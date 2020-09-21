@@ -148,6 +148,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="SourceCode\Constraints.h" />
+    <ClInclude Include="SourceCode\Debug\Debug.h" />
     <ClInclude Include="SourceCode\GameObject\CGameObject.h" />
     <ClInclude Include="SourceCode\Graphic\Graphic.h" />
     <ClInclude Include="SourceCode\Game\Game.h" />
@@ -155,6 +156,7 @@
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="SourceCode\Debug\Debug.cpp" />
     <ClCompile Include="SourceCode\GameObject\CGameObject.cpp" />
     <ClCompile Include="SourceCode\Graphic\Graphic.cpp" />
     <ClCompile Include="SourceCode\Game\Game.cpp" />

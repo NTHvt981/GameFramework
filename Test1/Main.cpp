@@ -46,7 +46,10 @@ WARNING: This one file example has a hell LOT of *sinful* programming practices
 */
 
 #include "SourceCode\Constraints.h"
+#include "SourceCode\Game\Game.h"
 
+
+/*
 HWND hWnd = 0;
 
 LPDIRECT3D9 d3d = NULL;			// Direct3D handle
@@ -58,12 +61,6 @@ int BackBufferHeight = 0;
 
 LPD3DXSPRITE spriteHandler = NULL;	// Sprite helper library to help us draw 2D images 
 
-
-/*#define BRICK_TEXTURE_PATH L"Resources/Texture/brick.png"
-#define BRICK_START_X 30.0f
-#define BRICK_START_Y 10.0f
-#define BRICK_START_VX 0.2f
-#define BRICK_WIDTH 16.0f*/
 
 
 LPDIRECT3DTEXTURE9 texBrick;	// Texture object to store brick image
@@ -88,7 +85,10 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
+*/
+
 // DEBUG SUPPORT FUNCTIONS //////////////
+/*
 #define _W(x)  __W(x)
 #define __W(x)  L##x
 
@@ -110,10 +110,13 @@ void DebugOutTitle(wchar_t* fmt, ...)
 {
 	wchar_t s[1024];
 	VA_PRINTS(s);
-	SetWindowText(hWnd, s);
+	//SetWindowText(hWnd, s);
 }
+*/
+
 //////////////////////////////////////////
 
+/*
 void InitDirectX(HWND hWnd)
 {
 	d3d = Direct3DCreate9(D3D_SDK_VERSION);
@@ -159,10 +162,11 @@ void InitDirectX(HWND hWnd)
 
 	DebugOut(L"[INFO] InitDirectX OK\n");
 }
+*/
 
 /*
 	Load game resources. In this example, we only load a brick image
-*/
+
 void LoadResources()
 {
 	HRESULT result = D3DXCreateTextureFromFileEx(
@@ -189,6 +193,7 @@ void LoadResources()
 
 	DebugOut(L"[INFO] Texture loaded Ok: %s \n", BRICK_TEXTURE_PATH);
 }
+*/
 
 /*
 	Update world status for this frame
@@ -221,7 +226,6 @@ void Update(DWORD dt)
 /*
 	Render a frame
 	IMPORTANT: world status must NOT be changed during rendering
-*/
 void Render()
 {
 	if (d3ddv->BeginScene())
@@ -293,7 +297,9 @@ HWND CreateGameWindow(HINSTANCE hInstance, int nCmdShow, int ScreenWidth, int Sc
 
 	return hWnd;
 }
+*/
 
+/*
 int Run()
 {
 	MSG msg;
@@ -329,7 +335,9 @@ int Run()
 
 	return 1;
 }
+*/
 
+/*
 void Cleanup()
 {
 	texBrick->Release();
@@ -341,16 +349,26 @@ void Cleanup()
 	DebugOut(L"[INFO] Cleanup Ok\n");
 }
 
+*/
+
+CGame* game;
+
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-	hWnd = CreateGameWindow(hInstance, nCmdShow, WINDOW_WIDTH, WINDOW_HEIGHT);
-	if (hWnd == 0) return 0;
+	//hWnd = CreateGameWindow(hInstance, nCmdShow, WINDOW_WIDTH, WINDOW_HEIGHT);
+	//if (hWnd == 0) return 0;
 
-	InitDirectX(hWnd);
+	//InitDirectX(hWnd);
 
-	LoadResources();
-	Run();
-	Cleanup();
+	//LoadResources();
+	//Run();
+	//Cleanup();
+
+	game = new CGame();
+	game->Init(hInstance, nCmdShow, WINDOW_WIDTH, WINDOW_HEIGHT, FULLSCREEN);
+	game->LoadResources();
+	game->Run();
+	game->End();
 
 	return 0;
 }

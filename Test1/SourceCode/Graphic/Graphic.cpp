@@ -1,16 +1,21 @@
 #include "Graphic.h"
-#include "../Game/Game.h"
+#include "../Debug/Debug.h"
 
-int CGraphic::Init(HWND hwnd, int width, int height, int fullscreen) {
+//CGraphic* CGraphic::GetInstance()
+//{
+//	if (__instance == NULL) __instance = new CGraphic();
+//	return __instance;
+//}
 
-	LPDIRECT3D9 d3d = Direct3DCreate9(D3D_SDK_VERSION);
+int CGraphic::Init(HWND hwnd) {
+	this->hWnd = hwnd;
+
+	d3d = Direct3DCreate9(D3D_SDK_VERSION);
 	if (d3d == NULL)
 	{
 		MessageBox(hwnd, L"Error initializing Direct3D", L"Error", MB_OK);
 		return 0;
 	}
-
-	this->hWnd = hWnd;
 
 	D3DPRESENT_PARAMETERS d3dpp;
 
@@ -25,7 +30,7 @@ int CGraphic::Init(HWND hwnd, int width, int height, int fullscreen) {
 	d3dpp.BackBufferCount = 1;
 
 	RECT r;
-	GetClientRect(hWnd, &r);	// retrieve Window width & height 
+	GetClientRect(this->hWnd, &r);	// retrieve Window width & height 
 
 	d3dpp.BackBufferHeight = r.bottom + 1;
 	d3dpp.BackBufferWidth = r.right + 1;
@@ -56,13 +61,16 @@ int CGraphic::Init(HWND hwnd, int width, int height, int fullscreen) {
 
 LPDIRECT3DTEXTURE9 CGraphic::LoadTexture(LPCWSTR texturePath)
 {
+	texturePath = L"./Resources/Texture/brick.png";
+
 	D3DXIMAGE_INFO info;
 	LPDIRECT3DTEXTURE9 texture;
 
 	HRESULT result = D3DXGetImageInfoFromFile(texturePath, &info);
 	if (result != D3D_OK)
 	{
-		MessageBox(hWnd, L"Error get image info %s failed", L"Error", MB_OK);
+		//DebugOut(L"[ERROR] get image info failed. Result: %s\n", result);
+		MessageBox(hWnd, L"Error get image info failed", L"Error", MB_OK);
 		return NULL;
 	}
 
@@ -103,5 +111,33 @@ void CGraphic::Draw(float x, float y, LPDIRECT3DTEXTURE9 texture, int left, int 
 	r.right = right;
 	r.bottom = bottom;
 	spriteHandler->Draw(texture, &r, NULL, &p, D3DCOLOR_XRGB(255, 255, 255));
+}
+
+void CGraphic::Render(LPDIRECT3DTEXTURE9 texture)
+{
+	if (d3ddev->BeginScene())
+	{
+		// Clear the whole window with a color
+		d3ddev->ColorFill(backBuffer, NULL, BACKGROUND_COLOR);
+
+		spriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
+
+		D3DXVECTOR3 p(BRICK_START_X, BRICK_START_Y, 0);
+		spriteHandler->Draw(texture, NULL, NULL, &p, D3DCOLOR_WHITE);
+
+		spriteHandler->End();
+		d3ddev->EndScene();
+	}
+
+	// Display back buffer content to the screen
+	d3ddev->Present(NULL, NULL, NULL, NULL);
+}
+
+void CGraphic::End()
+{
+	d3d->Release();
+	spriteHandler->Release();
+	backBuffer->Release();
+	d3ddev->Release();
 }
 

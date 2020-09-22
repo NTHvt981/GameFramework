@@ -1,16 +1,21 @@
-#include "../Constraints.h"
-#include "../Graphic/Graphic.h"
-
 #pragma once
+#include "..\Constraints.h"
+#include "..\Graphic\Graphic.h"
+#include "..\Debug\Debug.h"
+#include "..\GameObject\GameObject.h"
+#include "..\GameObject\HorizontalEntity\HorizontalEntity.h"
+
+using namespace std;
+
 class CGame
 {
 private:
 	HWND hWnd = NULL;									// Window handle
-	//static CGame* _instance;
-	CGraphic* graphic;
 
-	LPDIRECT3DTEXTURE9 brickTexture = NULL;
-
+	//temp game object
+	CGameObject* lHorizontalEntity;
+public:
+	static CGame* Instance;
 public:
 	//static CGame* GetInstance();
 

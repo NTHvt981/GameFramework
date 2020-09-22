@@ -24,8 +24,7 @@
 
 #define MAX_FRAME_RATE 120
 
-
-#define BRICK_TEXTURE_PATH L"..\..\Resources\Texture\brick.png"
+#define BRICK_TEXTURE_PATH L"./Resources/Texture/brick.png"
 #define BRICK_START_X 30.0f
 #define BRICK_START_Y 10.0f
 #define BRICK_START_VX 0.2f

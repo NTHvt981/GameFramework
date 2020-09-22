@@ -3,22 +3,18 @@
 HWND CreateGameWindow(HINSTANCE hInstance, int nCmdShow, int ScreenWidth, int ScreenHeight);
 LRESULT CALLBACK WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
-//CGame* CGame::GetInstance()
-//{
-//	if (_instance == NULL) _instance = new CGame();
-//	return _instance;
-//}
+CGame* CGame::Instance = new CGame();
 
 void CGame::Init(HINSTANCE hInstance, int nCmdShow, int width, int height, bool fullscreen)
 {
 	hWnd = CreateGameWindow(hInstance, nCmdShow, width, height);
-	graphic = new CGraphic();
-	graphic->Init(hWnd);
+	CGraphic::Instance->Init(hWnd);
 }
 
 void CGame::LoadResources()
 {
-	brickTexture = graphic->LoadTexture(BRICK_TEXTURE_PATH);
+	lHorizontalEntity = new CHorizontalEntity(BRICK_TEXTURE_PATH);
+	lHorizontalEntity->SetPosition(BRICK_START_X, BRICK_START_Y);
 }
 
 void CGame::Run()
@@ -28,30 +24,40 @@ void CGame::Run()
 	DWORD frameStart = GetTickCount();
 	DWORD tickPerFrame = 1000 / MAX_FRAME_RATE;
 
-	while (!done)
+	try
 	{
-		if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+		while (!done)
 		{
-			if (msg.message == WM_QUIT) done = 1;
+			if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
+			{
+				if (msg.message == WM_QUIT) done = 1;
 
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
+				TranslateMessage(&msg);
+				DispatchMessage(&msg);
+			}
+
+			DWORD now = GetTickCount();
+
+			// dt: the time between (beginning of last frame) and now
+			// this frame: the frame we are about to render
+			DWORD dt = now - frameStart;
+
+			//Heart of the game
+			if (dt >= tickPerFrame)
+			{
+				frameStart = now;
+
+				Update(dt);
+				Render();
+			}
+			else
+				Sleep(tickPerFrame - dt);
 		}
-
-		DWORD now = GetTickCount();
-
-		// dt: the time between (beginning of last frame) and now
-		// this frame: the frame we are about to render
-		DWORD dt = now - frameStart;
-
-		if (dt >= tickPerFrame)
-		{
-			frameStart = now;
-			Update(dt);
-			Render();
-		}
-		else
-			Sleep(tickPerFrame - dt);
+	}
+	catch (const std::exception& ex)
+	{
+		DebugOut(L"[ERROR] Exception in Run method in Game %s\n", ex.what());
+		return;
 	}
 
 	return;
@@ -59,18 +65,38 @@ void CGame::Run()
 
 void CGame::Update(DWORD dt)
 {
+	lHorizontalEntity->Update(dt);
     return;
 }
 
 void CGame::Render()
 {
-	graphic->Render(brickTexture);
+	LPDIRECT3DDEVICE9 d3ddev = CGraphic::Instance->GetDirect3DDevice();
+	LPD3DXSPRITE spriteHandler = CGraphic::Instance->GetSpriteHandler();
+	LPDIRECT3DSURFACE9 backBuffer = CGraphic::Instance->GetBackBuffer();
+
+	if (d3ddev->BeginScene() == D3D_OK)
+	{
+		// Clear the whole window with a color
+		d3ddev->ColorFill(backBuffer, NULL, BACKGROUND_COLOR);
+
+		spriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
+
+
+		lHorizontalEntity->Render();
+
+
+		spriteHandler->End();
+		d3ddev->EndScene();
+	}
+
+	// Display back buffer content to the screen
+	d3ddev->Present(NULL, NULL, NULL, NULL);
 }
 
 void CGame::End()
 {
-	brickTexture->Release();
-	graphic->End();
+	CGraphic::Instance->End();
 }
 
 CGame::~CGame()

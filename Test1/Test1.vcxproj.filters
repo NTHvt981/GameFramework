@@ -21,6 +21,9 @@
     <Image Include="Test1.ico">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="..\..\..\..\Downloads\steel robot.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
@@ -35,13 +38,16 @@
     <ClInclude Include="SourceCode\Graphic\Graphic.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SourceCode\GameObject\CGameObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SourceCode\Constraints.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SourceCode\Debug\Debug.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\GameObject\HorizontalEntity\HorizontalEntity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\GameObject\GameObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -55,10 +61,13 @@
     <ClCompile Include="SourceCode\Graphic\Graphic.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SourceCode\GameObject\CGameObject.cpp">
+    <ClCompile Include="SourceCode\Debug\Debug.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SourceCode\Debug\Debug.cpp">
+    <ClCompile Include="SourceCode\GameObject\HorizontalEntity\HorizontalEntity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\GameObject\GameObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

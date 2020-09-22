@@ -1,11 +1,7 @@
 #include "Graphic.h"
-#include "../Debug/Debug.h"
+#include "..\Debug\Debug.h"
 
-//CGraphic* CGraphic::GetInstance()
-//{
-//	if (__instance == NULL) __instance = new CGraphic();
-//	return __instance;
-//}
+CGraphic* CGraphic::Instance = new CGraphic();
 
 int CGraphic::Init(HWND hwnd) {
 	this->hWnd = hwnd;
@@ -53,16 +49,16 @@ int CGraphic::Init(HWND hwnd) {
 	d3ddev->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &backBuffer);
 
 	// Initialize sprite helper from Direct3DX helper library
-	D3DXCreateSprite(d3ddev, &spriteHandler);
+	HRESULT result = D3DXCreateSprite(d3ddev, &spriteHandler);
+	//if (!SUCCEEDED(result))
 
-	OutputDebugString(L"[INFO] InitGame done;\n");
+
+	OutputDebugString(L"[INFO] Init graphic done;\n");
 	return 1;
 }
 
 LPDIRECT3DTEXTURE9 CGraphic::LoadTexture(LPCWSTR texturePath)
 {
-	texturePath = L"./Resources/Texture/brick.png";
-
 	D3DXIMAGE_INFO info;
 	LPDIRECT3DTEXTURE9 texture;
 
@@ -90,15 +86,15 @@ LPDIRECT3DTEXTURE9 CGraphic::LoadTexture(LPCWSTR texturePath)
 		NULL,
 		&texture);								// Created texture pointer
 
-	if (result != D3D_OK)
+	if (!SUCCEEDED(result))
 	{
-		//DebugOut(L"[ERROR] CreateTextureFromFile failed. File: %s\n", texturePath);
-		MessageBox(hWnd, L"Error CreateTextureFromFile failed", L"Error", MB_OK);
+		_com_error err(result);
+		LPCTSTR errMsg = err.ErrorMessage();
+		DebugOut(L"[ERROR] CreateTextureFromFile failed. File: %s; Error Code: %s\n", texturePath, errMsg);
 		return NULL;
 	}
 
-	//DebugOut(L"[INFO] Texture loaded Ok: %s \n", texturePath);
-	OutputDebugString(L"[INFO] Texture loaded Ok;\n");
+	DebugOut(L"[INFO] Texture loaded Ok: %s \n", texturePath);
 	return texture;
 }
 
@@ -113,24 +109,14 @@ void CGraphic::Draw(float x, float y, LPDIRECT3DTEXTURE9 texture, int left, int 
 	spriteHandler->Draw(texture, &r, NULL, &p, D3DCOLOR_XRGB(255, 255, 255));
 }
 
+void CGraphic::Draw(float x, float y, LPDIRECT3DTEXTURE9 texture)
+{
+	D3DXVECTOR3 p(x, y, 0);
+	spriteHandler->Draw(texture, NULL, NULL, &p, D3DCOLOR_XRGB(255, 255, 255));
+}
+
 void CGraphic::Render(LPDIRECT3DTEXTURE9 texture)
 {
-	if (d3ddev->BeginScene())
-	{
-		// Clear the whole window with a color
-		d3ddev->ColorFill(backBuffer, NULL, BACKGROUND_COLOR);
-
-		spriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
-
-		D3DXVECTOR3 p(BRICK_START_X, BRICK_START_Y, 0);
-		spriteHandler->Draw(texture, NULL, NULL, &p, D3DCOLOR_WHITE);
-
-		spriteHandler->End();
-		d3ddev->EndScene();
-	}
-
-	// Display back buffer content to the screen
-	d3ddev->Present(NULL, NULL, NULL, NULL);
 }
 
 void CGraphic::End()

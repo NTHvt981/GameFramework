@@ -109,10 +109,27 @@ void CGraphic::Draw(float x, float y, LPDIRECT3DTEXTURE9 texture, int left, int 
 	spriteHandler->Draw(texture, &r, NULL, &p, D3DCOLOR_XRGB(255, 255, 255));
 }
 
+void CGraphic::Draw(float x, float y, float origin_x, float origin_y, LPDIRECT3DTEXTURE9 texture)
+{
+	D3DXVECTOR3 p(x, y, 0);
+	D3DXVECTOR3 origin(origin_x, origin_y, 0);
+	spriteHandler->Draw(texture, NULL, NULL, &p, D3DCOLOR_XRGB(255, 255, 255));
+}
+
 void CGraphic::Draw(float x, float y, LPDIRECT3DTEXTURE9 texture)
 {
 	D3DXVECTOR3 p(x, y, 0);
 	spriteHandler->Draw(texture, NULL, NULL, &p, D3DCOLOR_XRGB(255, 255, 255));
+}
+
+void CGraphic::Draw(Vector position, LPDIRECT3DTEXTURE9 texture)
+{
+	Draw(position.x, position.y, texture);
+}
+
+void CGraphic::Draw(Vector position, Vector origin, LPDIRECT3DTEXTURE9 texture)
+{
+	Draw(position.x, position.y, origin.x, origin.y, texture);
 }
 
 void CGraphic::Render(LPDIRECT3DTEXTURE9 texture)

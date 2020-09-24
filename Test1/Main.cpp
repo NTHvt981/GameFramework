@@ -22,15 +22,13 @@ WARNING: This one file example has a hell LOT of *sinful* programming practices
 #include "SourceCode\Constraints.h"
 #include "SourceCode\Game\Game.h"
 
-CGame* game;
-
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-	game = new CGame();
-	game->Init(hInstance, nCmdShow, WINDOW_WIDTH, WINDOW_HEIGHT, FULLSCREEN);
-	game->LoadResources();
-	game->Run();
-	game->End();
+	CGame* lGame = CGame::GetInstance();
+	lGame->Init(hInstance, nCmdShow, WINDOW_WIDTH, WINDOW_HEIGHT, FULLSCREEN);
+	lGame->LoadResources();
+	lGame->Run();
+	lGame->CleanResources();
 
 	return 0;
 }

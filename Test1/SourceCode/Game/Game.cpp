@@ -3,7 +3,13 @@
 HWND CreateGameWindow(HINSTANCE hInstance, int nCmdShow, int ScreenWidth, int ScreenHeight);
 LRESULT CALLBACK WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 
-CGame* CGame::Instance = new CGame();
+CGame* CGame::__instance = NULL;
+
+CGame* CGame::GetInstance()
+{
+	if (__instance == NULL) __instance = new CGame();
+	return __instance;
+}
 
 void CGame::Init(HINSTANCE hInstance, int nCmdShow, int width, int height, bool fullscreen)
 {
@@ -13,12 +19,19 @@ void CGame::Init(HINSTANCE hInstance, int nCmdShow, int width, int height, bool 
 
 void CGame::LoadResources()
 {
-	lHorizontalEntity = new CHorizontalEntity(BRICK_TEXTURE_PATH);
-	lHorizontalEntity->SetPosition(BRICK_START_X, BRICK_START_Y);
+	lGameObjects.push_back(new CHorizontalEntity(STEEL_ROBOT_TEXTURE_PATH));
+	lGameObjects.push_back(new CVerticalEntity(STEEL_ROBOT_TEXTURE_PATH));
+	for each (LPGameObject obj in lGameObjects)
+	{
+		obj->SetPosition(POSITION_START_X, POSITION_START_Y);
+	}
 }
 
 void CGame::Run()
 {
+	//Load resource to the game
+	LoadResources();
+
 	MSG msg;
 	int done = 0;
 	DWORD frameStart = GetTickCount();
@@ -60,12 +73,16 @@ void CGame::Run()
 		return;
 	}
 
-	return;
+	//Clean the resources
+	CleanResources();
 }
 
 void CGame::Update(DWORD dt)
 {
-	lHorizontalEntity->Update(dt);
+	for each (LPGameObject obj in lGameObjects)
+	{
+		obj->Update(dt);
+	}
     return;
 }
 
@@ -83,7 +100,10 @@ void CGame::Render()
 		spriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
 
 
-		lHorizontalEntity->Render();
+		for each (LPGameObject obj in lGameObjects)
+		{
+			obj->Render();
+		}
 
 
 		spriteHandler->End();
@@ -94,7 +114,7 @@ void CGame::Render()
 	d3ddev->Present(NULL, NULL, NULL, NULL);
 }
 
-void CGame::End()
+void CGame::CleanResources()
 {
 	CGraphic::Instance->End();
 }

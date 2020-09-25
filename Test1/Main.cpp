@@ -26,9 +26,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 {
 	CGame* lGame = CGame::GetInstance();
 	lGame->Init(hInstance, nCmdShow, WINDOW_WIDTH, WINDOW_HEIGHT, FULLSCREEN);
-	lGame->LoadResources();
 	lGame->Run();
-	lGame->CleanResources();
 
 	return 0;
 }

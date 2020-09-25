@@ -1,0 +1,26 @@
+#include "Player.h"
+
+CPlayer::CPlayer(LPCWSTR texturePath): CGameObject(texturePath)
+{
+	camera = new CCamera(0, 0);
+	//CCamera::SetInstance(*camera);
+}
+
+void CPlayer::Update(DWORD dt)
+{
+	velocity.x = dt * speed * (
+		CInput::GetInstance()->IsKeyDown(DIK_D) - CInput::GetInstance()->IsKeyDown(DIK_A)
+		);
+	velocity.y = dt * speed * (
+		-CInput::GetInstance()->IsKeyDown(DIK_S) + CInput::GetInstance()->IsKeyDown(DIK_W)
+		);
+
+	move(dt);
+
+	if (position.x < 0) position.x = 0;
+	if (position.x > WINDOW_WIDTH) position.x = WINDOW_WIDTH;
+	if (position.y < 0) position.y = 0;
+	if (position.y > WINDOW_HEIGHT) position.y = WINDOW_HEIGHT;
+
+	camera->SetPosition(Vector(position.x - WINDOW_WIDTH / 2, position.y + WINDOW_HEIGHT / 2));
+}

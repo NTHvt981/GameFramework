@@ -5,6 +5,7 @@
 #include "..\GameObject\GameObject.h"
 #include "..\GameObject\HorizontalEntity\HorizontalEntity.h"
 #include "..\GameObject\VerticalEntity\VerticalEntity.h"
+#include "..\GameObject\PlayableEntity\Player.h"
 
 using namespace std;
 

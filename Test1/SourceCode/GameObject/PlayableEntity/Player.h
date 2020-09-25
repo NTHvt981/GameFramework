@@ -3,6 +3,7 @@
 #include "../GameObject.h"
 #include "../../Constraints.h"
 #include "../../Camera/Camera.h"
+#include "../../Input/Input.h"
 
 class CPlayer: public CGameObject
 {

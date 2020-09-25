@@ -15,12 +15,14 @@ void CGame::Init(HINSTANCE hInstance, int nCmdShow, int width, int height, bool 
 {
 	hWnd = CreateGameWindow(hInstance, nCmdShow, width, height);
 	CGraphic::Instance->Init(hWnd);
+	CInput::GetInstance()->Init(hInstance, hWnd);
 }
 
 void CGame::LoadResources()
 {
 	lGameObjects.push_back(new CHorizontalEntity(STEEL_ROBOT_TEXTURE_PATH));
 	lGameObjects.push_back(new CVerticalEntity(STEEL_ROBOT_TEXTURE_PATH));
+	lGameObjects.push_back(new CPlayer(STEEL_ROBOT_TEXTURE_PATH));
 	for each (LPGameObject obj in lGameObjects)
 	{
 		obj->SetPosition(POSITION_START_X, POSITION_START_Y);
@@ -79,6 +81,7 @@ void CGame::Run()
 
 void CGame::Update(DWORD dt)
 {
+	CInput::GetInstance()->Update();
 	for each (LPGameObject obj in lGameObjects)
 	{
 		obj->Update(dt);

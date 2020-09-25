@@ -25,7 +25,10 @@ public:
 	int Init(HWND hwnd);
 	LPDIRECT3DTEXTURE9 LoadTexture(LPCWSTR texturePath);
 	void Draw(float x, float y, LPDIRECT3DTEXTURE9 texture, int left, int top, int right, int bottom);
+	void Draw(float x, float y, float origin_x, float origin_y, LPDIRECT3DTEXTURE9 texture);
 	void Draw(float x, float y, LPDIRECT3DTEXTURE9 texture);
+	void Draw(Vector position, LPDIRECT3DTEXTURE9 texture);
+	void Draw(Vector position, Vector origin, LPDIRECT3DTEXTURE9 texture);
 	void Render(LPDIRECT3DTEXTURE9 texture);
 
 	void End();

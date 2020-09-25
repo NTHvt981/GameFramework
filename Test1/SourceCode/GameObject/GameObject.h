@@ -4,10 +4,11 @@
 class CGameObject
 {
 protected:
-	float x;
-	float y;
-	float vx = 0;
-	float vy = 0;
+	Vector position;
+	Vector origin;
+	Vector velocity;
+
+	int speed;
 
 	LPDIRECT3DTEXTURE9 texture;
 
@@ -24,3 +25,4 @@ public:
 	~CGameObject();
 };
 
+typedef CGameObject* LPGameObject;

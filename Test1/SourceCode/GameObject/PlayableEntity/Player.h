@@ -8,7 +8,7 @@
 class CPlayer: public CGameObject
 {
 private:
-	float speed = 0.5;
+	float speed = 2;
 	CCamera* camera;
 public:
 	CPlayer(LPCWSTR texturePath);

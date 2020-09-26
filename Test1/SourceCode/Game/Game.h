@@ -14,9 +14,6 @@ class CGame
 private:
 	HWND hWnd = NULL;									// Window handle
 
-	//temp game object
-	CGameObject* lHorizontalEntity;
-
 	vector<LPGameObject> lGameObjects;
 private:
 	static CGame* __instance;
@@ -32,5 +29,7 @@ public:
 	void Run();
 
 	~CGame();
+
+	void AddGameObject(LPGameObject gameObject, float x, float y);
 };
 

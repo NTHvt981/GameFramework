@@ -1,5 +1,7 @@
 #pragma once
 #include "..\Constraints.h"
+#include "..\CollisionBox\CollisionBox.h"
+#include "../Graphic/Graphic.h"
 
 class CGameObject
 {
@@ -11,6 +13,7 @@ protected:
 	int speed;
 
 	LPDIRECT3DTEXTURE9 texture;
+	LPCollisionBox collisionBox = NULL;
 
 protected:
 	void move(DWORD dt);
@@ -18,6 +21,10 @@ protected:
 public:
 	CGameObject(LPCWSTR texturePath);
 	void SetPosition(float _x, float _y);
+	Vector GetPosition();
+
+	void SetCollisionBox(LPCollisionBox _collisionBox);
+	LPCollisionBox GetCollisionBox();
 
 	virtual void Update(DWORD dt);
 	virtual void Render();
@@ -25,4 +32,3 @@ public:
 	~CGameObject();
 };
 
-typedef CGameObject* LPGameObject;

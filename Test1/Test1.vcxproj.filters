@@ -112,7 +112,7 @@
     <ClCompile Include="SourceCode\Debug\Debug.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SourceCode\Collision\CCollision.cpp">
+    <ClCompile Include="SourceCode\Collision\Collision.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

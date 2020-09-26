@@ -163,8 +163,8 @@
     <ClInclude Include="SourceCode\GameObject\VerticalEntity\VerticalEntity.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="SourceCode\Collision\CCollision.cpp" />
     <ClCompile Include="SourceCode\Camera\Camera.cpp" />
+    <ClCompile Include="SourceCode\Collision\Collision.cpp" />
     <ClCompile Include="SourceCode\Debug\Debug.cpp" />
     <ClCompile Include="SourceCode\GameObject\HorizontalEntity\HorizontalEntity.cpp" />
     <ClCompile Include="SourceCode\GameObject\GameObject.cpp" />

@@ -11,6 +11,11 @@
 #include <stdlib.h>
 #include <d3dx9core.h>
 
+#include <vector>
+
+#include "./Vector/Vector.h"
+#include "./Debug/Debug.h"
+
 #define WINDOW_CLASS_NAME L"NGUYEN TRUNG HIEU'S WINDOW"
 #define WINDOW_TITLE L"Test 1"
 #define WINDOW_ICON_PATH L".\Resources\Texture\brick.ico" 
@@ -22,10 +27,15 @@
 #define WINDOW_WIDTH 640
 #define WINDOW_HEIGHT 480
 
-#define MAX_FRAME_RATE 120
+//#define MAX_FRAME_RATE 120
+#define MAX_FRAME_RATE 60
 
 #define BRICK_TEXTURE_PATH L"./Resources/Texture/brick.png"
+#define STEEL_ROBOT_TEXTURE_PATH L"./Resources/Texture/steel robot.png"
 #define BRICK_START_X 30.0f
 #define BRICK_START_Y 10.0f
 #define BRICK_START_VX 0.2f
 #define BRICK_WIDTH 16.0f
+
+#define POSITION_START_X 10
+#define POSITION_START_Y 10

@@ -28,7 +28,6 @@ void CPlayer::Update(DWORD dt)
 		);
 
 	move(dt);
-	DebugOut(L"Position %.2f - %.2f\n", position.x, position.y);
 
 	if (position.x < 0) position.x = 0;
 	if (position.x > WINDOW_WIDTH) position.x = WINDOW_WIDTH;

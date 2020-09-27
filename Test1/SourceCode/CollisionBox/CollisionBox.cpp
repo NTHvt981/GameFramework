@@ -17,8 +17,6 @@ CCollisionBox::CCollisionBox(LPGameObject _gameObject,
 		box->AddCoBox(this);
 	}
 	CCollision::GetInstance()->AddCollisionBox(this);
-
-	DebugOut(L"[DEBUG] number of co collision boxes %d\n", collisionBoxes.size());
 }
 
 //CCollisionBox::CCollisionBox(LPGameObject _gameObject, Vector _pos, Vector _size)

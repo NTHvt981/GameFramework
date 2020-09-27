@@ -7,17 +7,25 @@ class CCamera
 {
 private:
 	Vector position = Vector(0, 0);
+	float width;
+	float height;
+	D3DXMATRIX matrix;
 
 	static CCamera* __activeInstance;
 public:
 	static CCamera* GetInstance();
 	static void SetInstance(CCamera &camera);
 
-	CCamera(Vector v);
-	CCamera(float x, float y);
+	CCamera(float w, float h);
 
-	void SetPosition(Vector v);
-	void SetPosition(float x, float y);
+	void SetMatrix();
+	void Transform(float x, float y, D3DXVECTOR3 &new_pos);
+
+	void Follow(float x, float y);
+	void Follow(Vector pos);
+
 	Vector GetPosition();
+
+	float GetScale();
 };
 

@@ -1,5 +1,4 @@
 #include "Graphic.h"
-#include "..\Debug\Debug.h"
 
 CGraphic* CGraphic::Instance = new CGraphic();
 
@@ -111,15 +110,26 @@ void CGraphic::Draw(float x, float y, LPDIRECT3DTEXTURE9 texture, int left, int 
 
 void CGraphic::Draw(float x, float y, float origin_x, float origin_y, LPDIRECT3DTEXTURE9 texture)
 {
-	D3DXVECTOR3 p(x, y, 0);
+	D3DXVECTOR3 position(x, y, 0);
+	if (CCamera::GetInstance() != NULL)
+	{
+		CCamera::GetInstance()->SetMatrix();
+		CCamera::GetInstance()->Transform(x, y, position);
+	}
 	D3DXVECTOR3 origin(origin_x, origin_y, 0);
-	spriteHandler->Draw(texture, NULL, NULL, &p, D3DCOLOR_XRGB(255, 255, 255));
+	spriteHandler->Draw(texture, NULL, &origin, &position, D3DCOLOR_XRGB(255, 255, 255));
 }
 
 void CGraphic::Draw(float x, float y, LPDIRECT3DTEXTURE9 texture)
 {
-	D3DXVECTOR3 p(x, y, 0);
-	spriteHandler->Draw(texture, NULL, NULL, &p, D3DCOLOR_XRGB(255, 255, 255));
+	D3DXVECTOR3 position(x, y, 0);
+	if (CCamera::GetInstance() != NULL)
+	{
+		CCamera::GetInstance()->SetMatrix();
+		CCamera::GetInstance()->Transform(x, y, position);
+	}
+
+	spriteHandler->Draw(texture, NULL, NULL, &position, D3DCOLOR_XRGB(255, 255, 255));
 }
 
 void CGraphic::Draw(Vector position, LPDIRECT3DTEXTURE9 texture)

@@ -1,6 +1,8 @@
 #pragma once
 
 #include "..\Constraints.h"
+#include "..\Debug\Debug.h"
+#include "../Camera/Camera.h"
 #include <comdef.h>
 
 class CGraphic

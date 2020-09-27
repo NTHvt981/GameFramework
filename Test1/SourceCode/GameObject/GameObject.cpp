@@ -4,8 +4,6 @@ void CGameObject::move(DWORD dt)
 {
 	list<LPGameObject> objectsCollide;
 	collisionBox->CalculateCollision(velocity, objectsCollide);
-	if (objectsCollide.size() > 0)
-		DebugOut(L"COLLIDE\n");
 	position = position + velocity;
 }
 

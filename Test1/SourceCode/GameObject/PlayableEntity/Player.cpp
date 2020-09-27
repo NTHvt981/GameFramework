@@ -2,12 +2,14 @@
 
 CPlayer::CPlayer(LPCWSTR texturePath): CGameObject(texturePath)
 {
-	camera = new CCamera(0, 0);
+	origin.x = 8;
+	origin.y = 9;
+	camera = new CCamera(WINDOW_WIDTH, WINDOW_HEIGHT);
 	CCamera::SetInstance(*camera);
 
 	this->collisionBox = new CCollisionBox(
 		this,
-		0.0f, 0.0f,
+		-origin.x, origin.y,
 		17.0f, 18.0f
 	);
 }
@@ -26,11 +28,17 @@ void CPlayer::Update(DWORD dt)
 		);
 
 	move(dt);
+	DebugOut(L"Position %.2f - %.2f\n", position.x, position.y);
 
 	if (position.x < 0) position.x = 0;
 	if (position.x > WINDOW_WIDTH) position.x = WINDOW_WIDTH;
 	if (position.y < 0) position.y = 0;
 	if (position.y > WINDOW_HEIGHT) position.y = WINDOW_HEIGHT;
 
-	camera->SetPosition(Vector(position.x - WINDOW_WIDTH / 2, position.y + WINDOW_HEIGHT / 2));
+	camera->Follow(position.x, position.y);
+}
+
+void CPlayer::Render()
+{
+	CGraphic::Instance->Draw(position, origin, texture);
 }

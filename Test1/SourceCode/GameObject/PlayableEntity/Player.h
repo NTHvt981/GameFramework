@@ -13,5 +13,6 @@ private:
 public:
 	CPlayer(LPCWSTR texturePath);
 	void Update(DWORD dt);
+	void Render();
 };
 

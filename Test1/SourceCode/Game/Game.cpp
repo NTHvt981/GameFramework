@@ -15,18 +15,16 @@ void CGame::Init(HINSTANCE hInstance, int nCmdShow, int width, int height, bool 
 {
 	hWnd = CreateGameWindow(hInstance, nCmdShow, width, height);
 	CGraphic::Instance->Init(hWnd);
+
 	CInput::GetInstance()->Init(hInstance, hWnd);
+	CInput::GetInstance()->Update();
 }
 
 void CGame::LoadResources()
 {
-	lGameObjects.push_back(new CHorizontalEntity(STEEL_ROBOT_TEXTURE_PATH));
-	lGameObjects.push_back(new CVerticalEntity(STEEL_ROBOT_TEXTURE_PATH));
-	lGameObjects.push_back(new CPlayer(STEEL_ROBOT_TEXTURE_PATH));
-	for each (LPGameObject obj in lGameObjects)
-	{
-		obj->SetPosition(POSITION_START_X, POSITION_START_Y);
-	}
+	AddGameObject(new CHorizontalEntity(STEEL_ROBOT_TEXTURE_PATH), 300, 300);
+	AddGameObject(new CVerticalEntity(STEEL_ROBOT_TEXTURE_PATH), 0, 100);
+	AddGameObject(new CPlayer(STEEL_ROBOT_TEXTURE_PATH), 100, 100);
 }
 
 void CGame::Run()
@@ -62,7 +60,7 @@ void CGame::Run()
 			{
 				frameStart = now;
 
-				Update(dt);
+				Update(dt/10);
 				Render();
 			}
 			else
@@ -81,7 +79,21 @@ void CGame::Run()
 
 void CGame::Update(DWORD dt)
 {
+	/*
+	struture of updating the game
+	first we update game object collision box position base on game object position
+	then we set game object state
+	then with the state we set velocity, action
+	then we calculate collision between game objects return remaining velocity
+	then we update the game object position base on remaining velocity
+	*/
 	CInput::GetInstance()->Update();
+
+	for each (LPCollisionBox box in CCollision::GetInstance()->GetCollisionBoxes())
+	{
+		box->Update();
+	}
+
 	for each (LPGameObject obj in lGameObjects)
 	{
 		obj->Update(dt);
@@ -125,6 +137,13 @@ void CGame::CleanResources()
 CGame::~CGame()
 {
 }
+
+void CGame::AddGameObject(LPGameObject gameObject, float x, float y)
+{
+	gameObject->SetPosition(x, y);
+	lGameObjects.push_back(gameObject);
+}
+
 
 HWND CreateGameWindow(HINSTANCE hInstance, int nCmdShow, int ScreenWidth, int ScreenHeight)
 {

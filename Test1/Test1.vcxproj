@@ -147,6 +147,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="SourceCode\CollisionBox\CollisionBox.h" />
+    <ClInclude Include="SourceCode\Collision\Collision.h" />
     <ClInclude Include="SourceCode\Camera\Camera.h" />
     <ClInclude Include="SourceCode\Debug\Debug.h" />
     <ClInclude Include="SourceCode\GameObject\HorizontalEntity\HorizontalEntity.h" />
@@ -163,6 +165,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SourceCode\Camera\Camera.cpp" />
+    <ClCompile Include="SourceCode\CollisionBox\CollisionBox.cpp" />
+    <ClCompile Include="SourceCode\Collision\Collision.cpp" />
     <ClCompile Include="SourceCode\Debug\Debug.cpp" />
     <ClCompile Include="SourceCode\GameObject\HorizontalEntity\HorizontalEntity.cpp" />
     <ClCompile Include="SourceCode\GameObject\GameObject.cpp" />

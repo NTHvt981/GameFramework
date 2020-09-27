@@ -4,8 +4,6 @@ CCamera* CCamera::__activeInstance = NULL;
 
 CCamera* CCamera::GetInstance()
 {
-    if (__activeInstance == NULL) 
-        return NULL;
     return __activeInstance;
 }
 
@@ -14,29 +12,48 @@ void CCamera::SetInstance(CCamera& camera)
     __activeInstance = &camera;
 }
 
-CCamera::CCamera(Vector v)
+CCamera::CCamera(float w, float h)
 {
-    position = v;
+    width = w;
+    height = h;
 }
 
-CCamera::CCamera(float x, float y)
+void CCamera::SetMatrix()
 {
-    position.x = x;
-    position.y = y;
+    D3DXMatrixIdentity(&matrix);
+
+    matrix._22 = -1.0f;
+    matrix._41 = -position.x;
+    matrix._42 = position.y;
 }
 
-void CCamera::SetPosition(Vector v)
+void CCamera::Transform(float x, float y, D3DXVECTOR3& new_pos)
 {
-    position = v;
+    D3DXVECTOR3 old_pos(x, y, 0);
+    D3DXVECTOR4 transform_vector_4;
+    D3DXVec3Transform(&transform_vector_4, &old_pos, &matrix);
+
+    new_pos.x = transform_vector_4.x;
+    new_pos.y = transform_vector_4.y;
 }
 
-void CCamera::SetPosition(float x, float y)
+void CCamera::Follow(float x, float y)
 {
-    position.x = x;
-    position.y = y;
+    position.x = x - width / 2;
+    position.y = y + height / 2;
+}
+
+void CCamera::Follow(Vector pos)
+{
+    Follow(pos.x, pos.y);
 }
 
 Vector CCamera::GetPosition()
 {
     return position;
 }
+
+//float CCamera::GetScale()
+//{
+//    return scale;
+//}

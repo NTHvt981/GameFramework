@@ -39,3 +39,9 @@
 
 #define POSITION_START_X 10
 #define POSITION_START_Y 10
+
+class CGameObject;
+typedef CGameObject* LPGameObject;
+
+class CCollisionBox;
+typedef CCollisionBox* LPCollisionBox;

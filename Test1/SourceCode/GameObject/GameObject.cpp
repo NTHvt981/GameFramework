@@ -1,8 +1,9 @@
 #include "GameObject.h"
-#include "../Graphic/Graphic.h"
 
 void CGameObject::move(DWORD dt)
 {
+	list<LPGameObject> objectsCollide;
+	collisionBox->CalculateCollision(velocity, objectsCollide);
 	position = position + velocity;
 }
 
@@ -15,6 +16,21 @@ void CGameObject::SetPosition(float _x, float _y)
 {
 	position.x = _x;
 	position.y = _y;
+}
+
+Vector CGameObject::GetPosition()
+{
+	return position;
+}
+
+void CGameObject::SetCollisionBox(LPCollisionBox _collisionBox)
+{
+	this->collisionBox = _collisionBox;
+}
+
+LPCollisionBox CGameObject::GetCollisionBox()
+{
+	return collisionBox;
 }
 
 void CGameObject::Update(DWORD dt)

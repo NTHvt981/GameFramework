@@ -3,7 +3,7 @@
 CVerticalEntity::CVerticalEntity(LPCWSTR texturePath): CGameObject(texturePath)
 {
 	speed = 3;
-	velocity.y = speed;
+	state = MOVE_DOWN_STATE;
 
 	this->collisionBox = new CCollisionBox(
 		this,
@@ -14,15 +14,35 @@ CVerticalEntity::CVerticalEntity(LPCWSTR texturePath): CGameObject(texturePath)
 
 void CVerticalEntity::Update(DWORD dt)
 {
-	/*
-	DebugOut(L"[DEBUG] Vertical collision\n left %f | right %f | top %f | bottom %f\n", 
-	collisionBox->GetLeft(), collisionBox->GetRight(),
-	collisionBox->GetTop(), collisionBox->GetBottom());*/
+	switch (state)
+	{
+	case MOVE_DOWN_STATE:
+		MoveDown();
+		break;
+	case MOVE_UP_STATE:
+		MoveUp();
+		break;
 
-	if (position.y <= 0)
-		velocity.y = speed;
-	else if (position.y >= WINDOW_HEIGHT)
-		velocity.y = -speed;
+	default:
+		break;
+	}
+
 
 	move(dt);
+}
+
+void CVerticalEntity::MoveUp()
+{
+	if (position.y >= WINDOW_HEIGHT)
+		state = MOVE_DOWN_STATE;
+
+	velocity.y = speed;
+}
+
+void CVerticalEntity::MoveDown()
+{
+	if (position.y <= 0)
+		state = MOVE_UP_STATE;
+
+	velocity.y = -speed;
 }

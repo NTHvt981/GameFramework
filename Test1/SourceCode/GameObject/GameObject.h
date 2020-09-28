@@ -15,6 +15,8 @@ protected:
 	LPDIRECT3DTEXTURE9 texture;
 	LPCollisionBox collisionBox = NULL;
 
+	int state;
+
 protected:
 	void move(DWORD dt);
 

@@ -40,6 +40,12 @@
 #define POSITION_START_X 10
 #define POSITION_START_Y 10
 
+//for the states
+#define MOVE_LEFT_STATE 0
+#define MOVE_RIGHT_STATE 1
+#define MOVE_UP_STATE 2
+#define MOVE_DOWN_STATE 3
+
 class CGameObject;
 typedef CGameObject* LPGameObject;
 

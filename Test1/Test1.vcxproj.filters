@@ -80,6 +80,9 @@
     <ClInclude Include="SourceCode\CollisionBox\CollisionBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SourceCode\Library\TextureLibrary.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SourceCode\Game\Game.cpp">
@@ -119,6 +122,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SourceCode\CollisionBox\CollisionBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Library\TextureLibrary.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

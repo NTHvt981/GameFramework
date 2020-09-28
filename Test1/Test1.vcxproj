@@ -162,6 +162,7 @@
     <ClInclude Include="SourceCode\Input\Input.h" />
     <ClInclude Include="SourceCode\Vector\Vector.h" />
     <ClInclude Include="SourceCode\GameObject\VerticalEntity\VerticalEntity.h" />
+    <ClInclude Include="SourceCode\Library\TextureLibrary.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SourceCode\Camera\Camera.cpp" />
@@ -177,6 +178,7 @@
     <ClCompile Include="SourceCode\Input\Input.cpp" />
     <ClCompile Include="SourceCode\Vector\Vector.cpp" />
     <ClCompile Include="SourceCode\GameObject\VerticalEntity\VerticalEntity.cpp" />
+    <ClCompile Include="SourceCode\Library\TextureLibrary.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\Downloads\steel robot.png" />

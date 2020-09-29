@@ -54,3 +54,9 @@ typedef CCollisionBox* LPCollisionBox;
 
 class CSprite;
 typedef CSprite* LPSprite;
+
+class CAnimationFrame;
+typedef CAnimationFrame* LPAnimationFrame;
+
+class CAnimation;
+typedef CAnimation* LPAnimation;

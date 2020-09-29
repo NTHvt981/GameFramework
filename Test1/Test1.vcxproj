@@ -148,6 +148,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="SourceCode\Library\AnimationLibrary.h" />
+    <ClInclude Include="SourceCode\Unit\Animation.h" />
     <ClInclude Include="SourceCode\CollisionBox\CollisionBox.h" />
     <ClInclude Include="SourceCode\Collision\Collision.h" />
     <ClInclude Include="SourceCode\Camera\Camera.h" />
@@ -168,6 +170,8 @@
     <ClInclude Include="SourceCode\Unit\Sprite.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="SourceCode\Library\AnimationLibrary.cpp" />
+    <ClCompile Include="SourceCode\Unit\Animation.cpp" />
     <ClCompile Include="SourceCode\Camera\Camera.cpp" />
     <ClCompile Include="SourceCode\CollisionBox\CollisionBox.cpp" />
     <ClCompile Include="SourceCode\Collision\Collision.cpp" />

@@ -181,15 +181,21 @@
     <ClCompile Include="SourceCode\Library\TextureLibrary.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\..\..\..\Desktop\Tileset\player_sheet_transparent.png" />
     <Image Include="..\..\..\..\Downloads\steel robot.png" />
     <Image Include="Resources\Texture\brick.ico" />
     <Image Include="Resources\Texture\brick.png" />
+    <Image Include="Resources\Texture\character_sheet_transparent.png" />
+    <Image Include="Resources\Texture\player_sheet.png" />
     <Image Include="Resources\Texture\steel robot.png" />
     <Image Include="small.ico" />
     <Image Include="Test1.ico" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Test1.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resources\Textfile\temp.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

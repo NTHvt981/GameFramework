@@ -33,6 +33,15 @@
     <Image Include="Resources\Texture\steel robot.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="..\..\..\..\Desktop\Tileset\player_sheet_transparent.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Texture\player_sheet.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Texture\character_sheet_transparent.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
@@ -132,5 +141,8 @@
     <ResourceCompile Include="Test1.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resources\Textfile\temp.txt" />
   </ItemGroup>
 </Project>

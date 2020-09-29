@@ -164,6 +164,8 @@
     <ClInclude Include="SourceCode\Vector\Vector.h" />
     <ClInclude Include="SourceCode\GameObject\VerticalEntity\VerticalEntity.h" />
     <ClInclude Include="SourceCode\Library\TextureLibrary.h" />
+    <ClInclude Include="SourceCode\Library\SpriteLibrary.h" />
+    <ClInclude Include="SourceCode\Unit\Sprite.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SourceCode\Camera\Camera.cpp" />
@@ -180,6 +182,8 @@
     <ClCompile Include="SourceCode\Vector\Vector.cpp" />
     <ClCompile Include="SourceCode\GameObject\VerticalEntity\VerticalEntity.cpp" />
     <ClCompile Include="SourceCode\Library\TextureLibrary.cpp" />
+    <ClCompile Include="SourceCode\Library\SpriteLibrary.cpp" />
+    <ClCompile Include="SourceCode\Unit\Sprite.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\Desktop\Tileset\player_sheet_transparent.png" />
@@ -187,6 +191,7 @@
     <Image Include="Resources\Texture\brick.ico" />
     <Image Include="Resources\Texture\brick.png" />
     <Image Include="Resources\Texture\character_sheet_transparent.png" />
+    <Image Include="Resources\Texture\My car spritesheet.png" />
     <Image Include="Resources\Texture\player_sheet.png" />
     <Image Include="Resources\Texture\steel robot.png" />
     <Image Include="small.ico" />

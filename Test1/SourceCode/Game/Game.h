@@ -1,6 +1,8 @@
 #pragma once
 #include "..\Constraints.h"
 #include "..\Graphic\Graphic.h"
+#include "..\Library\TextureLibrary.h"
+#include "..\Library\SpriteLibrary.h"
 #include "..\Debug\Debug.h"
 #include "..\GameObject\GameObject.h"
 #include "..\GameObject\HorizontalEntity\HorizontalEntity.h"
@@ -19,6 +21,9 @@ private:
 	static CGame* __instance;
 private:
 	void LoadResources();
+	void LoadTextures();
+	void LoadSprites();
+	void LoadAnimations();
 	void Update(DWORD dt);
 	void Render();
 	void CleanResources();

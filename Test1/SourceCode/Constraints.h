@@ -51,3 +51,6 @@ typedef CGameObject* LPGameObject;
 
 class CCollisionBox;
 typedef CCollisionBox* LPCollisionBox;
+
+class CSprite;
+typedef CSprite* LPSprite;

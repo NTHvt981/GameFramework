@@ -97,18 +97,29 @@ LPDIRECT3DTEXTURE9 CGraphic::LoadTexture(LPCWSTR texturePath)
 	return texture;
 }
 
-void CGraphic::Draw(float x, float y, LPDIRECT3DTEXTURE9 texture, int left, int top, int right, int bottom)
+void CGraphic::Draw(float x, float y, LPDIRECT3DTEXTURE9 texture, 
+	int left, int top, int right, int bottom,
+	float origin_x, float origin_y)
 {
-	D3DXVECTOR3 p(x, y, 0);
+	D3DXVECTOR3 origin(origin_x, origin_y, 0);
+	D3DXVECTOR3 position(x, y, 0);
+	if (CCamera::GetInstance() != NULL)
+	{
+		CCamera::GetInstance()->SetMatrix();
+		CCamera::GetInstance()->Transform(x, y, position);
+	}
 	RECT r;
 	r.left = left;
 	r.top = top;
 	r.right = right;
 	r.bottom = bottom;
-	spriteHandler->Draw(texture, &r, NULL, &p, D3DCOLOR_XRGB(255, 255, 255));
+	spriteHandler->Draw(texture, &r, &origin, &position, D3DCOLOR_XRGB(255, 255, 255));
+	
 }
 
-void CGraphic::Draw(float x, float y, float origin_x, float origin_y, LPDIRECT3DTEXTURE9 texture)
+void CGraphic::Draw(float x, float y, 
+	float origin_x, float origin_y, 
+	LPDIRECT3DTEXTURE9 texture)
 {
 	D3DXVECTOR3 position(x, y, 0);
 	if (CCamera::GetInstance() != NULL)

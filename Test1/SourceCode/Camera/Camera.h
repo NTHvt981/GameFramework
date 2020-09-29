@@ -16,6 +16,8 @@ public:
 	static CCamera* GetInstance();
 	static void SetInstance(CCamera &camera);
 
+	static D3DXMATRIX MirrorHorizontal(D3DXVECTOR3& vector);
+
 	CCamera(float w, float h);
 
 	void SetMatrix();

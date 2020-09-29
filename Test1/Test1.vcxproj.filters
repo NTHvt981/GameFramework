@@ -33,6 +33,15 @@
     <Image Include="Resources\Texture\steel robot.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="..\..\..\..\Desktop\Tileset\player_sheet_transparent.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Texture\player_sheet.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Texture\character_sheet_transparent.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
@@ -80,6 +89,9 @@
     <ClInclude Include="SourceCode\CollisionBox\CollisionBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SourceCode\Library\TextureLibrary.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SourceCode\Game\Game.cpp">
@@ -121,10 +133,16 @@
     <ClCompile Include="SourceCode\CollisionBox\CollisionBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SourceCode\Library\TextureLibrary.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Test1.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Resources\Textfile\temp.txt" />
   </ItemGroup>
 </Project>

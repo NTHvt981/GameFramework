@@ -130,6 +130,7 @@ void CGraphic::Draw(float x, float y, LPDIRECT3DTEXTURE9 texture)
 	}
 
 	spriteHandler->Draw(texture, NULL, NULL, &position, D3DCOLOR_XRGB(255, 255, 255));
+	
 }
 
 void CGraphic::Draw(Vector position, LPDIRECT3DTEXTURE9 texture)

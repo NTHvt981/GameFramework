@@ -22,9 +22,9 @@ void CGame::Init(HINSTANCE hInstance, int nCmdShow, int width, int height, bool 
 
 void CGame::LoadResources()
 {
-	AddGameObject(new CHorizontalEntity(STEEL_ROBOT_TEXTURE_PATH), 300, 300);
+	AddGameObject(new CHorizontalEntity(STEEL_ROBOT_TEXTURE_PATH), 300, 100);
 	AddGameObject(new CVerticalEntity(STEEL_ROBOT_TEXTURE_PATH), 0, 100);
-	AddGameObject(new CPlayer(STEEL_ROBOT_TEXTURE_PATH), 100, 100);
+	AddGameObject(new CPlayer(STEEL_ROBOT_TEXTURE_PATH), 0, 0);
 }
 
 void CGame::Run()

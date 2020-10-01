@@ -1,6 +1,6 @@
 #include "Player.h"
 
-CPlayer::CPlayer(LPCWSTR texturePath): CGameObject(texturePath)
+CPlayer::CPlayer(LPCWSTR texturePath): CEntity(texturePath)
 {
 	origin.x = 8;
 	origin.y = 9;

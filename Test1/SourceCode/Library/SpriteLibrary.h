@@ -4,13 +4,13 @@
 #include <unordered_map>
 #include <map>
 
-#define CAR_GUN_DOWNLEFT 1
-#define CAR_GUN_LEFT 2
-#define CAR_GUN_TOPLEFT 3
-#define CAR_GUN_TOP 4
-#define CAR_GUN_DOWNRIGHT 5
-#define CAR_GUN_RIGHT 6
-#define CAR_GUN_TOPRIGHT 7
+//#define CAR_GUN_DOWNLEFT 1
+//#define CAR_GUN_LEFT 2
+//#define CAR_GUN_TOPLEFT 3
+//#define CAR_GUN_TOP 4
+//#define CAR_GUN_DOWNRIGHT 5
+//#define CAR_GUN_RIGHT 6
+//#define CAR_GUN_TOPRIGHT 7
 
 using namespace std;
 

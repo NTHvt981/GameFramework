@@ -1,9 +1,9 @@
 #include "CollisionBox.h"
 
-CCollisionBox::CCollisionBox(LPGameObject _gameObject, 
+CCollisionBox::CCollisionBox(LPEntity _gameObject,
 	float _localX, float _localY, float width, float height)
 {
-	gameObject = _gameObject;
+	entity = _gameObject;
 	localPosition.x = _localX;
 	localPosition.y = _localY;
 
@@ -48,14 +48,14 @@ void CCollisionBox::AddCoBox(LPCollisionBox lpBox)
 
 void CCollisionBox::Update()
 {
-	left = gameObject->GetPosition().x + localPosition.x;
-	top = gameObject->GetPosition().y + localPosition.y;
+	left = entity->GetPosition().x + localPosition.x;
+	top = entity->GetPosition().y + localPosition.y;
 
 	right = left + size.x;
 	bottom = top + size.y;
 }
 
-void CCollisionBox::CalculateCollision(Vector& velocity, list<LPGameObject>& objectsCollide)
+void CCollisionBox::CalculateCollision(Vector& velocity, list<LPEntity>& objectsCollide)
 {
 	objectsCollide.clear();
 
@@ -132,7 +132,7 @@ float CCollisionBox::GetBottom()
 	return bottom;
 }
 
-LPGameObject CCollisionBox::GetGameObject()
+LPEntity CCollisionBox::GetGameObject()
 {
-	return LPGameObject();
+	return entity;
 }

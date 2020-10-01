@@ -2,7 +2,7 @@
 #include <list>
 #include "..\Constraints.h"
 #include "..\Collision\Collision.h"
-#include "..\GameObject\GameObject.h"
+#include "..\GameObject\Entity.h"
 #include "..\Vector\Vector.h"
 
 using namespace std;
@@ -18,25 +18,25 @@ private:
 	float right = 0;
 	float bottom = 0;
 
-	LPGameObject gameObject;
+	LPEntity entity;
 	//this list must not contain self collision box instance
 	list<LPCollisionBox> collisionBoxes;
 
 public:
 	//CCollisionBox(LPGameObject _gameObject);
-	CCollisionBox(LPGameObject _gameObject, float _localX, float _localY, float width, float height);
+	CCollisionBox(LPEntity _gameObject, float _localX, float _localY, float width, float height);
 	//CCollisionBox(LPGameObject _gameObject, Vector pos, Vector size);
 
 	void RemoveCoBox(LPCollisionBox lpBox);
 	void AddCoBox(LPCollisionBox lpBox);
 
 	void Update();
-	void CalculateCollision(Vector& velocity, list<LPGameObject> &objectsCollide);
+	void CalculateCollision(Vector& velocity, list<LPEntity> &objectsCollide);
 public:
 	float GetLeft();
 	float GetTop();
 	float GetRight();
 	float GetBottom();
-	LPGameObject GetGameObject();
+	LPEntity GetGameObject();
 };
 

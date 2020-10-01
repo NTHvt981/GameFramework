@@ -53,6 +53,17 @@ Vector CCamera::GetPosition()
     return position;
 }
 
+Vector CCamera::GetScale()
+{
+    return scale;
+}
+
+void CCamera::SetScale(float x, float y)
+{
+    scale.x = x;
+    scale.y = y;
+}
+
 //float CCamera::GetScale()
 //{
 //    return scale;

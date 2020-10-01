@@ -1,11 +1,11 @@
 #pragma once
 
-#include "../GameObject.h"
+#include "../Entity.h"
 #include "../../Constraints.h"
 #include "../../Camera/Camera.h"
 #include "../../Input/Input.h"
 
-class CPlayer: public CGameObject
+class CPlayer: public CEntity
 {
 private:
 	float speed = 2;

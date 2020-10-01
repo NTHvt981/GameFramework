@@ -2,7 +2,7 @@
 
 #include <list>
 #include "..\Constraints.h"
-#include "..\CollisionBox\CollisionBox.h"
+#include "CollisionBox.h"
 
 using namespace std;
 

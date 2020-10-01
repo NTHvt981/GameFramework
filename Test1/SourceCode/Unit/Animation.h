@@ -25,7 +25,12 @@ class CAnimation
 	int currentFrame;
 	vector<LPAnimationFrame> frames;
 public:
-	CAnimation(int id, int defaultTime) { this->defaultTime = defaultTime; lastFrameTime = -1; currentFrame = -1; }
+	CAnimation(int id, int defaultTime) { 
+		this->id = id;
+		this->defaultTime = defaultTime; 
+		lastFrameTime = -1; 
+		currentFrame = -1; 
+	}
 	void Add(int spriteId, DWORD time = 0);
 	void Render(float x, float y);
 	int GetId();

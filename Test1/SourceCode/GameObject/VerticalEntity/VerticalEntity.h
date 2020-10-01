@@ -1,7 +1,9 @@
 #pragma once
-#include "..\GameObject.h"
 
-class CVerticalEntity: public CGameObject
+#include "..\..\Constraints.h"
+#include "..\Entity.h"
+
+class CVerticalEntity: public CEntity
 {
 public:
 	CVerticalEntity(LPCWSTR texturePath);

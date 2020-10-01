@@ -7,6 +7,7 @@ class CCamera
 {
 private:
 	Vector position = Vector(0, 0);
+	Vector scale = Vector(1, 1);
 	float width;
 	float height;
 	D3DXMATRIX matrix;
@@ -28,6 +29,7 @@ public:
 
 	Vector GetPosition();
 
-	float GetScale();
+	Vector GetScale();
+	void SetScale(float x, float y);
 };
 

@@ -35,6 +35,7 @@ public:
 
 	~CGame();
 
-	void AddGameObject(LPGameObject gameObject, float x, float y);
+	void AddGameObject(LPGameObject gameObject);
+	void AddEntity(LPEntity entity, float x, float y);
 };
 

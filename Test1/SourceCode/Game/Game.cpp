@@ -22,9 +22,9 @@ void CGame::Init(HINSTANCE hInstance, int nCmdShow, int width, int height, bool 
 
 void CGame::LoadResources()
 {
-	//AddGameObject(new CHorizontalEntity(STEEL_ROBOT_TEXTURE_PATH), 300, 100);
-	//AddGameObject(new CVerticalEntity(STEEL_ROBOT_TEXTURE_PATH), 0, 100);
-	//AddGameObject(new CPlayer(STEEL_ROBOT_TEXTURE_PATH), 0, 0);
+	//AddEntity(new CHorizontalEntity(STEEL_ROBOT_TEXTURE_PATH), 300, 100);
+	//AddEntity(new CVerticalEntity(STEEL_ROBOT_TEXTURE_PATH), 0, 100);
+	AddEntity(new CPlayer(STEEL_ROBOT_TEXTURE_PATH), 0, 0);
 
 	LoadTextures();
 	LoadSprites();
@@ -33,17 +33,18 @@ void CGame::LoadResources()
 
 void CGame::LoadTextures()
 {
-	CTextureLibrary::GetInstance()->Add(CAR_TEXTURE, L"Resources/Texture/My car spritesheet.png");
+	//CTextureLibrary::GetInstance()->Add(CAR_TEXTURE, L"Resources/Texture/My car spritesheet.png");
+	CTextureLibrary::GetInstance()->Add(CAR_TEXTURE, L"Resources/Texture/My car spritesheet transparent.png");
 }
 
 void CGame::LoadSprites()
 {
 	CSpriteLibrary::GetInstance()->Add(new CSprite(
-		CAR_GUN_DOWNLEFT, 2, 2, 9, 9,
-		CTextureLibrary::GetInstance()->Get(CAR_TEXTURE)
-	));
-	CSpriteLibrary::GetInstance()->Add(new CSprite(
-		CAR_GUN_LEFT, 11, 2,	18,	9,
+		WHEEL_1[0], 
+		WHEEL_1[1], 
+		WHEEL_1[2], 
+		WHEEL_1[3], 
+		WHEEL_1[4], 
 		CTextureLibrary::GetInstance()->Get(CAR_TEXTURE)
 	));
 }
@@ -165,9 +166,15 @@ CGame::~CGame()
 {
 }
 
-void CGame::AddGameObject(LPGameObject gameObject, float x, float y)
+void CGame::AddEntity(LPEntity entity, float x, float y)
 {
-	gameObject->SetPosition(x, y);
+	entity->SetPosition(x, y);
+	//lGameObjects.push_back(entity);
+	AddGameObject(entity);
+}
+
+void CGame::AddGameObject(LPGameObject gameObject)
+{
 	lGameObjects.push_back(gameObject);
 }
 

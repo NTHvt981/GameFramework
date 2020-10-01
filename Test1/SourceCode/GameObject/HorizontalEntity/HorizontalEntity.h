@@ -1,8 +1,8 @@
 #pragma once
-#include "..\GameObject.h"
+#include "..\Entity.h"
 
 
-class CHorizontalEntity: public CGameObject
+class CHorizontalEntity: public CEntity
 {
 public:
 	CHorizontalEntity(LPCWSTR texturePath);

@@ -1,6 +1,7 @@
 #pragma once
 #include <list>
 #include "..\Constraints.h"
+#include "..\Graphic\Graphic.h"
 #include "..\Collision\Collision.h"
 #include "..\GameObject\Entity.h"
 #include "..\Vector\Vector.h"
@@ -31,6 +32,7 @@ public:
 	void AddCoBox(LPCollisionBox lpBox);
 
 	void Update();
+	void Render();
 	void CalculateCollision(Vector& velocity, list<LPEntity> &objectsCollide);
 public:
 	float GetLeft();

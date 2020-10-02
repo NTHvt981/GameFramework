@@ -10,26 +10,30 @@ void CAnimation::Add(int spriteId, DWORD time)
 	frames.push_back(frame);
 }
 
+void CAnimation::Add(int spriteIds[], int size)
+{
+	for (int i = 0; i < size; i++)
+	{
+		Add(spriteIds[i]);
+	}
+}
+
 void CAnimation::Render(float x, float y)
 {
 	DWORD now = GetTickCount();
-	if (currentFrame == -1)
+	if (lastFrameTime == -1) lastFrameTime = now;
+
+	DWORD t = frames[currentFrame]->GetTime();
+	if (now - lastFrameTime > t)
 	{
-		currentFrame = 0;
+		currentFrame = currentFrame + mode;
 		lastFrameTime = now;
 	}
-	else
-	{
-		DWORD t = frames[currentFrame]->GetTime();
-		if (now - lastFrameTime > t)
-		{
-			currentFrame++;
-			lastFrameTime = now;
-			if (currentFrame == frames.size()) currentFrame = 0;
-			//DebugOut(L"now: %d, lastFrameTime: %d, t: %d\n", now, lastFrameTime, t);
-		}
 
-	}
+	//check to see if current frame out of frames limit
+	if (currentFrame == -1)
+		currentFrame = frames.size() - 1;
+	else if (currentFrame == frames.size()) currentFrame = 0;
 
 	frames[currentFrame]->GetSprite()->Draw(x, y);
 }
@@ -37,4 +41,19 @@ void CAnimation::Render(float x, float y)
 int CAnimation::GetId()
 {
 	return id;
+}
+
+LPAnimation CAnimation::Copy()
+{
+	return new CAnimation(*this);
+}
+
+int CAnimation::GetMode()
+{
+	return mode;
+}
+
+void CAnimation::SetMode(int _mode)
+{
+	this->mode = _mode;
 }

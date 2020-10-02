@@ -148,6 +148,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="SourceCode\Vector\Box.h" />
     <ClInclude Include="SourceCode\GameObject\Entity.h" />
     <ClInclude Include="SourceCode\GameObject\GameObject.h" />
     <ClInclude Include="SourceCode\Library\AnimationLibrary.h" />
@@ -171,6 +172,7 @@
     <ClInclude Include="SourceCode\Unit\Sprite.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="SourceCode\Vector\Box.cpp" />
     <ClCompile Include="SourceCode\GameObject\Entity.cpp" />
     <ClCompile Include="SourceCode\GameObject\GameObject.cpp" />
     <ClCompile Include="SourceCode\Library\AnimationLibrary.cpp" />
@@ -194,6 +196,8 @@
   <ItemGroup>
     <Image Include="..\..\..\..\Desktop\Tileset\player_sheet_transparent.png" />
     <Image Include="..\..\..\..\Downloads\steel robot.png" />
+    <Image Include="Resources\Texture\area_2_tileset.png" />
+    <Image Include="Resources\Texture\bbox.png" />
     <Image Include="Resources\Texture\brick.ico" />
     <Image Include="Resources\Texture\brick.png" />
     <Image Include="Resources\Texture\character_sheet_transparent.png" />

@@ -16,6 +16,7 @@ public:
 	static CAnimationLibrary* GetInstance();
 
 	void Add(LPAnimation anim);
+	void Add(LPAnimation anim, int id);
 	LPAnimation Get(unsigned int id);
 
 	void DrawTest();

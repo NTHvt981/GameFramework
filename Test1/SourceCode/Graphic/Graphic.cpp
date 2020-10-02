@@ -97,10 +97,11 @@ LPDIRECT3DTEXTURE9 CGraphic::LoadTexture(LPCWSTR texturePath)
 	return texture;
 }
 
-void CGraphic::Draw(float x, float y, LPDIRECT3DTEXTURE9 texture, 
+void CGraphic::Draw(LPDIRECT3DTEXTURE9 texture, float x, float y,
 	int left, int top, int right, int bottom,
-	float origin_x, float origin_y)
+	float origin_x, float origin_y, float alpha)
 {
+	int opacity = alpha * 255;
 	D3DXVECTOR3 origin(origin_x, origin_y, 0);
 	D3DXVECTOR3 position(x, y, 0);
 	if (CCamera::GetInstance() != NULL)
@@ -113,14 +114,14 @@ void CGraphic::Draw(float x, float y, LPDIRECT3DTEXTURE9 texture,
 	r.top = top;
 	r.right = right;
 	r.bottom = bottom;
-	spriteHandler->Draw(texture, &r, &origin, &position, D3DCOLOR_XRGB(255, 255, 255));
+	spriteHandler->Draw(texture, &r, &origin, &position, D3DCOLOR_RGBA(255, 255, 255, opacity));
 	
 }
 
-void CGraphic::Draw(float x, float y, 
-	float origin_x, float origin_y, 
-	LPDIRECT3DTEXTURE9 texture)
+void CGraphic::Draw(LPDIRECT3DTEXTURE9 texture, float x, float y,
+	float origin_x, float origin_y, float alpha)
 {
+	int opacity = alpha * 255;
 	D3DXVECTOR3 position(x, y, 0);
 	if (CCamera::GetInstance() != NULL)
 	{
@@ -128,30 +129,12 @@ void CGraphic::Draw(float x, float y,
 		CCamera::GetInstance()->Transform(x, y, position);
 	}
 	D3DXVECTOR3 origin(origin_x, origin_y, 0);
-	spriteHandler->Draw(texture, NULL, &origin, &position, D3DCOLOR_XRGB(255, 255, 255));
+	spriteHandler->Draw(texture, NULL, &origin, &position, D3DCOLOR_RGBA(255, 255, 255, opacity));
 }
 
-void CGraphic::Draw(float x, float y, LPDIRECT3DTEXTURE9 texture)
+void CGraphic::Draw(LPDIRECT3DTEXTURE9 texture, Vector position, Vector origin, float alpha)
 {
-	D3DXVECTOR3 position(x, y, 0);
-	if (CCamera::GetInstance() != NULL)
-	{
-		CCamera::GetInstance()->SetMatrix();
-		CCamera::GetInstance()->Transform(x, y, position);
-	}
-
-	spriteHandler->Draw(texture, NULL, NULL, &position, D3DCOLOR_XRGB(255, 255, 255));
-	
-}
-
-void CGraphic::Draw(Vector position, LPDIRECT3DTEXTURE9 texture)
-{
-	Draw(position.x, position.y, texture);
-}
-
-void CGraphic::Draw(Vector position, Vector origin, LPDIRECT3DTEXTURE9 texture)
-{
-	Draw(position.x, position.y, origin.x, origin.y, texture);
+	Draw(texture, position.x, position.y, origin.x, origin.y, alpha);
 }
 
 void CGraphic::Render(LPDIRECT3DTEXTURE9 texture)

@@ -1,6 +1,7 @@
 #include "Sprite.h"
 
-CSprite::CSprite(int id, int left, int top, int right, int bottom, LPDIRECT3DTEXTURE9 tex
+CSprite::CSprite(int id, int left, int top, int right, int bottom, 
+	LPDIRECT3DTEXTURE9 tex
 	, float origin_x, float origin_y) {
 	this->id = id;
 	this->left = left;
@@ -15,7 +16,7 @@ CSprite::CSprite(int id, int left, int top, int right, int bottom, LPDIRECT3DTEX
 
 void CSprite::Draw(float x, float y, int alpha)
 {
-	CGraphic::Instance->Draw(x, y, texture, left, top, right, bottom, origin.x, origin.y);
+	CGraphic::Instance->Draw(texture, x, y, left, top, right, bottom, origin.x, origin.y);
 }
 
 int CSprite::GetId()

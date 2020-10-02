@@ -19,13 +19,19 @@ CAR_HEAD
 56	20	71	36	upleft
 
 CAR_BODY
-38	2	45	9	down
+108	2	115	9	down
 
-CAR_WHEEL
+CAR_WHEEL_CLOCK
 38	11	45	18	one
 47	11	54	18	two
 56	11	63	18	three
 65	11	72	18	four
+
+CAR_WHEEL_R_CLOCK
+38	2	45	9	one
+47	2	54	9	two
+56	2	63	9	three
+65	2	72	9	four
 
 FIRE_BALL
 74	2	97	9	left

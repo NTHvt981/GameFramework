@@ -30,12 +30,11 @@
 //#define MAX_FRAME_RATE 120
 #define MAX_FRAME_RATE 60
 
-#define BRICK_TEXTURE_PATH L"./Resources/Texture/brick.png"
+#define TEX_BRICK_PATH L"./Resources/Texture/brick.png"
 #define STEEL_ROBOT_TEXTURE_PATH L"./Resources/Texture/steel robot.png"
-#define BRICK_START_X 30.0f
-#define BRICK_START_Y 10.0f
-#define BRICK_START_VX 0.2f
-#define BRICK_WIDTH 16.0f
+#define TEX_BBOX_PATH L"./Resources/Texture/bbox.png"
+#define TEX_CAR_SPRIRESHEET_TRANSPARENT L"Resources/Texture/My car spritesheet transparent.png"
+#define ID_TEX_BBOX 999		// special texture to draw object bounding box
 
 #define POSITION_START_X 10
 #define POSITION_START_Y 10
@@ -47,21 +46,28 @@
 #define MOVE_DOWN_STATE 3
 
 #pragma region TEXTURE PARAMS
-const int CAR_GUN_LEFT[] = { 11,2,	18,	9 };
-const int CAR_GUN_UPLEFT[] = { 20,	2,	27,	9 };
-const int CAR_GUN_UP[] = { 29,	2,	36,	9 };
-const int CAR_GUN_UPRIGHT[] = { 20,	11,	27,	18 };
-const int CAR_GUN_RIGHT[] = { 29,	11,	36,	18 };
+#define ID_CAR_GUN_LEFT 1000
+#define ID_CAR_GUN_RIGHT 1002
+#define ID_CAR_GUN_UPLEFT 1001
+#define ID_CAR_GUN_UPRIGHT 1003
+#define ID_CAR_GUN_UP 1004
 
-const int CAR_HEAD_LEFT[] = { 2,	20,	17,	27 };
-const int CAR_HEAD_RIGHT[] = { 2,	29,	17,	36 };
-const int CAR_HEAD_UPRIGHT[] = { 38,	20,	53,	35 };
-const int CAR_HEAD_UPLEFT[] = { 56,	20,	71,	36 };
+#define ID_CAR_HEAD_LEFT 1005
+#define ID_CAR_HEAD_RIGHT 1006
+#define ID_CAR_HEAD_UPLEFT 1007
+#define ID_CAR_HEAD_UPRIGHT 1008
 
-const int WHEEL_1[] = { 100, 38,	11,	45,	18 };
-const int WHEEL_2[] = { 101, 47,	11,	54,	18 };
-const int WHEEL_3[] = { 102, 56,	11,	63,	18 };
-const int WHEEL_4[] = { 103, 65,	11,	72,	18 };
+#define ID_CAR_BODY 1009
+#define ID_CAR_WHEEL_1 1010
+#define ID_CAR_WHEEL_2 1011
+#define ID_CAR_WHEEL_3 1012
+#define ID_CAR_WHEEL_4 1013
+#define ID_CAR_WHEEL_5 1014
+#define ID_CAR_WHEEL_6 1015
+#define ID_CAR_WHEEL_7 1016
+#define ID_CAR_WHEEL_8 1017
+
+#define ID_FIRE_BALL 1018
 #pragma endregion
 
 //enum class GOTYPES;

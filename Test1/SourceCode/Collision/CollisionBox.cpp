@@ -19,16 +19,6 @@ CCollisionBox::CCollisionBox(LPEntity _gameObject,
 	CCollision::GetInstance()->AddCollisionBox(this);
 }
 
-//CCollisionBox::CCollisionBox(LPGameObject _gameObject, Vector _pos, Vector _size)
-//{
-//	gameObject = _gameObject;
-//	localPosition.x = _pos.x;
-//	localPosition.y = _pos.y;
-//
-//	size.x = _size.x;
-//	size.y = _size.y;
-//}
-
 void CCollisionBox::RemoveCoBox(LPCollisionBox lpBox)
 {
 	try
@@ -53,6 +43,24 @@ void CCollisionBox::Update()
 
 	right = left + size.x;
 	bottom = top + size.y;
+}
+
+void CCollisionBox::Render()
+{
+	D3DXVECTOR3 position(
+		left, top, 0);
+	D3DXVECTOR3 origin(0, 0, 0);
+	RECT rect;
+
+	LPDIRECT3DTEXTURE9 bbox = CTextureLibrary::GetInstance()->Get(ID_TEX_BBOX);
+
+	float l, t, r, b;
+	l = 0;
+	t = 0;
+	r = right - left;
+	b = bottom- top;
+
+	CGraphic::Instance->Draw(bbox, position.x, position.y, l, t, r, b, 0, 0, 0.2);
 }
 
 void CCollisionBox::CalculateCollision(Vector& velocity, list<LPEntity>& objectsCollide)

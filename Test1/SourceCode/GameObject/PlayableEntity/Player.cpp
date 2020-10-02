@@ -2,14 +2,12 @@
 
 CPlayer::CPlayer(LPCWSTR texturePath): CEntity(texturePath)
 {
-	origin.x = 8;
-	origin.y = 9;
 	camera = new CCamera(WINDOW_WIDTH, WINDOW_HEIGHT);
 	CCamera::SetInstance(*camera);
 
 	this->collisionBox = new CCollisionBox(
 		this,
-		-origin.x, origin.y,
+		0, 0,
 		17.0f, 18.0f
 	);
 }
@@ -39,5 +37,6 @@ void CPlayer::Update(DWORD dt)
 
 void CPlayer::Render()
 {
-	CGraphic::Instance->Draw(position, origin, texture);
+	CEntity::Render();
+	collisionBox->Render();
 }

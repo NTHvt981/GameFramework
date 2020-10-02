@@ -3,6 +3,7 @@
 #include "GameObject.h"
 #include "..\Constraints.h"
 #include "..\Graphic\Graphic.h"
+#include "..\Library\TextureLibrary.h"
 #include "..\Collision\CollisionBox.h"
 
 class CEntity: public CGameObject {
@@ -28,6 +29,7 @@ public:
 
 	void SetCollisionBox(LPCollisionBox _collisionBox);
 	LPCollisionBox GetCollisionBox();
+	void RenderBoundingBox();
 
 	void Update(DWORD dt);
 	void Render();

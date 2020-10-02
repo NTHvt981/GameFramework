@@ -3,6 +3,7 @@
 #include "..\Graphic\Graphic.h"
 #include "..\Library\TextureLibrary.h"
 #include "..\Library\SpriteLibrary.h"
+#include "..\Library\AnimationLibrary.h"
 #include "..\Debug\Debug.h"
 #include "..\GameObject\GameObject.h"
 #include "..\GameObject\HorizontalEntity\HorizontalEntity.h"

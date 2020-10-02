@@ -20,8 +20,10 @@ Vector CEntity::GetPosition()
 void CEntity::move(DWORD dt)
 {
 	list<LPEntity> objectsCollide;
-	collisionBox->CalculateCollision(velocity, objectsCollide);
+	if (collisionBox != NULL)
+		collisionBox->CalculateCollision(velocity, objectsCollide);
 	position = position + velocity;
+	collisionBox->Update();
 }
 
 void CEntity::SetCollisionBox(LPCollisionBox _collisionBox)
@@ -34,6 +36,11 @@ LPCollisionBox CEntity::GetCollisionBox()
 	return collisionBox;
 }
 
+void CEntity::RenderBoundingBox()
+{
+	// TODO: Don't render collision box here
+}
+
 void CEntity::Update(DWORD dt)
 {
 }
@@ -41,9 +48,9 @@ void CEntity::Update(DWORD dt)
 void CEntity::Render()
 {
 	CGraphic::Instance->Draw(
+		texture,
 		position,
-		origin,
-		texture
+		origin
 	);
 }
 

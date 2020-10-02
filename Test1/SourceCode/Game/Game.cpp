@@ -34,23 +34,41 @@ void CGame::LoadResources()
 void CGame::LoadTextures()
 {
 	//CTextureLibrary::GetInstance()->Add(CAR_TEXTURE, L"Resources/Texture/My car spritesheet.png");
-	CTextureLibrary::GetInstance()->Add(CAR_TEXTURE, L"Resources/Texture/My car spritesheet transparent.png");
+	CTextureLibrary::GetInstance()->Add(CAR_TEXTURE, TEX_CAR_SPRIRESHEET_TRANSPARENT);
+	CTextureLibrary::GetInstance()
+		->Add(ID_TEX_BBOX, TEX_BBOX_PATH);
 }
 
 void CGame::LoadSprites()
 {
-	CSpriteLibrary::GetInstance()->Add(new CSprite(
-		WHEEL_1[0], 
-		WHEEL_1[1], 
-		WHEEL_1[2], 
-		WHEEL_1[3], 
-		WHEEL_1[4], 
-		CTextureLibrary::GetInstance()->Get(CAR_TEXTURE)
-	));
+	LPDIRECT3DTEXTURE9 textCar = CTextureLibrary::GetInstance()->Get(CAR_TEXTURE);
+	CSpriteLibrary* lib = CSpriteLibrary::GetInstance();
+
+	lib->Add(ID_CAR_GUN_LEFT, 11, 2, 18, 9, textCar);
+	lib->Add(ID_CAR_GUN_RIGHT, 11, 11, 18, 18, textCar);
+	lib->Add(ID_CAR_GUN_UPLEFT, 20, 2, 27, 9, textCar);
+	lib->Add(ID_CAR_GUN_UPRIGHT, 20, 11, 27, 18, textCar);
+	lib->Add(ID_CAR_GUN_UP, 29, 2, 36, 9, textCar);
+
+	lib->Add(ID_CAR_HEAD_LEFT, 2,	20,	17,	27, textCar);
+	lib->Add(ID_CAR_HEAD_RIGHT, 2,	29,	17,	36, textCar);
+	lib->Add(ID_CAR_HEAD_UPLEFT, 56,	20,	71,	36, textCar);
+	lib->Add(ID_CAR_HEAD_UPRIGHT, 38,	20,	53,	35, textCar);
+	lib->Add(ID_CAR_BODY, 108,	2,	115,	9, textCar);
+
+	lib->Add(ID_CAR_WHEEL_1, 38,	11,	45,	18, textCar);
+	lib->Add(ID_CAR_WHEEL_2, 47,	11,	54,	18, textCar);
+	lib->Add(ID_CAR_WHEEL_3, 56,	11,	63,	18, textCar);
+	lib->Add(ID_CAR_WHEEL_4, 65,	11,	72,	18, textCar);
+	lib->Add(ID_CAR_WHEEL_5, 38,	2,	45,	9, textCar);
+	lib->Add(ID_CAR_WHEEL_6, 47,	2,	54,	9, textCar);
+	lib->Add(ID_CAR_WHEEL_7, 56,	2,	63,	9, textCar);
+	lib->Add(ID_CAR_WHEEL_8, 65	,2,	72,	9, textCar);
 }
 
 void CGame::LoadAnimations()
 {
+	LPAnimation ani = new CAnimation(1, 100);
 }
 
 void CGame::Run()
@@ -124,7 +142,6 @@ void CGame::Update(DWORD dt)
 	{
 		obj->Update(dt);
 	}
-    return;
 }
 
 void CGame::Render()
@@ -140,14 +157,13 @@ void CGame::Render()
 
 		spriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
 
+		CSpriteLibrary::GetInstance()->DrawTest();
+		CAnimationLibrary::GetInstance()->DrawTest();
 
 		for each (LPGameObject obj in lGameObjects)
 		{
 			obj->Render();
 		}
-
-		CSpriteLibrary::GetInstance()->DrawTest();
-
 
 		spriteHandler->End();
 		d3ddev->EndScene();

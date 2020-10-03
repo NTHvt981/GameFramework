@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Entity.h"
+#include "DynamicEntity.h"
 #include "../Physic.h"
 #include "../../Constraints.h"
 #include "../../Camera/Camera.h"
@@ -19,7 +19,7 @@
 #define PLAYER_AIM_UPLEFT 2
 #define PLAYER_AIM_UPRIGHT 3
 
-class CPlayer: public CEntity, public IPhysic
+class CPlayer: public CDynamicEntity, public IPhysic
 {
 private:
 	float speed = 1.5;

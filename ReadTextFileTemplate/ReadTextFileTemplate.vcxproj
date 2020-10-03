@@ -21,10 +21,9 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{caa6ceea-b092-42ff-b6ad-ff3649cc5044}</ProjectGuid>
-    <RootNamespace>Test1</RootNamespace>
+    <ProjectGuid>{6113d535-a285-44b5-91ca-f2403b0299ea}</ProjectGuid>
+    <RootNamespace>ReadTextFileTemplate</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>Lesson1</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -87,16 +86,12 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>false</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include</AdditionalIncludeDirectories>
-      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86</AdditionalLibraryDirectories>
-      <AdditionalDependencies>d3dx9.lib;d3d9.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -105,11 +100,11 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -119,16 +114,12 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>false</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include</AdditionalIncludeDirectories>
-      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x64;C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Lib\x86</AdditionalLibraryDirectories>
-      <AdditionalDependencies>d3dx9.lib;d3d9.lib;dxguid.lib;dxerr.lib;dinput8.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -137,94 +128,25 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="SourceCode\GameObject\DynamicObjects\DynamicEntity.h" />
-    <ClInclude Include="SourceCode\Collision\DynamicBox.h" />
-    <ClInclude Include="SourceCode\GameObject\StaticObjects\Ground.h" />
-    <ClInclude Include="SourceCode\GameObject\Physic.h" />
-    <ClInclude Include="SourceCode\Vector\Box.h" />
-    <ClInclude Include="SourceCode\GameObject\Entity.h" />
-    <ClInclude Include="SourceCode\GameObject\GameObject.h" />
-    <ClInclude Include="SourceCode\Library\AnimationLibrary.h" />
-    <ClInclude Include="SourceCode\Unit\Animation.h" />
-    <ClInclude Include="SourceCode\Collision\CollisionBox.h" />
-    <ClInclude Include="SourceCode\Collision\Collision.h" />
-    <ClInclude Include="SourceCode\Camera\Camera.h" />
-    <ClInclude Include="SourceCode\Debug\Debug.h" />
-    <ClInclude Include="SourceCode\GameObject\DynamicObjects\HorizontalEntity.h" />
-    <ClInclude Include="SourceCode\Constraints.h" />
-    <ClInclude Include="SourceCode\GameObject\DynamicObjects\Player.h" />
-    <ClInclude Include="SourceCode\Graphic\Graphic.h" />
-    <ClInclude Include="SourceCode\Game\Game.h" />
-    <ClInclude Include="Main.h" />
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="SourceCode\Input\Input.h" />
-    <ClInclude Include="SourceCode\Vector\Vector.h" />
-    <ClInclude Include="SourceCode\GameObject\DynamicObjects\VerticalEntity.h" />
-    <ClInclude Include="SourceCode\Library\TextureLibrary.h" />
-    <ClInclude Include="SourceCode\Library\SpriteLibrary.h" />
-    <ClInclude Include="SourceCode\Unit\Sprite.h" />
-    <ClInclude Include="SourceCode\GameObject\StaticObjects\Wall.h" />
-    <ClInclude Include="SourceCode\GameObject\StaticObjects\StaticEntity.h" />
+    <ClCompile Include="Box.cpp" />
+    <ClCompile Include="ReadTextFileTemplate.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="SourceCode\GameObject\DynamicObjects\DynamicEntity.cpp" />
-    <ClCompile Include="SourceCode\Collision\DynamicBox.cpp" />
-    <ClCompile Include="SourceCode\GameObject\StaticObjects\Ground.cpp" />
-    <ClCompile Include="SourceCode\GameObject\Physic.cpp" />
-    <ClCompile Include="SourceCode\Vector\Box.cpp" />
-    <ClCompile Include="SourceCode\GameObject\Entity.cpp" />
-    <ClCompile Include="SourceCode\GameObject\GameObject.cpp" />
-    <ClCompile Include="SourceCode\Library\AnimationLibrary.cpp" />
-    <ClCompile Include="SourceCode\Unit\Animation.cpp" />
-    <ClCompile Include="SourceCode\Camera\Camera.cpp" />
-    <ClCompile Include="SourceCode\Collision\CollisionBox.cpp" />
-    <ClCompile Include="SourceCode\Collision\Collision.cpp" />
-    <ClCompile Include="SourceCode\Debug\Debug.cpp" />
-    <ClCompile Include="SourceCode\GameObject\DynamicObjects\HorizontalEntity.cpp" />
-    <ClCompile Include="SourceCode\GameObject\DynamicObjects\Player.cpp" />
-    <ClCompile Include="SourceCode\Graphic\Graphic.cpp" />
-    <ClCompile Include="SourceCode\Game\Game.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="SourceCode\Input\Input.cpp" />
-    <ClCompile Include="SourceCode\Vector\Vector.cpp" />
-    <ClCompile Include="SourceCode\GameObject\DynamicObjects\VerticalEntity.cpp" />
-    <ClCompile Include="SourceCode\Library\TextureLibrary.cpp" />
-    <ClCompile Include="SourceCode\Library\SpriteLibrary.cpp" />
-    <ClCompile Include="SourceCode\Unit\Sprite.cpp" />
-    <ClCompile Include="SourceCode\GameObject\StaticObjects\Wall.cpp" />
-    <ClCompile Include="SourceCode\GameObject\StaticObjects\StaticEntity.cpp" />
+    <ClInclude Include="Box.h" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\Desktop\Tileset\player_sheet_transparent.png" />
-    <Image Include="..\..\..\..\Downloads\steel robot.png" />
-    <Image Include="Resources\Texture\area_2_tileset.png" />
-    <Image Include="Resources\Texture\bbox.png" />
-    <Image Include="Resources\Texture\brick.ico" />
-    <Image Include="Resources\Texture\brick.png" />
-    <Image Include="Resources\Texture\character_sheet_transparent.png" />
-    <Image Include="Resources\Texture\My car spritesheet transparent.png" />
-    <Image Include="Resources\Texture\My car spritesheet.png" />
-    <Image Include="Resources\Texture\player_sheet.png" />
-    <Image Include="Resources\Texture\steel robot.png" />
-    <Image Include="small.ico" />
-    <Image Include="Test1.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Test1.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="Resources\Textfile\temp.txt" />
+    <Text Include="Resource\Textfile\temp_sprite_info.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

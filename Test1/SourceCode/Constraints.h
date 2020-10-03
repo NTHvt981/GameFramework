@@ -81,6 +81,9 @@ typedef CEntity* LPEntity;
 class CCollisionBox;
 typedef CCollisionBox* LPCollisionBox;
 
+class CDynamicBox;
+typedef CDynamicBox* LPDynamicBox;
+
 class CSprite;
 typedef CSprite* LPSprite;
 

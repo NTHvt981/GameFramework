@@ -1,11 +1,11 @@
 #include "HorizontalEntity.h"
 
-CHorizontalEntity::CHorizontalEntity(LPCWSTR texturePath):CEntity(texturePath)
+CHorizontalEntity::CHorizontalEntity(LPCWSTR texturePath):CDynamicEntity(texturePath)
 {
 	speed = 5;
 	state = MOVE_RIGHT_STATE;
 
-	this->collisionBox = new CCollisionBox(
+	this->collisionBox = new CDynamicBox(
 		this,
 		0.0f, 0.0f,
 		17.0f, 18.0f

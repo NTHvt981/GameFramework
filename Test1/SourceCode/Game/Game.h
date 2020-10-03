@@ -6,9 +6,9 @@
 #include "..\Library\AnimationLibrary.h"
 #include "..\Debug\Debug.h"
 #include "..\GameObject\GameObject.h"
-#include "..\GameObject\HorizontalEntity\HorizontalEntity.h"
-#include "..\GameObject\VerticalEntity\VerticalEntity.h"
-#include "..\GameObject\PlayableEntity\Player.h"
+#include "..\GameObject\DynamicObjects\HorizontalEntity.h"
+#include "..\GameObject\DynamicObjects\VerticalEntity.h"
+#include "..\GameObject\DynamicObjects\Player.h"
 #include "..\GameObject\StaticObjects\Wall.h"
 #include "..\GameObject\StaticObjects\Ground.h"
 

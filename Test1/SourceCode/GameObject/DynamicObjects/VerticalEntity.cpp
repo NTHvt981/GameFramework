@@ -1,11 +1,11 @@
 #include "VerticalEntity.h"
 
-CVerticalEntity::CVerticalEntity(LPCWSTR texturePath): CEntity(texturePath)
+CVerticalEntity::CVerticalEntity(LPCWSTR texturePath): CDynamicEntity(texturePath)
 {
 	speed = 3;
 	state = MOVE_DOWN_STATE;
 
-	this->collisionBox = new CCollisionBox(
+	this->collisionBox = new CDynamicBox(
 		this,
 		0.0f, 0.0f,
 		17.0f, 18.0f

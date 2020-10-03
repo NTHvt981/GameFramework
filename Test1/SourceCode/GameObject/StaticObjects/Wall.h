@@ -1,12 +1,12 @@
 #pragma once
 
-#include "..\Entity.h"
+#include "..\GameObject.h"
+#include "..\..\Collision\CollisionBox.h"
 
-class CWall: public CEntity
+class CWall: public CGameObject
 {
 protected:
-	GOTYPES type = GOTYPES::Static;
-protected:
+	LPCollisionBox collisionBox = NULL;
 	void move(DWORD dt);
 public:
 	CWall(float l, float t, float r, float b);

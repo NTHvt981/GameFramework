@@ -4,12 +4,10 @@
 #include "..\Constraints.h"
 #include "..\Graphic\Graphic.h"
 #include "..\Library\TextureLibrary.h"
-#include "..\Collision\CollisionBox.h"
+#include "..\Collision\DynamicBox.h"
 
 class CEntity: public CGameObject {
 protected:
-	GOTYPES type = GOTYPES::Entity;
-
 	Vector position;
 	Vector origin;
 	Vector velocity;
@@ -17,8 +15,8 @@ protected:
 	int speed;
 
 	LPDIRECT3DTEXTURE9 texture;
-	LPCollisionBox collisionBox = NULL;
-	list<LPEntity> collidedEntities;
+	LPDynamicBox collisionBox = NULL;
+	list<LPGameObject> collidedEntities;
 
 protected:
 	void move(DWORD dt);
@@ -28,11 +26,10 @@ public:
 	void SetPosition(float _x, float _y);
 	Vector GetPosition();
 
-	void SetCollisionBox(LPCollisionBox _collisionBox);
-	LPCollisionBox GetCollisionBox();
+	LPDynamicBox GetCollisionBox();
 
 	bool IsCollidedWith(GOTYPES type);
-	void GetCollidedWith(GOTYPES type, list<LPEntity> &collidedObjs);
+	void GetCollidedWith(GOTYPES type, list<LPGameObject> &collidedObjs);
 
 	void Update(DWORD dt);
 	void Render();

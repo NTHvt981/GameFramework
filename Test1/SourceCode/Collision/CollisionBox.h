@@ -3,47 +3,42 @@
 #include "..\Constraints.h"
 #include "..\Graphic\Graphic.h"
 #include "..\Collision\Collision.h"
-#include "..\GameObject\Entity.h"
+#include "..\GameObject\GameObject.h"
 #include "..\Vector\Vector.h"
+#include "..\Library\TextureLibrary.h"
 
 using namespace std;
 
+//Basic collision box, this type are not support for moving
 class CCollisionBox
 {
-private:
-	Vector localPosition;
-	Vector size;
-
-	float left = 0;
-	float top = 0;
-	float right = 0;
-	float bottom = 0;
+protected:
+	float left;
+	float top;
+	float right;
+	float bottom;
 
 	bool solid = true;
 
-	LPEntity entity;
+	LPGameObject owner;
 	//this list must not contain self collision box instance
 	list<LPCollisionBox> collisionBoxes;
 
 public:
-	//CCollisionBox(LPGameObject _gameObject);
-	CCollisionBox(LPEntity _gameObject, float _localX, float _localY, float width, float height);
-	//CCollisionBox(LPGameObject _gameObject, Vector pos, Vector size);
+	CCollisionBox(LPGameObject obj, float l = 0, float t = 0, float r = 0, float b=0);
 
 	void RemoveCoBox(LPCollisionBox lpBox);
 	void AddCoBox(LPCollisionBox lpBox);
 
-	void Update();
 	void Render();
 	void CalculateCollision(Vector& velocity, 
-		list<LPEntity> &objectsCollide);
-	list<LPEntity> GetCollidedObjects();
+		list<LPGameObject> &objectsCollide);
 public:
 	float GetLeft();
 	float GetTop();
 	float GetRight();
 	float GetBottom();
-	LPEntity GetGameObject();
+	LPGameObject GetOwner();
 	bool IsSolid();
 
 public:

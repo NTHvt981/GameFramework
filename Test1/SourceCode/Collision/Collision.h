@@ -6,6 +6,7 @@
 
 using namespace std;
 
+//Class that handle basic function of calculating collision
 class CCollision
 {
 private:

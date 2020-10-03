@@ -26,11 +26,11 @@ void CGame::LoadResources()
 	LoadSprites();
 	LoadAnimations();
 
-	//AddEntity(new CHorizontalEntity(STEEL_ROBOT_TEXTURE_PATH), 300, 100);
-	//AddEntity(new CVerticalEntity(STEEL_ROBOT_TEXTURE_PATH), 0, 100);
-	AddEntity(new CPlayer(STEEL_ROBOT_TEXTURE_PATH), 100, 300);
-	AddEntity(new CGround(0, 0, WINDOW_WIDTH/2, 50, true), 0, 0);
-	AddEntity(new CGround(0, 100, WINDOW_WIDTH/2, 150, false), 0, 0);
+	AddEntity(new CPlayer(STEEL_ROBOT_TEXTURE_PATH), 100, 800);
+	AddGameObject(new CGround(0, 0, 100, 32));
+	AddGameObject(new CGround(100, 64, 300, 96));
+	AddGameObject(new CGround(300, 128, 400, 160));
+	AddGameObject(new CGround(200, 192, 300, 224));
 }
 
 void CGame::LoadTextures()

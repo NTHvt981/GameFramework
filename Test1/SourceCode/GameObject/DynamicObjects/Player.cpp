@@ -1,12 +1,12 @@
 #include "Player.h"
 
-CPlayer::CPlayer(LPCWSTR texturePath): CEntity(texturePath)
+CPlayer::CPlayer(LPCWSTR texturePath): CDynamicEntity(texturePath)
 {
 	SetType(GOTYPES::Player);
 	camera = new CCamera(WINDOW_WIDTH, WINDOW_HEIGHT);
 	CCamera::SetInstance(*camera);
 
-	this->collisionBox = new CCollisionBox(
+	this->collisionBox = new CDynamicBox(
 		this,
 		-10, 12,
 		20, 20

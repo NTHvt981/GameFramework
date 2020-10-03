@@ -1,15 +1,13 @@
 #include "CollisionBox.h"
 
-CCollisionBox::CCollisionBox(LPEntity _gameObject,
-	float _localX, float _localY, float width, float height)
+CCollisionBox::CCollisionBox(LPGameObject obj, float l, float t, float r, float b)
 {
-	entity = _gameObject;
-	localPosition.x = _localX;
-	localPosition.y = _localY;
+	left = l;
+	top = t;
+	right = r;
+	bottom = b;
 
-	size.x = width;
-	size.y = height;
-
+	owner = obj;
 	CCollision::GetInstance()->GetCollisionBoxes();
 	for each (LPCollisionBox box in CCollision::GetInstance()->GetCollisionBoxes())
 	{
@@ -36,17 +34,6 @@ void CCollisionBox::AddCoBox(LPCollisionBox lpBox)
 	collisionBoxes.push_back(lpBox);
 }
 
-void CCollisionBox::Update()
-{
-	left = entity->GetPosition().x + localPosition.x;
-	bottom = entity->GetPosition().y + localPosition.y;
-
-	right = left + size.x;
-	top = bottom - size.y;
-
-	
-}
-
 void CCollisionBox::Render()
 {
 	D3DXVECTOR3 position(
@@ -64,7 +51,7 @@ void CCollisionBox::Render()
 	CGraphic::Instance->Draw(bbox, position.x, position.y, l, t, r, b, 0, 0, 0.2);
 }
 
-void CCollisionBox::CalculateCollision(Vector& velocity, list<LPEntity>& objectsCollide)
+void CCollisionBox::CalculateCollision(Vector& velocity, list<LPGameObject>& objectsCollide)
 {
 	objectsCollide.clear();
 
@@ -104,7 +91,7 @@ void CCollisionBox::CalculateCollision(Vector& velocity, list<LPEntity>& objects
 			if (collideTime < 1.0f && collideTime >= 0.0f)
 			{
 				//asign the game object that contain collision box
-				objectsCollide.push_back(staticBox->GetGameObject());
+				objectsCollide.push_back(staticBox->GetOwner());
 
 				// if both this box and collide box are solid
 				// recalculate the velocity
@@ -146,9 +133,9 @@ float CCollisionBox::GetBottom()
 	return bottom;
 }
 
-LPEntity CCollisionBox::GetGameObject()
+LPGameObject CCollisionBox::GetOwner()
 {
-	return entity;
+	return owner;
 }
 
 bool CCollisionBox::IsSolid()

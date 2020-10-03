@@ -65,16 +65,7 @@
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SourceCode\GameObject\HorizontalEntity\HorizontalEntity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SourceCode\Vector\Vector.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SourceCode\GameObject\VerticalEntity\VerticalEntity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SourceCode\GameObject\PlayableEntity\Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SourceCode\Collision\Collision.h">
@@ -134,6 +125,24 @@
     <ClInclude Include="SourceCode\GameObject\StaticObjects\Ground.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SourceCode\Collision\DynamicBox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\GameObject\DynamicObjects\HorizontalEntity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\GameObject\DynamicObjects\Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\GameObject\DynamicObjects\VerticalEntity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\GameObject\DynamicObjects\DynamicEntity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\GameObject\StaticObjects\StaticEntity.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SourceCode\Game\Game.cpp">
@@ -145,16 +154,7 @@
     <ClCompile Include="SourceCode\Graphic\Graphic.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SourceCode\GameObject\HorizontalEntity\HorizontalEntity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SourceCode\Vector\Vector.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SourceCode\GameObject\VerticalEntity\VerticalEntity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SourceCode\GameObject\PlayableEntity\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SourceCode\Camera\Camera.cpp">
@@ -203,6 +203,24 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SourceCode\GameObject\StaticObjects\Ground.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Collision\DynamicBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\GameObject\DynamicObjects\HorizontalEntity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\GameObject\DynamicObjects\Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\GameObject\DynamicObjects\VerticalEntity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\GameObject\DynamicObjects\DynamicEntity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\GameObject\StaticObjects\StaticEntity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

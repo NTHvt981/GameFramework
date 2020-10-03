@@ -5,6 +5,6 @@
 class CGround : public CWall
 {
 public:
-	CGround(float l, float t, float r, float b, bool solid);
+	CGround(float l, float t, float r, float b);
 };
 

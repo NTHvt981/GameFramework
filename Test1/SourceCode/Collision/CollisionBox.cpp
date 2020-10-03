@@ -39,18 +39,19 @@ void CCollisionBox::AddCoBox(LPCollisionBox lpBox)
 void CCollisionBox::Update()
 {
 	left = entity->GetPosition().x + localPosition.x;
-	top = entity->GetPosition().y + localPosition.y;
+	bottom = entity->GetPosition().y + localPosition.y;
 
 	right = left + size.x;
-	bottom = top + size.y;
+	top = bottom - size.y;
+
+	
 }
 
 void CCollisionBox::Render()
 {
 	D3DXVECTOR3 position(
-		left, top, 0);
+		left, bottom, 0);
 	D3DXVECTOR3 origin(0, 0, 0);
-	RECT rect;
 
 	LPDIRECT3DTEXTURE9 bbox = CTextureLibrary::GetInstance()->Get(ID_TEX_BBOX);
 
@@ -105,16 +106,21 @@ void CCollisionBox::CalculateCollision(Vector& velocity, list<LPEntity>& objects
 				//asign the game object that contain collision box
 				objectsCollide.push_back(staticBox->GetGameObject());
 
-				float newX, newY;
-				CCollision::GetInstance()->Slide(
-					left, top,
-					newX, newY,
-					velocity.x, velocity.y,
-					collideTime, normalX, normalY
-				);
+				// if both this box and collide box are solid
+				// recalculate the velocity
+				if (solid && staticBox->IsSolid())
+				{
+					float newX, newY;
+					CCollision::GetInstance()->Slide(
+						left, top,
+						newX, newY,
+						velocity.x, velocity.y,
+						collideTime, normalX, normalY
+					);
 
-				velocity.x = newX - left;
-				velocity.y = newY - top;
+					velocity.x = newX - left;
+					velocity.y = newY - top;
+				}
 			}
 		}
 	}
@@ -143,4 +149,22 @@ float CCollisionBox::GetBottom()
 LPEntity CCollisionBox::GetGameObject()
 {
 	return entity;
+}
+
+bool CCollisionBox::IsSolid()
+{
+	return solid;
+}
+
+void CCollisionBox::SetLTRB(float l, float t, float r, float b)
+{
+	left = l;
+	top = t;
+	right = r;
+	bottom = b;
+}
+
+void CCollisionBox::SetSolid(bool _solid)
+{
+	this->solid = _solid;
 }

@@ -9,6 +9,8 @@
 #include "..\GameObject\HorizontalEntity\HorizontalEntity.h"
 #include "..\GameObject\VerticalEntity\VerticalEntity.h"
 #include "..\GameObject\PlayableEntity\Player.h"
+#include "..\GameObject\StaticObjects\Wall.h"
+#include "..\GameObject\StaticObjects\Ground.h"
 
 using namespace std;
 

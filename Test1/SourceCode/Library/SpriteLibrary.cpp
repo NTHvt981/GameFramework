@@ -13,9 +13,10 @@ void CSpriteLibrary::Add(LPSprite sprite)
 	sprites[sprite->GetId()] = sprite;
 }
 
-void CSpriteLibrary::Add(int id, int l, int t, int r, int b, LPDIRECT3DTEXTURE9 tex)
+void CSpriteLibrary::Add(int id, int l, int t, int r, int b, 
+	LPDIRECT3DTEXTURE9 tex, float origin_x, float origin_y)
 {
-	LPSprite spr = new CSprite(id, l, t, r, b, tex);
+	LPSprite spr = new CSprite(id, l, t, r, b, tex, origin_x, origin_y);
 	Add(spr);
 }
 

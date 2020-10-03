@@ -8,7 +8,7 @@
 
 class CEntity: public CGameObject {
 protected:
-	//GOTYPES type = GOTYPES::Entity;
+	GOTYPES type = GOTYPES::Entity;
 
 	Vector position;
 	Vector origin;
@@ -18,6 +18,7 @@ protected:
 
 	LPDIRECT3DTEXTURE9 texture;
 	LPCollisionBox collisionBox = NULL;
+	list<LPEntity> collidedEntities;
 
 protected:
 	void move(DWORD dt);
@@ -29,7 +30,9 @@ public:
 
 	void SetCollisionBox(LPCollisionBox _collisionBox);
 	LPCollisionBox GetCollisionBox();
-	void RenderBoundingBox();
+
+	bool IsCollidedWith(GOTYPES type);
+	void GetCollidedWith(GOTYPES type, list<LPEntity> &collidedObjs);
 
 	void Update(DWORD dt);
 	void Render();

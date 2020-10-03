@@ -148,6 +148,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="SourceCode\GameObject\StaticObjects\Ground.h" />
+    <ClInclude Include="SourceCode\GameObject\Physic.h" />
     <ClInclude Include="SourceCode\Vector\Box.h" />
     <ClInclude Include="SourceCode\GameObject\Entity.h" />
     <ClInclude Include="SourceCode\GameObject\GameObject.h" />
@@ -170,8 +172,11 @@
     <ClInclude Include="SourceCode\Library\TextureLibrary.h" />
     <ClInclude Include="SourceCode\Library\SpriteLibrary.h" />
     <ClInclude Include="SourceCode\Unit\Sprite.h" />
+    <ClInclude Include="SourceCode\GameObject\StaticObjects\Wall.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="SourceCode\GameObject\StaticObjects\Ground.cpp" />
+    <ClCompile Include="SourceCode\GameObject\Physic.cpp" />
     <ClCompile Include="SourceCode\Vector\Box.cpp" />
     <ClCompile Include="SourceCode\GameObject\Entity.cpp" />
     <ClCompile Include="SourceCode\GameObject\GameObject.cpp" />
@@ -192,6 +197,7 @@
     <ClCompile Include="SourceCode\Library\TextureLibrary.cpp" />
     <ClCompile Include="SourceCode\Library\SpriteLibrary.cpp" />
     <ClCompile Include="SourceCode\Unit\Sprite.cpp" />
+    <ClCompile Include="SourceCode\GameObject\StaticObjects\Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\Desktop\Tileset\player_sheet_transparent.png" />

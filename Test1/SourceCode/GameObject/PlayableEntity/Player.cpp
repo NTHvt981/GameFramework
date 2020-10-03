@@ -2,30 +2,49 @@
 
 CPlayer::CPlayer(LPCWSTR texturePath): CEntity(texturePath)
 {
+	SetType(GOTYPES::Player);
 	camera = new CCamera(WINDOW_WIDTH, WINDOW_HEIGHT);
 	CCamera::SetInstance(*camera);
 
 	this->collisionBox = new CCollisionBox(
 		this,
-		0, 0,
-		17.0f, 18.0f
+		-10, 12,
+		20, 20
+	);
+
+	leftWheelAni = new CAnimation(1, 50);
+	int ids[] = {
+		ID_CAR_WHEEL_1,
+		ID_CAR_WHEEL_2,
+		ID_CAR_WHEEL_3,
+		ID_CAR_WHEEL_4,
+	};
+	rightWheelAni = leftWheelAni;
+	leftWheelAni->Add(ids, 4);
+	bodySprite = CSpriteLibrary::GetInstance()->Get(
+		ID_CAR_BODY
 	);
 }
 
 void CPlayer::Update(DWORD dt)
 {
-	//DebugOut(L"[DEBUG] Player collision\n left %f | right %f | top %f | bottom %f\n", 
-	//	collisionBox->GetLeft(), collisionBox->GetRight(),
-	//	collisionBox->GetTop(), collisionBox->GetBottom());
-
 	velocity.x = dt * speed * (
 		CInput::GetInstance()->IsKeyDown(DIK_D) - CInput::GetInstance()->IsKeyDown(DIK_A)
 		);
-	velocity.y = dt * speed * (
-		-CInput::GetInstance()->IsKeyDown(DIK_S) + CInput::GetInstance()->IsKeyDown(DIK_W)
-		);
+	if (onGround)
+		if (CInput::GetInstance()->IsKeyDown(DIK_K))
+			velocity.y = jumpSpeed;
 
+	SetState();
+	GetState();
+
+	ApplyPhysic(velocity);
 	move(dt);
+
+	if (IsCollidedWith(GOTYPES::Ground))
+		onGround = true;
+	else
+		onGround = false;
 
 	if (position.x < 0) position.x = 0;
 	if (position.x > WINDOW_WIDTH) position.x = WINDOW_WIDTH;
@@ -37,6 +56,77 @@ void CPlayer::Update(DWORD dt)
 
 void CPlayer::Render()
 {
-	CEntity::Render();
+	leftWheelAni->Render(leftWheelPivot + position);
+	rightWheelAni->Render(rightWheelPivot + position);
+	headSprite->Draw(headPivot + position);
+	bodySprite->Draw(bodyPivot + position);
+	canonSprite->Draw(canonPivot + position);
 	collisionBox->Render();
+}
+
+void CPlayer::SetState()
+{
+	if (velocity.x > 0)
+		horizontalState = PLAYER_MOVE_RIGHT;
+	else if (velocity.x < 0)
+		horizontalState = PLAYER_MOVE_LEFT;
+	else
+		horizontalState = PLAYER_DONT_MOVE;
+
+	bool KeyW;
+	KeyW = CInput::GetInstance()->IsKeyDown(DIK_W);
+
+	if (KeyW)
+	{
+		if (velocity.x > 0 || aimDirection == PLAYER_AIM_RIGHT)
+			aimDirection = PLAYER_AIM_UPRIGHT;
+		else if (velocity.x < 0 || aimDirection == PLAYER_AIM_LEFT)
+			aimDirection = PLAYER_AIM_UPLEFT;
+	}
+	else
+	{
+		if (velocity.x > 0)
+			aimDirection = PLAYER_AIM_RIGHT;
+		else if (velocity.x < 0)
+			aimDirection = PLAYER_AIM_LEFT;
+	}
+}
+
+void CPlayer::GetState()
+{
+	switch (horizontalState)
+	{
+	case PLAYER_MOVE_RIGHT:
+		leftWheelAni->SetMode(ANIMATION_NORMAL);
+		break;
+	case PLAYER_MOVE_LEFT:
+		leftWheelAni->SetMode(ANIMATION_REVERSE);
+		break;
+	case PLAYER_DONT_MOVE:
+		leftWheelAni->SetMode(ANIMATION_PAUSE);
+		break;
+	}
+
+	CSpriteLibrary* lib = CSpriteLibrary::GetInstance();
+	switch (aimDirection)
+	{
+	case PLAYER_AIM_UPRIGHT:
+		canonSprite = lib->Get(ID_CAR_GUN_UP);
+		headSprite = lib->Get(ID_CAR_HEAD_UPRIGHT);
+		break;
+	case PLAYER_AIM_UPLEFT:
+		canonSprite = lib->Get(ID_CAR_GUN_UP);
+		headSprite = lib->Get(ID_CAR_HEAD_UPLEFT);
+		break;
+	case PLAYER_AIM_RIGHT:
+		canonSprite = lib->Get(ID_CAR_GUN_RIGHT);
+		headSprite = lib->Get(ID_CAR_HEAD_RIGHT);
+		break;
+	case PLAYER_AIM_LEFT:
+		canonSprite = lib->Get(ID_CAR_GUN_LEFT);
+		headSprite = lib->Get(ID_CAR_HEAD_LEFT);
+		break;
+	default:
+		break;
+	}
 }

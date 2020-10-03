@@ -1,22 +1,60 @@
 #pragma once
 
 #include "../Entity.h"
+#include "../Physic.h"
 #include "../../Constraints.h"
 #include "../../Camera/Camera.h"
 #include "../../Input/Input.h"
 #include "../../Unit/Animation.h"
 
-class CPlayer: public CEntity
+#define PLAYER_MOVE_LEFT -1
+#define PLAYER_DONT_MOVE 0
+#define PLAYER_MOVE_RIGHT 1
+
+#define PLAYER_ON_GROUND 0
+#define PLAYER_ON_AIR 1
+
+#define PLAYER_AIM_LEFT 0
+#define PLAYER_AIM_RIGHT 1
+#define PLAYER_AIM_UPLEFT 2
+#define PLAYER_AIM_UPRIGHT 3
+
+class CPlayer: public CEntity, public IPhysic
 {
 private:
-	float speed = 2;
+	float speed = 1.5;
 	CCamera* camera;
 
-	Vector left_wheel_pivot = Vector(-6, -4);
-	Vector right_wheel_pivot = Vector(6, -4);
+	Vector leftWheelPivot = Vector(-8, -4);
+	Vector rightWheelPivot = Vector(8, -4);
+	Vector headPivot = Vector(0, 3);
+	Vector canonPivot = Vector(0, 6);
+	Vector bodyPivot = Vector(0, -3);
 
-	LPAnimation left_wheel_ani;
-	LPAnimation right_wheel_ani;
+	LPAnimation leftWheelAni;
+	LPAnimation rightWheelAni;
+
+	LPSprite headSprite;
+	LPSprite bodySprite;
+	LPSprite canonSprite;
+
+	int horizontalState = PLAYER_DONT_MOVE;
+	int verticalState = PLAYER_ON_GROUND;
+	int aimDirection = PLAYER_AIM_RIGHT;
+
+private:
+	void SetState();
+	void GetState();
+
+	void MoveLeft();
+	void MoveRight();
+	void StandStill();
+
+	void AimLeft();
+	void AimRight();
+	void AimUpLeft();
+	void AimUpRight();
+
 public:
 	CPlayer(LPCWSTR texturePath);
 	void Update(DWORD dt);

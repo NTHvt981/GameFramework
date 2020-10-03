@@ -39,7 +39,8 @@ public:
 	}
 	void Add(int spriteId, DWORD time = 0);
 	void Add(int spriteIds[], int size);
-	void Render(float x, float y);
+	void Render(float x, float y, int alpha = 255);
+	void Render(Vector position, int alpha = 255);
 	int GetId();
 	LPAnimation Copy();
 

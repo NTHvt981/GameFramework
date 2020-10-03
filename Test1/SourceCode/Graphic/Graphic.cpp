@@ -58,6 +58,10 @@ int CGraphic::Init(HWND hwnd) {
 
 LPDIRECT3DTEXTURE9 CGraphic::LoadTexture(LPCWSTR texturePath)
 {
+	if (texturePath == NULL)
+	{
+		return NULL;
+	}
 	D3DXIMAGE_INFO info;
 	LPDIRECT3DTEXTURE9 texture;
 

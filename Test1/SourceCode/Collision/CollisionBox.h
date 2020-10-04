@@ -31,8 +31,6 @@ public:
 	void AddCoBox(LPCollisionBox lpBox);
 
 	void Render();
-	void CalculateCollision(Vector& velocity, 
-		list<LPGameObject> &objectsCollide);
 public:
 	float GetLeft();
 	float GetTop();
@@ -42,6 +40,7 @@ public:
 	bool IsSolid();
 
 public:
+	void GetCollision(list<LPGameObject>& objectsCollide);
 	void SetLTRB(float l, float t, float r, float b);
 	void SetSolid(bool _solid);
 };

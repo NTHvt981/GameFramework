@@ -137,10 +137,7 @@
     <ClInclude Include="SourceCode\GameObject\DynamicObjects\VerticalEntity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SourceCode\GameObject\DynamicObjects\DynamicEntity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SourceCode\GameObject\StaticObjects\StaticEntity.h">
+    <ClInclude Include="SourceCode\Collision\CollisionEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -217,10 +214,7 @@
     <ClCompile Include="SourceCode\GameObject\DynamicObjects\VerticalEntity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SourceCode\GameObject\DynamicObjects\DynamicEntity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SourceCode\GameObject\StaticObjects\StaticEntity.cpp">
+    <ClCompile Include="SourceCode\Collision\CollisionEvent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

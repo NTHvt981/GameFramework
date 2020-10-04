@@ -21,15 +21,10 @@ Vector CEntity::GetPosition()
 void CEntity::move(DWORD dt)
 {
 	if (collisionBox != NULL)
-		collisionBox->CalculateCollision(velocity, collidedEntities);
+		collisionBox->CalculateCollision(velocity, collideEvents);
 	position = position + velocity;
 	collisionBox->Update();
 }
-
-//void CEntity::SetCollisionBox(LPCollisionBox _collisionBox)
-//{
-//	this->collisionBox = _collisionBox;
-//}
 
 LPDynamicBox CEntity::GetCollisionBox()
 {
@@ -38,22 +33,29 @@ LPDynamicBox CEntity::GetCollisionBox()
 
 bool CEntity::IsCollidedWith(GOTYPES type)
 {
-	for (const LPGameObject& e : collidedEntities)
+	for each (CollisionEvent e in collideEvents)
 	{
-		if (e ->GetType() == type)
+		if (e.object->GetType() == type)
 			return true;
 	}
 	return false;
 }
 
-void CEntity::GetCollidedWith(GOTYPES type, list<LPGameObject>& collidedObjs)
+bool CEntity::GetCollidedWith(GOTYPES type, list<LPGameObject>& collidedObjs)
 {
+	bool result = false;
 	collidedObjs.clear();
-	for each (LPEntity e in collidedEntities)
+	for each (CollisionEvent e in collideEvents)
 	{
-		if (e->GetType() == type)
-			collidedObjs.push_back(e);
+		if (e.object->GetType() == type)
+		{
+			result = true;
+		
+			collidedObjs.push_back(e.object);
+		}
 	}
+
+	return result;
 }
 
 void CEntity::Update(DWORD dt)

@@ -51,68 +51,6 @@ void CCollisionBox::Render()
 	CGraphic::Instance->Draw(bbox, position.x, position.y, l, t, r, b, 0, 0, 0.2);
 }
 
-void CCollisionBox::CalculateCollision(Vector& velocity, list<LPGameObject>& objectsCollide)
-{
-	objectsCollide.clear();
-
-	//SweptBroadphaseBox
-	float broadLeft, broadRight, broadTop, broadBottom;
-	CCollision::GetInstance()->GetSweptBroadphaseBox(
-		left, top, right, bottom,
-		velocity.x, velocity.y,
-		broadLeft, broadTop, broadRight, broadBottom
-	);
-
-	for each (LPCollisionBox staticBox in collisionBoxes)
-	{
-		//get left, top, right, bottom of other collision boxes
-		float staticLeft, staticTop, staticRight, staticBottom;
-		staticLeft = staticBox->GetLeft();
-		staticTop = staticBox->GetTop();
-		staticRight = staticBox->GetRight();
-		staticBottom = staticBox->GetBottom();
-
-		//if false -> no Collision garantee
-		if (CCollision::GetInstance()->AABBCheck(
-			broadLeft, broadTop, broadRight, broadBottom,
-			staticLeft, staticTop, staticRight, staticBottom
-		))
-		{
-			float collideTime, normalX, normalY;
-
-			CCollision::GetInstance()->SweptAABB(
-				left, top, right, bottom,
-				velocity.x, velocity.y,
-				staticLeft, staticTop, staticRight, staticBottom,
-				collideTime, normalX, normalY
-			);
-
-			//if there is collision
-			if (collideTime < 1.0f && collideTime >= 0.0f)
-			{
-				//asign the game object that contain collision box
-				objectsCollide.push_back(staticBox->GetOwner());
-
-				// if both this box and collide box are solid
-				// recalculate the velocity
-				if (solid && staticBox->IsSolid())
-				{
-					float newX, newY;
-					CCollision::GetInstance()->Slide(
-						left, top,
-						newX, newY,
-						velocity.x, velocity.y,
-						collideTime, normalX, normalY
-					);
-
-					velocity.x = newX - left;
-					velocity.y = newY - top;
-				}
-			}
-		}
-	}
-}
-
 float CCollisionBox::GetLeft()
 {
 	return left;
@@ -141,6 +79,11 @@ LPGameObject CCollisionBox::GetOwner()
 bool CCollisionBox::IsSolid()
 {
 	return solid;
+}
+
+void CCollisionBox::GetCollision(list<LPGameObject>& objectsCollide)
+{
+	// TODO: i will add this later
 }
 
 void CCollisionBox::SetLTRB(float l, float t, float r, float b)

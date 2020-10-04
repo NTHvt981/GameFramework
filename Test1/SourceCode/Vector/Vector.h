@@ -6,9 +6,10 @@ public:
 	float y;
 	
 public:
-	Vector();
-	Vector(float _x , float _y );
+	Vector(float _x = 0, float _y = 0);
 	Vector operator+(Vector b);
+
+	void Set(float _x, float _y);
 };
 
 Vector Add(Vector a, Vector b);

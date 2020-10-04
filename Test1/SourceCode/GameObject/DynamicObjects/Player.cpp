@@ -1,6 +1,6 @@
 #include "Player.h"
 
-CPlayer::CPlayer(LPCWSTR texturePath): CDynamicEntity(texturePath)
+CPlayer::CPlayer(LPCWSTR texturePath): CEntity(texturePath)
 {
 	SetType(GOTYPES::Player);
 	camera = new CCamera(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -33,18 +33,21 @@ void CPlayer::Update(DWORD dt)
 		);
 	if (onGround)
 		if (CInput::GetInstance()->IsKeyDown(DIK_K))
+		{
 			velocity.y = jumpSpeed;
+		}
 
 	SetState();
 	GetState();
 
 	ApplyPhysic(velocity);
+	old_velocity.Set(velocity.x, velocity.y);
 	move(dt);
 
-	if (IsCollidedWith(GOTYPES::Ground))
-		onGround = true;
-	else
+	if (velocity.y > 0)
 		onGround = false;
+	else if (velocity.y == 0 && old_velocity.y < 0)
+		onGround = true;
 
 	if (position.x < 0) position.x = 0;
 	if (position.x > WINDOW_WIDTH) position.x = WINDOW_WIDTH;

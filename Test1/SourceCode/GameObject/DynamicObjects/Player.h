@@ -1,6 +1,6 @@
 #pragma once
 
-#include "DynamicEntity.h"
+#include "../Entity.h"
 #include "../Physic.h"
 #include "../../Constraints.h"
 #include "../../Camera/Camera.h"
@@ -19,11 +19,13 @@
 #define PLAYER_AIM_UPLEFT 2
 #define PLAYER_AIM_UPRIGHT 3
 
-class CPlayer: public CDynamicEntity, public IPhysic
+class CPlayer: public CEntity, public IPhysic
 {
 private:
 	float speed = 1.5;
 	CCamera* camera;
+
+	Vector old_velocity;
 
 	Vector leftWheelPivot = Vector(-8, -4);
 	Vector rightWheelPivot = Vector(8, -4);

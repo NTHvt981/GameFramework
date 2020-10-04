@@ -1,9 +1,10 @@
 #pragma once
+
+template <typename T>
 struct Box
 {
-	float l;
-	float t;
-	float r;
-	float b;
+	T left;
+	T top;
+	T right;
+	T bottom;
 };
-

@@ -1,6 +1,6 @@
 #include "HorizontalEntity.h"
 
-CHorizontalEntity::CHorizontalEntity(LPCWSTR texturePath):CDynamicEntity(texturePath)
+CHorizontalEntity::CHorizontalEntity(LPCWSTR texturePath):CEntity(texturePath)
 {
 	speed = 5;
 	state = MOVE_RIGHT_STATE;

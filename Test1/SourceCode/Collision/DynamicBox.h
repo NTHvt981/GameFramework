@@ -2,6 +2,7 @@
 
 #include "../Constraints.h"
 #include "CollisionBox.h"
+#include "CollisionEvent.h"
 #include "../GameObject/Entity.h"
 
 //Advance collision box, have an update function that get called when entity finish moving
@@ -14,6 +15,11 @@ protected:
 
 public:
 	void Update();
-	CDynamicBox(LPEntity _entity, float _localX, float _localY, float width, float height);
+	void Follow(float x, float y);
+	void CalculateCollision(Vector& velocity,
+		list<CollisionEvent>& events);
+	CDynamicBox(LPEntity _entity, 
+		float _localX=0, float _localY=0, float width=0, float height=0
+	);
 };
 

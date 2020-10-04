@@ -140,13 +140,23 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Box.cpp" />
-    <ClCompile Include="ReadTextFileTemplate.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="ReadTileSet.cpp" />
+    <ClCompile Include="StringHelper.cpp" />
+    <ClCompile Include="TileSet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Box.h" />
+    <ClInclude Include="ReadTileSet.h" />
+    <ClInclude Include="StringHelper.h" />
+    <ClInclude Include="TileSet.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Resource\Textfile\temp_tilemap_info.txt" />
     <Text Include="Resource\Textfile\temp_sprite_info.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resource\Texture\area_2_tileset_2.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

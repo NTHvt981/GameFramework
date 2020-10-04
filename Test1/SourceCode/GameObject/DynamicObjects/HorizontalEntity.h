@@ -1,9 +1,9 @@
 #pragma once
 
+#include "../Entity.h"
 #include "../../Constraints.h"
-#include "DynamicEntity.h"
 
-class CHorizontalEntity: public CDynamicEntity
+class CHorizontalEntity: public CEntity
 {
 public:
 	CHorizontalEntity(LPCWSTR texturePath);

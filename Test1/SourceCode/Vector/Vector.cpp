@@ -1,11 +1,5 @@
 #include "Vector.h"
 
-Vector::Vector()
-{
-	x = 0;
-	y = 0;
-}
-
 Vector::Vector(float _x , float _y )
 {
 	x = _x;
@@ -24,4 +18,10 @@ Vector Add(Vector a, Vector b)
 Vector Vector::operator+(Vector b)
 {
 	return Vector(this->x + b.x, this->y + b.y);
+}
+
+void Vector::Set(float _x, float _y)
+{
+	x = _x;
+	y = _y;
 }

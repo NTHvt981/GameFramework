@@ -5,6 +5,7 @@
 #include "..\Graphic\Graphic.h"
 #include "..\Library\TextureLibrary.h"
 #include "..\Collision\DynamicBox.h"
+#include "..\Collision\CollisionEvent.h"
 
 class CEntity: public CGameObject {
 protected:
@@ -16,7 +17,7 @@ protected:
 
 	LPDIRECT3DTEXTURE9 texture;
 	LPDynamicBox collisionBox = NULL;
-	list<LPGameObject> collidedEntities;
+	list<CollisionEvent> collideEvents;
 
 protected:
 	void move(DWORD dt);
@@ -29,7 +30,7 @@ public:
 	LPDynamicBox GetCollisionBox();
 
 	bool IsCollidedWith(GOTYPES type);
-	void GetCollidedWith(GOTYPES type, list<LPGameObject> &collidedObjs);
+	bool GetCollidedWith(GOTYPES type, list<LPGameObject> &collidedObjs);
 
 	void Update(DWORD dt);
 	void Render();

@@ -148,7 +148,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="SourceCode\GameObject\DynamicObjects\DynamicEntity.h" />
+    <ClInclude Include="SourceCode\Collision\CollisionEvent.h" />
     <ClInclude Include="SourceCode\Collision\DynamicBox.h" />
     <ClInclude Include="SourceCode\GameObject\StaticObjects\Ground.h" />
     <ClInclude Include="SourceCode\GameObject\Physic.h" />
@@ -175,10 +175,9 @@
     <ClInclude Include="SourceCode\Library\SpriteLibrary.h" />
     <ClInclude Include="SourceCode\Unit\Sprite.h" />
     <ClInclude Include="SourceCode\GameObject\StaticObjects\Wall.h" />
-    <ClInclude Include="SourceCode\GameObject\StaticObjects\StaticEntity.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="SourceCode\GameObject\DynamicObjects\DynamicEntity.cpp" />
+    <ClCompile Include="SourceCode\Collision\CollisionEvent.cpp" />
     <ClCompile Include="SourceCode\Collision\DynamicBox.cpp" />
     <ClCompile Include="SourceCode\GameObject\StaticObjects\Ground.cpp" />
     <ClCompile Include="SourceCode\GameObject\Physic.cpp" />
@@ -203,7 +202,6 @@
     <ClCompile Include="SourceCode\Library\SpriteLibrary.cpp" />
     <ClCompile Include="SourceCode\Unit\Sprite.cpp" />
     <ClCompile Include="SourceCode\GameObject\StaticObjects\Wall.cpp" />
-    <ClCompile Include="SourceCode\GameObject\StaticObjects\StaticEntity.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\Desktop\Tileset\player_sheet_transparent.png" />

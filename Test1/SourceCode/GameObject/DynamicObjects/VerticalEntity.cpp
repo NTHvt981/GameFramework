@@ -1,6 +1,6 @@
 #include "VerticalEntity.h"
 
-CVerticalEntity::CVerticalEntity(LPCWSTR texturePath): CDynamicEntity(texturePath)
+CVerticalEntity::CVerticalEntity(LPCWSTR texturePath): CEntity(texturePath)
 {
 	speed = 3;
 	state = MOVE_DOWN_STATE;

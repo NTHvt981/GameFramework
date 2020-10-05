@@ -150,6 +150,8 @@
   <ItemGroup>
     <ClInclude Include="SourceCode\Collision\CollisionEvent.h" />
     <ClInclude Include="SourceCode\Collision\DynamicBox.h" />
+    <ClInclude Include="SourceCode\FileAndString\ReadTileSet.h" />
+    <ClInclude Include="SourceCode\FileAndString\StringHelper.h" />
     <ClInclude Include="SourceCode\GameObject\StaticObjects\Ground.h" />
     <ClInclude Include="SourceCode\GameObject\Physic.h" />
     <ClInclude Include="SourceCode\Vector\Box.h" />
@@ -175,10 +177,14 @@
     <ClInclude Include="SourceCode\Library\SpriteLibrary.h" />
     <ClInclude Include="SourceCode\Unit\Sprite.h" />
     <ClInclude Include="SourceCode\GameObject\StaticObjects\Wall.h" />
+    <ClInclude Include="SourceCode\TileSystem\TileMap.h" />
+    <ClInclude Include="SourceCode\TileSystem\TileSet.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SourceCode\Collision\CollisionEvent.cpp" />
     <ClCompile Include="SourceCode\Collision\DynamicBox.cpp" />
+    <ClCompile Include="SourceCode\FileAndString\ReadTileSet.cpp" />
+    <ClCompile Include="SourceCode\FileAndString\StringHelper.cpp" />
     <ClCompile Include="SourceCode\GameObject\StaticObjects\Ground.cpp" />
     <ClCompile Include="SourceCode\GameObject\Physic.cpp" />
     <ClCompile Include="SourceCode\Vector\Box.cpp" />
@@ -202,11 +208,14 @@
     <ClCompile Include="SourceCode\Library\SpriteLibrary.cpp" />
     <ClCompile Include="SourceCode\Unit\Sprite.cpp" />
     <ClCompile Include="SourceCode\GameObject\StaticObjects\Wall.cpp" />
+    <ClCompile Include="SourceCode\TileSystem\TileMap.cpp" />
+    <ClCompile Include="SourceCode\TileSystem\TileSet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\Desktop\Tileset\player_sheet_transparent.png" />
     <Image Include="..\..\..\..\Downloads\steel robot.png" />
     <Image Include="Resources\Texture\area_2_tileset.png" />
+    <Image Include="Resources\Texture\area_2_tileset_2.png" />
     <Image Include="Resources\Texture\bbox.png" />
     <Image Include="Resources\Texture\brick.ico" />
     <Image Include="Resources\Texture\brick.png" />
@@ -223,6 +232,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resources\Textfile\temp.txt" />
+    <Text Include="Resources\Textfile\temp_tilemap_info.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

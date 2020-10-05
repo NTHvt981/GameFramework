@@ -103,7 +103,7 @@ LPDIRECT3DTEXTURE9 CGraphic::LoadTexture(LPCWSTR texturePath)
 
 void CGraphic::Draw(LPDIRECT3DTEXTURE9 texture, float x, float y,
 	int left, int top, int right, int bottom,
-	float origin_x, float origin_y, float alpha)
+	float origin_x, float origin_y, float alpha, bool use_camera)
 {
 	int opacity = alpha * 255;
 	D3DXVECTOR3 origin(origin_x, origin_y, 0);

@@ -2,6 +2,7 @@
 //
 
 #include <iostream>
+#include "Box.h"
 #include "StringHelper.h"
 #include "ReadTileSet.h"
 

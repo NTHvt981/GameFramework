@@ -57,6 +57,9 @@
     <Image Include="Resources\Texture\area_2_tileset.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Resources\Texture\area_2_tileset_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
@@ -140,6 +143,18 @@
     <ClInclude Include="SourceCode\Collision\CollisionEvent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SourceCode\TileSystem\TileMap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\TileSystem\TileSet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\FileAndString\ReadTileSet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\FileAndString\StringHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SourceCode\Game\Game.cpp">
@@ -217,6 +232,18 @@
     <ClCompile Include="SourceCode\Collision\CollisionEvent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SourceCode\TileSystem\TileMap.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\TileSystem\TileSet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\FileAndString\ReadTileSet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\FileAndString\StringHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Test1.rc">
@@ -225,5 +252,6 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Resources\Textfile\temp.txt" />
+    <Text Include="Resources\Textfile\temp_tilemap_info.txt" />
   </ItemGroup>
 </Project>

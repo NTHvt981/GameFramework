@@ -92,3 +92,8 @@ typedef CAnimationFrame* LPAnimationFrame;
 
 class CAnimation;
 typedef CAnimation* LPAnimation;
+
+class CTileSet;
+typedef CTileSet* LPTileSet;
+
+class CTileMap;

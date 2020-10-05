@@ -28,7 +28,7 @@ public:
 	LPDIRECT3DTEXTURE9 LoadTexture(LPCWSTR texturePath);
 	void Draw(LPDIRECT3DTEXTURE9 texture, float x, float y,
 		int left, int top, int right, int bottom, 
-		float origin_x=0, float origin_y=0, float alpha=1);
+		float origin_x=0, float origin_y=0, float alpha=1, bool use_camera=true);
 	void Draw(LPDIRECT3DTEXTURE9 texture, float x, float y, 
 		float origin_x = 0, float origin_y = 0, float alpha = 1);
 	void Draw(LPDIRECT3DTEXTURE9 texture, Vector position, 

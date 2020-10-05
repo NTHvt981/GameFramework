@@ -1,16 +1,25 @@
 #pragma once
 #include "..\Constraints.h"
 #include "..\Graphic\Graphic.h"
+
 #include "..\Library\TextureLibrary.h"
 #include "..\Library\SpriteLibrary.h"
 #include "..\Library\AnimationLibrary.h"
 #include "..\Debug\Debug.h"
+
 #include "..\GameObject\GameObject.h"
 #include "..\GameObject\DynamicObjects\HorizontalEntity.h"
 #include "..\GameObject\DynamicObjects\VerticalEntity.h"
 #include "..\GameObject\DynamicObjects\Player.h"
+
 #include "..\GameObject\StaticObjects\Wall.h"
 #include "..\GameObject\StaticObjects\Ground.h"
+
+#include "../FileAndString/ReadTileSet.h"
+#include "../FileAndString/StringHelper.h"
+
+#include "../TileSystem/TileMap.h"
+#include "../TileSystem/TileSet.h"
 
 using namespace std;
 
@@ -27,6 +36,7 @@ private:
 	void LoadTextures();
 	void LoadSprites();
 	void LoadAnimations();
+	void LoadLevel();
 	void Update(DWORD dt);
 	void Render();
 	void CleanResources();

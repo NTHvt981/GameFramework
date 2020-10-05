@@ -25,6 +25,7 @@ void CGame::LoadResources()
 	LoadTextures();
 	LoadSprites();
 	LoadAnimations();
+	LoadLevel();
 
 	AddEntity(new CPlayer(STEEL_ROBOT_TEXTURE_PATH), 100, 800);
 	AddGameObject(new CGround(0, 0, 100, 32));
@@ -71,6 +72,38 @@ void CGame::LoadSprites()
 void CGame::LoadAnimations()
 {
 	LPAnimation ani = new CAnimation(1, 100);
+}
+
+void CGame::LoadLevel()
+{
+	int tile_size_x, tile_size_y, tileset_size_x, tileset_size_y;
+	int padding, margin;
+	vector<vector<int>> matrix;
+	string tileDir, fileDir;
+
+	fileDir = "Resources/Textfile/temp_tilemap_info.txt";
+
+	GetInfo(
+		tile_size_x, tile_size_y,
+		tileset_size_x, tileset_size_y,
+		padding, margin, matrix,
+		tileDir, fileDir);
+
+	map<int, Box<int>> tileMap;
+	GetMap(tile_size_x, tile_size_x,
+		tileset_size_x, tileset_size_y,
+		padding, margin,
+		tileMap);
+
+	wstring stemp = std::wstring(tileDir.begin(), tileDir.end());
+	LPTileSet tileSet = new CTileSet(
+		CGraphic::Instance->LoadTexture(stemp.c_str()),
+		tileMap, tileset_size_x
+	);
+
+	CTileMap::GetInstance()->SetTileSet(tileSet);
+	CTileMap::GetInstance()->SetMatrix(matrix);
+
 }
 
 void CGame::Run()
@@ -159,8 +192,9 @@ void CGame::Render()
 
 		spriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
 
-		CSpriteLibrary::GetInstance()->DrawTest();
+		//CSpriteLibrary::GetInstance()->DrawTest();
 		//CAnimationLibrary::GetInstance()->DrawTest();
+		CTileMap::GetInstance()->Render();
 
 		for each (LPGameObject obj in lGameObjects)
 		{

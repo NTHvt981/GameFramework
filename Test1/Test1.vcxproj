@@ -149,6 +149,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="SourceCode\GameObject\DynamicObjects\Enemies\Dome.h" />
+    <ClInclude Include="SourceCode\GameObject\DynamicObjects\Enemies\Orb.h" />
+    <ClInclude Include="SourceCode\GameObject\DynamicObjects\Enemies\Jumper.h" />
     <ClInclude Include="SourceCode\Collision\CollisionEvent.h" />
     <ClInclude Include="SourceCode\Collision\DynamicBox.h" />
     <ClInclude Include="SourceCode\FileAndString\ReadTileSet.h" />
@@ -184,6 +186,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SourceCode\GameObject\DynamicObjects\Enemies\Dome.cpp" />
+    <ClCompile Include="SourceCode\GameObject\DynamicObjects\Enemies\Orb.cpp" />
+    <ClCompile Include="SourceCode\GameObject\DynamicObjects\Enemies\Jumper.cpp" />
     <ClCompile Include="SourceCode\Collision\CollisionEvent.cpp" />
     <ClCompile Include="SourceCode\Collision\DynamicBox.cpp" />
     <ClCompile Include="SourceCode\FileAndString\ReadTileSet.cpp" />
@@ -220,7 +224,6 @@
     <Image Include="..\..\..\..\Downloads\steel robot.png" />
     <Image Include="Resources\Texture\32854.gif" />
     <Image Include="Resources\Texture\32854.png" />
-    <Image Include="Resources\Texture\area_2_tileset.png" />
     <Image Include="Resources\Texture\area_2_tileset_2.png" />
     <Image Include="Resources\Texture\bbox.png" />
     <Image Include="Resources\Texture\brick.ico" />

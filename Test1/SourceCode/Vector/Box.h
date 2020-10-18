@@ -8,3 +8,4 @@ struct Box
 	T right;
 	T bottom;
 };
+

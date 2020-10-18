@@ -55,7 +55,7 @@ void CDynamicBox::CalculateCollision(Vector& velocity, list<CollisionEvent>& eve
 			);
 
 			//if there is collision
-			if (collideTime < 1.0f && collideTime >= 0.0f)
+			if (collideTime < 1.0f && collideTime >= 0.0f && (!(normalX==0 && normalY==0)))
 			{
 				//asign the game object that contain collision box
 				events.push_back(

@@ -11,7 +11,7 @@ void CTileSet::Draw(vector<vector<int>> matrix)
 {
 	for (int iY = 0; iY < matrix.size(); iY++)
 	{
-		for (int iX = 0; iX < matrix[0].size(); iX++)
+		for (int iX = 0; iX < matrix[0].size()/4; iX++)
 		{
 			int key = matrix[iY][iX];
 			if (tileMap.count(key) == 0) continue;
@@ -20,7 +20,7 @@ void CTileSet::Draw(vector<vector<int>> matrix)
 			CGraphic::Instance->Draw(
 				texture,
 				iX * tileSize, iY * tileSize,
-				tile.left, tile.top, tile.right, tile.bottom, 0, 0, 1, false
+				tile.left, tile.top, tile.right, tile.bottom
 			);
 		}
 	}

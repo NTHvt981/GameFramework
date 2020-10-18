@@ -5,25 +5,25 @@
 #include "../../../Constraints.h"
 #include "../../../Unit/Animation.h"
 
-#define WORM_MOVE_LEFT -1
-#define WORM_DONT_MOVE 0
-#define WORM_MOVE_RIGHT 1
+#define JUMPER_MOVE_LEFT -1
+#define JUMPER_DONT_MOVE 0
+#define JUMPER_MOVE_RIGHT 1
 
-#define WORM_ON_GROUND 0
-#define WORM_ON_AIR 1
+#define JUMPER_ON_GROUND 0
+#define JUMPER_ON_AIR 1
 
-class CWorm : public CEntity, public IPhysic
+class CJumper: public CEntity
 {
 private:
 	float speed = 0.4;
 
 	Vector old_velocity;
 
-	LPAnimation crawlLeftAni;
-	LPAnimation crawlRightAni;
+	LPAnimation moveLeftAni;
+	LPAnimation moveRightAni;
 
-	int horizontalState = WORM_DONT_MOVE;
-	int verticalState = WORM_ON_GROUND;
+	int horizontalState = JUMPER_DONT_MOVE;
+	int verticalState = JUMPER_ON_GROUND;
 
 private:
 	void SetState();
@@ -33,7 +33,7 @@ private:
 	void DontMove(DWORD dt);
 
 public:
-	CWorm(LPCWSTR texturePath);
+	CJumper(LPCWSTR texturePath);
 	void Update(DWORD dt);
 	void Render();
 };

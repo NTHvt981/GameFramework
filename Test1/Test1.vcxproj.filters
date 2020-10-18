@@ -54,9 +54,6 @@
     <Image Include="Resources\Texture\bbox.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="Resources\Texture\area_2_tileset.png">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="Resources\Texture\area_2_tileset_2.png">
       <Filter>Resource Files</Filter>
     </Image>
@@ -170,6 +167,12 @@
     <ClInclude Include="SourceCode\GameObject\DynamicObjects\Enemies\Dome.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SourceCode\GameObject\DynamicObjects\Enemies\Jumper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\GameObject\DynamicObjects\Enemies\Orb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SourceCode\Game\Game.cpp">
@@ -263,6 +266,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SourceCode\GameObject\DynamicObjects\Enemies\Dome.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\GameObject\DynamicObjects\Enemies\Jumper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\GameObject\DynamicObjects\Enemies\Orb.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

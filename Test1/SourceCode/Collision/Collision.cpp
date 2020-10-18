@@ -70,6 +70,8 @@ void CCollision::SweptAABB(
 	//the same goes for exit time, exit position
 	if (move_velocity_x == 0.0f)
 	{
+		//entry_time_x = -std::numeric_limits<float>::infinity();
+		//exit_time_x = std::numeric_limits<float>::infinity();
 		entry_time_x = -std::numeric_limits<float>::infinity();
 		exit_time_x = std::numeric_limits<float>::infinity();
 	}
@@ -81,6 +83,8 @@ void CCollision::SweptAABB(
 
 	if (move_velocity_y == 0.0f)
 	{
+		//entry_time_y = -std::numeric_limits<float>::infinity();
+		//exit_time_y = std::numeric_limits<float>::infinity();
 		entry_time_y = -std::numeric_limits<float>::infinity();
 		exit_time_y = std::numeric_limits<float>::infinity();
 	}
@@ -168,10 +172,11 @@ bool CCollision::AABBCheck(
 	float left_1, float top_1, float right_1, float bottom_1, 
 	float left_2, float top_2, float right_2, float bottom_2)
 {
-	return !(right_1 < left_2 || 
-		left_1 > right_2 ||
-		bottom_1 < top_2 || 
-		top_1 > bottom_2);
+	return !(
+		right_1 <= left_2 || 
+		right_2 <= left_1 ||
+		bottom_1 <= top_2 || 
+		bottom_2 <= top_1);
 }
 
 void CCollision::Deflect(

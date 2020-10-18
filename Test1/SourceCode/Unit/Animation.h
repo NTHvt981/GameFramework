@@ -29,11 +29,15 @@ class CAnimation
 	int defaultTime;
 	int currentFrame;
 	vector<LPAnimationFrame> frames;
+
+	bool loop;
+	bool end = false;
 public:
-	CAnimation(int id, int defaultTime, int mode=ANIMATION_NORMAL) { 
+	CAnimation(int id, int defaultTime, int mode=ANIMATION_NORMAL, bool loop=true) { 
 		this->id = id;
 		this->defaultTime = defaultTime; 
 		this->mode = mode;
+		this->loop = loop;
 		lastFrameTime = -1; 
 		currentFrame = 0; 
 	}
@@ -42,6 +46,10 @@ public:
 	void Render(float x, float y, int alpha = 255);
 	void Render(Vector position, int alpha = 255);
 	int GetId();
+	bool IsLoop();
+	bool IsEnd();
+	void Reset();
+	
 	LPAnimation Copy();
 
 	int GetMode();

@@ -31,6 +31,8 @@ void CGame::LoadResources()
 
 	AddEntity(new CWorm(ENEMIES_TEXTURE_PATH), 50, 100);
 	AddEntity(new CDome(ENEMIES_TEXTURE_PATH), 50, 50);
+	AddEntity(new CJumper(ENEMIES_TEXTURE_PATH), 50, 150);
+	AddEntity(new COrb(ENEMIES_TEXTURE_PATH), 50, 50);
 
 	AddGameObject(new CGround(0, 0, 100, 32));
 	AddGameObject(new CGround(100, 64, 300, 96));
@@ -102,6 +104,23 @@ void CGame::LoadSprites()
 	lib->Add(ID_DOME_RIGHT_MOVE_UP_2, 187, 441, 205, 459, textEnemies);
 	lib->Add(ID_DOME_RIGHT_MOVE_DOWN_1, 105, 441, 123, 459, textEnemies);
 	lib->Add(ID_DOME_RIGHT_MOVE_DOWN_2, 105, 461, 123, 479, textEnemies);
+
+
+	//JUMPER
+	lib->Add(ID_JUMPER_MOVE_LEFT_1, 67, 499, 84, 525, textEnemies);
+	lib->Add(ID_JUMPER_MOVE_LEFT_2, 85, 499, 102, 525, textEnemies);
+	lib->Add(ID_JUMPER_MOVE_LEFT_3, 105, 499, 122, 525, textEnemies);
+	lib->Add(ID_JUMPER_MOVE_RIGHT_1, 132, 499, 149, 525, textEnemies);
+	lib->Add(ID_JUMPER_MOVE_RIGHT_2, 152, 499, 169, 525, textEnemies);
+	lib->Add(ID_JUMPER_MOVE_RIGHT_3, 170, 499, 187, 525, textEnemies);
+
+
+	//ORB
+	lib->Add(ID_ORB_1, 78, 387, 96, 405, textEnemies);
+	lib->Add(ID_ORB_2, 98, 387, 116, 405, textEnemies);
+	lib->Add(ID_ORB_3, 118, 387, 136, 405, textEnemies);
+	lib->Add(ID_ORB_4, 138, 387, 156, 405, textEnemies);
+	lib->Add(ID_ORB_5, 158, 387, 176, 405, textEnemies);
 }
 
 void CGame::LoadAnimations()
@@ -133,7 +152,7 @@ void CGame::LoadLevel()
 	wstring stemp = std::wstring(tileDir.begin(), tileDir.end());
 	LPTileSet tileSet = new CTileSet(
 		CGraphic::Instance->LoadTexture(stemp.c_str()),
-		tileMap, tileset_size_x
+		tileMap, tile_size_x
 	);
 
 	CTileMap::GetInstance()->SetTileSet(tileSet);

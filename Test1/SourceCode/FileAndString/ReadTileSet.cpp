@@ -76,8 +76,8 @@ void GetMap(
 
             box.left = iX * tile_size_x + iX * padding;
             box.top = iY * tile_size_y + iY * padding;
-            box.right = box.left + tile_size_x - 1;
-            box.bottom = box.top + tile_size_x - 1;
+            box.right = box.left + tile_size_x;
+            box.bottom = box.top + tile_size_y;
 
             result[tile_index] = box;
         }

@@ -20,10 +20,21 @@ Vector CEntity::GetPosition()
 
 void CEntity::move(DWORD dt)
 {
+	Vector vel_x(velocity.x, 0);
+	Vector vel_y(0, velocity.y);
+
 	if (collisionBox != NULL)
-		collisionBox->CalculateCollision(velocity, collideEvents);
-	position = position + velocity;
-	collisionBox->Update();
+	{
+		collisionBox->CalculateCollision(vel_x, collideEvents);
+		position.x = position.x + vel_x.x;
+		velocity.x = vel_x.x;
+		collisionBox->Update();
+
+		collisionBox->CalculateCollision(vel_y, collideEvents);
+		position.y = position.y + vel_y.y;
+		velocity.y = vel_y.y;
+		collisionBox->Update();
+	}
 }
 
 LPDynamicBox CEntity::GetCollisionBox()

@@ -60,6 +60,9 @@
     <Image Include="Resources\Texture\area_2_tileset_2.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Resources\Texture\enemies.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
@@ -155,6 +158,9 @@
     <ClInclude Include="SourceCode\FileAndString\StringHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SourceCode\GameObject\DynamicObjects\Enemies\Worm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SourceCode\Game\Game.cpp">
@@ -244,6 +250,9 @@
     <ClCompile Include="SourceCode\FileAndString\StringHelper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SourceCode\GameObject\DynamicObjects\Enemies\Worm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Test1.rc">
@@ -253,5 +262,6 @@
   <ItemGroup>
     <Text Include="Resources\Textfile\temp.txt" />
     <Text Include="Resources\Textfile\temp_tilemap_info.txt" />
+    <Text Include="Resources\Textfile\enemy-position.txt" />
   </ItemGroup>
 </Project>

@@ -84,7 +84,7 @@ LPDIRECT3DTEXTURE9 CGraphic::LoadTexture(LPCWSTR texturePath)
 		D3DPOOL_DEFAULT,
 		D3DX_DEFAULT,
 		D3DX_DEFAULT,
-		D3DCOLOR_XRGB(255, 255, 255),			// Transparent color
+		D3DCOLOR_XRGB(251, 255, 0),			// Transparent color
 		&info,
 		NULL,
 		&texture);								// Created texture pointer

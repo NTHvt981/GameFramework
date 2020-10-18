@@ -28,6 +28,7 @@ void CGame::LoadResources()
 	LoadLevel();
 
 	AddEntity(new CPlayer(STEEL_ROBOT_TEXTURE_PATH), 100, 800);
+	AddEntity(new CWorm(ENEMIES_TEXTURE_PATH), 50, 100);
 	AddGameObject(new CGround(0, 0, 100, 32));
 	AddGameObject(new CGround(100, 64, 300, 96));
 	AddGameObject(new CGround(300, 128, 400, 160));
@@ -38,6 +39,7 @@ void CGame::LoadTextures()
 {
 	//CTextureLibrary::GetInstance()->Add(CAR_TEXTURE, L"Resources/Texture/My car spritesheet.png");
 	CTextureLibrary::GetInstance()->Add(CAR_TEXTURE, TEX_CAR_SPRIRESHEET_TRANSPARENT);
+	CTextureLibrary::GetInstance()->Add(ENEMIES_TEXTURE, ENEMIES_TEXTURE_PATH);
 	CTextureLibrary::GetInstance()
 		->Add(ID_TEX_BBOX, TEX_BBOX_PATH);
 }
@@ -45,8 +47,10 @@ void CGame::LoadTextures()
 void CGame::LoadSprites()
 {
 	LPDIRECT3DTEXTURE9 textCar = CTextureLibrary::GetInstance()->Get(CAR_TEXTURE);
+	LPDIRECT3DTEXTURE9 textEnemies = CTextureLibrary::GetInstance()->Get(ENEMIES_TEXTURE);
 	CSpriteLibrary* lib = CSpriteLibrary::GetInstance();
 
+	// CAR
 	lib->Add(ID_CAR_GUN_LEFT, 11, 2, 18, 9, textCar, 12, 4);
 	lib->Add(ID_CAR_GUN_RIGHT, 11, 11, 18, 18, textCar, -4, 4);
 	lib->Add(ID_CAR_GUN_UPLEFT, 20, 2, 27, 9, textCar, 13, 13);
@@ -66,7 +70,14 @@ void CGame::LoadSprites()
 	lib->Add(ID_CAR_WHEEL_5, 38, 2, 45, 9, textCar, 3, 4);
 	lib->Add(ID_CAR_WHEEL_6, 47, 2, 54, 9, textCar, 3, 4);
 	lib->Add(ID_CAR_WHEEL_7, 56, 2, 63, 9, textCar, 3, 4);
-	lib->Add(ID_CAR_WHEEL_8, 65	,2,	72,	9, textCar, 3, 4);
+	lib->Add(ID_CAR_WHEEL_8, 65, 2, 72, 9, textCar, 3, 4);
+
+	// ENEMIES
+	// WORM
+	lib->Add(ID_WORM_MOVE_LEFT_1, 46, 412, 64, 422, textEnemies);
+	lib->Add(ID_WORM_MOVE_LEFT_2, 64 , 412, 82, 422, textEnemies);
+	lib->Add(ID_WORM_MOVE_RIGHT_1, 172, 412, 190, 422, textEnemies);
+	lib->Add(ID_WORM_MOVE_RIGHT_2, 192, 412, 210, 422, textEnemies);
 }
 
 void CGame::LoadAnimations()

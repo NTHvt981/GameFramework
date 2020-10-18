@@ -4,6 +4,7 @@
 #include <unordered_map>
 
 #define CAR_TEXTURE 1
+#define ENEMIES_TEXTURE 2
 
 using namespace std;
 

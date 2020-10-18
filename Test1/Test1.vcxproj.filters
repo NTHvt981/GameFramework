@@ -63,6 +63,12 @@
     <Image Include="Resources\Texture\enemies.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Resources\Texture\32854.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Texture\32854.gif">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
@@ -161,6 +167,9 @@
     <ClInclude Include="SourceCode\GameObject\DynamicObjects\Enemies\Worm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SourceCode\GameObject\DynamicObjects\Enemies\Dome.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SourceCode\Game\Game.cpp">
@@ -251,6 +260,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SourceCode\GameObject\DynamicObjects\Enemies\Worm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\GameObject\DynamicObjects\Enemies\Dome.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

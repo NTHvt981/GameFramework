@@ -28,10 +28,12 @@ void CGame::LoadResources()
 	LoadLevel();
 
 	AddEntity(new CPlayer(STEEL_ROBOT_TEXTURE_PATH), 100, 800);
+
 	AddEntity(new CWorm(ENEMIES_TEXTURE_PATH), 50, 100);
+	AddEntity(new CDome(ENEMIES_TEXTURE_PATH), 50, 50);
 	AddEntity(new CJumper(ENEMIES_TEXTURE_PATH), 50, 150);
 	AddEntity(new COrb(ENEMIES_TEXTURE_PATH), 50, 50);
-	AddEntity(new CWalker(ENEMIES_TEXTURE_PATH), 50, 50);
+
 	AddGameObject(new CGround(0, 0, 100, 32));
 	AddGameObject(new CGround(100, 64, 300, 96));
 	AddGameObject(new CGround(300, 128, 400, 160));
@@ -82,8 +84,28 @@ void CGame::LoadSprites()
 	lib->Add(ID_WORM_MOVE_RIGHT_1, 172, 412, 190, 422, textEnemies);
 	lib->Add(ID_WORM_MOVE_RIGHT_2, 192, 412, 210, 422, textEnemies);
 
+	// DOME
+	lib->Add(ID_DOME_UP_MOVE_RIGHT_1, 67, 424, 85, 443, textEnemies);
+	lib->Add(ID_DOME_UP_MOVE_RIGHT_2, 87, 424, 105, 443, textEnemies);
+	lib->Add(ID_DOME_UP_MOVE_LEFT_1, 149, 424, 167, 443, textEnemies);
+	lib->Add(ID_DOME_UP_MOVE_LEFT_2, 169, 424, 187, 443, textEnemies);
 
-	
+	lib->Add(ID_DOME_DOWN_MOVE_RIGHT_1, 67, 479, 85, 498, textEnemies);
+	lib->Add(ID_DOME_DOWN_MOVE_RIGHT_2, 87, 479, 105, 498, textEnemies);
+	lib->Add(ID_DOME_DOWN_MOVE_LEFT_1, 149, 479, 167, 498, textEnemies);
+	lib->Add(ID_DOME_DOWN_MOVE_LEFT_2, 169, 479, 187, 498, textEnemies);
+
+	lib->Add(ID_DOME_LEFT_MOVE_UP_1, 50, 461, 68, 479, textEnemies);
+	lib->Add(ID_DOME_LEFT_MOVE_UP_2, 51, 441, 69, 459, textEnemies);
+	lib->Add(ID_DOME_LEFT_MOVE_DOWN_1, 133, 441, 151, 459, textEnemies);
+	lib->Add(ID_DOME_LEFT_MOVE_DOWN_2, 132, 461, 150, 479, textEnemies);
+
+	lib->Add(ID_DOME_RIGHT_MOVE_UP_1, 187, 461, 205, 479, textEnemies);
+	lib->Add(ID_DOME_RIGHT_MOVE_UP_2, 187, 441, 205, 459, textEnemies);
+	lib->Add(ID_DOME_RIGHT_MOVE_DOWN_1, 105, 441, 123, 459, textEnemies);
+	lib->Add(ID_DOME_RIGHT_MOVE_DOWN_2, 105, 461, 123, 479, textEnemies);
+
+
 	//JUMPER
 	lib->Add(ID_JUMPER_MOVE_LEFT_1, 67, 499, 84, 525, textEnemies);
 	lib->Add(ID_JUMPER_MOVE_LEFT_2, 85, 499, 102, 525, textEnemies);
@@ -99,13 +121,6 @@ void CGame::LoadSprites()
 	lib->Add(ID_ORB_3, 118, 387, 136, 405, textEnemies);
 	lib->Add(ID_ORB_4, 138, 387, 156, 405, textEnemies);
 	lib->Add(ID_ORB_5, 158, 387, 176, 405, textEnemies);
-
-
-	//WALKER
-	lib->Add(ID_WALKER_1, 84, 296, 102, 313, textEnemies);
-	lib->Add(ID_WALKER_2, 104, 296, 122, 313, textEnemies);
-	lib->Add(ID_WALKER_3, 132, 296, 150, 313, textEnemies);
-	lib->Add(ID_WALKER_4, 152, 296, 170, 313, textEnemies);
 }
 
 void CGame::LoadAnimations()

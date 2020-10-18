@@ -79,8 +79,23 @@
 #define ID_WORM_MOVE_RIGHT_2 2003
 #pragma endregion
 
+#pragma region ENEMY JUMPER
+#define ID_JUMPER_MOVE_LEFT_1 2100
+#define ID_JUMPER_MOVE_LEFT_2 2101
+#define ID_JUMPER_MOVE_LEFT_3 2102
+
+#define ID_JUMPER_MOVE_RIGHT_1 2103
+#define ID_JUMPER_MOVE_RIGHT_2 2104
+#define ID_JUMPER_MOVE_RIGHT_3 2105
 #pragma endregion
 
+#pragma region ENEMY ORB
+#define ID_ORB_1 2106
+#define ID_ORB_2 2107
+#define ID_ORB_3 2108
+#define ID_ORB_4 2109
+#define ID_ORB_5 2110
+#pragma endregion
 //enum class GOTYPES;
 
 class CGameObject;

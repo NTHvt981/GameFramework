@@ -29,6 +29,8 @@ void CGame::LoadResources()
 
 	AddEntity(new CPlayer(STEEL_ROBOT_TEXTURE_PATH), 100, 800);
 	AddEntity(new CWorm(ENEMIES_TEXTURE_PATH), 50, 100);
+	AddEntity(new CJumper(ENEMIES_TEXTURE_PATH), 50, 150);
+	AddEntity(new COrb(ENEMIES_TEXTURE_PATH), 50, 50);
 	AddGameObject(new CGround(0, 0, 100, 32));
 	AddGameObject(new CGround(100, 64, 300, 96));
 	AddGameObject(new CGround(300, 128, 400, 160));
@@ -78,6 +80,24 @@ void CGame::LoadSprites()
 	lib->Add(ID_WORM_MOVE_LEFT_2, 64 , 412, 82, 422, textEnemies);
 	lib->Add(ID_WORM_MOVE_RIGHT_1, 172, 412, 190, 422, textEnemies);
 	lib->Add(ID_WORM_MOVE_RIGHT_2, 192, 412, 210, 422, textEnemies);
+
+
+	
+	//JUMPER
+	lib->Add(ID_JUMPER_MOVE_LEFT_1, 67, 499, 84, 525, textEnemies);
+	lib->Add(ID_JUMPER_MOVE_LEFT_2, 85, 499, 102, 525, textEnemies);
+	lib->Add(ID_JUMPER_MOVE_LEFT_3, 105, 499, 122, 525, textEnemies);
+	lib->Add(ID_JUMPER_MOVE_RIGHT_1, 132, 499, 149, 525, textEnemies);
+	lib->Add(ID_JUMPER_MOVE_RIGHT_2, 152, 499, 169, 525, textEnemies);
+	lib->Add(ID_JUMPER_MOVE_RIGHT_3, 170, 499, 187, 525, textEnemies);
+
+
+	//ORB
+	lib->Add(ID_ORB_1, 78, 387, 96, 405, textEnemies);
+	lib->Add(ID_ORB_2, 98, 387, 116, 405, textEnemies);
+	lib->Add(ID_ORB_3, 118, 387, 136, 405, textEnemies);
+	lib->Add(ID_ORB_4, 138, 387, 156, 405, textEnemies);
+	lib->Add(ID_ORB_5, 158, 387, 176, 405, textEnemies);
 }
 
 void CGame::LoadAnimations()

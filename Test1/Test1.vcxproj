@@ -148,6 +148,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="SourceCode\GameObject\DynamicObjects\Enemies\Orb.h" />
+    <ClInclude Include="SourceCode\GameObject\DynamicObjects\Enemies\Jumper.h" />
     <ClInclude Include="SourceCode\Collision\CollisionEvent.h" />
     <ClInclude Include="SourceCode\Collision\DynamicBox.h" />
     <ClInclude Include="SourceCode\FileAndString\ReadTileSet.h" />
@@ -182,6 +184,8 @@
     <ClInclude Include="SourceCode\GameObject\DynamicObjects\Enemies\Worm.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="SourceCode\GameObject\DynamicObjects\Enemies\Orb.cpp" />
+    <ClCompile Include="SourceCode\GameObject\DynamicObjects\Enemies\Jumper.cpp" />
     <ClCompile Include="SourceCode\Collision\CollisionEvent.cpp" />
     <ClCompile Include="SourceCode\Collision\DynamicBox.cpp" />
     <ClCompile Include="SourceCode\FileAndString\ReadTileSet.cpp" />

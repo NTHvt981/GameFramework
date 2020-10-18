@@ -164,6 +164,12 @@
     <ClInclude Include="SourceCode\GameObject\DynamicObjects\Enemies\Worm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SourceCode\GameObject\DynamicObjects\Enemies\Jumper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\GameObject\DynamicObjects\Enemies\Orb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SourceCode\Game\Game.cpp">
@@ -254,6 +260,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SourceCode\GameObject\DynamicObjects\Enemies\Worm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\GameObject\DynamicObjects\Enemies\Jumper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\GameObject\DynamicObjects\Enemies\Orb.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -179,6 +179,7 @@
     <ClInclude Include="SourceCode\GameObject\StaticObjects\Wall.h" />
     <ClInclude Include="SourceCode\TileSystem\TileMap.h" />
     <ClInclude Include="SourceCode\TileSystem\TileSet.h" />
+    <ClInclude Include="SourceCode\GameObject\DynamicObjects\Enemies\Worm.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SourceCode\Collision\CollisionEvent.cpp" />
@@ -210,6 +211,7 @@
     <ClCompile Include="SourceCode\GameObject\StaticObjects\Wall.cpp" />
     <ClCompile Include="SourceCode\TileSystem\TileMap.cpp" />
     <ClCompile Include="SourceCode\TileSystem\TileSet.cpp" />
+    <ClCompile Include="SourceCode\GameObject\DynamicObjects\Enemies\Worm.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\Desktop\Tileset\player_sheet_transparent.png" />
@@ -219,6 +221,7 @@
     <Image Include="Resources\Texture\brick.ico" />
     <Image Include="Resources\Texture\brick.png" />
     <Image Include="Resources\Texture\character_sheet_transparent.png" />
+    <Image Include="Resources\Texture\enemies.png" />
     <Image Include="Resources\Texture\My car spritesheet transparent.png" />
     <Image Include="Resources\Texture\My car spritesheet.png" />
     <Image Include="Resources\Texture\player_sheet.png" />
@@ -230,6 +233,7 @@
     <ResourceCompile Include="Test1.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="Resources\Textfile\enemy-position.txt" />
     <Text Include="Resources\Textfile\temp.txt" />
     <Text Include="Resources\Textfile\temp_tilemap_info.txt" />
   </ItemGroup>

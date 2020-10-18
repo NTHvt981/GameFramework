@@ -32,6 +32,7 @@
 
 #define TEX_BRICK_PATH L"./Resources/Texture/brick.png"
 #define STEEL_ROBOT_TEXTURE_PATH L"./Resources/Texture/steel robot.png"
+#define ENEMIES_TEXTURE_PATH L"./Resources/Texture/32854.png"
 #define TEX_BBOX_PATH L"./Resources/Texture/bbox.png"
 #define TEX_CAR_SPRIRESHEET_TRANSPARENT L"Resources/Texture/My car spritesheet transparent.png"
 #define ID_TEX_BBOX 999		// special texture to draw object bounding box
@@ -46,6 +47,7 @@
 #define MOVE_DOWN_STATE 3
 
 #pragma region TEXTURE PARAMS
+#pragma region TANK
 #define ID_CAR_GUN_LEFT 1000
 #define ID_CAR_GUN_RIGHT 1002
 #define ID_CAR_GUN_UPLEFT 1001
@@ -68,6 +70,15 @@
 #define ID_CAR_WHEEL_8 1017
 
 #define ID_FIRE_BALL 1018
+#pragma endregion
+
+#pragma region ENEMY WORM
+#define ID_WORM_MOVE_LEFT_1 2000
+#define ID_WORM_MOVE_LEFT_2 2001
+#define ID_WORM_MOVE_RIGHT_1 2002
+#define ID_WORM_MOVE_RIGHT_2 2003
+#pragma endregion
+
 #pragma endregion
 
 //enum class GOTYPES;

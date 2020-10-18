@@ -60,6 +60,12 @@
     <Image Include="Resources\Texture\enemies.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Resources\Texture\32854.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Texture\32854.gif">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">

@@ -8,8 +8,8 @@ CPlayer::CPlayer(LPCWSTR texturePath): CEntity(texturePath)
 
 	this->collisionBox = new CDynamicBox(
 		this,
-		-10, 12,
-		20, 20
+		-12, 12,
+		24, 20
 	);
 
 	leftWheelAni = new CAnimation(1, 50);
@@ -49,10 +49,10 @@ void CPlayer::Update(DWORD dt)
 	else if (velocity.y == 0 && old_velocity.y < 0)
 		onGround = true;
 
-	if (position.x < 0) position.x = 0;
-	if (position.x > WINDOW_WIDTH) position.x = WINDOW_WIDTH;
-	if (position.y < 0) position.y = 0;
-	if (position.y > WINDOW_HEIGHT) position.y = WINDOW_HEIGHT;
+	//if (position.x < 0) position.x = 0;
+	//if (position.x > WINDOW_WIDTH) position.x = WINDOW_WIDTH;
+	//if (position.y < 0) position.y = 0;
+	//if (position.y > WINDOW_HEIGHT) position.y = WINDOW_HEIGHT;
 
 	camera->Follow(position.x, position.y);
 }

@@ -28,10 +28,9 @@ void CGame::LoadResources()
 	LoadLevel();
 
 	AddEntity(new CPlayer(STEEL_ROBOT_TEXTURE_PATH), 100, 800);
-	AddGameObject(new CGround(0, 0, 100, 32));
-	AddGameObject(new CGround(100, 64, 300, 96));
-	AddGameObject(new CGround(300, 128, 400, 160));
-	AddGameObject(new CGround(200, 192, 300, 224));
+	AddGameObject(new CGround(0, 0, 1000, 100));
+	AddGameObject(new CGround(200, 150, 400, 200));
+	AddGameObject(new CGround(350, 200, 400, 300));
 }
 
 void CGame::LoadTextures()

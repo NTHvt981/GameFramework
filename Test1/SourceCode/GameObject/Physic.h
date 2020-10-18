@@ -8,7 +8,7 @@ private:
 	float gravity = 0.5;
 protected:
 	bool onGround = false;
-	float jumpSpeed = 8.5;
+	float jumpSpeed = 12;
 	void ApplyPhysic(Vector &v);
 };
 

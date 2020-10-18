@@ -14,6 +14,7 @@
 #include "..\GameObject\DynamicObjects\Enemies\Worm.h"
 #include "..\GameObject\DynamicObjects\Enemies\Jumper.h"
 #include "..\GameObject\DynamicObjects\Enemies\Orb.h"
+#include "..\GameObject\DynamicObjects\Enemies\Walker.h"
 
 #include "..\GameObject\StaticObjects\Wall.h"
 #include "..\GameObject\StaticObjects\Ground.h"

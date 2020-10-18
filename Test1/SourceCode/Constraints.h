@@ -96,6 +96,13 @@
 #define ID_ORB_4 2109
 #define ID_ORB_5 2110
 #pragma endregion
+
+#pragma region ENEMY WALKER
+#define ID_WALKER_1 2111
+#define ID_WALKER_2 2112
+#define ID_WALKER_3 2113
+#define ID_WALKER_4 2114
+#pragma endregion
 //enum class GOTYPES;
 
 class CGameObject;

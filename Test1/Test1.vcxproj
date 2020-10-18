@@ -182,6 +182,7 @@
     <ClInclude Include="SourceCode\TileSystem\TileMap.h" />
     <ClInclude Include="SourceCode\TileSystem\TileSet.h" />
     <ClInclude Include="SourceCode\GameObject\DynamicObjects\Enemies\Worm.h" />
+    <ClInclude Include="SourceCode\GameObject\DynamicObjects\Enemies\Walker.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SourceCode\GameObject\DynamicObjects\Enemies\Orb.cpp" />
@@ -216,6 +217,7 @@
     <ClCompile Include="SourceCode\TileSystem\TileMap.cpp" />
     <ClCompile Include="SourceCode\TileSystem\TileSet.cpp" />
     <ClCompile Include="SourceCode\GameObject\DynamicObjects\Enemies\Worm.cpp" />
+    <ClCompile Include="SourceCode\GameObject\DynamicObjects\Enemies\Walker.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\Desktop\Tileset\player_sheet_transparent.png" />

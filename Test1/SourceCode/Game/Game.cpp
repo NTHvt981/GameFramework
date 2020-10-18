@@ -98,7 +98,7 @@ void CGame::LoadLevel()
 	wstring stemp = std::wstring(tileDir.begin(), tileDir.end());
 	LPTileSet tileSet = new CTileSet(
 		CGraphic::Instance->LoadTexture(stemp.c_str()),
-		tileMap, tileset_size_x
+		tileMap, tile_size_x
 	);
 
 	CTileMap::GetInstance()->SetTileSet(tileSet);

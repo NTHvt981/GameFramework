@@ -220,8 +220,6 @@
     <ClCompile Include="SourceCode\GameObject\DynamicObjects\Enemies\Worm.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\Desktop\Tileset\player_sheet_transparent.png" />
-    <Image Include="..\..\..\..\Downloads\steel robot.png" />
     <Image Include="Resources\Texture\32854.gif" />
     <Image Include="Resources\Texture\32854.png" />
     <Image Include="Resources\Texture\area_2_tileset_2.png" />

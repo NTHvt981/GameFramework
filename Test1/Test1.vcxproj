@@ -184,6 +184,7 @@
     <ClInclude Include="SourceCode\TileSystem\TileSet.h" />
     <ClInclude Include="SourceCode\GameObject\DynamicObjects\Enemies\Worm.h" />
     <ClInclude Include="SourceCode\GameObject\DynamicObjects\Enemies\Walker.h" />
+    <ClInclude Include="SourceCode\Timer\Timer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SourceCode\GameObject\DynamicObjects\Enemies\Dome.cpp" />
@@ -220,6 +221,7 @@
     <ClCompile Include="SourceCode\TileSystem\TileSet.cpp" />
     <ClCompile Include="SourceCode\GameObject\DynamicObjects\Enemies\Worm.cpp" />
     <ClCompile Include="SourceCode\GameObject\DynamicObjects\Enemies\Walker.cpp" />
+    <ClCompile Include="SourceCode\Timer\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Resources\Texture\32854.gif" />

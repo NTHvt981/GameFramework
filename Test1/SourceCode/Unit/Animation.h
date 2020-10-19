@@ -54,5 +54,8 @@ public:
 
 	int GetMode();
 	void SetMode(int mode);
+
+	int GetCurrentFrame();
+	void SetCurrentFrame(int fr);
 };
 

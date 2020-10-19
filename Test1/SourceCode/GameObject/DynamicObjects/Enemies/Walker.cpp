@@ -29,6 +29,7 @@ void CWalker::Update(DWORD dt)
 	GetState(dt);
 
 	position = position + velocity;
+	collisionBox->Update();
 }
 
 void CWalker::Render()

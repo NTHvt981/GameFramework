@@ -85,3 +85,14 @@ void CAnimation::SetMode(int _mode)
 {
 	this->mode = _mode;
 }
+
+int CAnimation::GetCurrentFrame()
+{
+	return currentFrame;
+}
+
+void CAnimation::SetCurrentFrame(int fr)
+{
+	currentFrame = fr;
+	lastFrameTime = 0;
+}

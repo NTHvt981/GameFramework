@@ -36,6 +36,7 @@ void CJumper::Update(DWORD dt)
 	GetState(dt);
 
 	position = position + velocity;
+	collisionBox->Update();
 }
 
 void CJumper::Render()

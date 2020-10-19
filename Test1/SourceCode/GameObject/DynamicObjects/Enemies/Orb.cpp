@@ -36,6 +36,7 @@ void COrb::Update(DWORD dt)
 	GetState(dt);
 
 	position = position + velocity;
+	collisionBox->Update();
 }
 
 void COrb::Render()

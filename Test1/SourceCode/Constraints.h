@@ -15,6 +15,7 @@
 
 #include "./Vector/Vector.h"
 #include "./Debug/Debug.h"
+#include "./Timer/Timer.h"
 
 #define WINDOW_CLASS_NAME L"NGUYEN TRUNG HIEU'S WINDOW"
 #define WINDOW_TITLE L"Test 1"

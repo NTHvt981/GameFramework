@@ -30,6 +30,7 @@ void CGame::LoadResources()
 	AddEntity(new CPlayer(STEEL_ROBOT_TEXTURE_PATH), 100, 800);
 
 	AddEntity(new CWorm(ENEMIES_TEXTURE_PATH), 50, 100);
+	AddEntity(new CWalker(ENEMIES_TEXTURE_PATH), 50, 50);
 	AddEntity(new CDome(ENEMIES_TEXTURE_PATH), 50, 50);
 	AddEntity(new CJumper(ENEMIES_TEXTURE_PATH), 50, 150);
 	AddEntity(new COrb(ENEMIES_TEXTURE_PATH), 50, 50);
@@ -121,6 +122,19 @@ void CGame::LoadSprites()
 	lib->Add(ID_ORB_3, 118, 387, 136, 405, textEnemies);
 	lib->Add(ID_ORB_4, 138, 387, 156, 405, textEnemies);
 	lib->Add(ID_ORB_5, 158, 387, 176, 405, textEnemies);
+
+
+	//WALKER
+	lib->Add(ID_WALKER_1, 84, 296, 102, 313, textEnemies);
+	lib->Add(ID_WALKER_2, 104, 296, 122, 313, textEnemies);
+	lib->Add(ID_WALKER_3, 132, 296, 150, 313, textEnemies);
+	lib->Add(ID_WALKER_4, 152, 296, 170, 313, textEnemies);
+
+	//84	296	18	17
+	//	104	297	18	16
+
+	//	132	297	18	16
+	//	152	296	18	17
 }
 
 void CGame::LoadAnimations()

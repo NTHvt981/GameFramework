@@ -6,7 +6,7 @@
 class CHorizontalEntity: public CEntity
 {
 public:
-	CHorizontalEntity(LPCWSTR texturePath);
+	CHorizontalEntity();
 	void Update(DWORD dt);
 
 	//state functions (get called depending on states)

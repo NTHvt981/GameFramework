@@ -35,7 +35,7 @@ private:
 	void TurnRight(DWORD dt);
 
 public:
-	COrb(LPCWSTR texturePath);
+	COrb();
 	void Update(DWORD dt);
 	void Render();
 };

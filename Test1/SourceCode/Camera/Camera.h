@@ -28,6 +28,7 @@ public:
 	void Follow(Vector pos);
 
 	Vector GetPosition();
+	void GetLTRB(float& l, float& t, float& r, float& b);
 
 	Vector GetScale();
 	void SetScale(float x, float y);

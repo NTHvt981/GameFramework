@@ -33,7 +33,7 @@ private:
 	void DontMove(DWORD dt);
 
 public:
-	CWorm(LPCWSTR texturePath);
+	CWorm();
 	void Update(DWORD dt);
 	void Render();
 };

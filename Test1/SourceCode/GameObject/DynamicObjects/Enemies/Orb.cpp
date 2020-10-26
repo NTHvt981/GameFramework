@@ -1,6 +1,6 @@
 #include "Orb.h"
 
-COrb::COrb(LPCWSTR texturePath) : CEntity(texturePath)
+COrb::COrb() : CEntity()
 {
 	SetType(GOTYPES::Enemy);
 
@@ -73,7 +73,7 @@ void COrb::MoveLeft(DWORD dt)
 	velocity.x = -speed * dt;
 	currentAni = moveLeftAni;
 
-	if (position.x <= 0)
+	if (position.x <= 10)
 	{
 		turnRightAni->Reset();
 		horizontalState = ORB_TURN_RIGHT;

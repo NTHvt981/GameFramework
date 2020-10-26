@@ -17,7 +17,8 @@ void CGame::Init(HINSTANCE hInstance, int nCmdShow, int width, int height, bool 
 	CGraphic::Instance->Init(hWnd);
 
 	CInput::GetInstance()->Init(hInstance, hWnd);
-	CInput::GetInstance()->Update();
+	
+	mapGrid = DivideGrids(GAME_WIDTH, GAME_HEIGHT, GRID_WIDTH, GRID_HEIGHT);
 }
 
 void CGame::LoadResources()
@@ -27,18 +28,21 @@ void CGame::LoadResources()
 	LoadAnimations();
 	LoadLevel();
 
-	AddEntity(new CPlayer(STEEL_ROBOT_TEXTURE_PATH), 100, 800);
+	CPlayer* player = new CPlayer();
+	player->SetPosition(100, 800);
+	AddGameObject(player);
+	//CPlayer::SetCurrentPlayer(player);
 
-	AddEntity(new CWorm(ENEMIES_TEXTURE_PATH), 50, 100);
-	AddEntity(new CWalker(ENEMIES_TEXTURE_PATH), 50, 50);
-	AddEntity(new CDome(ENEMIES_TEXTURE_PATH), 50, 50);
-	AddEntity(new CJumper(ENEMIES_TEXTURE_PATH), 50, 150);
-	AddEntity(new COrb(ENEMIES_TEXTURE_PATH), 50, 50);
+	AddEntity(new CWorm(), 50, 100);
+	AddEntity(new CWalker(), 50, 50);
+	AddEntity(new CDome(), 50, 50);
+	AddEntity(new CJumper(), 50, 150);
+	AddEntity(new COrb(), 50, 50);
 
-	AddGameObject(new CGround(0, 0, 100, 32));
-	AddGameObject(new CGround(100, 64, 300, 96));
-	AddGameObject(new CGround(300, 128, 400, 160));
-	AddGameObject(new CGround(200, 192, 300, 224));
+	AddEntity(new CGround(0, 0, 100, 32), 0, 0);
+	AddEntity(new CGround(100, 64, 300, 96), 100, 64);
+	AddEntity(new CGround(300, 128, 400, 160), 300, 128);
+	AddEntity(new CGround(200, 192, 300, 224), 200, 192);
 }
 
 void CGame::LoadTextures()
@@ -236,15 +240,29 @@ void CGame::Update(DWORD dt)
 	*/
 	CInput::GetInstance()->Update();
 
-	//for each (LPCollisionBox box in CCollision::GetInstance()->GetCollisionBoxes())
-	//{
-	//	box->Update();
-	//}
+	float l, t, r, b;
+	CCamera::GetInstance()->GetLTRB(l, t, r, b);
+	int startX, startY, endX, endY;
+	GetGridXandY(startX, startY, endX, endY, l, t, r, b, GRID_WIDTH, GRID_HEIGHT);
 
+	int count = 0;
+
+	for (int i = startY; i <= endY; i++)
+	{
+		for (int j = startX; j <= endX; j++)
+		{
+			mapGrid[i][j].Update(dt, count);
+		}
+	}
+
+	//update game object list (including player)
 	for each (LPGameObject obj in lGameObjects)
 	{
 		obj->Update(dt);
 	}
+
+	DebugOut(L"[INFO] Number of entities: %d\n", mapEntities.size());
+	DebugOut(L"[INFO] Number of entities update: %d\n", count);
 }
 
 void CGame::Render()
@@ -264,6 +282,22 @@ void CGame::Render()
 		//CAnimationLibrary::GetInstance()->DrawTest();
 		CTileMap::GetInstance()->Render();
 
+		float l, t, r, b;
+		CCamera::GetInstance()->GetLTRB(l, t, r, b);
+		int startX, startY, endX, endY;
+		GetGridXandY(startX, startY, endX, endY, l, t, r, b, GRID_WIDTH, GRID_HEIGHT);
+
+		int count = 0;
+
+		for (int i = startY; i <= endY; i++)
+		{
+			for (int j = startX; j <= endX; j++)
+			{
+				mapGrid[i][j].Render();
+			}
+		}
+
+		//render game object list (including player)
 		for each (LPGameObject obj in lGameObjects)
 		{
 			obj->Render();
@@ -289,8 +323,25 @@ CGame::~CGame()
 void CGame::AddEntity(LPEntity entity, float x, float y)
 {
 	entity->SetPosition(x, y);
-	//lGameObjects.push_back(entity);
-	AddGameObject(entity);
+
+	entity->SetId(countId);
+	mapEntities[countId] = entity;
+	countId++;
+
+	SetEntity(entity);
+}
+
+void CGame::SetEntity(LPEntity entity)
+{
+	int grid_x = entity->GetPosition().x / GRID_WIDTH;
+	int grid_y = entity->GetPosition().y / GRID_HEIGHT;
+
+	mapGrid[grid_y][grid_x].AddEntity(entity->GetId());
+}
+
+LPEntity CGame::GetEntity(int id)
+{
+	return mapEntities[id];
 }
 
 void CGame::AddGameObject(LPGameObject gameObject)
@@ -363,4 +414,15 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	}
 
 	return 0;
+}
+
+void GetGridXandY(int& startX, int& startY, int& endX, int& endY, 
+	float left, float top, float right, float bottom, 
+	float gridWidth, float gridHeight)
+{
+	startX = max( (left / GRID_WIDTH) - 1, 0);
+	endX = ceil(right / GRID_WIDTH);
+
+	startY = max((top / GRID_HEIGHT) - 1, 0);
+	endY = ceil(bottom / GRID_HEIGHT);
 }

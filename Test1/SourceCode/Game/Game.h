@@ -1,4 +1,5 @@
 #pragma once
+#include <map>
 #include "..\Constraints.h"
 #include "..\Graphic\Graphic.h"
 
@@ -26,6 +27,8 @@
 #include "../TileSystem/TileMap.h"
 #include "../TileSystem/TileSet.h"
 
+#include "../GridSystem/Grid.h"
+
 using namespace std;
 
 class CGame
@@ -34,6 +37,9 @@ private:
 	HWND hWnd = NULL;									// Window handle
 
 	vector<LPGameObject> lGameObjects;
+	map<int, LPEntity> mapEntities = map<int, LPEntity>();
+	vector<vector<CGrid>> mapGrid;
+	int countId = 0;
 private:
 	static CGame* __instance;
 private:
@@ -55,5 +61,11 @@ public:
 
 	void AddGameObject(LPGameObject gameObject);
 	void AddEntity(LPEntity entity, float x, float y);
+	void SetEntity(LPEntity entity);
+
+	LPEntity GetEntity(int id);
 };
 
+void GetGridXandY(int &startX, int &startY, int& endX, int& endY,
+	float left, float top, float right, float bottom, 
+	float gridWidth, float gridHeight);

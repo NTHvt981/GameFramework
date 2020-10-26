@@ -33,7 +33,7 @@ private:
 	void DontMove(DWORD dt);
 
 public:
-	CJumper(LPCWSTR texturePath);
+	CJumper();
 	void Update(DWORD dt);
 	void Render();
 };

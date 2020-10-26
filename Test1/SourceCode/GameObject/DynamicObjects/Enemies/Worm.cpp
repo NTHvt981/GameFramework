@@ -1,6 +1,6 @@
 #include "Worm.h"
 
-CWorm::CWorm(LPCWSTR texturePath) : CEntity(texturePath)
+CWorm::CWorm() : CEntity()
 {
 	SetType(GOTYPES::Enemy);
 
@@ -34,6 +34,7 @@ void CWorm::Update(DWORD dt)
 	GetState(dt);
 
 	position = position + velocity;
+	collisionBox->Update();
 }
 
 void CWorm::Render()

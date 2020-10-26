@@ -30,7 +30,7 @@ private:
 	void DontMove(DWORD dt);
 
 public:
-	CWalker(LPCWSTR texturePath);
+	CWalker();
 	void Update(DWORD dt);
 	void Render();
 };

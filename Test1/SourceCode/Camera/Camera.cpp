@@ -41,6 +41,15 @@ void CCamera::Follow(float x, float y)
 {
     position.x = x - width / 2;
     position.y = y + height / 2;
+
+    float l, t, r, b;
+    GetLTRB(l, t, r, b);
+
+    //if (position.y < height/2)
+    //    position.y = height;
+
+    if (position.x < 0)
+        position.x = 0;
 }
 
 void CCamera::Follow(Vector pos)
@@ -51,6 +60,14 @@ void CCamera::Follow(Vector pos)
 Vector CCamera::GetPosition()
 {
     return position;
+}
+
+void CCamera::GetLTRB(float& l, float& t, float& r, float& b)
+{
+    l = position.x;
+    t = position.y - height;
+    r = position.x + width;
+    b = position.y;
 }
 
 Vector CCamera::GetScale()

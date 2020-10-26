@@ -6,7 +6,7 @@
 class CVerticalEntity: public CEntity
 {
 public:
-	CVerticalEntity(LPCWSTR texturePath);
+	CVerticalEntity();
 	void Update(DWORD dt);
 
 	//state functions (get called depending on states)

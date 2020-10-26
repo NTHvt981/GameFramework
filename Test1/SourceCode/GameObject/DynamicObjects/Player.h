@@ -45,6 +45,9 @@ private:
 	int aimDirection = PLAYER_AIM_RIGHT;
 
 private:
+	static CPlayer* currentPlayer;
+
+private:
 	void SetState();
 	void GetState();
 
@@ -58,8 +61,11 @@ private:
 	void AimUpRight();
 
 public:
-	CPlayer(LPCWSTR texturePath);
+	CPlayer();
 	void Update(DWORD dt);
 	void Render();
+
+	static CPlayer* GetCurrentPlayer();
+	static void SetCurrentPlayer(CPlayer* player);
 };
 

@@ -9,13 +9,13 @@
 
 class CEntity: public CGameObject {
 protected:
+	int id;
 	Vector position;
 	Vector origin;
 	Vector velocity;
 
 	int speed;
 
-	LPDIRECT3DTEXTURE9 texture;
 	LPDynamicBox collisionBox = NULL;
 	list<CollisionEvent> collideEvents;
 
@@ -23,9 +23,11 @@ protected:
 	void move(DWORD dt);
 
 public:
-	CEntity(LPCWSTR texturePath);
+	CEntity();
 	void SetPosition(float _x, float _y);
+	void SetId(int _id);
 	Vector GetPosition();
+	int GetId();
 
 	LPDynamicBox GetCollisionBox();
 

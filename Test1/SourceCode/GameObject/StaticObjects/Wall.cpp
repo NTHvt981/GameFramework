@@ -1,8 +1,9 @@
 #include "Wall.h"
 
-CWall::CWall(float l, float t, float r, float b): CGameObject()
+CWall::CWall(float l, float t, float r, float b): CEntity()
 {
-	collisionBox = new CCollisionBox(this, l, t, r, b);
+	collisionBox = new CCollisionBox(this);
+	collisionBox->SetLTRB(l, t, r, b);
 	collisionBox->SetSolid(true);
 
 	SetType(GOTYPES::Wall);

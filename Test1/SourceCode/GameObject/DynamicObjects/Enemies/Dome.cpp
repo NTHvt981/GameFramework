@@ -1,6 +1,6 @@
 #include "Dome.h"
 
-CDome::CDome(LPCWSTR texturePath) : CEntity(texturePath)
+CDome::CDome() : CEntity()
 {
 	SetType(GOTYPES::Enemy);
 
@@ -87,6 +87,7 @@ void CDome::Update(DWORD dt)
 	GetState(dt);
 
 	position = position + velocity;
+	collisionBox->Update();
 }
 
 void CDome::Render()

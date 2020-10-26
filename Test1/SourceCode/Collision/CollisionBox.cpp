@@ -8,7 +8,7 @@ CCollisionBox::CCollisionBox(LPGameObject obj, float l, float t, float r, float 
 	bottom = b;
 
 	owner = obj;
-	CCollision::GetInstance()->GetCollisionBoxes();
+
 	for each (LPCollisionBox box in CCollision::GetInstance()->GetCollisionBoxes())
 	{
 		collisionBoxes.push_back(box);

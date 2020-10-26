@@ -1,8 +1,7 @@
 #include "Entity.h"
 
-CEntity::CEntity(LPCWSTR texturePath)
+CEntity::CEntity()
 {
-	this->texture = CGraphic::Instance->LoadTexture(texturePath);
 	SetType(GOTYPES::Entity);
 }
 
@@ -12,9 +11,19 @@ void CEntity::SetPosition(float _x, float _y)
 	position.y = _y;
 }
 
+void CEntity::SetId(int _id)
+{
+	id = _id;
+}
+
 Vector CEntity::GetPosition()
 {
 	return position;
+}
+
+int CEntity::GetId()
+{
+	return id;
 }
 
 
@@ -75,15 +84,9 @@ void CEntity::Update(DWORD dt)
 
 void CEntity::Render()
 {
-	CGraphic::Instance->Draw(
-		texture,
-		position,
-		origin
-	);
 }
 
 CEntity::~CEntity()
 {
-	//Free memory
-	if (texture != NULL) texture->Release();
+	//Free memory here
 }

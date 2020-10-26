@@ -28,6 +28,12 @@
 #define WINDOW_WIDTH 320
 #define WINDOW_HEIGHT 240
 
+#define GAME_WIDTH 2048
+#define GAME_HEIGHT 2048
+
+#define GRID_WIDTH 128
+#define GRID_HEIGHT 128
+
 //#define MAX_FRAME_RATE 120
 #define MAX_FRAME_RATE 60
 
@@ -153,3 +159,5 @@ class CTileSet;
 typedef CTileSet* LPTileSet;
 
 class CTileMap;
+
+class CGrid;

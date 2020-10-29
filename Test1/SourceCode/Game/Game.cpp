@@ -31,7 +31,7 @@ void CGame::LoadResources()
 	CPlayer* player = new CPlayer();
 	player->SetPosition(100, 800);
 	AddGameObject(player);
-	//CPlayer::SetCurrentPlayer(player);
+	CPlayer::SetCurrentPlayer(player);
 
 	AddEntity(new CWorm(), 50, 100);
 	AddEntity(new CWalker(), 50, 50);
@@ -247,6 +247,19 @@ void CGame::Update(DWORD dt)
 
 	int count = 0;
 
+	CCollision::GetInstance()->ResetActiveCollisionBoxes();
+	CCollision::GetInstance()->AddActiveCollisionBoxes(
+		CPlayer::GetCurrentPlayer()->GetCollisionBox()->GetId()
+	);
+	for (int i = startY; i <= endY; i++)
+	{
+		for (int j = startX; j <= endX; j++)
+		{
+			CCollision::GetInstance()
+				->AddActiveCollisionBoxes(mapGrid[i][j].GetColBoxes());
+		}
+	}
+
 	for (int i = startY; i <= endY; i++)
 	{
 		for (int j = startX; j <= endX; j++)
@@ -261,8 +274,8 @@ void CGame::Update(DWORD dt)
 		obj->Update(dt);
 	}
 
-	DebugOut(L"[INFO] Number of entities: %d\n", mapEntities.size());
-	DebugOut(L"[INFO] Number of entities update: %d\n", count);
+	//DebugOut(L"[INFO] Number of entities: %d\n", mapEntities.size());
+	//DebugOut(L"[INFO] Number of entities update: %d\n", count);
 }
 
 void CGame::Render()

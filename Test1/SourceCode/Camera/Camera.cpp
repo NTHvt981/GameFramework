@@ -25,6 +25,8 @@ void CCamera::SetMatrix()
     matrix._22 = -1.0f;
     matrix._41 = -position.x;
     matrix._42 = position.y;
+
+    //matrix._11 *= 2;
 }
 
 void CCamera::Transform(float x, float y, D3DXVECTOR3& new_pos)

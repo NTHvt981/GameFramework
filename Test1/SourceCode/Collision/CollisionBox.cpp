@@ -1,7 +1,13 @@
 #include "CollisionBox.h"
 
+int CCollisionBox::countId = 0;
+
 CCollisionBox::CCollisionBox(LPGameObject obj, float l, float t, float r, float b)
 {
+	//Set id
+	id = countId;
+	countId++;
+
 	left = l;
 	top = t;
 	right = r;
@@ -9,11 +15,6 @@ CCollisionBox::CCollisionBox(LPGameObject obj, float l, float t, float r, float 
 
 	owner = obj;
 
-	for each (LPCollisionBox box in CCollision::GetInstance()->GetCollisionBoxes())
-	{
-		collisionBoxes.push_back(box);
-		box->AddCoBox(this);
-	}
 	CCollision::GetInstance()->AddCollisionBox(this);
 }
 
@@ -79,6 +80,11 @@ LPGameObject CCollisionBox::GetOwner()
 bool CCollisionBox::IsSolid()
 {
 	return solid;
+}
+
+int CCollisionBox::GetId()
+{
+	return id;
 }
 
 void CCollisionBox::GetCollision(list<LPGameObject>& objectsCollide)

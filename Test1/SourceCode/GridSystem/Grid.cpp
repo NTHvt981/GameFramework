@@ -2,21 +2,23 @@
 
 void CGrid::RemoveEntity(int id)
 {
-	//entitiesId.remove(id);
-	list<int>::iterator it;
-	for (it = entitiesId.begin(); it != entitiesId.end(); ++it)
-	{
-		if (*it == id)
-		{
-			entitiesId.erase(it);
-			return;
-		}
-	}
+	entitiesId.remove(id);
+
+	LPEntity e = CGame::GetInstance()->GetEntity(id);
+	int coId = e->GetCollisionBox()->GetId();
+	colBoxesId.remove(coId);
 }
 
 void CGrid::AddEntity(int id)
 {
 	entitiesId.push_back(id);
+	LPEntity e = CGame::GetInstance()->GetEntity(id);
+	colBoxesId.push_back(e->GetCollisionBox()->GetId());
+}
+
+list<int> CGrid::GetColBoxes()
+{
+	return colBoxesId;
 }
 
 void CGrid::SetLTRB(float l, float t, float r, float b)
@@ -48,6 +50,7 @@ void CGrid::Update(DWORD dt, int &count)
 		float y = e->GetPosition().y;
 		if (!((x >= left && x < right) && (y >= top && y < bottom)))
 		{
+			//add entity to remove list
 			removeList.push_back(*it);
 		}
 		++it;
@@ -58,7 +61,7 @@ void CGrid::Update(DWORD dt, int &count)
 		LPEntity e = game->GetEntity(removeList.front());
 		game->SetEntity(e);
 
-		entitiesId.remove(removeList.front());
+		this->RemoveEntity(e->GetId());
 		removeList.pop_front();
 	}
 }

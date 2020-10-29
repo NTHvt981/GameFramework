@@ -10,6 +10,7 @@ class CGrid
 {
 private:
 	list<int> entitiesId = list<int>();
+	list<int> colBoxesId = list<int>();
 	float left;
 	float top;
 	float right;
@@ -19,6 +20,7 @@ public:
 	void RemoveEntity(int id);
 	void AddEntity(int id);
 
+	list<int> GetColBoxes();
 	void SetLTRB(float l, float t, float r, float b);
 
 	void Update(DWORD dt, int &count);

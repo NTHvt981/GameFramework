@@ -13,6 +13,8 @@ using namespace std;
 class CCollisionBox
 {
 protected:
+	int id;
+
 	float left;
 	float top;
 	float right;
@@ -23,6 +25,9 @@ protected:
 	LPGameObject owner;
 	//this list must not contain self collision box instance
 	list<LPCollisionBox> collisionBoxes;
+
+private:
+	static int countId;
 
 public:
 	CCollisionBox(LPGameObject obj, float l = 0, float t = 0, float r = 0, float b=0);
@@ -38,6 +43,7 @@ public:
 	float GetBottom();
 	LPGameObject GetOwner();
 	bool IsSolid();
+	int GetId();
 
 public:
 	void GetCollision(list<LPGameObject>& objectsCollide);

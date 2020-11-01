@@ -1,6 +1,6 @@
 #include "HorizontalEntity.h"
 
-CHorizontalEntity::CHorizontalEntity(LPCWSTR texturePath):CEntity(texturePath)
+CHorizontalEntity::CHorizontalEntity():CEntity()
 {
 	speed = 5;
 	state = MOVE_RIGHT_STATE;
@@ -32,7 +32,7 @@ void CHorizontalEntity::Update(DWORD dt)
 
 void CHorizontalEntity::MoveLeft()
 {
-	if (position.x >= WINDOW_WIDTH)
+	if (position.x >= CAMERA_WIDTH)
 		state = MOVE_RIGHT_STATE;
 
 	velocity.x = speed;

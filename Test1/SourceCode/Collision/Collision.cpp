@@ -9,12 +9,45 @@ CCollision* CCollision::GetInstance() {
 
 void CCollision::AddCollisionBox(LPCollisionBox box)
 {
-	collisionBoxes.push_back(box);
+	//collisionBoxes.push_back(box);
+	collisionBoxes[box->GetId()] = box;
 }
 
-list<LPCollisionBox> CCollision::GetCollisionBoxes()
+void CCollision::GetCollisionBoxes(int exceptionId, list<LPCollisionBox> &outputList)
 {
-	return collisionBoxes;
+	outputList.clear();
+
+	list<int>::iterator it;
+	//loop through active CBs
+	for (it = activeCollisionBoxes.begin(); it != activeCollisionBoxes.end(); it++)
+	{
+		int id = *it;
+		if (id != exceptionId)
+			outputList.push_back(this->GetCollisionBox(id));
+	}
+}
+
+LPCollisionBox CCollision::GetCollisionBox(int id)
+{
+	return collisionBoxes[id];
+}
+
+void CCollision::ResetActiveCollisionBoxes()
+{
+	activeCollisionBoxes.erase(
+		activeCollisionBoxes.begin(),
+		activeCollisionBoxes.end()
+	);
+}
+
+void CCollision::AddActiveCollisionBoxes(int lCB)
+{
+	activeCollisionBoxes.push_back(lCB);
+}
+
+void CCollision::AddActiveCollisionBoxes(list<int> lCBs)
+{
+	activeCollisionBoxes.insert(activeCollisionBoxes.end(), lCBs.begin(), lCBs.end());
 }
 
 void CCollision::SweptAABB(

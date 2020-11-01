@@ -1,6 +1,6 @@
 #include "Walker.h"
 
-CWalker::CWalker(LPCWSTR texturePath) : CEntity(texturePath)
+CWalker::CWalker() : CEntity()
 {
 	SetType(GOTYPES::Enemy);
 
@@ -61,7 +61,7 @@ void CWalker::MoveDown(DWORD dt)
 
 	currentAni = moveDownAni;
 
-	if (position.y < 0)
+	if (position.y < 10)
 		verticalState = WALKER_MOVE_UP;
 }
 

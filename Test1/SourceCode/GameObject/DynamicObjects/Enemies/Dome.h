@@ -52,7 +52,7 @@ private:
 	void DontMove(DWORD dt);
 
 public:
-	CDome(LPCWSTR texturePath);
+	CDome();
 	void Update(DWORD dt);
 	void Render();
 };

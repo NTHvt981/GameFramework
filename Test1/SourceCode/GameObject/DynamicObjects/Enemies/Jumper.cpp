@@ -1,6 +1,6 @@
 #include "Jumper.h"
 
-CJumper::CJumper(LPCWSTR texturePath) : CEntity(texturePath)
+CJumper::CJumper() : CEntity()
 {
 	SetType(GOTYPES::Enemy);
 

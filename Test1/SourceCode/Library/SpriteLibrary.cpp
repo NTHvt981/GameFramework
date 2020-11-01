@@ -31,7 +31,7 @@ void CSpriteLibrary::DrawTest()
 	float y = 100;
 	for each (pair<int, LPSprite> it in sprites)
 	{
-		if (x < WINDOW_WIDTH)
+		if (x < CAMERA_WIDTH)
 			x += 100;
 		else
 		{

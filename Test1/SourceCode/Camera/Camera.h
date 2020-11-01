@@ -7,9 +7,9 @@ class CCamera
 {
 private:
 	Vector position = Vector(0, 0);
-	Vector scale = Vector(1, 1);
 	float width;
 	float height;
+	float scale;
 	D3DXMATRIX matrix;
 
 	static CCamera* __activeInstance;
@@ -19,17 +19,20 @@ public:
 
 	static D3DXMATRIX MirrorHorizontal(D3DXVECTOR3& vector);
 
-	CCamera(float w, float h);
+	CCamera(float w, float h, float s=1);
 
 	void SetMatrix();
 	void Transform(float x, float y, D3DXVECTOR3 &new_pos);
+	void Transform(float x, float y, float origin_x, float origin_y, 
+		D3DXMATRIX& _matrix);
+	void SetRenderData(D3DXVECTOR2& center, D3DXVECTOR2& translate, D3DXVECTOR2& scaling);
 
 	void Follow(float x, float y);
 	void Follow(Vector pos);
 
 	Vector GetPosition();
+	void GetLTRB(float& l, float& t, float& r, float& b);
 
-	Vector GetScale();
-	void SetScale(float x, float y);
+	float GetScale();
 };
 

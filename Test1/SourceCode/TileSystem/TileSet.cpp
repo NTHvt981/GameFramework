@@ -9,9 +9,21 @@ CTileSet::CTileSet(LPDIRECT3DTEXTURE9 tex, map<int, Box<int>> map, int size)
 
 void CTileSet::Draw(vector<vector<int>> matrix)
 {
-	for (int iY = 0; iY < matrix.size(); iY++)
+	float l, t, r, b;
+	CCamera::GetInstance()->GetLTRB(l, t, r, b);
+	int startX, startY, endX, endY;
+	
+	//Get the start and end of the tiles position base on camera l, t, r, b
+	startX = max((l / tileSize), 0);
+	endX = floor(r / tileSize);
+
+	startY = max((t / tileSize), 0);
+	endY = floor(b / tileSize);
+
+	//only draw the tiles within the camera
+	for (int iY = startY; iY <= endY; iY++)
 	{
-		for (int iX = 0; iX < matrix[0].size()/4; iX++)
+		for (int iX = startX; iX <= endX; iX++)
 		{
 			int key = matrix[iY][iX];
 			if (tileMap.count(key) == 0) continue;
@@ -24,4 +36,8 @@ void CTileSet::Draw(vector<vector<int>> matrix)
 			);
 		}
 	}
+
+	//DEBUG
+	DebugOut(L"[INFO] Number of tiles total: %d\n", (matrix.size() * matrix[0].size()));
+	DebugOut(L"[INFO] Number of tiles render: %d\n", (endY - startY)*(endX - startX));
 }

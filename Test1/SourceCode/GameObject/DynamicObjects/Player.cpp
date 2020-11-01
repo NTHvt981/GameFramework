@@ -1,9 +1,11 @@
 #include "Player.h"
 
-CPlayer::CPlayer(LPCWSTR texturePath): CEntity(texturePath)
+CPlayer* CPlayer::currentPlayer = NULL;
+
+CPlayer::CPlayer(): CEntity()
 {
 	SetType(GOTYPES::Player);
-	camera = new CCamera(WINDOW_WIDTH, WINDOW_HEIGHT);
+	camera = new CCamera(CAMERA_WIDTH, CAMERA_HEIGHT, 1);
 	CCamera::SetInstance(*camera);
 
 	this->collisionBox = new CDynamicBox(
@@ -65,6 +67,16 @@ void CPlayer::Render()
 	bodySprite->Draw(bodyPivot + position);
 	canonSprite->Draw(canonPivot + position);
 	collisionBox->Render();
+}
+
+CPlayer* CPlayer::GetCurrentPlayer()
+{
+	return currentPlayer;
+}
+
+void CPlayer::SetCurrentPlayer(CPlayer* player)
+{
+	currentPlayer = player;
 }
 
 void CPlayer::SetState()

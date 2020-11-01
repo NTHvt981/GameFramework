@@ -21,6 +21,7 @@ void CDynamicBox::Follow(float x, float y)
 void CDynamicBox::CalculateCollision(Vector& velocity, list<CollisionEvent>& events)
 {
 	events.clear();
+	CCollision::GetInstance()->GetCollisionBoxes(id, collisionBoxes);
 
 	//SweptBroadphaseBox
 	float broadLeft, broadRight, broadTop, broadBottom;

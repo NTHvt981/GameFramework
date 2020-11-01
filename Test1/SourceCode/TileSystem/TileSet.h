@@ -17,6 +17,8 @@ private:
 
 public:
 	CTileSet(LPDIRECT3DTEXTURE9 tex, map<int, Box<int>> map, int size);
+
+	//unlike before, now tile set only draw tiles within the camera
 	void Draw(vector<vector<int>> matrix);
 };
 

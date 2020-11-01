@@ -29,7 +29,7 @@ void CAnimationLibrary::DrawTest()
 	float y = 50;
 	for each (pair<int, LPAnimation> it in animations)
 	{
-		if (x < WINDOW_WIDTH)
+		if (x < CAMERA_WIDTH)
 			x += 15;
 		else
 		{

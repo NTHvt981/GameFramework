@@ -22,11 +22,23 @@
 #define WINDOW_ICON_PATH L".\Resources\Texture\brick.ico" 
 #define D3DCOLOR_WHITE D3DCOLOR_XRGB(255, 255, 255)
 
-#define FULLSCREEN false
+#define FULLSCREEN true
 
 #define BACKGROUND_COLOR D3DCOLOR_XRGB(0, 0, 0)
-#define WINDOW_WIDTH 320
-#define WINDOW_HEIGHT 240
+//width and height of the camera
+#define CAMERA_WIDTH 320
+#define CAMERA_HEIGHT 240
+
+//width and height when shown
+#define WINDOW_WIDTH 640
+#define WINDOW_HEIGHT 480
+
+//width and height of the whole level
+#define GAME_WIDTH 2048
+#define GAME_HEIGHT 2048
+
+#define GRID_WIDTH 128
+#define GRID_HEIGHT 128
 
 //#define MAX_FRAME_RATE 120
 #define MAX_FRAME_RATE 60
@@ -153,3 +165,5 @@ class CTileSet;
 typedef CTileSet* LPTileSet;
 
 class CTileMap;
+
+class CGrid;

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <list>
+#include <map>
 #include "..\Constraints.h"
 #include "CollisionBox.h"
 
@@ -12,13 +13,22 @@ class CCollision
 private:
 	static CCollision* __instance;
 
-	list<LPCollisionBox> collisionBoxes;
+	//contain all collision box
+	map<int, LPCollisionBox> collisionBoxes;
+	//contain collision box get call for collision
+	list<int> activeCollisionBoxes;
 
 public:
 	static CCollision* GetInstance();
 
 	void AddCollisionBox(LPCollisionBox box);
-	list<LPCollisionBox> GetCollisionBoxes();
+	void GetCollisionBoxes(int exceptionId, list<LPCollisionBox>& outputList);
+	LPCollisionBox GetCollisionBox(int id);
+
+	//set active list empty
+	void ResetActiveCollisionBoxes();
+	void AddActiveCollisionBoxes(int lCB);
+	void AddActiveCollisionBoxes(list<int> lCBs);
 
 	//vital functions for game object to use
 	static void SweptAABB(

@@ -123,6 +123,7 @@
       <ConformanceMode>false</ConformanceMode>
       <AdditionalIncludeDirectories>C:\Program Files (x86)\Microsoft DirectX SDK (June 2010)\Include</AdditionalIncludeDirectories>
       <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -148,6 +149,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="SourceCode\GridSystem\Grid.h" />
     <ClInclude Include="SourceCode\GameObject\DynamicObjects\Enemies\Dome.h" />
     <ClInclude Include="SourceCode\GameObject\DynamicObjects\Enemies\Orb.h" />
     <ClInclude Include="SourceCode\GameObject\DynamicObjects\Enemies\Jumper.h" />
@@ -187,6 +189,7 @@
     <ClInclude Include="SourceCode\Timer\Timer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="SourceCode\GridSystem\Grid.cpp" />
     <ClCompile Include="SourceCode\GameObject\DynamicObjects\Enemies\Dome.cpp" />
     <ClCompile Include="SourceCode\GameObject\DynamicObjects\Enemies\Orb.cpp" />
     <ClCompile Include="SourceCode\GameObject\DynamicObjects\Enemies\Jumper.cpp" />

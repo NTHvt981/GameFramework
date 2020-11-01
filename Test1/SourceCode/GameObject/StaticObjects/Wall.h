@@ -1,12 +1,12 @@
 #pragma once
 
-#include "..\GameObject.h"
+#include "..\Entity.h"
 #include "..\..\Collision\CollisionBox.h"
 
-class CWall: public CGameObject
+class CWall: public CEntity
 {
 protected:
-	LPCollisionBox collisionBox = NULL;
+	//LPCollisionBox collisionBox = NULL;
 public:
 	CWall(float l, float t, float r, float b);
 	void Render();

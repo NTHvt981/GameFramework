@@ -1,6 +1,6 @@
 #include "VerticalEntity.h"
 
-CVerticalEntity::CVerticalEntity(LPCWSTR texturePath): CEntity(texturePath)
+CVerticalEntity::CVerticalEntity(): CEntity()
 {
 	speed = 3;
 	state = MOVE_DOWN_STATE;
@@ -33,7 +33,7 @@ void CVerticalEntity::Update(DWORD dt)
 
 void CVerticalEntity::MoveUp()
 {
-	if (position.y >= WINDOW_HEIGHT)
+	if (position.y >= CAMERA_HEIGHT)
 		state = MOVE_DOWN_STATE;
 
 	velocity.y = speed;

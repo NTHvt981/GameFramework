@@ -74,7 +74,7 @@ void CWorm::MoveLeft(DWORD dt)
 {
 	velocity.x = -speed * dt;
 
-	if (position.x <= 0)
+	if (position.x <= 10)
 	{
 		horizontalState = WORM_MOVE_RIGHT;
 	}

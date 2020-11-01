@@ -33,7 +33,7 @@ void CVerticalEntity::Update(DWORD dt)
 
 void CVerticalEntity::MoveUp()
 {
-	if (position.y >= WINDOW_HEIGHT)
+	if (position.y >= CAMERA_HEIGHT)
 		state = MOVE_DOWN_STATE;
 
 	velocity.y = speed;

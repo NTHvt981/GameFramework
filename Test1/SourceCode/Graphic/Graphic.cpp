@@ -105,6 +105,9 @@ void CGraphic::Draw(LPDIRECT3DTEXTURE9 texture, float x, float y,
 	int left, int top, int right, int bottom,
 	float origin_x, float origin_y, float alpha)
 {
+	bool change = false;
+	D3DXMATRIX matrix;
+
 	int opacity = alpha * 255;
 	D3DXVECTOR3 origin(origin_x, origin_y, 0);
 	D3DXVECTOR3 position(x, y, 0);
@@ -112,19 +115,29 @@ void CGraphic::Draw(LPDIRECT3DTEXTURE9 texture, float x, float y,
 	{
 		CCamera::GetInstance()->SetMatrix();
 		CCamera::GetInstance()->Transform(x, y, position);
+
+		//CCamera::GetInstance()->Transform(x, y, origin_x, origin_y, matrix);
+		change = true;
 	}
 	RECT r;
 	r.left = left;
 	r.top = top;
 	r.right = right;
 	r.bottom = bottom;
+
+	//DEBUG
+	//if (change)
+	//	spriteHandler->SetTransform(&matrix);
+
 	spriteHandler->Draw(texture, &r, &origin, &position, D3DCOLOR_RGBA(255, 255, 255, opacity));
-	
 }
 
 void CGraphic::Draw(LPDIRECT3DTEXTURE9 texture, float x, float y,
 	float origin_x, float origin_y, float alpha)
 {
+	throw("Error");
+	return;
+
 	int opacity = alpha * 255;
 	D3DXVECTOR3 position(x, y, 0);
 	if (CCamera::GetInstance() != NULL)

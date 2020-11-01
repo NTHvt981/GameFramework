@@ -248,9 +248,14 @@ void CGame::Update(DWORD dt)
 	int count = 0;
 
 	CCollision::GetInstance()->ResetActiveCollisionBoxes();
+	//since player is special not in the grid system,
+	//ensure that player co box is always in active co box list
+	//co box list contain all collision box
+	//active co box list contain collision box that get checked collide
 	CCollision::GetInstance()->AddActiveCollisionBoxes(
 		CPlayer::GetCurrentPlayer()->GetCollisionBox()->GetId()
 	);
+	//base on grid, add collision box to the active list
 	for (int i = startY; i <= endY; i++)
 	{
 		for (int j = startX; j <= endX; j++)
@@ -260,6 +265,7 @@ void CGame::Update(DWORD dt)
 		}
 	}
 
+	//update the grid within the camera, these grids call their entities update func
 	for (int i = startY; i <= endY; i++)
 	{
 		for (int j = startX; j <= endX; j++)
@@ -268,14 +274,14 @@ void CGame::Update(DWORD dt)
 		}
 	}
 
-	//update game object list (including player)
+	//update game object list (including player) (these game obj always get update)
 	for each (LPGameObject obj in lGameObjects)
 	{
 		obj->Update(dt);
 	}
 
-	//DebugOut(L"[INFO] Number of entities: %d\n", mapEntities.size());
-	//DebugOut(L"[INFO] Number of entities update: %d\n", count);
+	DebugOut(L"[INFO] Number of entities: %d\n", mapEntities.size());
+	DebugOut(L"[INFO] Number of entities update: %d\n", count);
 }
 
 void CGame::Render()
@@ -310,7 +316,7 @@ void CGame::Render()
 			}
 		}
 
-		//render game object list (including player)
+		//render game object list (including player) (these game obj always get rendered)
 		for each (LPGameObject obj in lGameObjects)
 		{
 			obj->Render();
@@ -433,9 +439,9 @@ void GetGridXandY(int& startX, int& startY, int& endX, int& endY,
 	float left, float top, float right, float bottom, 
 	float gridWidth, float gridHeight)
 {
-	startX = max( (left / GRID_WIDTH) - 1, 0);
-	endX = ceil(right / GRID_WIDTH);
+	startX = max( (left / GRID_WIDTH), 0);
+	endX = floor(right / GRID_WIDTH);
 
-	startY = max((top / GRID_HEIGHT) - 1, 0);
-	endY = ceil(bottom / GRID_HEIGHT);
+	startY = max((top / GRID_HEIGHT) , 0);
+	endY = floor(bottom / GRID_HEIGHT);
 }

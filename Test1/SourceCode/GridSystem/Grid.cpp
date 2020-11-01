@@ -31,15 +31,19 @@ void CGrid::SetLTRB(float l, float t, float r, float b)
 
 void CGrid::Update(DWORD dt, int &count)
 {
+	//safe approach, ensure that if grid contain no entity -> exit func
 	if (entitiesId.size() == 0) return;
 
+	//do not remove entity while in the update loop, store remove ones in this
 	list<int> removeList = list<int>();
 
 	CGame* game = CGame::GetInstance();
 	list<int>::iterator it = entitiesId.begin();
 	while (it != entitiesId.end())
 	{
+		//get the entity base on its id
 		LPEntity e = game->GetEntity(*it);
+		//update the entity
 		e->Update(dt);
 
 		//this is for debug
@@ -56,9 +60,11 @@ void CGrid::Update(DWORD dt, int &count)
 		++it;
 	}
 
+	//remove all entities in remove list
 	while (!removeList.empty())
 	{
 		LPEntity e = game->GetEntity(removeList.front());
+		//set the grid that entity is in
 		game->SetEntity(e);
 
 		this->RemoveEntity(e->GetId());
@@ -68,10 +74,12 @@ void CGrid::Update(DWORD dt, int &count)
 
 void CGrid::Render()
 {
+	//safe approach, ensure that if grid contain no entity -> exit func
 	if (entitiesId.size() == 0) return;
 
 	CGame* game = CGame::GetInstance();
 	list<int>::iterator it;
+	//loop through list, render the entity
 	for (it = entitiesId.begin(); it != entitiesId.end(); ++it)
 	{
 		game->GetEntity(

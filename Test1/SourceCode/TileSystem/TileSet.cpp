@@ -12,13 +12,15 @@ void CTileSet::Draw(vector<vector<int>> matrix)
 	float l, t, r, b;
 	CCamera::GetInstance()->GetLTRB(l, t, r, b);
 	int startX, startY, endX, endY;
+	
+	//Get the start and end of the tiles position base on camera l, t, r, b
+	startX = max((l / tileSize), 0);
+	endX = floor(r / tileSize);
 
-	startX = max((l / tileSize) - 1, 0);
-	endX = ceil(r / tileSize);
+	startY = max((t / tileSize), 0);
+	endY = floor(b / tileSize);
 
-	startY = max((t / tileSize) - 1, 0);
-	endY = ceil(b / tileSize);
-
+	//only draw the tiles within the camera
 	for (int iY = startY; iY <= endY; iY++)
 	{
 		for (int iX = startX; iX <= endX; iX++)
@@ -34,4 +36,8 @@ void CTileSet::Draw(vector<vector<int>> matrix)
 			);
 		}
 	}
+
+	//DEBUG
+	DebugOut(L"[INFO] Number of tiles total: %d\n", (matrix.size() * matrix[0].size()));
+	DebugOut(L"[INFO] Number of tiles render: %d\n", (endY - startY)*(endX - startX));
 }

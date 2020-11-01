@@ -36,9 +36,15 @@ class CGame
 private:
 	HWND hWnd = NULL;									// Window handle
 
+	//contains all game object that always get update, render (including player)
 	vector<LPGameObject> lGameObjects;
+
+	//contains all entity, each grid contain a list of number, each number is an id
+	//of the entity
 	map<int, LPEntity> mapEntities = map<int, LPEntity>();
 	vector<vector<CGrid>> mapGrid;
+
+	//this var for debug
 	int countId = 0;
 private:
 	static CGame* __instance;
@@ -60,7 +66,10 @@ public:
 	~CGame();
 
 	void AddGameObject(LPGameObject gameObject);
+
+	//set new entity pos, add it to entity map, set what grid it is in
 	void AddEntity(LPEntity entity, float x, float y);
+	//set what grid is entity in
 	void SetEntity(LPEntity entity);
 
 	LPEntity GetEntity(int id);

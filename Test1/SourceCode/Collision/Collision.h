@@ -13,8 +13,9 @@ class CCollision
 private:
 	static CCollision* __instance;
 
-	//list<LPCollisionBox> collisionBoxes;
+	//contain all collision box
 	map<int, LPCollisionBox> collisionBoxes;
+	//contain collision box get call for collision
 	list<int> activeCollisionBoxes;
 
 public:
@@ -24,6 +25,7 @@ public:
 	void GetCollisionBoxes(int exceptionId, list<LPCollisionBox>& outputList);
 	LPCollisionBox GetCollisionBox(int id);
 
+	//set active list empty
 	void ResetActiveCollisionBoxes();
 	void AddActiveCollisionBoxes(int lCB);
 	void AddActiveCollisionBoxes(list<int> lCBs);

@@ -5,7 +5,7 @@ CPlayer* CPlayer::currentPlayer = NULL;
 CPlayer::CPlayer(): CEntity()
 {
 	SetType(GOTYPES::Player);
-	camera = new CCamera(WINDOW_WIDTH, WINDOW_HEIGHT);
+	camera = new CCamera(CAMERA_WIDTH, CAMERA_HEIGHT, 1);
 	CCamera::SetInstance(*camera);
 
 	this->collisionBox = new CDynamicBox(

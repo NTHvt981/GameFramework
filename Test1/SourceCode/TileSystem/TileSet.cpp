@@ -37,6 +37,8 @@ void CTileSet::Draw(vector<vector<int>> matrix)
 		}
 	}
 
+
+
 	//DEBUG
 	DebugOut(L"[INFO] Number of tiles total: %d\n", (matrix.size() * matrix[0].size()));
 	DebugOut(L"[INFO] Number of tiles render: %d\n", (endY - startY)*(endX - startX));

@@ -227,6 +227,7 @@
     <ClCompile Include="SourceCode\Timer\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\..\..\..\Desktop\Tileset\Area-2 Car map\tile\TileMap.png" />
     <Image Include="Resources\Texture\32854.gif" />
     <Image Include="Resources\Texture\32854.png" />
     <Image Include="Resources\Texture\area_2_tileset_2.png" />
@@ -246,6 +247,7 @@
     <ResourceCompile Include="Test1.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="..\..\..\..\Desktop\Tileset\Area-2 Car map\tile\TileMaTrix.txt" />
     <Text Include="Resources\Textfile\enemy-position.txt" />
     <Text Include="Resources\Textfile\temp.txt" />
     <Text Include="Resources\Textfile\temp_tilemap_info.txt" />

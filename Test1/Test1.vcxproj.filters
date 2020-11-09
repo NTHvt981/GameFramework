@@ -60,6 +60,9 @@
     <Image Include="Resources\Texture\32854.gif">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="..\..\..\..\Desktop\Tileset\Area-2 Car map\tile\TileMap.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
@@ -296,5 +299,6 @@
     <Text Include="Resources\Textfile\temp.txt" />
     <Text Include="Resources\Textfile\temp_tilemap_info.txt" />
     <Text Include="Resources\Textfile\enemy-position.txt" />
+    <Text Include="..\..\..\..\Desktop\Tileset\Area-2 Car map\tile\TileMaTrix.txt" />
   </ItemGroup>
 </Project>

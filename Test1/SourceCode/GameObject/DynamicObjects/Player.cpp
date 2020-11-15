@@ -4,28 +4,43 @@ CPlayer* CPlayer::currentPlayer = NULL;
 
 CPlayer::CPlayer(): CEntity()
 {
+	gravity = 0.25;
+	jumpSpeed = 6.5;
+
 	SetType(GOTYPES::Player);
 	camera = new CCamera(CAMERA_WIDTH, CAMERA_HEIGHT, 1);
 	CCamera::SetInstance(*camera);
 
 	this->collisionBox = new CDynamicBox(
 		this,
-		-12, 12,
-		24, 20
+		-12, 8,
+		24, 16
 	);
 
-	leftWheelAni = new CAnimation(1, 50);
-	int ids[] = {
+	leftWheelAni = new CAnimation(1, 25);
+	int idsL[] = {
 		ID_CAR_WHEEL_1,
 		ID_CAR_WHEEL_2,
 		ID_CAR_WHEEL_3,
 		ID_CAR_WHEEL_4,
 	};
-	rightWheelAni = leftWheelAni;
-	leftWheelAni->Add(ids, 4);
+	leftWheelAni->Add(idsL, 4);
+
+	rightWheelAni = new CAnimation(1, 25);
+	int idsR[] = {
+		ID_CAR_WHEEL_4,
+		ID_CAR_WHEEL_1,
+		ID_CAR_WHEEL_2,
+		ID_CAR_WHEEL_3,
+	};
+	rightWheelAni->Add(idsR, 4);
+
 	bodySprite = CSpriteLibrary::GetInstance()->Get(
 		ID_CAR_BODY
 	);
+
+	CTimer* timer = new CTimer(1000);
+	timer->Start();
 }
 
 void CPlayer::Update(DWORD dt)
@@ -42,7 +57,6 @@ void CPlayer::Update(DWORD dt)
 	SetState();
 	GetState();
 
-	ApplyPhysic(velocity);
 	old_velocity.Set(velocity.x, velocity.y);
 	move(dt);
 
@@ -57,12 +71,14 @@ void CPlayer::Update(DWORD dt)
 	//if (position.y > WINDOW_HEIGHT) position.y = WINDOW_HEIGHT;
 
 	camera->Follow(position.x, position.y);
+
 }
 
 void CPlayer::Render()
 {
 	leftWheelAni->Render(leftWheelPivot + position);
 	rightWheelAni->Render(rightWheelPivot + position);
+
 	headSprite->Draw(headPivot + position);
 	bodySprite->Draw(bodyPivot + position);
 	canonSprite->Draw(canonPivot + position);
@@ -113,12 +129,15 @@ void CPlayer::GetState()
 	{
 	case PLAYER_MOVE_RIGHT:
 		leftWheelAni->SetMode(ANIMATION_NORMAL);
+		rightWheelAni->SetMode(ANIMATION_NORMAL);
 		break;
 	case PLAYER_MOVE_LEFT:
 		leftWheelAni->SetMode(ANIMATION_REVERSE);
+		rightWheelAni->SetMode(ANIMATION_REVERSE);
 		break;
 	case PLAYER_DONT_MOVE:
 		leftWheelAni->SetMode(ANIMATION_PAUSE);
+		rightWheelAni->SetMode(ANIMATION_PAUSE);
 		break;
 	}
 

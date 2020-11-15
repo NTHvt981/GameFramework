@@ -49,6 +49,7 @@ void CTimer::Attach()
 
 void CTimer::Detach()
 {
+
 }
 
 void CTimer::Update(DWORD dt) {

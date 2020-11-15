@@ -24,16 +24,7 @@
     <Image Include="Test1.ico">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="Resources\Texture\brick.ico">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Resources\Texture\brick.png">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="Resources\Texture\steel robot.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Resources\Texture\player_sheet.png">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="Resources\Texture\character_sheet_transparent.png">
@@ -54,13 +45,7 @@
     <Image Include="Resources\Texture\enemies.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="Resources\Texture\32854.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Resources\Texture\32854.gif">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="..\..\..\..\Desktop\Tileset\Area-2 Car map\tile\TileMap.png">
+    <Image Include="Resources\Texture\TileMap.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
@@ -299,6 +284,6 @@
     <Text Include="Resources\Textfile\temp.txt" />
     <Text Include="Resources\Textfile\temp_tilemap_info.txt" />
     <Text Include="Resources\Textfile\enemy-position.txt" />
-    <Text Include="..\..\..\..\Desktop\Tileset\Area-2 Car map\tile\TileMaTrix.txt" />
+    <Text Include="Resources\Textfile\TileMaTrix.txt" />
   </ItemGroup>
 </Project>

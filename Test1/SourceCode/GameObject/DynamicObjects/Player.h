@@ -19,7 +19,7 @@
 #define PLAYER_AIM_UPLEFT 2
 #define PLAYER_AIM_UPRIGHT 3
 
-class CPlayer: public CEntity, public IPhysic
+class CPlayer: public CEntity
 {
 private:
 	float speed = 1.5;
@@ -29,9 +29,9 @@ private:
 
 	Vector leftWheelPivot = Vector(-8, -4);
 	Vector rightWheelPivot = Vector(8, -4);
-	Vector headPivot = Vector(0, 3);
-	Vector canonPivot = Vector(0, 6);
-	Vector bodyPivot = Vector(0, -3);
+	Vector headPivot = Vector(0, 0);
+	Vector canonPivot = Vector(0, 3);
+	Vector bodyPivot = Vector(0, -5);
 
 	LPAnimation leftWheelAni;
 	LPAnimation rightWheelAni;

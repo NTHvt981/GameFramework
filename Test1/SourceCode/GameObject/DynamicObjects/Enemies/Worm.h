@@ -12,7 +12,7 @@
 #define WORM_ON_GROUND 0
 #define WORM_ON_AIR 1
 
-class CWorm : public CEntity, public IPhysic
+class CWorm : public CEntity
 {
 private:
 	float speed = 0.4;

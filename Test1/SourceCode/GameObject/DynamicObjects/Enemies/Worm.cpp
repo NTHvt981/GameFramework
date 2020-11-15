@@ -3,6 +3,7 @@
 CWorm::CWorm() : CEntity()
 {
 	SetType(GOTYPES::Enemy);
+	gravity = 0.25;
 
 	this->collisionBox = new CDynamicBox(
 		this,
@@ -33,7 +34,9 @@ void CWorm::Update(DWORD dt)
 {
 	GetState(dt);
 
-	position = position + velocity;
+	velocity.y -= gravity;
+	move(dt);
+
 	collisionBox->Update();
 }
 

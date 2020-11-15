@@ -5,10 +5,10 @@
 class IPhysic
 {
 private:
-	float gravity = 0.5;
+	float gravity = 0.25;
 protected:
 	bool onGround = false;
-	float jumpSpeed = 12;
+	float jumpSpeed = 6.25;
 	void ApplyPhysic(Vector &v);
 };
 

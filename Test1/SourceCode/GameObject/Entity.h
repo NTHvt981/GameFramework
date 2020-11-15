@@ -19,6 +19,11 @@ protected:
 	LPDynamicBox collisionBox = NULL;
 	list<CollisionEvent> collideEvents;
 
+	//for physic
+	bool onGround = false;
+	float gravity = 0;
+	float jumpSpeed = 0;
+
 protected:
 	void move(DWORD dt);
 

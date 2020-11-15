@@ -45,7 +45,7 @@
 
 #define TEX_BRICK_PATH L"./Resources/Texture/brick.png"
 #define STEEL_ROBOT_TEXTURE_PATH L"./Resources/Texture/steel robot.png"
-#define ENEMIES_TEXTURE_PATH L"./Resources/Texture/32854.png"
+#define ENEMIES_TEXTURE_PATH L"./Resources/Texture/enemies.png"
 #define TEX_BBOX_PATH L"./Resources/Texture/bbox.png"
 #define TEX_CAR_SPRIRESHEET_TRANSPARENT L"Resources/Texture/My car spritesheet transparent.png"
 #define ID_TEX_BBOX 999		// special texture to draw object bounding box

@@ -29,6 +29,8 @@ int CEntity::GetId()
 
 void CEntity::move(DWORD dt)
 {
+	velocity.y -= gravity;
+
 	Vector vel_x(velocity.x, 0);
 	Vector vel_y(0, velocity.y);
 

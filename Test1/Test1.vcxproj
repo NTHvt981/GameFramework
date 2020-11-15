@@ -227,19 +227,14 @@
     <ClCompile Include="SourceCode\Timer\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\Desktop\Tileset\Area-2 Car map\tile\TileMap.png" />
-    <Image Include="Resources\Texture\32854.gif" />
-    <Image Include="Resources\Texture\32854.png" />
     <Image Include="Resources\Texture\area_2_tileset_2.png" />
     <Image Include="Resources\Texture\bbox.png" />
-    <Image Include="Resources\Texture\brick.ico" />
-    <Image Include="Resources\Texture\brick.png" />
     <Image Include="Resources\Texture\character_sheet_transparent.png" />
     <Image Include="Resources\Texture\enemies.png" />
     <Image Include="Resources\Texture\My car spritesheet transparent.png" />
     <Image Include="Resources\Texture\My car spritesheet.png" />
-    <Image Include="Resources\Texture\player_sheet.png" />
     <Image Include="Resources\Texture\steel robot.png" />
+    <Image Include="Resources\Texture\TileMap.png" />
     <Image Include="small.ico" />
     <Image Include="Test1.ico" />
   </ItemGroup>
@@ -247,10 +242,10 @@
     <ResourceCompile Include="Test1.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\..\..\..\Desktop\Tileset\Area-2 Car map\tile\TileMaTrix.txt" />
     <Text Include="Resources\Textfile\enemy-position.txt" />
     <Text Include="Resources\Textfile\temp.txt" />
     <Text Include="Resources\Textfile\temp_tilemap_info.txt" />
+    <Text Include="Resources\Textfile\TileMaTrix.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

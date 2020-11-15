@@ -88,7 +88,8 @@ void CGrid::Render()
 	}
 }
 
-vector<vector<CGrid>> DivideGrids(int width, int height, int grid_width, int grid_height)
+vector<vector<CGrid>> DivideGrids(
+	int width, int height, int grid_width, int grid_height)
 {
 	vector<vector<CGrid>> grids;
 	

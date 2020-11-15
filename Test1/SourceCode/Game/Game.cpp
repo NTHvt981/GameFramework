@@ -19,6 +19,8 @@ void CGame::Init(HINSTANCE hInstance, int nCmdShow, int width, int height, bool 
 	CInput::GetInstance()->Init(hInstance, hWnd);
 	
 	mapGrid = DivideGrids(GAME_WIDTH, GAME_HEIGHT, GRID_WIDTH, GRID_HEIGHT);
+	grid_count_width = mapGrid[0].size();
+	grid_count_height = mapGrid.size();
 }
 
 void CGame::LoadResources()
@@ -29,7 +31,7 @@ void CGame::LoadResources()
 	LoadLevel();
 
 	CPlayer* player = new CPlayer();
-	player->SetPosition(100, 800);
+	player->SetPosition(100, 200);
 	AddGameObject(player);
 	CPlayer::SetCurrentPlayer(player);
 
@@ -39,10 +41,10 @@ void CGame::LoadResources()
 	AddEntity(new CJumper(), 50, 150);
 	AddEntity(new COrb(), 50, 50);
 
-	AddEntity(new CGround(0, 0, 100, 32), 0, 0);
-	AddEntity(new CGround(100, 64, 300, 96), 100, 64);
-	AddEntity(new CGround(300, 128, 400, 160), 300, 128);
-	AddEntity(new CGround(200, 192, 300, 224), 200, 192);
+	//AddEntity(new CGround(0, 0, 100, 32), 0, 0);
+	//AddEntity(new CGround(100, 64, 300, 96), 100, 64);
+	//AddEntity(new CGround(300, 128, 400, 160), 300, 128);
+	//AddEntity(new CGround(200, 192, 300, 224), 200, 192);
 }
 
 void CGame::LoadTextures()
@@ -148,34 +150,63 @@ void CGame::LoadAnimations()
 
 void CGame::LoadLevel()
 {
-	int tile_size_x, tile_size_y, tileset_size_x, tileset_size_y;
-	int padding, margin;
+	//int tile_size_x, tile_size_y, tileset_size_x, tileset_size_y;
+	//int padding, margin;
+	//vector<vector<int>> matrix;
+	//string tileDir, fileDir;
+	//
+	//fileDir = "Resources/Textfile/temp_tilemap_info.txt";
+	//
+	//GetInfo(
+	//	tile_size_x, tile_size_y,
+	//	tileset_size_x, tileset_size_y,
+	//	padding, margin, matrix,
+	//	tileDir, fileDir);
+	//
+	//map<int, Box<int>> tileMap;
+	//GetMap(tile_size_x, tile_size_x,
+	//	tileset_size_x, tileset_size_y,
+	//	padding, margin,
+	//	tileMap);
+	//
+	//wstring stemp = std::wstring(tileDir.begin(), tileDir.end());
+	//LPTileSet tileSet = new CTileSet(
+	//	CGraphic::Instance->LoadTexture(stemp.c_str()),
+	//	tileMap, tile_size_x
+	//);
+
+	int tile_count, tile_width, tile_height, tile_count_width, tile_count_height;
+	vector<int> solid_tiles;
 	vector<vector<int>> matrix;
 	string tileDir, fileDir;
 
-	fileDir = "Resources/Textfile/temp_tilemap_info.txt";
+	fileDir = "Resources/Textfile/TileMaTrix.txt";
 
-	GetInfo(
-		tile_size_x, tile_size_y,
-		tileset_size_x, tileset_size_y,
-		padding, margin, matrix,
-		tileDir, fileDir);
+	GetInfo(tile_count, tile_width, tile_height,
+		tile_count_width, tile_count_height, solid_tiles, matrix, tileDir, fileDir);
 
 	map<int, Box<int>> tileMap;
-	GetMap(tile_size_x, tile_size_x,
-		tileset_size_x, tileset_size_y,
-		padding, margin,
-		tileMap);
+	GetMap(tile_width, tile_height, tile_count, tileMap);
 
 	wstring stemp = std::wstring(tileDir.begin(), tileDir.end());
 	LPTileSet tileSet = new CTileSet(
 		CGraphic::Instance->LoadTexture(stemp.c_str()),
-		tileMap, tile_size_x
+		tileMap, tile_width
 	);
 
 	CTileMap::GetInstance()->SetTileSet(tileSet);
 	CTileMap::GetInstance()->SetMatrix(matrix);
 
+	
+	vector<Box<float>> solid_boxes;
+	SetWallPosition(solid_boxes, matrix, solid_tiles, tile_width);
+	for each (Box<float> box in solid_boxes)
+	{
+		AddEntity(
+			new CGround(box.left, box.top, box.right, box.bottom), 
+			box.left + 1, box.top + 1
+		);
+	}
 }
 
 void CGame::Run()
@@ -243,7 +274,8 @@ void CGame::Update(DWORD dt)
 	float l, t, r, b;
 	CCamera::GetInstance()->GetLTRB(l, t, r, b);
 	int startX, startY, endX, endY;
-	GetGridXandY(startX, startY, endX, endY, l, t, r, b, GRID_WIDTH, GRID_HEIGHT);
+	GetGridXandY(startX, startY, endX, endY, l, t, r, b, 
+		GRID_WIDTH, GRID_HEIGHT, grid_count_width, grid_count_height);
 
 	int count = 0;
 
@@ -282,6 +314,8 @@ void CGame::Update(DWORD dt)
 
 	DebugOut(L"[INFO] Number of entities: %d\n", mapEntities.size());
 	DebugOut(L"[INFO] Number of entities update: %d\n", count);
+
+	CTimer::UpdateAll(dt);
 }
 
 void CGame::Render()
@@ -304,7 +338,8 @@ void CGame::Render()
 		float l, t, r, b;
 		CCamera::GetInstance()->GetLTRB(l, t, r, b);
 		int startX, startY, endX, endY;
-		GetGridXandY(startX, startY, endX, endY, l, t, r, b, GRID_WIDTH, GRID_HEIGHT);
+		GetGridXandY(startX, startY, endX, endY, l, t, r, b, 
+			GRID_WIDTH, GRID_HEIGHT, grid_count_width, grid_count_height);
 
 		int count = 0;
 
@@ -435,13 +470,16 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	return 0;
 }
 
-void GetGridXandY(int& startX, int& startY, int& endX, int& endY, 
+void GetGridXandY(
+	int& startX, int& startY, int& endX, int& endY, 
 	float left, float top, float right, float bottom, 
-	float gridWidth, float gridHeight)
+	float gridWidth, float gridHeight,
+	int grid_count_width, 
+	int grid_count_height)
 {
-	startX = max( (left / GRID_WIDTH), 0);
-	endX = floor(right / GRID_WIDTH);
+	startX = max((left / gridWidth), 0);
+	endX = min( right / gridWidth, grid_count_width - 1);
 
-	startY = max((top / GRID_HEIGHT) , 0);
-	endY = floor(bottom / GRID_HEIGHT);
+	startY = max((top / gridHeight), 0);
+	endY = min( bottom / gridHeight, grid_count_height - 1);
 }

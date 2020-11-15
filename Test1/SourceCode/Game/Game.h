@@ -43,6 +43,8 @@ private:
 	//of the entity
 	map<int, LPEntity> mapEntities = map<int, LPEntity>();
 	vector<vector<CGrid>> mapGrid;
+	int grid_count_width;
+	int grid_count_height;
 
 	//this var for debug
 	int countId = 0;
@@ -77,4 +79,5 @@ public:
 
 void GetGridXandY(int &startX, int &startY, int& endX, int& endY,
 	float left, float top, float right, float bottom, 
-	float gridWidth, float gridHeight);
+	float gridWidth, float gridHeight,
+	int grid_count_width, int grid_count_height);

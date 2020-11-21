@@ -6,8 +6,9 @@
 class CWall: public CEntity
 {
 protected:
-	//LPCollisionBox collisionBox = NULL;
+	void move(DWORD dt);
 public:
+	void SetPosition(float _x, float _y);
 	CWall(float l, float t, float r, float b);
 	void Render();
 };

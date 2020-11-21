@@ -9,6 +9,7 @@ CDome::CDome() : CEntity()
 		0, 0,
 		18, 18
 	);
+	collisionBox->SetSolid(false);
 
 	// dome up
 	domeUpMoveLeft = new CAnimation(1, 100);

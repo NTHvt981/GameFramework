@@ -10,6 +10,7 @@ CWorm::CWorm() : CEntity()
 		0, 0,
 		18, 10
 	);
+	collisionBox->SetSolid(false);
 
 	crawlLeftAni = new CAnimation(1, 200);
 	int idsL[] = {
@@ -34,7 +35,6 @@ void CWorm::Update(DWORD dt)
 {
 	GetState(dt);
 
-	velocity.y -= gravity;
 	move(dt);
 
 	collisionBox->Update();
@@ -51,6 +51,17 @@ void CWorm::Render()
 			crawlLeftAni->Render(position);
 	}
 	collisionBox->Render();
+}
+
+void CWorm::move(DWORD dt)
+{
+	//debug comment
+	CEntity::move(dt);
+
+#pragma region debug code
+
+#pragma endregion
+
 }
 
 void CWorm::SetState()

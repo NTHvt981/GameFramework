@@ -34,7 +34,8 @@ void CGrid::Update(DWORD dt, int &count)
 	//safe approach, ensure that if grid contain no entity -> exit func
 	if (entitiesId.size() == 0) return;
 
-	//do not remove entity while in the update loop, store remove ones in this
+	//do not remove entity while in the update loop, 
+	//store remove ones in removeList
 	list<int> removeList = list<int>();
 
 	CGame* game = CGame::GetInstance();
@@ -50,8 +51,8 @@ void CGrid::Update(DWORD dt, int &count)
 		count++;
 
 		//check if entity is in grid boundary
-		float x = e->GetPosition().x;
-		float y = e->GetPosition().y;
+		float x = e->GetCenter().x;
+		float y = e->GetCenter().y;
 		if (!((x >= left && x < right) && (y >= top && y < bottom)))
 		{
 			//add entity to remove list

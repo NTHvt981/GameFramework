@@ -101,52 +101,123 @@ LPDIRECT3DTEXTURE9 CGraphic::LoadTexture(LPCWSTR texturePath)
 	return texture;
 }
 
-void CGraphic::Draw(LPDIRECT3DTEXTURE9 texture, float x, float y,
+void CGraphic::Draw(
+	LPDIRECT3DTEXTURE9 texture, float x, float y,
 	int left, int top, int right, int bottom,
 	float origin_x, float origin_y, float alpha)
 {
-	bool change = false;
+	if (CCamera::GetInstance() != NULL)
+	{
+		DrawWithTransformation(texture, x, y, left, top, right, bottom, alpha);
+		return;
+	}
+
 	D3DXMATRIX matrix;
 
 	int opacity = alpha * 255;
 	D3DXVECTOR3 origin(origin_x, origin_y, 0);
 	D3DXVECTOR3 position(x, y, 0);
-	if (CCamera::GetInstance() != NULL)
-	{
-		CCamera::GetInstance()->SetMatrix();
-		CCamera::GetInstance()->Transform(x, y, position);
-
-		//CCamera::GetInstance()->Transform(x, y, origin_x, origin_y, matrix);
-		change = true;
-	}
 	RECT r;
 	r.left = left;
 	r.top = top;
 	r.right = right;
 	r.bottom = bottom;
 
-	//DEBUG
-	//if (change)
-	//	spriteHandler->SetTransform(&matrix);
-
 	spriteHandler->Draw(texture, &r, &origin, &position, D3DCOLOR_RGBA(255, 255, 255, opacity));
 }
 
-void CGraphic::Draw(LPDIRECT3DTEXTURE9 texture, float x, float y,
+void CGraphic::Draw(LPDIRECT3DTEXTURE9 texture, 
+	float x, float y,
 	float origin_x, float origin_y, float alpha)
 {
-	throw("Error");
-	return;
-
 	int opacity = alpha * 255;
 	D3DXVECTOR3 position(x, y, 0);
-	if (CCamera::GetInstance() != NULL)
-	{
-		CCamera::GetInstance()->SetMatrix();
-		CCamera::GetInstance()->Transform(x, y, position);
-	}
 	D3DXVECTOR3 origin(origin_x, origin_y, 0);
-	spriteHandler->Draw(texture, NULL, &origin, &position, D3DCOLOR_RGBA(255, 255, 255, opacity));
+	spriteHandler->Draw(texture, NULL, &origin, &position, 
+		D3DCOLOR_RGBA(255, 255, 255, opacity));
+}
+
+void CGraphic::DrawWithFixedPosition(
+	LPDIRECT3DTEXTURE9 texture, float x, float y, 
+	int left, int top, int right, int bottom, float alpha)
+{
+	int opacity = alpha * 255;
+	D3DXVECTOR3 position(x, y, 0);
+	RECT r;
+	r.left = left;
+	r.top = top;
+	r.right = right;
+	r.bottom = bottom;
+
+	spriteHandler->Draw(texture, &r, NULL, &position, 
+		D3DCOLOR_RGBA(255, 255, 255, opacity));
+}
+
+void CGraphic::DrawWithTransformation(
+	LPDIRECT3DTEXTURE9 texture, float x, float y, 
+	int left, int top, int right, int bottom, float alpha)
+{
+	int opacity = alpha * 255;
+	int scale = CCamera::GetInstance()->GetScale();
+
+	float width = right - left;
+	float height = bottom - top;
+	D3DXVECTOR2 center = D3DXVECTOR2((width / 2) * scale, (height / 2) * scale);
+	D3DXVECTOR2 translate = D3DXVECTOR2(x, y);
+	D3DXVECTOR2 scaling = D3DXVECTOR2(scale, scale);
+	float angle = 0;
+	SetRenderData(center, translate, scaling);
+	RECT r;
+	r.left = left;
+	r.top = top;
+	r.right = right;
+	r.bottom = bottom;
+	D3DXMATRIX matrix;
+	D3DXMatrixTransformation2D(
+		&matrix,
+		&D3DXVECTOR2(0, 0),
+		NULL,
+		&scaling,
+		NULL,
+		angle,
+		&translate
+	);
+
+	spriteHandler->SetTransform(&matrix);
+	D3DXVECTOR3 Pos(0, 0, 0);
+	spriteHandler->Draw(texture, &r, NULL, &Pos,
+		D3DCOLOR_RGBA(255, 255, 255, opacity));
+}
+
+void CGraphic::SetRenderData(D3DXVECTOR2& center, D3DXVECTOR2& translate, D3DXVECTOR2& scaling)
+{
+	D3DXMATRIX mt;
+	D3DXMatrixIdentity(&mt);
+
+	Vector position = CCamera::GetInstance()->GetPosition();
+	int scale = CCamera::GetInstance()->GetScale();
+
+	mt._11 = scale;
+	mt._22 = scale;
+	mt._33 = scale;
+	mt._44 = scale;
+
+	mt._41 = -position.x * scale;
+	mt._42 = -position.y * scale;
+	D3DXVECTOR4 curTranslate;
+	D3DXVECTOR4 curCenter;
+
+	D3DXVec2Transform(&curCenter, &D3DXVECTOR2(center.x, center.y), &mt);
+
+	D3DXVec2Transform(&curTranslate, &D3DXVECTOR2(translate.x, translate.y), &mt);
+
+	center.x = curCenter.x;
+	center.y = curCenter.y;
+	translate.x = curTranslate.x;
+	translate.y = curTranslate.y;
+
+	//translate.x = translate.x - position.x;
+	//translate.y = translate.y - position.y;
 }
 
 void CGraphic::Draw(LPDIRECT3DTEXTURE9 texture, Vector position, Vector origin, float alpha)

@@ -25,6 +25,10 @@ private:
 	int horizontalState = WORM_DONT_MOVE;
 	int verticalState = WORM_ON_GROUND;
 
+protected:
+	//this function is only called for debug
+	void move(DWORD dt);
+
 private:
 	void SetState();
 	void GetState(DWORD dt);

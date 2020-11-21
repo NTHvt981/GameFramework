@@ -20,10 +20,10 @@ void CTileSet::Draw(vector<vector<int>> matrix)
 	
 	//Get the start and end of the tiles position base on camera l, t, r, b
 	startX = max((l / tileSize), 0);
-	endX = min(ceil(r / tileSize), tile_count_width - 1);
+	endX = min(ceil(r / tileSize), tile_count_width - 1.0);
 
 	startY = max((t / tileSize), 0);
-	endY = min(ceil(b / tileSize), tile_count_height - 1);
+	endY = min(ceil(b / tileSize), tile_count_height - 1.0);
 
 	for (int iY = startY; iY <= endY; iY++)
 	{
@@ -43,6 +43,7 @@ void CTileSet::Draw(vector<vector<int>> matrix)
 
 
 	//DEBUG
-	DebugOut(L"[INFO] Number of tiles total: %d\n", (matrix.size() * matrix[0].size()));
+/*	DebugOut(L"[INFO] Number of tiles total: %d\n", (matrix.size() * matrix[0].size()));
 	DebugOut(L"[INFO] Number of tiles render: %d\n", (endY - startY)*(endX - startX));
+	*/
 }

@@ -4,18 +4,22 @@ CPlayer* CPlayer::currentPlayer = NULL;
 
 CPlayer::CPlayer(): CEntity()
 {
-	gravity = 0.25;
+	gravity = 0.3;
 	jumpSpeed = 6.5;
 
+	headPivot = &rightHeadPivot;
+	canonPivot = &rightCanonPivot;
+
 	SetType(GOTYPES::Player);
-	camera = new CCamera(CAMERA_WIDTH, CAMERA_HEIGHT, 1);
+	camera = new CCamera(WINDOW_WIDTH, WINDOW_HEIGHT, 2);
 	CCamera::SetInstance(*camera);
 
 	this->collisionBox = new CDynamicBox(
 		this,
-		-12, 8,
-		24, 16
+		4, 11,
+		22, 15
 	);
+	this->collisionBox->SetSolid(false);
 
 	leftWheelAni = new CAnimation(1, 25);
 	int idsL[] = {
@@ -45,13 +49,24 @@ CPlayer::CPlayer(): CEntity()
 
 void CPlayer::Update(DWORD dt)
 {
+	CInput* input = CInput::GetInstance();
+	CPlayerHealth* healthSystem = CPlayerHealth::GetInstance();
+
+	if (!enable) return;
+	if (CPlayer::GetCurrentPlayer()->GetId() != GetId()) return;
+
 	velocity.x = dt * speed * (
-		CInput::GetInstance()->IsKeyDown(DIK_D) - CInput::GetInstance()->IsKeyDown(DIK_A)
+		input->IsKeyDown(DIK_D) - 
+		input->IsKeyDown(DIK_A)
 		);
+
+	if (input->IsKeyDown(DIK_J))
+		healthSystem->ReduceHealth(GOTYPES::Sophia);
+
 	if (onGround)
-		if (CInput::GetInstance()->IsKeyDown(DIK_K))
+		if (input->IsKeyDown(DIK_K))
 		{
-			velocity.y = jumpSpeed;
+			velocity.y = -jumpSpeed;
 		}
 
 	SetState();
@@ -60,28 +75,35 @@ void CPlayer::Update(DWORD dt)
 	old_velocity.Set(velocity.x, velocity.y);
 	move(dt);
 
-	if (velocity.y > 0)
+	if (velocity.y < 0)
 		onGround = false;
-	else if (velocity.y == 0 && old_velocity.y < 0)
+	else if (velocity.y == 0 && old_velocity.y > 0)
 		onGround = true;
 
-	//if (position.x < 0) position.x = 0;
-	//if (position.x > WINDOW_WIDTH) position.x = WINDOW_WIDTH;
-	//if (position.y < 0) position.y = 0;
-	//if (position.y > WINDOW_HEIGHT) position.y = WINDOW_HEIGHT;
+	float l, t, r, b;
+	collisionBox->GetLTRB(l, t, r, b);
+	center = Vector(
+		(r + l) / 2,
+		(b + t) / 2
+	);
 
-	camera->Follow(position.x, position.y);
-
+	if (IsCollidedWith(GOTYPES::Enemy))
+		healthSystem->ReduceHealth(GOTYPES::Sophia);
 }
 
 void CPlayer::Render()
 {
-	leftWheelAni->Render(leftWheelPivot + position);
-	rightWheelAni->Render(rightWheelPivot + position);
+	if (!visible) return;
 
-	headSprite->Draw(headPivot + position);
-	bodySprite->Draw(bodyPivot + position);
-	canonSprite->Draw(canonPivot + position);
+	Vector add_up = Vector(0, 0);
+	if (!onGround) add_up.y = -2;
+
+	leftWheelAni->Render(*leftWheelPivot + position);
+	rightWheelAni->Render(*rightWheelPivot + position);
+
+	headSprite->Draw(*headPivot + position + add_up);
+	bodySprite->Draw(*bodyPivot + position + add_up);
+	canonSprite->Draw(*canonPivot + position + add_up);
 	collisionBox->Render();
 }
 
@@ -93,6 +115,15 @@ CPlayer* CPlayer::GetCurrentPlayer()
 void CPlayer::SetCurrentPlayer(CPlayer* player)
 {
 	currentPlayer = player;
+}
+
+void CPlayer::move(DWORD dt)
+{
+	//debug comment
+	CEntity::move(dt);
+#pragma region debug code
+
+#pragma endregion
 }
 
 void CPlayer::SetState()
@@ -145,20 +176,56 @@ void CPlayer::GetState()
 	switch (aimDirection)
 	{
 	case PLAYER_AIM_UPRIGHT:
+		//set head & canon & body & wheel pivot (position)
+		headPivot = &upRightHeadPivot;
+		canonPivot = &upRightCanonPivot;
+		bodyPivot = &bodyStandingPivot;
+		leftWheelPivot = &leftWheelStandingPivot;
+		rightWheelPivot = &rightWheelStandingPivot;
+
+		//set head, canon, body sprite
 		canonSprite = lib->Get(ID_CAR_GUN_UP);
 		headSprite = lib->Get(ID_CAR_HEAD_UPRIGHT);
+		bodySprite = lib->Get(ID_CAR_BODY_UPRIGHT);
 		break;
 	case PLAYER_AIM_UPLEFT:
+		//set head & canon & body & wheel pivot (position)
+		headPivot = &upLeftHeadPivot;
+		canonPivot = &upLeftCanonPivot;
+		bodyPivot = &bodyStandingPivot;
+		leftWheelPivot = &leftWheelStandingPivot;
+		rightWheelPivot = &rightWheelStandingPivot;
+
+		//set head, canon, body sprite
 		canonSprite = lib->Get(ID_CAR_GUN_UP);
 		headSprite = lib->Get(ID_CAR_HEAD_UPLEFT);
+		bodySprite = lib->Get(ID_CAR_BODY_UPLEFT);
 		break;
 	case PLAYER_AIM_RIGHT:
+		//set head & canon & body & wheel pivot (position)
+		headPivot = &rightHeadPivot;
+		canonPivot = &rightCanonPivot;
+		bodyPivot = &bodyOnGroundPivot;
+		leftWheelPivot = &leftWheelOnGroundPivot;
+		rightWheelPivot = &rightWheelOnGroundPivot;
+
+		//set head, canon, body sprite
 		canonSprite = lib->Get(ID_CAR_GUN_RIGHT);
 		headSprite = lib->Get(ID_CAR_HEAD_RIGHT);
+		bodySprite = lib->Get(ID_CAR_BODY);
 		break;
 	case PLAYER_AIM_LEFT:
+		//set head & canon & body & wheel pivot (position)
+		headPivot = &leftHeadPivot;
+		canonPivot = &leftCanonPivot;
+		bodyPivot = &bodyOnGroundPivot;
+		leftWheelPivot = &leftWheelOnGroundPivot;
+		rightWheelPivot = &rightWheelOnGroundPivot;
+
+		//set head, canon, body sprite
 		canonSprite = lib->Get(ID_CAR_GUN_LEFT);
 		headSprite = lib->Get(ID_CAR_HEAD_LEFT);
+		bodySprite = lib->Get(ID_CAR_BODY);
 		break;
 	default:
 		break;

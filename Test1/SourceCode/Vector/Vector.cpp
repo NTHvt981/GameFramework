@@ -20,6 +20,11 @@ Vector Vector::operator+(Vector b)
 	return Vector(this->x + b.x, this->y + b.y);
 }
 
+Vector Vector::operator/(int d)
+{
+	return Vector(this->x / d, this->y / d);
+}
+
 void Vector::Set(float _x, float _y)
 {
 	x = _x;

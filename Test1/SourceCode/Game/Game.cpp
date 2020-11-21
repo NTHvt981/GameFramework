@@ -27,24 +27,15 @@ void CGame::LoadResources()
 {
 	LoadTextures();
 	LoadSprites();
-	LoadAnimations();
 	LoadLevel();
+	LoadAreas();
+	LoadPortals();
+	LoadEnemies();
 
 	CPlayer* player = new CPlayer();
-	player->SetPosition(100, 200);
+	player->SetPosition(200, 92*32);
 	AddGameObject(player);
 	CPlayer::SetCurrentPlayer(player);
-
-	AddEntity(new CWorm(), 50, 100);
-	AddEntity(new CWalker(), 50, 50);
-	AddEntity(new CDome(), 50, 50);
-	AddEntity(new CJumper(), 50, 150);
-	AddEntity(new COrb(), 50, 50);
-
-	//AddEntity(new CGround(0, 0, 100, 32), 0, 0);
-	//AddEntity(new CGround(100, 64, 300, 96), 100, 64);
-	//AddEntity(new CGround(300, 128, 400, 160), 300, 128);
-	//AddEntity(new CGround(200, 192, 300, 224), 200, 192);
 }
 
 void CGame::LoadTextures()
@@ -63,26 +54,29 @@ void CGame::LoadSprites()
 	CSpriteLibrary* lib = CSpriteLibrary::GetInstance();
 
 	// CAR
-	lib->Add(ID_CAR_GUN_LEFT, 11, 2, 18, 9, textCar, 12, 4);
-	lib->Add(ID_CAR_GUN_RIGHT, 11, 11, 18, 18, textCar, -4, 4);
-	lib->Add(ID_CAR_GUN_UPLEFT, 20, 2, 27, 9, textCar, 13, 13);
-	lib->Add(ID_CAR_GUN_UPRIGHT, 20, 11, 27, 18, textCar, -5, 12);
-	lib->Add(ID_CAR_GUN_UP, 29, 2, 36, 9, textCar, 4, 13);
+	lib->Add(ID_CAR_GUN_LEFT, 11, 4, 18, 8, textCar);
+	lib->Add(ID_CAR_GUN_RIGHT, 12, 13, 19, 17, textCar);
+	lib->Add(ID_CAR_GUN_UPLEFT, 20, 2, 28, 10, textCar);
+	lib->Add(ID_CAR_GUN_UPRIGHT, 20, 11, 28, 19, textCar);
+	lib->Add(ID_CAR_GUN_UP, 31, 2, 35, 9, textCar);
 
-	lib->Add(ID_CAR_HEAD_LEFT, 2,	20,	17,	27, textCar, 5, 8);
-	lib->Add(ID_CAR_HEAD_RIGHT, 2,	29,	17,	36, textCar, 11, 8);
-	lib->Add(ID_CAR_HEAD_UPLEFT, 56,	20,	71,	36, textCar, 3, 12);
-	lib->Add(ID_CAR_HEAD_UPRIGHT, 38,	20,	53,	35, textCar, 12, 12);
-	lib->Add(ID_CAR_BODY, 108,	2,	115,	9, textCar, 4, 6);
+	lib->Add(ID_CAR_HEAD_LEFT, 2,	20,	18,	28, textCar);
+	lib->Add(ID_CAR_HEAD_RIGHT, 2,	29,	18,	37, textCar);
+	lib->Add(ID_CAR_HEAD_UPLEFT, 56,	21,	56+16,	36, textCar);
+	lib->Add(ID_CAR_HEAD_UPRIGHT, 38,	21,	38+16,	35, textCar);
 
-	lib->Add(ID_CAR_WHEEL_1, 38, 11, 45, 18, textCar, 4, 4);
-	lib->Add(ID_CAR_WHEEL_2, 47, 11, 54, 18, textCar, 4, 4);
-	lib->Add(ID_CAR_WHEEL_3, 56, 11, 63, 18, textCar, 4, 4);
-	lib->Add(ID_CAR_WHEEL_4, 65, 11, 72, 18, textCar, 4, 4);
-	lib->Add(ID_CAR_WHEEL_5, 38, 2, 45, 9, textCar, 3, 4);
-	lib->Add(ID_CAR_WHEEL_6, 47, 2, 54, 9, textCar, 3, 4);
-	lib->Add(ID_CAR_WHEEL_7, 56, 2, 63, 9, textCar, 3, 4);
-	lib->Add(ID_CAR_WHEEL_8, 65, 2, 72, 9, textCar, 3, 4);
+	lib->Add(ID_CAR_BODY, 109,	2,	115,	9, textCar);
+	lib->Add(ID_CAR_BODY_UPRIGHT, 135, 2, 143, 10, textCar);
+	lib->Add(ID_CAR_BODY_UPLEFT, 126, 2, 134, 10, textCar);
+
+	lib->Add(ID_CAR_WHEEL_1, 38, 11, 45, 19, textCar);
+	lib->Add(ID_CAR_WHEEL_2, 47, 11, 54, 19, textCar);
+	lib->Add(ID_CAR_WHEEL_3, 56, 11, 63, 19, textCar);
+	lib->Add(ID_CAR_WHEEL_4, 65, 11, 72, 19, textCar);
+	lib->Add(ID_CAR_WHEEL_5, 38, 2, 45, 10, textCar);
+	lib->Add(ID_CAR_WHEEL_6, 47, 2, 54, 10, textCar);
+	lib->Add(ID_CAR_WHEEL_7, 56, 2, 63, 10, textCar);
+	lib->Add(ID_CAR_WHEEL_8, 65, 2, 72, 10, textCar);
 
 	// ENEMIES
 	// WORM
@@ -143,37 +137,8 @@ void CGame::LoadSprites()
 	//	152	296	18	17
 }
 
-void CGame::LoadAnimations()
-{
-	LPAnimation ani = new CAnimation(1, 100);
-}
-
 void CGame::LoadLevel()
 {
-	//int tile_size_x, tile_size_y, tileset_size_x, tileset_size_y;
-	//int padding, margin;
-	//vector<vector<int>> matrix;
-	//string tileDir, fileDir;
-	//
-	//fileDir = "Resources/Textfile/temp_tilemap_info.txt";
-	//
-	//GetInfo(
-	//	tile_size_x, tile_size_y,
-	//	tileset_size_x, tileset_size_y,
-	//	padding, margin, matrix,
-	//	tileDir, fileDir);
-	//
-	//map<int, Box<int>> tileMap;
-	//GetMap(tile_size_x, tile_size_x,
-	//	tileset_size_x, tileset_size_y,
-	//	padding, margin,
-	//	tileMap);
-	//
-	//wstring stemp = std::wstring(tileDir.begin(), tileDir.end());
-	//LPTileSet tileSet = new CTileSet(
-	//	CGraphic::Instance->LoadTexture(stemp.c_str()),
-	//	tileMap, tile_size_x
-	//);
 
 	int tile_count, tile_width, tile_height, tile_count_width, tile_count_height;
 	vector<int> solid_tiles;
@@ -197,16 +162,106 @@ void CGame::LoadLevel()
 	CTileMap::GetInstance()->SetTileSet(tileSet);
 	CTileMap::GetInstance()->SetMatrix(matrix);
 
-	
+	LoadWalls(matrix, solid_tiles, tile_width);
+}
+
+inline void CGame::LoadWalls(
+	vector<vector<int>> matrix, 
+	vector<int> solid_tiles, 
+	int tile_width)
+{
 	vector<Box<float>> solid_boxes;
 	SetWallPosition(solid_boxes, matrix, solid_tiles, tile_width);
 	for each (Box<float> box in solid_boxes)
 	{
 		AddEntity(
-			new CGround(box.left, box.top, box.right, box.bottom), 
+			new CWall(box.left, box.top, box.right, box.bottom),
 			box.left + 1, box.top + 1
 		);
 	}
+
+	AddEntity(new CWall(0, 89 * 32, 32, 96 * 32), 0, 91 * 32);
+}
+
+void CGame::LoadAreas()
+{
+	areas[1] = new CArea(0, 88, 31, 95);
+	areas[2] = new CArea(32, 57, 47, 95);
+	areas[3] = new CArea(48, 56, 63, 63);
+
+	areas[4] = new CArea(64, 33, 79, 63);
+	areas[5] = new CArea(48, 1, 63, 55);
+	areas[6] = new CArea(64, 0, 79, 7);
+
+	areas[7] = new CArea(80, 0, 95, 15);
+	areas[8] = new CArea(64, 8, 79, 14);
+	areas[9] = new CArea(40, 32, 47, 39);
+
+	for (int i = 1; i <= 9; i++)
+	{
+		float l = areas[i]->left * 32;
+		float t = areas[i]->top * 32;
+		float r = areas[i]->right * 32 + 32;
+		float b = areas[i]->bottom * 32 + 48;
+
+		areas[i] = new CArea(l, t, r, b);
+	}
+
+	currArea = areas[1];
+}
+
+void CGame::LoadPortals()
+{
+	const int range = 16;
+	int ls[range][5] = {
+		{ 12, 30, 92, 31, 92 },
+		{ 21, 33, 92, 33, 92 },
+		{ 23, 46, 60, 46, 60 },
+		{ 32, 49, 60, 49, 60 },
+		{ 34, 62, 60, 62, 60 },
+		{ 43, 65, 60, 65, 60 },
+
+		{ 45, 65, 36, 65, 36},
+		{ 54, 62, 36, 62, 36},
+		{ 56, 62, 4, 62, 4},
+		{ 65, 65, 4, 65, 4},
+		{ 67, 78, 4, 78, 4},
+		{ 76, 81, 4, 81, 4},
+
+		{ 78, 81, 12, 81, 12},
+		{ 87, 78, 12, 78, 12},
+		{ 59, 49, 36, 49, 36},
+		{ 95, 46, 36, 46, 36}
+	};
+
+	for (int i = 0; i < range; i++)
+	{
+		int id = ls[i][0];
+		int areaId = id / 10;
+		int reverseId = (id % 10) * 10 + (id / 10);
+
+		int l = ls[i][1] * 32;
+		int r = ls[i][3] * 32 + 32;
+
+		int t = ls[i][2] * 32 ;
+		int b = ls[i][4] * 32 + 32;
+
+		portals[id] = new CPortal(l, t, r, b);
+		portals[id]->SetTargetId(reverseId);
+		portals[id]->SetAreaId(areaId);
+	}
+}
+
+void CGame::LoadEnemies()
+{
+	AddEntity(new CWorm(), 160, 92 * 32);
+	AddEntity(new CWorm(), 180, 92 * 32);
+	AddEntity(new CWorm(), 200, 92 * 32);
+	AddEntity(new CWorm(), 220, 92 * 32);
+	AddEntity(new CWorm(), 240, 92 * 32);
+	AddEntity(new CWorm(), 260, 92 * 32);
+	AddEntity(new CWorm(), 280, 92 * 32);
+	AddEntity(new CWorm(), 300, 92 * 32);
 }
 
 void CGame::Run()
@@ -245,8 +300,8 @@ void CGame::Run()
 				Update(dt/10);
 				Render();
 			}
-			else
-				Sleep(tickPerFrame - dt);
+			//else
+			//	Sleep(tickPerFrame - dt);
 		}
 	}
 	catch (const std::exception& ex)
@@ -271,13 +326,46 @@ void CGame::Update(DWORD dt)
 	*/
 	CInput::GetInstance()->Update();
 
+	UpdateCollisionBoxes(dt);
+	UpdateEnemies(dt);
+
+	switch (mode)
+	{
+	case NORMAL_MODE:
+		NormalMode(dt);
+		break;
+
+	case CHANGEAREA_MODE:
+		TransitionMode(dt);
+		break;
+
+	default:
+		break;
+	}
+}
+
+void CGame::UpdateCamera()
+{
+	CCamera::GetInstance()->SetOuterBound(
+		currArea->left,
+		currArea->top,
+		currArea->right,
+		currArea->bottom
+	);
+
+	//set camera position
+	CCamera::GetInstance()->Follow(
+		CPlayer::GetCurrentPlayer()->GetCenter()
+	);
+}
+
+void CGame::UpdateCollisionBoxes(DWORD dt)
+{
 	float l, t, r, b;
 	CCamera::GetInstance()->GetLTRB(l, t, r, b);
 	int startX, startY, endX, endY;
-	GetGridXandY(startX, startY, endX, endY, l, t, r, b, 
+	GetGridXandY(startX, startY, endX, endY, l, t, r, b,
 		GRID_WIDTH, GRID_HEIGHT, grid_count_width, grid_count_height);
-
-	int count = 0;
 
 	CCollision::GetInstance()->ResetActiveCollisionBoxes();
 	//since player is special not in the grid system,
@@ -296,6 +384,16 @@ void CGame::Update(DWORD dt)
 				->AddActiveCollisionBoxes(mapGrid[i][j].GetColBoxes());
 		}
 	}
+}
+
+void CGame::UpdateEnemies(DWORD dt)
+{
+	int count = 0;
+	float l, t, r, b;
+	CCamera::GetInstance()->GetLTRB(l, t, r, b);
+	int startX, startY, endX, endY;
+	GetGridXandY(startX, startY, endX, endY, l, t, r, b,
+		GRID_WIDTH, GRID_HEIGHT, grid_count_width, grid_count_height);
 
 	//update the grid within the camera, these grids call their entities update func
 	for (int i = startY; i <= endY; i++)
@@ -305,17 +403,107 @@ void CGame::Update(DWORD dt)
 			mapGrid[i][j].Update(dt, count);
 		}
 	}
+}
 
-	//update game object list (including player) (these game obj always get update)
-	for each (LPGameObject obj in lGameObjects)
+void CGame::UpdatePlayer(DWORD dt)
+{
+	CPlayer* player = CPlayer::GetCurrentPlayer();
+	int grid_x = player->GetCenter().x / GRID_WIDTH;
+	int grid_y = player->GetCenter().y / GRID_HEIGHT;
+
+	ResetEntityCoCollisionBoxes(
+		player,
+		grid_x,
+		grid_y
+		);
+
+	CPlayer::GetCurrentPlayer()->Update(dt);
+	CPlayerHealth::GetInstance()->Update(dt);
+}
+
+void CGame::UpdatePortals(DWORD dt)
+{
+	for each (pair<int, CPortal*> por_pair in portals)
 	{
-		obj->Update(dt);
+		CPortal* portal = por_pair.second;
+		int id = por_pair.first;
+		int area1 = portal->GetAreaId();
+		int area2 = portal->GetTargetId();
+
+		portal->Update(dt);
+		if (portal->IsCollideWithPlayer())
+		{
+			DebugOut(L"[DEBUG] Portal [%d] from area [%d] to area [%d]\n",
+				id, area1, area2);
+			SetAreaTransition(portal);
+		}
 	}
+}
 
-	DebugOut(L"[INFO] Number of entities: %d\n", mapEntities.size());
-	DebugOut(L"[INFO] Number of entities update: %d\n", count);
+void CGame::SetAreaTransition(CPortal* p)
+{
+	//get cur area, dest area, dest position for player
+	destPortal = portals[p->GetTargetId()];
+	int destAreaId = destPortal->GetAreaId();
+	destArea = areas[destAreaId];
 
-	CTimer::UpdateAll(dt);
+	mode = CHANGEAREA_MODE;
+}
+
+void CGame::NormalMode(DWORD dt)
+{
+	CPlayer* player = CPlayer::GetCurrentPlayer();
+	CCamera* cam = CCamera::GetInstance();
+
+	UpdatePlayer(dt);
+	UpdateCamera();
+	UpdatePortals(dt);
+}
+
+void CGame::TransitionMode(DWORD dt)
+{
+	CPlayer* player = CPlayer::GetCurrentPlayer();
+	CCamera* cam = CCamera::GetInstance();
+
+	float cam_l, cam_t, cam_r, cam_b;
+	float area_l, area_t, area_r, area_b;
+
+	destArea->GetLTRB(area_l, area_t, area_r, area_b);
+	cam->GetLTRB(cam_l, cam_t, cam_r, cam_b);
+
+	float dx = max(max(0, area_l - cam_l), cam_r - area_r);
+	float dy = max(max(0, area_t - cam_t), cam_b - area_b);
+	// if area_l - cam_r > 0
+	// then destination area is to the right of camera
+	int sidex = (area_l - cam_l) > 0 ? 1 : -1;
+	int sidey = (area_t - cam_t) > 0 ? 1 : -1;
+
+	if (dx == 0 && dy == 0)
+	{
+		currArea = destArea;
+		destPortal->SetIsCollideWithPlayer(true);
+		player->Enable();
+		mode = NORMAL_MODE;
+
+		float portal_l, portal_t, portal_r, portal_b;
+		destPortal->GetCollisionBox()->GetLTRB(
+			portal_l, portal_t, portal_r, portal_b
+		);
+		
+		float x, y;
+		x = (portal_l + portal_r) / 2 -
+			(player->GetCenter().x - player->GetPosition().x);
+		y = (portal_b + portal_t) / 2 -
+			(player->GetCenter().y - player->GetPosition().y);
+		player->SetPosition(
+			x, y
+		);
+	}
+	else
+	{
+		cam->Move(min(6, dx) * sidex, min(6, dy) * sidey);
+		player->Disable();
+	}
 }
 
 void CGame::Render()
@@ -331,31 +519,12 @@ void CGame::Render()
 
 		spriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
 
-		//CSpriteLibrary::GetInstance()->DrawTest();
-		//CAnimationLibrary::GetInstance()->DrawTest();
-		CTileMap::GetInstance()->Render();
-
-		float l, t, r, b;
-		CCamera::GetInstance()->GetLTRB(l, t, r, b);
-		int startX, startY, endX, endY;
-		GetGridXandY(startX, startY, endX, endY, l, t, r, b, 
-			GRID_WIDTH, GRID_HEIGHT, grid_count_width, grid_count_height);
-
-		int count = 0;
-
-		for (int i = startY; i <= endY; i++)
-		{
-			for (int j = startX; j <= endX; j++)
-			{
-				mapGrid[i][j].Render();
-			}
-		}
-
-		//render game object list (including player) (these game obj always get rendered)
-		for each (LPGameObject obj in lGameObjects)
-		{
-			obj->Render();
-		}
+		//Render these
+		//tiles -> enemies -> player -> portals
+		RenderTiles();
+		RenderEnemies();
+		RenderPlayer();
+		RenderPortals();
 
 		spriteHandler->End();
 		d3ddev->EndScene();
@@ -365,10 +534,50 @@ void CGame::Render()
 	d3ddev->Present(NULL, NULL, NULL, NULL);
 }
 
+void CGame::RenderTiles()
+{
+	CTileMap::GetInstance()->Render();
+}
+
+void CGame::RenderEnemies()
+{
+	float l, t, r, b;
+	CCamera::GetInstance()->GetLTRB(l, t, r, b);
+	int startX, startY, endX, endY;
+	GetGridXandY(startX, startY, endX, endY, l, t, r, b,
+		GRID_WIDTH, GRID_HEIGHT, grid_count_width, grid_count_height);
+
+	int count = 0;
+
+	for (int i = startY; i <= endY; i++)
+	{
+		for (int j = startX; j <= endX; j++)
+		{
+			mapGrid[i][j].Render();
+		}
+	}
+}
+
+void CGame::RenderPlayer()
+{
+	CPlayer::GetCurrentPlayer()->Render();
+}
+
+void CGame::RenderPortals()
+{
+	for each (pair<int, CPortal*> por_pair in portals)
+	{
+		CPortal* portal = por_pair.second;
+
+		portal->Render();
+	}
+}
+
 void CGame::CleanResources()
 {
 	CGraphic::Instance->End();
 }
+
 
 CGame::~CGame()
 {
@@ -377,6 +586,12 @@ CGame::~CGame()
 void CGame::AddEntity(LPEntity entity, float x, float y)
 {
 	entity->SetPosition(x, y);
+
+	if (entity->GetType() == GOTYPES::Enemy)
+	{
+		int i = 10;
+		i++;
+	}
 
 	entity->SetId(countId);
 	mapEntities[countId] = entity;
@@ -387,10 +602,49 @@ void CGame::AddEntity(LPEntity entity, float x, float y)
 
 void CGame::SetEntity(LPEntity entity)
 {
-	int grid_x = entity->GetPosition().x / GRID_WIDTH;
-	int grid_y = entity->GetPosition().y / GRID_HEIGHT;
+	int grid_x = entity->GetCenter().x / GRID_WIDTH;
+	int grid_y = entity->GetCenter().y / GRID_HEIGHT;
 
 	mapGrid[grid_y][grid_x].AddEntity(entity->GetId());
+
+	//for debug
+	ResetEntityCoCollisionBoxes(entity, grid_x, grid_y);
+}
+
+void CGame::ResetEntityCoCollisionBoxes(
+	LPEntity entity, int grid_x, int grid_y)
+{
+	list<LPCollisionBox> newCoCollisionBoxes;
+	list<CGrid*> selfAndSuroundGrids;
+	selfAndSuroundGrids.push_back(&mapGrid[grid_y][grid_x]);
+	if (grid_x > 0)
+		selfAndSuroundGrids.push_back(&mapGrid[grid_y][grid_x - 1]);
+	if (grid_x < grid_count_width - 1)
+		selfAndSuroundGrids.push_back(&mapGrid[grid_y][grid_x + 1]);
+
+	if (grid_y > 0)
+		selfAndSuroundGrids.push_back(&mapGrid[grid_y - 1][grid_x]);
+	if (grid_y < grid_count_height - 1)
+		selfAndSuroundGrids.push_back(&mapGrid[grid_y + 1][grid_x]);
+
+	if (grid_x > 0 && grid_y > 0)
+		selfAndSuroundGrids.push_back(&mapGrid[grid_y - 1][grid_x - 1]);
+	if (grid_x > 0 && grid_y < grid_count_height - 1)
+		selfAndSuroundGrids.push_back(&mapGrid[grid_y + 1][grid_x - 1]);
+	if (grid_x < grid_count_width - 1 && grid_y < grid_count_height - 1)
+		selfAndSuroundGrids.push_back(&mapGrid[grid_y + 1][grid_x + 1]);
+	if (grid_x < grid_count_width - 1 && grid_y > 0)
+		selfAndSuroundGrids.push_back(&mapGrid[grid_y - 1][grid_x + 1]);
+
+	for each (CGrid * grid in selfAndSuroundGrids)
+	{
+		for each (int id in grid->GetColBoxes())
+			newCoCollisionBoxes.push_back(
+				CCollision::GetInstance()->GetCollisionBox(id)
+			);
+	}
+
+	entity->GetCollisionBox()->ResetCoCollisionBoxes(newCoCollisionBoxes);
 }
 
 LPEntity CGame::GetEntity(int id)

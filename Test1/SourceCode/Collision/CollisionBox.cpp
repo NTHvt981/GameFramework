@@ -22,7 +22,7 @@ void CCollisionBox::RemoveCoBox(LPCollisionBox lpBox)
 {
 	try
 	{
-		collisionBoxes.remove(lpBox);
+		coCollisionBoxes.remove(lpBox);
 	}
 	catch (const std::exception& ex)
 	{
@@ -32,13 +32,13 @@ void CCollisionBox::RemoveCoBox(LPCollisionBox lpBox)
 
 void CCollisionBox::AddCoBox(LPCollisionBox lpBox)
 {
-	collisionBoxes.push_back(lpBox);
+	coCollisionBoxes.push_back(lpBox);
 }
 
 void CCollisionBox::Render()
 {
 	D3DXVECTOR3 position(
-		left, bottom, 0);
+		left, top, 0);
 	D3DXVECTOR3 origin(0, 0, 0);
 
 	LPDIRECT3DTEXTURE9 bbox = CTextureLibrary::GetInstance()->Get(ID_TEX_BBOX);
@@ -87,9 +87,29 @@ int CCollisionBox::GetId()
 	return id;
 }
 
-void CCollisionBox::GetCollision(list<LPGameObject>& objectsCollide)
+void CCollisionBox::GetCollision(list<CollisionEvent>& events)
 {
-	// TODO: i will add this later
+	events.clear();
+	CCollision::GetInstance()->GetCollisionBoxes(id, coCollisionBoxes);
+
+	for each (LPCollisionBox staticBox in coCollisionBoxes)
+	{
+		//get left, top, right, bottom of other collision boxes
+		float staticLeft, staticTop, staticRight, staticBottom;
+		staticLeft = staticBox->GetLeft();
+		staticTop = staticBox->GetTop();
+		staticRight = staticBox->GetRight();
+		staticBottom = staticBox->GetBottom();
+
+		//if false -> garantee no Collision
+		if (CCollision::GetInstance()->AABBCheck(
+			left, top, right, bottom,
+			staticLeft, staticTop, staticRight, staticBottom
+		))
+		{
+			events.push_back({ staticBox->GetOwner(), Vector(0, 0) });
+		}
+	}
 }
 
 void CCollisionBox::SetLTRB(float l, float t, float r, float b)
@@ -98,6 +118,14 @@ void CCollisionBox::SetLTRB(float l, float t, float r, float b)
 	top = t;
 	right = r;
 	bottom = b;
+}
+
+void CCollisionBox::GetLTRB(float &l, float &t, float &r, float &b)
+{
+	l = left;
+	t = top;
+	r = right;
+	b = bottom;
 }
 
 void CCollisionBox::SetSolid(bool _solid)

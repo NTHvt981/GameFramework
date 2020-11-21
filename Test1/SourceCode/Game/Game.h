@@ -11,7 +11,7 @@
 #include "..\GameObject\GameObject.h"
 #include "..\GameObject\DynamicObjects\HorizontalEntity.h"
 #include "..\GameObject\DynamicObjects\VerticalEntity.h"
-#include "..\GameObject\DynamicObjects\Player.h"
+#include "..\Player\Player.h"
 #include "..\GameObject\DynamicObjects\Enemies\Worm.h"
 #include "..\GameObject\DynamicObjects\Enemies\Dome.h"
 #include "..\GameObject\DynamicObjects\Enemies\Jumper.h"
@@ -19,7 +19,6 @@
 #include "..\GameObject\DynamicObjects\Enemies\Walker.h"
 
 #include "..\GameObject\StaticObjects\Wall.h"
-#include "..\GameObject\StaticObjects\Ground.h"
 
 #include "../FileAndString/ReadTileSet.h"
 #include "../FileAndString/StringHelper.h"
@@ -28,6 +27,17 @@
 #include "../TileSystem/TileSet.h"
 
 #include "../GridSystem/Grid.h"
+#include "../AreaAndScene/Area.h"
+#include "../GameObject/StaticObjects/Portal.h"
+
+#define NORMAL_MODE 0
+#define CHANGEAREA_MODE 1
+#define CHANGESCENE_MODE 2
+#define CUTSCENE_MODE 3
+
+#define INTRO_SCENE 0
+#define SIDESCROLL_SCENE 1
+#define TOPDOWN_SCENE 2
 
 using namespace std;
 
@@ -48,16 +58,48 @@ private:
 
 	//this var for debug
 	int countId = 0;
+
+	//this vars for player changing scene
+	int mode = NORMAL_MODE;
+	CArea* currArea = NULL;
+	CArea* destArea = NULL;
+	CPortal* destPortal = NULL;
+	map<int, CArea*> areas;
+	map<int, CPortal*> portals;
+
 private:
 	static CGame* __instance;
 private:
 	void LoadResources();
 	void LoadTextures();
 	void LoadSprites();
-	void LoadAnimations();
 	void LoadLevel();
+	void LoadWalls(
+		vector<vector<int>> matrix,
+		vector<int> solid_tiles,
+		int tile_width);
+	void LoadAreas();
+	void LoadPortals();
+	void LoadEnemies();
+
 	void Update(DWORD dt);
+	void UpdateCamera();
+	void UpdateCollisionBoxes(DWORD dt);
+	void UpdateEnemies(DWORD dt);
+	void UpdatePlayer(DWORD dt);
+	void UpdatePortals(DWORD dt);
+
+	void SetAreaTransition(CPortal* p);
+	void NormalMode(DWORD dt);
+	void TransitionMode(DWORD dt);
+
 	void Render();
+
+	void RenderTiles();
+	void RenderEnemies();
+	void RenderPlayer();
+	void RenderPortals();
+
 	void CleanResources();
 public:
 	static CGame* GetInstance();
@@ -73,11 +115,13 @@ public:
 	void AddEntity(LPEntity entity, float x, float y);
 	//set what grid is entity in
 	void SetEntity(LPEntity entity);
+	void ResetEntityCoCollisionBoxes(LPEntity entity, int grid_x, int grid_y);
 
 	LPEntity GetEntity(int id);
 };
 
-void GetGridXandY(int &startX, int &startY, int& endX, int& endY,
+void GetGridXandY(
+	int &startX, int &startY, int& endX, int& endY,
 	float left, float top, float right, float bottom, 
 	float gridWidth, float gridHeight,
 	int grid_count_width, int grid_count_height);

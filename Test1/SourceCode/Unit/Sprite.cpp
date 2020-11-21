@@ -16,7 +16,14 @@ CSprite::CSprite(int id, int left, int top, int right, int bottom,
 
 void CSprite::Draw(float x, float y, int alpha)
 {
-	CGraphic::Instance->Draw(texture, x, y, left, top, right, bottom, origin.x, origin.y);
+	CGraphic::Instance->Draw(texture, x, y, 
+		left, top, right, bottom, origin.x, origin.y);
+}
+
+void CSprite::DrawWithFixedPosition(float x, float y, int alpha)
+{
+	CGraphic::Instance->DrawWithFixedPosition(texture, x, y,
+		left, top, right, bottom);
 }
 
 void CSprite::Draw(Vector position, int alpha)

@@ -2,26 +2,21 @@
 
 void CDynamicBox::Update()
 {
-	left = entity->GetPosition().x + localPosition.x;
-	bottom = entity->GetPosition().y + localPosition.y;
-	
-	right = left + size.x;
-	top = bottom - size.y;
+	this->Follow(entity->GetPosition().x, entity->GetPosition().y);
 }
 
 void CDynamicBox::Follow(float x, float y)
 {
 	left = x + localPosition.x;
-	bottom = y + localPosition.y;
+	top = y + localPosition.y;
 
 	right = left + size.x;
-	top = bottom - size.y;
+	bottom = top + size.y;
 }
 
 void CDynamicBox::CalculateCollision(Vector& velocity, list<CollisionEvent>& events)
 {
 	events.clear();
-	CCollision::GetInstance()->GetCollisionBoxes(id, collisionBoxes);
 
 	//SweptBroadphaseBox
 	float broadLeft, broadRight, broadTop, broadBottom;
@@ -31,16 +26,13 @@ void CDynamicBox::CalculateCollision(Vector& velocity, list<CollisionEvent>& eve
 		broadLeft, broadTop, broadRight, broadBottom
 	);
 
-	for each (LPCollisionBox staticBox in collisionBoxes)
+	for each (LPCollisionBox staticBox in coCollisionBoxes)
 	{
 		//get left, top, right, bottom of other collision boxes
 		float staticLeft, staticTop, staticRight, staticBottom;
-		staticLeft = staticBox->GetLeft();
-		staticTop = staticBox->GetTop();
-		staticRight = staticBox->GetRight();
-		staticBottom = staticBox->GetBottom();
+		staticBox->GetLTRB(staticLeft, staticTop, staticRight, staticBottom);
 
-		//if false -> no Collision garantee
+		//if false -> there is no collision
 		if (CCollision::GetInstance()->AABBCheck(
 			broadLeft, broadTop, broadRight, broadBottom,
 			staticLeft, staticTop, staticRight, staticBottom
@@ -55,8 +47,10 @@ void CDynamicBox::CalculateCollision(Vector& velocity, list<CollisionEvent>& eve
 				collideTime, normalX, normalY
 			);
 
+			//this doesnt work with player vs enemies
 			//if there is collision
-			if (collideTime < 1.0f && collideTime >= 0.0f && (!(normalX==0 && normalY==0)))
+			if (collideTime < 1.0f && collideTime >= 0.0f && 
+				(!(normalX==0 && normalY==0)))
 			{
 				//asign the game object that contain collision box
 				events.push_back(
@@ -65,9 +59,9 @@ void CDynamicBox::CalculateCollision(Vector& velocity, list<CollisionEvent>& eve
 						Vector(normalX, normalY)
 					});
 
-				// if both this box and collide box are solid
+				// if other box is solid
 				// recalculate the velocity
-				if (solid && staticBox->IsSolid())
+				if (staticBox->IsSolid())
 				{
 					float newX, newY;
 					CCollision::GetInstance()->Slide(
@@ -80,6 +74,23 @@ void CDynamicBox::CalculateCollision(Vector& velocity, list<CollisionEvent>& eve
 					velocity.x = newX - left;
 					velocity.y = newY - top;
 				}
+			}
+			
+			//this is temporary code
+			//not recommend
+			else
+			{
+				if (CCollision::GetInstance()->AABBCheck(
+					left, top, right, bottom,
+					staticLeft, staticTop, staticRight, staticBottom
+				))
+					//asign the game object that contain collision box
+					events.push_back(
+						{
+							staticBox->GetOwner(),
+							Vector(0, 0)
+						});
+
 			}
 		}
 	}
@@ -95,4 +106,35 @@ CDynamicBox::CDynamicBox(LPEntity _entity, float _localX, float _localY, float w
 	size.x = width;
 	size.y = height;
 
+}
+
+void CDynamicBox::ResetCoCollisionBoxes()
+{
+	CCollision::GetInstance()->GetCollisionBoxes(id, coCollisionBoxes);
+}
+
+void CDynamicBox::ResetCoCollisionBoxes(
+	list<LPCollisionBox> newCoCollisionBoxes)
+{
+	for each (LPCollisionBox oldBoxes in coCollisionBoxes) {
+		oldBoxes->RemoveCoBox(this);
+	}
+
+	coCollisionBoxes.clear();
+
+	for each (LPCollisionBox newBox in newCoCollisionBoxes) {
+		if (newBox->GetId() != this->id)
+		{
+			//add self to new box co boxes
+			newBox->AddCoBox(this);
+
+			//add new box to self co collision boxes
+			AddCoBox(newBox);
+		}
+	}
+}
+
+Vector CDynamicBox::GetSize()
+{
+	return this->size;
 }

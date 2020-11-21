@@ -48,6 +48,12 @@
     <Image Include="Resources\Texture\TileMap.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="..\..\..\..\Desktop\Tileset\Area-2 Car map\area2-side-map in my way\TileMap.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="C:\Users\Admin\Desktop\Tileset\Area-2 Car map\area2-side-map in my way\TileMap.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
@@ -113,16 +119,10 @@
     <ClInclude Include="SourceCode\GameObject\StaticObjects\Wall.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SourceCode\GameObject\StaticObjects\Ground.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SourceCode\Collision\DynamicBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SourceCode\GameObject\DynamicObjects\HorizontalEntity.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SourceCode\GameObject\DynamicObjects\Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SourceCode\GameObject\DynamicObjects\VerticalEntity.h">
@@ -162,6 +162,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SourceCode\GridSystem\Grid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\AreaAndScene\Area.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\AreaAndScene\Scene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\GameObject\StaticObjects\Portal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Player\Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Player\PlayerHealth.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -223,16 +238,10 @@
     <ClCompile Include="SourceCode\GameObject\StaticObjects\Wall.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SourceCode\GameObject\StaticObjects\Ground.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SourceCode\Collision\DynamicBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SourceCode\GameObject\DynamicObjects\HorizontalEntity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SourceCode\GameObject\DynamicObjects\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SourceCode\GameObject\DynamicObjects\VerticalEntity.cpp">
@@ -274,6 +283,21 @@
     <ClCompile Include="SourceCode\GridSystem\Grid.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SourceCode\AreaAndScene\Area.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\AreaAndScene\Scene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\GameObject\StaticObjects\Portal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Player\Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Player\PlayerHealth.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Test1.rc">
@@ -285,5 +309,6 @@
     <Text Include="Resources\Textfile\temp_tilemap_info.txt" />
     <Text Include="Resources\Textfile\enemy-position.txt" />
     <Text Include="Resources\Textfile\TileMaTrix.txt" />
+    <Text Include="SourceCode\FileAndString\temp.txt" />
   </ItemGroup>
 </Project>

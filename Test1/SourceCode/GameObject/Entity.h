@@ -25,14 +25,16 @@ protected:
 	float jumpSpeed = 0;
 
 protected:
-	void move(DWORD dt);
+	virtual void move(DWORD dt);
 
 public:
 	CEntity();
-	void SetPosition(float _x, float _y);
-	void SetId(int _id);
-	Vector GetPosition();
 	int GetId();
+	void SetId(int _id);
+
+	virtual void SetPosition(float _x, float _y);
+	virtual Vector GetPosition();
+	virtual Vector GetCenter();
 
 	LPDynamicBox GetCollisionBox();
 

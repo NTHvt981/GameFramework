@@ -21,5 +21,10 @@ public:
 	CDynamicBox(LPEntity _entity, 
 		float _localX=0, float _localY=0, float width=0, float height=0
 	);
+
+	//void Reset
+	void ResetCoCollisionBoxes();
+	void ResetCoCollisionBoxes(list<LPCollisionBox> newCoCollisionBoxes);
+	Vector GetSize();
 };
 

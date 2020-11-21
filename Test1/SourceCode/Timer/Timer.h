@@ -8,27 +8,24 @@ using namespace std;
 class CTimer
 {
 private:
+	//be cautious
+	//current must be add up, not minus down
+	//current time minus dt in update lead to bug
 	DWORD currentTime;
 	DWORD waitTime;
-	bool finish;
-
-	static list<CTimer> timers;
-
+	//bool finish = false;
+	bool pause = false;
 public:
 	CTimer(DWORD waitTime);
 	void Start();
-	void Reset();
+	void Update(DWORD dt);
+	void Pause();
+	void UnPause();
 	bool IsFinish();
+	bool JustFinish();
 
-	DWORD GetCurrentTime();
+	DWORD GetTimeLeft();
 	DWORD GetWaitTime();
 	void SetWaitTime(DWORD t);
-	bool operator ==(CTimer timer);
-private:
-	void Update(DWORD dt);
-	void Attach();
-	void Detach();
-public:
-	static void UpdateAll(DWORD dt);
 };
 

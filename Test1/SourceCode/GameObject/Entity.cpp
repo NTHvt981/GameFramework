@@ -9,6 +9,10 @@ void CEntity::SetPosition(float _x, float _y)
 {
 	position.x = _x;
 	position.y = _y;
+
+	//when we change position of entity, 
+	//we should update the collision box
+	collisionBox->Update();
 }
 
 void CEntity::SetId(int _id)
@@ -21,6 +25,17 @@ Vector CEntity::GetPosition()
 	return position;
 }
 
+Vector CEntity::GetCenter()
+{
+	float l, t, r, b;
+	collisionBox->GetLTRB(l, t, r, b);
+
+	return Vector(
+		(r + l) / 2,
+		(b + t) / 2
+	);
+}
+
 int CEntity::GetId()
 {
 	return id;
@@ -29,11 +44,12 @@ int CEntity::GetId()
 
 void CEntity::move(DWORD dt)
 {
-	velocity.y -= gravity;
+	velocity.y += gravity;
 
 	Vector vel_x(velocity.x, 0);
 	Vector vel_y(0, velocity.y);
 
+	//collisionBox->ResetCoCollisionBoxes();
 	if (collisionBox != NULL)
 	{
 		collisionBox->CalculateCollision(vel_x, collideEvents);
@@ -45,7 +61,12 @@ void CEntity::move(DWORD dt)
 		position.y = position.y + vel_y.y;
 		velocity.y = vel_y.y;
 		collisionBox->Update();
+
+		//collisionBox->CalculateCollision(velocity, collideEvents);
+		//position = position + velocity;
+		//collisionBox->Update();
 	}
+
 }
 
 LPDynamicBox CEntity::GetCollisionBox()

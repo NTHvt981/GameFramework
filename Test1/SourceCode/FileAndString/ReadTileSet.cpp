@@ -1,89 +1,5 @@
 #include "ReadTileSet.h"
 
-void GetInfo(
-    int& tile_size_x, int& tile_size_y,
-    int& tileset_size_x, int& tileset_size_y,
-    int& padding, int& margin, vector<vector<int>> &matrix,
-    string& tileDir, string fileDir)
-{
-    vector<string> lines = GetData(fileDir);
-    int map_detail_index = 0;
-
-    for (int i = 0; i < lines.size(); i++)
-    {
-        string line = lines[i];
-        
-        if (Contain(line, "TILEMAP"))
-        {
-            map_detail_index = i+1;
-            break;
-        }
-        if (Contain(line, "//")) continue;
-        if (Trim(line) == "") continue;
-
-        vector<string> segments = SplitString(line, " ");
-        if (segments[0] == "source")
-        {
-            tileDir = segments[1].c_str();
-        }
-        else if (segments[0] == "tile_padding")
-        {
-            padding = atoi(segments[1].c_str());
-        }
-        else if (segments[0] == "tile_margin")
-        {
-            margin = atoi(segments[1].c_str());
-        }
-        else if (segments[0] == "tile_size")
-        {
-            tile_size_x = atoi(segments[1].c_str());
-            tile_size_y = atoi(segments[2].c_str());
-        }
-        else if (segments[0] == "tileset_size")
-        {
-            tileset_size_x = atoi(segments[1].c_str());
-            tileset_size_y = atoi(segments[2].c_str());
-        }
-    }
-
-    for (int i = map_detail_index; i < lines.size(); i++)
-    {
-        string line = lines[i];
-        //matrix.insert(0, vector<int>());
-        matrix.insert(matrix.begin(), vector<int>());
-
-        vector<string> segments = SplitString(line, ",");
-        for (int j = 0; j < segments.size(); j++)
-        {
-            matrix.front().push_back(atoi(segments[j].c_str()));
-        }
-    }
-}
-
-void GetMap(
-    int tile_size_x, int tile_size_y,
-    int tileset_size_x, int tileset_size_y,
-    int padding, int margin, map<int, Box<int>>& result)
-{
-    result.clear();
-
-    for (int iY = 0; iY < tileset_size_y; iY++)
-    {
-        for (int iX = 0; iX < tileset_size_x; iX++)
-        {
-            int tile_index = tileset_size_y * iY + iX + 1;
-            Box<int> box;
-
-            box.left = iX * tile_size_x + iX * padding;
-            box.top = iY * tile_size_y + iY * padding;
-            box.right = box.left + tile_size_x;
-            box.bottom = box.top + tile_size_y;
-
-            result[tile_index] = box;
-        }
-    }
-}
-
 void GetInfo(int& tile_count, 
     int& tile_width, int& tile_height, 
     int& tile_count_width, int& tile_count_height,
@@ -114,12 +30,12 @@ void GetInfo(int& tile_count,
     {
         string line = lines[i];
         //matrix.insert(0, vector<int>());
-        matrix.insert(matrix.begin(), vector<int>());
+        matrix.insert(matrix.end(), vector<int>());
 
         vector<string> segments = SplitString(line, " ");
         for (int j = 0; j < segments.size(); j++)
         {
-            matrix.front().push_back(atoi(segments[j].c_str()));
+            matrix[i-14.0].push_back(atoi(segments[j].c_str()));
         }
     }
 }
@@ -149,24 +65,112 @@ void SetWallPosition(
     vector<int> solid_tiles,
     int tile_size)
 {
-    for (int iY = 0; iY < matrix.size(); iY++)
+    //for (int iY = 0; iY < matrix.size(); iY++)
+    //{
+    //    for (int iX = 0; iX < matrix[iY].size(); iX++)
+    //    {
+    //        if (count(solid_tiles.begin(), solid_tiles.end(), 
+    //            matrix[iY][iX]) > 0)
+    //        {
+    //            Box<float> box;
+
+    //            box.left = iX * tile_size;
+    //            box.right = (iX + 1) * tile_size;
+
+    //            box.top = (iY) * tile_size;
+    //            box.bottom = (iY + 1) * tile_size;
+
+    //            pos_list.push_back(box);
+    //        }
+    //    }
+    //}
+
+    //reduce number of walls a little bit
+    for (int iY = 0; iY < matrix.size(); iY += 2)
     {
-        for (int iX = 0; iX < matrix[iY].size(); iX++)
+        for (int iX = 0; iX < matrix[iY].size(); iX += 2)
         {
-            if (count(solid_tiles.begin(), solid_tiles.end(), matrix[iY][iX]) > 0)
+            vector<int>::iterator begin = solid_tiles.begin();
+            vector<int>::iterator end = solid_tiles.end();
+
+            //int iL, iT, iR, iB;
+            //iL = iX;
+            //iT = iY;
+            //iR = iX + 1;
+            //iB = iY + 1;
+
+            // matrix[y][x]
+            if (count(begin, end, matrix[iY][iX]) > 0 && count(begin, end, matrix[iY][iX+1]) > 0)
             {
-                Box<float> box;
-
-                box.left = iX * tile_size;
-                box.right = (iX + 1) * tile_size;
-
-                box.top = (iY - 1) * tile_size;
-                box.bottom = (iY) * tile_size;
-
-                pos_list.push_back(box);
+                if (count(begin, end, matrix[iY+1][iX]) > 0 && count(begin, end, matrix[iY+1][iX+1]) > 0)
+                    pos_list.push_back(MakeBox(iX, iY, iX+1, iY+1, tile_size));
+                else
+                {
+                    pos_list.push_back(MakeBox(iX, iY, iX+1, iY, tile_size));
+                    
+                if (count(begin, end, matrix[iY + 1][iX]) > 0)
+                    pos_list.push_back(MakeBox(iX, iY + 1, iX, iY + 1, tile_size));
+                if (count(begin, end, matrix[iY + 1][iX + 1]) > 0)
+                    pos_list.push_back(MakeBox(iX + 1, iY + 1, iX + 1, iY + 1, tile_size));
+                }
             }
+
+            else if (count(begin, end, matrix[iY + 1][iX]) > 0 && count(begin, end, matrix[iY + 1][iX + 1]) > 0)
+            {
+                pos_list.push_back(MakeBox(iX, iY + 1, iX + 1, iY + 1, tile_size));
+            }
+
+            else
+            {
+                if (count(begin, end, matrix[iY][iX + 1]) > 0 && count(begin, end, matrix[iY + 1][iX + 1]) > 0) 
+                {
+                    pos_list.push_back(MakeBox(iX + 1, iY, iX + 1, iY + 1, tile_size));
+
+                    if (count(begin, end, matrix[iY][iX]) > 0)
+                        pos_list.push_back(MakeBox(iX, iY, iX, iY, tile_size));
+                    if (count(begin, end, matrix[iY + 1][iX]) > 0)
+                        pos_list.push_back(MakeBox(iX, iY + 1, iX, iY + 1, tile_size));
+                }
+
+                if (count(begin, end, matrix[iY][iX]) > 0 && count(begin, end, matrix[iY + 1][iX]) > 0)
+                    pos_list.push_back(MakeBox(iX, iY, iX, iY + 1, tile_size));
+                else
+                {
+                    if (count(begin, end, matrix[iY][iX]) > 0)
+                        pos_list.push_back(MakeBox(iX, iY, iX, iY, tile_size));
+                    if (count(begin, end, matrix[iY + 1][iX]) > 0)
+                        pos_list.push_back(MakeBox(iX, iY + 1, iX, iY + 1, tile_size));
+                }
+            }
+                
+
+            //continue == skip
+            //if (iL == -1 || iT == -1) continue;
+
+            //Box<float> box;
+
+            //box.left = iL * tile_size;
+            //box.right = (iR + 1) * tile_size;
+
+            //box.top = (iT)*tile_size;
+            //box.bottom = (iB + 1) * tile_size;
+
+            //pos_list.push_back(box);
         }
     }
+}
+
+Box<float> MakeBox(int iL, int iT, int iR, int iB, float tile_size)
+{
+    Box<float> box;
+
+    box.left = iL * tile_size;
+    box.right = (iR + 1) * tile_size;
+
+    box.top = (iT)*tile_size;
+    box.bottom = (iB + 1) * tile_size;
+
+    return box;
 }
 
 vector<string> GetData(string fileDir)

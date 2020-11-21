@@ -20,6 +20,7 @@ public:
 	, float origin_x = 0, float origin_y = 0);
 
 	void Draw(float x, float y, int alpha = 255);
+	void DrawWithFixedPosition(float x, float y, int alpha = 255);
 	void Draw(Vector position, int alpha = 255);
 
 	int GetId();

@@ -34,14 +34,16 @@
 #define WINDOW_HEIGHT 480
 
 //width and height of the whole level
-#define GAME_WIDTH 2048
-#define GAME_HEIGHT 2048
+//#define GAME_WIDTH 2048
+//#define GAME_HEIGHT 2048
+#define GAME_WIDTH 3072
+#define GAME_HEIGHT 3072
 
-#define GRID_WIDTH 128
-#define GRID_HEIGHT 128
+#define GRID_WIDTH 64
+#define GRID_HEIGHT 64
 
 //#define MAX_FRAME_RATE 120
-#define MAX_FRAME_RATE 60
+#define MAX_FRAME_RATE 90
 
 #define TEX_BRICK_PATH L"./Resources/Texture/brick.png"
 #define STEEL_ROBOT_TEXTURE_PATH L"./Resources/Texture/steel robot.png"
@@ -73,6 +75,9 @@
 #define ID_CAR_HEAD_UPRIGHT 1008
 
 #define ID_CAR_BODY 1009
+#define ID_CAR_BODY_UPRIGHT 1019
+#define ID_CAR_BODY_UPLEFT 1020
+
 #define ID_CAR_WHEEL_1 1010
 #define ID_CAR_WHEEL_2 1011
 #define ID_CAR_WHEEL_3 1012

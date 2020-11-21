@@ -78,6 +78,18 @@ void CGame::LoadSprites()
 	lib->Add(ID_CAR_WHEEL_7, 56, 2, 63, 10, textCar);
 	lib->Add(ID_CAR_WHEEL_8, 65, 2, 72, 10, textCar);
 
+
+	lib->Add(ID_CAR_GUN_LEFT_WHITE, 83, 36, 83+7, 36+4, textCar);
+	lib->Add(ID_CAR_GUN_RIGHT_WHITE, 84, 45, 84+7, 45+4, textCar);
+	lib->Add(ID_CAR_GUN_UPLEFT_WHITE, 92, 34, 92+8, 34+8, textCar);
+	lib->Add(ID_CAR_GUN_UPRIGHT_WHITE, 92, 43, 92+8, 43+8, textCar);
+	lib->Add(ID_CAR_GUN_UP_WHITE, 103, 34, 103+4, 34+7, textCar);
+
+	lib->Add(ID_CAR_HEAD_LEFT_WHITE, 74, 53, 74+16, 53+8, textCar);
+	lib->Add(ID_CAR_HEAD_RIGHT_WHITE, 74, 62, 74+16, 62+8, textCar);
+	lib->Add(ID_CAR_HEAD_UPLEFT_WHITE, 128, 54, 128+16, 54+15, textCar);
+	lib->Add(ID_CAR_HEAD_UPRIGHT_WHITE, 110, 54, 110+16, 54+15, textCar);
+
 	// ENEMIES
 	// WORM
 	lib->Add(ID_WORM_MOVE_LEFT_1, 46, 412, 64, 422, textEnemies);

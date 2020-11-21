@@ -97,6 +97,11 @@ void CPlayerHealth::SetPlayerMode(int _mode)
     playerMode = _mode;
 }
 
+int CPlayerHealth::GetHealthState()
+{
+    return healthState;
+}
+
 bool CPlayerHealth::IsGameOver()
 {
     return gameOver;

@@ -60,14 +60,18 @@ void CPlayer::Update(DWORD dt)
 		input->IsKeyDown(DIK_A)
 		);
 
-	if (input->IsKeyDown(DIK_J))
-		healthSystem->ReduceHealth(GOTYPES::Sophia);
-
 	if (onGround)
 		if (input->IsKeyDown(DIK_K))
 		{
 			velocity.y = -jumpSpeed;
 		}
+
+	/// <summary>
+	/// For debugs
+	/// </summary>
+	/// <param name="dt"></param>
+	if (input->IsKeyDown(DIK_J))
+		healthSystem->ReduceHealth(GOTYPES::Sophia);
 
 	SetState();
 	GetState();
@@ -80,15 +84,18 @@ void CPlayer::Update(DWORD dt)
 	else if (velocity.y == 0 && old_velocity.y > 0)
 		onGround = true;
 
-	float l, t, r, b;
-	collisionBox->GetLTRB(l, t, r, b);
-	center = Vector(
-		(r + l) / 2,
-		(b + t) / 2
-	);
+	//float l, t, r, b;
+	//collisionBox->GetLTRB(l, t, r, b);
+	//center = Vector(
+	//	(r + l) / 2,
+	//	(b + t) / 2
+	//);
 
 	if (IsCollidedWith(GOTYPES::Enemy))
 		healthSystem->ReduceHealth(GOTYPES::Sophia);
+
+	if (healthSystem->GetHealthState() == INVULNERABLE)
+		SetHealthAnimation(dt);
 }
 
 void CPlayer::Render()
@@ -115,15 +122,6 @@ CPlayer* CPlayer::GetCurrentPlayer()
 void CPlayer::SetCurrentPlayer(CPlayer* player)
 {
 	currentPlayer = player;
-}
-
-void CPlayer::move(DWORD dt)
-{
-	//debug comment
-	CEntity::move(dt);
-#pragma region debug code
-
-#pragma endregion
 }
 
 void CPlayer::SetState()
@@ -230,4 +228,48 @@ void CPlayer::GetState()
 	default:
 		break;
 	}
+}
+
+void CPlayer::move(DWORD dt)
+{
+	//debug comment
+	CEntity::move(dt);
+#pragma region debug code
+
+#pragma endregion
+}
+
+void CPlayer::SetHealthAnimation(DWORD dt)
+{
+	CSpriteLibrary* lib = CSpriteLibrary::GetInstance();
+
+	//Get id of canon and head
+	int canonSpriteId = canonSprite->GetId();
+	int headSpriteId = headSprite->GetId();
+
+	healthAniCountTime += dt;
+	if (healthAniCountTime >= healthAniWaitTime)
+	{
+		healthAniCountTime = 0;
+
+		if (healthAniWhiteFlip)
+		{
+			DebugOut(L"[INFO] flip white TRUE\n");
+			healthAniWhiteFlip = false;
+		}
+		else
+		{
+			DebugOut(L"[INFO] flip white FALSE\n");
+			healthAniWhiteFlip = true;
+		}
+	}
+
+	if (healthAniWhiteFlip)
+	{
+		canonSprite = lib->Get(canonSpriteId + 100);
+		headSprite = lib->Get(headSpriteId + 100);
+	}
+
+	//canonSprite = lib->Get(ID_CAR_GUN_UP);
+	//headSprite = lib->Get(ID_CAR_HEAD_UPRIGHT);
 }

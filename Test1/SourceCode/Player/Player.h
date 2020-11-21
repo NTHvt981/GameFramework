@@ -25,6 +25,14 @@ private:
 	float speed = 1.5;
 	CCamera* camera;
 
+	/// <summary>
+	/// these vars for being damaged animation
+	/// </summary>
+	bool healthAniWhiteFlip = false;
+	DWORD healthAniWaitTime = 10;
+	DWORD healthAniCountTime = 0;
+	int addUpSpriteId;
+
 	Vector old_velocity;
 
 	Vector* headPivot;
@@ -68,7 +76,7 @@ private:
 	Vector upRightHeadPivot = Vector(0, 6);
 	Vector upLeftHeadPivot	= Vector(15, 6);
 
-	Vector center = Vector(0, 0);
+	//Vector center = Vector(0, 0);
 
 	LPAnimation leftWheelAni;
 	LPAnimation rightWheelAni;
@@ -108,5 +116,6 @@ public:
 protected:
 	//this function is only called for debug
 	void move(DWORD dt);
+	void SetHealthAnimation(DWORD dt);
 };
 

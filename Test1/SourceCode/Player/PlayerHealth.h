@@ -56,6 +56,7 @@ public:
 	void IncreaseHealth(GOTYPES type, int heal_points = 1);
 
 	void SetPlayerMode(int _mode);
+	int GetHealthState();
 
 	bool IsGameOver();
 

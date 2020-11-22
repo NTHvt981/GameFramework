@@ -1,7 +1,6 @@
 #pragma once
 #include "../Constraints.h"
 #include <list>
-#include <vector>
 #include "../Game/Game.h"
 
 using namespace std;
@@ -19,6 +18,10 @@ private:
 	float top;
 	float right;
 	float bottom;
+
+	int count = 0;
+
+	list<int> removeList = list<int>();
 	
 public:
 	void RemoveEntity(int id);

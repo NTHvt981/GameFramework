@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../../Entity.h"
-#include "../../Physic.h"
-#include "../../../Constraints.h"
-#include "../../../Unit/Animation.h"
+#include "../Entity.h"
+#include "../Physic.h"
+#include "../../Constraints.h"
+#include "../../Unit/Animation.h"
 
 #define WALKER_MOVE_UP -1
 #define WALKER_DONT_MOVE 0

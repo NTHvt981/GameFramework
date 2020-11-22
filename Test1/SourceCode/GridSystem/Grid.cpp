@@ -6,14 +6,21 @@ void CGrid::RemoveEntity(int id)
 
 	LPEntity e = CGame::GetInstance()->GetEntity(id);
 	int coId = e->GetCollisionBox()->GetId();
+
 	colBoxesId.remove(coId);
+
+	//entitiesId.resize(count);
+	//colBoxesId.resize(count);
 }
 
 void CGrid::AddEntity(int id)
 {
 	entitiesId.push_back(id);
 	LPEntity e = CGame::GetInstance()->GetEntity(id);
+
 	colBoxesId.push_back(e->GetCollisionBox()->GetId());
+
+	count++;
 }
 
 list<int> CGrid::GetColBoxes()
@@ -29,36 +36,38 @@ void CGrid::SetLTRB(float l, float t, float r, float b)
 	bottom = b;
 }
 
-void CGrid::Update(DWORD dt, int &count)
+void CGrid::Update(DWORD dt, int &_count)
 {
 	//safe approach, ensure that if grid contain no entity -> exit func
 	if (entitiesId.size() == 0) return;
 
 	//do not remove entity while in the update loop, 
 	//store remove ones in removeList
-	list<int> removeList = list<int>();
+	//list<int> removeList = list<int>();
 
 	CGame* game = CGame::GetInstance();
 	list<int>::iterator it = entitiesId.begin();
-	while (it != entitiesId.end())
+
+	for each (int id in entitiesId)
 	{
 		//get the entity base on its id
-		LPEntity e = game->GetEntity(*it);
+		LPEntity e = game->GetEntity(id);
+		if (e == NULL) continue;
 		//update the entity
 		e->Update(dt);
 
 		//this is for debug
-		count++;
+		_count++;
 
 		//check if entity is in grid boundary
 		float x = e->GetCenter().x;
 		float y = e->GetCenter().y;
+
 		if (!((x >= left && x < right) && (y >= top && y < bottom)))
 		{
 			//add entity to remove list
-			removeList.push_back(*it);
+			removeList.push_back(id);
 		}
-		++it;
 	}
 
 	//remove all entities in remove list
@@ -66,9 +75,13 @@ void CGrid::Update(DWORD dt, int &count)
 	{
 		LPEntity e = game->GetEntity(removeList.front());
 		//set the grid that entity is in
-		game->SetEntity(e);
+		//game->SetEntity(e);
 
-		this->RemoveEntity(e->GetId());
+		LPRequest request = new CGameRequest(REQUEST_TYPES::SetEnetity);
+		request->entity = e;
+		game->AddRequest(request);
+
+		//this->RemoveEntity(e->GetId());
 		removeList.pop_front();
 	}
 }

@@ -12,9 +12,13 @@ CPlayerHealth* CPlayerHealth::GetInstance()
 
 CPlayerHealth::CPlayerHealth()
 {
-    invulnerableTimer = new CTimer(200);
+    invulnerableTimer = new CTimer(100);
     sophiaHealth = sophiaMaxHealth;
     jasonHealth = jasonMaxHealth;
+
+    sprSophiaHealthBar = CSpriteLibrary::GetInstance()->Get(ID_SOPHIA_HEALTH_BAR);
+    sprTextHov = CSpriteLibrary::GetInstance()->Get(ID_TEXT_HOV);
+    sprTextPow = CSpriteLibrary::GetInstance()->Get(ID_TEXT_POW);
 }
 
 void CPlayerHealth::turnOnInvulnerability()
@@ -115,4 +119,31 @@ void CPlayerHealth::Update(DWORD dt)
 
 void CPlayerHealth::Render()
 {
+    sprTextPow->DrawWithFixedPosition(textPowPivot.x, textPowPivot.y);
+    sprTextHov->DrawWithFixedPosition(textHovPivot.x, textHovPivot.y);
+
+    int count = 0;
+    int healthBarHeight, healthBarWidth;
+    LPSprite healthBarToDraw = sprSophiaHealthBar;
+
+    if (playerMode == SOPHIA)
+    {
+        count = sophiaHealth;
+        healthBarToDraw = sprSophiaHealthBar;
+    }
+    else
+    {
+        count = jasonHealth;
+        healthBarToDraw = sprJasonHealthBar;
+    }
+
+    healthBarToDraw->GetSize(healthBarWidth, healthBarHeight);
+
+    for (int i = 0; i < count; i++)
+    {
+        healthBarToDraw->DrawWithFixedPosition(
+            textHealthBarPivot.x,
+            textHealthBarPivot.y - i * ( healthBarHeight + 2 )
+        );
+    }
 }

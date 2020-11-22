@@ -1,9 +1,12 @@
 #pragma once
 
-#include "../../Entity.h"
-#include "../../Physic.h"
-#include "../../../Constraints.h"
-#include "../../../Unit/Animation.h"
+//#include "Enemy.h"
+#include "../Entity.h"
+#include "../../Constraints.h"
+#include "../../Unit/Animation.h"
+
+#include "../../Game/Game.h"
+#include "../../Game/GameRequest.h"
 
 #define WORM_MOVE_LEFT -1
 #define WORM_DONT_MOVE 0

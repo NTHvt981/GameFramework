@@ -31,11 +31,14 @@ private:
 	//these vars for rendering
 	Vector drawPosition = Vector(0, 0);
 
+	LPSprite sprTextHov;
+	LPSprite sprTextPow;
 	LPSprite sprSophiaHealthBar;
-	LPSprite sprSophiaHealthUnit;
-
 	LPSprite sprJasonHealthBar;
-	LPSprite sprJasonHealthUnit;
+
+	Vector textHovPivot = Vector(25, 225);
+	Vector textHealthBarPivot = Vector(25, 350);
+	Vector textPowPivot = Vector(25, 375);
 
 private:
 	void turnOnInvulnerability();

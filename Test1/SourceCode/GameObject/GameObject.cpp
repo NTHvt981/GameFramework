@@ -1,6 +1,10 @@
 #include "GameObject.h"
 
 
+CGameObject::CGameObject()
+{
+}
+
 void CGameObject::Disable()
 {
     enable = false;

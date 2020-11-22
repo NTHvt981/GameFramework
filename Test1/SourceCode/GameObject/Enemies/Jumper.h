@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../../Entity.h"
-#include "../../Physic.h"
-#include "../../../Constraints.h"
-#include "../../../Unit/Animation.h"
+#include "../Entity.h"
+#include "../Physic.h"
+#include "../../Constraints.h"
+#include "../../Unit/Animation.h"
 
 #define JUMPER_MOVE_LEFT -1
 #define JUMPER_DONT_MOVE 0

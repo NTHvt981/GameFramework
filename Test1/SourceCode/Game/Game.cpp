@@ -41,54 +41,68 @@ void CGame::LoadResources()
 void CGame::LoadTextures()
 {
 	//CTextureLibrary::GetInstance()->Add(CAR_TEXTURE, L"Resources/Texture/My car spritesheet.png");
-	CTextureLibrary::GetInstance()->Add(CAR_TEXTURE, TEX_CAR_SPRIRESHEET_TRANSPARENT);
+	CTextureLibrary::GetInstance()->Add(PLAYER_TEXTURE, PLAYER_TEXTURE_PATH);
 	CTextureLibrary::GetInstance()->Add(ENEMIES_TEXTURE, ENEMIES_TEXTURE_PATH);
+	CTextureLibrary::GetInstance()->Add(PLAYER_HEALTH_TEXTURE, PLAYER_HEALTH_TEXTURE_PATH);
 	CTextureLibrary::GetInstance()
 		->Add(ID_TEX_BBOX, TEX_BBOX_PATH);
 }
 
 void CGame::LoadSprites()
 {
-	LPDIRECT3DTEXTURE9 textCar = CTextureLibrary::GetInstance()->Get(CAR_TEXTURE);
+	LPDIRECT3DTEXTURE9 textPlayer = CTextureLibrary::GetInstance()->Get(PLAYER_TEXTURE);
 	LPDIRECT3DTEXTURE9 textEnemies = CTextureLibrary::GetInstance()->Get(ENEMIES_TEXTURE);
+	LPDIRECT3DTEXTURE9 textPlayerHealth = CTextureLibrary::GetInstance()->Get(PLAYER_HEALTH_TEXTURE);
 	CSpriteLibrary* lib = CSpriteLibrary::GetInstance();
 
 	// CAR
-	lib->Add(ID_CAR_GUN_LEFT, 11, 4, 18, 8, textCar);
-	lib->Add(ID_CAR_GUN_RIGHT, 12, 13, 19, 17, textCar);
-	lib->Add(ID_CAR_GUN_UPLEFT, 20, 2, 28, 10, textCar);
-	lib->Add(ID_CAR_GUN_UPRIGHT, 20, 11, 28, 19, textCar);
-	lib->Add(ID_CAR_GUN_UP, 31, 2, 35, 9, textCar);
+	lib->Add(ID_CAR_GUN_LEFT, 11, 4, 18, 8, textPlayer);
+	lib->Add(ID_CAR_GUN_RIGHT, 12, 13, 19, 17, textPlayer);
+	lib->Add(ID_CAR_GUN_UPLEFT, 20, 2, 28, 10, textPlayer);
+	lib->Add(ID_CAR_GUN_UPRIGHT, 20, 11, 28, 19, textPlayer);
+	lib->Add(ID_CAR_GUN_UP, 31, 2, 35, 9, textPlayer);
 
-	lib->Add(ID_CAR_HEAD_LEFT, 2,	20,	18,	28, textCar);
-	lib->Add(ID_CAR_HEAD_RIGHT, 2,	29,	18,	37, textCar);
-	lib->Add(ID_CAR_HEAD_UPLEFT, 56,	21,	56+16,	36, textCar);
-	lib->Add(ID_CAR_HEAD_UPRIGHT, 38,	21,	38+16,	35, textCar);
+	lib->Add(ID_CAR_HEAD_LEFT, 2,	20,	18,	28, textPlayer);
+	lib->Add(ID_CAR_HEAD_RIGHT, 2,	29,	18,	37, textPlayer);
+	lib->Add(ID_CAR_HEAD_UPLEFT, 56,	21,	56+16,	36, textPlayer);
+	lib->Add(ID_CAR_HEAD_UPRIGHT, 38,	21,	38+16,	35, textPlayer);
 
-	lib->Add(ID_CAR_BODY, 109,	2,	115,	9, textCar);
-	lib->Add(ID_CAR_BODY_UPRIGHT, 135, 2, 143, 10, textCar);
-	lib->Add(ID_CAR_BODY_UPLEFT, 126, 2, 134, 10, textCar);
+	lib->Add(ID_CAR_BODY, 109,	2,	115,	9, textPlayer);
+	lib->Add(ID_CAR_BODY_UPRIGHT, 135, 2, 143, 10, textPlayer);
+	lib->Add(ID_CAR_BODY_UPLEFT, 126, 2, 134, 10, textPlayer);
 
-	lib->Add(ID_CAR_WHEEL_1, 38, 11, 45, 19, textCar);
-	lib->Add(ID_CAR_WHEEL_2, 47, 11, 54, 19, textCar);
-	lib->Add(ID_CAR_WHEEL_3, 56, 11, 63, 19, textCar);
-	lib->Add(ID_CAR_WHEEL_4, 65, 11, 72, 19, textCar);
-	lib->Add(ID_CAR_WHEEL_5, 38, 2, 45, 10, textCar);
-	lib->Add(ID_CAR_WHEEL_6, 47, 2, 54, 10, textCar);
-	lib->Add(ID_CAR_WHEEL_7, 56, 2, 63, 10, textCar);
-	lib->Add(ID_CAR_WHEEL_8, 65, 2, 72, 10, textCar);
+	lib->Add(ID_CAR_WHEEL_1, 38, 11, 45, 19, textPlayer);
+	lib->Add(ID_CAR_WHEEL_2, 47, 11, 54, 19, textPlayer);
+	lib->Add(ID_CAR_WHEEL_3, 56, 11, 63, 19, textPlayer);
+	lib->Add(ID_CAR_WHEEL_4, 65, 11, 72, 19, textPlayer);
+	lib->Add(ID_CAR_WHEEL_5, 38, 2, 45, 10, textPlayer);
+	lib->Add(ID_CAR_WHEEL_6, 47, 2, 54, 10, textPlayer);
+	lib->Add(ID_CAR_WHEEL_7, 56, 2, 63, 10, textPlayer);
+	lib->Add(ID_CAR_WHEEL_8, 65, 2, 72, 10, textPlayer);
 
 
-	lib->Add(ID_CAR_GUN_LEFT_WHITE, 83, 36, 83+7, 36+4, textCar);
-	lib->Add(ID_CAR_GUN_RIGHT_WHITE, 84, 45, 84+7, 45+4, textCar);
-	lib->Add(ID_CAR_GUN_UPLEFT_WHITE, 92, 34, 92+8, 34+8, textCar);
-	lib->Add(ID_CAR_GUN_UPRIGHT_WHITE, 92, 43, 92+8, 43+8, textCar);
-	lib->Add(ID_CAR_GUN_UP_WHITE, 103, 34, 103+4, 34+7, textCar);
+	lib->Add(ID_CAR_GUN_LEFT_WHITE, 83, 36, 83+7, 36+4, textPlayer);
+	lib->Add(ID_CAR_GUN_RIGHT_WHITE, 84, 45, 84+7, 45+4, textPlayer);
+	lib->Add(ID_CAR_GUN_UPLEFT_WHITE, 92, 34, 92+8, 34+8, textPlayer);
+	lib->Add(ID_CAR_GUN_UPRIGHT_WHITE, 92, 43, 92+8, 43+8, textPlayer);
+	lib->Add(ID_CAR_GUN_UP_WHITE, 103, 34, 103+4, 34+7, textPlayer);
 
-	lib->Add(ID_CAR_HEAD_LEFT_WHITE, 74, 53, 74+16, 53+8, textCar);
-	lib->Add(ID_CAR_HEAD_RIGHT_WHITE, 74, 62, 74+16, 62+8, textCar);
-	lib->Add(ID_CAR_HEAD_UPLEFT_WHITE, 128, 54, 128+16, 54+15, textCar);
-	lib->Add(ID_CAR_HEAD_UPRIGHT_WHITE, 110, 54, 110+16, 54+15, textCar);
+	lib->Add(ID_CAR_HEAD_LEFT_WHITE, 74, 53, 74+16, 53+8, textPlayer);
+	lib->Add(ID_CAR_HEAD_RIGHT_WHITE, 74, 62, 74+16, 62+8, textPlayer);
+	lib->Add(ID_CAR_HEAD_UPLEFT_WHITE, 128, 54, 128+16, 54+15, textPlayer);
+	lib->Add(ID_CAR_HEAD_UPRIGHT_WHITE, 110, 54, 110+16, 54+15, textPlayer);
+
+	lib->Add(ID_CAR_BULLET_LEFT, 74, 3, 74 + 24, 3 + 6, textPlayer);
+	lib->Add(ID_CAR_BULLET_RIGHT, 74, 12, 74 + 24, 12 + 6, textPlayer);
+	lib->Add(ID_CAR_BULLET_UP, 100, 2, 100 + 6, 2 + 24, textPlayer);
+
+	lib->Add(ID_TEXT_HOV, 0, 0, 11, 35, textPlayerHealth);
+	lib->Add(ID_TEXT_POW, 0, 58, 11, 93, textPlayerHealth);
+	lib->Add(ID_SOPHIA_HEALTH_BAR, 0, 43, 11, 48, textPlayerHealth);
+
+	//lib->Add(ID_TEXT_HOV, 0, 0, 11 * 2, 35 * 2, textPlayerHealth);
+	//lib->Add(ID_TEXT_POW, 0, 58 * 2, 11 * 2, 93 * 2, textPlayerHealth);
+	//lib->Add(ID_SOPHIA_HEALTH_BAR, 0, 43 * 2, 11 * 2, 48 * 2, textPlayerHealth);
 
 	// ENEMIES
 	// WORM
@@ -154,13 +168,16 @@ void CGame::LoadLevel()
 
 	int tile_count, tile_width, tile_height, tile_count_width, tile_count_height;
 	vector<int> solid_tiles;
+	vector<int> anti_player_tiles;
 	vector<vector<int>> matrix;
 	string tileDir, fileDir;
 
 	fileDir = "Resources/Textfile/TileMaTrix.txt";
 
 	GetInfo(tile_count, tile_width, tile_height,
-		tile_count_width, tile_count_height, solid_tiles, matrix, tileDir, fileDir);
+		tile_count_width, tile_count_height, 
+		solid_tiles, anti_player_tiles,
+		matrix, tileDir, fileDir);
 
 	map<int, Box<int>> tileMap;
 	GetMap(tile_width, tile_height, tile_count, tileMap);
@@ -175,6 +192,7 @@ void CGame::LoadLevel()
 	CTileMap::GetInstance()->SetMatrix(matrix);
 
 	LoadWalls(matrix, solid_tiles, tile_width);
+	LoadAntiPlayerZones(matrix, anti_player_tiles, tile_width);
 }
 
 inline void CGame::LoadWalls(
@@ -193,6 +211,20 @@ inline void CGame::LoadWalls(
 	}
 
 	AddEntity(new CWall(0, 89 * 32, 32, 96 * 32), 0, 91 * 32);
+}
+
+void CGame::LoadAntiPlayerZones(
+	vector<vector<int>> matrix, vector<int> anti_player_tiles, int tile_width)
+{
+	vector<Box<float>> solid_boxes;
+	SetWallPosition(solid_boxes, matrix, anti_player_tiles, tile_width);
+	for each (Box<float> box in solid_boxes)
+	{
+		AddEntity(
+			new CAntiPlayer(box.left, box.top, box.right, box.bottom),
+			box.left + 1, box.top + 1
+		);
+	}
 }
 
 void CGame::LoadAreas()
@@ -267,13 +299,14 @@ void CGame::LoadPortals()
 void CGame::LoadEnemies()
 {
 	AddEntity(new CWorm(), 160, 92 * 32);
-	AddEntity(new CWorm(), 180, 92 * 32);
-	AddEntity(new CWorm(), 200, 92 * 32);
-	AddEntity(new CWorm(), 220, 92 * 32);
-	AddEntity(new CWorm(), 240, 92 * 32);
-	AddEntity(new CWorm(), 260, 92 * 32);
-	AddEntity(new CWorm(), 280, 92 * 32);
-	AddEntity(new CWorm(), 300, 92 * 32);
+	AddEntity(new COrb(), 1*32, 91 * 32);
+	//AddEntity(new CWorm(), 180, 92 * 32);
+	//AddEntity(new CWorm(), 200, 92 * 32);
+	//AddEntity(new CWorm(), 220, 92 * 32);
+	//AddEntity(new CWorm(), 240, 92 * 32);
+	//AddEntity(new CWorm(), 260, 92 * 32);
+	//AddEntity(new CWorm(), 280, 92 * 32);
+	//AddEntity(new CWorm(), 300, 92 * 32);
 }
 
 void CGame::Run()
@@ -328,6 +361,8 @@ void CGame::Run()
 
 void CGame::Update(DWORD dt)
 {
+	requestList.clear();
+
 	/*
 	struture of updating the game
 	first we update game object collision box position base on game object position
@@ -354,6 +389,8 @@ void CGame::Update(DWORD dt)
 	default:
 		break;
 	}
+
+	ExecuteRequests(requestList);
 }
 
 void CGame::UpdateCamera()
@@ -573,6 +610,7 @@ void CGame::RenderEnemies()
 void CGame::RenderPlayer()
 {
 	CPlayer::GetCurrentPlayer()->Render();
+	CPlayerHealth::GetInstance()->Render();
 }
 
 void CGame::RenderPortals()
@@ -599,25 +637,58 @@ void CGame::AddEntity(LPEntity entity, float x, float y)
 {
 	entity->SetPosition(x, y);
 
-	if (entity->GetType() == GOTYPES::Enemy)
-	{
-		int i = 10;
-		i++;
-	}
-
 	entity->SetId(countId);
 	mapEntities[countId] = entity;
 	countId++;
+	
+	if (entity->GetType() == GOTYPES::PlayerBullet)
+	{
+		int i = 0;
+		i++;
+	}
 
 	SetEntity(entity);
 }
 
+void CGame::RemoveEntity(int id)
+{
+	LPEntity entity = mapEntities[id];
+
+	int grid_x, grid_y;
+	entity->GetGridPosition(grid_x, grid_y);
+
+	mapGrid[grid_y][grid_x].RemoveEntity(id);
+
+	mapEntities.erase(id);
+	free(entity);
+}
+
 void CGame::SetEntity(LPEntity entity)
 {
+	if (entity == NULL) return;
+	if (entity->GetId() < 0 || entity->GetId() > countId) return;
+
+	int old_grid_x, old_grid_y;
+	entity->GetGridPosition(old_grid_x, old_grid_y);
+	if (!(old_grid_x < 0 || old_grid_y < 0 ||
+		old_grid_x >= grid_count_width || old_grid_y >= grid_count_height))
+	{
+		mapGrid[old_grid_y][old_grid_x].RemoveEntity(entity->GetId());
+	}
+
 	int grid_x = entity->GetCenter().x / GRID_WIDTH;
 	int grid_y = entity->GetCenter().y / GRID_HEIGHT;
 
+	//assert code
+	if (grid_x < 0 || grid_y < 0 ||
+		grid_x >= grid_count_width || grid_y >= grid_count_height)
+	{
+		DebugOut(L"[ERROR] vector size violation at game ccp set entity\n");
+		return;
+	}
+
 	mapGrid[grid_y][grid_x].AddEntity(entity->GetId());
+	entity->SetGridPosition(grid_x, grid_y);
 
 	//for debug
 	ResetEntityCoCollisionBoxes(entity, grid_x, grid_y);
@@ -662,6 +733,44 @@ void CGame::ResetEntityCoCollisionBoxes(
 LPEntity CGame::GetEntity(int id)
 {
 	return mapEntities[id];
+}
+
+void CGame::AddRequest(LPRequest re)
+{
+	requestList.push_back(re);
+}
+
+void CGame::ExecuteRequests(list<LPRequest> requests)
+{
+	while (!requests.empty())
+	{
+		LPRequest re = requests.front();
+
+		ExecuteRequest(re);
+		requests.pop_front();
+	}
+}
+
+void CGame::ExecuteRequest(LPRequest request)
+{
+	switch (request->type)
+	{
+	case REQUEST_TYPES::CreateEntity:
+		AddEntity(
+			request->entity,
+			request->x,
+			request->y
+		);
+		break;
+	case REQUEST_TYPES::DeleteEntity:
+		RemoveEntity(request->id);
+		break;
+	case REQUEST_TYPES::SetEnetity:
+		SetEntity(request->entity);
+		break;
+	default:
+		break;
+	}
 }
 
 void CGame::AddGameObject(LPGameObject gameObject)
@@ -743,9 +852,9 @@ void GetGridXandY(
 	int grid_count_width, 
 	int grid_count_height)
 {
-	startX = max((left / gridWidth), 0);
-	endX = min( right / gridWidth, grid_count_width - 1);
+	startX = max((left / gridWidth) - 1, 0);
+	endX = min( right / gridWidth + 1, grid_count_width - 1);
 
-	startY = max((top / gridHeight), 0);
-	endY = min( bottom / gridHeight, grid_count_height - 1);
+	startY = max((top / gridHeight) - 1, 0);
+	endY = min( bottom / gridHeight + 1, grid_count_height - 1);
 }

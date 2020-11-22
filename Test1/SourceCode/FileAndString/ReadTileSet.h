@@ -29,6 +29,14 @@ void GetInfo(
 	vector<vector<int>>& matrix,
 	string& tileDir, string fileDir);
 
+void GetInfo(int& tile_count,
+	int& tile_width, int& tile_height,
+	int& tile_count_width, int& tile_count_height,
+	vector<int>& solid_tiles,
+	vector<int>& anti_player_tiles,
+	vector<vector<int>>& matrix,
+	string& tileDir, string fileDir);
+
 /// <summary>
 /// get a map of tile
 /// </summary>

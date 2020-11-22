@@ -6,6 +6,9 @@
 #include "../Input/Input.h"
 #include "../Unit/Animation.h"
 #include "PlayerHealth.h"
+#include "PlayerBullet.h"
+
+#include "../Game/Game.h"
 
 #define PLAYER_MOVE_LEFT -1
 #define PLAYER_DONT_MOVE 0
@@ -32,6 +35,17 @@ private:
 	DWORD healthAniWaitTime = 10;
 	DWORD healthAniCountTime = 0;
 	int addUpSpriteId;
+
+	/// <summary>
+	/// these vars for shooting funtion
+	/// </summary>
+	Vector leftShootPivot = Vector(0, 12);
+	Vector rightShootPivot = Vector(16, 12);
+	Vector upLeftShootPivot = Vector(17, -4);
+	Vector upRightShootPivot = Vector(9, -4);
+	bool canShoot = true;
+	DWORD shootWaitTime = 15;
+	DWORD shootCountTime = 0;
 
 	Vector old_velocity;
 
@@ -117,5 +131,8 @@ protected:
 	//this function is only called for debug
 	void move(DWORD dt);
 	void SetHealthAnimation(DWORD dt);
+
+	void HandleShooting(DWORD dt);
+	void Shoot(int aim_direction);
 };
 

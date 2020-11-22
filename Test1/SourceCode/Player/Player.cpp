@@ -70,11 +70,13 @@ void CPlayer::Update(DWORD dt)
 	/// For debugs
 	/// </summary>
 	/// <param name="dt"></param>
-	if (input->IsKeyDown(DIK_J))
-		healthSystem->ReduceHealth(GOTYPES::Sophia);
+	//if (input->IsKeyDown(DIK_J))
+	//	healthSystem->ReduceHealth(GOTYPES::Sophia);
 
 	SetState();
 	GetState();
+
+	HandleShooting(dt);
 
 	old_velocity.Set(velocity.x, velocity.y);
 	move(dt);
@@ -91,7 +93,7 @@ void CPlayer::Update(DWORD dt)
 	//	(b + t) / 2
 	//);
 
-	if (IsCollidedWith(GOTYPES::Enemy))
+	if (IsCollidedWith(GOTYPES::Enemy) || IsCollidedWith(GOTYPES::EnemyBullet))
 		healthSystem->ReduceHealth(GOTYPES::Sophia);
 
 	if (healthSystem->GetHealthState() == INVULNERABLE)
@@ -254,12 +256,10 @@ void CPlayer::SetHealthAnimation(DWORD dt)
 
 		if (healthAniWhiteFlip)
 		{
-			DebugOut(L"[INFO] flip white TRUE\n");
 			healthAniWhiteFlip = false;
 		}
 		else
 		{
-			DebugOut(L"[INFO] flip white FALSE\n");
 			healthAniWhiteFlip = true;
 		}
 	}
@@ -272,4 +272,73 @@ void CPlayer::SetHealthAnimation(DWORD dt)
 
 	//canonSprite = lib->Get(ID_CAR_GUN_UP);
 	//headSprite = lib->Get(ID_CAR_HEAD_UPRIGHT);
+}
+
+void CPlayer::HandleShooting(DWORD dt)
+{
+	CInput* input = CInput::GetInstance();
+
+	if (!canShoot)
+	{
+		shootCountTime = min(shootCountTime + dt, shootWaitTime);
+		if (shootCountTime >= shootWaitTime) canShoot = true;
+	}
+	else
+	{
+		if (input->IsKeyDown(DIK_J))
+		{
+			//DebugOut(L"[INFO] SHOOT\n");
+			Shoot(aimDirection);
+		}
+	}
+}
+
+void CPlayer::Shoot(int aim_direction)
+{
+	Vector* shoot_pivot = &rightShootPivot;
+	Vector direction = Vector(0, 0);
+
+	switch (aim_direction)
+	{
+	case PLAYER_AIM_UPRIGHT:
+		shoot_pivot = &upRightShootPivot;
+		direction.y = -1;
+		break;
+	case PLAYER_AIM_UPLEFT:
+		shoot_pivot = &upLeftShootPivot;
+		direction.y = -1;
+		break;
+	case PLAYER_AIM_RIGHT:
+		shoot_pivot = &rightShootPivot;
+		direction.x = 1;
+		break;
+	case PLAYER_AIM_LEFT:
+		shoot_pivot = &leftShootPivot;
+		direction.x = -1;
+		break;
+	default:
+		break;
+	}
+
+	float x = (*shoot_pivot).x + position.x;
+	float y = (*shoot_pivot).y + position.y;
+
+	try
+	{
+		LPRequest request = new CGameRequest(REQUEST_TYPES::CreateEntity);
+		request->entity = new CPlayerBullet(
+			direction
+		);
+		request->x = x;
+		request->y = y;
+
+		CGame::GetInstance()->AddRequest(request);
+	}
+	catch (const std::exception& ex)
+	{
+		DebugOut(L"[ERROR] create bullet %s \n", ex.what());
+	}
+
+	shootCountTime = 0;
+	canShoot = false;
 }

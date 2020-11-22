@@ -149,6 +149,11 @@ void CGraphic::DrawWithFixedPosition(
 	r.right = right;
 	r.bottom = bottom;
 
+	D3DXMATRIX matrix;
+	D3DXMatrixIdentity(&matrix);
+	
+	spriteHandler->SetTransform(&matrix);
+
 	spriteHandler->Draw(texture, &r, NULL, &position, 
 		D3DCOLOR_RGBA(255, 255, 255, opacity));
 }

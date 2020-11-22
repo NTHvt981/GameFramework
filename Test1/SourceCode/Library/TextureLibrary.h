@@ -3,8 +3,9 @@
 #include "../Graphic/Graphic.h"
 #include <unordered_map>
 
-#define CAR_TEXTURE 1
+#define PLAYER_TEXTURE 1
 #define ENEMIES_TEXTURE 2
+#define PLAYER_HEALTH_TEXTURE 3
 
 using namespace std;
 

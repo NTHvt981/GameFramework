@@ -1,11 +1,11 @@
 #pragma once
 
-#include "../../Entity.h"
-#include "../../Physic.h"
-#include "../../../Constraints.h"
-#include "../../../Camera/Camera.h"
-#include "../../../Input/Input.h"
-#include "../../../Unit/Animation.h"
+#include "../Entity.h"
+#include "../Physic.h"
+#include "../../Constraints.h"
+#include "../../Camera/Camera.h"
+#include "../../Input/Input.h"
+#include "../../Unit/Animation.h"
 
 #define DOME_UP_MOVE_LEFT 1
 #define DOME_UP_MOVE_RIGHT 2

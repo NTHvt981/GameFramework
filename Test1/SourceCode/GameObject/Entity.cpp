@@ -1,6 +1,6 @@
 #include "Entity.h"
 
-CEntity::CEntity()
+CEntity::CEntity() : CGameObject()
 {
 	SetType(GOTYPES::Entity);
 }
@@ -42,6 +42,7 @@ int CEntity::GetId()
 }
 
 
+
 void CEntity::move(DWORD dt)
 {
 	velocity.y += gravity;
@@ -67,6 +68,22 @@ void CEntity::move(DWORD dt)
 		//collisionBox->Update();
 	}
 
+}
+
+void CEntity::SetMaxHealth(int mh)
+{
+	maxHealth = mh;
+	health = mh;
+}
+
+int CEntity::GetHealth()
+{
+	return health;
+}
+
+void CEntity::InflictDamage(int dam)
+{
+	health = max(0, health - dam);
 }
 
 LPDynamicBox CEntity::GetCollisionBox()
@@ -112,4 +129,16 @@ void CEntity::Render()
 CEntity::~CEntity()
 {
 	//Free memory here
+}
+
+void CEntity::GetGridPosition(int& x, int& y)
+{
+	x = gridPosition.x;
+	y = gridPosition.y;
+}
+
+void CEntity::SetGridPosition(int x, int y)
+{
+	gridPosition.x = x;
+	gridPosition.y = y;
 }

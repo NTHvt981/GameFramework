@@ -14,6 +14,8 @@ protected:
 	Vector origin;
 	Vector velocity;
 
+	Vector gridPosition = Vector(-1, -1);
+
 	int speed;
 
 	LPDynamicBox collisionBox = NULL;
@@ -45,5 +47,19 @@ public:
 	void Render();
 
 	~CEntity();
+
+	void GetGridPosition(int &x, int &y);
+	void SetGridPosition(int x, int y);
+
+
+private:
+	int maxHealth = -1;
+	int health = -1;
+protected:
+	void SetMaxHealth(int mh);
+	int GetHealth();
+
+public:
+	virtual void InflictDamage(int dam);
 };
 

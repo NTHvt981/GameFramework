@@ -2,8 +2,9 @@
 
 CWorm::CWorm() : CEntity()
 {
-	SetType(GOTYPES::Enemy);
+	SetMaxHealth(5);
 	gravity = 0.25;
+	SetType(GOTYPES::Enemy);
 
 	this->collisionBox = new CDynamicBox(
 		this,
@@ -35,9 +36,14 @@ void CWorm::Update(DWORD dt)
 {
 	GetState(dt);
 
-	move(dt);
-
 	collisionBox->Update();
+
+	if (GetHealth() == 0)
+	{
+		LPRequest request = new CGameRequest(REQUEST_TYPES::DeleteEntity);
+		request->id = this->id;
+		CGame::GetInstance()->AddRequest(request);
+	}
 }
 
 void CWorm::Render()
@@ -93,6 +99,8 @@ void CWorm::MoveLeft(DWORD dt)
 		horizontalState = WORM_MOVE_RIGHT;
 	}
 
+	move(dt);
+
 	crawlLeftAni->SetMode(ANIMATION_NORMAL);
 	crawlRightAni->SetMode(ANIMATION_REVERSE);
 }
@@ -105,6 +113,8 @@ void CWorm::MoveRight(DWORD dt)
 	{
 		horizontalState = WORM_MOVE_LEFT;
 	}
+
+	move(dt);
 
 	crawlLeftAni->SetMode(ANIMATION_REVERSE);
 	crawlRightAni->SetMode(ANIMATION_NORMAL);

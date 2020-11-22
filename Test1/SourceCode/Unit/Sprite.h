@@ -24,5 +24,6 @@ public:
 	void Draw(Vector position, int alpha = 255);
 
 	int GetId();
+	void GetSize(int &width, int &height);
 };
 

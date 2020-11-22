@@ -3,6 +3,8 @@
 CJumper::CJumper() : CEntity()
 {
 	SetType(GOTYPES::Enemy);
+	gravity = 0.3;
+	jumpSpeed = 6;
 
 	this->collisionBox = new CDynamicBox(
 		this,

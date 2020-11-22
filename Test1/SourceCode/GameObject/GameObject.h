@@ -8,9 +8,13 @@ enum class GOTYPES
 	Static,
 	Wall,
 	Dynamic,
-	Player,
-	Enemy,
 	Porter,
+
+	Enemy,
+	EnemyBullet,
+
+	Player,
+	PlayerBullet,
 
 	//jason is the pilot, and sophia is the tank
 	Jason,
@@ -28,6 +32,7 @@ private:
 	GOTYPES type = GOTYPES::GameObject;
 
 public:
+	CGameObject();
 	void Disable();
 	void Enable();
 

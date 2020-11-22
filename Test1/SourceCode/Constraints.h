@@ -43,13 +43,13 @@
 #define GRID_HEIGHT 64
 
 //#define MAX_FRAME_RATE 120
-#define MAX_FRAME_RATE 90
+#define MAX_FRAME_RATE 60
 
-#define TEX_BRICK_PATH L"./Resources/Texture/brick.png"
-#define STEEL_ROBOT_TEXTURE_PATH L"./Resources/Texture/steel robot.png"
 #define ENEMIES_TEXTURE_PATH L"./Resources/Texture/enemies.png"
+#define PLAYER_TEXTURE_PATH L"Resources/Texture/My car spritesheet transparent.png"
+#define PLAYER_HEALTH_TEXTURE_PATH L"Resources/Texture/Player health.png"
+
 #define TEX_BBOX_PATH L"./Resources/Texture/bbox.png"
-#define TEX_CAR_SPRIRESHEET_TRANSPARENT L"Resources/Texture/My car spritesheet transparent.png"
 #define ID_TEX_BBOX 999		// special texture to draw object bounding box
 
 #define POSITION_START_X 10
@@ -95,6 +95,14 @@
 #define ID_CAR_BODY_UPLEFT_WHITE 1120
 #pragma endregion
 
+#pragma region Sophia and jason health
+#define ID_SOPHIA_HEALTH_BAR 1200
+#define ID_JASON_HEALTH_BAR 1201
+#define ID_TEXT_POW 1202
+#define ID_TEXT_HOV 1203
+#pragma endregion
+
+
 #define ID_CAR_WHEEL_1 1010
 #define ID_CAR_WHEEL_2 1011
 #define ID_CAR_WHEEL_3 1012
@@ -103,6 +111,10 @@
 #define ID_CAR_WHEEL_6 1015
 #define ID_CAR_WHEEL_7 1016
 #define ID_CAR_WHEEL_8 1017
+
+#define ID_CAR_BULLET_LEFT 1030
+#define ID_CAR_BULLET_RIGHT 1031
+#define ID_CAR_BULLET_UP 1032
 
 #define ID_FIRE_BALL 1018
 #pragma endregion
@@ -161,6 +173,9 @@
 #define ID_WALKER_4 2114
 #pragma endregion
 //enum class GOTYPES;
+
+class CGameRequest;
+typedef CGameRequest* LPRequest;
 
 class CGameObject;
 typedef CGameObject* LPGameObject;

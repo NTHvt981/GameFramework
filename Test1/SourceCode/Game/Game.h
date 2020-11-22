@@ -2,6 +2,7 @@
 #include <map>
 #include "..\Constraints.h"
 #include "..\Graphic\Graphic.h"
+#include "GameRequest.h"
 
 #include "..\Library\TextureLibrary.h"
 #include "..\Library\SpriteLibrary.h"
@@ -9,14 +10,13 @@
 #include "..\Debug\Debug.h"
 
 #include "..\GameObject\GameObject.h"
-#include "..\GameObject\DynamicObjects\HorizontalEntity.h"
-#include "..\GameObject\DynamicObjects\VerticalEntity.h"
 #include "..\Player\Player.h"
-#include "..\GameObject\DynamicObjects\Enemies\Worm.h"
-#include "..\GameObject\DynamicObjects\Enemies\Dome.h"
-#include "..\GameObject\DynamicObjects\Enemies\Jumper.h"
-#include "..\GameObject\DynamicObjects\Enemies\Orb.h"
-#include "..\GameObject\DynamicObjects\Enemies\Walker.h"
+#include "..\GameObject\StaticObjects\AntiPlayer.h"
+#include "..\GameObject\Enemies\Worm.h"
+#include "..\GameObject\Enemies\Dome.h"
+#include "..\GameObject\Enemies\Jumper.h"
+#include "..\GameObject\Enemies\Orb.h"
+#include "..\GameObject\Enemies\Walker.h"
 
 #include "..\GameObject\StaticObjects\Wall.h"
 
@@ -57,7 +57,7 @@ private:
 	int grid_count_height;
 
 	//this var for debug
-	int countId = 0;
+	long countId = 0;
 
 	//this vars for player changing scene
 	int mode = NORMAL_MODE;
@@ -66,6 +66,8 @@ private:
 	CPortal* destPortal = NULL;
 	map<int, CArea*> areas;
 	map<int, CPortal*> portals;
+
+	list<LPRequest> requestList;
 
 private:
 	static CGame* __instance;
@@ -78,6 +80,12 @@ private:
 		vector<vector<int>> matrix,
 		vector<int> solid_tiles,
 		int tile_width);
+
+	void LoadAntiPlayerZones(
+		vector<vector<int>> matrix,
+		vector<int> anti_player_tiles,
+		int tile_width);
+
 	void LoadAreas();
 	void LoadPortals();
 	void LoadEnemies();
@@ -111,13 +119,21 @@ public:
 
 	void AddGameObject(LPGameObject gameObject);
 
-	//set new entity pos, add it to entity map, set what grid it is in
-	void AddEntity(LPEntity entity, float x, float y);
-	//set what grid is entity in
-	void SetEntity(LPEntity entity);
 	void ResetEntityCoCollisionBoxes(LPEntity entity, int grid_x, int grid_y);
 
 	LPEntity GetEntity(int id);
+
+	void AddRequest(LPRequest re);
+
+private:
+	void ExecuteRequests(list<LPRequest> requests);
+	void ExecuteRequest(LPRequest request);
+
+	//set new entity pos, add it to entity map, set what grid it is in
+	void AddEntity(LPEntity entity, float x, float y);
+	void RemoveEntity(int id);
+	//set what grid is entity in
+	void SetEntity(LPEntity entity);
 };
 
 void GetGridXandY(

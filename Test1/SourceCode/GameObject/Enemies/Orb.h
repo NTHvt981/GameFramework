@@ -1,9 +1,11 @@
 #pragma once
 
-#include "../../Entity.h"
-#include "../../Physic.h"
-#include "../../../Constraints.h"
-#include "../../../Unit/Animation.h"
+#include "../Entity.h"
+#include "../Physic.h"
+#include "../../Constraints.h"
+#include "../../Unit/Animation.h"
+#include "../../Game/GameRequest.h"
+#include "../../Game/Game.h"
 
 #define ORB_MOVE_LEFT 0
 #define ORB_TURN_RIGHT 1
@@ -24,7 +26,7 @@ private:
 
 	LPAnimation currentAni;
 
-	int horizontalState = ORB_MOVE_RIGHT;
+	int horizontalState;
 
 private:
 	void SetState();

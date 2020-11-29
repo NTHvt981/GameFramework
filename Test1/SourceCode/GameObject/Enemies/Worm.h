@@ -1,12 +1,11 @@
 #pragma once
 
-//#include "Enemy.h"
-#include "../Entity.h"
+#include "Enemy.h"
+//#include "../Entity.h"
 #include "../../Constraints.h"
 #include "../../Unit/Animation.h"
 
 #include "../../Game/Game.h"
-#include "../../Game/GameRequest.h"
 
 #define WORM_MOVE_LEFT -1
 #define WORM_DONT_MOVE 0
@@ -15,7 +14,7 @@
 #define WORM_ON_GROUND 0
 #define WORM_ON_AIR 1
 
-class CWorm : public CEntity
+class CWorm : public CEnemy
 {
 private:
 	float speed = 0.4;
@@ -25,12 +24,12 @@ private:
 	LPAnimation crawlLeftAni;
 	LPAnimation crawlRightAni;
 
-	int horizontalState = WORM_DONT_MOVE;
+	int state = WORM_DONT_MOVE;
 	int verticalState = WORM_ON_GROUND;
 
 protected:
 	//this function is only called for debug
-	void move(DWORD dt);
+	void Move(DWORD dt);
 
 private:
 	void SetState();

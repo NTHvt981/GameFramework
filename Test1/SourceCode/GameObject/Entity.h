@@ -2,8 +2,6 @@
 
 #include "GameObject.h"
 #include "..\Constraints.h"
-#include "..\Graphic\Graphic.h"
-#include "..\Library\TextureLibrary.h"
 #include "..\Collision\DynamicBox.h"
 #include "..\Collision\CollisionEvent.h"
 
@@ -27,7 +25,8 @@ protected:
 	float jumpSpeed = 0;
 
 protected:
-	virtual void move(DWORD dt);
+	virtual void Move(DWORD dt);
+	virtual void MoveWithoutGravity(DWORD dt);
 
 public:
 	CEntity();
@@ -36,6 +35,7 @@ public:
 
 	virtual void SetPosition(float _x, float _y);
 	virtual Vector GetPosition();
+	virtual void SetCenter(float _x, float _y);
 	virtual Vector GetCenter();
 
 	LPDynamicBox GetCollisionBox();
@@ -52,14 +52,14 @@ public:
 	void SetGridPosition(int x, int y);
 
 
-private:
-	int maxHealth = -1;
-	int health = -1;
-protected:
-	void SetMaxHealth(int mh);
-	int GetHealth();
-
-public:
-	virtual void InflictDamage(int dam);
+//private:
+//	int maxHealth = -1;
+//	int health = -1;
+//protected:
+//	void SetMaxHealth(int mh);
+//	int GetHealth();
+//
+//public:
+//	virtual void InflictDamage(int dam);
 };
 

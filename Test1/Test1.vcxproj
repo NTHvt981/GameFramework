@@ -149,6 +149,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="SourceCode\Player\JasonBullet.h" />
+    <ClInclude Include="SourceCode\GameObject\Enemies\Enemy.h" />
+    <ClInclude Include="SourceCode\Player\Jason.h" />
+    <ClInclude Include="SourceCode\Player\Sophia.h" />
     <ClInclude Include="SourceCode\GameObject\StaticObjects\AntiPlayer.h" />
     <ClInclude Include="SourceCode\Game\Game.h" />
     <ClInclude Include="SourceCode\Game\GameRequest.h" />
@@ -194,6 +198,10 @@
     <ClInclude Include="SourceCode\Timer\Timer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="SourceCode\Player\JasonBullet.cpp" />
+    <ClCompile Include="SourceCode\GameObject\Enemies\Enemy.cpp" />
+    <ClCompile Include="SourceCode\Player\Jason.cpp" />
+    <ClCompile Include="SourceCode\Player\Sophia.cpp" />
     <ClCompile Include="SourceCode\GameObject\StaticObjects\AntiPlayer.cpp" />
     <ClCompile Include="SourceCode\Game\Game.cpp" />
     <ClCompile Include="SourceCode\Game\GameRequest.cpp" />

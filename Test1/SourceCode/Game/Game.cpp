@@ -32,7 +32,8 @@ void CGame::LoadResources()
 	LoadPortals();
 	LoadEnemies();
 
-	CPlayer* player = new CPlayer();
+	//CSophia* player = new CSophia();
+	CPlayer* player = new CSophia();
 	player->SetPosition(200, 92*32);
 	AddGameObject(player);
 	CPlayer::SetCurrentPlayer(player);
@@ -56,54 +57,70 @@ void CGame::LoadSprites()
 	CSpriteLibrary* lib = CSpriteLibrary::GetInstance();
 
 	// CAR
-	lib->Add(ID_CAR_GUN_LEFT, 11, 4, 18, 8, textPlayer);
-	lib->Add(ID_CAR_GUN_RIGHT, 12, 13, 19, 17, textPlayer);
-	lib->Add(ID_CAR_GUN_UPLEFT, 20, 2, 28, 10, textPlayer);
-	lib->Add(ID_CAR_GUN_UPRIGHT, 20, 11, 28, 19, textPlayer);
-	lib->Add(ID_CAR_GUN_UP, 31, 2, 35, 9, textPlayer);
+	lib->Add(ID_SOPHIA_GUN_LEFT, 11, 4, 18, 8, textPlayer);
+	lib->Add(ID_SOPHIA_GUN_RIGHT, 12, 13, 19, 17, textPlayer);
+	lib->Add(ID_SOPHIA_GUN_UPLEFT, 20, 2, 28, 10, textPlayer);
+	lib->Add(ID_SOPHIA_GUN_UPRIGHT, 20, 11, 28, 19, textPlayer);
+	lib->Add(ID_SOPHIA_GUN_UP, 31, 2, 35, 9, textPlayer);
 
-	lib->Add(ID_CAR_HEAD_LEFT, 2,	20,	18,	28, textPlayer);
-	lib->Add(ID_CAR_HEAD_RIGHT, 2,	29,	18,	37, textPlayer);
-	lib->Add(ID_CAR_HEAD_UPLEFT, 56,	21,	56+16,	36, textPlayer);
-	lib->Add(ID_CAR_HEAD_UPRIGHT, 38,	21,	38+16,	35, textPlayer);
+	lib->Add(ID_SOPHIA_HEAD_LEFT, 2,	20,	18,	28, textPlayer);
+	lib->Add(ID_SOPHIA_HEAD_RIGHT, 2,	29,	18,	37, textPlayer);
+	lib->Add(ID_SOPHIA_HEAD_UPLEFT, 56,	21,	56+16,	36, textPlayer);
+	lib->Add(ID_SOPHIA_HEAD_UPRIGHT, 38,	21,	38+16,	35, textPlayer);
 
-	lib->Add(ID_CAR_BODY, 109,	2,	115,	9, textPlayer);
-	lib->Add(ID_CAR_BODY_UPRIGHT, 135, 2, 143, 10, textPlayer);
-	lib->Add(ID_CAR_BODY_UPLEFT, 126, 2, 134, 10, textPlayer);
+	lib->Add(ID_SOPHIA_HEAD_EJECT_JASON_LEFT_1, 109, 12, 109 + 16, 12 + 15, textPlayer);
+	lib->Add(ID_SOPHIA_HEAD_EJECT_JASON_LEFT_2, 126, 12, 126 + 16, 12 + 15, textPlayer);
+	lib->Add(ID_SOPHIA_HEAD_EJECT_JASON_RIGHT_1, 109, 30, 109 + 16, 30 + 15, textPlayer);
+	lib->Add(ID_SOPHIA_HEAD_EJECT_JASON_RIGHT_2, 126, 30, 126 + 16, 30 + 15, textPlayer);
 
-	lib->Add(ID_CAR_WHEEL_1, 38, 11, 45, 19, textPlayer);
-	lib->Add(ID_CAR_WHEEL_2, 47, 11, 54, 19, textPlayer);
-	lib->Add(ID_CAR_WHEEL_3, 56, 11, 63, 19, textPlayer);
-	lib->Add(ID_CAR_WHEEL_4, 65, 11, 72, 19, textPlayer);
-	lib->Add(ID_CAR_WHEEL_5, 38, 2, 45, 10, textPlayer);
-	lib->Add(ID_CAR_WHEEL_6, 47, 2, 54, 10, textPlayer);
-	lib->Add(ID_CAR_WHEEL_7, 56, 2, 63, 10, textPlayer);
-	lib->Add(ID_CAR_WHEEL_8, 65, 2, 72, 10, textPlayer);
+	lib->Add(ID_SOPHIA_BODY, 109,	2,	115,	9, textPlayer);
+	lib->Add(ID_SOPHIA_BODY_UPRIGHT, 135, 2, 143, 10, textPlayer);
+	lib->Add(ID_SOPHIA_BODY_UPLEFT, 126, 2, 134, 10, textPlayer);
 
+	lib->Add(ID_SOPHIA_WHEEL_1, 38, 11, 45, 19, textPlayer);
+	lib->Add(ID_SOPHIA_WHEEL_2, 47, 11, 54, 19, textPlayer);
+	lib->Add(ID_SOPHIA_WHEEL_3, 56, 11, 63, 19, textPlayer);
+	lib->Add(ID_SOPHIA_WHEEL_4, 65, 11, 72, 19, textPlayer);
+	lib->Add(ID_SOPHIA_WHEEL_5, 38, 2, 45, 10, textPlayer);
+	lib->Add(ID_SOPHIA_WHEEL_6, 47, 2, 54, 10, textPlayer);
+	lib->Add(ID_SOPHIA_WHEEL_7, 56, 2, 63, 10, textPlayer);
+	lib->Add(ID_SOPHIA_WHEEL_8, 65, 2, 72, 10, textPlayer);
 
-	lib->Add(ID_CAR_GUN_LEFT_WHITE, 83, 36, 83+7, 36+4, textPlayer);
-	lib->Add(ID_CAR_GUN_RIGHT_WHITE, 84, 45, 84+7, 45+4, textPlayer);
-	lib->Add(ID_CAR_GUN_UPLEFT_WHITE, 92, 34, 92+8, 34+8, textPlayer);
-	lib->Add(ID_CAR_GUN_UPRIGHT_WHITE, 92, 43, 92+8, 43+8, textPlayer);
-	lib->Add(ID_CAR_GUN_UP_WHITE, 103, 34, 103+4, 34+7, textPlayer);
+	lib->Add(ID_SOPHIA_GUN_LEFT_WHITE, 83, 36, 83+7, 36+4, textPlayer);
+	lib->Add(ID_SOPHIA_GUN_RIGHT_WHITE, 84, 45, 84+7, 45+4, textPlayer);
+	lib->Add(ID_SOPHIA_GUN_UPLEFT_WHITE, 92, 34, 92+8, 34+8, textPlayer);
+	lib->Add(ID_SOPHIA_GUN_UPRIGHT_WHITE, 92, 43, 92+8, 43+8, textPlayer);
+	lib->Add(ID_SOPHIA_GUN_UP_WHITE, 103, 34, 103+4, 34+7, textPlayer);
 
-	lib->Add(ID_CAR_HEAD_LEFT_WHITE, 74, 53, 74+16, 53+8, textPlayer);
-	lib->Add(ID_CAR_HEAD_RIGHT_WHITE, 74, 62, 74+16, 62+8, textPlayer);
-	lib->Add(ID_CAR_HEAD_UPLEFT_WHITE, 128, 54, 128+16, 54+15, textPlayer);
-	lib->Add(ID_CAR_HEAD_UPRIGHT_WHITE, 110, 54, 110+16, 54+15, textPlayer);
+	lib->Add(ID_SOPHIA_HEAD_LEFT_WHITE, 74, 53, 74+16, 53+8, textPlayer);
+	lib->Add(ID_SOPHIA_HEAD_RIGHT_WHITE, 74, 62, 74+16, 62+8, textPlayer);
+	lib->Add(ID_SOPHIA_HEAD_UPLEFT_WHITE, 128, 54, 128+16, 54+15, textPlayer);
+	lib->Add(ID_SOPHIA_HEAD_UPRIGHT_WHITE, 110, 54, 110+16, 54+15, textPlayer);
 
-	lib->Add(ID_CAR_BULLET_LEFT, 74, 3, 74 + 24, 3 + 6, textPlayer);
-	lib->Add(ID_CAR_BULLET_RIGHT, 74, 12, 74 + 24, 12 + 6, textPlayer);
-	lib->Add(ID_CAR_BULLET_UP, 100, 2, 100 + 6, 2 + 24, textPlayer);
+	lib->Add(ID_SOPHIA_BULLET_LEFT, 74, 3, 74 + 24, 3 + 6, textPlayer);
+	lib->Add(ID_SOPHIA_BULLET_RIGHT, 74, 12, 74 + 24, 12 + 6, textPlayer);
+	lib->Add(ID_SOPHIA_BULLET_UP, 100, 2, 100 + 6, 2 + 24, textPlayer);
 
 	lib->Add(ID_TEXT_HOV, 0, 0, 11, 35, textPlayerHealth);
 	lib->Add(ID_TEXT_POW, 0, 58, 11, 93, textPlayerHealth);
 	lib->Add(ID_SOPHIA_HEALTH_BAR, 0, 43, 11, 48, textPlayerHealth);
+	
+	lib->Add(ID_JASON_WALK_LEFT_1, 2, 38,	2 + 8, 38 + 16, textPlayer);
+	lib->Add(ID_JASON_WALK_LEFT_2, 11, 38, 11 + 8, 38 + 16, textPlayer);
+	lib->Add(ID_JASON_WALK_LEFT_3, 20, 38, 20 + 8, 38 + 16, textPlayer);
+	lib->Add(ID_JASON_WALK_LEFT_4, 29, 38, 29 + 8, 38 + 16, textPlayer);
 
-	//lib->Add(ID_TEXT_HOV, 0, 0, 11 * 2, 35 * 2, textPlayerHealth);
-	//lib->Add(ID_TEXT_POW, 0, 58 * 2, 11 * 2, 93 * 2, textPlayerHealth);
-	//lib->Add(ID_SOPHIA_HEALTH_BAR, 0, 43 * 2, 11 * 2, 48 * 2, textPlayerHealth);
+	lib->Add(ID_JASON_WALK_RIGHT_1, 2, 55,	2 + 8, 55 + 16, textPlayer);
+	lib->Add(ID_JASON_WALK_RIGHT_2, 11, 55, 11 + 8, 55 + 16, textPlayer);
+	lib->Add(ID_JASON_WALK_RIGHT_3, 20, 55, 20 + 8, 55 + 16, textPlayer);
+	lib->Add(ID_JASON_WALK_RIGHT_4, 29, 55, 29 + 8, 55 + 16, textPlayer);
 
+	lib->Add(ID_JASON_CRAWL_LEFT_1, 2, 139, 2 + 15, 139 + 8, textPlayer);
+	lib->Add(ID_JASON_CRAWL_LEFT_2, 20, 139, 20 + 15, 139 + 8, textPlayer);
+	lib->Add(ID_JASON_CRAWL_RIGHT_1, 38, 139, 38 + 15, 139 + 8, textPlayer);
+	lib->Add(ID_JASON_CRAWL_RIGHT_2, 56, 139, 56 + 15, 139 + 8, textPlayer);
+
+	lib->Add(ID_JASON_BULLET, 94, 141, 94 + 5, 141 + 4, textPlayer);
 	// ENEMIES
 	// WORM
 	lib->Add(ID_WORM_MOVE_LEFT_1, 46, 412, 64, 422, textEnemies);
@@ -361,7 +378,7 @@ void CGame::Run()
 
 void CGame::Update(DWORD dt)
 {
-	requestList.clear();
+	CGameRequest::RequestList.clear();
 
 	/*
 	struture of updating the game
@@ -390,7 +407,7 @@ void CGame::Update(DWORD dt)
 		break;
 	}
 
-	ExecuteRequests(requestList);
+	ExecuteRequests(CGameRequest::RequestList);
 }
 
 void CGame::UpdateCamera()
@@ -534,18 +551,23 @@ void CGame::TransitionMode(DWORD dt)
 		player->Enable();
 		mode = NORMAL_MODE;
 
-		float portal_l, portal_t, portal_r, portal_b;
-		destPortal->GetCollisionBox()->GetLTRB(
-			portal_l, portal_t, portal_r, portal_b
-		);
-		
-		float x, y;
-		x = (portal_l + portal_r) / 2 -
-			(player->GetCenter().x - player->GetPosition().x);
-		y = (portal_b + portal_t) / 2 -
-			(player->GetCenter().y - player->GetPosition().y);
-		player->SetPosition(
-			x, y
+		//float portal_l, portal_t, portal_r, portal_b;
+		//destPortal->GetCollisionBox()->GetLTRB(
+		//	portal_l, portal_t, portal_r, portal_b
+		//);
+		//
+		//float x, y;
+		//x = (portal_l + portal_r) / 2 -
+		//	(player->GetCenter().x - player->GetPosition().x);
+		//y = (portal_b + portal_t) / 2 -
+		//	(player->GetCenter().y - player->GetPosition().y);
+		//player->SetPosition(
+		//	x, y
+		//);
+
+		player->SetCenter(
+			destPortal->GetCenter().x,
+			destPortal->GetCenter().y
 		);
 	}
 	else
@@ -735,10 +757,10 @@ LPEntity CGame::GetEntity(int id)
 	return mapEntities[id];
 }
 
-void CGame::AddRequest(LPRequest re)
-{
-	requestList.push_back(re);
-}
+//void CGame::AddRequest(LPRequest re)
+//{
+//	requestList.push_back(re);
+//}
 
 void CGame::ExecuteRequests(list<LPRequest> requests)
 {

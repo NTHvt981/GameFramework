@@ -10,19 +10,19 @@ CPlayerBullet::CPlayerBullet(Vector direction): CEntity() {
 
 	if (direction.x == 1)
 	{
-		sprId = ID_CAR_BULLET_RIGHT;
+		sprId = ID_SOPHIA_BULLET_RIGHT;
 		velocity = Vector(speed, 0);
 	}
 	else if (direction.x == -1)
 	{
-		sprId = ID_CAR_BULLET_LEFT;
+		sprId = ID_SOPHIA_BULLET_LEFT;
 		velocity = Vector(-speed, 0);
 	}
 	else
 	{
 		if (direction.y == -1)
 		{
-			sprId = ID_CAR_BULLET_UP;
+			sprId = ID_SOPHIA_BULLET_UP;
 			velocity = Vector(0, -speed);
 
 			//swap size w and h of coli box
@@ -47,7 +47,7 @@ void CPlayerBullet::Update(DWORD dt)
 	bool delete_condition = false;
 	old_velocity.Set(velocity.x, velocity.y);
 
-	move(dt);
+	Move(dt);
 	collisionBox->Update();
 
 	/// <summary>
@@ -74,7 +74,7 @@ void CPlayerBullet::Update(DWORD dt)
 		list<LPGameObject> ls;
 		GetCollidedWith(GOTYPES::Enemy, ls);
 
-		dynamic_cast<LPEntity>(ls.front())->InflictDamage(damage);
+		dynamic_cast<LPEnemy>(ls.front())->InflictDamage(damage);
 
 		delete_condition = true;
 	}
@@ -83,7 +83,7 @@ void CPlayerBullet::Update(DWORD dt)
 	{
 		LPRequest request = new CGameRequest(REQUEST_TYPES::DeleteEntity);
 		request->id = this->id;
-		CGame::GetInstance()->AddRequest(request);
+		CGameRequest::AddRequest(request);
 	}
 }
 

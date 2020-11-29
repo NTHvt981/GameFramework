@@ -1,8 +1,7 @@
 #include "Orb.h"
 
-COrb::COrb() : CEntity()
+COrb::COrb() : CEnemy()
 {
-	SetType(GOTYPES::Enemy);
 	SetMaxHealth(7);
 
 	this->collisionBox = new CDynamicBox(
@@ -17,7 +16,7 @@ COrb::COrb() : CEntity()
 	turnLeftAni = new CAnimation(1, 50, 1, false);
 	turnRightAni = new CAnimation(1, 50, 1, false);
 	currentAni = moveRightAni;
-	horizontalState = ORB_MOVE_RIGHT;
+	state = ORB_MOVE_RIGHT;
 
 	moveLeftAni->Add(ID_ORB_1);
 	moveRightAni->Add(ID_ORB_5);
@@ -39,12 +38,14 @@ void COrb::Update(DWORD dt)
 {
 	GetState(dt);
 
-	if (GetHealth() == 0)
+	/*if (health == 0)
 	{
 		LPRequest request = new CGameRequest(REQUEST_TYPES::DeleteEntity);
 		request->id = this->id;
-		CGame::GetInstance()->AddRequest(request);
-	}
+		CGameRequest::AddRequest(request);
+	}*/
+
+	CEnemy::Update(dt);
 }
 
 void COrb::Render()
@@ -59,7 +60,7 @@ void COrb::SetState()
 
 void COrb::GetState(DWORD dt)
 {
-	switch (horizontalState)
+	switch (state)
 	{
 	case ORB_MOVE_RIGHT:
 		MoveRight(dt);
@@ -81,13 +82,13 @@ void COrb::MoveLeft(DWORD dt)
 	velocity.x = -speed * dt;
 	currentAni = moveLeftAni;
 
-	move(dt);
+	Move(dt);
 	collisionBox->Update();
 
 	if (velocity.x == 0)
 	{
 		turnRightAni->Reset();
-		horizontalState = ORB_TURN_RIGHT;
+		state = ORB_TURN_RIGHT;
 	}
 }
 
@@ -96,13 +97,13 @@ void COrb::MoveRight(DWORD dt)
 	velocity.x = speed * dt;
 	currentAni = moveRightAni;
 
-	move(dt);
+	Move(dt);
 	collisionBox->Update();
 
 	if (velocity.x == 0)
 	{
 		turnLeftAni->Reset();
-		horizontalState = ORB_TURN_LEFT;
+		state = ORB_TURN_LEFT;
 	}
 }
 
@@ -112,7 +113,7 @@ void COrb::TurnLeft(DWORD dt)
 	currentAni = turnLeftAni;
 
 	if (currentAni->IsEnd())
-		horizontalState = ORB_MOVE_LEFT;
+		state = ORB_MOVE_LEFT;
 }
 
 void COrb::TurnRight(DWORD dt)
@@ -121,5 +122,5 @@ void COrb::TurnRight(DWORD dt)
 	currentAni = turnRightAni;
 
 	if (currentAni->IsEnd())
-		horizontalState = ORB_MOVE_RIGHT;
+		state = ORB_MOVE_RIGHT;
 }

@@ -1,6 +1,6 @@
 #include "AntiPlayer.h"
 
-void CAntiPlayer::move(DWORD dt)
+void CAntiPlayer::Move(DWORD dt)
 {
 }
 
@@ -11,7 +11,7 @@ void CAntiPlayer::SetPosition(float _x, float _y)
 
 CAntiPlayer::CAntiPlayer(float l, float t, float r, float b) : CEntity()
 {
-	SetType(GOTYPES::Enemy);
+	SetType(GOTYPES::EnemyBullet);
 	position = Vector(-1, -1);
 	velocity = Vector(0, 0);
 

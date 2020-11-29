@@ -79,7 +79,7 @@ void CGrid::Update(DWORD dt, int &_count)
 
 		LPRequest request = new CGameRequest(REQUEST_TYPES::SetEnetity);
 		request->entity = e;
-		game->AddRequest(request);
+		CGameRequest::AddRequest(request);
 
 		//this->RemoveEntity(e->GetId());
 		removeList.pop_front();

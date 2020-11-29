@@ -30,7 +30,7 @@ CJumper::CJumper() : CEntity()
 
 	moveRightAni->Add(idsR, 3);
 
-	horizontalState = JUMPER_MOVE_RIGHT;
+	state = JUMPER_MOVE_RIGHT;
 }
 
 void CJumper::Update(DWORD dt)
@@ -43,11 +43,11 @@ void CJumper::Update(DWORD dt)
 
 void CJumper::Render()
 {
-	if (horizontalState == JUMPER_MOVE_LEFT)
+	if (state == JUMPER_MOVE_LEFT)
 	{
 		moveLeftAni->Render(position);
 	}
-	else if (horizontalState == JUMPER_MOVE_RIGHT)
+	else if (state == JUMPER_MOVE_RIGHT)
 	{
 		moveRightAni->Render(position);
 	}
@@ -60,7 +60,7 @@ void CJumper::SetState()
 
 void CJumper::GetState(DWORD dt)
 {
-	switch (horizontalState)
+	switch (state)
 	{
 	case JUMPER_MOVE_RIGHT:
 		MoveRight(dt);
@@ -80,7 +80,7 @@ void CJumper::MoveLeft(DWORD dt)
 
 	if (position.x <= 50)
 	{
-		horizontalState = JUMPER_MOVE_RIGHT;
+		state = JUMPER_MOVE_RIGHT;
 	}
 }
 
@@ -90,7 +90,7 @@ void CJumper::MoveRight(DWORD dt)
 
 	if (position.x >= 320)
 	{
-		horizontalState = JUMPER_MOVE_LEFT;
+		state = JUMPER_MOVE_LEFT;
 	}
 }
 

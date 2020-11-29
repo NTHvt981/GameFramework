@@ -6,7 +6,7 @@
 class CAntiPlayer: public CEntity
 {
 protected:
-	void move(DWORD dt);
+	void Move(DWORD dt);
 public:
 	CAntiPlayer(float l, float t, float r, float b);
 

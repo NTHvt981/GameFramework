@@ -25,6 +25,16 @@ Vector CEntity::GetPosition()
 	return position;
 }
 
+void CEntity::SetCenter(float _x, float _y)
+{
+	Vector size = collisionBox->GetSize();
+	Vector col_local_pos = collisionBox->GetLocalPosition();
+	float pos_x = _x - size.x / 2 - col_local_pos.x;
+	float pos_y = _y - size.y / 2 - col_local_pos.y;
+
+	SetPosition(pos_x, pos_y);
+}
+
 Vector CEntity::GetCenter()
 {
 	float l, t, r, b;
@@ -43,10 +53,14 @@ int CEntity::GetId()
 
 
 
-void CEntity::move(DWORD dt)
+void CEntity::Move(DWORD dt)
 {
 	velocity.y += gravity;
+	MoveWithoutGravity(dt);
+}
 
+void CEntity::MoveWithoutGravity(DWORD dt)
+{
 	Vector vel_x(velocity.x, 0);
 	Vector vel_y(0, velocity.y);
 
@@ -62,29 +76,24 @@ void CEntity::move(DWORD dt)
 		position.y = position.y + vel_y.y;
 		velocity.y = vel_y.y;
 		collisionBox->Update();
-
-		//collisionBox->CalculateCollision(velocity, collideEvents);
-		//position = position + velocity;
-		//collisionBox->Update();
 	}
-
 }
 
-void CEntity::SetMaxHealth(int mh)
-{
-	maxHealth = mh;
-	health = mh;
-}
-
-int CEntity::GetHealth()
-{
-	return health;
-}
-
-void CEntity::InflictDamage(int dam)
-{
-	health = max(0, health - dam);
-}
+//void CEntity::SetMaxHealth(int mh)
+//{
+//	maxHealth = mh;
+//	health = mh;
+//}
+//
+//int CEntity::GetHealth()
+//{
+//	return health;
+//}
+//
+//void CEntity::InflictDamage(int dam)
+//{
+//	health = max(0, health - dam);
+//}
 
 LPDynamicBox CEntity::GetCollisionBox()
 {

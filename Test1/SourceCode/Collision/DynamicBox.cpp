@@ -138,3 +138,8 @@ Vector CDynamicBox::GetSize()
 {
 	return this->size;
 }
+
+Vector CDynamicBox::GetLocalPosition()
+{
+	return localPosition;
+}

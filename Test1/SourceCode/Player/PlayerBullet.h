@@ -1,12 +1,11 @@
 #pragma once
 
-#include "../GameObject/Entity.h"
+#include "../GameObject/Enemies/Enemy.h"
 #include "../Timer/Timer.h"
 #include "../Constraints.h"
 #include "../Unit/Sprite.h"
 #include "../Library/SpriteLibrary.h"
 
-#include "../Game/Game.h"
 #include "../Game/GameRequest.h"
 
 class CPlayerBullet: public CEntity

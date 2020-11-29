@@ -19,8 +19,8 @@ This sample illustrates how to:
 WARNING: This one file example has a hell LOT of *sinful* programming practices
 ================================================================ */
 
-#include "SourceCode\Constraints.h"
 #include "SourceCode\Game\Game.h"
+#include "SourceCode\Constraints.h"
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {

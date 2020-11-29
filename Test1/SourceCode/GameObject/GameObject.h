@@ -9,6 +9,7 @@ enum class GOTYPES
 	Wall,
 	Dynamic,
 	Porter,
+	Ladder,
 
 	Enemy,
 	EnemyBullet,

@@ -1,6 +1,6 @@
 #include "Wall.h"
 
-void CWall::move(DWORD dt)
+void CWall::Move(DWORD dt)
 {
 }
 

@@ -1,18 +1,18 @@
 #pragma once
 
-#include "../Entity.h"
+//#include "../Entity.h"
+#include "Enemy.h"
 #include "../Physic.h"
 #include "../../Constraints.h"
 #include "../../Unit/Animation.h"
 #include "../../Game/GameRequest.h"
-#include "../../Game/Game.h"
 
 #define ORB_MOVE_LEFT 0
 #define ORB_TURN_RIGHT 1
 #define ORB_TURN_LEFT 2
 #define ORB_MOVE_RIGHT 3
 
-class COrb: public CEntity
+class COrb: public CEnemy
 {
 private:
 	float speed = 1;
@@ -26,7 +26,7 @@ private:
 
 	LPAnimation currentAni;
 
-	int horizontalState;
+	int state;
 
 private:
 	void SetState();

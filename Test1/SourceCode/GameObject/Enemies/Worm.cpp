@@ -1,10 +1,9 @@
 #include "Worm.h"
 
-CWorm::CWorm() : CEntity()
+CWorm::CWorm() : CEnemy()
 {
 	SetMaxHealth(5);
 	gravity = 0.25;
-	SetType(GOTYPES::Enemy);
 
 	this->collisionBox = new CDynamicBox(
 		this,
@@ -29,7 +28,7 @@ CWorm::CWorm() : CEntity()
 
 	crawlRightAni->Add(idsR, 2);
 
-	horizontalState = WORM_MOVE_RIGHT;
+	state = WORM_MOVE_RIGHT;
 }
 
 void CWorm::Update(DWORD dt)
@@ -38,31 +37,32 @@ void CWorm::Update(DWORD dt)
 
 	collisionBox->Update();
 
-	if (GetHealth() == 0)
-	{
-		LPRequest request = new CGameRequest(REQUEST_TYPES::DeleteEntity);
-		request->id = this->id;
-		CGame::GetInstance()->AddRequest(request);
-	}
+	CEnemy::Update(dt);
+	//if (health == 0)
+	//{
+	//	LPRequest request = new CGameRequest(REQUEST_TYPES::DeleteEntity);
+	//	request->id = this->id;
+	//	CGameRequest::AddRequest(request);
+	//}
 }
 
 void CWorm::Render()
 {
-	if (horizontalState == WORM_MOVE_RIGHT)
+	if (state == WORM_MOVE_RIGHT)
 	{
 		crawlRightAni->Render(position);
 	}
-	else if (horizontalState == WORM_MOVE_LEFT)
+	else if (state == WORM_MOVE_LEFT)
 	{
 			crawlLeftAni->Render(position);
 	}
 	collisionBox->Render();
 }
 
-void CWorm::move(DWORD dt)
+void CWorm::Move(DWORD dt)
 {
 	//debug comment
-	CEntity::move(dt);
+	CEntity::Move(dt);
 
 #pragma region debug code
 
@@ -76,7 +76,7 @@ void CWorm::SetState()
 
 void CWorm::GetState(DWORD dt)
 {
-	switch (horizontalState)
+	switch (state)
 	{
 	case WORM_MOVE_RIGHT:
 		MoveRight(dt);
@@ -96,10 +96,10 @@ void CWorm::MoveLeft(DWORD dt)
 
 	if (position.x <= 10)
 	{
-		horizontalState = WORM_MOVE_RIGHT;
+		state = WORM_MOVE_RIGHT;
 	}
 
-	move(dt);
+	Move(dt);
 
 	crawlLeftAni->SetMode(ANIMATION_NORMAL);
 	crawlRightAni->SetMode(ANIMATION_REVERSE);
@@ -111,10 +111,10 @@ void CWorm::MoveRight(DWORD dt)
 
 	if (position.x >= 320)
 	{
-		horizontalState = WORM_MOVE_LEFT;
+		state = WORM_MOVE_LEFT;
 	}
 
-	move(dt);
+	Move(dt);
 
 	crawlLeftAni->SetMode(ANIMATION_REVERSE);
 	crawlRightAni->SetMode(ANIMATION_NORMAL);

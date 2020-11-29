@@ -1,6 +1,11 @@
 #pragma once
 #include <map>
+#include "..\Player\Player.h"
+#include "..\Player\Sophia.h"
+#include "..\Player\Jason.h"
+
 #include "..\Constraints.h"
+
 #include "..\Graphic\Graphic.h"
 #include "GameRequest.h"
 
@@ -10,7 +15,7 @@
 #include "..\Debug\Debug.h"
 
 #include "..\GameObject\GameObject.h"
-#include "..\Player\Player.h"
+
 #include "..\GameObject\StaticObjects\AntiPlayer.h"
 #include "..\GameObject\Enemies\Worm.h"
 #include "..\GameObject\Enemies\Dome.h"
@@ -67,7 +72,7 @@ private:
 	map<int, CArea*> areas;
 	map<int, CPortal*> portals;
 
-	list<LPRequest> requestList;
+	//list<LPRequest> requestList;
 
 private:
 	static CGame* __instance;
@@ -123,7 +128,7 @@ public:
 
 	LPEntity GetEntity(int id);
 
-	void AddRequest(LPRequest re);
+	//void AddRequest(LPRequest re);
 
 private:
 	void ExecuteRequests(list<LPRequest> requests);

@@ -22,7 +22,7 @@ private:
 	LPAnimation moveLeftAni;
 	LPAnimation moveRightAni;
 
-	int horizontalState = JUMPER_DONT_MOVE;
+	int state = JUMPER_DONT_MOVE;
 	int verticalState = JUMPER_ON_GROUND;
 
 private:

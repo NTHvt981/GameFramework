@@ -3,7 +3,6 @@
 #include "../Entity.h"
 #include "../../Constraints.h"
 #include "../../Game/GameRequest.h"
-#include "../../Game/Game.h"
 
 class CEnemy: public CEntity
 {

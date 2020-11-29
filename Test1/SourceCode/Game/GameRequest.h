@@ -12,6 +12,9 @@ enum REQUEST_TYPES
 
 class CGameRequest
 {
+public:
+	static list<LPRequest> RequestList;
+
 	//fields
 public:
 	REQUEST_TYPES type;
@@ -28,5 +31,6 @@ public:
 	//method
 public:
 	CGameRequest(REQUEST_TYPES t);
+	static void AddRequest(LPRequest re);
 };
 

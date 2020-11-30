@@ -26,9 +26,9 @@ private:
     LPAnimation crawlLeftAnimation;
     LPAnimation crawlRightAnimation;
 
-    int state = JASON_WALK;
-    int facing = RIGHT;
-    int pace = STILL;
+    int state;
+    int facing;
+    int pace;
 
     float walkSpeed = 0.75;
     float crawlSpeed = 0.25;
@@ -40,11 +40,14 @@ private:
     Vector posCrawlSpr = Vector(-8, 8);
 
 protected:
-    void SetState(DWORD dt);
-    void GetState(DWORD dt);
+    void ApplyState(DWORD dt);
+    void HandleSwitchToSophia();
 
 public:
-    CJason();
+    void SetFacing(int _facing);
+
+public:
+    CJason(int _state = JASON_WALK, int _facing = RIGHT, int _pace = STILL);
     void Update(DWORD dt);
     void Render();
 
@@ -57,5 +60,10 @@ protected:
     void SetHealthAnimation(DWORD dt);
 
     void Shoot(int aim_direction);
+
+private:
+    static CJason* __instance;
+public:
+    static CJason* GetInstance();
 };
 

@@ -1,100 +1,6 @@
 #include "Sophia.h"
 
-void CSophia::onLeft(DWORD dt)
-{
-	if (keyRight)
-		nextState = ON_RIGHT;
-
-	if (keyUp) face = FACE_UP_LEFT;
-	else face = FACE_LEFT;
-
-	headSprite = CSpriteLibrary::GetInstance()->Get(ID_SOPHIA_HEAD_LEFT);
-	showCanon = true;
-}
-
-void CSophia::onRight(DWORD dt)
-{
-	if (keyLeft)
-		nextState = ON_LEFT;
-
-	if (keyUp) face = FACE_UP_RIGHT;
-	else face = FACE_RIGHT;
-
-	headSprite = CSpriteLibrary::GetInstance()->Get(ID_SOPHIA_HEAD_RIGHT);
-	showCanon = true;
-}
-
-void CSophia::onLeftTurnRight(DWORD dt)
-{
-	if (headTurnRightAni->IsEnd())
-		nextState = ON_RIGHT;
-
-	headAni = headTurnRightAni;
-	showCanon = false;
-}
-
-void CSophia::onRightTurnLeft(DWORD dt)
-{
-	if (headTurnRightAni->IsEnd())
-		nextState = ON_LEFT;
-
-	headAni = headTurnLeftAni;
-	showCanon = false;
-}
-
-void CSophia::onLeftEjectJason(DWORD dt)
-{
-	if (headOnLeftEjectJasonAni->IsEnd())
-		nextState = ON_LEFT;
-
-	headAni = headOnLeftEjectJasonAni;
-	showCanon = false;
-}
-
-void CSophia::onRightEjectJason(DWORD dt)
-{
-	if (headOnRightEjectJasonAni->IsEnd())
-		nextState = ON_RIGHT;
-
-	headAni = headOnRightEjectJasonAni;
-	showCanon = false;
-}
-
-void CSophia::SetState(DWORD dt)
-{
-	if (keyLeft) pace = MOVE_LEFT;
-	else if (keyRight) pace = MOVE_RIGHT;
-	else pace = STILL;
-
-	switch (state)
-	{
-	case ON_LEFT:
-		onLeft(dt);
-		break;
-	case ON_RIGHT:
-		onLeft(dt);
-		break;
-
-	case ON_LEFT_TURN_RIGHT:
-		onLeftTurnRight(dt);
-		break;
-	case ON_RIGHT_TURN_LEFT:
-		onRightTurnLeft(dt);
-		break;
-
-	case ON_LEFT_EJECT_JASON:
-		onLeftEjectJason(dt);
-		break;
-	case ON_RIGHT_EJECT_JASON:
-		onRightEjectJason(dt);
-		break;
-	default:
-		break;
-	}
-
-	prevState = state;
-	state = nextState;
-}
+CSophia* CSophia::__instance = NULL;
 
 void CSophia::GetState(DWORD dt)
 {
@@ -118,21 +24,50 @@ void CSophia::GetState(DWORD dt)
 	{
 	case FACE_LEFT:
 		canonPivot = &leftCanonPivot;
+		headPivot = &leftHeadPivot;
+		leftWheelPivot = &leftWheelOnGroundPivot;
+		rightWheelPivot = &rightWheelOnGroundPivot;
+
 		canonSprite = CSpriteLibrary::GetInstance()->Get(ID_SOPHIA_GUN_LEFT);
+		headSprite = CSpriteLibrary::GetInstance()->Get(ID_SOPHIA_HEAD_LEFT);
 
 		leftWheelPivot = &leftWheelOnGroundPivot;
 		rightWheelPivot = &rightWheelOnGroundPivot;
 		break;
 	case FACE_RIGHT:
+		canonPivot = &rightCanonPivot;
+		headPivot = &rightHeadPivot;
+		leftWheelPivot = &leftWheelOnGroundPivot;
+		rightWheelPivot = &rightWheelOnGroundPivot;
+
+		canonSprite = CSpriteLibrary::GetInstance()->Get(ID_SOPHIA_GUN_RIGHT);
+		headSprite = CSpriteLibrary::GetInstance()->Get(ID_SOPHIA_HEAD_RIGHT);
+
 		leftWheelPivot = &leftWheelOnGroundPivot;
 		rightWheelPivot = &rightWheelOnGroundPivot;
 		break;
 
 	case FACE_UP_LEFT:
+		canonPivot = &upLeftCanonPivot;
+		headPivot = &upLeftHeadPivot;
+		leftWheelPivot = &leftWheelStandingPivot;
+		rightWheelPivot = &rightWheelStandingPivot;
+
+		canonSprite = CSpriteLibrary::GetInstance()->Get(ID_SOPHIA_GUN_UP);
+		headSprite = CSpriteLibrary::GetInstance()->Get(ID_SOPHIA_HEAD_UPLEFT);
+
 		leftWheelPivot = &leftWheelStandingPivot;
 		rightWheelPivot = &rightWheelStandingPivot;
 		break;
 	case FACE_UP_RIGHT:
+		canonPivot = &upRightCanonPivot;
+		headPivot = &upRightHeadPivot;
+		leftWheelPivot = &leftWheelStandingPivot;
+		rightWheelPivot = &rightWheelStandingPivot;
+
+		canonSprite = CSpriteLibrary::GetInstance()->Get(ID_SOPHIA_GUN_UP);
+		headSprite = CSpriteLibrary::GetInstance()->Get(ID_SOPHIA_HEAD_UPRIGHT);
+
 		leftWheelPivot = &leftWheelStandingPivot;
 		rightWheelPivot = &rightWheelStandingPivot;
 		break;
@@ -185,24 +120,45 @@ void CSophia::Update(DWORD dt)
 
 	CInput* input = CInput::GetInstance();
 
-	keyUp = input->IsKeyDown(DIK_A);
-	keyLeft = input->IsKeyDown(DIK_W);
+	keyUp = input->IsKeyDown(DIK_W);
+	keyLeft = input->IsKeyDown(DIK_A);
 	keyRight = input->IsKeyDown(DIK_D);
 	keyDown = input->IsKeyDown(DIK_S);
 
-	keyJump = input->IsKeyDown(DIK_J);
-	keyShoot = input->IsKeyDown(DIK_K);
-	keySwitchPlayer = input->IsKeyDown(DIK_L);
+	keyJump = input->IsKeyDown(DIK_K);
+	keyShoot = input->IsKeyDown(DIK_J);
+	keySwitchPlayer = input->IsKeyPressed(DIK_L);
 
 	velocity.x = dt * speed * (keyRight - keyLeft);
 
-	if (onGround && keyUp)
+	if (onGround && keyJump)
 		velocity.y = -jumpSpeed;
 
-	SetState(dt);
+	if (keyRight)
+		pace = MOVE_RIGHT;
+	else if (keyLeft)
+		pace = MOVE_LEFT;
+	else
+		pace = STILL;
+
+	if (keyUp)
+	{
+		if (face == FACE_RIGHT || keyRight)
+			face = FACE_UP_RIGHT;
+		else if (face == FACE_LEFT || keyLeft)
+			face = FACE_UP_LEFT;
+	}
+	else
+	{
+		if (keyRight) face = FACE_RIGHT;
+		else if (keyLeft) face = FACE_LEFT;
+	}
+
+	//SetState(dt);
 	GetState(dt);
 
 	HandleShooting(dt);
+	HandleSwitchToJason();
 
 	old_velocity.Set(velocity.x, velocity.y);
 	Move(dt);
@@ -222,6 +178,11 @@ void CSophia::Update(DWORD dt)
 
 	if (healthSystem->GetHealthState() == INVULNERABLE)
 		SetHealthAnimation(dt);
+	else
+	{
+		showCanon = true;
+		showHead = true;
+	}
 }
 
 void CSophia::Render()
@@ -234,20 +195,14 @@ void CSophia::Render()
 	leftWheelAni->Render(*leftWheelPivot + position);
 	rightWheelAni->Render(*rightWheelPivot + position);
 
-	headSprite->Draw(*headPivot + position + add_up);
-	bodySprite->Draw(*bodyPivot + position + add_up);
-	canonSprite->Draw(*canonPivot + position + add_up);
+	if (showHead) headSprite->Draw(*headPivot + position + add_up);
+	bodySprite->Draw(bodyPivot + position + add_up);
+	if (showCanon) canonSprite->Draw(*canonPivot + position + add_up);
 	collisionBox->Render();
 }
 
 void CSophia::SetHealthAnimation(DWORD dt)
 {
-	CSpriteLibrary* lib = CSpriteLibrary::GetInstance();
-
-	//Get id of canon and head
-	int canonSpriteId = canonSprite->GetId();
-	int headSpriteId = headSprite->GetId();
-
 	healthAniCountTime += dt;
 	if (healthAniCountTime >= healthAniWaitTime)
 	{
@@ -265,8 +220,13 @@ void CSophia::SetHealthAnimation(DWORD dt)
 
 	if (healthAniWhiteFlip)
 	{
-		canonSprite = lib->Get(canonSpriteId + 100);
-		headSprite = lib->Get(headSpriteId + 100);
+		showCanon = false;
+		showHead = false;
+	}
+	else
+	{
+		showCanon = true;
+		showHead = true;
 	}
 }
 
@@ -277,19 +237,19 @@ void CSophia::Shoot()
 
 	switch (face)
 	{
-	case SOPHIA_AIM_UPRIGHT:
+	case FACE_UP_RIGHT:
 		shoot_pivot = &shootUpRightPivot;
 		direction.y = -1;
 		break;
-	case SOPHIA_AIM_UPLEFT:
+	case FACE_UP_LEFT:
 		shoot_pivot = &shootUpLeftPivot;
 		direction.y = -1;
 		break;
-	case SOPHIA_AIM_RIGHT:
+	case FACE_RIGHT:
 		shoot_pivot = &shootRightPivot;
 		direction.x = 1;
 		break;
-	case SOPHIA_AIM_LEFT:
+	case FACE_LEFT:
 		shoot_pivot = &shootLeftPivot;
 		direction.x = -1;
 		break;
@@ -318,4 +278,67 @@ void CSophia::Shoot()
 
 	shootCountTime = 0;
 	canShoot = false;
+}
+
+void CSophia::HandleSwitchToJason()
+{
+	if (keySwitchPlayer)
+	{
+		if (face != FACE_LEFT && face != FACE_RIGHT)
+			return;
+
+		CSophiaFake* faker = CSophiaFake::GetInstance();
+
+		faker->canonPivot = *canonPivot;
+		faker->headPivot = *headPivot;
+		faker->bodyPivot = bodyPivot;
+		faker->leftWheelPivot = *leftWheelPivot;
+		faker->rightWheelPivot = *rightWheelPivot;
+
+		faker->canonSprite = canonSprite;
+		faker->headSprite = headSprite;
+		faker->bodySprite = bodySprite;
+		faker->leftWheelAni = leftWheelAni;
+		faker->rightWheelAni = rightWheelAni;
+
+		faker->realSophiaId = GetId();
+
+		CJason* jason = CJason::GetInstance();
+		Vector center = GetPosition();
+
+		if (face == FACE_LEFT)
+		{
+			jason->SetFacing(LEFT);
+
+			center = center + ejectJasonLeftPivot;
+		}
+		else if (face == FACE_RIGHT)
+		{
+			jason->SetFacing(RIGHT);
+
+			center = center + ejectJasonRightPivot;
+		}
+		jason->SetCenter(
+			center.x,
+			center.y
+		);
+
+		LPRequest switchJasonReq = new CGameRequest(REQUEST_TYPES::SwitchToJason);
+		CGameRequest::AddRequest(switchJasonReq);
+
+		LPRequest fakeSophiaReq = new CGameRequest(REQUEST_TYPES::CreateEntity);
+		fakeSophiaReq->entity = faker;
+		fakeSophiaReq->x = position.x;
+		fakeSophiaReq->y = position.y;
+
+		CGameRequest::AddRequest(fakeSophiaReq);
+	}
+}
+
+CSophia* CSophia::GetInstance()
+{
+	if (__instance == NULL)
+		__instance = new CSophia();
+
+	return __instance;
 }

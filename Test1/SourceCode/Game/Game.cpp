@@ -33,10 +33,12 @@ void CGame::LoadResources()
 	LoadEnemies();
 
 	//CSophia* player = new CSophia();
-	CPlayer* player = new CSophia();
+	CPlayer* player = CSophia::GetInstance();
 	player->SetPosition(200, 92*32);
-	AddGameObject(player);
+	//AddGameObject(player);
 	CPlayer::SetCurrentPlayer(player);
+
+	CSophiaFake::GetInstance()->Disable();
 }
 
 void CGame::LoadTextures()
@@ -406,8 +408,6 @@ void CGame::Update(DWORD dt)
 	default:
 		break;
 	}
-
-	ExecuteRequests(CGameRequest::RequestList);
 }
 
 void CGame::UpdateCamera()
@@ -518,8 +518,8 @@ void CGame::SetAreaTransition(CPortal* p)
 
 void CGame::NormalMode(DWORD dt)
 {
-	CPlayer* player = CPlayer::GetCurrentPlayer();
-	CCamera* cam = CCamera::GetInstance();
+	//CPlayer* player = CPlayer::GetCurrentPlayer();
+	//CCamera* cam = CCamera::GetInstance();
 
 	UpdatePlayer(dt);
 	UpdateCamera();
@@ -594,7 +594,10 @@ void CGame::Render()
 		//tiles -> enemies -> player -> portals
 		RenderTiles();
 		RenderEnemies();
+
+		CSophiaFake::GetInstance()->Render();
 		RenderPlayer();
+
 		RenderPortals();
 
 		spriteHandler->End();
@@ -603,6 +606,8 @@ void CGame::Render()
 
 	// Display back buffer content to the screen
 	d3ddev->Present(NULL, NULL, NULL, NULL);
+
+	ExecuteRequests(CGameRequest::RequestList);
 }
 
 void CGame::RenderTiles()
@@ -789,6 +794,18 @@ void CGame::ExecuteRequest(LPRequest request)
 		break;
 	case REQUEST_TYPES::SetEnetity:
 		SetEntity(request->entity);
+		break;
+
+	case REQUEST_TYPES::SwitchToJason:
+		CPlayer::SetCurrentPlayer(CJason::GetInstance());
+
+		CSophiaFake::GetInstance()->Enable();
+		break;
+
+	case REQUEST_TYPES::SwitchToSophia:
+		CPlayer::SetCurrentPlayer(CSophia::GetInstance());
+
+		CSophiaFake::GetInstance()->Disable();
 		break;
 	default:
 		break;

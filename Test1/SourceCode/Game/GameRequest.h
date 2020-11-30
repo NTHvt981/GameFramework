@@ -7,7 +7,10 @@ enum REQUEST_TYPES
 {
 	CreateEntity,
 	DeleteEntity,
-	SetEnetity
+	SetEnetity,
+
+	SwitchToJason,
+	SwitchToSophia
 };
 
 class CGameRequest

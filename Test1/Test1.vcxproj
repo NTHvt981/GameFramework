@@ -149,6 +149,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="SourceCode\Player\SophiaFake.h" />
     <ClInclude Include="SourceCode\Player\JasonBullet.h" />
     <ClInclude Include="SourceCode\GameObject\Enemies\Enemy.h" />
     <ClInclude Include="SourceCode\Player\Jason.h" />
@@ -198,6 +199,7 @@
     <ClInclude Include="SourceCode\Timer\Timer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="SourceCode\Player\SophiaFake.cpp" />
     <ClCompile Include="SourceCode\Player\JasonBullet.cpp" />
     <ClCompile Include="SourceCode\GameObject\Enemies\Enemy.cpp" />
     <ClCompile Include="SourceCode\Player\Jason.cpp" />

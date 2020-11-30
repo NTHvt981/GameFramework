@@ -19,7 +19,8 @@ enum class GOTYPES
 
 	//jason is the pilot, and sophia is the tank
 	Jason,
-	Sophia
+	Sophia,
+	FakeSophia
 };
 
 class CGameObject

@@ -1,6 +1,8 @@
 #include "Jason.h"
 
-void CJason::SetState(DWORD dt)
+CJason* CJason::__instance = NULL;
+
+void CJason::ApplyState(DWORD dt)
 {
 	switch (state)
 	{
@@ -18,14 +20,31 @@ void CJason::SetState(DWORD dt)
 	}
 }
 
-void CJason::GetState(DWORD dt)
+void CJason::HandleSwitchToSophia()
 {
+	if (IsCollidedWith(GOTYPES::FakeSophia))
+	{
+		if (CInput::GetInstance()->IsKeyPressed(DIK_L))
+		{
+			LPRequest switchSophiaReq = new CGameRequest(REQUEST_TYPES::SwitchToSophia);
+			CGameRequest::AddRequest(switchSophiaReq);
+		}
+	}
 }
 
-CJason::CJason() : CPlayer()
+void CJason::SetFacing(int _facing)
+{
+	facing = _facing;
+}
+
+CJason::CJason(int _state, int _facing, int _pace) : CPlayer()
 {
 	gravity = 0.2;
 	jumpSpeed = 3;
+
+	state = _state;
+	facing = _facing;
+	pace = _pace;
 
 	collisionBox = new CDynamicBox(
 		this,
@@ -75,7 +94,7 @@ void CJason::Update(DWORD dt)
 {
 	CPlayer::Update(dt);
 
-	SetState(dt);
+	ApplyState(dt);
 
 	CPlayerHealth* healthSystem = CPlayerHealth::GetInstance();
 	if (IsCollidedWith(GOTYPES::Enemy) || IsCollidedWith(GOTYPES::EnemyBullet))
@@ -91,6 +110,8 @@ void CJason::Update(DWORD dt)
 	}
 	else if (pace == MOTION)
 		animation->SetMode(ANIMATION_NORMAL);
+
+	HandleSwitchToSophia();
 }
 
 void CJason::Render()
@@ -100,6 +121,7 @@ void CJason::Render()
 		position.x + posToDraw->x,
 		position.y + posToDraw->y
 	));
+	collisionBox->Render();
 }
 
 void CJason::onWalk(DWORD dt)
@@ -242,4 +264,12 @@ void CJason::SetHealthAnimation(DWORD dt)
 
 void CJason::Shoot(int aim_direction)
 {
+}
+
+CJason* CJason::GetInstance()
+{
+	if (__instance == NULL)
+		__instance = new CJason();
+
+	return __instance;
 }

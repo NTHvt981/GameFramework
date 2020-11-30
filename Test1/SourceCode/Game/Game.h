@@ -3,6 +3,7 @@
 #include "..\Player\Player.h"
 #include "..\Player\Sophia.h"
 #include "..\Player\Jason.h"
+#include "..\Player\SophiaFake.h"
 
 #include "..\Constraints.h"
 

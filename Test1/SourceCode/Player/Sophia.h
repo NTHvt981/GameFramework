@@ -1,17 +1,7 @@
 #pragma once
 #include "Player.h"
-
-#define SOPHIA_MOVE_LEFT -1
-#define SOPHIA_DONT_MOVE 0
-#define SOPHIA_MOVE_RIGHT 1
-
-#define SOPHIA_ON_GROUND 0
-#define SOPHIA_ON_AIR 1
-
-#define SOPHIA_AIM_LEFT 0
-#define SOPHIA_AIM_RIGHT 1
-#define SOPHIA_AIM_UPLEFT 2
-#define SOPHIA_AIM_UPRIGHT 3
+#include "SophiaFake.h"
+#include "Jason.h"
 
 //state for side
 #define ON_LEFT 0
@@ -51,7 +41,7 @@ private:
 	Vector* canonPivot;
 	Vector* leftWheelPivot;
 	Vector* rightWheelPivot;
-	Vector* bodyPivot;
+	Vector bodyPivot = Vector(12, 18);
 
 	/*
 	standing is then sophia aim canon upward
@@ -68,8 +58,6 @@ private:
 	position y of head, body, canon of sophia -2 when on air
 
 	*/
-	Vector bodyOnGroundPivot = Vector(12, 18);
-	Vector bodyStandingPivot = Vector(11, 13);
 
 	Vector leftCanonPivot = Vector(3, 12);
 	Vector rightCanonPivot = Vector(20, 12);
@@ -90,12 +78,11 @@ private:
 	LPSprite canonSprite;
 	LPSprite bodySprite;
 
-	int state = ON_RIGHT;
-	int prevState = state;
-	int nextState = state;
 	int face = FACE_RIGHT;
 	int pace = STILL;
+
 	bool showCanon = true;
+	bool showHead = true;
 
 private:
 	//keys for input
@@ -107,15 +94,7 @@ private:
 	bool keyShoot;
 	bool keySwitchPlayer;
 
-	void onLeft(DWORD dt);
-	void onRight(DWORD dt);
-	void onLeftTurnRight(DWORD dt);
-	void onRightTurnLeft(DWORD dt);
-	void onLeftEjectJason(DWORD dt);
-	void onRightEjectJason(DWORD dt);
-
 protected:
-	void SetState(DWORD dt);
 	void GetState(DWORD dt);
 
 public:
@@ -127,5 +106,11 @@ protected:
 	void SetHealthAnimation(DWORD dt);
 
 	void Shoot();
+	void HandleSwitchToJason();
+
+private:
+	static CSophia *__instance;
+public:
+	static CSophia* GetInstance();
 };
 

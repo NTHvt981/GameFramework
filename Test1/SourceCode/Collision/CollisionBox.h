@@ -55,3 +55,4 @@ public:
 	void SetSolid(bool _solid);
 };
 
+bool CheckCollision(LPCollisionBox a, LPCollisionBox b);

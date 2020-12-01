@@ -4,42 +4,6 @@ CPlayerBullet::CPlayerBullet(Vector direction): CEntity() {
 	SetType(GOTYPES::PlayerBullet);
 	selfDestructTimer = new CTimer(75);
 	selfDestructTimer->Start();
-
-	Vector size = Vector(20, 6);
-	int sprId;
-
-	if (direction.x == 1)
-	{
-		sprId = ID_SOPHIA_BULLET_RIGHT;
-		velocity = Vector(speed, 0);
-	}
-	else if (direction.x == -1)
-	{
-		sprId = ID_SOPHIA_BULLET_LEFT;
-		velocity = Vector(-speed, 0);
-	}
-	else
-	{
-		if (direction.y == -1)
-		{
-			sprId = ID_SOPHIA_BULLET_UP;
-			velocity = Vector(0, -speed);
-
-			//swap size w and h of coli box
-			int temp = size.x;
-			size.x = size.y;
-			size.y = temp;
-		}
-	}
-
-	collisionBox = new CDynamicBox(
-		this, 0, 0, size.x, size.y
-	);
-	collisionBox->SetSolid(false);
-
-	sprite = CSpriteLibrary::GetInstance()->Get(sprId);
-
-	//DebugOut(L"[INFO] CREATE BULLET\n");
 }
 
 void CPlayerBullet::Update(DWORD dt)
@@ -75,6 +39,16 @@ void CPlayerBullet::Update(DWORD dt)
 		GetCollidedWith(GOTYPES::Enemy, ls);
 
 		dynamic_cast<LPEnemy>(ls.front())->InflictDamage(damage);
+
+		delete_condition = true;
+	}	
+	
+	if (IsCollidedWith(GOTYPES::BreakableWall))
+	{
+		list<LPGameObject> ls;
+		GetCollidedWith(GOTYPES::BreakableWall, ls);
+
+		dynamic_cast<CBreakableWall*>(ls.front())->Destroy();
 
 		delete_condition = true;
 	}

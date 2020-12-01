@@ -50,16 +50,7 @@ public:
 
 	void GetGridPosition(int &x, int &y);
 	void SetGridPosition(int x, int y);
-
-
-//private:
-//	int maxHealth = -1;
-//	int health = -1;
-//protected:
-//	void SetMaxHealth(int mh);
-//	int GetHealth();
-//
-//public:
-//	virtual void InflictDamage(int dam);
 };
+
+bool CheckCollision(LPEntity a, LPEntity b);
 

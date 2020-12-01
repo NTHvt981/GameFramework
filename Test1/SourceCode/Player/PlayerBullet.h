@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../GameObject/Enemies/Enemy.h"
+#include "../GameObject/StaticObjects/BreakableWall.h"
 #include "../Timer/Timer.h"
 #include "../Constraints.h"
 #include "../Unit/Sprite.h"
@@ -10,7 +11,7 @@
 
 class CPlayerBullet: public CEntity
 {
-private:
+protected:
 	float speed = 5;
 	const int damage = 2;
 	Vector old_velocity;

@@ -25,5 +25,9 @@ public:
 
 	bool IsCollideWithPlayer();
 	void SetIsCollideWithPlayer(bool b);
+
+	Vector localDeployPosition = Vector(-16, 12);
+	void SetDeploySide(int s);
+	void GetDeployPosition(float &x, float &y);
 };
 

@@ -64,6 +64,8 @@ void CEntity::MoveWithoutGravity(DWORD dt)
 	Vector vel_x(velocity.x, 0);
 	Vector vel_y(0, velocity.y);
 
+	collideEvents.clear();
+
 	//collisionBox->ResetCoCollisionBoxes();
 	if (collisionBox != NULL)
 	{
@@ -150,4 +152,9 @@ void CEntity::SetGridPosition(int x, int y)
 {
 	gridPosition.x = x;
 	gridPosition.y = y;
+}
+
+bool CheckCollision(LPEntity a, LPEntity b)
+{
+	return CheckCollision(a->GetCollisionBox(), b->GetCollisionBox());
 }

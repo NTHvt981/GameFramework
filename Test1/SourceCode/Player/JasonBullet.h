@@ -4,5 +4,7 @@
 
 class CJasonBullet: public CPlayerBullet
 {
+public:
+	CJasonBullet(Vector direction);
 };
 

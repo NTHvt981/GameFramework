@@ -20,7 +20,7 @@ void CSophia::GetState(DWORD dt)
 		break;
 	}
 
-	switch (face)
+	switch (facing)
 	{
 	case FACE_LEFT:
 		canonPivot = &leftCanonPivot;
@@ -143,15 +143,15 @@ void CSophia::Update(DWORD dt)
 
 	if (keyUp)
 	{
-		if (face == FACE_RIGHT || keyRight)
-			face = FACE_UP_RIGHT;
-		else if (face == FACE_LEFT || keyLeft)
-			face = FACE_UP_LEFT;
+		if (facing == FACE_RIGHT || keyRight)
+			facing = FACE_UP_RIGHT;
+		else if (facing == FACE_LEFT || keyLeft)
+			facing = FACE_UP_LEFT;
 	}
 	else
 	{
-		if (keyRight) face = FACE_RIGHT;
-		else if (keyLeft) face = FACE_LEFT;
+		if (keyRight) facing = FACE_RIGHT;
+		else if (keyLeft) facing = FACE_LEFT;
 	}
 
 	//SetState(dt);
@@ -235,7 +235,7 @@ void CSophia::Shoot()
 	Vector* shoot_pivot = &shootRightPivot;
 	Vector direction = Vector(0, 0);
 
-	switch (face)
+	switch (facing)
 	{
 	case FACE_UP_RIGHT:
 		shoot_pivot = &shootUpRightPivot;
@@ -263,7 +263,7 @@ void CSophia::Shoot()
 	try
 	{
 		LPRequest request = new CGameRequest(REQUEST_TYPES::CreateEntity);
-		request->entity = new CPlayerBullet(
+		request->entity = new CSophiaBullet(
 			direction
 		);
 		request->x = x;
@@ -282,9 +282,9 @@ void CSophia::Shoot()
 
 void CSophia::HandleSwitchToJason()
 {
-	if (keySwitchPlayer)
+	if (keySwitchPlayer && onGround && pace == STILL)
 	{
-		if (face != FACE_LEFT && face != FACE_RIGHT)
+		if (facing != FACE_LEFT && facing != FACE_RIGHT)
 			return;
 
 		CSophiaFake* faker = CSophiaFake::GetInstance();
@@ -306,13 +306,13 @@ void CSophia::HandleSwitchToJason()
 		CJason* jason = CJason::GetInstance();
 		Vector center = GetPosition();
 
-		if (face == FACE_LEFT)
+		if (facing == FACE_LEFT)
 		{
 			jason->SetFacing(LEFT);
 
 			center = center + ejectJasonLeftPivot;
 		}
-		else if (face == FACE_RIGHT)
+		else if (facing == FACE_RIGHT)
 		{
 			jason->SetFacing(RIGHT);
 

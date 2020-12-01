@@ -149,6 +149,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="SourceCode\GameObject\StaticObjects\Ladder.h" />
+    <ClInclude Include="SourceCode\GameObject\StaticObjects\BreakableWall.h" />
     <ClInclude Include="SourceCode\Player\SophiaFake.h" />
     <ClInclude Include="SourceCode\Player\JasonBullet.h" />
     <ClInclude Include="SourceCode\GameObject\Enemies\Enemy.h" />
@@ -199,6 +201,8 @@
     <ClInclude Include="SourceCode\Timer\Timer.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="SourceCode\GameObject\StaticObjects\Ladder.cpp" />
+    <ClCompile Include="SourceCode\GameObject\StaticObjects\BreakableWall.cpp" />
     <ClCompile Include="SourceCode\Player\SophiaFake.cpp" />
     <ClCompile Include="SourceCode\Player\JasonBullet.cpp" />
     <ClCompile Include="SourceCode\GameObject\Enemies\Enemy.cpp" />
@@ -255,6 +259,7 @@
     <Image Include="Resources\Texture\enemies.png" />
     <Image Include="Resources\Texture\My car spritesheet transparent.png" />
     <Image Include="Resources\Texture\My car spritesheet.png" />
+    <Image Include="Resources\Texture\OtherObjects.png" />
     <Image Include="Resources\Texture\Player health.png" />
     <Image Include="Resources\Texture\steel robot.png" />
     <Image Include="Resources\Texture\TileMap.png" />

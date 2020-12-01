@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "SophiaFake.h"
 #include "Jason.h"
+#include "SophiaBullet.h"
 
 //state for side
 #define ON_LEFT 0
@@ -78,7 +79,7 @@ private:
 	LPSprite canonSprite;
 	LPSprite bodySprite;
 
-	int face = FACE_RIGHT;
+	int facing = FACE_RIGHT;
 	int pace = STILL;
 
 	bool showCanon = true;
@@ -86,13 +87,6 @@ private:
 
 private:
 	//keys for input
-	bool keyLeft;
-	bool keyUp;
-	bool keyRight;
-	bool keyDown;
-	bool keyJump;
-	bool keyShoot;
-	bool keySwitchPlayer;
 
 protected:
 	void GetState(DWORD dt);

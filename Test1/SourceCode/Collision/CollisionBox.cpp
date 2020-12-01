@@ -102,7 +102,7 @@ void CCollisionBox::GetCollision(list<CollisionEvent>& events)
 		staticBottom = staticBox->GetBottom();
 
 		//if false -> garantee no Collision
-		if (CCollision::GetInstance()->AABBCheck(
+		if (AABBCheck(
 			left, top, right, bottom,
 			staticLeft, staticTop, staticRight, staticBottom
 		))
@@ -131,4 +131,15 @@ void CCollisionBox::GetLTRB(float &l, float &t, float &r, float &b)
 void CCollisionBox::SetSolid(bool _solid)
 {
 	this->solid = _solid;
+}
+
+bool CheckCollision(LPCollisionBox a, LPCollisionBox b)
+{
+	float al, at, ar, ab;
+	float bl, bt, br, bb;
+
+	a->GetLTRB(al, at, ar, ab);
+	b->GetLTRB(bl, bt, br, bb);
+
+	return AABBCheck(al, at, ar, ab, bl, bt, br, bb);
 }

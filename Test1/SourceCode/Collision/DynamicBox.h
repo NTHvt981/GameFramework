@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Constraints.h"
+#include "Collision.h"
 #include "CollisionBox.h"
 #include "CollisionEvent.h"
 #include "../GameObject/Entity.h"

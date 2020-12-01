@@ -7,6 +7,7 @@ enum class GOTYPES
 	Entity,
 	Static,
 	Wall,
+	BreakableWall,
 	Dynamic,
 	Porter,
 	Ladder,

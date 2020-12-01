@@ -56,7 +56,7 @@ void CPlayer::HandleShooting(DWORD dt)
 	}
 	else
 	{
-		if (input->IsKeyDown(DIK_J))
+		if (keyShoot)
 		{
 			//DebugOut(L"[INFO] SHOOT\n");
 			Shoot();

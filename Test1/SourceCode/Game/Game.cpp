@@ -49,6 +49,7 @@ void CGame::LoadTextures()
 	CTextureLibrary::GetInstance()->Add(PLAYER_HEALTH_TEXTURE, PLAYER_HEALTH_TEXTURE_PATH);
 	CTextureLibrary::GetInstance()
 		->Add(ID_TEX_BBOX, TEX_BBOX_PATH);
+	CTextureLibrary::GetInstance()->Add(OTHER_OBJECTS_TEXTURE, OTHER_OBJECTS_TEXTURE_PATH);
 }
 
 void CGame::LoadSprites()
@@ -56,6 +57,7 @@ void CGame::LoadSprites()
 	LPDIRECT3DTEXTURE9 textPlayer = CTextureLibrary::GetInstance()->Get(PLAYER_TEXTURE);
 	LPDIRECT3DTEXTURE9 textEnemies = CTextureLibrary::GetInstance()->Get(ENEMIES_TEXTURE);
 	LPDIRECT3DTEXTURE9 textPlayerHealth = CTextureLibrary::GetInstance()->Get(PLAYER_HEALTH_TEXTURE);
+	LPDIRECT3DTEXTURE9 textOtherObjects = CTextureLibrary::GetInstance()->Get(OTHER_OBJECTS_TEXTURE);
 	CSpriteLibrary* lib = CSpriteLibrary::GetInstance();
 
 	// CAR
@@ -180,6 +182,9 @@ void CGame::LoadSprites()
 
 	//	132	297	18	16
 	//	152	296	18	17
+
+	//other object sprite
+	lib->Add(ID_BREAKABLE_WALL, 1, 35, 17, 51, textOtherObjects);
 }
 
 void CGame::LoadLevel()
@@ -230,6 +235,21 @@ inline void CGame::LoadWalls(
 	}
 
 	AddEntity(new CWall(0, 89 * 32, 32, 96 * 32), 0, 91 * 32);
+
+	AddEntity(new CBreakableWall(84 * 16, 185 * 16, 85 * 16, 186 * 16), 0, 0);
+	AddEntity(new CBreakableWall(85 * 16, 185 * 16, 86 * 16, 186 * 16), 0, 0);
+
+	AddEntity(new CBreakableWall(80 * 16, 177 * 16, 81 * 16, 178 * 16), 0, 0);
+	AddEntity(new CBreakableWall(81 * 16, 177 * 16, 82 * 16, 178 * 16), 0, 0);
+
+	AddEntity(new CBreakableWall(84 * 16, 169 * 16, 85 * 16, 170 * 16), 0, 0);
+	AddEntity(new CBreakableWall(85 * 16, 169 * 16, 86 * 16, 170 * 16), 0, 0);
+
+	AddEntity(new CBreakableWall(80 * 16, 161 * 16, 81 * 16, 162 * 16), 0, 0);
+	AddEntity(new CBreakableWall(81 * 16, 161 * 16, 82 * 16, 162 * 16), 0, 0);
+
+	AddEntity(new CBreakableWall(80 * 16, 125 * 16, 81 * 16, 126 * 16), 0, 0);
+	AddEntity(new CBreakableWall(81 * 16, 125 * 16, 82 * 16, 126 * 16), 0, 0);
 }
 
 void CGame::LoadAntiPlayerZones(
@@ -276,25 +296,25 @@ void CGame::LoadAreas()
 void CGame::LoadPortals()
 {
 	const int range = 16;
-	int ls[range][5] = {
-		{ 12, 30, 92, 31, 92 },
-		{ 21, 33, 92, 33, 92 },
-		{ 23, 46, 60, 46, 60 },
-		{ 32, 49, 60, 49, 60 },
-		{ 34, 62, 60, 62, 60 },
-		{ 43, 65, 60, 65, 60 },
+	int ls[range][6] = {
+		{ 12, 30, 92, 30, 92, -1 },
+		{ 21, 33, 92, 33, 92, 1 },
+		{ 23, 46, 60, 46, 60, -1 },
+		{ 32, 49, 60, 49, 60, 1 },
+		{ 34, 62, 60, 62, 60, -1 },
+		{ 43, 65, 60, 65, 60, 1 },
 
-		{ 45, 65, 36, 65, 36},
-		{ 54, 62, 36, 62, 36},
-		{ 56, 62, 4, 62, 4},
-		{ 65, 65, 4, 65, 4},
-		{ 67, 78, 4, 78, 4},
-		{ 76, 81, 4, 81, 4},
+		{ 45, 65, 36, 65, 36, 1},
+		{ 54, 62, 36, 62, 36, -1},
+		{ 56, 62, 4, 62, 4, -1},
+		{ 65, 65, 4, 65, 4, 1},
+		{ 67, 78, 4, 78, 4, -1},
+		{ 76, 81, 4, 81, 4, 1},
 
-		{ 78, 81, 12, 81, 12},
-		{ 87, 78, 12, 78, 12},
-		{ 59, 49, 36, 49, 36},
-		{ 95, 46, 36, 46, 36}
+		{ 78, 81, 12, 81, 12, 1},
+		{ 87, 78, 12, 78, 12, -1},
+		{ 59, 49, 36, 49, 36, 1},
+		{ 95, 46, 36, 46, 36, -1}
 	};
 
 	for (int i = 0; i < range; i++)
@@ -309,9 +329,13 @@ void CGame::LoadPortals()
 		int t = ls[i][2] * 32 ;
 		int b = ls[i][4] * 32 + 32;
 
+		int side = ls[i][5];
+
 		portals[id] = new CPortal(l, t, r, b);
 		portals[id]->SetTargetId(reverseId);
 		portals[id]->SetAreaId(areaId);
+
+		portals[id]->SetDeploySide(side);
 	}
 }
 
@@ -401,8 +425,14 @@ void CGame::Update(DWORD dt)
 		NormalMode(dt);
 		break;
 
-	case CHANGEAREA_MODE:
-		TransitionMode(dt);
+	case BEGIN_CHANGEAREA_MODE:
+		BeginChangeAreaMode(dt);
+		break;
+	case DURING_CHANGEAREA_MODE:
+		DuringChangeAreaMode(dt);
+		break;
+	case END_CHANGEAREA_MODE:
+		EndChangeAreaMode(dt);
 		break;
 
 	default:
@@ -513,7 +543,7 @@ void CGame::SetAreaTransition(CPortal* p)
 	int destAreaId = destPortal->GetAreaId();
 	destArea = areas[destAreaId];
 
-	mode = CHANGEAREA_MODE;
+	mode = BEGIN_CHANGEAREA_MODE;
 }
 
 void CGame::NormalMode(DWORD dt)
@@ -526,7 +556,16 @@ void CGame::NormalMode(DWORD dt)
 	UpdatePortals(dt);
 }
 
-void CGame::TransitionMode(DWORD dt)
+void CGame::BeginChangeAreaMode(DWORD dt)
+{
+	CPlayer* player = CPlayer::GetCurrentPlayer();
+	CCamera* cam = CCamera::GetInstance();
+
+	player->Disable();
+	mode = DURING_CHANGEAREA_MODE;
+}
+
+void CGame::DuringChangeAreaMode(DWORD dt)
 {
 	CPlayer* player = CPlayer::GetCurrentPlayer();
 	CCamera* cam = CCamera::GetInstance();
@@ -546,35 +585,32 @@ void CGame::TransitionMode(DWORD dt)
 
 	if (dx == 0 && dy == 0)
 	{
-		currArea = destArea;
-		destPortal->SetIsCollideWithPlayer(true);
-		player->Enable();
-		mode = NORMAL_MODE;
-
-		//float portal_l, portal_t, portal_r, portal_b;
-		//destPortal->GetCollisionBox()->GetLTRB(
-		//	portal_l, portal_t, portal_r, portal_b
-		//);
-		//
-		//float x, y;
-		//x = (portal_l + portal_r) / 2 -
-		//	(player->GetCenter().x - player->GetPosition().x);
-		//y = (portal_b + portal_t) / 2 -
-		//	(player->GetCenter().y - player->GetPosition().y);
-		//player->SetPosition(
-		//	x, y
-		//);
-
-		player->SetCenter(
-			destPortal->GetCenter().x,
-			destPortal->GetCenter().y
-		);
+		mode = END_CHANGEAREA_MODE;
 	}
 	else
 	{
 		cam->Move(min(6, dx) * sidex, min(6, dy) * sidey);
-		player->Disable();
 	}
+}
+
+void CGame::EndChangeAreaMode(DWORD dt)
+{
+	CPlayer* player = CPlayer::GetCurrentPlayer();
+	CCamera* cam = CCamera::GetInstance();
+
+	currArea = destArea;
+	destPortal->SetIsCollideWithPlayer(true);
+	player->Enable();
+	mode = NORMAL_MODE;
+
+	float x, y;
+	destPortal->GetDeployPosition(x, y);
+	player->SetCenter(
+		x,
+		y
+	);
+
+	mode = NORMAL_MODE;
 }
 
 void CGame::Render()

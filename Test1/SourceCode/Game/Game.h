@@ -25,6 +25,7 @@
 #include "..\GameObject\Enemies\Walker.h"
 
 #include "..\GameObject\StaticObjects\Wall.h"
+#include "..\GameObject\StaticObjects\BreakableWall.h"
 
 #include "../FileAndString/ReadTileSet.h"
 #include "../FileAndString/StringHelper.h"
@@ -37,9 +38,13 @@
 #include "../GameObject/StaticObjects/Portal.h"
 
 #define NORMAL_MODE 0
-#define CHANGEAREA_MODE 1
-#define CHANGESCENE_MODE 2
-#define CUTSCENE_MODE 3
+
+#define BEGIN_CHANGEAREA_MODE 1
+#define DURING_CHANGEAREA_MODE 2
+#define END_CHANGEAREA_MODE 3
+
+#define CHANGESCENE_MODE 4
+#define CUTSCENE_MODE 5
 
 #define INTRO_SCENE 0
 #define SIDESCROLL_SCENE 1
@@ -105,7 +110,10 @@ private:
 
 	void SetAreaTransition(CPortal* p);
 	void NormalMode(DWORD dt);
-	void TransitionMode(DWORD dt);
+
+	void BeginChangeAreaMode(DWORD dt);
+	void DuringChangeAreaMode(DWORD dt);
+	void EndChangeAreaMode(DWORD dt);
 
 	void Render();
 

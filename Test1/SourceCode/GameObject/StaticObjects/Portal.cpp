@@ -74,3 +74,18 @@ void CPortal::SetIsCollideWithPlayer(bool b)
 {
 	alreadyCollideWithPlayer = b;
 }
+
+void CPortal::SetDeploySide(int s)
+{
+	if (s == 1)
+		localDeployPosition.x = 16;
+	else
+		localDeployPosition.x = -16;
+	localDeployPosition.y = 8;
+}
+
+void CPortal::GetDeployPosition(float& x, float& y)
+{
+	x = GetCenter().x + localDeployPosition.x;
+	y = GetCenter().y + localDeployPosition.y;
+}

@@ -6,6 +6,7 @@
 #define PLAYER_TEXTURE 1
 #define ENEMIES_TEXTURE 2
 #define PLAYER_HEALTH_TEXTURE 3
+#define OTHER_OBJECTS_TEXTURE 4
 
 using namespace std;
 

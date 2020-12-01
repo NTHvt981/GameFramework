@@ -50,6 +50,7 @@
 #define ENEMIES_TEXTURE_PATH L"./Resources/Texture/enemies.png"
 #define PLAYER_TEXTURE_PATH L"Resources/Texture/My car spritesheet transparent.png"
 #define PLAYER_HEALTH_TEXTURE_PATH L"Resources/Texture/Player health.png"
+#define OTHER_OBJECTS_TEXTURE_PATH L"Resources/Texture/OtherObjects.png"
 
 #define TEX_BBOX_PATH L"./Resources/Texture/bbox.png"
 #define ID_TEX_BBOX 999		// special texture to draw object bounding box
@@ -222,6 +223,12 @@
 #define ID_WALKER_3 2113
 #define ID_WALKER_4 2114
 #pragma endregion
+
+#define ID_BREAKABLE_WALL 6000
+#define ID_PORTAL_FACE_RIGHT_1 6001
+#define ID_PORTAL_FACE_RIGHT_2 6002
+#define ID_PORTAL_FACE_LEFT_1 6003
+#define ID_PORTAL_FACE_LEFT_2 6004
 //enum class GOTYPES;
 
 class CGameRequest;

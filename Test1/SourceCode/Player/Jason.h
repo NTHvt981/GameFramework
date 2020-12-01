@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "../Constraints.h"
 #include "../Unit/Animation.h"
+#include "JasonBullet.h"
 
 #define JASON_CRAWL 0
 #define JASON_WALK 1
@@ -26,6 +27,8 @@ private:
     LPAnimation crawlLeftAnimation;
     LPAnimation crawlRightAnimation;
 
+    bool showAnimation = true;
+
     int state;
     int facing;
     int pace;
@@ -37,7 +40,12 @@ private:
     Vector* posToDraw;
     Vector posClimbSpr = Vector(0, 0);
     Vector posWalkSpr = Vector(0, 0);
-    Vector posCrawlSpr = Vector(-8, 8);
+    Vector posCrawlSpr = Vector(-4, 8);
+
+    Vector shootLeftWalkPivot = Vector(0, 0);
+    Vector shootRightWalkPivot = Vector(0, 0);
+    Vector shootLeftCrawlPivot = Vector(0, 4);
+    Vector shootRightCrawlPivot = Vector(0, 4);
 
 protected:
     void ApplyState(DWORD dt);
@@ -59,7 +67,7 @@ private:
 protected:
     void SetHealthAnimation(DWORD dt);
 
-    void Shoot(int aim_direction);
+    void Shoot();
 
 private:
     static CJason* __instance;

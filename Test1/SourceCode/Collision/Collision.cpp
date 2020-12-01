@@ -50,7 +50,7 @@ void CCollision::AddActiveCollisionBoxes(list<int> lCBs)
 	activeCollisionBoxes.insert(activeCollisionBoxes.end(), lCBs.begin(), lCBs.end());
 }
 
-void CCollision::SweptAABB(
+void SweptAABB(
 	float move_left, float move_top, float move_right, float move_bottom,
 	float move_velocity_x, float move_velocity_y,
 	float static_left, float static_top, float static_right, float static_bottom,
@@ -172,7 +172,7 @@ void CCollision::SweptAABB(
 	}
 }
 
-void CCollision::GetSweptBroadphaseBox(
+void GetSweptBroadphaseBox(
 	float move_left, float move_top, float move_right, float move_bottom, 
 	float move_velocity_x, float move_velocity_y, 
 	float& target_left, float& target_top, float& target_right, float& target_bottom)
@@ -201,7 +201,7 @@ void CCollision::GetSweptBroadphaseBox(
 }
 
 //return true is there is collision between to rectangle
-bool CCollision::AABBCheck(
+bool AABBCheck(
 	float left_1, float top_1, float right_1, float bottom_1, 
 	float left_2, float top_2, float right_2, float bottom_2)
 {
@@ -212,7 +212,7 @@ bool CCollision::AABBCheck(
 		bottom_2 <= top_1);
 }
 
-void CCollision::Deflect(
+void Deflect(
 	float old_x, float old_y, 
 	float& new_x, float& new_y, 
 	float velocity_x, float velocity_y, 
@@ -244,7 +244,7 @@ void CCollision::Deflect(
 	new_y += velocity_y;
 }
 
-void CCollision::Push(
+void Push(
 	float old_x, float old_y, 
 	float& new_x, float& new_y, 
 	float velocity_x, float velocity_y, 
@@ -253,7 +253,7 @@ void CCollision::Push(
 {
 }
 
-void CCollision::Slide(
+void Slide(
 	float old_x, float old_y, 
 	float& new_x, float& new_y, 
 	float velocity_x, float velocity_y, 

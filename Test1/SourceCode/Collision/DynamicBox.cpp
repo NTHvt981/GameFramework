@@ -16,11 +16,10 @@ void CDynamicBox::Follow(float x, float y)
 
 void CDynamicBox::CalculateCollision(Vector& velocity, list<CollisionEvent>& events)
 {
-	events.clear();
 
 	//SweptBroadphaseBox
 	float broadLeft, broadRight, broadTop, broadBottom;
-	CCollision::GetInstance()->GetSweptBroadphaseBox(
+	GetSweptBroadphaseBox(
 		left, top, right, bottom,
 		velocity.x, velocity.y,
 		broadLeft, broadTop, broadRight, broadBottom
@@ -33,14 +32,14 @@ void CDynamicBox::CalculateCollision(Vector& velocity, list<CollisionEvent>& eve
 		staticBox->GetLTRB(staticLeft, staticTop, staticRight, staticBottom);
 
 		//if false -> there is no collision
-		if (CCollision::GetInstance()->AABBCheck(
+		if (AABBCheck(
 			broadLeft, broadTop, broadRight, broadBottom,
 			staticLeft, staticTop, staticRight, staticBottom
 		))
 		{
 			float collideTime, normalX, normalY;
 
-			CCollision::GetInstance()->SweptAABB(
+			SweptAABB(
 				left, top, right, bottom,
 				velocity.x, velocity.y,
 				staticLeft, staticTop, staticRight, staticBottom,
@@ -64,7 +63,7 @@ void CDynamicBox::CalculateCollision(Vector& velocity, list<CollisionEvent>& eve
 				if (staticBox->IsSolid())
 				{
 					float newX, newY;
-					CCollision::GetInstance()->Slide(
+					Slide(
 						left, top,
 						newX, newY,
 						velocity.x, velocity.y,
@@ -80,7 +79,7 @@ void CDynamicBox::CalculateCollision(Vector& velocity, list<CollisionEvent>& eve
 			//not recommend
 			else
 			{
-				if (CCollision::GetInstance()->AABBCheck(
+				if (AABBCheck(
 					left, top, right, bottom,
 					staticLeft, staticTop, staticRight, staticBottom
 				))

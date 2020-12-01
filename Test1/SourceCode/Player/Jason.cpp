@@ -94,6 +94,17 @@ void CJason::Update(DWORD dt)
 {
 	CPlayer::Update(dt);
 
+	CInput* input = CInput::GetInstance();
+
+	keyUp = input->IsKeyDown(DIK_W);
+	keyLeft = input->IsKeyDown(DIK_A);
+	keyRight = input->IsKeyDown(DIK_D);
+	keyDown = input->IsKeyDown(DIK_S);
+
+	keyJump = input->IsKeyDown(DIK_K);
+	keyShoot = input->IsKeyDown(DIK_J);
+	keySwitchPlayer = input->IsKeyPressed(DIK_L);
+
 	ApplyState(dt);
 
 	CPlayerHealth* healthSystem = CPlayerHealth::GetInstance();
@@ -111,16 +122,18 @@ void CJason::Update(DWORD dt)
 	else if (pace == MOTION)
 		animation->SetMode(ANIMATION_NORMAL);
 
+	HandleShooting(dt);
 	HandleSwitchToSophia();
 }
 
 void CJason::Render()
 {
 	//animation->Render(position + posToDraw);
-	animation->Render(Vector(
-		position.x + posToDraw->x,
-		position.y + posToDraw->y
-	));
+	if (showAnimation)
+		animation->Render(Vector(
+			position.x + posToDraw->x,
+			position.y + posToDraw->y
+		));
 	collisionBox->Render();
 }
 
@@ -132,7 +145,7 @@ void CJason::onWalk(DWORD dt)
 	);
 
 	if (onGround)
-		if (input->IsKeyDown(DIK_K))
+		if (keyJump)
 		{
 			velocity.y = -jumpSpeed;
 		}
@@ -207,7 +220,7 @@ void CJason::onCrawl(DWORD dt)
 	Move(dt);
 	collisionBox->Update();
 
-	if (input->IsKeyPressed(DIK_W))
+	if (keyUp)
 		state = JASON_WALK;
 
 	onGround = true;
@@ -252,18 +265,94 @@ void CJason::onClimb(DWORD dt)
 	/// </summary>
 	if (!IsCollidedWith(GOTYPES::Ladder))
 		state = JASON_WALK;
-	if (velocity.y == 0 && input->IsKeyDown(DIK_S))
+	if (velocity.y == 0 && keyDown)
 		state = JASON_WALK;
 
 	onGround = false;
+
+	SetHealthAnimation(dt);
 }
 
 void CJason::SetHealthAnimation(DWORD dt)
 {
+	CPlayerHealth* healthSystem = CPlayerHealth::GetInstance();
+
+	if (healthSystem->GetHealthState() == INVULNERABLE)
+	{
+		healthAniCountTime += dt;
+		if (healthAniCountTime >= healthAniWaitTime)
+		{
+			healthAniCountTime = 0;
+
+			if (healthAniWhiteFlip)
+			{
+				healthAniWhiteFlip = false;
+			}
+			else
+			{
+				healthAniWhiteFlip = true;
+			}
+		}
+	}
+	else healthAniWhiteFlip = false;
+
+	if (healthAniWhiteFlip)
+	{
+		showAnimation = false;
+	}
+	else
+	{
+		showAnimation = true;
+	}
 }
 
-void CJason::Shoot(int aim_direction)
+void CJason::Shoot()
 {
+	Vector* shoot_pivot = &shootRightWalkPivot;
+	Vector direction = Vector(0, 0);
+
+	if (facing == RIGHT && state == JASON_WALK)
+	{
+		shoot_pivot = &shootRightWalkPivot;
+		direction = Vector(1, 0);
+	}
+	else if (facing == LEFT && state == JASON_WALK)
+	{
+		shoot_pivot = &shootLeftWalkPivot;
+		direction = Vector(-1, 0);
+	}
+	else if (facing == RIGHT && state == JASON_CRAWL)
+	{
+		shoot_pivot = &shootRightCrawlPivot;
+		direction = Vector(1, 0);
+	}
+	else if (facing == LEFT && state == JASON_CRAWL)
+	{
+		shoot_pivot = &shootLeftCrawlPivot;
+		direction = Vector(-1, 0);
+	}
+
+	float x = (*shoot_pivot).x + GetCenter().x;
+	float y = (*shoot_pivot).y + GetCenter().y;
+
+	try
+	{
+		LPRequest request = new CGameRequest(REQUEST_TYPES::CreateEntity);
+		request->entity = new CJasonBullet(
+			direction
+		);
+		request->x = x;
+		request->y = y;
+
+		CGameRequest::AddRequest(request);
+	}
+	catch (const std::exception& ex)
+	{
+		DebugOut(L"[ERROR] create bullet %s \n", ex.what());
+	}
+
+	shootCountTime = 0;
+	canShoot = false;
 }
 
 CJason* CJason::GetInstance()

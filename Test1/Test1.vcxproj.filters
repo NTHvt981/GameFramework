@@ -57,6 +57,9 @@
     <Image Include="Resources\Texture\Player health.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Resources\Texture\OtherObjects.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
@@ -203,6 +206,12 @@
     <ClInclude Include="SourceCode\Player\SophiaFake.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SourceCode\GameObject\StaticObjects\BreakableWall.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\GameObject\StaticObjects\Ladder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -341,6 +350,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SourceCode\Player\SophiaFake.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\GameObject\StaticObjects\BreakableWall.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\GameObject\StaticObjects\Ladder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

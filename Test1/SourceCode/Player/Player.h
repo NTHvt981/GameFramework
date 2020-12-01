@@ -28,10 +28,18 @@ protected:
 	/// <summary>
 	/// these vars for shooting funtion
 	/// </summary>
-	bool canShoot = true;
 	DWORD shootWaitTime = 15;
+	bool canShoot = true;
 	DWORD shootCountTime = 0;
 
+protected:
+	bool keyLeft;
+	bool keyUp;
+	bool keyRight;
+	bool keyDown;
+	bool keyJump;
+	bool keyShoot;
+	bool keySwitchPlayer;
 
 private:
 	static CPlayer* currentPlayer;

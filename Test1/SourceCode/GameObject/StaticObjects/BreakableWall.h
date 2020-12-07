@@ -5,7 +5,7 @@
 #include "..\..\Collision\CollisionBox.h"
 #include "..\..\Unit\Sprite.h"
 
-#include "..\..\Game\GameRequest.h"
+#include "..\..\SceneSystem\SceneRequest.h"
 #include "..\..\Library\SpriteLibrary.h"
 
 class CBreakableWall: public CEntity

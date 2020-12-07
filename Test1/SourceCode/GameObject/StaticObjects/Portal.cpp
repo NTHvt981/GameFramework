@@ -1,6 +1,6 @@
 #include "Portal.h"
 
-CPortal::CPortal(float l, float t, float r, float b, int p) : CEntity()
+CAreaPortal::CAreaPortal(float l, float t, float r, float b, int p, int a) : CEntity()
 {
 	collisionBox = new CDynamicBox(this);
 	collisionBox->SetLTRB(l, t, r, b);
@@ -10,82 +10,103 @@ CPortal::CPortal(float l, float t, float r, float b, int p) : CEntity()
 	position = Vector((r + l) / 2, (t + b) / 2);
 
 	this->targetId = p;
+	this->areaId = a;
 
-	SetType(GOTYPES::Porter);
+	SetType(GOTYPES::AreaPortal);
 }
 
-void CPortal::SetTargetId(int t)
+void CAreaPortal::SetTargetId(int t)
 {
 	targetId = t;
 }
 
-int CPortal::GetTargetId()
+int CAreaPortal::GetTargetId()
 {
 	return targetId;
 }
 
-void CPortal::SetArea(CArea* a)
+void CAreaPortal::SetArea(CArea* a)
 {
 	this->area = a;
 }
 
-CArea* CPortal::GetArea()
+CArea* CAreaPortal::GetArea()
 {
 	return this->area;
 }
 
-void CPortal::SetAreaId(int area)
+void CAreaPortal::SetAreaId(int area)
 {
 	areaId = area;
 }
 
-int CPortal::GetAreaId()
+int CAreaPortal::GetAreaId()
 {
 	return areaId;
 }
 
-void CPortal::Update(DWORD dt)
+void CAreaPortal::Update(DWORD dt)
 {
 	collisionBox->GetCollision(
 		collideEvents
 	);
 }
 
-void CPortal::Render()
+void CAreaPortal::Render()
 {
 	collisionBox->Render();
 }
 
-bool CPortal::IsCollideWithPlayer()
+bool CAreaPortal::IsCollideWithPlayer()
 {
-	if (!alreadyCollideWithPlayer && IsCollidedWith(GOTYPES::Player))
+	bool collidePlayer;
+	IsColliding(CPlayer::GetCurrentPlayer(), collidePlayer);
+
+	if (!alreadyCollideWithPlayer && collidePlayer)
 	{
 		alreadyCollideWithPlayer = true;
 		return true;
 	}
 
-	if (alreadyCollideWithPlayer && (!IsCollidedWith(GOTYPES::Player)))
+	if (alreadyCollideWithPlayer && (!collidePlayer))
 		alreadyCollideWithPlayer = false;
 
 	return false;
 }
 
-void CPortal::SetIsCollideWithPlayer(bool b)
+void CAreaPortal::SetIsCollideWithPlayer(bool b)
 {
 	alreadyCollideWithPlayer = b;
 }
 
-void CPortal::SetDeploySide(int s)
+void CAreaPortal::GetDeployPosition(float& x, float& y)
 {
-	if (s == 1)
-		localDeployPosition.x = 16;
-	else
-		localDeployPosition.x = -16;
-	localDeployPosition.y = 8;
+	x = GetCenter().x + (direction.x * distance);
+	y = GetCenter().y + (direction.y * distance);
 }
 
-void CPortal::GetDeployPosition(float& x, float& y)
+void CAreaPortal::GetLTRB(float& l, float& t, float& r, float& b)
 {
-	x = GetCenter().x + localDeployPosition.x;
-	y = GetCenter().y + localDeployPosition.y;
+	collisionBox->GetLTRB(l, t, r, b);
+}
+
+void CAreaPortal::SetLTRB(float l, float t, float r, float b)
+{
+	collisionBox->SetLTRB(l, t, r, b);
+}
+
+float CAreaPortal::GetDistance()
+{
+	return distance;
+}
+
+void CAreaPortal::SetDistance(float d)
+{
+	distance = d;
+}
+
+void CAreaPortal::SetDeployDirection(float x, float y)
+{
+	direction.x = x;
+	direction.y = y;
 }

@@ -2,7 +2,7 @@
 
 #include "../Entity.h"
 #include "../../Constraints.h"
-#include "../../Game/GameRequest.h"
+#include "../../SceneSystem/SceneRequest.h"
 
 class CEnemy : public CEntity
 {

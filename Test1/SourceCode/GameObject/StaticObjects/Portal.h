@@ -2,15 +2,20 @@
 #include "../Entity.h"
 #include "../../AreaAndScene/Area.h"
 
-class CPortal: public CEntity
+#include "../../Player/Player.h"
+
+class CAreaPortal: public CEntity
 {
 private:
 	CArea* area = NULL;
 	int areaId;
 	int targetId;
 	bool alreadyCollideWithPlayer = false;
+
+	Vector direction;
+	float distance = 16;
 public:
-	CPortal(float l, float t, float r, float b, int p=NULL);
+	CAreaPortal(float l, float t, float r, float b, int p=NULL, int a=0);
 	void SetTargetId(int t);
 	int GetTargetId();
 
@@ -26,8 +31,14 @@ public:
 	bool IsCollideWithPlayer();
 	void SetIsCollideWithPlayer(bool b);
 
-	Vector localDeployPosition = Vector(-16, 12);
-	void SetDeploySide(int s);
 	void GetDeployPosition(float &x, float &y);
+
+	void GetLTRB(float& l, float& t, float& r, float& b);
+	void SetLTRB(float l, float t, float r, float b);
+
+	float GetDistance();
+	void SetDistance(float d);
+
+	void SetDeployDirection(float x, float y);
 };
 

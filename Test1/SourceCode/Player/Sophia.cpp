@@ -25,6 +25,7 @@ void CSophia::GetState(DWORD dt)
 	case FACE_LEFT:
 		canonPivot = &leftCanonPivot;
 		headPivot = &leftHeadPivot;
+		bodyPivot = &bodyOnGroundPivot;
 		leftWheelPivot = &leftWheelOnGroundPivot;
 		rightWheelPivot = &rightWheelOnGroundPivot;
 
@@ -37,6 +38,7 @@ void CSophia::GetState(DWORD dt)
 	case FACE_RIGHT:
 		canonPivot = &rightCanonPivot;
 		headPivot = &rightHeadPivot;
+		bodyPivot = &bodyOnGroundPivot;
 		leftWheelPivot = &leftWheelOnGroundPivot;
 		rightWheelPivot = &rightWheelOnGroundPivot;
 
@@ -50,6 +52,7 @@ void CSophia::GetState(DWORD dt)
 	case FACE_UP_LEFT:
 		canonPivot = &upLeftCanonPivot;
 		headPivot = &upLeftHeadPivot;
+		bodyPivot = &bodyStandingPivot;
 		leftWheelPivot = &leftWheelStandingPivot;
 		rightWheelPivot = &rightWheelStandingPivot;
 
@@ -62,6 +65,7 @@ void CSophia::GetState(DWORD dt)
 	case FACE_UP_RIGHT:
 		canonPivot = &upRightCanonPivot;
 		headPivot = &upRightHeadPivot;
+		bodyPivot = &bodyStandingPivot;
 		leftWheelPivot = &leftWheelStandingPivot;
 		rightWheelPivot = &rightWheelStandingPivot;
 
@@ -157,9 +161,6 @@ void CSophia::Update(DWORD dt)
 	//SetState(dt);
 	GetState(dt);
 
-	HandleShooting(dt);
-	HandleSwitchToJason();
-
 	old_velocity.Set(velocity.x, velocity.y);
 	Move(dt);
 
@@ -168,7 +169,6 @@ void CSophia::Update(DWORD dt)
 	else if (velocity.y == 0 && old_velocity.y > 0)
 		onGround = true;
 
-
 	/// <summary>
 	/// health section
 	/// </summary>
@@ -176,13 +176,9 @@ void CSophia::Update(DWORD dt)
 	if (IsCollidedWith(GOTYPES::Enemy) || IsCollidedWith(GOTYPES::EnemyBullet))
 		healthSystem->ReduceHealth(GOTYPES::Sophia);
 
-	if (healthSystem->GetHealthState() == INVULNERABLE)
-		SetHealthAnimation(dt);
-	else
-	{
-		showCanon = true;
-		showHead = true;
-	}
+	SetHealthAnimation(dt);
+	HandleShooting(dt);
+	HandleSwitchToJason();
 }
 
 void CSophia::Render()
@@ -196,27 +192,33 @@ void CSophia::Render()
 	rightWheelAni->Render(*rightWheelPivot + position);
 
 	if (showHead) headSprite->Draw(*headPivot + position + add_up);
-	bodySprite->Draw(bodyPivot + position + add_up);
+	bodySprite->Draw(*bodyPivot + position + add_up);
 	if (showCanon) canonSprite->Draw(*canonPivot + position + add_up);
 	collisionBox->Render();
 }
 
 void CSophia::SetHealthAnimation(DWORD dt)
 {
-	healthAniCountTime += dt;
-	if (healthAniCountTime >= healthAniWaitTime)
-	{
-		healthAniCountTime = 0;
+	CPlayerHealth* healthSystem = CPlayerHealth::GetInstance();
 
-		if (healthAniWhiteFlip)
+	if (healthSystem->GetHealthState() == INVULNERABLE)
+	{
+		healthAniCountTime += dt;
+		if (healthAniCountTime >= healthAniWaitTime)
 		{
-			healthAniWhiteFlip = false;
-		}
-		else
-		{
-			healthAniWhiteFlip = true;
+			healthAniCountTime = 0;
+
+			if (healthAniWhiteFlip)
+			{
+				healthAniWhiteFlip = false;
+			}
+			else
+			{
+				healthAniWhiteFlip = true;
+			}
 		}
 	}
+	else healthAniWhiteFlip = false;
 
 	if (healthAniWhiteFlip)
 	{
@@ -262,14 +264,14 @@ void CSophia::Shoot()
 
 	try
 	{
-		LPRequest request = new CGameRequest(REQUEST_TYPES::CreateEntity);
+		LPSceneRequest request = new CSceneRequest(SCENE_REQUEST_TYPES::CreateEntity);
 		request->entity = new CSophiaBullet(
 			direction
 		);
 		request->x = x;
 		request->y = y;
 
-		CGameRequest::AddRequest(request);
+		CSceneRequest::AddRequest(request);
 	}
 	catch (const std::exception& ex)
 	{
@@ -291,7 +293,7 @@ void CSophia::HandleSwitchToJason()
 
 		faker->canonPivot = *canonPivot;
 		faker->headPivot = *headPivot;
-		faker->bodyPivot = bodyPivot;
+		faker->bodyPivot = *bodyPivot;
 		faker->leftWheelPivot = *leftWheelPivot;
 		faker->rightWheelPivot = *rightWheelPivot;
 
@@ -323,15 +325,15 @@ void CSophia::HandleSwitchToJason()
 			center.y
 		);
 
-		LPRequest switchJasonReq = new CGameRequest(REQUEST_TYPES::SwitchToJason);
-		CGameRequest::AddRequest(switchJasonReq);
+		LPSceneRequest switchJasonReq = new CSceneRequest(SCENE_REQUEST_TYPES::SwitchToJason);
+		CSceneRequest::AddRequest(switchJasonReq);
 
-		LPRequest fakeSophiaReq = new CGameRequest(REQUEST_TYPES::CreateEntity);
+		LPSceneRequest fakeSophiaReq = new CSceneRequest(SCENE_REQUEST_TYPES::CreateEntity);
 		fakeSophiaReq->entity = faker;
 		fakeSophiaReq->x = position.x;
 		fakeSophiaReq->y = position.y;
 
-		CGameRequest::AddRequest(fakeSophiaReq);
+		CSceneRequest::AddRequest(fakeSophiaReq);
 	}
 }
 

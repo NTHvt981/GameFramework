@@ -78,21 +78,21 @@ void CPlayerHealth::IncreaseJasonHealth(int heal_points)
     DebugOut(L"[INFO] jason health now is %d\n", jasonHealth);
 }
 
-void CPlayerHealth::ReduceHealth(GOTYPES type, int damage)
+void CPlayerHealth::ReduceHealth(GOTYPES Type, int damage)
 {
     if (healthState == INVULNERABLE) return;
 
-    if (type == GOTYPES::Jason)
+    if (Type == GOTYPES::Jason)
         ReduceJasonHealth(damage);
-    else if (type == GOTYPES::Sophia)
+    else if (Type == GOTYPES::Sophia)
         ReduceSophiaHealth(damage);
 }
 
-void CPlayerHealth::IncreaseHealth(GOTYPES type, int heal_points)
+void CPlayerHealth::IncreaseHealth(GOTYPES Type, int heal_points)
 {
-    if (type == GOTYPES::Jason)
+    if (Type == GOTYPES::Jason)
         IncreaseJasonHealth(heal_points);
-    else if (type == GOTYPES::Sophia)
+    else if (Type == GOTYPES::Sophia)
         IncreaseSophiaHealth(heal_points);
 }
 

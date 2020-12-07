@@ -19,8 +19,8 @@ CCamera::CCamera(float w, float h, float s)
    this->scale = s;
 
    //width - 320, height - 240
-   innerBound.left = 120;
-   innerBound.top = 80;
+   innerBound.left = width / 3;
+   innerBound.top = height / 3;
 
    innerBound.right = width - innerBound.left;
    innerBound.bottom = height - innerBound.top;

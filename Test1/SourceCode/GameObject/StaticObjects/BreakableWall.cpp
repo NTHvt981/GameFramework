@@ -39,8 +39,8 @@ void CBreakableWall::Render()
 
 void CBreakableWall::Destroy()
 {
-	CGameRequest* req = new CGameRequest(REQUEST_TYPES::DeleteEntity);
+	LPSceneRequest req = new CSceneRequest(SCENE_REQUEST_TYPES::DeleteEntity);
 
 	req->id = this->GetId();
-	CGameRequest::AddRequest(req);
+	CSceneRequest::AddRequest(req);
 }

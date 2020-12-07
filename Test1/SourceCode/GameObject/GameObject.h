@@ -9,7 +9,6 @@ enum class GOTYPES
 	Wall,
 	BreakableWall,
 	Dynamic,
-	Porter,
 	Ladder,
 
 	Enemy,
@@ -21,7 +20,10 @@ enum class GOTYPES
 	//jason is the pilot, and sophia is the tank
 	Jason,
 	Sophia,
-	FakeSophia
+	FakeSophia,
+
+	AreaPortal,
+	ScenePortal,
 };
 
 class CGameObject
@@ -32,7 +34,7 @@ protected:
 	bool enable = true;
 
 private:
-	GOTYPES type = GOTYPES::GameObject;
+	GOTYPES Type = GOTYPES::GameObject;
 
 public:
 	CGameObject();

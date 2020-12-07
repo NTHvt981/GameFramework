@@ -1,13 +1,13 @@
 #include "GameRequest.h"
 
-list<LPRequest> CGameRequest::RequestList = list<LPRequest>();
+list<LPGameRequest> CGameRequest::RequestList = list<LPGameRequest>();
 
-CGameRequest::CGameRequest(REQUEST_TYPES t)
+CGameRequest::CGameRequest(GAME_REQUEST_TYPES t)
 {
-	type = t;
+	Type = t;
 }
 
-void CGameRequest::AddRequest(LPRequest re)
+void CGameRequest::AddRequest(LPGameRequest re)
 {
 	CGameRequest::RequestList.push_back(re);
 }

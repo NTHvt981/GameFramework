@@ -230,9 +230,9 @@ void CGraphic::Draw(LPDIRECT3DTEXTURE9 texture, Vector position, Vector origin, 
 	Draw(texture, position.x, position.y, origin.x, origin.y, alpha);
 }
 
-void CGraphic::Render(LPDIRECT3DTEXTURE9 texture)
-{
-}
+//void CGraphic::Render(LPDIRECT3DTEXTURE9 texture)
+//{
+//}
 
 void CGraphic::End()
 {

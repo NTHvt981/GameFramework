@@ -26,11 +26,14 @@
 
 #define BACKGROUND_COLOR D3DCOLOR_XRGB(0, 0, 0)
 //width and height of the camera
-#define CAMERA_WIDTH 320
-#define CAMERA_HEIGHT 240
+#define CAMERA_WIDTH 256
+#define CAMERA_HEIGHT 256
+#define CAMERA_SCALE 2
 
 //width and height when shown
-#define WINDOW_WIDTH 640
+//#define WINDOW_WIDTH 640
+//#define WINDOW_HEIGHT 480
+#define WINDOW_WIDTH 480
 #define WINDOW_HEIGHT 480
 
 //width and height of the whole level
@@ -48,9 +51,10 @@
 #define MAX_FRAME_RATE 60
 
 #define ENEMIES_TEXTURE_PATH L"./Resources/Texture/enemies.png"
-#define PLAYER_TEXTURE_PATH L"Resources/Texture/My car spritesheet transparent.png"
+#define PLAYER_TEXTURE_PATH L"Resources/Texture/PlayerSheetTransparent.png"
 #define PLAYER_HEALTH_TEXTURE_PATH L"Resources/Texture/Player health.png"
 #define OTHER_OBJECTS_TEXTURE_PATH L"Resources/Texture/OtherObjects.png"
+#define BLACK_SCREEN_TEXTURE_PATH L"Resources/Texture/BlackScreen.png"
 
 #define TEX_BBOX_PATH L"./Resources/Texture/bbox.png"
 #define ID_TEX_BBOX 999		// special texture to draw object bounding box
@@ -168,6 +172,8 @@
 #define ID_JASON_TOPDOWN_WALK_RIGHT_1 1510
 #define ID_JASON_TOPDOWN_WALK_RIGHT_2 1511
 #define ID_JASON_TOPDOWN_WALK_RIGHT_3 1512
+
+#define ID_JASON_TOPDOWN_BULLET 1513
 #pragma endregion
 
 #pragma region ENEMY WORM
@@ -229,10 +235,18 @@
 #define ID_PORTAL_FACE_RIGHT_2 6002
 #define ID_PORTAL_FACE_LEFT_1 6003
 #define ID_PORTAL_FACE_LEFT_2 6004
+
+#define ID_BLACK_SCREEN 6005
 //enum class GOTYPES;
 
+class CScene;
+typedef CScene* LPScene;
+
 class CGameRequest;
-typedef CGameRequest* LPRequest;
+typedef CGameRequest* LPGameRequest;
+
+class CSceneRequest;
+typedef CSceneRequest* LPSceneRequest;
 
 class CGameObject;
 typedef CGameObject* LPGameObject;
@@ -267,3 +281,10 @@ typedef CTileSet* LPTileSet;
 class CTileMap;
 
 class CGrid;
+
+#define SIDESCROLL_LEVEL_SIZE Vector(3072, 3072)
+#define TOPDOWN_LEVEL_SIZE Vector(2048, 2048)
+
+#define INTRO_TO_SIDESCROLL_POS Vector(200, 2944)
+#define SIDESCROLL_TO_TOPDOWN_POS Vector(128, 1888)
+#define TOPDOWN_TO_SIDESCROLL_POS Vector(2400, 400)

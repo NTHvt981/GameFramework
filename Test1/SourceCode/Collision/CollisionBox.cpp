@@ -112,6 +112,22 @@ void CCollisionBox::GetCollision(list<CollisionEvent>& events)
 	}
 }
 
+void CCollisionBox::IsColliding(LPCollisionBox box, bool& result)
+{
+	//get left, top, right, bottom of other collision boxes
+	float staticLeft, staticTop, staticRight, staticBottom;
+	staticLeft = box->GetLeft();
+	staticTop = box->GetTop();
+	staticRight = box->GetRight();
+	staticBottom = box->GetBottom();
+
+	//if false -> garantee no Collision
+	result = AABBCheck(
+		left, top, right, bottom,
+		staticLeft, staticTop, staticRight, staticBottom
+	);
+}
+
 void CCollisionBox::SetLTRB(float l, float t, float r, float b)
 {
 	left = l;

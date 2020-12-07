@@ -4,10 +4,7 @@ CPlayer* CPlayer::currentPlayer = NULL;
 
 CPlayer::CPlayer(): CEntity()
 {
-
 	SetType(GOTYPES::Player);
-	camera = new CCamera(WINDOW_WIDTH, WINDOW_HEIGHT, 2);
-	CCamera::SetInstance(*camera);
 }
 
 void CPlayer::Update(DWORD dt)
@@ -20,7 +17,6 @@ void CPlayer::Update(DWORD dt)
 void CPlayer::Render()
 {
 	if (!visible) return;
-
 }
 
 CPlayer* CPlayer::GetCurrentPlayer()

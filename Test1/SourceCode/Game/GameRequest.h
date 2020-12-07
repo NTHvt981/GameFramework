@@ -1,39 +1,32 @@
 #pragma once
 
 #include "../Constraints.h"
-#include "../GameObject/Entity.h"
+#include "../SceneSystem/Scene.h"
 
-enum REQUEST_TYPES
+enum GAME_REQUEST_TYPES
 {
-	CreateEntity,
-	DeleteEntity,
-	SetEnetity,
-
-	SwitchToJason,
-	SwitchToSophia
+	SwitchToIntro,
+	SwitchToSideScroll,
+	SwitchToTopDown,
+	SwitchToEnding
 };
 
 class CGameRequest
 {
 public:
-	static list<LPRequest> RequestList;
+	static list<LPGameRequest> RequestList;
 
 	//fields
 public:
-	REQUEST_TYPES type;
-	int id = -1;
-	
-	/// <summary>
-	/// these var for create entity
-	/// called by entity themself
-	/// </summary>
-	LPEntity entity;
+	GAME_REQUEST_TYPES Type;
+	SCENE_TYPES sender;
+
 	float x = -1;
 	float y = -1;
 
 	//method
 public:
-	CGameRequest(REQUEST_TYPES t);
-	static void AddRequest(LPRequest re);
+	CGameRequest(GAME_REQUEST_TYPES t);
+	static void AddRequest(LPGameRequest re);
 };
 

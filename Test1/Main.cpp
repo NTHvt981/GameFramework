@@ -25,7 +25,7 @@ WARNING: This one file example has a hell LOT of *sinful* programming practices
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
 	CGame* lGame = CGame::GetInstance();
-	lGame->Init(hInstance, nCmdShow, WINDOW_WIDTH, WINDOW_HEIGHT, FULLSCREEN);
+	lGame->Init(hInstance, nCmdShow, CAMERA_WIDTH * CAMERA_SCALE, CAMERA_HEIGHT * CAMERA_SCALE, FULLSCREEN);
 	lGame->Run();
 
 	return 0;

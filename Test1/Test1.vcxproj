@@ -149,6 +149,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="SourceCode\GameObject\StaticObjects\SideScrollPortal.h" />
+    <ClInclude Include="SourceCode\GridSystem\SceneGrid.h" />
+    <ClInclude Include="SourceCode\Player\JasonTopDown.h" />
+    <ClInclude Include="SourceCode\SceneSystem\SceneRequest.h" />
+    <ClInclude Include="SourceCode\SceneSystem\SceneManager.h" />
+    <ClInclude Include="SourceCode\SceneSystem\EndingScene.h" />
+    <ClInclude Include="SourceCode\SceneSystem\GameOverScene.h" />
+    <ClInclude Include="SourceCode\SceneSystem\IntroScene.h" />
+    <ClInclude Include="SourceCode\SceneSystem\SideScrollScene.h" />
+    <ClInclude Include="SourceCode\SceneSystem\Scene.h" />
     <ClInclude Include="SourceCode\GameObject\StaticObjects\Ladder.h" />
     <ClInclude Include="SourceCode\GameObject\StaticObjects\BreakableWall.h" />
     <ClInclude Include="SourceCode\Player\SophiaFake.h" />
@@ -164,8 +174,6 @@
     <ClInclude Include="SourceCode\Player\PlayerHealth.h" />
     <ClInclude Include="SourceCode\GameObject\StaticObjects\Portal.h" />
     <ClInclude Include="SourceCode\AreaAndScene\Area.h" />
-    <ClInclude Include="SourceCode\AreaAndScene\Scene.h" />
-    <ClInclude Include="SourceCode\GridSystem\Grid.h" />
     <ClInclude Include="SourceCode\GameObject\Enemies\Dome.h" />
     <ClInclude Include="SourceCode\GameObject\Enemies\Orb.h" />
     <ClInclude Include="SourceCode\GameObject\Enemies\Jumper.h" />
@@ -199,8 +207,20 @@
     <ClInclude Include="SourceCode\GameObject\Enemies\Worm.h" />
     <ClInclude Include="SourceCode\GameObject\Enemies\Walker.h" />
     <ClInclude Include="SourceCode\Timer\Timer.h" />
+    <ClInclude Include="SourceCode\SceneSystem\TopDownScene.h" />
+    <ClInclude Include="SourceCode\GameObject\StaticObjects\TopDownPortal.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="SourceCode\GameObject\StaticObjects\SideScrollPortal.cpp" />
+    <ClCompile Include="SourceCode\GridSystem\SceneGrid.cpp" />
+    <ClCompile Include="SourceCode\Player\JasonTopDown.cpp" />
+    <ClCompile Include="SourceCode\SceneSystem\SceneRequest.cpp" />
+    <ClCompile Include="SourceCode\SceneSystem\SceneManager.cpp" />
+    <ClCompile Include="SourceCode\SceneSystem\EndingScene.cpp" />
+    <ClCompile Include="SourceCode\SceneSystem\GameOverScene.cpp" />
+    <ClCompile Include="SourceCode\SceneSystem\IntroScene.cpp" />
+    <ClCompile Include="SourceCode\SceneSystem\SideScrollScene.cpp" />
+    <ClCompile Include="SourceCode\SceneSystem\Scene.cpp" />
     <ClCompile Include="SourceCode\GameObject\StaticObjects\Ladder.cpp" />
     <ClCompile Include="SourceCode\GameObject\StaticObjects\BreakableWall.cpp" />
     <ClCompile Include="SourceCode\Player\SophiaFake.cpp" />
@@ -216,8 +236,6 @@
     <ClCompile Include="SourceCode\Player\PlayerHealth.cpp" />
     <ClCompile Include="SourceCode\GameObject\StaticObjects\Portal.cpp" />
     <ClCompile Include="SourceCode\AreaAndScene\Area.cpp" />
-    <ClCompile Include="SourceCode\AreaAndScene\Scene.cpp" />
-    <ClCompile Include="SourceCode\GridSystem\Grid.cpp" />
     <ClCompile Include="SourceCode\GameObject\Enemies\Dome.cpp" />
     <ClCompile Include="SourceCode\GameObject\Enemies\Orb.cpp" />
     <ClCompile Include="SourceCode\GameObject\Enemies\Jumper.cpp" />
@@ -249,20 +267,23 @@
     <ClCompile Include="SourceCode\GameObject\Enemies\Worm.cpp" />
     <ClCompile Include="SourceCode\GameObject\Enemies\Walker.cpp" />
     <ClCompile Include="SourceCode\Timer\Timer.cpp" />
+    <ClCompile Include="SourceCode\SceneSystem\TopDownScene.cpp" />
+    <ClCompile Include="SourceCode\GameObject\StaticObjects\TopDownPortal.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\Desktop\Tileset\Area-2 Car map\area2-side-map in my way\TileMap.png" />
     <Image Include="C:\Users\Admin\Desktop\Tileset\Area-2 Car map\area2-side-map in my way\TileMap.png" />
-    <Image Include="Resources\Texture\area_2_tileset_2.png" />
     <Image Include="Resources\Texture\bbox.png" />
+    <Image Include="Resources\Texture\BlackScreen.png" />
     <Image Include="Resources\Texture\character_sheet_transparent.png" />
     <Image Include="Resources\Texture\enemies.png" />
-    <Image Include="Resources\Texture\My car spritesheet transparent.png" />
+    <Image Include="Resources\Texture\PlayerSheetTransparent.png" />
     <Image Include="Resources\Texture\My car spritesheet.png" />
     <Image Include="Resources\Texture\OtherObjects.png" />
     <Image Include="Resources\Texture\Player health.png" />
     <Image Include="Resources\Texture\steel robot.png" />
     <Image Include="Resources\Texture\TileMap.png" />
+    <Image Include="Resources\Texture\TileMapTopDown.png" />
     <Image Include="small.ico" />
     <Image Include="Test1.ico" />
   </ItemGroup>
@@ -274,6 +295,7 @@
     <Text Include="Resources\Textfile\temp.txt" />
     <Text Include="Resources\Textfile\temp_tilemap_info.txt" />
     <Text Include="Resources\Textfile\TileMaTrix.txt" />
+    <Text Include="Resources\Textfile\TileMaTrixTopDown.txt" />
     <Text Include="SourceCode\FileAndString\temp.txt" />
     <Text Include="SourceCode\GameObject\Enemies\temp.txt" />
   </ItemGroup>

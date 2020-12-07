@@ -33,7 +33,7 @@ void CTileSet::Draw(vector<vector<int>> matrix)
 			if (tileMap.count(key) == 0) continue;
 			Box<int> tile = tileMap[key];
 
-			CGraphic::Instance->Draw(
+			CGraphic::Instance->DrawWithTransformation(
 				texture,
 				iX * tileSize, iY * tileSize,
 				tile.left, tile.top, tile.right, tile.bottom

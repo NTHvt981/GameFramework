@@ -33,13 +33,7 @@
     <Image Include="Resources\Texture\My car spritesheet.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="Resources\Texture\My car spritesheet transparent.png">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="Resources\Texture\bbox.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Resources\Texture\area_2_tileset_2.png">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="Resources\Texture\enemies.png">
@@ -58,6 +52,15 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="Resources\Texture\OtherObjects.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Texture\TileMapTopDown.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Texture\BlackScreen.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Texture\PlayerSheetTransparent.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
@@ -143,13 +146,7 @@
     <ClInclude Include="SourceCode\Timer\Timer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SourceCode\GridSystem\Grid.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SourceCode\AreaAndScene\Area.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SourceCode\AreaAndScene\Scene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SourceCode\GameObject\StaticObjects\Portal.h">
@@ -210,6 +207,42 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SourceCode\GameObject\StaticObjects\Ladder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\SceneSystem\Scene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\SceneSystem\EndingScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\SceneSystem\GameOverScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\SceneSystem\IntroScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\SceneSystem\SideScrollScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\SceneSystem\TopDownScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\SceneSystem\SceneManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\SceneSystem\SceneRequest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Player\JasonTopDown.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\GridSystem\SceneGrid.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\GameObject\StaticObjects\SideScrollPortal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\GameObject\StaticObjects\TopDownPortal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -289,13 +322,7 @@
     <ClCompile Include="SourceCode\Timer\Timer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SourceCode\GridSystem\Grid.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SourceCode\AreaAndScene\Area.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SourceCode\AreaAndScene\Scene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SourceCode\GameObject\StaticObjects\Portal.cpp">
@@ -358,6 +385,42 @@
     <ClCompile Include="SourceCode\GameObject\StaticObjects\Ladder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SourceCode\SceneSystem\Scene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\SceneSystem\EndingScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\SceneSystem\GameOverScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\SceneSystem\IntroScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\SceneSystem\SideScrollScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\SceneSystem\TopDownScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\SceneSystem\SceneManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\SceneSystem\SceneRequest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Player\JasonTopDown.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\GridSystem\SceneGrid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\GameObject\StaticObjects\SideScrollPortal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\GameObject\StaticObjects\TopDownPortal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Test1.rc">
@@ -371,5 +434,6 @@
     <Text Include="Resources\Textfile\TileMaTrix.txt" />
     <Text Include="SourceCode\FileAndString\temp.txt" />
     <Text Include="SourceCode\GameObject\Enemies\temp.txt" />
+    <Text Include="Resources\Textfile\TileMaTrixTopDown.txt" />
   </ItemGroup>
 </Project>

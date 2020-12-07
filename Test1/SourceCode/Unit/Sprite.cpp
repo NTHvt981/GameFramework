@@ -20,10 +20,10 @@ void CSprite::Draw(float x, float y, int alpha)
 		left, top, right, bottom, origin.x, origin.y);
 }
 
-void CSprite::DrawWithFixedPosition(float x, float y, int alpha)
+void CSprite::DrawWithFixedPosition(float x, float y, float alpha)
 {
 	CGraphic::Instance->DrawWithFixedPosition(texture, x, y,
-		left, top, right, bottom);
+		left, top, right, bottom, alpha);
 }
 
 void CSprite::Draw(Vector position, int alpha)

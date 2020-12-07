@@ -81,6 +81,11 @@ void CEntity::MoveWithoutGravity(DWORD dt)
 	}
 }
 
+void CEntity::IsColliding(LPEntity entity, bool& result)
+{
+	collisionBox->IsColliding(entity->GetCollisionBox(), result);
+}
+
 //void CEntity::SetMaxHealth(int mh)
 //{
 //	maxHealth = mh;
@@ -102,23 +107,23 @@ LPDynamicBox CEntity::GetCollisionBox()
 	return collisionBox;
 }
 
-bool CEntity::IsCollidedWith(GOTYPES type)
+bool CEntity::IsCollidedWith(GOTYPES Type)
 {
 	for each (CollisionEvent e in collideEvents)
 	{
-		if (e.object->GetType() == type)
+		if (e.object->GetType() == Type)
 			return true;
 	}
 	return false;
 }
 
-bool CEntity::GetCollidedWith(GOTYPES type, list<LPGameObject>& collidedObjs)
+bool CEntity::GetCollidedWith(GOTYPES Type, list<LPGameObject>& collidedObjs)
 {
 	bool result = false;
 	collidedObjs.clear();
 	for each (CollisionEvent e in collideEvents)
 	{
-		if (e.object->GetType() == type)
+		if (e.object->GetType() == Type)
 		{
 			result = true;
 		
@@ -144,14 +149,14 @@ CEntity::~CEntity()
 
 void CEntity::GetGridPosition(int& x, int& y)
 {
-	x = gridPosition.x;
-	y = gridPosition.y;
+	x = gridX;
+	y = gridY;
 }
 
 void CEntity::SetGridPosition(int x, int y)
 {
-	gridPosition.x = x;
-	gridPosition.y = y;
+	gridX = x;
+	gridY = y;
 }
 
 bool CheckCollision(LPEntity a, LPEntity b)

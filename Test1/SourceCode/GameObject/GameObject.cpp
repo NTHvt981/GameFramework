@@ -37,10 +37,10 @@ void CGameObject::Render()
 
 GOTYPES CGameObject::GetType()
 {
-    return type;
+    return Type;
 }
 
 void CGameObject::SetType(GOTYPES _type)
 {
-    type = _type;
+    Type = _type;
 }

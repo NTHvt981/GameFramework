@@ -55,9 +55,9 @@ void CPlayerBullet::Update(DWORD dt)
 
 	if (delete_condition)
 	{
-		LPRequest request = new CGameRequest(REQUEST_TYPES::DeleteEntity);
+		LPSceneRequest request = new CSceneRequest(SCENE_REQUEST_TYPES::DeleteEntity);
 		request->id = this->id;
-		CGameRequest::AddRequest(request);
+		CSceneRequest::AddRequest(request);
 	}
 }
 

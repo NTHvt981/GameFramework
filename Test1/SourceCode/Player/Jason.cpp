@@ -26,8 +26,8 @@ void CJason::HandleSwitchToSophia()
 	{
 		if (CInput::GetInstance()->IsKeyPressed(DIK_L))
 		{
-			LPRequest switchSophiaReq = new CGameRequest(REQUEST_TYPES::SwitchToSophia);
-			CGameRequest::AddRequest(switchSophiaReq);
+			LPSceneRequest swSophiaReq = new CSceneRequest(SCENE_REQUEST_TYPES::SwitchToSophia);
+			CSceneRequest::AddRequest(swSophiaReq);
 		}
 	}
 }
@@ -111,8 +111,7 @@ void CJason::Update(DWORD dt)
 	if (IsCollidedWith(GOTYPES::Enemy) || IsCollidedWith(GOTYPES::EnemyBullet))
 		healthSystem->ReduceHealth(GOTYPES::Jason);
 
-	if (healthSystem->GetHealthState() == INVULNERABLE)
-		SetHealthAnimation(dt);
+	SetHealthAnimation(dt);
 
 	if (pace == STILL)
 	{
@@ -128,6 +127,8 @@ void CJason::Update(DWORD dt)
 
 void CJason::Render()
 {
+	if (!visible) return;
+
 	//animation->Render(position + posToDraw);
 	if (showAnimation)
 		animation->Render(Vector(
@@ -269,8 +270,6 @@ void CJason::onClimb(DWORD dt)
 		state = JASON_WALK;
 
 	onGround = false;
-
-	SetHealthAnimation(dt);
 }
 
 void CJason::SetHealthAnimation(DWORD dt)
@@ -337,14 +336,14 @@ void CJason::Shoot()
 
 	try
 	{
-		LPRequest request = new CGameRequest(REQUEST_TYPES::CreateEntity);
+		LPSceneRequest request = new CSceneRequest(SCENE_REQUEST_TYPES::CreateEntity);
 		request->entity = new CJasonBullet(
 			direction
 		);
 		request->x = x;
 		request->y = y;
 
-		CGameRequest::AddRequest(request);
+		CSceneRequest::AddRequest(request);
 	}
 	catch (const std::exception& ex)
 	{

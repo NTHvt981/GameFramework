@@ -8,13 +8,12 @@
 #include "PlayerHealth.h"
 #include "PlayerBullet.h"
 
-#include "../Game/GameRequest.h"
+#include "../SceneSystem/SceneRequest.h"
 
 class CPlayer: public CEntity
 {
 protected:
 	float speed = 1.5;
-	CCamera* camera;
 	Vector old_velocity;
 
 	/// <summary>

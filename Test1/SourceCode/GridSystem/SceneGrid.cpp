@@ -1,34 +1,36 @@
-#include "Grid.h"
+#include "SceneGrid.h"
 
-void CGrid::RemoveEntity(int id)
+CSceneGrid::CSceneGrid(CScene* scene)
+{
+	this->scene = scene;
+}
+
+void CSceneGrid::RemoveEntity(int id)
 {
 	entitiesId.remove(id);
 
-	LPEntity e = CGame::GetInstance()->GetEntity(id);
+	LPEntity e = scene->GetEntity(id);
 	int coId = e->GetCollisionBox()->GetId();
 
 	colBoxesId.remove(coId);
-
-	//entitiesId.resize(count);
-	//colBoxesId.resize(count);
 }
 
-void CGrid::AddEntity(int id)
+void CSceneGrid::AddEntity(int id)
 {
 	entitiesId.push_back(id);
-	LPEntity e = CGame::GetInstance()->GetEntity(id);
+	LPEntity e = scene->GetEntity(id);
 
 	colBoxesId.push_back(e->GetCollisionBox()->GetId());
 
 	count++;
 }
 
-list<int> CGrid::GetColBoxes()
+list<int> CSceneGrid::GetColBoxes()
 {
 	return colBoxesId;
 }
 
-void CGrid::SetLTRB(float l, float t, float r, float b)
+void CSceneGrid::SetLTRB(float l, float t, float r, float b)
 {
 	left = l;
 	top = t;
@@ -36,7 +38,7 @@ void CGrid::SetLTRB(float l, float t, float r, float b)
 	bottom = b;
 }
 
-void CGrid::Update(DWORD dt, int &_count)
+void CSceneGrid::Update(DWORD dt, int& _count)
 {
 	//safe approach, ensure that if grid contain no entity -> exit func
 	if (entitiesId.size() == 0) return;
@@ -45,13 +47,12 @@ void CGrid::Update(DWORD dt, int &_count)
 	//store remove ones in removeList
 	//list<int> removeList = list<int>();
 
-	CGame* game = CGame::GetInstance();
 	list<int>::iterator it = entitiesId.begin();
 
 	for each (int id in entitiesId)
 	{
 		//get the entity base on its id
-		LPEntity e = game->GetEntity(id);
+		LPEntity e = scene->GetEntity(id);
 		if (e == NULL) continue;
 		//update the entity
 		e->Update(dt);
@@ -73,54 +74,55 @@ void CGrid::Update(DWORD dt, int &_count)
 	//remove all entities in remove list
 	while (!removeList.empty())
 	{
-		LPEntity e = game->GetEntity(removeList.front());
+		LPEntity e = scene->GetEntity(removeList.front());
 		//set the grid that entity is in
 		//game->SetEntity(e);
 
-		LPRequest request = new CGameRequest(REQUEST_TYPES::SetEnetity);
+		LPSceneRequest request = new CSceneRequest(SCENE_REQUEST_TYPES::SetEntity);
 		request->entity = e;
-		CGameRequest::AddRequest(request);
+		CSceneRequest::AddRequest(request);
 
 		//this->RemoveEntity(e->GetId());
 		removeList.pop_front();
 	}
 }
 
-void CGrid::Render()
+void CSceneGrid::Render()
 {
 	//safe approach, ensure that if grid contain no entity -> exit func
 	if (entitiesId.size() == 0) return;
 
-	CGame* game = CGame::GetInstance();
 	list<int>::iterator it;
 	//loop through list, render the entity
 	for (it = entitiesId.begin(); it != entitiesId.end(); ++it)
 	{
-		game->GetEntity(
+		scene->GetEntity(
 			*it
 		)->Render();
 	}
 }
 
-vector<vector<CGrid>> DivideGrids(
-	int width, int height, int grid_width, int grid_height)
+vector<vector<CSceneGrid*>> DivideSceneGrids(
+	int width, int height, int grid_width, int grid_height, CScene* scene)
 {
-	vector<vector<CGrid>> grids;
-	
+	vector<vector<CSceneGrid*>> grids;
+
 	//cot
 	int cols = ceil(width / grid_width);
 	//hang
 	int rows = ceil(height / grid_height);
 
-	grids = vector<vector<CGrid>>(rows);
+	grids = vector<vector<CSceneGrid*>>(rows);
 
 	for (int i = 0; i < rows; i++)
 	{
-		grids[i] = vector<CGrid>(cols);
+		grids[i] = vector<CSceneGrid*>(cols);
 
 		for (int j = 0; j < cols; j++)
 		{
-			grids[i][j].SetLTRB(
+			grids[i][j] = new CSceneGrid(scene);
+
+			grids[i][j]->SetLTRB(
 				j * grid_width,
 				i * grid_height,
 				(j + 1) * grid_width,

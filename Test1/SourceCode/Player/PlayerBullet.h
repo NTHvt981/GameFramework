@@ -7,7 +7,7 @@
 #include "../Unit/Sprite.h"
 #include "../Library/SpriteLibrary.h"
 
-#include "../Game/GameRequest.h"
+#include "../SceneSystem/SceneRequest.h"
 
 class CPlayerBullet: public CEntity
 {

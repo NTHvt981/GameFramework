@@ -12,7 +12,8 @@ protected:
 	Vector origin;
 	Vector velocity;
 
-	Vector gridPosition = Vector(-1, -1);
+	int gridX = -1;
+	int gridY = -1;
 
 	int speed;
 
@@ -28,6 +29,7 @@ protected:
 	virtual void Move(DWORD dt);
 	virtual void MoveWithoutGravity(DWORD dt);
 
+
 public:
 	CEntity();
 	int GetId();
@@ -40,8 +42,10 @@ public:
 
 	LPDynamicBox GetCollisionBox();
 
-	bool IsCollidedWith(GOTYPES type);
-	bool GetCollidedWith(GOTYPES type, list<LPGameObject> &collidedObjs);
+	bool IsCollidedWith(GOTYPES Type);
+	bool GetCollidedWith(GOTYPES Type, list<LPGameObject> &collidedObjs);
+
+	void IsColliding(LPEntity entity, bool& result);
 
 	void Update(DWORD dt);
 	void Render();

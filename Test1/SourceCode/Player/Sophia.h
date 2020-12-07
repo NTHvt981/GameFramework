@@ -42,7 +42,10 @@ private:
 	Vector* canonPivot;
 	Vector* leftWheelPivot;
 	Vector* rightWheelPivot;
-	Vector bodyPivot = Vector(12, 18);
+	Vector* bodyPivot;
+
+	Vector bodyOnGroundPivot = Vector(12, 18);
+	Vector bodyStandingPivot = Vector(12, 14);
 
 	/*
 	standing is then sophia aim canon upward

@@ -32,6 +32,7 @@ class CAnimation
 
 	bool loop;
 	bool end = false;
+	float speed = 1;
 public:
 	CAnimation(int id, int defaultTime, int mode=ANIMATION_NORMAL, bool loop=true) { 
 		this->id = id;
@@ -57,5 +58,10 @@ public:
 
 	int GetCurrentFrame();
 	void SetCurrentFrame(int fr);
+
+	void GetSize(int&width, int&height);
+
+	void SetSpeed(float _speed);
+	float GetSpeed();
 };
 

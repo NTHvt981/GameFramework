@@ -18,8 +18,8 @@ void CSceneManager::LoadResources()
 	topDownScene->LoadResources();
 
 	sideScrollScene->Start(
-		TOPDOWN_TO_SIDESCROLL_POS.x, 
-		TOPDOWN_TO_SIDESCROLL_POS.y
+		INTRO_TO_SIDESCROLL_POS.x, 
+		INTRO_TO_SIDESCROLL_POS.y
 	);
 
 	//topDownScene->Start(

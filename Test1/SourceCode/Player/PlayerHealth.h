@@ -36,9 +36,9 @@ private:
 	LPSprite sprSophiaHealthBar;
 	LPSprite sprJasonHealthBar;
 
-	Vector textHovPivot = Vector(25, 225);
-	Vector textHealthBarPivot = Vector(25, 350);
-	Vector textPowPivot = Vector(25, 375);
+	Vector textHovPivot = Vector(25, 250);
+	Vector textHealthBarPivot = Vector(25, 375);
+	Vector textPowPivot = Vector(25, 400);
 
 private:
 	void turnOnInvulnerability();

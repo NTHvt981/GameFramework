@@ -24,7 +24,12 @@ void CAnimation::Render(float x, float y, int alpha)
 	if (lastFrameTime == -1) lastFrameTime = now;
 
 	DWORD t = frames[currentFrame]->GetTime();
-	if (now - lastFrameTime > t)
+	//if (now - lastFrameTime > t)
+	//{
+	//	currentFrame = currentFrame + mode;
+	//	lastFrameTime = now;
+	//}
+	if ((now - lastFrameTime) * speed > t)
 	{
 		currentFrame = currentFrame + mode;
 		lastFrameTime = now;
@@ -95,4 +100,19 @@ void CAnimation::SetCurrentFrame(int fr)
 {
 	currentFrame = fr;
 	lastFrameTime = 0;
+}
+
+void CAnimation::GetSize(int& width, int& height)
+{
+	frames[0]->GetSprite()->GetSize(width, height);
+}
+
+void CAnimation::SetSpeed(float _speed)
+{
+	speed = _speed;
+}
+
+float CAnimation::GetSpeed()
+{
+	return speed;
 }

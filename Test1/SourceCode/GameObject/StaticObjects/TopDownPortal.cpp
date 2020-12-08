@@ -26,8 +26,7 @@ void CTopDownPortal::Render()
 
 bool CTopDownPortal::IsCollideWithPlayer()
 {
-	bool collidePlayer;
-	IsColliding(CPlayer::GetCurrentPlayer(), collidePlayer);
+	bool collidePlayer = IsColliding(CPlayer::GetCurrentPlayer());
 
 	if (!alreadyCollideWithPlayer && collidePlayer)
 	{

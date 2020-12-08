@@ -13,6 +13,12 @@ CEnemy::CEnemy()
 
 void CEnemy::Update(DWORD dt)
 {
+}
+
+void CEnemy::InflictDamage(int dam)
+{
+	health = max(0, health - dam);
+
 	if (health == 0)
 	{
 		LPSceneRequest request = new CSceneRequest(SCENE_REQUEST_TYPES::DeleteEntity);
@@ -21,7 +27,31 @@ void CEnemy::Update(DWORD dt)
 	}
 }
 
-void CEnemy::InflictDamage(int dam)
+float CEnemy::DistanceToPlayer()
 {
-	health = max(0, health - dam);
+	Vector playerPos = CPlayer::GetCurrentPlayer()->GetCenter();
+	Vector selfPos = GetCenter();
+
+	float result = sqrt(
+		pow(playerPos.x - selfPos.x, 2) +
+		pow(playerPos.y - selfPos.y, 2)
+	);
+
+	return result;
+}
+
+float CEnemy::HorizontalDistanceToPlayer()
+{
+	Vector playerPos = CPlayer::GetCurrentPlayer()->GetCenter();
+	Vector selfPos = GetCenter();
+
+	return abs(playerPos.x - selfPos.x);
+}
+
+float CEnemy::VerticalDistanceToPlayer()
+{
+	Vector playerPos = CPlayer::GetCurrentPlayer()->GetCenter();
+	Vector selfPos = GetCenter();
+
+	return abs(playerPos.y - selfPos.y);
 }

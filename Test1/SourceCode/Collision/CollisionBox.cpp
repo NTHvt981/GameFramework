@@ -90,7 +90,6 @@ int CCollisionBox::GetId()
 void CCollisionBox::GetCollision(list<CollisionEvent>& events)
 {
 	events.clear();
-	CCollision::GetInstance()->GetCollisionBoxes(id, coCollisionBoxes);
 
 	for each (LPCollisionBox staticBox in coCollisionBoxes)
 	{
@@ -112,7 +111,7 @@ void CCollisionBox::GetCollision(list<CollisionEvent>& events)
 	}
 }
 
-void CCollisionBox::IsColliding(LPCollisionBox box, bool& result)
+bool CCollisionBox::IsColliding(LPCollisionBox box)
 {
 	//get left, top, right, bottom of other collision boxes
 	float staticLeft, staticTop, staticRight, staticBottom;
@@ -122,10 +121,41 @@ void CCollisionBox::IsColliding(LPCollisionBox box, bool& result)
 	staticBottom = box->GetBottom();
 
 	//if false -> garantee no Collision
-	result = AABBCheck(
+	return AABBCheck(
 		left, top, right, bottom,
 		staticLeft, staticTop, staticRight, staticBottom
 	);
+}
+
+bool CCollisionBox::IsHypothesizedColliding(float x, float y)
+{
+	float hypLeft, hypTop, hypRight, hypBottom;
+
+	hypLeft = x;
+	hypTop = y;
+	hypRight = x + (right - left);
+	hypBottom = y + (bottom - top);
+
+	for each (LPCollisionBox staticBox in coCollisionBoxes)
+	{
+		//get left, top, right, bottom of other collision boxes
+		float staticLeft, staticTop, staticRight, staticBottom;
+		staticLeft = staticBox->GetLeft();
+		staticTop = staticBox->GetTop();
+		staticRight = staticBox->GetRight();
+		staticBottom = staticBox->GetBottom();
+
+		//if false -> garantee no Collision
+		if (AABBCheck(
+			hypLeft, hypTop, hypRight, hypBottom,
+			staticLeft, staticTop, staticRight, staticBottom
+		) && staticBox->IsSolid())
+		{
+			return true;
+		}
+	}
+
+	return false;
 }
 
 void CCollisionBox::SetLTRB(float l, float t, float r, float b)

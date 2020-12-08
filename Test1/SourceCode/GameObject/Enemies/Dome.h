@@ -1,30 +1,21 @@
 #pragma once
 
-#include "../Entity.h"
+#include "../Enemies/Enemy.h"
 #include "../Physic.h"
 #include "../../Constraints.h"
-#include "../../Camera/Camera.h"
-#include "../../Input/Input.h"
 #include "../../Unit/Animation.h"
 
-#define DOME_UP_MOVE_LEFT 1
-#define DOME_UP_MOVE_RIGHT 2
-#define DOME_DOWN_MOVE_LEFT 3
-#define DOME_DOWN_MOVE_RIGHT 4
-#define DOME_LEFT_MOVE_UP 5
-#define DOME_LEFT_MOVE_DOWN 6
-#define DOME_RIGHT_MOVE_UP 7
-#define DOME_RIGHT_MOVE_DOWN 8
+#define MY_DOME_CLING 0
+#define MY_DOME_FLY 1
 
-#define DOME_CLING 0
-#define DOME_FLY 1
-
-class CDome : public CEntity
+class CDome : public CEnemy
 {
 private:
-	float speed = 0.5;
+	const float clingSpeed = 1;
+	const float flySpeed = 4;
 
-	Vector old_velocity;
+	const float maxMainAxisDistance = 200;
+	const float maxSideAxisDistance = 5;
 
 	LPAnimation domeUpMoveLeft;
 	LPAnimation domeUpMoveRight;
@@ -38,21 +29,25 @@ private:
 	LPAnimation domeDownMoveLeft;
 	LPAnimation domeDownMoveRight;
 
-	int facialState = DOME_UP_MOVE_LEFT;
-	int flyingState = DOME_CLING;
+	LPAnimation animation;
+	int state = MY_DOME_CLING;
+
+	Vector clingDirection = Vector(0, 1);
+	Vector moveDirection = Vector(1, 0);
+
+	bool setInitDirection = false;
+
+	DWORD maxWaitTime = 100;
+	DWORD waitTime = 0;
 
 private:
-	void SetState();
-	void GetState(DWORD dt);
-	void MoveLeft(DWORD dt);
-	void MoveRight(DWORD dt);
-	void MoveUp(DWORD dt);
-	void MoveDown(DWORD dt);
-	void Fly(DWORD dt);
-	void DontMove(DWORD dt);
+	void ClingState(DWORD dt);
+	void FlyState(DWORD dt);
+	void SetInitDirection();
 
 public:
 	CDome();
 	void Update(DWORD dt);
 	void Render();
 };
+

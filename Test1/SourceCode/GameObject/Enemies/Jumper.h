@@ -1,39 +1,37 @@
 #pragma once
 
-#include "../Entity.h"
+#include "../Enemies/Enemy.h"
 #include "../Physic.h"
 #include "../../Constraints.h"
 #include "../../Unit/Animation.h"
 
-#define JUMPER_MOVE_LEFT -1
-#define JUMPER_DONT_MOVE 0
-#define JUMPER_MOVE_RIGHT 1
+#define JUMPER_NORMAL 0
+#define JUMPER_CHASE_PLAYER 1
 
-#define JUMPER_ON_GROUND 0
-#define JUMPER_ON_AIR 1
-
-#define JUMPER_LEFT 0
+#define JUMPER_LEFT -1
 #define JUMPER_RIGHT 1
 
-class CJumper: public CEntity
+class CJumper: public CEnemy
 {
 private:
-	float speed = 0.4;
+	const float normalSpeed = 0.8;
+	const float chaseSpeed = 1.6;
 
 	Vector old_velocity;
 
 	LPAnimation moveLeftAni;
 	LPAnimation moveRightAni;
+	LPAnimation animation;
 
-	int state = JUMPER_DONT_MOVE;
-	int verticalState = JUMPER_ON_GROUND;
+	int facing = JUMPER_RIGHT;
+	int state = JUMPER_NORMAL;
+
+	const float innerRadius = 75;
+	const float outerRadius = 125;
 
 private:
-	void SetState();
-	void GetState(DWORD dt);
-	void MoveLeft(DWORD dt);
-	void MoveRight(DWORD dt);
-	void DontMove(DWORD dt);
+	void NormalState(DWORD dt);
+	void ChasePlayerState(DWORD dt);
 
 public:
 	CJumper();

@@ -1,9 +1,58 @@
 #include "Jumper.h"
 
-CJumper::CJumper() : CEntity()
+void CJumper::NormalState(DWORD dt)
+{
+	bool onEdgeCon = collisionBox->IsHypothesizedColliding(
+		position.x,
+		position.y + 1
+	) && (! collisionBox->IsHypothesizedColliding(
+			position.x + width * facing,
+			position.y + 1
+		));
+
+	bool hitWallCon = collisionBox->IsHypothesizedColliding(
+		position.x + facing,
+		position.y
+	);
+
+	if (onEdgeCon || hitWallCon)
+		facing = -facing;
+
+	velocity.x = facing * normalSpeed;
+
+	old_velocity.Set(velocity.x, velocity.y);
+	Move(dt);
+
+	if (DistanceToPlayer() < innerRadius)
+		state = JUMPER_CHASE_PLAYER;
+}
+
+void CJumper::ChasePlayerState(DWORD dt)
+{
+	Vector playerPos = CPlayer::GetCurrentPlayer()->GetCenter();
+	Vector selfPos = GetCenter();
+
+	if ((playerPos.x - selfPos.x > 25) && (facing == -1))
+		facing = 1;
+	else if ((selfPos.x - playerPos.x > 25) && (facing == 1))
+		facing = -1;
+
+	velocity.x = facing * chaseSpeed;
+
+	if (collisionBox->IsHypothesizedColliding(position.x, position.y + 1))
+		velocity.y -= jumpSpeed;
+
+	old_velocity.Set(velocity.x, velocity.y);
+	Move(dt);
+
+	if (DistanceToPlayer() > outerRadius)
+		state = JUMPER_NORMAL;
+}
+
+CJumper::CJumper() : CEnemy()
 {
 	SetType(GOTYPES::Enemy);
-	gravity = 0.3;
+	gravity = 0.2;
 	jumpSpeed = 6;
 
 	this->collisionBox = new CDynamicBox(
@@ -11,6 +60,7 @@ CJumper::CJumper() : CEntity()
 		0, 0,
 		17, 26
 	);
+	collisionBox->SetSolid(false);
 
 	moveLeftAni = new CAnimation(1, 150);
 	int idsL[] = {
@@ -29,75 +79,26 @@ CJumper::CJumper() : CEntity()
 	};
 
 	moveRightAni->Add(idsR, 3);
+	animation = moveLeftAni;
 
-	state = JUMPER_MOVE_RIGHT;
+	moveLeftAni->GetSize(width, height);
 }
 
 void CJumper::Update(DWORD dt)
 {
-	GetState(dt);
+	if (state == JUMPER_NORMAL)
+		NormalState(dt);
+	else
+		ChasePlayerState(dt);
 
-	position = position + velocity;
-	collisionBox->Update();
+	if (facing == JUMPER_LEFT)
+		animation = moveLeftAni;
+	else
+		animation = moveRightAni;
 }
 
 void CJumper::Render()
 {
-	if (state == JUMPER_MOVE_LEFT)
-	{
-		moveLeftAni->Render(position);
-	}
-	else if (state == JUMPER_MOVE_RIGHT)
-	{
-		moveRightAni->Render(position);
-	}
+	animation->Render(position.x, position.y);
 	collisionBox->Render();
-}
-
-void CJumper::SetState()
-{
-}
-
-void CJumper::GetState(DWORD dt)
-{
-	switch (state)
-	{
-	case JUMPER_MOVE_RIGHT:
-		MoveRight(dt);
-		break;
-	case JUMPER_MOVE_LEFT:
-		MoveLeft(dt);
-		break;
-	case JUMPER_DONT_MOVE:
-		DontMove(dt);
-		break;
-	}
-}
-
-void CJumper::MoveLeft(DWORD dt)
-{
-	velocity.x = -speed * dt;
-
-	if (position.x <= 50)
-	{
-		state = JUMPER_MOVE_RIGHT;
-	}
-}
-
-void CJumper::MoveRight(DWORD dt)
-{
-	velocity.x = speed * dt;
-
-	if (position.x >= 320)
-	{
-		state = JUMPER_MOVE_LEFT;
-	}
-}
-
-void CJumper::DontMove(DWORD dt)
-{
-	velocity.x = 0;
-
-	moveLeftAni->SetMode(ANIMATION_PAUSE);
-	moveRightAni->SetMode(ANIMATION_PAUSE);
 }

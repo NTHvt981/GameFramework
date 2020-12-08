@@ -167,9 +167,6 @@
     <ClInclude Include="SourceCode\Game\GameRequest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SourceCode\GameObject\Enemies\Dome.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SourceCode\GameObject\Enemies\Jumper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -246,6 +243,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SourceCode\Unit\Pattern.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\GameObject\Enemies\Skull.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\GameObject\Enemies\Floater.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\GameObject\Enemies\Insect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\GameObject\Enemies\Dome.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -346,9 +355,6 @@
     <ClCompile Include="SourceCode\Game\GameRequest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SourceCode\GameObject\Enemies\Dome.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SourceCode\GameObject\Enemies\Jumper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -425,6 +431,21 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SourceCode\Unit\Pattern.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\GameObject\Enemies\Skull.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\GameObject\Enemies\Floater.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\GameObject\Enemies\Insect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="INSECT.CPP">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\GameObject\Enemies\Dome.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

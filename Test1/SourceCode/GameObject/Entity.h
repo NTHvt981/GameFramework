@@ -29,7 +29,6 @@ protected:
 	virtual void Move(DWORD dt);
 	virtual void MoveWithoutGravity(DWORD dt);
 
-
 public:
 	CEntity();
 	int GetId();
@@ -45,7 +44,7 @@ public:
 	bool IsCollidedWith(GOTYPES Type);
 	bool GetCollidedWith(GOTYPES Type, list<LPGameObject> &collidedObjs);
 
-	void IsColliding(LPEntity entity, bool& result);
+	bool IsColliding(LPEntity entity);
 
 	void Update(DWORD dt);
 	void Render();

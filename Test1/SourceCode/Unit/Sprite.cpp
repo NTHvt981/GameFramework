@@ -41,3 +41,4 @@ void CSprite::GetSize(int& width, int& height)
 	width = right - left;
 	height = bottom - top;
 }
+

@@ -1,42 +1,38 @@
 #pragma once
 
-#include "Enemy.h"
-//#include "../Entity.h"
+#include "../Enemies/Enemy.h"
+#include "../Physic.h"
 #include "../../Constraints.h"
 #include "../../Unit/Animation.h"
 
-#include "../../Game/Game.h"
+#define WORM_NORMAL 1
+#define WORM_CHASE_PLAYER 2
 
-#define WORM_MOVE_LEFT -1
-#define WORM_DONT_MOVE 0
-#define WORM_MOVE_RIGHT 1
-
-#define WORM_ON_GROUND 0
-#define WORM_ON_AIR 1
+#define WORM_LEFT -1
+#define WORM_RIGHT 1
 
 class CWorm : public CEnemy
 {
 private:
-	float speed = 0.4;
+	const float normalSpeed = 0.4;
+	const float chaseSpeed = 0.8;
+	const float gravity = 0.25;
+	const float jumpSpeed = 4;
 
-	Vector old_velocity;
+	LPAnimation moveLeftAni;
+	LPAnimation moveRightAni;
+	LPAnimation animation;
 
-	LPAnimation crawlLeftAni;
-	LPAnimation crawlRightAni;
+	int state = WORM_NORMAL;
+	int facing = WORM_RIGHT;
 
-	int state = WORM_DONT_MOVE;
-	int verticalState = WORM_ON_GROUND;
-
-protected:
-	//this function is only called for debug
-	void Move(DWORD dt);
+	const float innerRadius = 50;
+	const float outerRadius = 75;
+	const float chaseLimit = 10;
 
 private:
-	void SetState();
-	void GetState(DWORD dt);
-	void MoveLeft(DWORD dt);
-	void MoveRight(DWORD dt);
-	void DontMove(DWORD dt);
+	void NormalState(DWORD dt);
+	void ChasePlayerState(DWORD dt);
 
 public:
 	CWorm();

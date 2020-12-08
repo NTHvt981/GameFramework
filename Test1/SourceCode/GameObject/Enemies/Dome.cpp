@@ -1,6 +1,114 @@
 #include "Dome.h"
+ 
+void CDome::ClingState(DWORD dt)
+{
+	bool noGroundCon = !collisionBox->IsHypothesizedColliding(
+		position.x + clingDirection.x,
+		position.y + clingDirection.y
+	);
 
-CDome::CDome() : CEntity()
+	bool hitWallCon = collisionBox->IsHypothesizedColliding(
+		position.x + clingSpeed * moveDirection.x,
+		position.y + clingSpeed * moveDirection.y
+	);
+
+	if (noGroundCon)
+	{
+		Vector temp;
+		temp.x = moveDirection.x;
+		temp.y = moveDirection.y;
+
+		moveDirection.x = clingDirection.x;
+		moveDirection.y = clingDirection.y;
+
+		clingDirection.x = -temp.x;
+		clingDirection.y = -temp.y;
+	}
+
+	if (hitWallCon)
+	{
+		Vector temp;
+		temp.x = moveDirection.x;
+		temp.y = moveDirection.y;
+
+		moveDirection.x = -clingDirection.x;
+		moveDirection.y = -clingDirection.y;
+
+		clingDirection.x = temp.x;
+		clingDirection.y = temp.y;
+	}
+
+	velocity.x = clingSpeed * moveDirection.x;
+	velocity.y = clingSpeed * moveDirection.y;
+
+	Move(dt);
+
+	waitTime = min(waitTime + dt, maxWaitTime);
+	bool finish = false;
+	if (waitTime >= maxWaitTime) finish = true;
+	bool mainAxisNear = false;
+	bool sideAxisNear = false;
+
+	bool onTheSameSide = false;
+	Vector playerPos = CPlayer::GetCurrentPlayer()->GetCenter();
+	Vector selfPos = GetCenter();
+
+	//check if meet the player
+	if (clingDirection.x != 0)
+	{
+		if ((playerPos.x - selfPos.x) * (-clingDirection.x) > 0)
+			onTheSameSide = true;
+
+		mainAxisNear = HorizontalDistanceToPlayer() < maxMainAxisDistance;
+		sideAxisNear = VerticalDistanceToPlayer() < maxSideAxisDistance;
+	}
+	else
+	{
+		if ((playerPos.y - selfPos.y) * (-clingDirection.y) > 0)
+			onTheSameSide = true;
+
+		mainAxisNear = VerticalDistanceToPlayer() < maxMainAxisDistance;
+		sideAxisNear = HorizontalDistanceToPlayer() < maxSideAxisDistance;
+	}
+	if (mainAxisNear && sideAxisNear && finish && onTheSameSide)
+	{
+		state = MY_DOME_FLY;
+	}
+}
+
+void CDome::FlyState(DWORD dt)
+{
+	velocity.x = -flySpeed * clingDirection.x;
+	velocity.y = -flySpeed * clingDirection.y;
+
+	Move(dt);
+
+	bool headButtWallCon = collisionBox->IsHypothesizedColliding(
+		position.x - clingDirection.x,
+		position.y - clingDirection.y
+	);
+
+	if (headButtWallCon) {
+		clingDirection.x = -clingDirection.x;
+		clingDirection.y = -clingDirection.y;
+
+		waitTime = 0;
+
+		state = MY_DOME_CLING;
+	}
+}
+
+void CDome::SetInitDirection()
+{
+	bool noGroundCon = !collisionBox->IsHypothesizedColliding(
+		position.x + clingDirection.x,
+		position.y + clingDirection.y
+	);
+
+	setInitDirection = true;
+}
+
+CDome::CDome() : CEnemy()
 {
 	SetType(GOTYPES::Enemy);
 
@@ -79,276 +187,46 @@ CDome::CDome() : CEntity()
 
 	domeRightMoveDown->Add(idsRD, 2);
 
-	facialState = DOME_UP_MOVE_RIGHT;
-	flyingState = DOME_CLING;
+	animation = domeUpMoveRight;
 }
 
 void CDome::Update(DWORD dt)
 {
-	GetState(dt);
+	if (!setInitDirection) SetInitDirection();
 
-	position = position + velocity;
-	collisionBox->Update();
+	switch (state)
+	{
+	case MY_DOME_CLING:
+		ClingState(dt);
+		break;
+	case MY_DOME_FLY:
+		FlyState(dt);
+		break;
+	}
+
+	if (clingDirection.x == 1 && moveDirection.y == 1)
+		animation = domeLeftMoveDown;
+	else if (clingDirection.x == 1 && moveDirection.y == -1)
+		animation = domeLeftMoveUp;
+
+	if (clingDirection.x == -1 && moveDirection.y == 1)
+		animation = domeRightMoveDown;
+	else if (clingDirection.x == -1 && moveDirection.y == -1)
+		animation = domeRightMoveUp;
+
+	else if (clingDirection.y == 1 && moveDirection.x == 1)
+		animation = domeUpMoveRight;
+	else if (clingDirection.y == 1 && moveDirection.x == -1)
+		animation = domeUpMoveLeft;
+
+	if (clingDirection.y == -1 && moveDirection.x == 1)
+		animation = domeDownMoveRight;
+	else if (clingDirection.y == -1 && moveDirection.x == -1)
+		animation = domeDownMoveLeft;
 }
 
 void CDome::Render()
 {
-	switch (facialState)
-	{
-	case DOME_UP_MOVE_LEFT:
-		domeUpMoveLeft->Render(position);
-		break;
-	case DOME_UP_MOVE_RIGHT:
-		domeUpMoveRight->Render(position);
-		break;
-	case DOME_DOWN_MOVE_LEFT:
-		domeDownMoveLeft->Render(position);
-		break;
-	case DOME_DOWN_MOVE_RIGHT:
-		domeDownMoveRight->Render(position);
-		break;
-	case DOME_LEFT_MOVE_UP:
-		domeLeftMoveUp->Render(position);
-		break;
-	case DOME_LEFT_MOVE_DOWN:
-		domeLeftMoveDown->Render(position);
-		break;
-	case DOME_RIGHT_MOVE_UP:
-		domeRightMoveUp->Render(position);
-		break;
-	case DOME_RIGHT_MOVE_DOWN:
-		domeRightMoveDown->Render(position);
-		break;
-	default:
-		domeUpMoveLeft->Render(position);
-		break;
-		break;
-	}
+	animation->Render(position.x, position.y);
 	collisionBox->Render();
-}
-
-void CDome::SetState()
-{
-}
-
-void CDome::GetState(DWORD dt)
-{
-	switch (facialState)
-	{
-	case DOME_UP_MOVE_LEFT:
-		MoveLeft(dt);
-		break;
-	case DOME_UP_MOVE_RIGHT:
-		MoveRight(dt);
-		break;
-	case DOME_DOWN_MOVE_LEFT:
-		MoveLeft(dt);
-		break;
-	case DOME_DOWN_MOVE_RIGHT:
-		MoveRight(dt);
-		break;
-	case DOME_LEFT_MOVE_UP:
-		MoveUp(dt);
-		break;
-	case DOME_LEFT_MOVE_DOWN:
-		MoveDown(dt);
-		break;
-	case DOME_RIGHT_MOVE_UP:
-		MoveUp(dt);
-		break;
-	case DOME_RIGHT_MOVE_DOWN:
-		MoveDown(dt);
-		break;
-	default:
-		MoveLeft(dt);
-		break;
-	}
-}
-
-void CDome::MoveLeft(DWORD dt)
-{
-	velocity.x = -speed * dt;
-	velocity.y = 0;
-
-	if (position.y <= 50 && position.x <= 50)
-	{
-		position.y = 50;
-		position.x = 50;
-		facialState = DOME_RIGHT_MOVE_UP;
-	}
-
-	if (position.y >= 150 && position.x <= 50)
-	{
-		position.y = 150;
-		position.x = 50;
-		facialState = DOME_RIGHT_MOVE_DOWN;
-	}
-
-	if (position.y <= 50)
-	{
-		domeUpMoveLeft->SetMode(ANIMATION_NORMAL);
-		domeUpMoveRight->SetMode(ANIMATION_REVERSE);
-		domeDownMoveLeft->SetMode(ANIMATION_PAUSE);
-		domeDownMoveRight->SetMode(ANIMATION_PAUSE);
-	}
-	else if (position.y >= 150)
-	{
-		domeUpMoveLeft->SetMode(ANIMATION_PAUSE);
-		domeUpMoveRight->SetMode(ANIMATION_PAUSE);
-		domeDownMoveLeft->SetMode(ANIMATION_NORMAL);
-		domeDownMoveRight->SetMode(ANIMATION_REVERSE);
-	}
-	domeLeftMoveUp->SetMode(ANIMATION_PAUSE);
-	domeLeftMoveDown->SetMode(ANIMATION_PAUSE);
-	domeRightMoveUp->SetMode(ANIMATION_PAUSE);
-	domeRightMoveDown->SetMode(ANIMATION_PAUSE);
-}
-
-void CDome::MoveRight(DWORD dt)
-{
-	velocity.x = speed * dt;
-	velocity.y = 0;
-
-	if (position.y <= 50 && position.x >= 150)
-	{
-		position.y = 50;
-		position.x = 150;
-		facialState = DOME_LEFT_MOVE_UP;
-	}
-
-	if (position.y >= 150 && position.x >= 150)
-	{
-		position.y = 150;
-		position.x = 150;
-		facialState = DOME_LEFT_MOVE_DOWN;
-	}
-
-	if (position.y <= 50)
-	{
-		domeUpMoveLeft->SetMode(ANIMATION_REVERSE);
-		domeUpMoveRight->SetMode(ANIMATION_NORMAL);
-		domeDownMoveLeft->SetMode(ANIMATION_PAUSE);
-		domeDownMoveRight->SetMode(ANIMATION_PAUSE);
-	}
-	else if (position.y >= 150)
-	{
-		domeUpMoveLeft->SetMode(ANIMATION_PAUSE);
-		domeUpMoveRight->SetMode(ANIMATION_PAUSE);
-		domeDownMoveLeft->SetMode(ANIMATION_REVERSE);
-		domeDownMoveRight->SetMode(ANIMATION_NORMAL);
-	}
-	domeLeftMoveUp->SetMode(ANIMATION_PAUSE);
-	domeLeftMoveDown->SetMode(ANIMATION_PAUSE);
-	domeRightMoveUp->SetMode(ANIMATION_PAUSE);
-	domeRightMoveDown->SetMode(ANIMATION_PAUSE);
-}
-
-void CDome::MoveUp(DWORD dt)
-{
-	velocity.y = speed * dt;
-	velocity.x = 0;
-
-	if (position.x <= 50 && position.y >= 150)
-	{
-		position.x = 50;
-		position.y = 150;
-		facialState = DOME_DOWN_MOVE_RIGHT;
-	}
-
-	if (position.x >= 150 && position.y >= 150)
-	{
-		position.x = 150;
-		position.y = 150;
-		facialState = DOME_DOWN_MOVE_LEFT;
-	}
-
-	if (position.x <= 50)
-	{
-		domeLeftMoveUp->SetMode(ANIMATION_PAUSE);
-		domeLeftMoveDown->SetMode(ANIMATION_PAUSE);
-		domeRightMoveUp->SetMode(ANIMATION_NORMAL);
-		domeRightMoveDown->SetMode(ANIMATION_REVERSE);
-	}
-	else if (position.x >= 150)
-	{
-		domeLeftMoveUp->SetMode(ANIMATION_NORMAL);
-		domeLeftMoveDown->SetMode(ANIMATION_REVERSE);
-		domeRightMoveUp->SetMode(ANIMATION_PAUSE);
-		domeRightMoveDown->SetMode(ANIMATION_PAUSE);
-	}
-
-	domeUpMoveLeft->SetMode(ANIMATION_PAUSE);
-	domeUpMoveRight->SetMode(ANIMATION_PAUSE);
-	domeDownMoveLeft->SetMode(ANIMATION_PAUSE);
-	domeDownMoveRight->SetMode(ANIMATION_PAUSE);
-}
-
-void CDome::MoveDown(DWORD dt)
-{
-	velocity.y = -speed * dt;
-	velocity.x = 0;
-
-	if (position.x <= 50 && position.y <= 50)
-	{
-		position.x = 50;
-		position.y = 50;
-		facialState = DOME_UP_MOVE_RIGHT;
-	}
-
-	if (position.x >= 150 && position.y <= 50)
-	{
-		position.x = 150;
-		position.y = 50;
-		facialState = DOME_UP_MOVE_LEFT;
-	}
-
-	if (position.x <= 50)
-	{
-		domeLeftMoveUp->SetMode(ANIMATION_PAUSE);
-		domeLeftMoveDown->SetMode(ANIMATION_PAUSE);
-		domeRightMoveUp->SetMode(ANIMATION_REVERSE);
-		domeRightMoveDown->SetMode(ANIMATION_NORMAL);
-	}
-	else if (position.x >= 150)
-	{
-		domeLeftMoveUp->SetMode(ANIMATION_REVERSE);
-		domeLeftMoveDown->SetMode(ANIMATION_NORMAL);
-		domeRightMoveUp->SetMode(ANIMATION_PAUSE);
-		domeRightMoveDown->SetMode(ANIMATION_PAUSE);
-	}
-
-	domeUpMoveLeft->SetMode(ANIMATION_PAUSE);
-	domeUpMoveRight->SetMode(ANIMATION_PAUSE);
-	domeDownMoveLeft->SetMode(ANIMATION_PAUSE);
-	domeDownMoveRight->SetMode(ANIMATION_PAUSE);
-}
-
-void CDome::Fly(DWORD dt)
-{
-	velocity.x = speed * dt;
-	velocity.y = speed * dt;
-
-	domeLeftMoveUp->SetMode(ANIMATION_PAUSE);
-	domeLeftMoveDown->SetMode(ANIMATION_PAUSE);
-	domeRightMoveUp->SetMode(ANIMATION_PAUSE);
-	domeRightMoveDown->SetMode(ANIMATION_PAUSE);
-	domeUpMoveLeft->SetMode(ANIMATION_PAUSE);
-	domeUpMoveRight->SetMode(ANIMATION_PAUSE);
-	domeDownMoveLeft->SetMode(ANIMATION_PAUSE);
-	domeDownMoveRight->SetMode(ANIMATION_PAUSE);
-}
-
-void CDome::DontMove(DWORD dt)
-{
-	velocity.x = 0;
-	velocity.y = 0;
-
-	domeLeftMoveUp->SetMode(ANIMATION_PAUSE);
-	domeLeftMoveDown->SetMode(ANIMATION_PAUSE);
-	domeRightMoveUp->SetMode(ANIMATION_PAUSE);
-	domeRightMoveDown->SetMode(ANIMATION_PAUSE);
-	domeUpMoveLeft->SetMode(ANIMATION_PAUSE);
-	domeUpMoveRight->SetMode(ANIMATION_PAUSE);
-	domeDownMoveLeft->SetMode(ANIMATION_PAUSE);
-	domeDownMoveRight->SetMode(ANIMATION_PAUSE);
 }

@@ -149,6 +149,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="SourceCode\GameObject\Enemies\Insect.h" />
+    <ClInclude Include="SourceCode\GameObject\Enemies\Floater.h" />
+    <ClInclude Include="SourceCode\GameObject\Enemies\Dome.h" />
+    <ClInclude Include="SourceCode\GameObject\Enemies\Skull.h" />
     <ClInclude Include="SourceCode\Unit\Pattern.h" />
     <ClInclude Include="SourceCode\GameObject\StaticObjects\SideScrollPortal.h" />
     <ClInclude Include="SourceCode\GridSystem\SceneGrid.h" />
@@ -175,7 +179,6 @@
     <ClInclude Include="SourceCode\Player\PlayerHealth.h" />
     <ClInclude Include="SourceCode\GameObject\StaticObjects\Portal.h" />
     <ClInclude Include="SourceCode\AreaAndScene\Area.h" />
-    <ClInclude Include="SourceCode\GameObject\Enemies\Dome.h" />
     <ClInclude Include="SourceCode\GameObject\Enemies\Orb.h" />
     <ClInclude Include="SourceCode\GameObject\Enemies\Jumper.h" />
     <ClInclude Include="SourceCode\Collision\CollisionEvent.h" />
@@ -212,6 +215,11 @@
     <ClInclude Include="SourceCode\GameObject\StaticObjects\TopDownPortal.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="INSECT.CPP" />
+    <ClCompile Include="SourceCode\GameObject\Enemies\Insect.cpp" />
+    <ClCompile Include="SourceCode\GameObject\Enemies\Floater.cpp" />
+    <ClCompile Include="SourceCode\GameObject\Enemies\Dome.cpp" />
+    <ClCompile Include="SourceCode\GameObject\Enemies\Skull.cpp" />
     <ClCompile Include="SourceCode\Unit\Pattern.cpp" />
     <ClCompile Include="SourceCode\GameObject\StaticObjects\SideScrollPortal.cpp" />
     <ClCompile Include="SourceCode\GridSystem\SceneGrid.cpp" />
@@ -238,7 +246,6 @@
     <ClCompile Include="SourceCode\Player\PlayerHealth.cpp" />
     <ClCompile Include="SourceCode\GameObject\StaticObjects\Portal.cpp" />
     <ClCompile Include="SourceCode\AreaAndScene\Area.cpp" />
-    <ClCompile Include="SourceCode\GameObject\Enemies\Dome.cpp" />
     <ClCompile Include="SourceCode\GameObject\Enemies\Orb.cpp" />
     <ClCompile Include="SourceCode\GameObject\Enemies\Jumper.cpp" />
     <ClCompile Include="SourceCode\Collision\CollisionEvent.cpp" />

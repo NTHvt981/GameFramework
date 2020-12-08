@@ -21,6 +21,18 @@
 #include "../GameObject/StaticObjects/TopDownPortal.h"
 #include "../GameObject/StaticObjects/Wall.h"
 
+
+#pragma region Enemies
+#include "../GameObject/Enemies/Jumper.h"
+#include "../GameObject/Enemies/Skull.h"
+#include "../GameObject/Enemies/Dome.h"
+#include "../GameObject/Enemies/Floater.h"
+#include "../GameObject/Enemies/Insect.h"
+#include "../GameObject/Enemies/Worm.h"
+
+#pragma endregion
+
+
 class CSideScrollScene: public CScene
 {
 private:

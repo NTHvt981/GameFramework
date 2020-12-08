@@ -230,6 +230,27 @@
 #define ID_WALKER_4 2114
 #pragma endregion
 
+#pragma region ENEMY SKULL
+#define ID_SKULL_MOVE_LEFT_1 2115
+#define ID_SKULL_MOVE_LEFT_2 2116
+
+#define ID_SKULL_MOVE_RIGHT_1 2117
+#define ID_SKULL_MOVE_RIGHT_2 2118
+#pragma endregion
+
+#pragma region ENEMY FLOATER
+#define ID_FLOATER_MOVE_1 2119
+#define ID_FLOATER_MOVE_2 2120
+#pragma endregion
+
+#pragma region ENEMY INSECT
+#define ID_INSECT_MOVE_LEFT_1 2121
+#define ID_INSECT_MOVE_LEFT_2 2122
+
+#define ID_INSECT_MOVE_RIGHT_1 2123
+#define ID_INSECT_MOVE_RIGHT_2 2124
+#pragma endregion
+
 #define ID_BREAKABLE_WALL 6000
 #define ID_PORTAL_FACE_RIGHT_1 6001
 #define ID_PORTAL_FACE_RIGHT_2 6002

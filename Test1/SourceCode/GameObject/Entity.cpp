@@ -81,9 +81,9 @@ void CEntity::MoveWithoutGravity(DWORD dt)
 	}
 }
 
-void CEntity::IsColliding(LPEntity entity, bool& result)
+bool CEntity::IsColliding(LPEntity entity)
 {
-	collisionBox->IsColliding(entity->GetCollisionBox(), result);
+	return collisionBox->IsColliding(entity->GetCollisionBox());
 }
 
 //void CEntity::SetMaxHealth(int mh)

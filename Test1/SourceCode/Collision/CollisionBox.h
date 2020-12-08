@@ -50,7 +50,9 @@ public:
 
 public:
 	void GetCollision(list<CollisionEvent>& events);
-	void IsColliding(LPCollisionBox box, bool &result);
+	bool IsColliding(LPCollisionBox box);
+
+	bool IsHypothesizedColliding(float x, float y);
 
 	void SetLTRB(float l, float t, float r, float b);
 	void GetLTRB(float& l, float& t, float& r, float& b);

@@ -138,6 +138,17 @@ void CSideScrollScene::LoadPortals()
 
 void CSideScrollScene::LoadEnemies()
 {
+	//AddEntity(new CJumper(), 400, 2944);
+	//AddEntity(new CJumper(), 336, 2944);
+
+	//AddEntity(new CSkull(), 3*16, 182*16);
+
+	//AddEntity(new CMyDome(), 3 * 16 - 2, 185 * 16 - 2);
+
+	//AddEntity(new CFloater(FLOATER_HORIZONTAL), 336, 2944);
+
+	//AddEntity(new CInsect(), 336, 2944);
+	AddEntity(new CWorm(), 400, 2944);
 }
 
 CSideScrollScene::CSideScrollScene()
@@ -327,8 +338,7 @@ void CSideScrollScene::UpdatePortals(DWORD dt)
 	/// </summary>
 	CInput* input = CInput::GetInstance();
 
-	bool con1;
-	scenePortal->IsColliding(CPlayer::GetCurrentPlayer(), con1);
+	bool con1 = scenePortal->IsColliding(CPlayer::GetCurrentPlayer());
 	bool con2 = CPlayer::GetCurrentPlayer() == CJason::GetInstance();
 	bool con3 = input->IsKeyPressed(DIK_W);
 

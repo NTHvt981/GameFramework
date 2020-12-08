@@ -1,129 +1,117 @@
 #include "Worm.h"
 
+void CWorm::NormalState(DWORD dt)
+{
+	animation->SetSpeed(1);
+
+	velocity.x = facing * normalSpeed;
+
+	old_velocity.Set(velocity.x, velocity.y);
+	Move(dt);
+
+	bool onEdgeCon = collisionBox->IsHypothesizedColliding(
+		position.x,
+		position.y + 1
+	) && (!collisionBox->IsHypothesizedColliding(
+		position.x + width * facing,
+		position.y + 1
+	));
+
+	bool hitWallCon = collisionBox->IsHypothesizedColliding(
+		position.x + facing,
+		position.y
+	);
+
+	if (onEdgeCon || hitWallCon)
+		facing = -facing;
+
+	if (DistanceToPlayer() < innerRadius)
+		state = WORM_CHASE_PLAYER;
+}
+
+void CWorm::ChasePlayerState(DWORD dt)
+{
+	animation->SetSpeed(2);
+
+	bool hitWallCon = collisionBox->IsHypothesizedColliding(
+		position.x + facing,
+		position.y
+	);
+	bool onGroundCon = collisionBox->IsHypothesizedColliding(position.x, position.y + 1);
+
+	Vector playerPos = CPlayer::GetCurrentPlayer()->GetCenter();
+	Vector selfPos = GetCenter();
+
+	if ((playerPos.x - selfPos.x > chaseLimit) && (facing == -1))
+		facing = 1;
+	else if ((selfPos.x - playerPos.x > chaseLimit) && (facing == 1))
+		facing = -1;
+
+	velocity.x = facing * chaseSpeed;
+
+	if (hitWallCon && onGroundCon)
+		velocity.y -= jumpSpeed;
+
+	old_velocity.Set(velocity.x, velocity.y);
+	Move(dt);
+
+	if (DistanceToPlayer() > outerRadius)
+		state = WORM_NORMAL;
+}
+
 CWorm::CWorm() : CEnemy()
 {
-	SetMaxHealth(5);
-	gravity = 0.25;
+	SetMaxHealth(4);
+	CEntity::gravity = gravity;
+	CEntity::jumpSpeed = jumpSpeed;
 
-	this->collisionBox = new CDynamicBox(
-		this,
-		0, 0,
-		18, 10
-	);
-	collisionBox->SetSolid(false);
-
-	crawlLeftAni = new CAnimation(1, 200);
+	moveLeftAni = new CAnimation(1, 200);
 	int idsL[] = {
 		ID_WORM_MOVE_LEFT_1,
 		ID_WORM_MOVE_LEFT_2
 	};
 
-	crawlLeftAni->Add(idsL, 2);
+	moveLeftAni->Add(idsL, 2);
 
-	crawlRightAni = new CAnimation(1, 200);
+	moveRightAni = new CAnimation(1, 200);
 	int idsR[] = {
 		ID_WORM_MOVE_RIGHT_1,
 		ID_WORM_MOVE_RIGHT_2
 	};
 
-	crawlRightAni->Add(idsR, 2);
+	moveRightAni->Add(idsR, 2);
+	animation = moveRightAni;
 
-	state = WORM_MOVE_RIGHT;
+	animation->GetSize(width, height);
+	this->collisionBox = new CDynamicBox(
+		this,
+		0, 0,
+		width, height
+	);
+	collisionBox->SetSolid(false);
 }
 
 void CWorm::Update(DWORD dt)
 {
-	GetState(dt);
+	switch (state)
+	{
+	case WORM_NORMAL:
+		NormalState(dt);
+		break;
+	case WORM_CHASE_PLAYER:
+		ChasePlayerState(dt);
+		break;
+	}
 
-	collisionBox->Update();
-
-	CEnemy::Update(dt);
-	//if (health == 0)
-	//{
-	//	LPRequest request = new CGameRequest(REQUEST_TYPES::DeleteEntity);
-	//	request->id = this->id;
-	//	CGameRequest::AddRequest(request);
-	//}
+	if (facing == WORM_LEFT)
+		animation = moveLeftAni;
+	else
+		animation = moveRightAni;
 }
 
 void CWorm::Render()
 {
-	if (state == WORM_MOVE_RIGHT)
-	{
-		crawlRightAni->Render(position);
-	}
-	else if (state == WORM_MOVE_LEFT)
-	{
-			crawlLeftAni->Render(position);
-	}
+	animation->Render(position);
 	collisionBox->Render();
 }
 
-void CWorm::Move(DWORD dt)
-{
-	//debug comment
-	CEntity::Move(dt);
-
-#pragma region debug code
-
-#pragma endregion
-
-}
-
-void CWorm::SetState()
-{
-}
-
-void CWorm::GetState(DWORD dt)
-{
-	switch (state)
-	{
-	case WORM_MOVE_RIGHT:
-		MoveRight(dt);
-		break;
-	case WORM_MOVE_LEFT:
-		MoveLeft(dt);
-		break;
-	case WORM_DONT_MOVE:
-		DontMove(dt);
-		break;
-	}
-}
-
-void CWorm::MoveLeft(DWORD dt)
-{
-	velocity.x = -speed * dt;
-
-	if (position.x <= 10)
-	{
-		state = WORM_MOVE_RIGHT;
-	}
-
-	Move(dt);
-
-	crawlLeftAni->SetMode(ANIMATION_NORMAL);
-	crawlRightAni->SetMode(ANIMATION_REVERSE);
-}
-
-void CWorm::MoveRight(DWORD dt)
-{
-	velocity.x = speed * dt;
-
-	if (position.x >= 320)
-	{
-		state = WORM_MOVE_LEFT;
-	}
-
-	Move(dt);
-
-	crawlLeftAni->SetMode(ANIMATION_REVERSE);
-	crawlRightAni->SetMode(ANIMATION_NORMAL);
-}
-
-void CWorm::DontMove(DWORD dt)
-{
-	velocity.x = 0;
-
-	crawlLeftAni->SetMode(ANIMATION_PAUSE);
-	crawlRightAni->SetMode(ANIMATION_PAUSE);
-}

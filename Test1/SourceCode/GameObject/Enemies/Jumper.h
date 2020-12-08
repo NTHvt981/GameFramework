@@ -12,6 +12,9 @@
 #define JUMPER_ON_GROUND 0
 #define JUMPER_ON_AIR 1
 
+#define JUMPER_LEFT 0
+#define JUMPER_RIGHT 1
+
 class CJumper: public CEntity
 {
 private:

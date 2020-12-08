@@ -149,6 +149,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="SourceCode\Unit\Pattern.h" />
     <ClInclude Include="SourceCode\GameObject\StaticObjects\SideScrollPortal.h" />
     <ClInclude Include="SourceCode\GridSystem\SceneGrid.h" />
     <ClInclude Include="SourceCode\Player\JasonTopDown.h" />
@@ -211,6 +212,7 @@
     <ClInclude Include="SourceCode\GameObject\StaticObjects\TopDownPortal.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="SourceCode\Unit\Pattern.cpp" />
     <ClCompile Include="SourceCode\GameObject\StaticObjects\SideScrollPortal.cpp" />
     <ClCompile Include="SourceCode\GridSystem\SceneGrid.cpp" />
     <ClCompile Include="SourceCode\Player\JasonTopDown.cpp" />

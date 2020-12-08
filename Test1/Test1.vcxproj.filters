@@ -245,6 +245,9 @@
     <ClInclude Include="SourceCode\GameObject\StaticObjects\TopDownPortal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SourceCode\Unit\Pattern.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -419,6 +422,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SourceCode\GameObject\StaticObjects\TopDownPortal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Unit\Pattern.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

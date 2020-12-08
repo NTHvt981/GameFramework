@@ -10,9 +10,10 @@
 #include "..\Library\AnimationLibrary.h"
 #include "..\Debug\Debug.h"
 
-#include "../GameObject/StaticObjects/Portal.h"
-
 #include "../SceneSystem/SceneManager.h"
+
+
+#include "../Unit/Pattern.h"
 
 using namespace std;
 

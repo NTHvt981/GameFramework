@@ -6,8 +6,9 @@ void CSceneManager::Init()
 	sideScrollScene = new CSideScrollScene();
 	topDownScene = new CTopDownScene();
 	gameOverScene = new CGameOverScene();
+	bossScene = new CBossScene();
 
-	currentScene = sideScrollScene;
+	currentScene = bossScene;
 }
 
 void CSceneManager::LoadResources()
@@ -16,16 +17,19 @@ void CSceneManager::LoadResources()
 
 	sideScrollScene->LoadResources();
 	topDownScene->LoadResources();
+	bossScene->LoadResources();
 
-	sideScrollScene->Start(
-		INTRO_TO_SIDESCROLL_POS.x, 
-		INTRO_TO_SIDESCROLL_POS.y
-	);
+	//sideScrollScene->Start(
+	//	TOPDOWN_TO_SIDESCROLL_POS.x, 
+	//	TOPDOWN_TO_SIDESCROLL_POS.y
+	//);
 
 	//topDownScene->Start(
 	//	SIDESCROLL_TO_TOPDOWN_POS.x,
 	//	SIDESCROLL_TO_TOPDOWN_POS.y
 	//);
+
+	bossScene->Start();
 }
 
 void CSceneManager::Update(DWORD dt)

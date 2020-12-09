@@ -9,6 +9,7 @@
 #include "GameOverScene.h"
 #include "SideScrollScene.h"
 #include "TopDownScene.h"
+#include "BossScene.h"
 
 #define NORMAL_MODE 0
 #define BEGIN_CHANGESCENE_MODE 1
@@ -25,6 +26,7 @@ private:
 	CSideScrollScene *sideScrollScene;
 	CTopDownScene *topDownScene;
 	CGameOverScene *gameOverScene;
+	CBossScene* bossScene;
 
 	int mode = NORMAL_MODE;
 

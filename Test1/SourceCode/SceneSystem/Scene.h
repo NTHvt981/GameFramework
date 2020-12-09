@@ -20,7 +20,8 @@ enum class SCENE_TYPES
 	IntroScene,
 	SideScrollScene,
 	TopDownScene,
-	EndingScene
+	EndingScene,
+	BossScene
 };
 
 class CScene

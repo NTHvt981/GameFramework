@@ -149,6 +149,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="SourceCode\GameObject\Boss\BossHand.h" />
+    <ClInclude Include="SourceCode\GameObject\Boss\BossArm.h" />
+    <ClInclude Include="SourceCode\SceneSystem\BossScene.h" />
+    <ClInclude Include="SourceCode\GameObject\Boss\Boss.h" />
     <ClInclude Include="SourceCode\GameObject\EnemyBullets\EnemyBullet.h" />
     <ClInclude Include="SourceCode\GameObject\Enemies\Mine.h" />
     <ClInclude Include="SourceCode\GameObject\Enemies\Insect.h" />
@@ -217,6 +221,11 @@
     <ClInclude Include="SourceCode\GameObject\StaticObjects\TopDownPortal.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BOSSHAND.CPP" />
+    <ClCompile Include="SourceCode\GameObject\Boss\BossHand.cpp" />
+    <ClCompile Include="SourceCode\GameObject\Boss\BossArm.cpp" />
+    <ClCompile Include="SourceCode\SceneSystem\BossScene.cpp" />
+    <ClCompile Include="SourceCode\GameObject\Boss\Boss.cpp" />
     <ClCompile Include="SourceCode\GameObject\EnemyBullets\EnemyBullet.cpp" />
     <ClCompile Include="SourceCode\GameObject\Enemies\Mine.cpp" />
     <ClCompile Include="SourceCode\GameObject\Enemies\Insect.cpp" />
@@ -287,6 +296,7 @@
     <Image Include="C:\Users\Admin\Desktop\Tileset\Area-2 Car map\area2-side-map in my way\TileMap.png" />
     <Image Include="Resources\Texture\bbox.png" />
     <Image Include="Resources\Texture\BlackScreen.png" />
+    <Image Include="Resources\Texture\Boss.png" />
     <Image Include="Resources\Texture\character_sheet_transparent.png" />
     <Image Include="Resources\Texture\enemies.png" />
     <Image Include="Resources\Texture\PlayerSheetTransparent.png" />

@@ -55,6 +55,7 @@
 #define PLAYER_HEALTH_TEXTURE_PATH L"Resources/Texture/Player health.png"
 #define OTHER_OBJECTS_TEXTURE_PATH L"Resources/Texture/OtherObjects.png"
 #define BLACK_SCREEN_TEXTURE_PATH L"Resources/Texture/BlackScreen.png"
+#define BOSS_TEXTURE_PATH L"Resources/Texture/Boss.png"
 
 #define TEX_BBOX_PATH L"./Resources/Texture/bbox.png"
 #define ID_TEX_BBOX 999		// special texture to draw object bounding box
@@ -250,6 +251,24 @@
 #define ID_INSECT_MOVE_RIGHT_1 2123
 #define ID_INSECT_MOVE_RIGHT_2 2124
 #pragma endregion
+
+#pragma region BOSS
+#define ID_BOSS_HEAD_1 5001
+#define ID_BOSS_HEAD_2 5002
+#define ID_BOSS_HEAD_3 5003
+#define ID_BOSS_HEAD_4 5004
+#define ID_BOSS_HEAD_5 5005
+#define ID_BOSS_HEAD_6 5006
+#define ID_BOSS_HEAD_7 5007
+#define ID_BOSS_HEAD_8 5008
+
+#define ID_BOSS_LEFT_ARM 5009
+#define ID_BOSS_LEFT_HAND 5010
+
+#define ID_BOSS_RIGHT_ARM 5011
+#define ID_BOSS_RIGHT_HAND 5012
+#pragma endregion
+
 
 #define ID_MINE_BULLET 5998
 #define ID_SKULL_BULLET 5999

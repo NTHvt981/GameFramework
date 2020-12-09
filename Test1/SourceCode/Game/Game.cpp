@@ -46,6 +46,7 @@ void CGame::LoadTextures()
 		->Add(ID_TEX_BBOX, TEX_BBOX_PATH);
 	CTextureLibrary::GetInstance()->Add(OTHER_OBJECTS_TEXTURE, OTHER_OBJECTS_TEXTURE_PATH);
 	CTextureLibrary::GetInstance()->Add(BLACK_SCREEN_TEXTURE, BLACK_SCREEN_TEXTURE_PATH);
+	CTextureLibrary::GetInstance()->Add(BOSS_TEXTURE, BOSS_TEXTURE_PATH);
 }
 
 void CGame::LoadSprites()
@@ -54,6 +55,7 @@ void CGame::LoadSprites()
 	LPDIRECT3DTEXTURE9 textEnemies = CTextureLibrary::GetInstance()->Get(ENEMIES_TEXTURE);
 	LPDIRECT3DTEXTURE9 textPlayerHealth = CTextureLibrary::GetInstance()->Get(PLAYER_HEALTH_TEXTURE);
 	LPDIRECT3DTEXTURE9 textOtherObjects = CTextureLibrary::GetInstance()->Get(OTHER_OBJECTS_TEXTURE);
+	LPDIRECT3DTEXTURE9 textBoss = CTextureLibrary::GetInstance()->Get(BOSS_TEXTURE);
 	CSpriteLibrary* lib = CSpriteLibrary::GetInstance();
 
 	lib->Add(
@@ -232,6 +234,25 @@ void CGame::LoadSprites()
 
 	lib->Add(ID_MINE_BULLET, 32, 305, 40, 313, textEnemies);
 	lib->Add(ID_SKULL_BULLET, 51, 515, 61, 525, textEnemies);
+
+#pragma region BOSS
+	lib->Add(ID_BOSS_HEAD_1, 80, 303, 80 + 60, 303 + 64, textBoss);
+	lib->Add(ID_BOSS_HEAD_2, 146, 302, 146 + 60, 302 + 65, textBoss);
+	lib->Add(ID_BOSS_HEAD_3, 213, 303, 213 + 60, 303 + 64, textBoss);
+	lib->Add(ID_BOSS_HEAD_4, 280, 302, 280 + 60, 302 + 65, textBoss);
+
+	lib->Add(ID_BOSS_HEAD_5, 83, 371, 83 + 60, 371 + 65, textBoss);
+	lib->Add(ID_BOSS_HEAD_6, 147, 370, 147 + 60, 370 + 66, textBoss);
+	lib->Add(ID_BOSS_HEAD_7, 212, 371, 212 + 60, 371 + 65, textBoss);
+	lib->Add(ID_BOSS_HEAD_8, 277, 370, 277 + 60, 370 + 66, textBoss);
+
+	lib->Add(ID_BOSS_LEFT_ARM, 222, 1129, 222 + 16, 1129 + 17, textBoss);
+	lib->Add(ID_BOSS_LEFT_HAND, 218, 1147, 218 + 18, 1147 + 32, textBoss);
+
+	lib->Add(ID_BOSS_RIGHT_ARM, 188, 1129, 188 + 16, 1129 + 17, textBoss);
+	lib->Add(ID_BOSS_RIGHT_HAND, 190, 1147, 190 + 18, 1147 + 32, textBoss);
+#pragma endregion
+
 
 	//84	296	18	17
 	//	104	297	18	16

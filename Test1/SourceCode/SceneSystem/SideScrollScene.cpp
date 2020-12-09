@@ -141,14 +141,14 @@ void CSideScrollScene::LoadEnemies()
 	//AddEntity(new CJumper(), 400, 2944);
 	//AddEntity(new CJumper(), 336, 2944);
 
-	//AddEntity(new CSkull(), 3*16, 182*16);
+	AddEntity(new CSkull(), 3*16, 182*16);
 
 	//AddEntity(new CMyDome(), 3 * 16 - 2, 185 * 16 - 2);
 
 	//AddEntity(new CFloater(FLOATER_HORIZONTAL), 336, 2944);
 
 	//AddEntity(new CInsect(), 336, 2944);
-	AddEntity(new CWorm(), 400, 2944);
+	//AddEntity(new CWorm(), 400, 2944);
 }
 
 CSideScrollScene::CSideScrollScene()

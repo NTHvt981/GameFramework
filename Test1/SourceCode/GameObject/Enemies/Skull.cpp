@@ -52,6 +52,20 @@ void CSkull::DropBombState(DWORD dt)
 		facing = -1;
 
 	state = SKULL_FLY_BELOW;
+
+	LPSceneRequest request = new CSceneRequest(SCENE_REQUEST_TYPES::CreateEntity);
+	request->entity = new CEnemyBullet(
+		Vector(facing, 0),
+		1,
+		0.4,
+		ID_SKULL_BULLET,
+		350,
+		false
+	);
+	request->x = position.x + width/2;
+	request->y = position.y + height/2;
+
+	CSceneRequest::AddRequest(request);
 }
 
 void CSkull::FlyBelowState(DWORD dt)

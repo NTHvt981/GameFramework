@@ -230,6 +230,8 @@ void CGame::LoadSprites()
 	lib->Add(ID_WALKER_4, 152, 296, 170, 313, textEnemies);
 #pragma endregion
 
+	lib->Add(ID_MINE_BULLET, 32, 305, 40, 313, textEnemies);
+	lib->Add(ID_SKULL_BULLET, 51, 515, 61, 525, textEnemies);
 
 	//84	296	18	17
 	//	104	297	18	16

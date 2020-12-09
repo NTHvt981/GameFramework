@@ -25,6 +25,14 @@ Vector Vector::operator/(int d)
 	return Vector(this->x / d, this->y / d);
 }
 
+float Vector::Length()
+{
+	return sqrt(
+		pow(x, 2) +
+		pow(y, 2)
+	);
+}
+
 void Vector::Set(float _x, float _y)
 {
 	x = _x;

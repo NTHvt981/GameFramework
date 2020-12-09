@@ -5,6 +5,8 @@
 #include "../../Constraints.h"
 #include "../../Unit/Animation.h"
 
+#include "../EnemyBullets/EnemyBullet.h"
+
 #define SKULL_NORMAL 1
 #define SKULL_FLY_ABOVE 2
 #define SKULL_DROP_BOMB 3

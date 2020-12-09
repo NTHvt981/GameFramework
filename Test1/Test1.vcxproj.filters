@@ -257,6 +257,12 @@
     <ClInclude Include="SourceCode\GameObject\Enemies\Dome.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SourceCode\GameObject\Enemies\Mine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\GameObject\EnemyBullets\EnemyBullet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -442,10 +448,13 @@
     <ClCompile Include="SourceCode\GameObject\Enemies\Insect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="INSECT.CPP">
+    <ClCompile Include="SourceCode\GameObject\Enemies\Dome.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SourceCode\GameObject\Enemies\Dome.cpp">
+    <ClCompile Include="SourceCode\GameObject\Enemies\Mine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\GameObject\EnemyBullets\EnemyBullet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cmath>
+
 class Vector {
 public:
 	float x;
@@ -9,6 +11,8 @@ public:
 	Vector(float _x = 0, float _y = 0);
 	Vector operator+(Vector b);
 	Vector operator/(int d);
+
+	float Length();
 
 	void Set(float _x, float _y);
 };

@@ -149,6 +149,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="SourceCode\GameObject\EnemyBullets\EnemyBullet.h" />
+    <ClInclude Include="SourceCode\GameObject\Enemies\Mine.h" />
     <ClInclude Include="SourceCode\GameObject\Enemies\Insect.h" />
     <ClInclude Include="SourceCode\GameObject\Enemies\Floater.h" />
     <ClInclude Include="SourceCode\GameObject\Enemies\Dome.h" />
@@ -215,7 +217,8 @@
     <ClInclude Include="SourceCode\GameObject\StaticObjects\TopDownPortal.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="INSECT.CPP" />
+    <ClCompile Include="SourceCode\GameObject\EnemyBullets\EnemyBullet.cpp" />
+    <ClCompile Include="SourceCode\GameObject\Enemies\Mine.cpp" />
     <ClCompile Include="SourceCode\GameObject\Enemies\Insect.cpp" />
     <ClCompile Include="SourceCode\GameObject\Enemies\Floater.cpp" />
     <ClCompile Include="SourceCode\GameObject\Enemies\Dome.cpp" />

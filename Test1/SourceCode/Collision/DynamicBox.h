@@ -24,7 +24,6 @@ public:
 	);
 
 	//void Reset
-	void ResetCoCollisionBoxes();
 	void ResetCoCollisionBoxes(list<LPCollisionBox> newCoCollisionBoxes);
 	Vector GetSize();
 	Vector GetLocalPosition();

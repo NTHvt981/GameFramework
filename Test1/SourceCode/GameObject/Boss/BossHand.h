@@ -22,12 +22,14 @@ private:
 	Vector localPosition = Vector(0, 0);
 	Vector localGoalPosition = Vector(0, 0);
 
-	float speed = ARM_MOVE_SLOW;
+	float speed = ARM_MOVE_NORMAL;
 
 	void setUpBossArm(int parentId);
 
 public:
 	CBossHand(int id);
+	void GetAllCollisionBoxes(list<LPCollisionBox>& listCo);
+
 	void SetGoalPosition(float x, float y);
 	Vector GetLocalPosition();
 

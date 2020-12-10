@@ -12,6 +12,13 @@ void CBossScene::Start()
 	CJasonTopDown::GetInstance()->SetCenter(width / 2, height * 3 / 4);
 	CCamera::GetInstance()->SetOuterBound(0, 0, width, height);
 	CCamera::GetInstance()->Follow(width / 2, height / 2);
+
+	list<LPCollisionBox> lst;
+	boss->GetAllCollisionBoxes(lst);
+	CJasonTopDown::GetInstance()->GetCollisionBox()
+		->ResetCoCollisionBoxes(
+			lst
+		);
 }
 
 void CBossScene::LoadResources()
@@ -25,6 +32,7 @@ void CBossScene::Update(DWORD dt)
 
 	boss->Update(dt);
 	CJasonTopDown::GetInstance()->Update(dt);
+	CPlayerHealth::GetInstance()->Update(dt);
 
 	CJasonTopDown* player = CJasonTopDown::GetInstance();
 	CCamera* camera = CCamera::GetInstance();

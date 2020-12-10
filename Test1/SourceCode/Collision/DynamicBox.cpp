@@ -107,11 +107,6 @@ CDynamicBox::CDynamicBox(LPEntity _entity, float _localX, float _localY, float w
 
 }
 
-void CDynamicBox::ResetCoCollisionBoxes()
-{
-	CCollision::GetInstance()->GetCollisionBoxes(id, coCollisionBoxes);
-}
-
 void CDynamicBox::ResetCoCollisionBoxes(
 	list<LPCollisionBox> newCoCollisionBoxes)
 {

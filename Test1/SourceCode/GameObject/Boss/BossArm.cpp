@@ -23,6 +23,14 @@ CBossArm::CBossArm(
 	range = _range;
 }
 
+void CBossArm::GetAllCollisionBoxes(list<LPCollisionBox>& listCo)
+{
+	listCo.push_back(collisionBox);
+
+	if (child != NULL)
+		child->GetAllCollisionBoxes(listCo);
+}
+
 void CBossArm::SetGoalPosition(float x, float y)
 {
 	if (x < -range) x = -range;
@@ -53,7 +61,7 @@ void CBossArm::MoveCallFromBoss(DWORD dt, float _x, float _y)
 	position.x += _x;
 	position.y += _y;
 
-	if (!isTheEnd)
+	if (child != NULL)
 		child->MoveCallFromBoss(dt, _x, _y);
 }
 
@@ -93,6 +101,8 @@ void CBossArm::Update(DWORD dt)
 
 	localPosition.Set(localNewPosition.x, localNewPosition.y);
 	position.Set(position.x + remainVel.x, position.y + remainVel.y);
+
+	collisionBox->Update();
 
 	if (child != NULL) child->Update(dt);
 }

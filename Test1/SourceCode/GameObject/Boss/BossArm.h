@@ -7,8 +7,9 @@
 #include "../../Library/SpriteLibrary.h"
 
 #define ARM_MOVE_SLOW 1.5
-#define ARM_MOVE_FAST 2.5
-#define ARM_MOVE_VERY_FAST 3
+#define ARM_MOVE_NORMAL 2
+#define ARM_MOVE_FAST 3
+#define ARM_MOVE_VERY_FAST 4
 
 class CBossArm: public CEntity
 {
@@ -24,10 +25,11 @@ private:
 	Vector localPosition = Vector(0, 0);
 	Vector localGoalPosition = Vector(0, 0);
 
-	float speed = ARM_MOVE_SLOW;
+	float speed = ARM_MOVE_NORMAL;
 
 public:
 	CBossArm(CBossArm* _armBeforeIt, int sprId, float range);
+	void GetAllCollisionBoxes(list<LPCollisionBox>& listCo);
 
 protected:
 	void Move(DWORD dt);

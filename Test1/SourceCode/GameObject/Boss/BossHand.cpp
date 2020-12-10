@@ -31,6 +31,13 @@ CBossHand::CBossHand(int id) : CEntity()
 	setUpBossArm(id);
 }
 
+void CBossHand::GetAllCollisionBoxes(list<LPCollisionBox>& listCo)
+{
+	listCo.push_back(collisionBox);
+
+	child->GetAllCollisionBoxes(listCo);
+}
+
 void CBossHand::SetGoalPosition(float x, float y)
 {
 	if (x < -range) x = -range;
@@ -95,6 +102,8 @@ void CBossHand::Update(DWORD dt)
 	localPosition.Set(localNewPosition.x, localNewPosition.y);
 	position.Set(position.x + remainVel.x, position.y + remainVel.y);
 
+	collisionBox->Update();
+
 	if (child != NULL) child->Update(dt);
 }
 
@@ -120,11 +129,11 @@ void CBossHand::MoveAxis(float &cur, float &goal)
 
 bool CBossHand::HasReachGoal()
 {
-	if (localGoalPosition.x == localPosition.x &&
-		localGoalPosition.y == localPosition.y)
-	{
-		int a = 1;
-	}
+	//if (localGoalPosition.x == localPosition.x &&
+	//	localGoalPosition.y == localPosition.y)
+	//{
+	//	int a = 1;
+	//}
 
 	return (localGoalPosition.x == localPosition.x && 
 		localGoalPosition.y == localPosition.y);

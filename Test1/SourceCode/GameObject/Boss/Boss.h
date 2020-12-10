@@ -11,6 +11,10 @@
 #include "BossArm.h"
 #include "BossHand.h"
 
+#define BOSS_MOVE_SLOW 1
+#define BOSS_MOVE_NORMAL 1.5
+#define BOSS_MOVE_FAST 2
+
 class CBoss : public CEnemy
 {
 private:
@@ -25,16 +29,32 @@ private:
 	CBossHand *leftHand;
 	CBossHand *rightHand;
 
+	Vector localPosition = Vector(0, 0);
+	Vector localGoalPosition = Vector(0, 0);
+	const float range = 50;
+
+	vector<pair<Vector, float>> movementMatrix;
+	int movementIndex = 0;
+
 	/// <summary>
 	/// FOR DEBUG
 	/// </summary>
-	vector<Vector> debugMatrix;
-	int index = 0;
+	vector<Vector> armMovementMatrix;
+	int rightArmIndex = 0;
 
 public:
 	CBoss(bool *overCon);
 	void Update(DWORD dt);
 	void Render();
 	void SetCenter(float _x, float _y);
+
+	void GetAllCollisionBoxes(list<LPCollisionBox> &listCo);
+
+	void SetGoalPosition(float x, float y);
+	Vector GetLocalPosition();
+
+public:
+	void HandleMovement(DWORD dt);
+	bool HasReachGoal();
 };
 

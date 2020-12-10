@@ -14,14 +14,15 @@ private:
 	CBossArm* child;
 
 	int width, height;
-	const float speed = 1;
 
 	LPSprite sprite = NULL;
 
-	bool isStretchAll = false;
+	const float range = 80;
 
 	Vector localPosition = Vector(0, 0);
 	Vector localGoalPosition = Vector(0, 0);
+
+	float speed = ARM_MOVE_SLOW;
 
 	void setUpBossArm(int parentId);
 

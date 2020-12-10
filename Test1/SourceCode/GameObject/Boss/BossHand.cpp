@@ -8,13 +8,12 @@ void CBossHand::setUpBossArm(int parentId)
 	else
 		id = ID_BOSS_RIGHT_ARM;
 
-	CBossArm* arm1 = new CBossArm(&isStretchAll, NULL, false, id);
-	CBossArm* arm2 = new CBossArm(&isStretchAll, arm1, false, id);
-	CBossArm* arm3 = new CBossArm(&isStretchAll, arm2, false, id);
-	CBossArm* arm4 = new CBossArm(&isStretchAll, arm3, false, id);
-	CBossArm* arm5 = new CBossArm(&isStretchAll, arm4, true, id);
+	CBossArm* arm1 = new CBossArm(NULL, id, 0);
+	CBossArm* arm2 = new CBossArm(arm1, id, 20);
+	CBossArm* arm3 = new CBossArm(arm2, id, 40);
+	CBossArm* arm4 = new CBossArm(arm3, id, 60);
 
-	child = arm5;
+	child = arm4;
 }
 
 CBossHand::CBossHand(int id) : CEntity()
@@ -34,10 +33,16 @@ CBossHand::CBossHand(int id) : CEntity()
 
 void CBossHand::SetGoalPosition(float x, float y)
 {
-	isStretchAll = false;
+	if (x < -range) x = -range;
+	if (x > range) x = range;
+
+	if (y < -range) y = -range;
+	if (y > range) y = range;
 
 	localGoalPosition.x = x;
 	localGoalPosition.y = y;
+
+	child->SetGoalPosition(x, y);
 }
 
 Vector CBossHand::GetLocalPosition()
@@ -60,32 +65,37 @@ void CBossHand::Update(DWORD dt)
 
 	int _signX = _x >= 0 ? 1 : -1;
 	int _signY = _y >= 0 ? 1 : -1;
+
+	Vector localNewPosition;
 	
-	if (_x != 0 || _y != 0)
+	if (_signX > 0)
 	{
-		if (isStretchAll)
-		{
-			localGoalPosition.x = localPosition.x;
-			localGoalPosition.y = localPosition.y;
-
-			return;
-		}
-
-		velocity.x = _signX * speed;
-		velocity.y = _signY * speed;
-
-		if (abs(velocity.x) > abs(_x)) velocity.x = _signX * _x;
-		if (abs(velocity.y) > abs(_y)) velocity.y = _signY * _y;
-
-		localPosition.x += velocity.x;
-		localPosition.y += velocity.y;
-
-		position.x += velocity.x;
-		position.y += velocity.y;
-		collisionBox->Update();
-
-		child->MoveCallFromParent(dt, velocity.x, velocity.y);
+		localNewPosition.x = min(localPosition.x + speed, localGoalPosition.x);
 	}
+	else
+	{
+		localNewPosition.x = max(localPosition.x - speed, localGoalPosition.x);
+	}
+
+	if (_signY > 0)
+	{
+		localNewPosition.y = min(localPosition.y + speed, localGoalPosition.y);
+	}
+	else
+	{
+		localNewPosition.y = max(localPosition.y - speed, localGoalPosition.y);
+	}
+
+	Vector remainVel;
+	remainVel.Set(
+		localNewPosition.x - localPosition.x,
+		localNewPosition.y - localPosition.y
+	);
+
+	localPosition.Set(localNewPosition.x, localNewPosition.y);
+	position.Set(position.x + remainVel.x, position.y + remainVel.y);
+
+	if (child != NULL) child->Update(dt);
 }
 
 void CBossHand::Render()

@@ -1,91 +1,51 @@
 #include "BossArm.h"
 
 CBossArm::CBossArm(
-	bool *_isStretchAll, 
 	CBossArm* _child = NULL, 
-	bool isTheHead=false, 
-	int sprId=ID_BOSS_RIGHT_ARM)
+	int sprId=ID_BOSS_RIGHT_ARM,
+	float _range=0)
 {
-	isStretchAll = _isStretchAll;
-
 	SetType(GOTYPES::Enemy);
 
 	child = _child;
 	if (child == NULL) isTheEnd = true;
 
-	if (!isTheHead)
-	{
-		sprite = CSpriteLibrary::GetInstance()->Get(sprId);
-		sprite->GetSize(width, height);
+	sprite = CSpriteLibrary::GetInstance()->Get(sprId);
+	sprite->GetSize(width, height);
 
-		collisionBox = new CDynamicBox(
-			this,
-			-width / 2, -height / 2,
-			width, height
-		);
-		collisionBox->SetSolid(false);
-	}
+	collisionBox = new CDynamicBox(
+		this,
+		-width / 2, -height / 2,
+		width, height
+	);
+	collisionBox->SetSolid(false);
+
+	range = _range;
+}
+
+void CBossArm::SetGoalPosition(float x, float y)
+{
+	if (x < -range) x = -range;
+	if (x > range) x = range;
+
+	if (y < -range) y = -range;
+	if (y > range) y = range;
+
+	localGoalPosition.x = x;
+	localGoalPosition.y = y;
+
+	if (child != NULL)
+		child->SetGoalPosition(x, y);
+}
+
+Vector CBossArm::GetLocalPosition()
+{
+	return localPosition;
 }
 
 void CBossArm::MoveCallFromParent(DWORD dt, float vx, float vy)
 {
-	if (isTheEnd)
-	{
-		*isStretchAll = true;
-		return;
-	}
-	else if (*isStretchAll)
-	{
-		return;
-	}
 
-	Vector newPos;
-	newPos.Set(position.x + vx, position.y + vy);
-
-	Vector newDistance;
-	newDistance.Set(
-		abs(newPos.x - child->GetPosition().x),
-		abs(newPos.y - child->GetPosition().y)
-	);
-
-	Vector velocityPassOn;
-	float _vx = 0, _vy = 0;
-
-	if (newDistance.x > maxDistance)
-	{
-		if (vx > 0)
-		{
-			_vx = newDistance.x - maxDistance;
-			//vx = vx - (newDistance.x - maxDistance);
-		}
-		else
-		{
-			_vx = -newDistance.x + maxDistance;
-			//vx = vx + (newDistance.x - maxDistance);
-		}
-	}
-
-	if (newDistance.y > maxDistance)
-	{
-		if (vy > 0)
-		{
-			_vy = newDistance.y - maxDistance;
-			//vy = vy - (newDistance.y - maxDistance);
-		}
-		else
-		{
-			_vy = -newDistance.y + maxDistance;
-			//vy = vy + (newDistance.y - maxDistance);
-		}
-	}
-
-	if (_vx != 0 || _vy != 0)
-		child->MoveCallFromParent(dt, _vx, _vy);
-
-	position.x += vx;
-	position.y += vy;
-	if (sprite != NULL)
-		collisionBox->Update();
 }
 
 void CBossArm::MoveCallFromBoss(DWORD dt, float _x, float _y)
@@ -95,6 +55,46 @@ void CBossArm::MoveCallFromBoss(DWORD dt, float _x, float _y)
 
 	if (!isTheEnd)
 		child->MoveCallFromBoss(dt, _x, _y);
+}
+
+void CBossArm::Update(DWORD dt)
+{
+	float _x = localGoalPosition.x - localPosition.x;
+	float _y = localGoalPosition.y - localPosition.y;
+
+	int _signX = _x >= 0 ? 1 : -1;
+	int _signY = _y >= 0 ? 1 : -1;
+
+	Vector localNewPosition;
+
+	if (_signX > 0)
+	{
+		localNewPosition.x = min(localPosition.x + speed, localGoalPosition.x);
+	}
+	else
+	{
+		localNewPosition.x = max(localPosition.x - speed, localGoalPosition.x);
+	}
+
+	if (_signY > 0)
+	{
+		localNewPosition.y = min(localPosition.y + speed, localGoalPosition.y);
+	}
+	else
+	{
+		localNewPosition.y = max(localPosition.y - speed, localGoalPosition.y);
+	}
+
+	Vector remainVel;
+	remainVel.Set(
+		localNewPosition.x - localPosition.x,
+		localNewPosition.y - localPosition.y
+	);
+
+	localPosition.Set(localNewPosition.x, localNewPosition.y);
+	position.Set(position.x + remainVel.x, position.y + remainVel.y);
+
+	if (child != NULL) child->Update(dt);
 }
 
 void CBossArm::Render()
@@ -116,11 +116,6 @@ void CBossArm::SetPosition(float _x, float _y)
 
 	if (child != NULL)
 		child->SetPosition(_x, _y);
-}
-
-void CBossArm::SetIsStretchAllAddress(bool* _isStretchAll)
-{
-	isStretchAll = _isStretchAll;
 }
 
 void CBossArm::Move(DWORD dt)

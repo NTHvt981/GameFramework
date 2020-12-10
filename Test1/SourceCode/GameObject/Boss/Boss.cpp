@@ -27,9 +27,16 @@ CBoss::CBoss(bool* overCon)
 	rightHand = new CBossHand(
 		ID_BOSS_RIGHT_HAND);
 
-	debugMatrix.push_back(Vector(81, 0));
-	debugMatrix.push_back(Vector(81, 81));
-	debugMatrix.push_back(Vector(0, 81));
+	debugMatrix.push_back(Vector(100, 0));
+	debugMatrix.push_back(Vector(100, 100));
+	debugMatrix.push_back(Vector(0, 100));
+	debugMatrix.push_back(Vector(0, 0));
+	debugMatrix.push_back(Vector(100, 0));
+	debugMatrix.push_back(Vector(0, 100));
+	debugMatrix.push_back(Vector(-50, 100));
+	debugMatrix.push_back(Vector(-100, 0));
+	debugMatrix.push_back(Vector(0, 0));
+	debugMatrix.push_back(Vector(0, -100));
 	debugMatrix.push_back(Vector(0, 0));
 
 	rightHand->SetGoalPosition(debugMatrix[index].x, debugMatrix[index].y);

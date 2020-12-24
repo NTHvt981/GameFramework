@@ -45,6 +45,8 @@ public:
 	void Follow(float x, float y);
 	void Follow(Vector pos);
 
+	void FollowWithoutPlayer(float x, float y);
+
 	void Move(float vx, float vy);
 
 	Vector GetPosition();

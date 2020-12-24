@@ -120,7 +120,7 @@ CDome::CDome() : CEnemy()
 	collisionBox->SetSolid(false);
 
 	// dome up
-	domeUpMoveLeft = new CAnimation(1, 100);
+	domeUpMoveLeft = new CAnimation(100);
 	int idsUL[] = {
 		ID_DOME_UP_MOVE_LEFT_1,
 		ID_DOME_UP_MOVE_LEFT_2
@@ -128,7 +128,7 @@ CDome::CDome() : CEnemy()
 
 	domeUpMoveLeft->Add(idsUL, 2);
 
-	domeUpMoveRight = new CAnimation(1, 100);
+	domeUpMoveRight = new CAnimation(100);
 	int idsUR[] = {
 		ID_DOME_UP_MOVE_RIGHT_1,
 		ID_DOME_UP_MOVE_RIGHT_2
@@ -137,7 +137,7 @@ CDome::CDome() : CEnemy()
 	domeUpMoveRight->Add(idsUR, 2);
 
 	// dome down
-	domeDownMoveLeft = new CAnimation(1, 100);
+	domeDownMoveLeft = new CAnimation(100);
 	int idsDL[] = {
 		ID_DOME_DOWN_MOVE_LEFT_1,
 		ID_DOME_DOWN_MOVE_LEFT_2
@@ -145,7 +145,7 @@ CDome::CDome() : CEnemy()
 
 	domeDownMoveLeft->Add(idsDL, 2);
 
-	domeDownMoveRight = new CAnimation(1, 100);
+	domeDownMoveRight = new CAnimation(100);
 	int idsDR[] = {
 		ID_DOME_DOWN_MOVE_RIGHT_1,
 		ID_DOME_DOWN_MOVE_RIGHT_2
@@ -154,7 +154,7 @@ CDome::CDome() : CEnemy()
 	domeDownMoveRight->Add(idsDR, 2);
 
 	// dome left
-	domeLeftMoveUp = new CAnimation(1, 100);
+	domeLeftMoveUp = new CAnimation(100);
 	int idsLU[] = {
 		ID_DOME_LEFT_MOVE_UP_1,
 		ID_DOME_LEFT_MOVE_UP_2
@@ -162,7 +162,7 @@ CDome::CDome() : CEnemy()
 
 	domeLeftMoveUp->Add(idsLU, 2);
 
-	domeLeftMoveDown = new CAnimation(1, 100);
+	domeLeftMoveDown = new CAnimation(100);
 	int idsLD[] = {
 		ID_DOME_LEFT_MOVE_DOWN_1,
 		ID_DOME_LEFT_MOVE_DOWN_2
@@ -171,7 +171,7 @@ CDome::CDome() : CEnemy()
 	domeLeftMoveDown->Add(idsLD, 2);
 
 	// dome right
-	domeRightMoveUp = new CAnimation(1, 100);
+	domeRightMoveUp = new CAnimation(100);
 	int idsRU[] = {
 		ID_DOME_RIGHT_MOVE_UP_1,
 		ID_DOME_RIGHT_MOVE_UP_2
@@ -179,7 +179,7 @@ CDome::CDome() : CEnemy()
 
 	domeRightMoveUp->Add(idsRU, 2);
 
-	domeRightMoveDown = new CAnimation(1, 100);
+	domeRightMoveDown = new CAnimation(100);
 	int idsRD[] = {
 		ID_DOME_RIGHT_MOVE_DOWN_1,
 		ID_DOME_RIGHT_MOVE_DOWN_2

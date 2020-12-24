@@ -103,6 +103,12 @@ void CCamera::Follow(Vector pos)
     Follow(pos.x, pos.y);
 }
 
+void CCamera::FollowWithoutPlayer(float x, float y)
+{
+    position.x = x;
+    position.y = y;
+}
+
 void CCamera::Move(float vx, float vy)
 {
     position.x += vx;

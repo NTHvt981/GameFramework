@@ -21,7 +21,7 @@ CJasonTopDown::CJasonTopDown(int _facing, int _pace)
 
 	CSpriteLibrary* lib = CSpriteLibrary::GetInstance();
 
-	walkLeftAnimation = new CAnimation(1, JASON_TOPDOWN_FRAME_TIME);
+	walkLeftAnimation = new CAnimation(JASON_TOPDOWN_FRAME_TIME);
 	int ids1[] = {
 		ID_JASON_TOPDOWN_WALK_LEFT_1,
 		ID_JASON_TOPDOWN_WALK_LEFT_2,
@@ -29,7 +29,7 @@ CJasonTopDown::CJasonTopDown(int _facing, int _pace)
 	};
 	walkLeftAnimation->Add(ids1, 3);
 
-	walkRightAnimation = new CAnimation(1, JASON_TOPDOWN_FRAME_TIME);
+	walkRightAnimation = new CAnimation(JASON_TOPDOWN_FRAME_TIME);
 	int ids2[] = {
 		ID_JASON_TOPDOWN_WALK_RIGHT_1,
 		ID_JASON_TOPDOWN_WALK_RIGHT_2,
@@ -37,7 +37,7 @@ CJasonTopDown::CJasonTopDown(int _facing, int _pace)
 	};
 	walkRightAnimation->Add(ids2, 3);
 
-	walkUpAnimation = new CAnimation(1, JASON_TOPDOWN_FRAME_TIME);
+	walkUpAnimation = new CAnimation(JASON_TOPDOWN_FRAME_TIME);
 	int ids3[] = {
 		ID_JASON_TOPDOWN_WALK_UP_1,
 		ID_JASON_TOPDOWN_WALK_UP_2,
@@ -45,7 +45,7 @@ CJasonTopDown::CJasonTopDown(int _facing, int _pace)
 	};
 	walkUpAnimation->Add(ids3, 3);
 
-	walkDownAnimation = new CAnimation(1, JASON_TOPDOWN_FRAME_TIME);
+	walkDownAnimation = new CAnimation(JASON_TOPDOWN_FRAME_TIME);
 	int ids4[] = {
 		ID_JASON_TOPDOWN_WALK_DOWN_1,
 		ID_JASON_TOPDOWN_WALK_DOWN_2,

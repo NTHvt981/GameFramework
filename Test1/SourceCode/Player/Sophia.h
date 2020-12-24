@@ -2,7 +2,7 @@
 #include "Player.h"
 #include "SophiaFake.h"
 #include "Jason.h"
-#include "SophiaBullet.h"
+#include "../PlayerBullets/SophiaBullet.h"
 
 //state for side
 #define ON_LEFT 0

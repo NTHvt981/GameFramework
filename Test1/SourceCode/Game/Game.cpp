@@ -47,6 +47,9 @@ void CGame::LoadTextures()
 	CTextureLibrary::GetInstance()->Add(OTHER_OBJECTS_TEXTURE, OTHER_OBJECTS_TEXTURE_PATH);
 	CTextureLibrary::GetInstance()->Add(BLACK_SCREEN_TEXTURE, BLACK_SCREEN_TEXTURE_PATH);
 	CTextureLibrary::GetInstance()->Add(BOSS_TEXTURE, BOSS_TEXTURE_PATH);
+	CTextureLibrary::GetInstance()->Add(OPENING_TEXTURE, OPENING_TEXTURE_PATH);
+	CTextureLibrary::GetInstance()->Add(ROLLOUT_TEXTURE, ROLLOUT_TEXTURE_PATH);
+	CTextureLibrary::GetInstance()->Add(ITEMS_TEXTURE, ITEMS_TEXTURE_PATH);
 }
 
 void CGame::LoadSprites()
@@ -56,6 +59,9 @@ void CGame::LoadSprites()
 	LPDIRECT3DTEXTURE9 textPlayerHealth = CTextureLibrary::GetInstance()->Get(PLAYER_HEALTH_TEXTURE);
 	LPDIRECT3DTEXTURE9 textOtherObjects = CTextureLibrary::GetInstance()->Get(OTHER_OBJECTS_TEXTURE);
 	LPDIRECT3DTEXTURE9 textBoss = CTextureLibrary::GetInstance()->Get(BOSS_TEXTURE);
+	LPDIRECT3DTEXTURE9 textOpening = CTextureLibrary::GetInstance()->Get(OPENING_TEXTURE);
+	LPDIRECT3DTEXTURE9 textRollOut = CTextureLibrary::GetInstance()->Get(ROLLOUT_TEXTURE);
+	LPDIRECT3DTEXTURE9 textItems = CTextureLibrary::GetInstance()->Get(ITEMS_TEXTURE);
 	CSpriteLibrary* lib = CSpriteLibrary::GetInstance();
 
 	lib->Add(
@@ -116,6 +122,7 @@ void CGame::LoadSprites()
 	lib->Add(ID_TEXT_HOV, 0, 0, 11, 35, textPlayerHealth);
 	lib->Add(ID_TEXT_POW, 0, 58, 11, 93, textPlayerHealth);
 	lib->Add(ID_SOPHIA_HEALTH_BAR, 0, 43, 11, 48, textPlayerHealth);
+	lib->Add(ID_JASON_HEALTH_BAR, 0, 50, 11, 55, textPlayerHealth);
 
 	#pragma region JASON SPRITES
 	lib->Add(ID_JASON_WALK_LEFT_1, 2, 38,	2 + 8, 38 + 16, textPlayer);
@@ -155,6 +162,21 @@ void CGame::LoadSprites()
 
 	lib->Add(ID_JASON_TOPDOWN_BULLET, 85, 140, 85 + 7, 140 + 6, textPlayer);
 	#pragma endregion
+
+#pragma region ITEMS
+	lib->Add(ID_PLAYER_UPGRADE, 100, 8, 100 + 25, 8 + 17, textItems);
+	lib->Add(ID_HEALTH_BALL, 105, 109, 105 + 16, 109 + 16, textItems);
+	lib->Add(ID_ENERGY_BALL, 155, 109, 155 + 16, 109 + 16, textItems);
+	lib->Add(ID_POWER_BALL, 255, 109, 255 + 16, 109 + 16, textItems);
+#pragma endregion
+
+#pragma region EXPLOSION
+	lib->Add(ID_EXPLOSION_1, 145, 8, 145 + 8, 8 + 8, textPlayer);
+	lib->Add(ID_EXPLOSION_2, 154, 6, 154 + 16, 6 + 16, textPlayer);
+	lib->Add(ID_EXPLOSION_3, 171, 6, 171 + 16, 6 + 16, textPlayer);
+	lib->Add(ID_EXPLOSION_4, 188, 2, 188 + 24, 2 + 24, textPlayer);
+#pragma endregion
+
 
 	// ENEMIES
 #pragma region WORM
@@ -253,6 +275,70 @@ void CGame::LoadSprites()
 	lib->Add(ID_BOSS_RIGHT_HAND, 190, 1147, 190 + 18, 1147 + 32, textBoss);
 #pragma endregion
 
+#pragma region OPENING
+	lib->Add(ID_OPENING_1, 0, 0, 0 + 256, 0 + 224, textOpening);
+	lib->Add(ID_OPENING_2, 259, 0, 259 + 256, 0 + 224, textOpening);
+	lib->Add(ID_OPENING_3, 518, 0, 518 + 256, 0 + 224, textOpening);
+	lib->Add(ID_OPENING_4, 777, 0, 777 + 256, 0 + 224, textOpening);
+
+	lib->Add(ID_OPENING_5, 0, 227, 0 + 256, 227 + 224, textOpening);
+	lib->Add(ID_OPENING_6, 259, 227, 259 + 256, 227 + 224, textOpening);
+	lib->Add(ID_OPENING_7, 518, 227, 518 + 256, 277 + 224, textOpening);
+	lib->Add(ID_OPENING_8, 777, 227, 777 + 256, 227 + 224, textOpening);
+
+	lib->Add(ID_OPENING_9, 0, 454, 0 + 256, 454 + 224, textOpening);
+	lib->Add(ID_OPENING_10, 259, 454, 259 + 256, 454 + 224, textOpening);
+	lib->Add(ID_OPENING_11, 518, 454, 518 + 256, 454 + 224, textOpening);
+	lib->Add(ID_OPENING_12, 777, 454, 777 + 256, 454 + 224, textOpening);
+
+	lib->Add(ID_OPENING_13, 0, 681, 0 + 256, 681 + 224, textOpening);
+	lib->Add(ID_OPENING_14, 259, 681, 259 + 256, 681 + 224, textOpening);
+	lib->Add(ID_OPENING_15, 518, 681, 518 + 256, 681 + 224, textOpening);
+	lib->Add(ID_OPENING_16, 777, 681, 777 + 256, 681 + 224, textOpening);
+
+	lib->Add(ID_OPENING_17, 0, 908, 0 + 256, 908 + 224, textOpening);
+	lib->Add(ID_OPENING_18, 259, 908, 259 + 256, 908 + 224, textOpening);
+	lib->Add(ID_OPENING_19, 518, 908, 518 + 256, 908 + 224, textOpening);
+	lib->Add(ID_OPENING_20, 777, 908, 777 + 256, 908 + 224, textOpening);
+
+	lib->Add(ID_OPENING_21, 0, 1135, 0 + 256, 1135 + 224, textOpening);
+	lib->Add(ID_OPENING_22, 259, 1135, 259 + 256, 1135 + 224, textOpening);
+	lib->Add(ID_OPENING_23, 518, 1135, 518 + 256, 1135 + 224, textOpening);
+	lib->Add(ID_OPENING_24, 777, 1135, 777 + 256, 1135 + 224, textOpening);
+
+	lib->Add(ID_OPENING_25, 0, 1362, 0 + 256, 1362 + 224, textOpening);
+	lib->Add(ID_OPENING_26, 259, 1362, 259 + 256, 1362 + 224, textOpening);
+	lib->Add(ID_OPENING_27, 518, 1362, 518 + 256, 1362 + 224, textOpening);
+	lib->Add(ID_OPENING_28, 777, 1362, 777 + 256, 1362 + 224, textOpening);
+
+	lib->Add(ID_OPENING_29, 0, 1589, 0 + 256, 1589 + 224, textOpening);
+	lib->Add(ID_OPENING_30, 259, 1589, 259 + 256, 1589 + 224, textOpening);
+	lib->Add(ID_OPENING_31, 518, 1589, 518 + 256, 1589 + 224, textOpening);
+	lib->Add(ID_OPENING_32, 777, 1589, 777 + 256, 1589 + 224, textOpening);
+
+	lib->Add(ID_OPENING_33, 0, 1816, 0 + 256, 1816 + 224, textOpening);
+	lib->Add(ID_OPENING_34, 259, 1816, 259 + 256, 1816 + 224, textOpening);
+	lib->Add(ID_OPENING_35, 518, 1816, 518 + 256, 1816 + 224, textOpening);
+	lib->Add(ID_OPENING_36, 777, 1816, 777 + 256, 1816 + 224, textOpening);
+
+	lib->Add(ID_OPENING_37, 0, 2043, 0 + 256, 2043 + 224, textOpening);
+#pragma endregion
+
+#pragma region ROLLOUT
+	lib->Add(ID_ROLLOUT_1, 0, 0, 0 + 256, 0 + 224, textRollOut);
+	lib->Add(ID_ROLLOUT_2, 259, 0, 259 + 256, 0 + 224, textRollOut);
+	lib->Add(ID_ROLLOUT_3, 518, 0, 518 + 256, 0 + 224, textRollOut);
+
+	lib->Add(ID_ROLLOUT_4, 0, 227, 0 + 256, 227 + 224, textRollOut);
+	lib->Add(ID_ROLLOUT_5, 259, 227, 259 + 256, 227 + 224, textRollOut);
+	lib->Add(ID_ROLLOUT_6, 518, 227, 518 + 256, 227 + 224, textRollOut);
+
+	lib->Add(ID_ROLLOUT_7, 0, 454, 0 + 256, 454 + 224, textRollOut);
+	lib->Add(ID_ROLLOUT_8, 259, 454, 259 + 256, 454 + 224, textRollOut);
+	lib->Add(ID_ROLLOUT_9, 518, 454, 518 + 256, 454 + 224, textRollOut);
+
+	lib->Add(ID_ROLLOUT_10, 0, 681, 0 + 256, 681 + 224, textRollOut);
+#pragma endregion
 
 	//84	296	18	17
 	//	104	297	18	16

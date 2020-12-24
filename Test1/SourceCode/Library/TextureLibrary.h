@@ -9,6 +9,9 @@
 #define OTHER_OBJECTS_TEXTURE 4
 #define BLACK_SCREEN_TEXTURE 5
 #define BOSS_TEXTURE 6
+#define OPENING_TEXTURE 7
+#define ROLLOUT_TEXTURE 8
+#define ITEMS_TEXTURE 8
 
 using namespace std;
 

@@ -36,7 +36,7 @@ CInsect::CInsect()
 {
 	SetType(GOTYPES::Enemy);
 
-	leftAni = new CAnimation(1, 300);
+	leftAni = new CAnimation(300);
 	int idsL[] = {
 		ID_INSECT_MOVE_LEFT_1,
 		ID_INSECT_MOVE_LEFT_2
@@ -44,7 +44,7 @@ CInsect::CInsect()
 
 	leftAni->Add(idsL, 2);
 
-	rightAni = new CAnimation(1, 300);
+	rightAni = new CAnimation(300);
 	int idsR[] = {
 		ID_INSECT_MOVE_RIGHT_1,
 		ID_INSECT_MOVE_RIGHT_2

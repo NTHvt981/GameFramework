@@ -5,7 +5,7 @@ CBoss::CBoss(bool* overCon)
 	SetType(GOTYPES::Enemy);
 	gameOver = overCon;
 
-	animation = new CAnimation(1, 500);
+	animation = new CAnimation(500);
 	animation->Add(ID_BOSS_HEAD_1);
 	animation->Add(ID_BOSS_HEAD_2);
 	animation->Add(ID_BOSS_HEAD_3);

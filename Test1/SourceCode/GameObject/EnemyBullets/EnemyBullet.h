@@ -8,6 +8,8 @@
 #include "../../Library/SpriteLibrary.h"
 #include "../../Timer/Timer.h"
 
+#include "../StaticObjects/Explosion.h"
+
 class CEnemyBullet: public CEntity
 {
 private:

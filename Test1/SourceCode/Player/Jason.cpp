@@ -55,7 +55,7 @@ CJason::CJason(int _state, int _facing, int _pace) : CPlayer()
 
 	CSpriteLibrary* lib = CSpriteLibrary::GetInstance();
 
-	walkLeftAnimation = new CAnimation(1, 100);
+	walkLeftAnimation = new CAnimation(100);
 	int ids1[] = {
 		ID_JASON_WALK_LEFT_1,
 		ID_JASON_WALK_LEFT_2,
@@ -64,7 +64,7 @@ CJason::CJason(int _state, int _facing, int _pace) : CPlayer()
 	};
 	walkLeftAnimation->Add(ids1, 4);
 
-	walkRightAnimation = new CAnimation(1, 100);
+	walkRightAnimation = new CAnimation(100);
 	int ids2[] = {
 		ID_JASON_WALK_RIGHT_1,
 		ID_JASON_WALK_RIGHT_2,
@@ -73,14 +73,14 @@ CJason::CJason(int _state, int _facing, int _pace) : CPlayer()
 	};
 	walkRightAnimation->Add(ids2, 4);
 
-	crawlLeftAnimation = new CAnimation(1, 200);
+	crawlLeftAnimation = new CAnimation(200);
 	int ids3[] = {
 		ID_JASON_CRAWL_LEFT_1,
 		ID_JASON_CRAWL_LEFT_2
 	};
 	crawlLeftAnimation->Add(ids3, 2);
 
-	crawlRightAnimation = new CAnimation(1, 200);
+	crawlRightAnimation = new CAnimation(200);
 	int ids4[] = {
 		ID_JASON_CRAWL_RIGHT_1,
 		ID_JASON_CRAWL_RIGHT_2

@@ -16,6 +16,10 @@
 #define DURING_CHANGESCENE_MODE 2
 #define END_CHANGESCENE_MODE 3
 
+#define BEGIN_RESTART_MODE 4
+#define DURING_RESTART_MODE 5
+#define END_RESTART_MODE 6
+
 class CSceneManager
 {
 private:
@@ -26,6 +30,7 @@ private:
 	CSideScrollScene *sideScrollScene;
 	CTopDownScene *topDownScene;
 	CGameOverScene *gameOverScene;
+	CEndingScene* endingScene;
 	CBossScene* bossScene;
 
 	int mode = NORMAL_MODE;
@@ -33,6 +38,8 @@ private:
 	LPSprite transScreen = NULL;
 	float transAlpha = 0;
 	float transAlphaDivient = 0.05;
+
+	Vector restartPosition = Vector(0, 0);
 
 public:
 	void Init();
@@ -49,5 +56,9 @@ private:
 	void BeginChangeSceneMode(DWORD dt);
 	void DuringChangeSceneMode(DWORD dt);
 	void EndChangeSceneMode(DWORD dt);
+
+	void BeginRestartMode(DWORD dt);
+	void DuringRestartMode(DWORD dt);
+	void EndRestartMode(DWORD dt);
 };
 

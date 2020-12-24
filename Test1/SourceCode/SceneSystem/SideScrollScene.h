@@ -32,6 +32,13 @@
 
 #pragma endregion
 
+#pragma region ITEMS
+#include "../PlayerItems/PickUp.h"
+#include "../PlayerItems/HealthPickUp.h"
+#include "../PlayerItems/EnergyPickUp.h"
+#include "../PlayerItems/PowerPickUp.h"
+#pragma endregion
+
 
 class CSideScrollScene: public CScene
 {
@@ -74,6 +81,7 @@ public:
 	CSideScrollScene();
 	void LoadResources();
 	void Start(float x, float y);
+	void ReStart(float x, float y);
 	void Resume();
 	void Update(DWORD dt);
 	void Render();

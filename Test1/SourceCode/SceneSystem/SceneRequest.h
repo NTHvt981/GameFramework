@@ -16,6 +16,10 @@ enum SCENE_REQUEST_TYPES
 	SwitchToSophia,
 
 	SwitchArea,
+
+	CreateHealthBall,
+	CreateEnergyBall,
+	CreatePowerBall
 };
 
 class CSceneRequest

@@ -7,8 +7,9 @@ void CSceneManager::Init()
 	topDownScene = new CTopDownScene();
 	gameOverScene = new CGameOverScene();
 	bossScene = new CBossScene();
+	endingScene = new CEndingScene;
 
-	currentScene = bossScene;
+	currentScene = sideScrollScene;
 }
 
 void CSceneManager::LoadResources()
@@ -18,18 +19,25 @@ void CSceneManager::LoadResources()
 	sideScrollScene->LoadResources();
 	topDownScene->LoadResources();
 	bossScene->LoadResources();
+	introScene->LoadResources();
+	endingScene->LoadResources();
 
-	//sideScrollScene->Start(
-	//	TOPDOWN_TO_SIDESCROLL_POS.x, 
-	//	TOPDOWN_TO_SIDESCROLL_POS.y
-	//);
+	//introScene->Start();
+	//endingScene->Start();
+
+	sideScrollScene->Start(
+		INTRO_TO_SIDESCROLL_POS.x, 
+		INTRO_TO_SIDESCROLL_POS.y
+	);
+	restartPosition.Set(INTRO_TO_SIDESCROLL_POS.x, INTRO_TO_SIDESCROLL_POS.y);
 
 	//topDownScene->Start(
 	//	SIDESCROLL_TO_TOPDOWN_POS.x,
 	//	SIDESCROLL_TO_TOPDOWN_POS.y
 	//);
+	//restartPosition.Set(SIDESCROLL_TO_TOPDOWN_POS.x, SIDESCROLL_TO_TOPDOWN_POS.y);
 
-	bossScene->Start();
+	//bossScene->Start();
 }
 
 void CSceneManager::Update(DWORD dt)
@@ -47,6 +55,15 @@ void CSceneManager::Update(DWORD dt)
 		break;
 	case END_CHANGESCENE_MODE:
 		EndChangeSceneMode(dt);
+		break;
+	case BEGIN_RESTART_MODE:
+		BeginRestartMode(dt);
+		break;
+	case DURING_RESTART_MODE:
+		DuringRestartMode(dt);
+		break;
+	case END_RESTART_MODE:
+		EndRestartMode(dt);
 		break;
 	default:
 		break;
@@ -106,6 +123,12 @@ void CSceneManager::NormalMode(DWORD dt)
 {
 	currentScene->Update(dt);
 
+	if (CPlayerHealth::GetInstance()->IsGameOver())
+	{
+		CPlayer::GetCurrentPlayer()->Disable();
+		mode = BEGIN_RESTART_MODE;
+	}
+
 	transAlpha = 0;
 }
 
@@ -127,10 +150,15 @@ void CSceneManager::DuringChangeSceneMode(DWORD dt)
 				INTRO_TO_SIDESCROLL_POS.x,
 				INTRO_TO_SIDESCROLL_POS.y
 			);
+			restartPosition.Set(INTRO_TO_SIDESCROLL_POS.x, INTRO_TO_SIDESCROLL_POS.y);
 		}
 		else if (currentScene->Type == SCENE_TYPES::TopDownScene)
 		{
 			sideScrollScene->Resume();
+			restartPosition.Set(
+				CPlayer::GetCurrentPlayer()->GetPosition().x, 
+				CPlayer::GetCurrentPlayer()->GetPosition().y
+			);
 
 			CPlayer::SetCurrentPlayer(CJason::GetInstance());
 		}
@@ -141,6 +169,11 @@ void CSceneManager::DuringChangeSceneMode(DWORD dt)
 			SIDESCROLL_TO_TOPDOWN_POS.x,
 			SIDESCROLL_TO_TOPDOWN_POS.y
 		);
+		restartPosition.Set(SIDESCROLL_TO_TOPDOWN_POS.x, SIDESCROLL_TO_TOPDOWN_POS.y);
+		break;
+
+	case SCENE_TYPES::EndingScene:
+		endingScene->Start();
 		break;
 	}
 
@@ -156,4 +189,40 @@ void CSceneManager::EndChangeSceneMode(DWORD dt)
 	transAlpha = max(transAlpha - transAlphaDivient, 0);
 	if (transAlpha == 0)
 		mode = NORMAL_MODE;
+}
+
+void CSceneManager::BeginRestartMode(DWORD dt)
+{
+	transAlpha = min(transAlpha + transAlphaDivient, 1);
+	if (transAlpha == 1)
+		mode = DURING_RESTART_MODE;
+}
+
+void CSceneManager::DuringRestartMode(DWORD dt)
+{
+	switch (currentScene->Type)
+	{
+	case SCENE_TYPES::SideScrollScene:
+		sideScrollScene->ReStart(restartPosition.x, restartPosition.y);
+		break;
+
+	case SCENE_TYPES::TopDownScene:
+		topDownScene->Start(restartPosition.x, restartPosition.y);
+		break;
+	}
+
+	CPlayerHealth::GetInstance()->Restart();
+	
+	currentScene->Update(dt);
+	mode = END_RESTART_MODE;
+}
+
+void CSceneManager::EndRestartMode(DWORD dt)
+{
+	transAlpha = max(transAlpha - transAlphaDivient, 0);
+	if (transAlpha == 0)
+	{
+		CPlayer::GetCurrentPlayer()->Enable();
+		mode = NORMAL_MODE;
+	}
 }

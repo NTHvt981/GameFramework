@@ -95,7 +95,7 @@ CSophia::CSophia() : CPlayer()
 	);
 	this->collisionBox->SetSolid(false);
 
-	leftWheelAni = new CAnimation(1, 25);
+	leftWheelAni = new CAnimation(25);
 	int idsL[] = {
 		ID_SOPHIA_WHEEL_1,
 		ID_SOPHIA_WHEEL_2,
@@ -104,7 +104,7 @@ CSophia::CSophia() : CPlayer()
 	};
 	leftWheelAni->Add(idsL, 4);
 
-	rightWheelAni = new CAnimation(1, 25);
+	rightWheelAni = new CAnimation(25);
 	int idsR[] = {
 		ID_SOPHIA_WHEEL_4,
 		ID_SOPHIA_WHEEL_1,

@@ -98,7 +98,7 @@ CSkull::CSkull()
 	);
 	collisionBox->SetSolid(false);
 
-	moveLeftAni = new CAnimation(1, 750);
+	moveLeftAni = new CAnimation(750);
 	int idsL[] = {
 		ID_SKULL_MOVE_LEFT_1,
 		ID_SKULL_MOVE_LEFT_2
@@ -106,7 +106,7 @@ CSkull::CSkull()
 
 	moveLeftAni->Add(idsL, 2);
 
-	moveRightAni = new CAnimation(1, 750);
+	moveRightAni = new CAnimation(750);
 	int idsR[] = {
 		ID_SKULL_MOVE_RIGHT_1,
 		ID_SKULL_MOVE_RIGHT_2

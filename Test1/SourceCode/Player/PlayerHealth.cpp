@@ -17,6 +17,7 @@ CPlayerHealth::CPlayerHealth()
     jasonHealth = jasonMaxHealth;
 
     sprSophiaHealthBar = CSpriteLibrary::GetInstance()->Get(ID_SOPHIA_HEALTH_BAR);
+    sprJasonHealthBar = CSpriteLibrary::GetInstance()->Get(ID_JASON_HEALTH_BAR);
     sprTextHov = CSpriteLibrary::GetInstance()->Get(ID_TEXT_HOV);
     sprTextPow = CSpriteLibrary::GetInstance()->Get(ID_TEXT_POW);
 }
@@ -40,6 +41,8 @@ void CPlayerHealth::Restart()
 {
     this->sophiaHealth = this->sophiaMaxHealth;
     this->jasonHealth = this->jasonMaxHealth;
+
+    gameOver = false;
 }
 
 void CPlayerHealth::ReduceSophiaHealth(int damage)
@@ -88,12 +91,28 @@ void CPlayerHealth::ReduceHealth(GOTYPES Type, int damage)
         ReduceSophiaHealth(damage);
 }
 
+void CPlayerHealth::ReduceHealth(int damage)
+{
+    if (playerMode == SOPHIA)
+        ReduceSophiaHealth(damage);
+    else if (playerMode == JASON)
+        ReduceJasonHealth(damage);
+}
+
 void CPlayerHealth::IncreaseHealth(GOTYPES Type, int heal_points)
 {
     if (Type == GOTYPES::Jason)
         IncreaseJasonHealth(heal_points);
     else if (Type == GOTYPES::Sophia)
         IncreaseSophiaHealth(heal_points);
+}
+
+void CPlayerHealth::IncreaseHealth(int heal_points)
+{
+    if (playerMode == SOPHIA)
+        IncreaseSophiaHealth(heal_points);
+    else if (playerMode == JASON)
+        IncreaseJasonHealth(heal_points);
 }
 
 void CPlayerHealth::SetPlayerMode(int _mode)

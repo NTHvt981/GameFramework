@@ -6,6 +6,12 @@
 
 #include "../../Player/Player.h"
 
+#include "../../Debug/Utils.h"
+
+#include "../StaticObjects/Explosion.h"
+
+#define HEALTH_PICKUP_CHANCE 0.5
+
 class CEnemy : public CEntity
 {
 protected:

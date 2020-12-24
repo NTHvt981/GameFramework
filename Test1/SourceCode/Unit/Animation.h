@@ -1,6 +1,5 @@
 #pragma once
 #include "../Constraints.h"
-#include "../Library/AnimationLibrary.h"
 #include "../Library/SpriteLibrary.h"
 #include <vector>
 
@@ -23,7 +22,6 @@ public:
 
 class CAnimation
 {
-	int id;
 	int mode;
 	DWORD lastFrameTime;
 	int defaultTime;
@@ -33,9 +31,12 @@ class CAnimation
 	bool loop;
 	bool end = false;
 	float speed = 1;
+
+private:
+	void SelfSetCurrentFrame();
+
 public:
-	CAnimation(int id, int defaultTime, int mode=ANIMATION_NORMAL, bool loop=true) { 
-		this->id = id;
+	CAnimation(int defaultTime, int mode=ANIMATION_NORMAL, bool loop=true) { 
 		this->defaultTime = defaultTime; 
 		this->mode = mode;
 		this->loop = loop;
@@ -45,7 +46,9 @@ public:
 	void Add(int spriteId, DWORD time = 0);
 	void Add(int spriteIds[], int size);
 	void Render(float x, float y, int alpha = 255);
+	void RenderCenter(float x, float y, int alpha = 255);
 	void Render(Vector position, int alpha = 255);
+	void RenderWithFixedPosition(float x, float y, int alpha = 255);
 	int GetId();
 	bool IsLoop();
 	bool IsEnd();

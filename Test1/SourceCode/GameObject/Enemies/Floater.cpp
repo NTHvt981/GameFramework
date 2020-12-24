@@ -49,7 +49,7 @@ CFloater::CFloater(int _type)
 	SetType(GOTYPES::Enemy);
 	floaterType = _type;
 
-	animation = new CAnimation(1, 150);
+	animation = new CAnimation(150);
 	int idsR[] = {
 		ID_FLOATER_MOVE_1,
 		ID_FLOATER_MOVE_2

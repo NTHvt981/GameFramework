@@ -138,17 +138,19 @@ void CSideScrollScene::LoadPortals()
 
 void CSideScrollScene::LoadEnemies()
 {
-	//AddEntity(new CJumper(), 400, 2944);
-	//AddEntity(new CJumper(), 336, 2944);
+	AddEntity(new CJumper(), 400, 2944);
+	AddEntity(new CJumper(), 336, 2944);
 
 	AddEntity(new CSkull(), 3*16, 182*16);
 
-	//AddEntity(new CMyDome(), 3 * 16 - 2, 185 * 16 - 2);
+	AddEntity(new CDome(), 3 * 16 - 2, 185 * 16 - 2);
 
-	//AddEntity(new CFloater(FLOATER_HORIZONTAL), 336, 2944);
+	AddEntity(new CFloater(FLOATER_DIAGONAL), 336, 2944);
 
-	//AddEntity(new CInsect(), 336, 2944);
-	//AddEntity(new CWorm(), 400, 2944);
+	AddEntity(new CInsect(), 336, 2944);
+	AddEntity(new CWorm(), 400, 2944);
+
+	//AddEntity(new CHealthPickUp(), 400, 2944);
 }
 
 CSideScrollScene::CSideScrollScene()
@@ -198,6 +200,16 @@ void CSideScrollScene::Start(float x, float y)
 		if ((x >= l) && (x < r) && (y >= t) && (y < b))
 			SetArea(areaId);
 	}
+}
+
+void CSideScrollScene::ReStart(float x, float y)
+{
+	Start(x, y);
+
+	CPlayerHealth::GetInstance()->SetPlayerMode(SOPHIA);
+
+	CSophia::GetInstance()->Enable();
+	CJason::GetInstance()->Enable();
 }
 
 void CSideScrollScene::Resume()
@@ -430,13 +442,22 @@ void CSideScrollScene::ExecuteRequest(LPSceneRequest request)
 		CPlayer::SetCurrentPlayer(CJason::GetInstance());
 
 		CSophiaFake::GetInstance()->Enable();
+
+		CPlayerHealth::GetInstance()->SetPlayerMode(JASON);
 		break;
 
 	case SCENE_REQUEST_TYPES::SwitchToSophia:
 		CPlayer::SetCurrentPlayer(CSophia::GetInstance());
 
 		CSophiaFake::GetInstance()->Disable();
+
+		CPlayerHealth::GetInstance()->SetPlayerMode(SOPHIA);
 		break;
+
+	case SCENE_REQUEST_TYPES::CreateHealthBall:
+		AddEntity(new CHealthPickUp(), request->x, request->y);
+		break;
+		
 	default:
 		break;
 	}

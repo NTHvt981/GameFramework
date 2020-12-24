@@ -62,7 +62,7 @@ CJumper::CJumper() : CEnemy()
 	);
 	collisionBox->SetSolid(false);
 
-	moveLeftAni = new CAnimation(1, 150);
+	moveLeftAni = new CAnimation(150);
 	int idsL[] = {
 		ID_JUMPER_MOVE_LEFT_1,
 		ID_JUMPER_MOVE_LEFT_2,
@@ -71,7 +71,7 @@ CJumper::CJumper() : CEnemy()
 
 	moveLeftAni->Add(idsL, 3);
 
-	moveRightAni = new CAnimation(1, 150);
+	moveRightAni = new CAnimation(150);
 	int idsR[] = {
 		ID_JUMPER_MOVE_RIGHT_1,
 		ID_JUMPER_MOVE_RIGHT_2,

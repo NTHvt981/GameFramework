@@ -18,17 +18,12 @@ void CAnimation::Add(int spriteIds[], int size)
 	}
 }
 
-void CAnimation::Render(float x, float y, int alpha)
+void CAnimation::SelfSetCurrentFrame()
 {
 	DWORD now = GetTickCount();
 	if (lastFrameTime == -1) lastFrameTime = now;
 
 	DWORD t = frames[currentFrame]->GetTime();
-	//if (now - lastFrameTime > t)
-	//{
-	//	currentFrame = currentFrame + mode;
-	//	lastFrameTime = now;
-	//}
 	if ((now - lastFrameTime) * speed > t)
 	{
 		currentFrame = currentFrame + mode;
@@ -46,8 +41,23 @@ void CAnimation::Render(float x, float y, int alpha)
 			end = true;
 		}
 	}
+}
+
+void CAnimation::Render(float x, float y, int alpha)
+{
+	SelfSetCurrentFrame();
 
 	frames[currentFrame]->GetSprite()->Draw(x, y, alpha);
+}
+
+void CAnimation::RenderCenter(float x, float y, int alpha)
+{
+	SelfSetCurrentFrame();
+
+	int w, h;
+	frames[currentFrame]->GetSprite()->GetSize(w, h);
+
+	frames[currentFrame]->GetSprite()->Draw(x - w/2, y - h/2, alpha);
 }
 
 void CAnimation::Render(Vector position, int alpha)
@@ -55,9 +65,11 @@ void CAnimation::Render(Vector position, int alpha)
 	Render(position.x, position.y, alpha);
 }
 
-int CAnimation::GetId()
+void CAnimation::RenderWithFixedPosition(float x, float y, int alpha)
 {
-	return id;
+	SelfSetCurrentFrame();
+
+	frames[currentFrame]->GetSprite()->DrawWithFixedPosition(x, y, alpha);
 }
 
 bool CAnimation::IsLoop()

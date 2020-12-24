@@ -64,8 +64,24 @@ void CTopDownScene::LoadAreas()
 {
 	areas[1] = new CArea(0, 56, 7, 63);
 	areas[2] = new CArea(8, 56, 15, 63);
+	areas[3] = new CArea(16, 56, 23, 63);
 
-	for (int i = 1; i <= 2; i++)
+	areas[4] = new CArea(16, 48, 23, 55);
+	areas[5] = new CArea(16, 40, 23, 47);
+
+	areas[6] = new CArea(8, 40, 15, 47);
+	areas[7] = new CArea(8, 32, 15, 39);
+
+	areas[8] = new CArea(0, 32, 7, 39);
+	areas[9] = new CArea(0, 24, 7, 31);
+
+	areas[10] = new CArea(8, 24, 15, 31);
+	areas[11] = new CArea(16, 24, 23, 31);
+	areas[12] = new CArea(24, 24, 31, 31);
+
+	areas[13] = new CArea(24, 16, 31, 23);
+
+	for (int i = 1; i <= 13; i++)
 	{
 		float l = areas[i]->left * 32;
 		float t = areas[i]->top * 32;
@@ -80,26 +96,47 @@ void CTopDownScene::LoadAreas()
 
 void CTopDownScene::LoadPortals()
 {
-	const int range = 2;
-	int ls[range][7] = {
-		{ 12, 7, 59, 7, 60, -1, 0 },
-		{ 21, 9, 59, 9, 60, 1, 0 },
+	const int range = 24;
+	int ls[range][5] = {
+		{ 102, 7, 60, -1, 0 }, { 201, 9, 60, 1, 0 },
+
+		{ 203, 15, 60, -1, 0 }, { 302, 17, 60, 1, 0 },
+
+		{ 304, 20, 57, 0, 1 }, { 403, 20, 54, 0, -1 },
+
+		{ 405, 20, 49, 0, 1 }, { 504, 20, 46, 0, -1 },
+
+		{ 506, 17, 44, 1, 0 }, { 605, 15, 44, -1, 0 },
+
+		{ 607, 12, 41, 0, 1 }, { 706, 12, 38, 0, -1 },
+
+		{ 708, 9, 36, 1, 0 }, { 807, 7, 36, -1, 0 },
+
+		{ 809, 4, 33, 0, 1 }, { 908, 4, 30, 0, -1 },
+
+		{ 910, 7, 28, -1, 0 }, { 1009, 9, 28, 1, 0 },
+
+		{ 1011, 15, 28, -1, 0 }, { 1110, 17, 28, 1, 0 },
+
+		{ 1112, 23, 28, -1, 0 }, { 1211, 25, 28, 1, 0 },
+
+		{ 1213, 28, 25, 0, 1 }, { 1312, 28, 22, 0, -1 },
 	};
 
 	for (int i = 0; i < range; i++)
 	{
 		int id = ls[i][0];
-		int areaId = id / 10;
-		int reverseId = (id % 10) * 10 + (id / 10);
+		int areaId = id / 100;
+		int reverseId = (id % 100) * 100 + (id / 100);
 
 		int l = ls[i][1] * 32 - 1;
-		int r = ls[i][3] * 32 + 1;
-
 		int t = ls[i][2] * 32 - 1;
-		int b = ls[i][4] * 32 + 1;
 
-		int sideX = ls[i][5];
-		int sideY = ls[i][6];
+		int r = ls[i][1] * 32 + 1;
+		int b = ls[i][2] * 32 + 1;
+
+		int sideX = ls[i][3];
+		int sideY = ls[i][4];
 
 		portals[id] = new CAreaPortal(l, t, r, b);
 		portals[id]->SetTargetId(reverseId);
@@ -151,6 +188,26 @@ void CTopDownScene::Start(float x, float y)
 
 	CJasonTopDown::GetInstance()->SetPosition(x, y);
 	CPlayer::SetCurrentPlayer(CJasonTopDown::GetInstance());
+
+	for each (pair<int, CArea*> p in areas)
+	{
+		int areaId = p.first;
+		CArea* area = p.second;
+		float l, t, r, b;
+		area->GetLTRB(l, t, r, b);
+
+		if ((x >= l) && (x < r) && (y >= t) && (y < b))
+			SetArea(areaId);
+	}
+
+	CPlayerHealth::GetInstance()->SetPlayerMode(JASON);
+}
+
+void CTopDownScene::ReStart(float x, float y)
+{
+	Start(x, y);
+
+
 }
 
 void CTopDownScene::Update(DWORD dt)
@@ -201,6 +258,11 @@ void CTopDownScene::Render()
 
 void CTopDownScene::End()
 {
+}
+
+void CTopDownScene::SetArea(int areaId)
+{
+	currArea = areas[areaId];
 }
 
 void CTopDownScene::UpdateCamera()

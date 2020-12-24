@@ -3,7 +3,7 @@
 #include "Player.h"
 #include "../Constraints.h"
 #include "../Unit/Animation.h"
-#include "JasonBullet.h"
+#include "../PlayerBullets/JasonBullet.h"
 
 #define JASON_CRAWL 0
 #define JASON_WALK 1

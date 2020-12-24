@@ -65,7 +65,7 @@ CWorm::CWorm() : CEnemy()
 	CEntity::gravity = gravity;
 	CEntity::jumpSpeed = jumpSpeed;
 
-	moveLeftAni = new CAnimation(1, 200);
+	moveLeftAni = new CAnimation(200);
 	int idsL[] = {
 		ID_WORM_MOVE_LEFT_1,
 		ID_WORM_MOVE_LEFT_2
@@ -73,7 +73,7 @@ CWorm::CWorm() : CEnemy()
 
 	moveLeftAni->Add(idsL, 2);
 
-	moveRightAni = new CAnimation(1, 200);
+	moveRightAni = new CAnimation(200);
 	int idsR[] = {
 		ID_WORM_MOVE_RIGHT_1,
 		ID_WORM_MOVE_RIGHT_2

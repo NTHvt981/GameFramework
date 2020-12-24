@@ -11,10 +11,10 @@ COrb::COrb() : CEnemy()
 	);
 	collisionBox->SetSolid(false);
 
-	moveLeftAni = new CAnimation(1, 100);
-	moveRightAni = new CAnimation(1, 100);
-	turnLeftAni = new CAnimation(1, 50, 1, false);
-	turnRightAni = new CAnimation(1, 50, 1, false);
+	moveLeftAni = new CAnimation(100);
+	moveRightAni = new CAnimation(100);
+	turnLeftAni = new CAnimation(50, 1, false);
+	turnRightAni = new CAnimation(50, 1, false);
 	currentAni = moveRightAni;
 	state = ORB_MOVE_RIGHT;
 

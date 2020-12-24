@@ -59,6 +59,8 @@ void CEnemyBullet::Update(DWORD dt)
 		LPSceneRequest request = new CSceneRequest(SCENE_REQUEST_TYPES::DeleteEntity);
 		request->id = this->id;
 		CSceneRequest::AddRequest(request);
+
+		CExplosion::CreateExplosion(GetCenter().x, GetCenter().y, EXPLOSION_TYPES::Small);
 	}
 }
 

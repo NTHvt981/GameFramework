@@ -60,9 +60,12 @@ public:
 	CTopDownScene();
 	void LoadResources();
 	void Start(float x, float y);
+	void ReStart(float x, float y);
 	void Update(DWORD dt);
 	void Render();
 	void End();
+
+	void SetArea(int areaId);
 
 private:
 	/// <summary>

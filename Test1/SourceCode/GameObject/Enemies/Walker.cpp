@@ -10,8 +10,8 @@ CWalker::CWalker() : CEntity()
 		18, 17
 	);
 
-	moveDownAni = new CAnimation(1, 200);
-	moveUpAni = new CAnimation(1, 200);
+	moveDownAni = new CAnimation(200);
+	moveUpAni = new CAnimation(200);
 
 	moveDownAni->Add(ID_WALKER_1);
 	moveDownAni->Add(ID_WALKER_2);

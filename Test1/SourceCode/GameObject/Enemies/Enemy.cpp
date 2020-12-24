@@ -24,6 +24,16 @@ void CEnemy::InflictDamage(int dam)
 		LPSceneRequest request = new CSceneRequest(SCENE_REQUEST_TYPES::DeleteEntity);
 		request->id = this->id;
 		CSceneRequest::AddRequest(request);
+
+		if (CUtils::lottery(HEALTH_PICKUP_CHANCE))
+		{
+			LPSceneRequest pickupReq = new CSceneRequest(SCENE_REQUEST_TYPES::CreateHealthBall);
+			pickupReq->x = GetCenter().x;
+			pickupReq->y = GetCenter().y;
+			CSceneRequest::AddRequest(pickupReq);
+		}
+
+		CExplosion::CreateExplosion(GetCenter().x, GetCenter().y, EXPLOSION_TYPES::Big);
 	}
 }
 

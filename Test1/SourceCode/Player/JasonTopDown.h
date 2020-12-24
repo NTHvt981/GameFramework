@@ -3,7 +3,7 @@
 #include "Player.h"
 #include "../Constraints.h"
 #include "../Unit/Animation.h"
-#include "JasonBullet.h"
+#include "../PlayerBullets/JasonBullet.h"
 
 #define LEFT 0
 #define RIGHT 1

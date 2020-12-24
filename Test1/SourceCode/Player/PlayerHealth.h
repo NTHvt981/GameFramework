@@ -56,7 +56,9 @@ public:
 	void Restart();
 
 	void ReduceHealth(GOTYPES Type, int damage = 1);
+	void ReduceHealth(int damage = 1);
 	void IncreaseHealth(GOTYPES Type, int heal_points = 1);
+	void IncreaseHealth(int heal_points = 1);
 
 	void SetPlayerMode(int _mode);
 	int GetHealthState();

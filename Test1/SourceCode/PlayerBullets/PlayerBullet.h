@@ -9,6 +9,8 @@
 
 #include "../SceneSystem/SceneRequest.h"
 
+#include "../GameObject/StaticObjects/Explosion.h"
+
 class CPlayerBullet: public CEntity
 {
 protected:
@@ -18,8 +20,11 @@ protected:
 	LPSprite sprite;
 	CTimer* selfDestructTimer;
 
+	EXPLOSION_TYPES effectType = EXPLOSION_TYPES::Medium;
+
 public:
 	CPlayerBullet(Vector direction);
+	void CreateEffect(float vx, float vy);
 	
 	void Update(DWORD dt);
 	void Render();

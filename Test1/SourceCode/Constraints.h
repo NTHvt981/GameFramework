@@ -56,6 +56,9 @@
 #define OTHER_OBJECTS_TEXTURE_PATH L"Resources/Texture/OtherObjects.png"
 #define BLACK_SCREEN_TEXTURE_PATH L"Resources/Texture/BlackScreen.png"
 #define BOSS_TEXTURE_PATH L"Resources/Texture/Boss.png"
+#define OPENING_TEXTURE_PATH L"Resources/Texture/Opening.png"
+#define ROLLOUT_TEXTURE_PATH L"Resources/Texture/RollOut.png"
+#define ITEMS_TEXTURE_PATH L"Resources/Texture/Items.png"
 
 #define TEX_BBOX_PATH L"./Resources/Texture/bbox.png"
 #define ID_TEX_BBOX 999		// special texture to draw object bounding box
@@ -177,6 +180,20 @@
 #define ID_JASON_TOPDOWN_BULLET 1513
 #pragma endregion
 
+#pragma region ITEMS
+#define ID_PLAYER_UPGRADE 1700
+#define ID_HEALTH_BALL 1701
+#define ID_ENERGY_BALL 1702
+#define ID_POWER_BALL 1703
+#pragma endregion
+
+#pragma region EXPLOSION
+#define ID_EXPLOSION_1 1704
+#define ID_EXPLOSION_2 1705
+#define ID_EXPLOSION_3 1706
+#define ID_EXPLOSION_4 1707
+#pragma endregion
+
 #pragma region ENEMY WORM
 #define ID_WORM_MOVE_LEFT_1 2000
 #define ID_WORM_MOVE_LEFT_2 2001
@@ -280,6 +297,58 @@
 #define ID_PORTAL_FACE_LEFT_2 6004
 
 #define ID_BLACK_SCREEN 6005
+
+#define ID_OPENING_1 6011
+#define ID_OPENING_2 6012
+#define ID_OPENING_3 6013
+#define ID_OPENING_4 6014
+#define ID_OPENING_5 6015
+#define ID_OPENING_6 6016
+#define ID_OPENING_7 6017
+#define ID_OPENING_8 6018
+#define ID_OPENING_9 6019
+
+#define ID_OPENING_10 6020
+#define ID_OPENING_11 6021
+#define ID_OPENING_12 6022
+#define ID_OPENING_13 6023
+#define ID_OPENING_14 6024
+#define ID_OPENING_15 6025
+#define ID_OPENING_16 6026
+#define ID_OPENING_17 6027
+#define ID_OPENING_18 6028
+#define ID_OPENING_19 6029
+
+#define ID_OPENING_20 6030
+#define ID_OPENING_21 6031
+#define ID_OPENING_22 6032
+#define ID_OPENING_23 6033
+#define ID_OPENING_24 6034
+#define ID_OPENING_25 6035
+#define ID_OPENING_26 6036
+#define ID_OPENING_27 6037
+#define ID_OPENING_28 6038
+#define ID_OPENING_29 6039
+
+#define ID_OPENING_30 6040
+#define ID_OPENING_31 6041
+#define ID_OPENING_32 6042
+#define ID_OPENING_33 6043
+#define ID_OPENING_34 6044
+#define ID_OPENING_35 6045
+#define ID_OPENING_36 6046
+#define ID_OPENING_37 6047
+
+#define ID_ROLLOUT_1 6101
+#define ID_ROLLOUT_2 6102
+#define ID_ROLLOUT_3 6103
+#define ID_ROLLOUT_4 6104
+#define ID_ROLLOUT_5 6105
+#define ID_ROLLOUT_6 6106
+#define ID_ROLLOUT_7 6107
+#define ID_ROLLOUT_8 6108
+#define ID_ROLLOUT_9 6109
+#define ID_ROLLOUT_10 6110
 //enum class GOTYPES;
 
 class CScene;

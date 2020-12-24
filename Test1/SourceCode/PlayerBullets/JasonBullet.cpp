@@ -22,4 +22,6 @@ CJasonBullet::CJasonBullet(Vector direction) : CPlayerBullet(direction)
 	collisionBox->SetSolid(false);
 
 	sprite = CSpriteLibrary::GetInstance()->Get(sprId);
+
+	effectType = EXPLOSION_TYPES::Small;
 }

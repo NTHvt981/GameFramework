@@ -8,6 +8,7 @@ enum GAME_REQUEST_TYPES
 	SwitchToIntro,
 	SwitchToSideScroll,
 	SwitchToTopDown,
+	SwitchToBoss,
 	SwitchToEnding
 };
 

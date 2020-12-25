@@ -3,7 +3,7 @@
 #include "Player.h"
 #include "../Constraints.h"
 #include "../Unit/Animation.h"
-#include "../PlayerBullets/JasonBullet.h"
+#include "../PlayerBullets/JasonTopDownBullet.h"
 
 #define LEFT 0
 #define RIGHT 1
@@ -25,6 +25,11 @@ protected:
     Vector posHorSpr = Vector(0, 0);
     Vector posVerSpr = Vector(2, 0);
 
+    Vector leftShootPivot = Vector(-6, -6);
+    Vector rightShootPivot = Vector(6, -6);
+    Vector downShootPivot = Vector(-4, -2);
+    Vector upShootPivot = Vector(4, -8);
+
 private:
     LPAnimation animation;
     LPAnimation walkLeftAnimation;
@@ -36,11 +41,6 @@ private:
 
     int facing;
     int pace;
-
-    Vector shootLeftPivot = Vector(0, 0);
-    Vector shootUpPivot = Vector(0, 0);
-    Vector shootRightPivot = Vector(0, 0);
-    Vector shootDownPivot = Vector(0, 0);
 
 public:
     void SetFacing(int _facing);

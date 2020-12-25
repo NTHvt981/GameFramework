@@ -194,41 +194,41 @@ void CJasonTopDown::GetSetAnimation(DWORD dt, int _facing, int _pace)
 
 void CJasonTopDown::Shoot()
 {
-	Vector* shoot_pivot = &shootRightPivot;
 	Vector direction = Vector(0, 0);
+	Vector *shootPivot = new Vector(0, 0);
 
 	if (facing == RIGHT)
 	{
-		shoot_pivot = &shootRightPivot;
 		direction = Vector(1, 0);
+		shootPivot = &rightShootPivot;
 	}
 	else if (facing == LEFT)
 	{
-		shoot_pivot = &shootLeftPivot;
 		direction = Vector(-1, 0);
+		shootPivot = &leftShootPivot;
 	}
 	else if (facing == UP)
 	{
-		shoot_pivot = &shootUpPivot;
 		direction = Vector(0, -1);
+		shootPivot = &upShootPivot;
 	}
 	else if (facing == DOWN)
 	{
-		shoot_pivot = &shootDownPivot;
 		direction = Vector(0, 1);
+		shootPivot = &downShootPivot;
 	}
 
-	float x = (*shoot_pivot).x + GetCenter().x;
-	float y = (*shoot_pivot).y + GetCenter().y;
+	float x = GetCenter().x;
+	float y = GetCenter().y;
 
 	try
 	{
 		LPSceneRequest request = new CSceneRequest(SCENE_REQUEST_TYPES::CreateEntity);
-		request->entity = new CJasonBullet(
+		request->entity = new CJasonTopDownBullet(
 			direction
 		);
-		request->x = x;
-		request->y = y;
+		request->x = x + shootPivot->x;
+		request->y = y + shootPivot->y;
 
 		CSceneRequest::AddRequest(request);
 	}

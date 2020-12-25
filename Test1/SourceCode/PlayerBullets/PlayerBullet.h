@@ -11,16 +11,23 @@
 
 #include "../GameObject/StaticObjects/Explosion.h"
 
+#define SOPHIA_BULLET_SPEED 5;
+#define JASON_BULLET_SPEED 3.5;
+#define JASON_TOPDOWN_BULLET_SPEED 8;
+
 class CPlayerBullet: public CEntity
 {
 protected:
-	float speed = 5;
+	float speed = SOPHIA_BULLET_SPEED;
 	const int damage = 2;
 	Vector old_velocity;
 	LPSprite sprite;
 	CTimer* selfDestructTimer;
 
 	EXPLOSION_TYPES effectType = EXPLOSION_TYPES::Medium;
+
+	int width;
+	int height;
 
 public:
 	CPlayerBullet(Vector direction);

@@ -11,14 +11,21 @@
 #include "BossArm.h"
 #include "BossHand.h"
 
+#include "../StaticObjects/Explosion.h"
+#include "../../Debug/Utils.h"
+
 #define BOSS_MOVE_SLOW 1
 #define BOSS_MOVE_NORMAL 1.5
 #define BOSS_MOVE_FAST 2
 
+#define BOSS_NORMAL 0
+#define BOSS_DEFEAT 1
+
+#define BOSS_HEALTH 15
+
 class CBoss : public CEnemy
 {
 private:
-	bool* gameOver;
 	LPAnimation animation;
 
 	int width, height;
@@ -42,8 +49,12 @@ private:
 	vector<Vector> armMovementMatrix;
 	int rightArmIndex = 0;
 
+	int state = BOSS_NORMAL;
+	DWORD effectCountUp = 0;
+	DWORD effectWaitTime = 15;
+
 public:
-	CBoss(bool *overCon);
+	CBoss();
 	void Update(DWORD dt);
 	void Render();
 	void SetCenter(float _x, float _y);
@@ -53,8 +64,17 @@ public:
 	void SetGoalPosition(float x, float y);
 	Vector GetLocalPosition();
 
+	void InflictDamage(int dam);
+	int GetHealth();
+	bool IsDefeat();
+
 public:
 	void HandleMovement(DWORD dt);
 	bool HasReachGoal();
+	void Reset();
+
+private:
+	void NormalState(DWORD dt);
+	void DefeatState(DWORD dt);
 };
 

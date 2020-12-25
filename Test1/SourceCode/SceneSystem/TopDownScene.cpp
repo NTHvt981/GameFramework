@@ -149,7 +149,8 @@ void CTopDownScene::LoadPortals()
 	/// <summary>
 	/// Scene portal section
 	/// </summary>
-	scenePortal = new CTopDownPortal(112, 1904, 128, 1920);
+	sideScrollPortal = new CTopDownPortal(112, 1904, 128, 1920);
+	bossPortal = new CTopDownPortal(320, 1856, 448, 1952);
 }
 
 void CTopDownScene::LoadEnemies()
@@ -206,8 +207,6 @@ void CTopDownScene::Start(float x, float y)
 void CTopDownScene::ReStart(float x, float y)
 {
 	Start(x, y);
-
-
 }
 
 void CTopDownScene::Update(DWORD dt)
@@ -339,12 +338,22 @@ void CTopDownScene::UpdatePortals(DWORD dt)
 	/// <summary>
 	/// Scene portal section
 	/// </summary>
-	if (scenePortal->IsCollideWithPlayer())
+	if (sideScrollPortal->IsCollideWithPlayer())
 	{
 		LPGameRequest request = new CGameRequest(GAME_REQUEST_TYPES::SwitchToSideScroll);
 		request->sender = SCENE_TYPES::TopDownScene;
 
 		CGameRequest::AddRequest(request);
+	}
+
+	if (bossPortal->IsCollideWithPlayer())
+	{
+		LPGameRequest request = new CGameRequest(GAME_REQUEST_TYPES::SwitchToBoss);
+		request->sender = SCENE_TYPES::TopDownScene;
+
+		CGameRequest::AddRequest(request);
+
+		DebugOut(L"[BOSS] Enter boss Area\n");
 	}
 }
 
@@ -390,7 +399,9 @@ void CTopDownScene::RenderPortals()
 	/// <summary>
 	/// Scene portal section
 	/// </summary>
-	scenePortal->Render();
+	sideScrollPortal->Render();
+
+	bossPortal->Render();
 }
 
 void CTopDownScene::ExecuteRequests()
@@ -404,8 +415,6 @@ void CTopDownScene::ExecuteRequests()
 		ExecuteRequest(re);
 		requests.pop_front();
 	}
-
-	CSceneRequest::RequestList.clear();
 }
 
 void CTopDownScene::ExecuteRequest(LPSceneRequest request)

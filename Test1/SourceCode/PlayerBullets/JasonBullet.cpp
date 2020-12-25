@@ -5,7 +5,7 @@ CJasonBullet::CJasonBullet(Vector direction) : CPlayerBullet(direction)
 	Vector size = Vector(5, 4);
 	unsigned int sprId = ID_JASON_BULLET;
 
-	speed = 4;
+	speed = JASON_BULLET_SPEED;
 
 	if (direction.x == 1)
 	{

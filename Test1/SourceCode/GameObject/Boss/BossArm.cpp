@@ -5,7 +5,7 @@ CBossArm::CBossArm(
 	int sprId=ID_BOSS_RIGHT_ARM,
 	float _range=0)
 {
-	SetType(GOTYPES::Enemy);
+	SetType(GOTYPES::EnemyBullet);
 
 	child = _child;
 	if (child == NULL) isTheEnd = true;

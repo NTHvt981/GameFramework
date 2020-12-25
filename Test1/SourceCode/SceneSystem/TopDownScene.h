@@ -33,7 +33,9 @@ private:
 	map<int, CArea*> areas;
 	map<int, CAreaPortal*> portals;
 
-	CTopDownPortal *scenePortal;
+	CTopDownPortal* sideScrollPortal;
+
+	CTopDownPortal* bossPortal;
 
 	//contains all entity, each grid contain a list of number, each number is an id
 	//of the entity

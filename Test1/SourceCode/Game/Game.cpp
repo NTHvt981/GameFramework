@@ -116,6 +116,16 @@ void CGame::LoadSprites()
 	lib->Add(ID_SOPHIA_BULLET_LEFT, 74, 3, 74 + 24, 3 + 6, textPlayer);
 	lib->Add(ID_SOPHIA_BULLET_RIGHT, 74, 12, 74 + 24, 12 + 6, textPlayer);
 	lib->Add(ID_SOPHIA_BULLET_UP, 100, 2, 100 + 6, 2 + 24, textPlayer);
+
+	lib->Add(ID_SOPHIA_MISSILE_HEAD_LEFT, 154, 89, 154 + 7, 89 + 5, textPlayer);
+	lib->Add(ID_SOPHIA_MISSILE_HEAD_UP, 162, 81, 162 + 5, 81 + 7, textPlayer);
+	lib->Add(ID_SOPHIA_MISSILE_HEAD_RIGHT, 168, 89, 168 + 7, 89 + 5, textPlayer);
+	lib->Add(ID_SOPHIA_MISSILE_HEAD_DOWN, 162, 95, 162 + 5, 95 + 7, textPlayer);
+
+	lib->Add(ID_SOPHIA_MISSILE_TAIL_LEFT, 178, 86, 178 + 7, 86 + 12, textPlayer);
+	lib->Add(ID_SOPHIA_MISSILE_TAIL_UP, 186, 78, 186 + 12, 78 + 7, textPlayer);
+	lib->Add(ID_SOPHIA_MISSILE_TAIL_RIGHT, 199, 86, 199 + 7, 86 + 12, textPlayer);
+	lib->Add(ID_SOPHIA_MISSILE_TAIL_DOWN, 186, 99, 186 + 12, 99 + 7, textPlayer);
 	#pragma endregion
 
 
@@ -160,7 +170,10 @@ void CGame::LoadSprites()
 	lib->Add(ID_JASON_TOPDOWN_WALK_DOWN_2, 29, 72, 29 + 20, 72 + 32, textPlayer);
 	lib->Add(ID_JASON_TOPDOWN_WALK_DOWN_3, 54, 72, 54 + 20, 72 + 32, textPlayer);
 
-	lib->Add(ID_JASON_TOPDOWN_BULLET, 85, 140, 85 + 7, 140 + 6, textPlayer);
+	lib->Add(ID_JASON_TOPDOWN_BULLET_LEFT, 74, 150, 74 + 8, 150 + 6, textPlayer);
+	lib->Add(ID_JASON_TOPDOWN_BULLET_UP, 84, 149, 84 + 6, 149 + 8, textPlayer);
+	lib->Add(ID_JASON_TOPDOWN_BULLET_RIGHT, 92, 150, 92 + 8, 150 + 6, textPlayer);
+	lib->Add(ID_JASON_TOPDOWN_BULLET_DOWN, 102, 149, 102 + 6, 149 + 8, textPlayer);
 	#pragma endregion
 
 #pragma region ITEMS

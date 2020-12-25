@@ -18,6 +18,8 @@ void CBossHand::setUpBossArm(int parentId)
 
 CBossHand::CBossHand(int id) : CEntity()
 {
+	SetType(GOTYPES::EnemyBullet);
+
 	sprite = CSpriteLibrary::GetInstance()->Get(id);
 	sprite->GetSize(width, height);
 

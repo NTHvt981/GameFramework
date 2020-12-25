@@ -1,9 +1,9 @@
 #include "Boss.h"
 
-CBoss::CBoss(bool* overCon)
+CBoss::CBoss()
 {
 	SetType(GOTYPES::Enemy);
-	gameOver = overCon;
+	SetMaxHealth(BOSS_HEALTH);
 
 	animation = new CAnimation(500);
 	animation->Add(ID_BOSS_HEAD_1);
@@ -57,34 +57,16 @@ CBoss::CBoss(bool* overCon)
 
 void CBoss::Update(DWORD dt)
 {
-	rightHand->Update(dt);
-
-	if (rightHand->HasReachGoal())
+	switch (state)
 	{
-		rightArmIndex++;
-
-		if (rightArmIndex > armMovementMatrix.size() - 1)
-			rightArmIndex = 0;
-
-		rightHand->SetGoalPosition(
-			armMovementMatrix[rightArmIndex].x, armMovementMatrix[rightArmIndex].y
-		);
-	}
-
-
-	if (!HasReachGoal())
-		HandleMovement(dt);
-	else
-	{
-		movementIndex++;
-
-		if (movementIndex > movementMatrix.size() - 1)
-			movementIndex = 0;
-
-		SetGoalPosition(
-			movementMatrix[movementIndex].first.x, movementMatrix[movementIndex].first.y
-		);
-		speed = movementMatrix[movementIndex].second;
+	case BOSS_NORMAL:
+		NormalState(dt);
+		break;
+	case BOSS_DEFEAT:
+		DefeatState(dt);
+		break;
+	default:
+		break;
 	}
 }
 
@@ -139,6 +121,26 @@ Vector CBoss::GetLocalPosition()
 	return localPosition;
 }
 
+void CBoss::InflictDamage(int dam)
+{
+	health = max(0, health - dam);
+
+	if (health == 0)
+	{
+		state = BOSS_DEFEAT;
+	}
+}
+
+int CBoss::GetHealth()
+{
+	return health;
+}
+
+bool CBoss::IsDefeat()
+{
+	return state == BOSS_DEFEAT;
+}
+
 void CBoss::HandleMovement(DWORD dt)
 {
 	float _x = localGoalPosition.x - localPosition.x;
@@ -186,4 +188,73 @@ bool CBoss::HasReachGoal()
 {
 	return (localGoalPosition.x == localPosition.x &&
 		localGoalPosition.y == localPosition.y);
+}
+
+void CBoss::Reset()
+{
+	state = BOSS_NORMAL;
+	health = maxHealth;
+}
+
+void CBoss::NormalState(DWORD dt)
+{
+	animation->SetMode(ANIMATION_NORMAL);
+
+	rightHand->Update(dt);
+
+	if (rightHand->HasReachGoal())
+	{
+		rightArmIndex++;
+
+		if (rightArmIndex > armMovementMatrix.size() - 1)
+			rightArmIndex = 0;
+
+		rightHand->SetGoalPosition(
+			armMovementMatrix[rightArmIndex].x, armMovementMatrix[rightArmIndex].y
+		);
+	}
+
+
+	if (!HasReachGoal())
+		HandleMovement(dt);
+	else
+	{
+		movementIndex++;
+
+		if (movementIndex > movementMatrix.size() - 1)
+			movementIndex = 0;
+
+		SetGoalPosition(
+			movementMatrix[movementIndex].first.x, movementMatrix[movementIndex].first.y
+		);
+		speed = movementMatrix[movementIndex].second;
+	}
+}
+
+void CBoss::DefeatState(DWORD dt)
+{
+	animation->SetMode(ANIMATION_PAUSE);
+
+	effectCountUp += dt;
+	if (effectCountUp >= effectWaitTime)
+	{
+		effectCountUp = 0;
+
+		float min_x, max_x, min_y, max_y;
+		min_x = position.x - width / 2;
+		max_x = position.x + width / 2;
+		min_y = position.y - height / 2;
+		max_y = position.y + height / 2;
+
+		float spawn_x, spawn_y;
+		spawn_x = CUtils::randRange(min_x, max_x);
+		spawn_y = CUtils::randRange(min_y, max_y);
+
+		if (CUtils::lottery(0.3))
+			CExplosion::CreateExplosion(spawn_x, spawn_y, EXPLOSION_TYPES::Big);
+		else if (CUtils::lottery(0.7))
+			CExplosion::CreateExplosion(spawn_x, spawn_y, EXPLOSION_TYPES::Medium);
+		else
+			CExplosion::CreateExplosion(spawn_x, spawn_y, EXPLOSION_TYPES::Small);
+	}
 }

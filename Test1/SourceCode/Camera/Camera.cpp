@@ -141,6 +141,14 @@ void CCamera::SetOuterBound(float l, float t, float r, float b)
     outerBound.bottom = b;
 }
 
+void CCamera::GetOuterBound(float& l, float& t, float& r, float& b)
+{
+    l = outerBound.left;
+    t = outerBound.top;
+    r = outerBound.right;
+    b = outerBound.bottom;
+}
+
 //float CCamera::GetScale()
 //{
 //    return scale;

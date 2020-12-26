@@ -65,3 +65,13 @@ float CEnemy::VerticalDistanceToPlayer()
 
 	return abs(playerPos.y - selfPos.y);
 }
+
+bool CEnemy::InPlayerZone()
+{
+	float l, t, r, b;
+	CCamera::GetInstance()->GetOuterBound(l, t, r, b);
+	Vector center = GetCenter();
+
+	return ((center.x > l && center.x < r) &&
+		(center.y > t && center.y < b));
+}

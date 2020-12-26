@@ -15,7 +15,7 @@ CExplosion::CExplosion(EXPLOSION_TYPES type): CEntity() {
 	}
 
 	collisionBox = new CDynamicBox(
-		this, 0, 0, 10, 10
+		this, -5, -5, 10, 10
 	);
 	collisionBox->SetSolid(false);
 }

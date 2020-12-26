@@ -17,6 +17,10 @@
 #define MOTION 0
 #define STILL 1
 
+#define JASON_WALK_SPEED 0.75
+#define JASON_CRAWL_SPEED 0.25
+#define JASON_CLIMB_SPEED 0.5
+
 class CJason :
     public CPlayer
 {

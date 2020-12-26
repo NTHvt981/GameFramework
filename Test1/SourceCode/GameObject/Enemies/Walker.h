@@ -1,33 +1,46 @@
 #pragma once
 
-#include "../Entity.h"
-#include "../Physic.h"
+#include "Enemy.h"
 #include "../../Constraints.h"
 #include "../../Unit/Animation.h"
 
-#define WALKER_MOVE_UP -1
-#define WALKER_DONT_MOVE 0
-#define WALKER_MOVE_DOWN 1
+#include "../../Debug/Utils.h"
 
-class CWalker : public CEntity
+#define WALKER_MOVE 0
+#define WALKER_IDLE 1
+
+#define WALKER_BULLET_SPEED 3
+#define WALKER_MOVE_SPEED 0.5
+
+class CWalker : public CEnemy
 {
 private:
-	float speed = 0.4;
-
 	Vector old_velocity;
 
 	LPAnimation moveDownAni;
 	LPAnimation moveUpAni;
 	LPAnimation currentAni;
 
-	int verticalState = WALKER_MOVE_DOWN;
+	int state = WALKER_IDLE;
+	Vector moveDir;
+	const int range = 200;
+
+	DWORD countUp = 0;
+	const DWORD stopWaitTime = 50;
+	const DWORD moveWaitTime = 150;
+
+	DWORD velocityCountUp = 0;
+	const DWORD velocityWaitTime = 300;
+
+	bool stopShoot = false;
 
 private:
-	void SetState();
-	void GetState(DWORD dt);
-	void MoveDown(DWORD dt);
-	void MoveUp(DWORD dt);
-	void DontMove(DWORD dt);
+	void MoveState(DWORD dt);
+	void IdleState(DWORD dt);
+	void GetSetAnimation(DWORD dt);
+
+	void MoveRandom(DWORD dt);
+	void MoveTowardPlayer(DWORD dt);
 
 public:
 	CWalker();

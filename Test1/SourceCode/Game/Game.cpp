@@ -267,8 +267,61 @@ void CGame::LoadSprites()
 	lib->Add(ID_WALKER_4, 152, 296, 170, 313, textEnemies);
 #pragma endregion
 
+#pragma region DASHER
+	lib->Add(ID_DASHER_IDLE_1, 44, 277, 44 + 18, 277 + 16, textEnemies);
+	lib->Add(ID_DASHER_IDLE_2, 84, 277, 84 + 18, 277 + 16, textEnemies);
+	lib->Add(ID_DASHER_IDLE_3, 152, 277, 152 + 18, 277 + 16, textEnemies);
+	lib->Add(ID_DASHER_IDLE_4, 192, 277, 192 + 18, 277 + 16, textEnemies);
+
+	lib->Add(ID_DASHER_MOVE_1, 44, 277, 44 + 18, 277 + 16, textEnemies);
+	lib->Add(ID_DASHER_MOVE_2, 64, 275, 64 + 18, 275 + 16, textEnemies);
+	lib->Add(ID_DASHER_MOVE_3, 152, 277, 152 + 18, 277 + 16, textEnemies);
+	lib->Add(ID_DASHER_MOVE_4, 132, 275, 132 + 18, 275 + 16, textEnemies);
+#pragma endregion
+
+#pragma region HEAD
+	lib->Add(ID_HEAD_LEFT_1, 67, 351, 67 + 26, 351 + 34, textEnemies);
+	lib->Add(ID_HEAD_LEFT_2, 96, 352, 96 + 26, 352 + 33, textEnemies);
+	lib->Add(ID_HEAD_RIGHT_1, 161, 351, 161 + 26, 351 + 34, textEnemies);
+	lib->Add(ID_HEAD_RIGHT_2, 132, 352, 132 + 26, 352 + 33, textEnemies);
+#pragma endregion
+
+#pragma region SPIRAL
+	lib->Add(ID_SPIRAL_LEFT_1, 65, 316, 65 + 26, 316 + 33, textEnemies);
+	lib->Add(ID_SPIRAL_LEFT_2, 96, 316, 96 + 26, 316 + 33, textEnemies);
+	lib->Add(ID_SPIRAL_RIGHT_1, 163, 316, 163 + 26, 316 + 33, textEnemies);
+	lib->Add(ID_SPIRAL_RIGHT_2, 132, 316, 132 + 26, 316 + 33, textEnemies);
+#pragma endregion
+
+#pragma region TELEPORTER
+	lib->Add(ID_TELEPORTER_LEFT_1, 71, 568, 71 + 24, 568 + 32, textEnemies);
+	lib->Add(ID_TELEPORTER_LEFT_2, 98, 568, 98 + 24, 568 + 32, textEnemies);
+	lib->Add(ID_TELEPORTER_RIGHT_1, 159, 568, 159 + 24, 568 + 32, textEnemies);
+	lib->Add(ID_TELEPORTER_RIGHT_2, 132, 568, 132 + 24, 568 + 32, textEnemies);
+#pragma endregion
+
+#pragma region EYEBALL
+	lib->Add(ID_EYEBALL_1, 102, 550, 102 + 16, 550 + 16, textEnemies);
+	lib->Add(ID_EYEBALL_2, 119, 550, 119 + 16, 550 + 16, textEnemies);
+	lib->Add(ID_EYEBALL_3, 136, 550, 136 + 16, 550 + 16, textEnemies);
+#pragma endregion
+
+#pragma region CANON
+	lib->Add(ID_CANON_1, 96, 603, 96 + 26, 603 + 26, textEnemies);
+	lib->Add(ID_CANON_2, 70, 603, 70 + 22, 603 + 26, textEnemies);
+	lib->Add(ID_CANON_3, 41, 607, 41 + 26, 607 + 22, textEnemies);
+#pragma endregion
+
+#pragma region ENEMY BULLET
 	lib->Add(ID_MINE_BULLET, 32, 305, 40, 313, textEnemies);
 	lib->Add(ID_SKULL_BULLET, 51, 515, 61, 525, textEnemies);
+
+	lib->Add(ID_ENEMY_SIDESCROLL_BULLET_1, 51, 515, 61, 525, textEnemies);
+	lib->Add(ID_ENEMY_SIDESCROLL_BULLET_2, 32, 305, 32 + 8, 305 + 8, textEnemies);
+
+	lib->Add(ID_ENEMY_TOPDOWN_BULLET_1, 51, 1370, 51 + 10, 1370 + 10, textEnemies);
+	lib->Add(ID_ENEMY_TOPDOWN_BULLET_2, 51, 1370, 51 + 10, 1370 + 10, textEnemies);
+#pragma endregion
 
 #pragma region BOSS
 	lib->Add(ID_BOSS_HEAD_1, 80, 303, 80 + 60, 303 + 64, textBoss);

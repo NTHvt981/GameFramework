@@ -29,5 +29,8 @@ public:
 		int _spriteId, int selfDestructTime, bool _useSolid);
 	void Update(DWORD dt);
 	void Render();
+
+	static void Create(float x, float y, Vector _direction, float _speed, float _gravity,
+		int _spriteId, int selfDestructTime, bool _useSolid);
 };
 

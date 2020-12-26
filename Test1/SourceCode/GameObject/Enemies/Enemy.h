@@ -10,7 +10,11 @@
 
 #include "../StaticObjects/Explosion.h"
 
+#include "../EnemyBullets/EnemyBullet.h"
+
 #define HEALTH_PICKUP_CHANCE 0.5
+
+#define SPIRAL_HEALTH 10
 
 class CEnemy : public CEntity
 {
@@ -33,5 +37,7 @@ public:
 	float DistanceToPlayer();
 	float HorizontalDistanceToPlayer();
 	float VerticalDistanceToPlayer();
+
+	bool InPlayerZone();
 };
 

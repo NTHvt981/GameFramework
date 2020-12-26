@@ -339,8 +339,6 @@ void CSideScrollScene::UpdatePortals(DWORD dt)
 		portal->Update(dt);
 		if (portal->IsCollideWithPlayer())
 		{
-			DebugOut(L"[DEBUG] AreaPortal [%d] from area [%d] to area [%d]\n",
-				id, area1, area2);
 			SetAreaTransition(portal);
 		}
 	}

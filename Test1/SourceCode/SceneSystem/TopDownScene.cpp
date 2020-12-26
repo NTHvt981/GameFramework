@@ -150,11 +150,23 @@ void CTopDownScene::LoadPortals()
 	/// Scene portal section
 	/// </summary>
 	sideScrollPortal = new CTopDownPortal(112, 1904, 128, 1920);
-	bossPortal = new CTopDownPortal(320, 1856, 448, 1952);
+	bossPortal = new CTopDownPortal(2 * 32, 34 * 32, 6 * 32, 37 * 32);
 }
 
 void CTopDownScene::LoadEnemies()
 {
+	//320 -> 448 | 1856 -> 1952
+	//AddEntity(new CWalker(), 320, 1856);
+	//AddEntity(new CDasher(), 320, 1856);
+	//AddEntity(new CDasher(DASHER_HORIZONTAL), 480, 1932);
+
+	//AddEntity(new CCanon(), 400, 1890);
+	//AddEntity(new CHead(), 400, 1890);
+	//AddEntity(new CSpiral(), 400, 1890);
+	//AddEntity(new CEyeBall(), 400, 1890);
+	//AddEntity(new CEyeBall(EYEBALL_TYPE_MOVE), 400, 1950);
+
+	AddEntity(new CTeleporter(), 400, 1920);
 }
 
 CTopDownScene::CTopDownScene()
@@ -329,8 +341,6 @@ void CTopDownScene::UpdatePortals(DWORD dt)
 		portal->Update(dt);
 		if (portal->IsCollideWithPlayer())
 		{
-			DebugOut(L"[DEBUG] AreaPortal [%d] from area [%d] to area [%d]\n",
-				id, area1, area2);
 			SetAreaTransition(portal);
 		}
 	}
@@ -441,7 +451,7 @@ void CTopDownScene::ExecuteRequest(LPSceneRequest request)
 
 void CTopDownScene::AddEntity(LPEntity entity, float x, float y)
 {
-	entity->SetPosition(x, y);
+	entity->SetCenter(x, y);
 
 	entity->SetId(countId);
 	mapEntities[countId] = entity;

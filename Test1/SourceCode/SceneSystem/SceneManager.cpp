@@ -9,7 +9,7 @@ void CSceneManager::Init()
 	bossScene = new CBossScene();
 	endingScene = new CEndingScene;
 
-	currentScene = sideScrollScene;
+	currentScene = topDownScene;
 }
 
 void CSceneManager::LoadResources()
@@ -31,17 +31,17 @@ void CSceneManager::LoadResources()
 	//);
 	//restartPosition.Set(INTRO_TO_SIDESCROLL_POS.x, INTRO_TO_SIDESCROLL_POS.y);
 
-	sideScrollScene->Start(
-		TOPDOWN_TO_SIDESCROLL_POS.x, 
-		TOPDOWN_TO_SIDESCROLL_POS.y
-	);
-	restartPosition.Set(TOPDOWN_TO_SIDESCROLL_POS.x, TOPDOWN_TO_SIDESCROLL_POS.y);
-
-	//topDownScene->Start(
-	//	SIDESCROLL_TO_TOPDOWN_POS.x,
-	//	SIDESCROLL_TO_TOPDOWN_POS.y
+	//sideScrollScene->Start(
+	//	TOPDOWN_TO_SIDESCROLL_POS.x, 
+	//	TOPDOWN_TO_SIDESCROLL_POS.y
 	//);
-	//restartPosition.Set(SIDESCROLL_TO_TOPDOWN_POS.x, SIDESCROLL_TO_TOPDOWN_POS.y);
+	//restartPosition.Set(TOPDOWN_TO_SIDESCROLL_POS.x, TOPDOWN_TO_SIDESCROLL_POS.y);
+
+	topDownScene->Start(
+		SIDESCROLL_TO_TOPDOWN_POS.x,
+		SIDESCROLL_TO_TOPDOWN_POS.y
+	);
+	restartPosition.Set(SIDESCROLL_TO_TOPDOWN_POS.x, SIDESCROLL_TO_TOPDOWN_POS.y);
 
 	//bossScene->Start();
 }

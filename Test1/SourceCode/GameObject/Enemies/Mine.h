@@ -1,5 +1,13 @@
 #pragma once
-class CMine
+
+#include "../Enemies/Enemy.h"
+#include "../../Unit/Animation.h"
+
+class CMine: public CEnemy
 {
+public:
+	CMine();
+	void Update(DWORD dt);
+	void Render();
 };
 

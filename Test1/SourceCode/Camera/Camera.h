@@ -55,5 +55,6 @@ public:
 	float GetScale();
 
 	void SetOuterBound(float l, float t, float r, float b);
+	void GetOuterBound(float &l, float &t, float &r, float &b);
 };
 

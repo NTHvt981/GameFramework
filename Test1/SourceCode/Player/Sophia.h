@@ -23,6 +23,8 @@
 #define MOVE_RIGHT 2
 #define STILL 3
 
+#define SOPHIA_MOVE_SPEED 1.5
+
 class CSophia :
     public CPlayer
 {

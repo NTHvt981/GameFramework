@@ -149,6 +149,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="SourceCode\GameObject\Enemies\Canon.h" />
+    <ClInclude Include="SourceCode\GameObject\Enemies\EyeBall.h" />
+    <ClInclude Include="SourceCode\GameObject\Enemies\Head.h" />
+    <ClInclude Include="SourceCode\GameObject\Enemies\Dasher.h" />
     <ClInclude Include="SourceCode\GameObject\StaticObjects\Explosion.h" />
     <ClInclude Include="SourceCode\Debug\Utils.h" />
     <ClInclude Include="SourceCode\PlayerItems\EnergyPickUp.h" />
@@ -225,8 +229,15 @@
     <ClInclude Include="SourceCode\Timer\Timer.h" />
     <ClInclude Include="SourceCode\SceneSystem\TopDownScene.h" />
     <ClInclude Include="SourceCode\GameObject\StaticObjects\TopDownPortal.h" />
+    <ClInclude Include="SourceCode\GameObject\Enemies\Spiral.h" />
+    <ClInclude Include="SourceCode\GameObject\Enemies\Teleporter.h" />
+    <ClInclude Include="SourceCode\GameObject\EnemyBullets\SpiralBullet.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="SourceCode\GameObject\Enemies\Canon.cpp" />
+    <ClCompile Include="SourceCode\GameObject\Enemies\EyeBall.cpp" />
+    <ClCompile Include="SourceCode\GameObject\Enemies\Head.cpp" />
+    <ClCompile Include="SourceCode\GameObject\Enemies\Dasher.cpp" />
     <ClCompile Include="SourceCode\GameObject\StaticObjects\Explosion.cpp" />
     <ClCompile Include="SourceCode\Debug\Utils.cpp" />
     <ClCompile Include="SourceCode\PlayerItems\EnergyPickUp.cpp" />
@@ -301,6 +312,9 @@
     <ClCompile Include="SourceCode\Timer\Timer.cpp" />
     <ClCompile Include="SourceCode\SceneSystem\TopDownScene.cpp" />
     <ClCompile Include="SourceCode\GameObject\StaticObjects\TopDownPortal.cpp" />
+    <ClCompile Include="SourceCode\GameObject\Enemies\Spiral.cpp" />
+    <ClCompile Include="SourceCode\GameObject\Enemies\Teleporter.cpp" />
+    <ClCompile Include="SourceCode\GameObject\EnemyBullets\SpiralBullet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\..\..\Desktop\Tileset\Area-2 Car map\area2-side-map in my way\TileMap.png" />
@@ -332,7 +346,6 @@
     <Text Include="Resources\Textfile\TileMaTrix.txt" />
     <Text Include="Resources\Textfile\TileMaTrixTopDown.txt" />
     <Text Include="SourceCode\FileAndString\temp.txt" />
-    <Text Include="SourceCode\GameObject\Enemies\temp.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

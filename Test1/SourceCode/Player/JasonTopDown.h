@@ -15,6 +15,8 @@
 
 #define JASON_TOPDOWN_FRAME_TIME 150
 
+#define JASON_TOP_DOWN_MOVE_SPEED 1.5
+
 class CJasonTopDown :
     public CPlayer
 {

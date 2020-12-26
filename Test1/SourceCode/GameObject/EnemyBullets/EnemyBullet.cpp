@@ -23,7 +23,10 @@ CEnemyBullet::CEnemyBullet(
 
 	sprite = CSpriteLibrary::GetInstance()->Get(_spriteId);
 	sprite->GetSize(width, height);
-	collisionBox = new CDynamicBox(this, 0, 0, width, height);
+	collisionBox = new CDynamicBox(
+		this, 0, 0,
+		width, height
+	);
 	collisionBox->SetSolid(false);
 
 	if (_selfDestructTime == -1)
@@ -60,7 +63,12 @@ void CEnemyBullet::Update(DWORD dt)
 		request->id = this->id;
 		CSceneRequest::AddRequest(request);
 
-		CExplosion::CreateExplosion(GetCenter().x, GetCenter().y, EXPLOSION_TYPES::Small);
+		const float length = velocity.Length();
+		const Vector center = GetCenter();
+		CExplosion::CreateExplosion(
+			center.x + (velocity.x / length)*width/2,
+			center.y + (velocity.y / length)*height/2,
+			EXPLOSION_TYPES::Small);
 	}
 }
 
@@ -68,4 +76,17 @@ void CEnemyBullet::Render()
 {
 	sprite->Draw(position);
 	collisionBox->Render();
+}
+
+void CEnemyBullet::Create(float x, float y,
+	Vector _direction, float _speed, float _gravity, 
+	int _spriteId, int selfDestructTime, 
+	bool _useSolid)
+{
+	LPSceneRequest request = new CSceneRequest(SCENE_REQUEST_TYPES::CreateEntity);
+	request->entity = new CEnemyBullet(
+		_direction, _speed, _gravity, _spriteId, selfDestructTime, _useSolid
+		);
+	request->x = x; request->y = y;
+	CSceneRequest::AddRequest(request);
 }

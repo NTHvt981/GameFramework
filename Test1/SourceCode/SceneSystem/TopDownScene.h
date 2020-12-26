@@ -19,6 +19,17 @@
 #include "../GameObject/StaticObjects/TopDownPortal.h"
 #include "../GameObject/StaticObjects/Wall.h"
 
+#pragma region ENEMIES
+#include "../GameObject/Enemies/Walker.h"
+#include "../GameObject/Enemies/Dasher.h"
+#include "../GameObject/Enemies/Head.h"
+#include "../GameObject/Enemies/Spiral.h"
+#include "../GameObject/Enemies/Teleporter.h"
+#include "../GameObject/Enemies/Eyeball.h"
+#include "../GameObject/Enemies/Canon.h"
+#pragma endregion
+
+
 class CTopDownScene : public CScene
 {
 private:

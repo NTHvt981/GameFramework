@@ -282,6 +282,54 @@
 #define ID_INSECT_MOVE_RIGHT_2 2124
 #pragma endregion
 
+#pragma region ENEMY DASHER
+#define ID_DASHER_IDLE_1 2125
+#define ID_DASHER_IDLE_2 2126
+#define ID_DASHER_IDLE_3 2127
+#define ID_DASHER_IDLE_4 2128
+
+#define ID_DASHER_MOVE_1 2129
+#define ID_DASHER_MOVE_2 2130
+#define ID_DASHER_MOVE_3 2131
+#define ID_DASHER_MOVE_4 2132
+#pragma endregion
+
+#pragma region ENEMY HEAD
+#define ID_HEAD_LEFT_1 2133
+#define ID_HEAD_LEFT_2 2134
+
+#define ID_HEAD_RIGHT_1 2135
+#define ID_HEAD_RIGHT_2 2136
+#pragma endregion
+
+#pragma region ENEMY SPIRAL
+#define ID_SPIRAL_LEFT_1 2137
+#define ID_SPIRAL_LEFT_2 2138
+
+#define ID_SPIRAL_RIGHT_1 2139
+#define ID_SPIRAL_RIGHT_2 2140
+#pragma endregion
+
+#pragma region ENEMY TELEPORTER
+#define ID_TELEPORTER_LEFT_1 2141
+#define ID_TELEPORTER_LEFT_2 2142
+
+#define ID_TELEPORTER_RIGHT_1 2143
+#define ID_TELEPORTER_RIGHT_2 2144
+#pragma endregion
+
+#pragma region ENEMY EYEBALL
+#define ID_EYEBALL_1 2145
+#define ID_EYEBALL_2 2146
+#define ID_EYEBALL_3 2147
+#pragma endregion
+
+#pragma region ENEMY CANON
+#define ID_CANON_1 2148
+#define ID_CANON_2 2149
+#define ID_CANON_3 2150
+#pragma endregion
+
 #pragma region BOSS
 #define ID_BOSS_HEAD_1 5001
 #define ID_BOSS_HEAD_2 5002
@@ -299,9 +347,12 @@
 #define ID_BOSS_RIGHT_HAND 5012
 #pragma endregion
 
-
 #define ID_MINE_BULLET 5998
 #define ID_SKULL_BULLET 5999
+#define ID_ENEMY_SIDESCROLL_BULLET_1 5900
+#define ID_ENEMY_SIDESCROLL_BULLET_2 5901
+#define ID_ENEMY_TOPDOWN_BULLET_1 5950
+#define ID_ENEMY_TOPDOWN_BULLET_2 5951
 
 #define ID_BREAKABLE_WALL 6000
 #define ID_PORTAL_FACE_RIGHT_1 6001

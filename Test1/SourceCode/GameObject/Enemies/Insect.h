@@ -11,12 +11,18 @@
 #define INSECT_NORMAL 1
 #define INSECT_SHOOT_PLAYER 1
 
+#define INSECT_RANGE 150
+#define INSECT_BULLET_SPEED 3
+
 class CInsect : public CEnemy
 {
 private:
 	const DWORD driftDownTime = 150;
 	const DWORD boostUpTime = 50;
 	DWORD stateTime = 0;
+
+	DWORD shootCountUp = 0;
+	DWORD shootWaitTime = 150;
 
 	const float driftDownSpeed = 0.75;
 	const float boostUpSpeed = 2.25;
@@ -30,6 +36,7 @@ private:
 private:
 	void DriftDownState(DWORD dt);
 	void BoostUpState(DWORD dt);
+	void HandleShoot(DWORD dt);
 
 public:
 	CInsect();

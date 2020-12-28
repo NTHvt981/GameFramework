@@ -59,7 +59,7 @@ void CTeleporter::VulnerableState(DWORD dt)
 
 	if (!canTele)
 	{
-		if (CUtils::lottery(0.1))
+		if (CUtils::lottery(0.05))
 			canTele = TeleportToPlayer(dt);
 		else
 			canTele = TeleportRandom(dt);

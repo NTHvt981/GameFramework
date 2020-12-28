@@ -9,7 +9,7 @@ void CSceneManager::Init()
 	bossScene = new CBossScene();
 	endingScene = new CEndingScene;
 
-	currentScene = topDownScene;
+	currentScene = sideScrollScene;
 }
 
 void CSceneManager::LoadResources()
@@ -25,11 +25,12 @@ void CSceneManager::LoadResources()
 	//introScene->Start();
 	//endingScene->Start();
 
-	//sideScrollScene->Start(
-	//	INTRO_TO_SIDESCROLL_POS.x, 
-	//	INTRO_TO_SIDESCROLL_POS.y
-	//);
-	//restartPosition.Set(INTRO_TO_SIDESCROLL_POS.x, INTRO_TO_SIDESCROLL_POS.y);
+	Vector startPos = START_AREA6_SIDESCROLL_POS;
+	sideScrollScene->Start(
+		startPos.x,
+		startPos.y
+	);
+	restartPosition.Set(startPos.x, startPos.y);
 
 	//sideScrollScene->Start(
 	//	TOPDOWN_TO_SIDESCROLL_POS.x, 
@@ -37,13 +38,15 @@ void CSceneManager::LoadResources()
 	//);
 	//restartPosition.Set(TOPDOWN_TO_SIDESCROLL_POS.x, TOPDOWN_TO_SIDESCROLL_POS.y);
 
-	topDownScene->Start(
-		SIDESCROLL_TO_TOPDOWN_POS.x,
-		SIDESCROLL_TO_TOPDOWN_POS.y
-	);
-	restartPosition.Set(SIDESCROLL_TO_TOPDOWN_POS.x, SIDESCROLL_TO_TOPDOWN_POS.y);
+	//topDownScene->Start(
+	//	SIDESCROLL_TO_TOPDOWN_POS.x,
+	//	SIDESCROLL_TO_TOPDOWN_POS.y
+	//);
+	//restartPosition.Set(SIDESCROLL_TO_TOPDOWN_POS.x, SIDESCROLL_TO_TOPDOWN_POS.y);
 
-	//bossScene->Start();
+	//Vector startPos = TOPDOWN_TO_BOSS_POS;
+	//bossScene->Start(startPos.x, startPos.y);
+	//restartPosition.Set(startPos.x, startPos.y);
 }
 
 void CSceneManager::Update(DWORD dt)
@@ -109,6 +112,8 @@ void CSceneManager::ExecuteRequest(LPGameRequest request)
 	switch (request->Type)
 	{
 	case GAME_REQUEST_TYPES::SwitchToEnding:
+		nextScene = endingScene;
+		mode = BEGIN_CHANGESCENE_MODE;
 		break;
 	case GAME_REQUEST_TYPES::SwitchToIntro:
 		break;

@@ -7,5 +7,5 @@ CHealthPickUp::CHealthPickUp(): CPickUp()
 
 void CHealthPickUp::InContactWithPlayer()
 {
-	CPlayerHealth::GetInstance()->IncreaseHealth(2);
+	CPlayerHealth::GetInstance()->IncreaseHealth(HEALTH_INCREASE);
 }

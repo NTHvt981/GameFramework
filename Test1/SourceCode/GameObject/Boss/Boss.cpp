@@ -31,28 +31,58 @@ CBoss::CBoss()
 	armMovementMatrix.push_back(Vector(100, 100));
 	armMovementMatrix.push_back(Vector(0, 100));
 	armMovementMatrix.push_back(Vector(0, 0));
-	armMovementMatrix.push_back(Vector(100, 0));
+
+	armMovementMatrix.push_back(Vector(0, -50));
 	armMovementMatrix.push_back(Vector(0, 100));
+	armMovementMatrix.push_back(Vector(50, 100));
 	armMovementMatrix.push_back(Vector(-50, 100));
-	armMovementMatrix.push_back(Vector(-100, 0));
 	armMovementMatrix.push_back(Vector(0, 0));
-	armMovementMatrix.push_back(Vector(0, -100));
+
+	armMovementMatrix.push_back(Vector(-100, 0));
+	armMovementMatrix.push_back(Vector(-100, 100));
+	armMovementMatrix.push_back(Vector(0, 100));
+	armMovementMatrix.push_back(Vector(0, 0));
+
+	armMovementMatrix.push_back(Vector(0, -50));
+	armMovementMatrix.push_back(Vector(0, 100));
+	armMovementMatrix.push_back(Vector(50, 100));
+	armMovementMatrix.push_back(Vector(-50, 100));
 	armMovementMatrix.push_back(Vector(0, 0));
 
 	rightHand->SetGoalPosition(
 		armMovementMatrix[rightArmIndex].x, armMovementMatrix[rightArmIndex].y
 	);
+	leftHand->SetGoalPosition(
+		armMovementMatrix[leftArmIndex].x, armMovementMatrix[leftArmIndex].y
+	);
 
-	movementMatrix.push_back(pair<Vector, float>(Vector(0, 0), BOSS_MOVE_NORMAL));
-	movementMatrix.push_back(pair<Vector, float>(Vector(range, 0), BOSS_MOVE_NORMAL));
-	movementMatrix.push_back(pair<Vector, float>(Vector(0, range), BOSS_MOVE_NORMAL));
-	movementMatrix.push_back(pair<Vector, float>(Vector(-range, 0), BOSS_MOVE_NORMAL));
-	movementMatrix.push_back(pair<Vector, float>(Vector(0, -range), BOSS_MOVE_NORMAL));
-	movementMatrix.push_back(pair<Vector, float>(Vector(range, -range), BOSS_MOVE_NORMAL));
-	movementMatrix.push_back(pair<Vector, float>(Vector(range, range), BOSS_MOVE_FAST));
-	movementMatrix.push_back(pair<Vector, float>(Vector(-range, range), BOSS_MOVE_FAST));
-	movementMatrix.push_back(pair<Vector, float>(Vector(-range, -range), BOSS_MOVE_FAST));
-	movementMatrix.push_back(pair<Vector, float>(Vector(0, 0), BOSS_MOVE_NORMAL));
+	movementMatrix.push_back(pair<Vector, float>(Vector(BOSS_MAX_RANGE, 0), BOSS_MOVE_NORMAL));
+	movementMatrix.push_back(pair<Vector, float>(Vector(BOSS_MED_RANGE, BOSS_MIN_RANGE), BOSS_MOVE_SLOW));
+	movementMatrix.push_back(pair<Vector, float>(Vector(0, 0), BOSS_MOVE_SLOW));
+
+	movementMatrix.push_back(pair<Vector, float>(Vector(-BOSS_MAX_RANGE, 0), BOSS_MOVE_NORMAL));
+	movementMatrix.push_back(pair<Vector, float>(Vector(-BOSS_MED_RANGE, BOSS_MIN_RANGE), BOSS_MOVE_SLOW));
+	movementMatrix.push_back(pair<Vector, float>(Vector(0, 0), BOSS_MOVE_SLOW));
+
+	movementMatrix.push_back(pair<Vector, float>(Vector(0, -BOSS_MAX_RANGE), BOSS_MOVE_SLOW));
+	movementMatrix.push_back(pair<Vector, float>(Vector(0, -BOSS_MED_RANGE), BOSS_MOVE_NORMAL));
+	movementMatrix.push_back(pair<Vector, float>(Vector(0, BOSS_MAX_RANGE), BOSS_MOVE_FAST));
+	movementMatrix.push_back(pair<Vector, float>(Vector(BOSS_MED_RANGE, BOSS_MAX_RANGE), BOSS_MOVE_SLOW));
+	movementMatrix.push_back(pair<Vector, float>(Vector(0, 0), BOSS_MOVE_SLOW));
+
+	movementMatrix.push_back(pair<Vector, float>(Vector(BOSS_MAX_RANGE, 0), BOSS_MOVE_NORMAL));
+	movementMatrix.push_back(pair<Vector, float>(Vector(BOSS_MED_RANGE, BOSS_MIN_RANGE), BOSS_MOVE_SLOW));
+	movementMatrix.push_back(pair<Vector, float>(Vector(0, 0), BOSS_MOVE_SLOW));
+
+	movementMatrix.push_back(pair<Vector, float>(Vector(-BOSS_MAX_RANGE, 0), BOSS_MOVE_NORMAL));
+	movementMatrix.push_back(pair<Vector, float>(Vector(-BOSS_MED_RANGE, BOSS_MIN_RANGE), BOSS_MOVE_SLOW));
+	movementMatrix.push_back(pair<Vector, float>(Vector(0, 0), BOSS_MOVE_SLOW));
+
+	movementMatrix.push_back(pair<Vector, float>(Vector(0, -BOSS_MAX_RANGE), BOSS_MOVE_SLOW));
+	movementMatrix.push_back(pair<Vector, float>(Vector(0, -BOSS_MED_RANGE), BOSS_MOVE_NORMAL));
+	movementMatrix.push_back(pair<Vector, float>(Vector(0, BOSS_MAX_RANGE), BOSS_MOVE_FAST));
+	movementMatrix.push_back(pair<Vector, float>(Vector(-BOSS_MED_RANGE, BOSS_MAX_RANGE), BOSS_MOVE_SLOW));
+	movementMatrix.push_back(pair<Vector, float>(Vector(0, 0), BOSS_MOVE_SLOW));
 }
 
 void CBoss::Update(DWORD dt)
@@ -106,11 +136,11 @@ void CBoss::GetAllCollisionBoxes(list<LPCollisionBox>& listCo)
 
 void CBoss::SetGoalPosition(float x, float y)
 {
-	if (x < -range) x = -range;
-	if (x > range) x = range;
+	if (x < -BOSS_MAX_RANGE) x = -BOSS_MAX_RANGE;
+	if (x > BOSS_MAX_RANGE) x = BOSS_MAX_RANGE;
 
-	if (y < -range) y = -range;
-	if (y > range) y = range;
+	if (y < -BOSS_MAX_RANGE) y = -BOSS_MAX_RANGE;
+	if (y > BOSS_MAX_RANGE) y = BOSS_MAX_RANGE;
 
 	localGoalPosition.x = x;
 	localGoalPosition.y = y;
@@ -127,6 +157,7 @@ void CBoss::InflictDamage(int dam)
 
 	if (health == 0)
 	{
+		CBreakableWall::Switch = true;
 		state = BOSS_DEFEAT;
 	}
 }
@@ -200,20 +231,9 @@ void CBoss::NormalState(DWORD dt)
 {
 	animation->SetMode(ANIMATION_NORMAL);
 
-	rightHand->Update(dt);
-
-	if (rightHand->HasReachGoal())
-	{
-		rightArmIndex++;
-
-		if (rightArmIndex > armMovementMatrix.size() - 1)
-			rightArmIndex = 0;
-
-		rightHand->SetGoalPosition(
-			armMovementMatrix[rightArmIndex].x, armMovementMatrix[rightArmIndex].y
-		);
-	}
-
+	UpdateHand(dt, leftHand, leftArmIndex);
+	UpdateHand(dt, rightHand, rightArmIndex);
+	HandleShoot(dt);
 
 	if (!HasReachGoal())
 		HandleMovement(dt);
@@ -256,5 +276,52 @@ void CBoss::DefeatState(DWORD dt)
 			CExplosion::CreateExplosion(spawn_x, spawn_y, EXPLOSION_TYPES::Medium);
 		else
 			CExplosion::CreateExplosion(spawn_x, spawn_y, EXPLOSION_TYPES::Small);
+	}
+}
+
+void CBoss::UpdateHand(DWORD dt, CBossHand* hand, int& index)
+{
+	hand->Update(dt);
+	if (hand->HasReachGoal())
+	{
+		index++;
+
+		if (index > armMovementMatrix.size() - 1)
+			index = 0;
+
+		hand->SetGoalPosition(
+			armMovementMatrix[index].x, armMovementMatrix[index].y
+		);
+	}
+}
+
+void CBoss::HandleShoot(DWORD dt)
+{
+	if (magazineSize == 0)
+	{
+		reloadCountUp += dt;
+		if (reloadCountUp >= reloadWaitTime)
+		{
+			reloadCountUp = 0;
+			magazineSize = maxMagazineSize;
+		}
+	}
+	else
+	{
+		shootCountUp += dt;
+		if (shootCountUp >= shootWaitTime)
+		{
+			shootCountUp = 0;
+			magazineSize = max(magazineSize - 1, 0);
+
+			Vector center = GetCenter();
+			Vector pCenter = CPlayer::GetCurrentPlayer()->GetCenter();
+			Vector dir = Vector(pCenter.x - center.x, pCenter.y - center.y);
+			CEnemyBullet::Create(
+				center.x + BOSS_SHOOT_PIVOT.x, 
+				center.y + BOSS_SHOOT_PIVOT.y,
+				dir, BOSS_BULLET_SPEED, 0, ID_ENEMY_TOPDOWN_BULLET_1, 300, true
+			);
+		}
 	}
 }

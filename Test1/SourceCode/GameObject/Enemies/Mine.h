@@ -9,5 +9,8 @@ public:
 	CMine();
 	void Update(DWORD dt);
 	void Render();
+
+private:
+	void Explode();
 };
 

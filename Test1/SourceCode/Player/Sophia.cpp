@@ -82,6 +82,7 @@ void CSophia::GetState(DWORD dt)
 
 CSophia::CSophia() : CPlayer()
 {
+	speed = SOPHIA_MOVE_SPEED;
 	gravity = 0.3;
 	jumpSpeed = 6.5;
 
@@ -129,18 +130,20 @@ void CSophia::Update(DWORD dt)
 	keyRight = input->IsKeyDown(DIK_D);
 	keyDown = input->IsKeyDown(DIK_S);
 
-	keyJump = input->IsKeyDown(DIK_K);
 	keyShoot = input->IsKeyDown(DIK_J);
 	keySwitchPlayer = input->IsKeyPressed(DIK_L);
 
-	velocity.x = dt * speed * (keyRight - keyLeft);
+	/// <summary>
+	/// Jump here
+	/// </summary>
+	//if (onGround && keyJump)
+	//	velocity.y = -jumpSpeed;
+	HandleMove(dt);
+	HandleJump(dt);
 
-	if (onGround && keyJump)
-		velocity.y = -jumpSpeed;
-
-	if (keyRight)
+	if (velocity.x > 0)
 		pace = MOVE_RIGHT;
-	else if (keyLeft)
+	else if (velocity.x < 0)
 		pace = MOVE_LEFT;
 	else
 		pace = STILL;
@@ -180,6 +183,50 @@ void CSophia::Update(DWORD dt)
 	HandleShooting(dt);
 	HandleSwitchToJason();
 }
+
+void CSophia::HandleMove(DWORD dt)
+{
+	int moveKey = keyRight - keyLeft;
+
+	if (moveKey != 0)
+		velocity.x += SOPHIA_MOVE_FRICTION * moveKey;
+	else
+	{
+		if (velocity.x > 0)
+			velocity.x = max(velocity.x - SOPHIA_MOVE_FRICTION, 0);
+		else if (velocity.x < 0)
+			velocity.x = min(velocity.x + SOPHIA_MOVE_FRICTION, 0);
+	}
+
+	if (velocity.x > SOPHIA_MOVE_SPEED)
+		velocity.x = SOPHIA_MOVE_SPEED;
+	else if (velocity.x < -SOPHIA_MOVE_SPEED)
+		velocity.x = -SOPHIA_MOVE_SPEED;
+}
+
+void CSophia::HandleJump(DWORD dt)
+{
+	CInput* input = CInput::GetInstance();
+	bool keyJump = input->IsKeyDown(DIK_K);
+	bool keyJumpRelease = input->IsKeyRelease(DIK_K);
+
+	if (onGround && keyJump)
+	{
+		jumpCountUp += dt;
+	}
+	else if (onGround && keyJumpRelease)
+	{
+		if (jumpCountUp >= bigJumpWaitTime)
+			velocity.y = -SOPHIA_HIGH_JUMP_SPEED;
+		else if (jumpCountUp >= smallJumpWaitTime)
+			velocity.y = -SOPHIA_MEDIUM_JUMP_SPEED;
+		else
+			velocity.y = -SOPHIA_LOW_JUMP_SPEED;
+	}
+	else
+		jumpCountUp = 0;
+}
+
 
 void CSophia::Render()
 {

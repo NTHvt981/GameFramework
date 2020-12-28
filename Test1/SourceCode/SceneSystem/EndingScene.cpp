@@ -2,6 +2,7 @@
 
 CEndingScene::CEndingScene()
 {
+	Type = SCENE_TYPES::EndingScene;
 }
 
 void CEndingScene::LoadResources()

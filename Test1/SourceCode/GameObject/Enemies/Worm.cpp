@@ -61,7 +61,6 @@ void CWorm::ChasePlayerState(DWORD dt)
 
 CWorm::CWorm() : CEnemy()
 {
-	SetMaxHealth(4);
 	CEntity::gravity = gravity;
 	CEntity::jumpSpeed = jumpSpeed;
 

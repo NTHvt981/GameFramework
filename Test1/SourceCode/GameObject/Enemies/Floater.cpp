@@ -48,6 +48,8 @@ CFloater::CFloater(int _type)
 {
 	SetType(GOTYPES::Enemy);
 	floaterType = _type;
+	if (_type == FLOATER_DIAGONAL)
+		velocity.Set(1 * diagonalSpeed, 1 * diagonalSpeed);
 
 	animation = new CAnimation(150);
 	int idsR[] = {

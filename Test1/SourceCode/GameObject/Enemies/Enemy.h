@@ -12,6 +12,23 @@
 
 #include "../EnemyBullets/EnemyBullet.h"
 
+enum ENEMY_TYPE {
+	Canon,
+	Dasher,
+	Dome,
+	EyeBall,
+	Floater,
+	Head,
+	Insect,
+	Jumper,
+	Orb,
+	Skull,
+	Spiral,
+	Teleporter,
+	Walker,
+	Worm
+};
+
 #define HEALTH_PICKUP_CHANCE 0.5
 
 #define SPIRAL_HEALTH 10
@@ -22,7 +39,6 @@ protected:
 	int maxHealth;
 	int health;
 	Vector old_velocity;
-	void SetMaxHealth(int mh);
 
 	int width;
 	int height;
@@ -33,6 +49,7 @@ public:
 	virtual void Update(DWORD dt);
 
 	virtual void InflictDamage(int dam);
+	CEnemy* SetMaxHealth(int mh);
 
 	float DistanceToPlayer();
 	float HorizontalDistanceToPlayer();

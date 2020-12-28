@@ -44,6 +44,8 @@ void CEnemyBullet::Update(DWORD dt)
 	
 	bool con1 = false;
 	bool con2 = false;
+	bool con3 = false;
+
 	if (useTimer)
 	{
 		countUp += dt;
@@ -57,18 +59,11 @@ void CEnemyBullet::Update(DWORD dt)
 		))
 			con2 = true;
 
-	if (con1 || con2)
-	{
-		LPSceneRequest request = new CSceneRequest(SCENE_REQUEST_TYPES::DeleteEntity);
-		request->id = this->id;
-		CSceneRequest::AddRequest(request);
+	con3 = IsColliding(CPlayer::GetCurrentPlayer());
 
-		const float length = velocity.Length();
-		const Vector center = GetCenter();
-		CExplosion::CreateExplosion(
-			center.x + (velocity.x / length)*width/2,
-			center.y + (velocity.y / length)*height/2,
-			EXPLOSION_TYPES::Small);
+	if (con1 || con2 || con3)
+	{
+		SelfDestruct();
 	}
 }
 
@@ -89,4 +84,18 @@ void CEnemyBullet::Create(float x, float y,
 		);
 	request->x = x; request->y = y;
 	CSceneRequest::AddRequest(request);
+}
+
+void CEnemyBullet::SelfDestruct()
+{
+	LPSceneRequest request = new CSceneRequest(SCENE_REQUEST_TYPES::DeleteEntity);
+	request->id = this->id;
+	CSceneRequest::AddRequest(request);
+
+	const float length = velocity.Length();
+	const Vector center = GetCenter();
+	CExplosion::CreateExplosion(
+		center.x + (velocity.x / length) * width / 2,
+		center.y + (velocity.y / length) * height / 2,
+		EXPLOSION_TYPES::Small);
 }

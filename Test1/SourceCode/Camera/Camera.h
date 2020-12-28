@@ -8,6 +8,7 @@ class CCamera
 {
 private:
 	Vector position = Vector(0, 200);
+	Vector goalPosition;
 	float width;
 	float height;
 	float scale;
@@ -44,6 +45,9 @@ public:
 	//these function should be called in game class rather than player class
 	void Follow(float x, float y);
 	void Follow(Vector pos);
+
+	void FollowWithTransition(float x, float y);
+	void FollowWithTransition(Vector pos);
 
 	void FollowWithoutPlayer(float x, float y);
 

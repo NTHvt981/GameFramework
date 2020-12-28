@@ -150,23 +150,58 @@ void CTopDownScene::LoadPortals()
 	/// Scene portal section
 	/// </summary>
 	sideScrollPortal = new CTopDownPortal(112, 1904, 128, 1920);
-	bossPortal = new CTopDownPortal(2 * 32, 34 * 32, 6 * 32, 37 * 32);
+	bossPortal = new CTopDownPortal(26 * 32, 18 * 32, 30 * 32, 21 * 32);
 }
 
 void CTopDownScene::LoadEnemies()
 {
-	//320 -> 448 | 1856 -> 1952
-	//AddEntity(new CWalker(), 320, 1856);
-	//AddEntity(new CDasher(), 320, 1856);
-	//AddEntity(new CDasher(DASHER_HORIZONTAL), 480, 1932);
+	//AREA 2
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::EyeBall, EYEBALL_TYPE_IDLE), 13 * 32, 58 * 32);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::EyeBall, EYEBALL_TYPE_MOVE), 10 * 32, 58 * 32);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::EyeBall, EYEBALL_TYPE_MOVE), 11 * 32, 60 * 32);
 
-	//AddEntity(new CCanon(), 400, 1890);
-	//AddEntity(new CHead(), 400, 1890);
-	//AddEntity(new CSpiral(), 400, 1890);
-	//AddEntity(new CEyeBall(), 400, 1890);
-	//AddEntity(new CEyeBall(EYEBALL_TYPE_MOVE), 400, 1950);
+	//AREA 3
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Teleporter), 20 * 32, 59 * 32);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Teleporter), 19 * 32, 61 * 32);
 
-	AddEntity(new CTeleporter(), 400, 1920);
+	//AREA 4
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Canon), 17.5 * 32, 51.5 * 32);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Canon), 21.5 * 32, 50.5 * 32);
+
+	//AREA 5
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::EyeBall, EYEBALL_TYPE_IDLE), 18 * 32, 42 * 32);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::EyeBall, EYEBALL_TYPE_MOVE), 20 * 32, 43 * 32);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Teleporter), 22 * 32, 42 * 32);
+
+	//AREA 6
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Spiral), 12 * 32, 43.5 * 32);
+
+	//AREA 7
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Head), 12 * 32, 34 * 32);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Spiral), 12 * 32, 35 * 32);
+
+	//AREA 8
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Canon), 2 * 32, 34 * 32);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::EyeBall, EYEBALL_TYPE_IDLE), 2 * 32, 37 * 32);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Dasher, DASHER_VERTICAL), 5 * 32, 34 * 32);
+
+	//AREA 9
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Canon), 2.5 * 32, 28.5 * 32);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::EyeBall, EYEBALL_TYPE_MOVE), 5 * 32, 26 * 32);
+
+	//AREA 10
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::EyeBall), 10 * 32, 26 * 32);
+
+	//AREA 11
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::EyeBall), 18 * 32, 28 * 32);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Dasher, DASHER_VERTICAL), 21 * 32, 28 * 32);
+}
+
+void CTopDownScene::LoadPickUps()
+{
+	AddEntity(new CHealthPickUp(), 13 * 32, 28 * 32);
+	AddEntity(new CHealthPickUp(), 26.5 * 32, 21.5 * 32);
+	AddEntity(new CHealthPickUp(), 29.5 * 32, 21.5 * 32);
 }
 
 CTopDownScene::CTopDownScene()
@@ -188,6 +223,7 @@ void CTopDownScene::LoadResources()
 	LoadAreas();
 	LoadPortals();
 	LoadEnemies();
+	LoadPickUps();
 
 	CPlayer* player = CJasonTopDown::GetInstance();
 	player->SetPosition(4 * 32, 59 * 32);
@@ -443,6 +479,10 @@ void CTopDownScene::ExecuteRequest(LPSceneRequest request)
 		break;
 	case SCENE_REQUEST_TYPES::SetEntity:
 		SetEntity(request->entity);
+		break;
+
+	case SCENE_REQUEST_TYPES::CreateHealthBall:
+		AddEntity(new CHealthPickUp(), request->x, request->y);
 		break;
 	default:
 		break;

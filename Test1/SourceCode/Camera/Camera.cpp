@@ -94,8 +94,35 @@ void CCamera::Follow(float x, float y)
     if (position.y + height > outerBound.bottom)
         position.y = outerBound.bottom - height;
 
-    float l, t, r, b;
-    GetLTRB(l, t, r, b);
+    //float l, t, r, b;
+    //GetLTRB(l, t, r, b);
+}
+
+void CCamera::FollowWithTransition(float x, float y)
+{
+    float _x = (x - width / 2) - position.x;
+    float _y = (y - height / 2) - position.y;
+
+    //position.x = x - width/2;
+    //position.y = y - height/2;
+
+    position.x += _x * 0.2;
+    position.y += _y * 0.2;
+
+    if (position.x < outerBound.left)
+        position.x = outerBound.left;
+    if (position.x + width > outerBound.right)
+        position.x = outerBound.right - width;
+
+    if (position.y < outerBound.top)
+        position.y = outerBound.top;
+    if (position.y + height > outerBound.bottom)
+        position.y = outerBound.bottom - height;
+}
+
+void CCamera::FollowWithTransition(Vector pos)
+{
+    FollowWithTransition(pos.x, pos.y);
 }
 
 void CCamera::Follow(Vector pos)

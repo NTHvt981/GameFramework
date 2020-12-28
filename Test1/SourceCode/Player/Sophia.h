@@ -23,7 +23,12 @@
 #define MOVE_RIGHT 2
 #define STILL 3
 
-#define SOPHIA_MOVE_SPEED 1.5
+#define SOPHIA_MOVE_SPEED 3
+#define SOPHIA_MOVE_FRICTION 0.2
+
+#define SOPHIA_LOW_JUMP_SPEED 4
+#define SOPHIA_MEDIUM_JUMP_SPEED 5.5
+#define SOPHIA_HIGH_JUMP_SPEED 6.5
 
 class CSophia :
     public CPlayer
@@ -90,8 +95,14 @@ private:
 	bool showCanon = true;
 	bool showHead = true;
 
+	DWORD jumpCountUp = 0;
+	const DWORD smallJumpWaitTime = 15;
+	const DWORD bigJumpWaitTime = 40;
+
 private:
 	//keys for input
+	void HandleMove(DWORD dt);
+	void HandleJump(DWORD dt);
 
 protected:
 	void GetState(DWORD dt);

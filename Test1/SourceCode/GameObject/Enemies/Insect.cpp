@@ -32,6 +32,34 @@ void CInsect::BoostUpState(DWORD dt)
 	}
 }
 
+void CInsect::HandleShoot(DWORD dt)
+{
+	bool con_1 = InPlayerZone();
+	bool con_2 = DistanceToPlayer() <= INSECT_RANGE;
+
+	if (con_1 && con_2)
+	{
+		shootCountUp += dt;
+		if (shootCountUp >= shootWaitTime)
+		{
+			shootCountUp = 0;
+			shootWaitTime = CUtils::randRange(100, 200);
+
+			Vector center = GetCenter();
+			Vector pCenter = CPlayer::GetCurrentPlayer()->GetCenter();
+			Vector dir = Vector(pCenter.x - center.x, pCenter.y - center.y);
+			CEnemyBullet::Create(
+				center.x, center.y, dir, INSECT_BULLET_SPEED, 0, ID_ENEMY_SIDESCROLL_BULLET_1, 500, true
+			);
+
+			if (dir.x > 0)
+				animation = rightAni;
+			else
+				animation = leftAni;
+		}
+	}
+}
+
 CInsect::CInsect()
 {
 	SetType(GOTYPES::Enemy);
@@ -73,6 +101,8 @@ void CInsect::Update(DWORD dt)
 		BoostUpState(dt);
 		break;
 	}
+
+	HandleShoot(dt);
 }
 
 void CInsect::Render()

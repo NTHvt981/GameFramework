@@ -1,7 +1,7 @@
 #pragma once
 
 #include "..\Constraints.h"
-#include "../Graphic/Graphic.h"
+#include "../GraphicAndSound/Graphic.h"
 
 class CSprite
 {

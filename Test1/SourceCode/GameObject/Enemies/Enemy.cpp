@@ -1,8 +1,10 @@
 #include "Enemy.h"
 
-void CEnemy::SetMaxHealth(int mh) {
+CEnemy* CEnemy::SetMaxHealth(int mh) {
 	maxHealth = mh;
 	health = mh;
+
+	return this;
 }
 
 CEnemy::CEnemy()
@@ -25,15 +27,17 @@ void CEnemy::InflictDamage(int dam)
 		request->id = this->id;
 		CSceneRequest::AddRequest(request);
 
+		Vector center = GetCenter();
+
 		if (CUtils::lottery(HEALTH_PICKUP_CHANCE))
 		{
 			LPSceneRequest pickupReq = new CSceneRequest(SCENE_REQUEST_TYPES::CreateHealthBall);
-			pickupReq->x = GetCenter().x;
-			pickupReq->y = GetCenter().y;
+			pickupReq->x = center.x;
+			pickupReq->y = center.y;
 			CSceneRequest::AddRequest(pickupReq);
 		}
 
-		CExplosion::CreateExplosion(GetCenter().x, GetCenter().y, EXPLOSION_TYPES::Big);
+		CExplosion::CreateExplosion(center.x, center.y, EXPLOSION_TYPES::Big);
 	}
 }
 

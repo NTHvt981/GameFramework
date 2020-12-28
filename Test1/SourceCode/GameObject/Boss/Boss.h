@@ -14,6 +14,8 @@
 #include "../StaticObjects/Explosion.h"
 #include "../../Debug/Utils.h"
 
+#include "../StaticObjects/BreakableWall.h"
+
 #define BOSS_MOVE_SLOW 1
 #define BOSS_MOVE_NORMAL 1.5
 #define BOSS_MOVE_FAST 2
@@ -21,7 +23,13 @@
 #define BOSS_NORMAL 0
 #define BOSS_DEFEAT 1
 
-#define BOSS_HEALTH 15
+#define BOSS_HEALTH 65
+#define BOSS_BULLET_SPEED 3
+#define BOSS_SHOOT_PIVOT Vector(0, 40)
+
+#define BOSS_MAX_RANGE 65
+#define BOSS_MED_RANGE 40
+#define BOSS_MIN_RANGE 20
 
 class CBoss : public CEnemy
 {
@@ -38,7 +46,6 @@ private:
 
 	Vector localPosition = Vector(0, 0);
 	Vector localGoalPosition = Vector(0, 0);
-	const float range = 50;
 
 	vector<pair<Vector, float>> movementMatrix;
 	int movementIndex = 0;
@@ -48,10 +55,20 @@ private:
 	/// </summary>
 	vector<Vector> armMovementMatrix;
 	int rightArmIndex = 0;
+	int leftArmIndex = 9;
 
 	int state = BOSS_NORMAL;
 	DWORD effectCountUp = 0;
 	DWORD effectWaitTime = 15;
+
+	DWORD shootCountUp = 0;
+	const DWORD shootWaitTime = 25;
+
+	DWORD reloadCountUp = 0;
+	const DWORD reloadWaitTime = 200;
+
+	const int maxMagazineSize = 5;
+	int magazineSize = maxMagazineSize;
 
 public:
 	CBoss();
@@ -76,5 +93,8 @@ public:
 private:
 	void NormalState(DWORD dt);
 	void DefeatState(DWORD dt);
+
+	void UpdateHand(DWORD dt, CBossHand* hand, int &index);
+	void HandleShoot(DWORD dt);
 };
 

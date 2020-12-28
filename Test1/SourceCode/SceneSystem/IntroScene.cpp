@@ -2,6 +2,7 @@
 
 CIntroScene::CIntroScene(): CScene()
 {
+	Type = SCENE_TYPES::IntroScene;
 }
 
 void CIntroScene::LoadResources()

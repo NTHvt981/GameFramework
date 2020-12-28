@@ -2,8 +2,6 @@
 
 COrb::COrb() : CEnemy()
 {
-	SetMaxHealth(7);
-
 	this->collisionBox = new CDynamicBox(
 		this,
 		0, 0,

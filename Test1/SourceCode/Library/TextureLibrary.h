@@ -1,6 +1,6 @@
 #pragma once
 #include "../Constraints.h"
-#include "../Graphic/Graphic.h"
+#include "../GraphicAndSound/Graphic.h"
 #include <unordered_map>
 
 #define PLAYER_TEXTURE 1
@@ -11,7 +11,7 @@
 #define BOSS_TEXTURE 6
 #define OPENING_TEXTURE 7
 #define ROLLOUT_TEXTURE 8
-#define ITEMS_TEXTURE 8
+#define ITEMS_TEXTURE 9
 
 using namespace std;
 

@@ -8,6 +8,8 @@
 #include "..\..\SceneSystem\SceneRequest.h"
 #include "..\..\Library\SpriteLibrary.h"
 
+#include "Explosion.h"
+
 class CBreakableWall: public CEntity
 {
 private:
@@ -24,5 +26,8 @@ public:
 	void Render();
 
 	void Destroy();
+
+public:
+	static bool Switch;
 };
 

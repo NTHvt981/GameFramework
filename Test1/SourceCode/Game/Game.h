@@ -3,7 +3,8 @@
 
 #include "..\Constraints.h"
 
-#include "..\Graphic\Graphic.h"
+#include "..\GraphicAndSound\Graphic.h"
+#include "..\GraphicAndSound\Audio.h"
 
 #include "..\Library\TextureLibrary.h"
 #include "..\Library\SpriteLibrary.h"

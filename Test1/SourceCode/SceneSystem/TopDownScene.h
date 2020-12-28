@@ -20,15 +20,15 @@
 #include "../GameObject/StaticObjects/Wall.h"
 
 #pragma region ENEMIES
-#include "../GameObject/Enemies/Walker.h"
-#include "../GameObject/Enemies/Dasher.h"
-#include "../GameObject/Enemies/Head.h"
-#include "../GameObject/Enemies/Spiral.h"
-#include "../GameObject/Enemies/Teleporter.h"
-#include "../GameObject/Enemies/Eyeball.h"
-#include "../GameObject/Enemies/Canon.h"
+#include "../GameObject/Enemies/EnemyBuilder.h"
 #pragma endregion
 
+#pragma region ITEMS
+#include "../PlayerItems/PickUp.h"
+#include "../PlayerItems/HealthPickUp.h"
+#include "../PlayerItems/EnergyPickUp.h"
+#include "../PlayerItems/PowerPickUp.h"
+#pragma endregion
 
 class CTopDownScene : public CScene
 {
@@ -68,6 +68,7 @@ private:
 	void LoadAreas();
 	void LoadPortals();
 	void LoadEnemies();
+	void LoadPickUps();
 
 public:
 	CTopDownScene();

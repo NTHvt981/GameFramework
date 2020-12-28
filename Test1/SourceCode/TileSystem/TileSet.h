@@ -4,7 +4,7 @@
 #include <vector>
 #include "../Constraints.h"
 #include "../Vector/Box.h"
-#include "../Graphic/Graphic.h"
+#include "../GraphicAndSound/Graphic.h"
 
 using namespace std;
 

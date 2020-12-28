@@ -9,7 +9,7 @@ void CSideScrollScene::LoadLevel()
 	wstring tileSetDir;
 
 	string tileMatrixDir;
-	tileMatrixDir = "Resources/Textfile/TileMaTrix.txt";
+	tileMatrixDir = "Resources/Textfile/TileMaTrixSideScroll.txt";
 
 	LoadFileParam(
 		tile_count, tile_width, tile_height,
@@ -29,6 +29,7 @@ void CSideScrollScene::LoadLevel()
 	CTileMap::GetInstance()->SetMatrix(matrix);
 
 	LoadWalls(matrix, solid_tiles, tile_width);
+	LoadBreakableWall();
 	LoadAntiPlayerZones(matrix, anti_player_tiles, tile_width);
 }
 
@@ -42,6 +43,52 @@ void CSideScrollScene::LoadWalls(
 		AddEntity(
 			new CWall(box.left, box.top, box.right, box.bottom),
 			box.left + 1, box.top + 1
+		);
+	}
+}
+
+void CSideScrollScene::LoadBreakableWall()
+{
+	vector<Vector> lst;
+	lst.push_back(Vector(84, 185));
+	lst.push_back(Vector(85, 185));
+
+	lst.push_back(Vector(80, 177));
+	lst.push_back(Vector(81, 177));
+
+	lst.push_back(Vector(84, 169));
+	lst.push_back(Vector(85, 169));
+
+	lst.push_back(Vector(80, 161));
+	lst.push_back(Vector(81, 161));
+
+	lst.push_back(Vector(80, 125));
+	lst.push_back(Vector(81, 125));
+
+	lst.push_back(Vector(106, 101));
+	lst.push_back(Vector(107, 101));
+
+	lst.push_back(Vector(106, 61));
+	lst.push_back(Vector(107, 61));
+
+	lst.push_back(Vector(106, 69));
+	lst.push_back(Vector(107, 69));
+
+	lst.push_back(Vector(102, 73));
+	lst.push_back(Vector(103, 73));
+
+	for each (Vector pos in lst)
+	{
+		float l, t, r, b;
+		l = pos.x * 16;
+		t = pos.y * 16;
+		r = l + 16;
+		b = t + 16;
+		
+		AddEntity(
+			new CBreakableWall(
+				l, t, r, b
+			), l + 8, t + 8
 		);
 	}
 }
@@ -72,7 +119,10 @@ void CSideScrollScene::LoadAreas()
 
 	areas[7] = new CArea(80, 0, 95, 15);
 
-	for (int i = 1; i <= 7; i++)
+	areas[8] = new CArea(64, 8, 79, 15);
+	areas[9] = new CArea(40, 32, 47, 39);
+
+	for (int i = 1; i <= 9; i++)
 	{
 		float l = areas[i]->left * 32;
 		float t = areas[i]->top * 32;
@@ -82,15 +132,12 @@ void CSideScrollScene::LoadAreas()
 		areas[i] = new CArea(l, t, r, b);
 	}
 
-	areas[8] = new CArea(2048, 256, 2560, 512);
-	areas[9] = new CArea(40, 32, 47, 39);
-
 	currArea = areas[1];
 }
 
 void CSideScrollScene::LoadPortals()
 {
-	const int range = 16;
+	const int range = 18;
 	int ls[range][6] = {
 		{ 12, 30, 92, 30, 92, -1 },
 		{ 21, 33, 92, 33, 92, 1 },
@@ -108,8 +155,11 @@ void CSideScrollScene::LoadPortals()
 
 		{ 78, 81, 12, 81, 12, 1},
 		{ 87, 78, 12, 78, 12, -1},
+
 		{ 59, 49, 36, 49, 36, 1},
-		{ 95, 46, 36, 46, 36, -1}
+		{ 95, 46, 36, 46, 36, -1},
+		{ 25, 46, 92, 46, 92, -1},
+		{ 52, 49, 52, 49, 52, 1}
 	};
 
 	for (int i = 0; i < range; i++)
@@ -133,24 +183,116 @@ void CSideScrollScene::LoadPortals()
 		portals[id]->SetDeployDirection(side, 0.5);
 	}
 
-	scenePortal = new CTopDownPortal(2112, 432, 2128, 448);
+	topDownPortal = new CTopDownPortal(2112, 432, 2128, 448);
+	endingPortal = new CTopDownPortal(84 * 16, 75 * 16, 85 * 16, 76 * 16);
 }
 
 void CSideScrollScene::LoadEnemies()
 {
-	AddEntity(new CJumper(), 400, 2944);
-	AddEntity(new CJumper(), 336, 2944);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Worm), 9 * 16, 183 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Worm), 13 * 16, 183 * 16);
 
-	AddEntity(new CSkull(), 3*16, 182*16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Dome), 18 * 16, 185 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Dome), 18 * 16, 179 * 16);
 
-	AddEntity(new CDome(), 3 * 16 - 2, 185 * 16 - 2);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Worm), 26 * 16, 183 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Worm), 29 * 16, 183 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Worm), 39 * 16, 183 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Worm), 51 * 16, 183 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Worm), 55 * 16, 183 * 16);
 
-	AddEntity(new CFloater(FLOATER_DIAGONAL), 336, 2944);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Floater, FLOATER_DIAGONAL), 34 * 16, 183 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Floater, FLOATER_DIAGONAL), 46 * 16, 183 * 16);
 
-	AddEntity(new CInsect(), 336, 2944);
-	AddEntity(new CWorm(), 400, 2944);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Floater, FLOATER_HORIZONTAL), 68 * 16, 178 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Floater, FLOATER_DIAGONAL), 76 * 16, 188 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Floater, FLOATER_DIAGONAL), 79 * 16, 182 * 16);
 
-	//AddEntity(new CHealthPickUp(), 400, 2944);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Dome), 81 * 16, 185 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Jumper), 76 * 16, 176 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Jumper), 70 * 16, 172 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Worm), 80 * 16, 168 * 16);
+
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Jumper), 77 * 16, 152 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Insect), 74 * 16, 151 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Floater), 84 * 16, 151 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Insect), 76 * 16, 159 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Worm), 67 * 16, 157 * 16);
+
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Floater, FLOATER_DIAGONAL), 74 * 16, 143 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Floater, FLOATER_DIAGONAL), 90 * 16, 143 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Insect), 91 * 16, 142 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Insect), 76 * 16, 143 * 16);
+
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Orb), 91 * 16, 147 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Orb), 90 * 16, 131 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Orb), 77 * 16, 123 * 16);
+
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Worm), 70 * 16, 129 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Worm), 75 * 16, 129 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Worm), 80 * 16, 129 * 16);
+
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Jumper), 84 * 16, 136 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Jumper), 84 * 16, 152 * 16);
+
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Dome), 78 * 16, 177 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Dome), 70 * 16, 121 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Dome), 72 * 16, 161 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Dome), 85 * 16, 145 * 16);
+
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Skull), 105 * 16, 120 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Skull), 112 * 16, 118 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Skull), 120 * 16, 118 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Floater, FLOATER_DIAGONAL), 117 * 16, 120 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Worm), 120 * 16, 120 * 16);
+
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Orb), 132 * 16, 79 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Orb), 132 * 16, 87 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Orb), 132 * 16, 95 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Orb), 132 * 16, 107 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Orb), 132 * 16, 115 * 16);
+
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Dome), 135 * 16, 77 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Dome), 135 * 16, 85 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Dome), 135 * 16, 93 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Dome), 135 * 16, 105 * 16);
+
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Dome), 147 * 16, 89 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Dome), 147 * 16, 105 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Dome), 147 * 16, 121 * 16);
+
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Insect), 120 * 16, 69 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Insect), 115 * 16, 60 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Insect), 115 * 16, 48 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Insect), 123 * 16, 52 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Insect), 104 * 16, 28 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Insect), 120 * 16, 20 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Insect), 120 * 16, 10 * 16);
+
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Jumper), 110 * 16, 68 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Jumper), 110 * 16, 60 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Jumper), 110 * 16, 36 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Jumper), 118 * 16, 12 * 16);
+
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Worm), 140 * 16, 9 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Worm), 148 * 16, 9 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Worm), 144 * 16, 6 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Worm), 152 * 16, 6 * 16);
+
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Floater, FLOATER_VERTICAL), 169 * 16, 4 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Floater, FLOATER_VERTICAL), 186.5 * 16, 4 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Floater, FLOATER_VERTICAL), 186.5 * 16, 19 * 16);
+	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Floater, FLOATER_VERTICAL), 172 * 16, 28 * 16);
+}
+
+void CSideScrollScene::DeleteEnemies()
+{
+	for each (int id in enemiesId)
+	{
+		LPEntity e = mapEntities[id];
+		if (e != NULL)
+			RemoveEntity(id);
+	}
 }
 
 CSideScrollScene::CSideScrollScene()
@@ -171,7 +313,6 @@ void CSideScrollScene::LoadResources()
 	LoadLevel();
 	LoadAreas();
 	LoadPortals();
-	LoadEnemies();
 
 	CPlayer* player = CSophia::GetInstance();
 	player->SetPosition(INTRO_TO_SIDESCROLL_POS.x, INTRO_TO_SIDESCROLL_POS.y);
@@ -200,6 +341,9 @@ void CSideScrollScene::Start(float x, float y)
 		if ((x >= l) && (x < r) && (y >= t) && (y < b))
 			SetArea(areaId);
 	}
+
+	DeleteEnemies();
+	LoadEnemies();
 }
 
 void CSideScrollScene::ReStart(float x, float y)
@@ -210,12 +354,18 @@ void CSideScrollScene::ReStart(float x, float y)
 
 	CSophia::GetInstance()->Enable();
 	CJason::GetInstance()->Enable();
+
+	DeleteEnemies();
+	LoadEnemies();
 }
 
 void CSideScrollScene::Resume()
 {
 	CTileMap::GetInstance()->SetTileSet(tileSet);
 	CTileMap::GetInstance()->SetMatrix(matrix);
+
+	DeleteEnemies();
+	LoadEnemies();
 }
 
 void CSideScrollScene::Update(DWORD dt)
@@ -287,7 +437,10 @@ void CSideScrollScene::UpdateCamera()
 	);
 
 	//set camera position
-	CCamera::GetInstance()->Follow(
+	//CCamera::GetInstance()->Follow(
+	//	CPlayer::GetCurrentPlayer()->GetCenter()
+	//);	
+	CCamera::GetInstance()->FollowWithTransition(
 		CPlayer::GetCurrentPlayer()->GetCenter()
 	);
 }
@@ -348,13 +501,22 @@ void CSideScrollScene::UpdatePortals(DWORD dt)
 	/// </summary>
 	CInput* input = CInput::GetInstance();
 
-	bool con1 = scenePortal->IsColliding(CPlayer::GetCurrentPlayer());
+	bool con1 = topDownPortal->IsColliding(CPlayer::GetCurrentPlayer());
 	bool con2 = CPlayer::GetCurrentPlayer() == CJason::GetInstance();
 	bool con3 = input->IsKeyPressed(DIK_W);
 
 	if (con1 && con2 && con3)
 	{
 		LPGameRequest request = new CGameRequest(GAME_REQUEST_TYPES::SwitchToTopDown);
+		request->sender = SCENE_TYPES::SideScrollScene;
+
+		CGameRequest::AddRequest(request);
+	}
+
+	bool con4 = endingPortal->IsColliding(CPlayer::GetCurrentPlayer());
+	if (con4 && con3)
+	{
+		LPGameRequest request = new CGameRequest(GAME_REQUEST_TYPES::SwitchToEnding);
 		request->sender = SCENE_TYPES::SideScrollScene;
 
 		CGameRequest::AddRequest(request);
@@ -400,7 +562,8 @@ void CSideScrollScene::RenderPortals()
 		portal->Render();
 	}
 
-	scenePortal->Render();
+	topDownPortal->Render();
+	endingPortal->Render();
 }
 
 void CSideScrollScene::ExecuteRequests()
@@ -469,10 +632,9 @@ void CSideScrollScene::AddEntity(LPEntity entity, float x, float y)
 	mapEntities[countId] = entity;
 	countId++;
 
-	if (entity->GetType() == GOTYPES::PlayerBullet)
+	if (entity->GetType() == GOTYPES::Enemy)
 	{
-		int i = 0;
-		i++;
+		enemiesId.push_back(entity->GetId());
 	}
 
 	SetEntity(entity);
@@ -481,6 +643,8 @@ void CSideScrollScene::AddEntity(LPEntity entity, float x, float y)
 void CSideScrollScene::RemoveEntity(int id)
 {
 	LPEntity entity = mapEntities[id];
+
+	//if (entity->GetType() == GOTYPES::Enemy) enemiesId.remove(id);
 
 	int grid_x, grid_y;
 	entity->GetGridPosition(grid_x, grid_y);

@@ -2,7 +2,7 @@
 #include <list>
 #include "CollisionEvent.h"
 #include "..\Constraints.h"
-#include "..\Graphic\Graphic.h"
+#include "..\GraphicAndSound\Graphic.h"
 #include "..\Collision\Collision.h"
 #include "..\GameObject\GameObject.h"
 #include "..\Vector\Vector.h"

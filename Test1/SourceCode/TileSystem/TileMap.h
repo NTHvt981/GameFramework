@@ -2,7 +2,7 @@
 
 #include "../Constraints.h"
 #include "TileSet.h"
-#include "../Graphic/Graphic.h"
+#include "../GraphicAndSound/Graphic.h"
 
 class CTileMap
 {

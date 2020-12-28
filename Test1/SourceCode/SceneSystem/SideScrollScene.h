@@ -23,13 +23,7 @@
 
 
 #pragma region Enemies
-#include "../GameObject/Enemies/Jumper.h"
-#include "../GameObject/Enemies/Skull.h"
-#include "../GameObject/Enemies/Dome.h"
-#include "../GameObject/Enemies/Floater.h"
-#include "../GameObject/Enemies/Insect.h"
-#include "../GameObject/Enemies/Worm.h"
-
+#include "../GameObject/Enemies/EnemyBuilder.h"
 #pragma endregion
 
 #pragma region ITEMS
@@ -53,6 +47,7 @@ private:
 	CAreaPortal* destPortal = NULL;
 	map<int, CArea*> areas;
 	map<int, CAreaPortal*> portals;
+	list<int> enemiesId;
 
 	//contains all entity, each grid contain a list of number, each number is an id
 	//of the entity
@@ -60,7 +55,8 @@ private:
 	int grid_count_width;
 	int grid_count_height;
 
-	CTopDownPortal* scenePortal;
+	CTopDownPortal* topDownPortal;
+	CTopDownPortal* endingPortal;
 
 private:
 	void LoadLevel();
@@ -68,6 +64,7 @@ private:
 		vector<vector<int>> matrix,
 		vector<int> solid_tiles,
 		int tile_width);
+	void LoadBreakableWall();
 	void LoadAntiPlayerZones(
 		vector<vector<int>> matrix,
 		vector<int> anti_player_tiles,
@@ -76,6 +73,7 @@ private:
 	void LoadAreas();
 	void LoadPortals();
 	void LoadEnemies();
+	void DeleteEnemies();
 
 public:
 	CSideScrollScene();

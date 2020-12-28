@@ -34,7 +34,7 @@ void CBossScene::ExecuteRequest(LPSceneRequest request)
 
 void CBossScene::AddEntity(LPEntity entity, float x, float y)
 {
-	entity->SetPosition(x, y);
+	entity->SetCenter(x, y);
 
 	entity->SetId(countId);
 	mapEntities[countId] = entity;
@@ -71,6 +71,7 @@ void CBossScene::ResetEntityCoCollisionBoxes(LPEntity entity)
 {
 	list<LPCollisionBox> lst;
 	boss->GetAllCollisionBoxes(lst);
+	lst.push_back(CPlayer::GetCurrentPlayer()->GetCollisionBox());
 	entity->GetCollisionBox()->ResetCoCollisionBoxes(lst);
 }
 
@@ -124,6 +125,8 @@ void CBossScene::Start(float x, float y)
 		->ResetCoCollisionBoxes(
 			lst
 		);
+
+	CPlayerHealth::GetInstance()->SetPlayerMode(JASON);
 }
 
 void CBossScene::ReStart(float x, float y)

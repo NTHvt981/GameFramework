@@ -10,6 +10,8 @@
 
 #include "../StaticObjects/Explosion.h"
 
+#include "../../Player/Player.h"
+
 class CEnemyBullet: public CEntity
 {
 private:
@@ -32,5 +34,8 @@ public:
 
 	static void Create(float x, float y, Vector _direction, float _speed, float _gravity,
 		int _spriteId, int selfDestructTime, bool _useSolid);
+
+private:
+	void SelfDestruct();
 };
 

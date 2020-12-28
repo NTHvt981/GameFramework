@@ -1,5 +1,7 @@
 #include "BreakableWall.h"
 
+bool CBreakableWall::Switch = false;
+
 void CBreakableWall::Move(DWORD dt)
 {
 }
@@ -39,8 +41,14 @@ void CBreakableWall::Render()
 
 void CBreakableWall::Destroy()
 {
-	LPSceneRequest req = new CSceneRequest(SCENE_REQUEST_TYPES::DeleteEntity);
+	if (Switch)
+	{
+		LPSceneRequest req = new CSceneRequest(SCENE_REQUEST_TYPES::DeleteEntity);
 
-	req->id = this->GetId();
-	CSceneRequest::AddRequest(req);
+		req->id = this->GetId();
+		CSceneRequest::AddRequest(req);
+
+		Vector center = GetCenter();
+		CExplosion::CreateExplosion(center.x, center.y, EXPLOSION_TYPES::Big);
+	}
 }

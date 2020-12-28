@@ -17,9 +17,13 @@
 #define MOTION 0
 #define STILL 1
 
-#define JASON_WALK_SPEED 0.75
-#define JASON_CRAWL_SPEED 0.25
-#define JASON_CLIMB_SPEED 0.5
+#define JASON_WALK_SPEED 2.5
+#define JASON_CRAWL_SPEED 2
+#define JASON_CLIMB_SPEED 2.25
+#define JASON_MOVE_FRICTION 0.15
+
+#define JASON_LOW_JUMP_SPEED 3
+#define JASON_HIGH_JUMP_SPEED 4.5
 
 class CJason :
     public CPlayer
@@ -37,10 +41,6 @@ private:
     int facing;
     int pace;
 
-    float walkSpeed = 0.75;
-    float crawlSpeed = 0.25;
-    float climbSpeed = 0.5;
-
     Vector* posToDraw;
     Vector posClimbSpr = Vector(0, 0);
     Vector posWalkSpr = Vector(0, 0);
@@ -50,6 +50,9 @@ private:
     Vector shootRightWalkPivot = Vector(0, 0);
     Vector shootLeftCrawlPivot = Vector(0, 4);
     Vector shootRightCrawlPivot = Vector(0, 4);
+
+    DWORD jumpCountUp = 0;
+    const DWORD jumpWaitTime = 20;
 
 protected:
     void ApplyState(DWORD dt);
@@ -67,6 +70,9 @@ private:
     void onWalk(DWORD dt);
     void onCrawl(DWORD dt);
     void onClimb(DWORD dt);
+
+    void HandleMove(DWORD dt, float maxSpeed, float friction);
+    void HandleJump(DWORD dt);
 
 protected:
     void SetHealthAnimation(DWORD dt);

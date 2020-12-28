@@ -74,23 +74,25 @@ void CJasonTopDown::Update(DWORD dt)
 
 	if (hKey != 0)
 	{
-		if (keyRight)
+		if (keyRight && vKey == 0 && !keyShoot)
 			facing = RIGHT;
-		else
+		else if (keyLeft && vKey == 0 && !keyShoot)
 			facing = LEFT;
 
 		pace = MOTION;
 	}
-	else if (vKey != 0)
+
+	if (vKey != 0)
 	{
-		if (keyDown)
+		if (keyDown && hKey == 0 && !keyShoot)
 			facing = DOWN;
-		else
+		else if (keyUp && hKey == 0 && !keyShoot)
 			facing = UP;
 
 		pace = MOTION;
 	}
-	else
+	
+	if (hKey == 0 && vKey == 0)
 		pace = STILL;
 
 	velocity.x = hKey * speed;

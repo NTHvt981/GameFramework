@@ -36,15 +36,6 @@
     <Image Include="Resources\Texture\enemies.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="Resources\Texture\TileMap.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="..\..\..\..\Desktop\Tileset\Area-2 Car map\area2-side-map in my way\TileMap.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="C:\Users\Admin\Desktop\Tileset\Area-2 Car map\area2-side-map in my way\TileMap.png">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="Resources\Texture\Player health.png">
       <Filter>Resource Files</Filter>
     </Image>
@@ -72,6 +63,9 @@
     <Image Include="Resources\Texture\Items.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="Resources\Texture\TileMapSideScroll.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
@@ -96,9 +90,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SourceCode\Debug\Debug.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="SourceCode\Graphic\Graphic.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
     <ClInclude Include="SourceCode\Constraints.h">
@@ -323,12 +314,18 @@
     <ClInclude Include="SourceCode\GameObject\EnemyBullets\SpiralBullet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SourceCode\GraphicAndSound\Graphic.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\GraphicAndSound\Audio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\GameObject\Enemies\EnemyBuilder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SourceCode\Graphic\Graphic.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SourceCode\Vector\Vector.cpp">
@@ -568,6 +565,15 @@
     <ClCompile Include="SourceCode\GameObject\EnemyBullets\SpiralBullet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SourceCode\GraphicAndSound\Graphic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\GraphicAndSound\Audio.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\GameObject\Enemies\EnemyBuilder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Test1.rc">
@@ -578,8 +584,12 @@
     <Text Include="Resources\Textfile\temp.txt" />
     <Text Include="Resources\Textfile\temp_tilemap_info.txt" />
     <Text Include="Resources\Textfile\enemy-position.txt" />
-    <Text Include="Resources\Textfile\TileMaTrix.txt" />
     <Text Include="SourceCode\FileAndString\temp.txt" />
     <Text Include="Resources\Textfile\TileMaTrixTopDown.txt" />
+    <Text Include="Resources\Textfile\TileMaTrixSideScroll.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="C:\Users\Admin\Downloads\Compressed\NES - Blaster Master - Sound Effects\SoundTrack.mp3" />
+    <Media Include="Resources\Sound\SoundTrack.mp3" />
   </ItemGroup>
 </Project>

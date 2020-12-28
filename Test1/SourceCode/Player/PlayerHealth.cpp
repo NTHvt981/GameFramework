@@ -132,6 +132,9 @@ bool CPlayerHealth::IsGameOver()
 
 void CPlayerHealth::Update(DWORD dt)
 {
+    SetCheat(dt);
+    if (cheat) return;
+
     invulnerableTimer->Update(dt);
     if (invulnerableTimer->JustFinish()) turnOffInvulnerability();
 }
@@ -164,5 +167,25 @@ void CPlayerHealth::Render()
             textHealthBarPivot.x,
             textHealthBarPivot.y - i * ( healthBarHeight + 2 )
         );
+    }
+}
+
+void CPlayerHealth::SetCheat(DWORD dt)
+{
+    CInput* input = CInput::GetInstance();
+    if (input->IsKeyPressed(DIK_E))
+    {
+        if (cheat)
+        {
+            cheat = false;
+            healthState = VULNERABLE;
+            DebugOut(L"[INFO] CHEAT MODE OFF\n");
+        }
+        else
+        {
+            cheat = true;
+            healthState = INVULNERABLE;
+            DebugOut(L"[INFO] CHEAT MODE ON\n");
+        }
     }
 }

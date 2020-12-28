@@ -5,6 +5,8 @@
 #include "../Timer/Timer.h"
 #include "Player.h"
 
+#include "../Input/Input.h"
+
 #define VULNERABLE 0
 #define INVULNERABLE 1
 
@@ -67,5 +69,10 @@ public:
 
 	void Update(DWORD dt);
 	void Render();
+
+	//this section for cheating
+private:
+	bool cheat = false;
+	void SetCheat(DWORD dt);
 };
 

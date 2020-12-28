@@ -141,15 +141,11 @@ void CJason::Render()
 void CJason::onWalk(DWORD dt)
 {
 	CInput* input = CInput::GetInstance();
-	velocity.x = dt * walkSpeed * (
-		input->IsKeyDown(DIK_D) - input->IsKeyDown(DIK_A)
-	);
-
-	if (onGround)
-		if (keyJump)
-		{
-			velocity.y = -jumpSpeed;
-		}
+	//velocity.x = walkSpeed * (
+	//	input->IsKeyDown(DIK_D) - input->IsKeyDown(DIK_A)
+	//);
+	HandleMove(dt, JASON_WALK_SPEED, JASON_MOVE_FRICTION);
+	HandleJump(dt);
 
 	//Set state for animation
 	if (velocity.x > 0)
@@ -193,9 +189,7 @@ void CJason::onWalk(DWORD dt)
 void CJason::onCrawl(DWORD dt)
 {
 	CInput* input = CInput::GetInstance();
-	velocity.x = dt * crawlSpeed * (
-		input->IsKeyDown(DIK_D) - input->IsKeyDown(DIK_A)
-		);
+	HandleMove(dt, JASON_CRAWL_SPEED, JASON_MOVE_FRICTION);
 
 	if (velocity.x > 0)
 	{
@@ -230,10 +224,10 @@ void CJason::onCrawl(DWORD dt)
 void CJason::onClimb(DWORD dt)
 {
 	CInput* input = CInput::GetInstance();
-	velocity.x = dt * climbSpeed * (
+	velocity.x = JASON_CLIMB_SPEED * (
 		input->IsKeyDown(DIK_D) - input->IsKeyDown(DIK_A)
 		);
-	velocity.y = dt * climbSpeed * (
+	velocity.y = JASON_CLIMB_SPEED * (
 		input->IsKeyDown(DIK_S) - input->IsKeyDown(DIK_W)
 		);
 
@@ -270,6 +264,48 @@ void CJason::onClimb(DWORD dt)
 		state = JASON_WALK;
 
 	onGround = false;
+}
+
+void CJason::HandleMove(DWORD dt, float maxSpeed, float friction)
+{
+	CInput* input = CInput::GetInstance();
+	int moveKey = input->IsKeyDown(DIK_D) - input->IsKeyDown(DIK_A);
+
+	if (moveKey != 0)
+		velocity.x += friction * moveKey;
+	else
+	{
+		if (velocity.x > 0)
+			velocity.x = max(velocity.x - friction, 0);
+		else if (velocity.x < 0)
+			velocity.x = min(velocity.x + friction, 0);
+	}
+
+	if (velocity.x > maxSpeed)
+		velocity.x = maxSpeed;
+	else if (velocity.x < -maxSpeed)
+		velocity.x = -maxSpeed;
+}
+
+void CJason::HandleJump(DWORD dt)
+{
+	CInput* input = CInput::GetInstance();
+	bool keyJump = input->IsKeyDown(DIK_K);
+	bool keyJumpRelease = input->IsKeyRelease(DIK_K);
+
+	if (onGround && keyJump)
+	{
+		jumpCountUp += dt;
+	}
+	else if (onGround && keyJumpRelease)
+	{
+		if (jumpCountUp >= jumpWaitTime)
+			velocity.y = -JASON_HIGH_JUMP_SPEED;
+		else
+			velocity.y = -JASON_LOW_JUMP_SPEED;
+	}
+	else
+		jumpCountUp = 0;
 }
 
 void CJason::SetHealthAnimation(DWORD dt)

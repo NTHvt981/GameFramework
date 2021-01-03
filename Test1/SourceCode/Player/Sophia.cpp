@@ -181,6 +181,7 @@ void CSophia::Update(DWORD dt)
 
 	SetHealthAnimation(dt);
 	HandleShooting(dt);
+	HandleFiringMissile(dt);
 	HandleSwitchToJason();
 }
 
@@ -213,18 +214,42 @@ void CSophia::HandleJump(DWORD dt)
 	if (onGround && keyJump)
 	{
 		jumpCountUp += dt;
+		if (jumpCountUp >= bigJumpWaitTime)
+			velocity.y = -SOPHIA_HIGH_JUMP_SPEED;
 	}
 	else if (onGround && keyJumpRelease)
 	{
-		if (jumpCountUp >= bigJumpWaitTime)
-			velocity.y = -SOPHIA_HIGH_JUMP_SPEED;
-		else if (jumpCountUp >= smallJumpWaitTime)
+		if (jumpCountUp >= smallJumpWaitTime)
 			velocity.y = -SOPHIA_MEDIUM_JUMP_SPEED;
 		else
 			velocity.y = -SOPHIA_LOW_JUMP_SPEED;
 	}
 	else
 		jumpCountUp = 0;
+}
+
+void CSophia::HandleFiringMissile(DWORD dt)
+{
+	CInput* input = CInput::GetInstance();
+	if (input->IsKeyPressed(DIK_I))
+	{
+		Vector center = GetCenter();
+
+		CMissileSearcher* searcher = new CMissileSearcher();
+		CMissile* missile = new CMissile(searcher);
+
+		CSceneRequest* req = new CSceneRequest(SCENE_REQUEST_TYPES::CreateEntity);
+		req->entity = searcher;
+		req->x = center.x;
+		req->y = center.y;
+		CSceneRequest::AddRequest(req);
+
+		LPSceneRequest request = new CSceneRequest(SCENE_REQUEST_TYPES::CreateEntity);
+		request->entity = missile;
+		request->x = center.x;
+		request->y = center.y;
+		CSceneRequest::AddRequest(request);
+	}
 }
 
 

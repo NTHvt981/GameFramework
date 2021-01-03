@@ -117,15 +117,19 @@ void CGame::LoadSprites()
 	lib->Add(ID_SOPHIA_BULLET_RIGHT, 74, 12, 74 + 24, 12 + 6, textPlayer);
 	lib->Add(ID_SOPHIA_BULLET_UP, 100, 2, 100 + 6, 2 + 24, textPlayer);
 
-	lib->Add(ID_SOPHIA_MISSILE_HEAD_LEFT, 154, 89, 154 + 7, 89 + 5, textPlayer);
-	lib->Add(ID_SOPHIA_MISSILE_HEAD_UP, 162, 81, 162 + 5, 81 + 7, textPlayer);
-	lib->Add(ID_SOPHIA_MISSILE_HEAD_RIGHT, 168, 89, 168 + 7, 89 + 5, textPlayer);
-	lib->Add(ID_SOPHIA_MISSILE_HEAD_DOWN, 162, 95, 162 + 5, 95 + 7, textPlayer);
+	lib->Add(ID_SOPHIA_MISSILE_HEAD_LEFT, 154, 88, 154 + 7, 88 + 7, textPlayer);
+	lib->Add(ID_SOPHIA_MISSILE_HEAD_UP, 161, 81, 161 + 7, 81 + 7, textPlayer);
+	lib->Add(ID_SOPHIA_MISSILE_HEAD_RIGHT, 168, 88, 168 + 7, 88 + 7, textPlayer);
+	lib->Add(ID_SOPHIA_MISSILE_HEAD_DOWN, 161, 95, 161 + 7, 95 + 7, textPlayer);
 
-	lib->Add(ID_SOPHIA_MISSILE_TAIL_LEFT, 178, 86, 178 + 7, 86 + 12, textPlayer);
-	lib->Add(ID_SOPHIA_MISSILE_TAIL_UP, 186, 78, 186 + 12, 78 + 7, textPlayer);
-	lib->Add(ID_SOPHIA_MISSILE_TAIL_RIGHT, 199, 86, 199 + 7, 86 + 12, textPlayer);
-	lib->Add(ID_SOPHIA_MISSILE_TAIL_DOWN, 186, 99, 186 + 12, 99 + 7, textPlayer);
+	//lib->Add(ID_SOPHIA_MISSILE_TAIL_LEFT, 178, 86, 178 + 7, 86 + 12, textPlayer);
+	//lib->Add(ID_SOPHIA_MISSILE_TAIL_UP, 186, 78, 186 + 12, 78 + 7, textPlayer);
+	//lib->Add(ID_SOPHIA_MISSILE_TAIL_RIGHT, 199, 86, 199 + 7, 86 + 12, textPlayer);
+	//lib->Add(ID_SOPHIA_MISSILE_TAIL_DOWN, 186, 99, 186 + 12, 99 + 7, textPlayer);
+	lib->Add(ID_SOPHIA_MISSILE_TAIL_LEFT, 74, 149, 74 + 8, 149 + 8, textPlayer);
+	lib->Add(ID_SOPHIA_MISSILE_TAIL_UP, 83, 149, 83 + 8, 149 + 8, textPlayer);
+	lib->Add(ID_SOPHIA_MISSILE_TAIL_RIGHT, 92, 149, 92 + 8, 149 + 8, textPlayer);
+	lib->Add(ID_SOPHIA_MISSILE_TAIL_DOWN, 101, 149, 101 + 8, 149 + 8, textPlayer);
 	#pragma endregion
 
 

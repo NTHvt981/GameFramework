@@ -35,12 +35,6 @@
 #define WALKER_HEALTH 3
 #define WORM_HEALTH 1
 
-class CEnemyParam
-{
-public:
-
-};
-
 class CEnemyBuilder
 {
 public:

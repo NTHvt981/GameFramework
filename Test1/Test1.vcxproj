@@ -149,6 +149,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="SourceCode\PlayerBullets\Missile.h" />
     <ClInclude Include="SourceCode\GameObject\Enemies\EnemyBuilder.h" />
     <ClInclude Include="SourceCode\GraphicAndSound\Audio.h" />
     <ClInclude Include="SourceCode\GameObject\Enemies\Canon.h" />
@@ -236,6 +237,7 @@
     <ClInclude Include="SourceCode\GameObject\EnemyBullets\SpiralBullet.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="SourceCode\PlayerBullets\Missile.cpp" />
     <ClCompile Include="SourceCode\GameObject\Enemies\EnemyBuilder.cpp" />
     <ClCompile Include="SourceCode\GraphicAndSound\Audio.cpp" />
     <ClCompile Include="SourceCode\GameObject\Enemies\Canon.cpp" />

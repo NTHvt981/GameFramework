@@ -3,6 +3,8 @@
 #include "SophiaFake.h"
 #include "Jason.h"
 #include "../PlayerBullets/SophiaBullet.h"
+#include "../PlayerBullets/Missile.h"
+
 
 //state for side
 #define ON_LEFT 0
@@ -103,6 +105,7 @@ private:
 	//keys for input
 	void HandleMove(DWORD dt);
 	void HandleJump(DWORD dt);
+	void HandleFiringMissile(DWORD dt);
 
 protected:
 	void GetState(DWORD dt);

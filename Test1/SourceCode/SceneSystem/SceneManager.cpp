@@ -9,7 +9,7 @@ void CSceneManager::Init()
 	bossScene = new CBossScene();
 	endingScene = new CEndingScene;
 
-	currentScene = sideScrollScene;
+	currentScene = introScene;
 }
 
 void CSceneManager::LoadResources()
@@ -22,15 +22,15 @@ void CSceneManager::LoadResources()
 	introScene->LoadResources();
 	endingScene->LoadResources();
 
-	//introScene->Start();
+	introScene->Start();
 	//endingScene->Start();
 
-	Vector startPos = START_AREA6_SIDESCROLL_POS;
-	sideScrollScene->Start(
-		startPos.x,
-		startPos.y
-	);
-	restartPosition.Set(startPos.x, startPos.y);
+	//Vector startPos = START_AREA6_SIDESCROLL_POS;
+	//sideScrollScene->Start(
+	//	startPos.x,
+	//	startPos.y
+	//);
+	//restartPosition.Set(startPos.x, startPos.y);
 
 	//sideScrollScene->Start(
 	//	TOPDOWN_TO_SIDESCROLL_POS.x, 
@@ -138,7 +138,10 @@ void CSceneManager::NormalMode(DWORD dt)
 {
 	currentScene->Update(dt);
 
-	if (CPlayerHealth::GetInstance()->IsGameOver())
+	bool con_1 = CPlayerHealth::GetInstance()->IsGameOver();
+	bool con_2 = CInput::GetInstance()->IsKeyPressed(DIK_R);
+
+	if (con_1 || con_2)
 	{
 		CPlayer::GetCurrentPlayer()->Disable();
 		mode = BEGIN_RESTART_MODE;

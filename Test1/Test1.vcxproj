@@ -149,6 +149,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="SourceCode\Debug\Utils.h" />
     <ClInclude Include="SourceCode\PlayerBullets\Missile.h" />
     <ClInclude Include="SourceCode\GameObject\Enemies\EnemyBuilder.h" />
     <ClInclude Include="SourceCode\GraphicAndSound\Audio.h" />
@@ -157,7 +158,6 @@
     <ClInclude Include="SourceCode\GameObject\Enemies\Head.h" />
     <ClInclude Include="SourceCode\GameObject\Enemies\Dasher.h" />
     <ClInclude Include="SourceCode\GameObject\StaticObjects\Explosion.h" />
-    <ClInclude Include="SourceCode\Debug\Utils.h" />
     <ClInclude Include="SourceCode\PlayerItems\EnergyPickUp.h" />
     <ClInclude Include="SourceCode\PlayerItems\HealthPickUp.h" />
     <ClInclude Include="SourceCode\PlayerItems\PowerPickUp.h" />
@@ -237,6 +237,7 @@
     <ClInclude Include="SourceCode\GameObject\EnemyBullets\SpiralBullet.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="SourceCode\Debug\Utils.cpp" />
     <ClCompile Include="SourceCode\PlayerBullets\Missile.cpp" />
     <ClCompile Include="SourceCode\GameObject\Enemies\EnemyBuilder.cpp" />
     <ClCompile Include="SourceCode\GraphicAndSound\Audio.cpp" />
@@ -245,7 +246,6 @@
     <ClCompile Include="SourceCode\GameObject\Enemies\Head.cpp" />
     <ClCompile Include="SourceCode\GameObject\Enemies\Dasher.cpp" />
     <ClCompile Include="SourceCode\GameObject\StaticObjects\Explosion.cpp" />
-    <ClCompile Include="SourceCode\Debug\Utils.cpp" />
     <ClCompile Include="SourceCode\PlayerItems\EnergyPickUp.cpp" />
     <ClCompile Include="SourceCode\PlayerItems\HealthPickUp.cpp" />
     <ClCompile Include="SourceCode\PlayerItems\PowerPickUp.cpp" />

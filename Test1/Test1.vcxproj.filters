@@ -287,9 +287,6 @@
     <ClInclude Include="SourceCode\PlayerItems\PowerPickUp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SourceCode\Debug\Utils.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SourceCode\GameObject\StaticObjects\Explosion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -324,6 +321,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SourceCode\PlayerBullets\Missile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SourceCode\Debug\Utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -541,9 +541,6 @@
     <ClCompile Include="SourceCode\PlayerItems\PowerPickUp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SourceCode\Debug\Utils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SourceCode\GameObject\StaticObjects\Explosion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -578,6 +575,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SourceCode\PlayerBullets\Missile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SourceCode\Debug\Utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

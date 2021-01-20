@@ -14,6 +14,7 @@ void CGame::Init(HINSTANCE hInstance, int nCmdShow, int width, int height, bool 
 	CGraphic::Instance->Init(hWnd);
 
 	CInput::GetInstance()->Init(hInstance, hWnd);
+	Sound::DirectSound_Init(hWnd);
 
 	/// <summary>
 	/// Setup camera
@@ -513,6 +514,7 @@ void CGame::Render()
 void CGame::CleanResources()
 {
 	CGraphic::Instance->End();
+	Sound::DirectSound_Shutdown();
 }
 
 

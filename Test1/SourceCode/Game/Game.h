@@ -5,6 +5,7 @@
 
 #include "..\GraphicAndSound\Graphic.h"
 #include "..\GraphicAndSound\Audio.h"
+#include "..\GraphicAndSound\Sound.h"
 
 #include "..\Library\TextureLibrary.h"
 #include "..\Library\SpriteLibrary.h"

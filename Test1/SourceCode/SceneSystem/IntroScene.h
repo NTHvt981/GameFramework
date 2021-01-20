@@ -11,10 +11,13 @@
 
 #include "../Camera/Camera.h"
 
+#include "../GraphicAndSound/Sound.h"
+
 class CIntroScene: public CScene
 {
 private:
 	LPAnimation animation;
+	CSound* themeSound;
 public:
 	CIntroScene();
 	void LoadResources();
@@ -22,5 +25,7 @@ public:
 	void Update(DWORD dt);
 	void Render();
 	void End();
+
+	CSound* getThemeSound();
 };
 

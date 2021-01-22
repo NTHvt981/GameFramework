@@ -9,7 +9,7 @@ void CSceneManager::Init()
 	bossScene = new CBossScene();
 	endingScene = new CEndingScene;
 
-	currentScene = bossScene;
+	currentScene = introScene;
 }
 
 void CSceneManager::LoadResources()
@@ -22,7 +22,7 @@ void CSceneManager::LoadResources()
 	introScene->LoadResources();
 	endingScene->LoadResources();
 
-	//introScene->Start();
+	introScene->Start();
 	//endingScene->Start();
 
 	//Vector startPos = START_AREA8_SIDESCROLL_POS;
@@ -44,9 +44,9 @@ void CSceneManager::LoadResources()
 	//);
 	//restartPosition.Set(SIDESCROLL_TO_TOPDOWN_POS.x, SIDESCROLL_TO_TOPDOWN_POS.y);
 
-	Vector startPos = TOPDOWN_TO_BOSS_POS;
-	bossScene->Start(startPos.x, startPos.y);
-	restartPosition.Set(startPos.x, startPos.y);
+	//Vector startPos = TOPDOWN_TO_BOSS_POS;
+	//bossScene->Start(startPos.x, startPos.y);
+	//restartPosition.Set(startPos.x, startPos.y);
 
 	CSoundLibrary::GetInstance()->LoadResources();
 	CSoundLibrary::GetInstance()->LoopMusic();

@@ -9,7 +9,7 @@ void CSceneManager::Init()
 	bossScene = new CBossScene();
 	endingScene = new CEndingScene;
 
-	currentScene = introScene;
+	currentScene = topDownScene;
 }
 
 void CSceneManager::LoadResources()
@@ -22,10 +22,10 @@ void CSceneManager::LoadResources()
 	introScene->LoadResources();
 	endingScene->LoadResources();
 
-	introScene->Start();
+	//introScene->Start();
 	//endingScene->Start();
 
-	//Vector startPos = START_AREA6_SIDESCROLL_POS;
+	//Vector startPos = START_AREA8_SIDESCROLL_POS;
 	//sideScrollScene->Start(
 	//	startPos.x,
 	//	startPos.y
@@ -38,15 +38,18 @@ void CSceneManager::LoadResources()
 	//);
 	//restartPosition.Set(TOPDOWN_TO_SIDESCROLL_POS.x, TOPDOWN_TO_SIDESCROLL_POS.y);
 
-	//topDownScene->Start(
-	//	SIDESCROLL_TO_TOPDOWN_POS.x,
-	//	SIDESCROLL_TO_TOPDOWN_POS.y
-	//);
-	//restartPosition.Set(SIDESCROLL_TO_TOPDOWN_POS.x, SIDESCROLL_TO_TOPDOWN_POS.y);
+	topDownScene->Start(
+		SIDESCROLL_TO_TOPDOWN_POS.x,
+		SIDESCROLL_TO_TOPDOWN_POS.y
+	);
+	restartPosition.Set(SIDESCROLL_TO_TOPDOWN_POS.x, SIDESCROLL_TO_TOPDOWN_POS.y);
 
 	//Vector startPos = TOPDOWN_TO_BOSS_POS;
 	//bossScene->Start(startPos.x, startPos.y);
 	//restartPosition.Set(startPos.x, startPos.y);
+
+	CSoundLibrary::GetInstance()->LoadResources();
+	CSoundLibrary::GetInstance()->LoopMusic();
 }
 
 void CSceneManager::Update(DWORD dt)
@@ -155,6 +158,8 @@ void CSceneManager::BeginChangeSceneMode(DWORD dt)
 	transAlpha = min(transAlpha + transAlphaDivient, 1);
 	if (transAlpha == 1)
 		mode = DURING_CHANGESCENE_MODE;
+
+	CSoundLibrary::GetInstance()->StopMusic();
 }
 
 void CSceneManager::DuringChangeSceneMode(DWORD dt)
@@ -212,6 +217,8 @@ void CSceneManager::EndChangeSceneMode(DWORD dt)
 	transAlpha = max(transAlpha - transAlphaDivient, 0);
 	if (transAlpha == 0)
 		mode = NORMAL_MODE;
+
+	CSoundLibrary::GetInstance()->LoopMusic();
 }
 
 void CSceneManager::BeginRestartMode(DWORD dt)
@@ -219,6 +226,8 @@ void CSceneManager::BeginRestartMode(DWORD dt)
 	transAlpha = min(transAlpha + transAlphaDivient, 1);
 	if (transAlpha == 1)
 		mode = DURING_RESTART_MODE;
+
+	CSoundLibrary::GetInstance()->StopMusic();
 }
 
 void CSceneManager::DuringRestartMode(DWORD dt)
@@ -230,7 +239,7 @@ void CSceneManager::DuringRestartMode(DWORD dt)
 		break;
 
 	case SCENE_TYPES::TopDownScene:
-		topDownScene->Start(restartPosition.x, restartPosition.y);
+		topDownScene->ReStart(restartPosition.x, restartPosition.y);
 		break;
 	}
 
@@ -248,4 +257,6 @@ void CSceneManager::EndRestartMode(DWORD dt)
 		CPlayer::GetCurrentPlayer()->Enable();
 		mode = NORMAL_MODE;
 	}
+
+	CSoundLibrary::GetInstance()->LoopMusic();
 }

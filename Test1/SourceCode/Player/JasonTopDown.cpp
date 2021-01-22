@@ -241,6 +241,8 @@ void CJasonTopDown::Shoot()
 
 	shootCountTime = 0;
 	canShoot = false;
+
+	CSoundLibrary::GetInstance()->PlayPlayerShootSound();
 }
 
 CJasonTopDown* CJasonTopDown::GetInstance()

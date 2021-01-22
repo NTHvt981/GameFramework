@@ -59,3 +59,15 @@ void Sound::Stop(CSound* sound)
 {
 	sound->Stop();
 }
+
+void Sound::PlayFromBegin(CSound* sound)
+{
+	sound->Reset();
+	sound->Play();
+}
+
+void Sound::LoopFromBegin(CSound* sound)
+{
+	sound->Reset();
+	sound->Play(0, DSBPLAY_LOOPING);
+}

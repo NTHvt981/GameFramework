@@ -26,5 +26,8 @@ public:
 	static void Loop(CSound* sound);
 	static void Stop(CSound* sound);
 
+	static void PlayFromBegin(CSound* sound);
+	static void LoopFromBegin(CSound* sound);
+
 };
 

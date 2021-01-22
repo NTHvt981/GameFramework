@@ -4,6 +4,8 @@
 #include "Scene.h"
 
 #include "../Player/JasonTopDown.h"
+#include "../Player/Sophia.h"
+#include "../Player/Jason.h"
 #include <vector>
 
 #include "../SceneSystem/SceneRequest.h"

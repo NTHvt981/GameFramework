@@ -7,6 +7,8 @@
 
 #include "../Input/Input.h"
 
+#include "../GraphicAndSound/SoundLibrary.h"
+
 #define VULNERABLE 0
 #define INVULNERABLE 1
 

@@ -38,6 +38,8 @@ void CWalker::IdleState(DWORD dt)
 		CEnemyBullet::Create(
 			center.x, center.y, dir, WALKER_BULLET_SPEED, 0, ID_ENEMY_TOPDOWN_BULLET_1, 300, true
 		);
+
+		CSoundLibrary::GetInstance()->PlayEnemyShootSound();
 	}
 
 	countUp += dt;

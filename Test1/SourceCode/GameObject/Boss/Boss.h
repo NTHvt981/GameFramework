@@ -16,6 +16,8 @@
 
 #include "../StaticObjects/BreakableWall.h"
 
+#include "../../GraphicAndSound/SoundLibrary.h"
+
 #define BOSS_MOVE_SLOW 1
 #define BOSS_MOVE_NORMAL 1.5
 #define BOSS_MOVE_FAST 2

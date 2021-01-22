@@ -38,6 +38,8 @@ void CEnemy::InflictDamage(int dam)
 		}
 
 		CExplosion::CreateExplosion(center.x, center.y, EXPLOSION_TYPES::Big);
+
+		CSoundLibrary::GetInstance()->PlayEnemyDeathSound();
 	}
 }
 

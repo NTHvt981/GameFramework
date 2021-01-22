@@ -157,7 +157,6 @@ void CTopDownScene::LoadEnemies()
 {
 	//AREA 2
 	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::EyeBall, EYEBALL_TYPE_IDLE), 13 * 32, 58 * 32);
-	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::EyeBall, EYEBALL_TYPE_MOVE), 10 * 32, 58 * 32);
 	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::EyeBall, EYEBALL_TYPE_MOVE), 11 * 32, 60 * 32);
 
 	//AREA 3
@@ -170,7 +169,6 @@ void CTopDownScene::LoadEnemies()
 
 	//AREA 5
 	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::EyeBall, EYEBALL_TYPE_IDLE), 18 * 32, 42 * 32);
-	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::EyeBall, EYEBALL_TYPE_MOVE), 20 * 32, 43 * 32);
 	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Teleporter), 22 * 32, 42 * 32);
 
 	//AREA 6
@@ -182,7 +180,6 @@ void CTopDownScene::LoadEnemies()
 
 	//AREA 8
 	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Canon), 2 * 32, 34 * 32);
-	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::EyeBall, EYEBALL_TYPE_IDLE), 2 * 32, 37 * 32);
 	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Dasher, DASHER_VERTICAL), 5 * 32, 34 * 32);
 
 	//AREA 9
@@ -255,6 +252,12 @@ void CTopDownScene::Start(float x, float y)
 void CTopDownScene::ReStart(float x, float y)
 {
 	Start(x, y);
+
+	CPlayerHealth::GetInstance()->SetPlayerMode(JASON);
+
+	CSophia::GetInstance()->Enable();
+	CJason::GetInstance()->Enable();
+	CJasonTopDown::GetInstance()->Enable();
 }
 
 void CTopDownScene::Update(DWORD dt)

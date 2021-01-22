@@ -8,6 +8,8 @@
 
 #include "..\..\SceneSystem\SceneRequest.h"
 
+#include "../../GraphicAndSound/SoundLibrary.h"
+
 enum EXPLOSION_TYPES
 {
 	Small,

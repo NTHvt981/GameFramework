@@ -10,6 +10,8 @@
 
 #include "../SceneSystem/SceneRequest.h"
 
+#include "../GraphicAndSound/SoundLibrary.h"
+
 class CPlayer: public CEntity
 {
 protected:

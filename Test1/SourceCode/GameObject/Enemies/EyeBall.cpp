@@ -46,6 +46,8 @@ void CEyeBall::Shoot(DWORD dt)
 		CEnemyBullet::Create(
 			center.x, center.y, dir, EYEBALL_BULLET_SPEED, 0, ID_ENEMY_TOPDOWN_BULLET_1, 300, true
 		);
+
+		CSoundLibrary::GetInstance()->PlayEnemyShootSound();
 	}
 }
 

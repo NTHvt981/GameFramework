@@ -49,4 +49,6 @@ void CExplosion::CreateExplosion(float x, float y, EXPLOSION_TYPES type)
 	req->y = y;
 
 	CSceneRequest::AddRequest(req);
+
+	CSoundLibrary::GetInstance()->PlayExplosionSound();
 }

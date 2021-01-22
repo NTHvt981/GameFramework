@@ -198,19 +198,15 @@ void CSideScrollScene::LoadEnemies()
 	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Worm), 26 * 16, 183 * 16);
 	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Worm), 29 * 16, 183 * 16);
 	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Worm), 39 * 16, 183 * 16);
-	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Worm), 51 * 16, 183 * 16);
 	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Worm), 55 * 16, 183 * 16);
 
 	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Floater, FLOATER_DIAGONAL), 34 * 16, 183 * 16);
-	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Floater, FLOATER_DIAGONAL), 46 * 16, 183 * 16);
 
 	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Floater, FLOATER_HORIZONTAL), 68 * 16, 178 * 16);
-	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Floater, FLOATER_DIAGONAL), 76 * 16, 188 * 16);
 	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Floater, FLOATER_DIAGONAL), 79 * 16, 182 * 16);
 
 	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Dome), 81 * 16, 185 * 16);
 	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Jumper), 76 * 16, 176 * 16);
-	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Jumper), 70 * 16, 172 * 16);
 	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Worm), 80 * 16, 168 * 16);
 
 	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Jumper), 77 * 16, 152 * 16);
@@ -237,7 +233,6 @@ void CSideScrollScene::LoadEnemies()
 
 	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Dome), 78 * 16, 177 * 16);
 	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Dome), 70 * 16, 121 * 16);
-	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Dome), 72 * 16, 161 * 16);
 	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Dome), 85 * 16, 145 * 16);
 
 	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Skull), 105 * 16, 120 * 16);
@@ -248,12 +243,10 @@ void CSideScrollScene::LoadEnemies()
 
 	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Orb), 132 * 16, 79 * 16);
 	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Orb), 132 * 16, 87 * 16);
-	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Orb), 132 * 16, 95 * 16);
 	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Orb), 132 * 16, 107 * 16);
 	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Orb), 132 * 16, 115 * 16);
 
 	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Dome), 135 * 16, 77 * 16);
-	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Dome), 135 * 16, 85 * 16);
 	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Dome), 135 * 16, 93 * 16);
 	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Dome), 135 * 16, 105 * 16);
 
@@ -263,25 +256,20 @@ void CSideScrollScene::LoadEnemies()
 
 	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Insect), 120 * 16, 69 * 16);
 	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Insect), 115 * 16, 60 * 16);
-	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Insect), 115 * 16, 48 * 16);
 	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Insect), 123 * 16, 52 * 16);
 	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Insect), 104 * 16, 28 * 16);
-	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Insect), 120 * 16, 20 * 16);
 	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Insect), 120 * 16, 10 * 16);
 
 	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Jumper), 110 * 16, 68 * 16);
-	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Jumper), 110 * 16, 60 * 16);
 	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Jumper), 110 * 16, 36 * 16);
 	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Jumper), 118 * 16, 12 * 16);
 
 	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Worm), 140 * 16, 9 * 16);
 	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Worm), 148 * 16, 9 * 16);
-	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Worm), 144 * 16, 6 * 16);
 	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Worm), 152 * 16, 6 * 16);
 
 	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Floater, FLOATER_VERTICAL), 169 * 16, 4 * 16);
 	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Floater, FLOATER_VERTICAL), 186.5 * 16, 4 * 16);
-	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Floater, FLOATER_VERTICAL), 186.5 * 16, 19 * 16);
 	AddEntity(CEnemyBuilder::Create(ENEMY_TYPE::Floater, FLOATER_VERTICAL), 172 * 16, 28 * 16);
 }
 

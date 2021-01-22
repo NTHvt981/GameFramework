@@ -322,6 +322,8 @@ void CBoss::HandleShoot(DWORD dt)
 				center.y + BOSS_SHOOT_PIVOT.y,
 				dir, BOSS_BULLET_SPEED, 0, ID_ENEMY_TOPDOWN_BULLET_1, 300, true
 			);
+
+			CSoundLibrary::GetInstance()->PlayBossShootSound();
 		}
 	}
 }

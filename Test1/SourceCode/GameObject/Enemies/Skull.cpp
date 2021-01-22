@@ -66,6 +66,8 @@ void CSkull::DropBombState(DWORD dt)
 	request->y = position.y + height/2;
 
 	CSceneRequest::AddRequest(request);
+
+	CSoundLibrary::GetInstance()->PlayEnemyShootSound();
 }
 
 void CSkull::FlyBelowState(DWORD dt)

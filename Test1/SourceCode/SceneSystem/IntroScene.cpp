@@ -88,8 +88,6 @@ void CIntroScene::LoadResources()
 	animation->Add(ID_OPENING_35, 150);
 	animation->Add(ID_OPENING_36, 200);
 	animation->Add(ID_OPENING_37, 1000);
-
-	this->themeSound = Sound::LoadSound("Resources/Sound/SoundTrack.wav");
 }
 
 void CIntroScene::Start()
@@ -99,10 +97,8 @@ void CIntroScene::Start()
 
 void CIntroScene::Update(DWORD dt)
 {
-	Sound::Loop(themeSound);
 	if (animation->IsEnd())
 	{
-		Sound::Stop(this->themeSound);
 		LPGameRequest req = new CGameRequest(GAME_REQUEST_TYPES::SwitchToSideScroll);
 		CGameRequest::AddRequest(req);
 	}
@@ -115,9 +111,4 @@ void CIntroScene::Render()
 
 void CIntroScene::End()
 {
-}
-
-CSound* CIntroScene::getThemeSound()
-{
-	return this->themeSound;
 }

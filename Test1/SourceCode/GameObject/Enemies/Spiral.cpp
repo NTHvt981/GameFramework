@@ -36,6 +36,8 @@ void CSpiral::Shoot()
 	CSpiralBullet::Create(
 		center.x, center.y - 20,
 		center, ID_ENEMY_TOPDOWN_BULLET_1, 3000);
+
+	CSoundLibrary::GetInstance()->PlayEnemyShootSound();
 }
 
 void CSpiral::Update(DWORD dt)

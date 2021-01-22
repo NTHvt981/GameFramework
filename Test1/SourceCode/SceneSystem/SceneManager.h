@@ -4,6 +4,8 @@
 #include "../Unit/Sprite.h"
 #include "../Library/SpriteLibrary.h"
 
+#include "../GraphicAndSound/SoundLibrary.h"
+
 #include "IntroScene.h"
 #include "EndingScene.h"
 #include "GameOverScene.h"

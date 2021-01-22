@@ -388,6 +388,8 @@ void CJason::Shoot()
 
 	shootCountTime = 0;
 	canShoot = false;
+
+	CSoundLibrary::GetInstance()->PlayPlayerShootSound();
 }
 
 CJason* CJason::GetInstance()

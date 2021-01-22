@@ -12,6 +12,8 @@
 
 #include "../EnemyBullets/EnemyBullet.h"
 
+#include "../../GraphicAndSound/SoundLibrary.h"
+
 enum ENEMY_TYPE {
 	Canon,
 	Dasher,

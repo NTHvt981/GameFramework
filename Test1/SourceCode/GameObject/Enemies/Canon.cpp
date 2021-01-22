@@ -24,12 +24,12 @@ void CCanon::Update(DWORD dt)
 	currFrame = animation->GetCurrentFrame();
 
 	//Shoot horizontal
-	if (currFrame == 1 && prevFrame == 0)
+	if (currFrame == 1 && prevFrame == 0 && InPlayerZone())
 	{
 		ShootHorizontal(dt);
 	}
 
-	if (currFrame == 3 && prevFrame == 2)
+	if (currFrame == 3 && prevFrame == 2 && InPlayerZone())
 	{
 		ShootVertical(dt);
 	}
@@ -52,6 +52,8 @@ void CCanon::ShootHorizontal(DWORD dt)
 		Vector(-1, 0),
 		CANON_BULLET_SPEED, 0, ID_ENEMY_TOPDOWN_BULLET_1, 300, true
 	);
+
+	CSoundLibrary::GetInstance()->PlayBossShootSound();
 }
 
 void CCanon::ShootVertical(DWORD dt)
@@ -69,6 +71,8 @@ void CCanon::ShootVertical(DWORD dt)
 		Vector(0, -1),
 		CANON_BULLET_SPEED, 0, ID_ENEMY_TOPDOWN_BULLET_1, 300, true
 	);
+
+	CSoundLibrary::GetInstance()->PlayBossShootSound();
 }
 
 void CCanon::Render()

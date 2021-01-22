@@ -56,6 +56,8 @@ void CInsect::HandleShoot(DWORD dt)
 				animation = rightAni;
 			else
 				animation = leftAni;
+
+			CSoundLibrary::GetInstance()->PlayEnemyShootSound();
 		}
 	}
 }

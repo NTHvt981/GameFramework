@@ -170,7 +170,14 @@ void CSophia::Update(DWORD dt)
 	if (velocity.y < 0)
 		onGround = false;
 	else if (velocity.y == 0 && old_velocity.y > 0)
-		onGround = true;
+	{
+		if (!onGround)
+		{
+			CSoundLibrary::GetInstance()->PlayPlayerTouchGroundSound();
+
+			onGround = true;
+		}
+	}
 
 	/// <summary>
 	/// health section
@@ -215,14 +222,23 @@ void CSophia::HandleJump(DWORD dt)
 	{
 		jumpCountUp += dt;
 		if (jumpCountUp >= bigJumpWaitTime)
+		{
 			velocity.y = -SOPHIA_HIGH_JUMP_SPEED;
+			CSoundLibrary::GetInstance()->PlayPlayerJumpSound();
+		}
 	}
 	else if (onGround && keyJumpRelease)
 	{
 		if (jumpCountUp >= smallJumpWaitTime)
+		{
 			velocity.y = -SOPHIA_MEDIUM_JUMP_SPEED;
+			CSoundLibrary::GetInstance()->PlayPlayerJumpSound();
+		}
 		else
+		{
 			velocity.y = -SOPHIA_LOW_JUMP_SPEED;
+			CSoundLibrary::GetInstance()->PlayPlayerJumpSound();
+		}
 	}
 	else
 		jumpCountUp = 0;
@@ -249,6 +265,8 @@ void CSophia::HandleFiringMissile(DWORD dt)
 		request->x = center.x;
 		request->y = center.y;
 		CSceneRequest::AddRequest(request);
+
+		CSoundLibrary::GetInstance()->PlayPlayerFireMissileSound();
 	}
 }
 
@@ -352,6 +370,8 @@ void CSophia::Shoot()
 
 	shootCountTime = 0;
 	canShoot = false;
+
+	CSoundLibrary::GetInstance()->PlayPlayerShootSound();
 }
 
 void CSophia::HandleSwitchToJason()

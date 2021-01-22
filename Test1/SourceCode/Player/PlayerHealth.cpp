@@ -89,6 +89,8 @@ void CPlayerHealth::ReduceHealth(GOTYPES Type, int damage)
         ReduceJasonHealth(damage);
     else if (Type == GOTYPES::Sophia)
         ReduceSophiaHealth(damage);
+
+    CSoundLibrary::GetInstance()->PlayPlayerHurtSound();
 }
 
 void CPlayerHealth::ReduceHealth(int damage)
@@ -97,6 +99,8 @@ void CPlayerHealth::ReduceHealth(int damage)
         ReduceSophiaHealth(damage);
     else if (playerMode == JASON)
         ReduceJasonHealth(damage);
+
+    CSoundLibrary::GetInstance()->PlayPlayerHurtSound();
 }
 
 void CPlayerHealth::IncreaseHealth(GOTYPES Type, int heal_points)

@@ -153,6 +153,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="SourceCode\GraphicAndSound\SoundLibrary.h" />
     <ClInclude Include="SourceCode\Debug\Utils.h" />
     <ClInclude Include="SourceCode\GraphicAndSound\Sound.h" />
     <ClInclude Include="SourceCode\PlayerBullets\Missile.h" />
@@ -242,6 +243,7 @@
     <ClInclude Include="SourceCode\GameObject\EnemyBullets\SpiralBullet.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="SourceCode\GraphicAndSound\SoundLibrary.cpp" />
     <ClCompile Include="SourceCode\Debug\Utils.cpp" />
     <ClCompile Include="SourceCode\GraphicAndSound\Sound.cpp" />
     <ClCompile Include="SourceCode\PlayerBullets\Missile.cpp" />
@@ -359,7 +361,45 @@
   </ItemGroup>
   <ItemGroup>
     <Media Include="C:\Users\Admin\Downloads\Compressed\NES - Blaster Master - Sound Effects\SoundTrack.mp3" />
+    <Media Include="Resources\Sound\Blaster Master SFX (1).wav" />
+    <Media Include="Resources\Sound\Blaster Master SFX (10).wav" />
+    <Media Include="Resources\Sound\Blaster Master SFX (11).wav" />
+    <Media Include="Resources\Sound\Blaster Master SFX (12).wav" />
+    <Media Include="Resources\Sound\Blaster Master SFX (13).wav" />
+    <Media Include="Resources\Sound\Blaster Master SFX (14).wav" />
+    <Media Include="Resources\Sound\Blaster Master SFX (15).wav" />
+    <Media Include="Resources\Sound\Blaster Master SFX (16).wav" />
+    <Media Include="Resources\Sound\Blaster Master SFX (17).wav" />
+    <Media Include="Resources\Sound\Blaster Master SFX (18).wav" />
+    <Media Include="Resources\Sound\Blaster Master SFX (19).wav" />
+    <Media Include="Resources\Sound\Blaster Master SFX (2).wav" />
+    <Media Include="Resources\Sound\Blaster Master SFX (20).wav" />
+    <Media Include="Resources\Sound\Blaster Master SFX (21).wav" />
+    <Media Include="Resources\Sound\Blaster Master SFX (22).wav" />
+    <Media Include="Resources\Sound\Blaster Master SFX (23).wav" />
+    <Media Include="Resources\Sound\Blaster Master SFX (24).wav" />
+    <Media Include="Resources\Sound\Blaster Master SFX (25).wav" />
+    <Media Include="Resources\Sound\Blaster Master SFX (26).wav" />
+    <Media Include="Resources\Sound\Blaster Master SFX (27).wav" />
+    <Media Include="Resources\Sound\Blaster Master SFX (28).wav" />
+    <Media Include="Resources\Sound\Blaster Master SFX (29).wav" />
+    <Media Include="Resources\Sound\Blaster Master SFX (3).wav" />
+    <Media Include="Resources\Sound\Blaster Master SFX (30).wav" />
+    <Media Include="Resources\Sound\Blaster Master SFX (31).wav" />
+    <Media Include="Resources\Sound\Blaster Master SFX (32).wav" />
+    <Media Include="Resources\Sound\Blaster Master SFX (33).wav" />
+    <Media Include="Resources\Sound\Blaster Master SFX (34).wav" />
+    <Media Include="Resources\Sound\Blaster Master SFX (35).wav" />
+    <Media Include="Resources\Sound\Blaster Master SFX (36).wav" />
+    <Media Include="Resources\Sound\Blaster Master SFX (37).wav" />
+    <Media Include="Resources\Sound\Blaster Master SFX (4).wav" />
+    <Media Include="Resources\Sound\Blaster Master SFX (5).wav" />
+    <Media Include="Resources\Sound\Blaster Master SFX (6).wav" />
+    <Media Include="Resources\Sound\Blaster Master SFX (7).wav" />
+    <Media Include="Resources\Sound\Blaster Master SFX (8).wav" />
+    <Media Include="Resources\Sound\Blaster Master SFX (9).wav" />
     <Media Include="Resources\Sound\SoundTrack.mp3" />
+    <Media Include="Resources\Sound\SoundTrack.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

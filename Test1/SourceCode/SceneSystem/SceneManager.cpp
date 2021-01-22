@@ -9,7 +9,7 @@ void CSceneManager::Init()
 	bossScene = new CBossScene();
 	endingScene = new CEndingScene;
 
-	currentScene = topDownScene;
+	currentScene = bossScene;
 }
 
 void CSceneManager::LoadResources()
@@ -38,15 +38,15 @@ void CSceneManager::LoadResources()
 	//);
 	//restartPosition.Set(TOPDOWN_TO_SIDESCROLL_POS.x, TOPDOWN_TO_SIDESCROLL_POS.y);
 
-	topDownScene->Start(
-		SIDESCROLL_TO_TOPDOWN_POS.x,
-		SIDESCROLL_TO_TOPDOWN_POS.y
-	);
-	restartPosition.Set(SIDESCROLL_TO_TOPDOWN_POS.x, SIDESCROLL_TO_TOPDOWN_POS.y);
+	//topDownScene->Start(
+	//	SIDESCROLL_TO_TOPDOWN_POS.x,
+	//	SIDESCROLL_TO_TOPDOWN_POS.y
+	//);
+	//restartPosition.Set(SIDESCROLL_TO_TOPDOWN_POS.x, SIDESCROLL_TO_TOPDOWN_POS.y);
 
-	//Vector startPos = TOPDOWN_TO_BOSS_POS;
-	//bossScene->Start(startPos.x, startPos.y);
-	//restartPosition.Set(startPos.x, startPos.y);
+	Vector startPos = TOPDOWN_TO_BOSS_POS;
+	bossScene->Start(startPos.x, startPos.y);
+	restartPosition.Set(startPos.x, startPos.y);
 
 	CSoundLibrary::GetInstance()->LoadResources();
 	CSoundLibrary::GetInstance()->LoopMusic();
@@ -240,6 +240,10 @@ void CSceneManager::DuringRestartMode(DWORD dt)
 
 	case SCENE_TYPES::TopDownScene:
 		topDownScene->ReStart(restartPosition.x, restartPosition.y);
+		break;
+
+	case SCENE_TYPES::BossScene:
+		bossScene->ReStart(restartPosition.x, restartPosition.y);
 		break;
 	}
 

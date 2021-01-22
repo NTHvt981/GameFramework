@@ -155,6 +155,8 @@ void CBossScene::Update(DWORD dt)
 	default:
 		break;
 	}
+
+	ExecuteRequests();
 }
 
 void CBossScene::Render()
@@ -165,7 +167,6 @@ void CBossScene::Render()
 	CPlayerHealth::GetInstance()->Render();
 
 	RenderOtherEntities();
-	ExecuteRequests();
 }
 
 void CBossScene::End()

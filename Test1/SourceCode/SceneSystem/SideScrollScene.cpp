@@ -342,9 +342,6 @@ void CSideScrollScene::ReStart(float x, float y)
 
 	CSophia::GetInstance()->Enable();
 	CJason::GetInstance()->Enable();
-
-	DeleteEnemies();
-	LoadEnemies();
 }
 
 void CSideScrollScene::Resume()
@@ -632,7 +629,7 @@ void CSideScrollScene::RemoveEntity(int id)
 {
 	LPEntity entity = mapEntities[id];
 
-	//if (entity->GetType() == GOTYPES::Enemy) enemiesId.remove(id);
+	if (entity == NULL) return;
 
 	int grid_x, grid_y;
 	entity->GetGridPosition(grid_x, grid_y);

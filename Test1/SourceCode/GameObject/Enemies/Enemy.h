@@ -33,7 +33,7 @@ enum ENEMY_TYPE {
 
 #define HEALTH_PICKUP_CHANCE 0.5
 
-#define SPIRAL_HEALTH 10
+//#define SPIRAL_HEALTH 10
 
 class CEnemy : public CEntity
 {

@@ -290,6 +290,8 @@ void CTopDownScene::Update(DWORD dt)
 	CCamera* cam = CCamera::GetInstance();
 	CPlayer* player = CPlayer::GetCurrentPlayer();
 	//check here
+
+	ExecuteRequests();
 }
 
 void CTopDownScene::Render()
@@ -302,8 +304,6 @@ void CTopDownScene::Render()
 	RenderPlayer();
 
 	RenderPortals();
-
-	ExecuteRequests();
 }
 
 void CTopDownScene::End()
@@ -512,6 +512,8 @@ void CTopDownScene::AddEntity(LPEntity entity, float x, float y)
 void CTopDownScene::RemoveEntity(int id)
 {
 	LPEntity entity = mapEntities[id];
+
+	if (entity == NULL) return;
 
 	int grid_x, grid_y;
 	entity->GetGridPosition(grid_x, grid_y);

@@ -16,8 +16,6 @@ CSpiral::CSpiral()
 		width, height
 	);
 	collisionBox->SetSolid(false);
-
-	SetMaxHealth(SPIRAL_HEALTH);
 }
 
 void CSpiral::Shoot()

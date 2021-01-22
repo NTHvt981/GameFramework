@@ -37,19 +37,19 @@ void CCollisionBox::AddCoBox(LPCollisionBox lpBox)
 
 void CCollisionBox::Render()
 {
-	D3DXVECTOR3 position(
-		left, top, 0);
-	D3DXVECTOR3 origin(0, 0, 0);
+	//D3DXVECTOR3 position(
+	//	left, top, 0);
+	//D3DXVECTOR3 origin(0, 0, 0);
 
-	LPDIRECT3DTEXTURE9 bbox = CTextureLibrary::GetInstance()->Get(ID_TEX_BBOX);
+	//LPDIRECT3DTEXTURE9 bbox = CTextureLibrary::GetInstance()->Get(ID_TEX_BBOX);
 
-	float l, t, r, b;
-	l = 0;
-	t = 0;
-	r = right - left;
-	b = bottom- top;
+	//float l, t, r, b;
+	//l = 0;
+	//t = 0;
+	//r = right - left;
+	//b = bottom- top;
 
-	CGraphic::Instance->Draw(bbox, position.x, position.y, l, t, r, b, 0, 0, 0.2);
+	//CGraphic::Instance->Draw(bbox, position.x, position.y, l, t, r, b, 0, 0, 0.2);
 }
 
 float CCollisionBox::GetLeft()

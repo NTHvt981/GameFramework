@@ -154,6 +154,9 @@ AutoTest.Net/
 # Installshield output folder
 [Ee]xpress/
 
+# Project and solution folders
+vs2019/
+
 # DocProject is a documentation generator add-in
 DocProject/buildhelp/
 DocProject/Help/*.HxT

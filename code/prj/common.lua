@@ -1,0 +1,8 @@
+root_path = "../../"
+release_path = root_path.."release/"
+libs_path = root_path.."libs/"
+temp_path = root_path.."temp/"
+code_path = root_path.."code/"
+prj_path = code_path.."prj/"
+prj_2019_path = prj_path.."vs2019/"
+source_path = code_path.."source/"

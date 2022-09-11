@@ -1,5 +1,6 @@
 #pragma once
 #include <optional>
+#include <assert.h>
 
 namespace data_types
 {
@@ -10,19 +11,13 @@ class InitOnce
 public:
 	void Set(const T& i_newValue)
 	{
-		if (m_value.has_value())
-		{
-			throw("InitOnce logic violation, value can only be initialized once!");
-		}
+		assert(!m_value.has_value());
 		m_value = i_newValue;
 	}
 
 	T Get() const
 	{
-		if (!m_value.has_value())
-		{
-			throw("InitOnce logic violation, value must be initialized!");
-		}
+		assert(m_value.has_value());
 		return m_value.value();
 	}
 

@@ -1,4 +1,5 @@
 #pragma once
+#include <assert.h>
 
 namespace data_types
 {
@@ -8,10 +9,7 @@ class Flag
 public:
 	void Set()
 	{
-		if (m_flag)
-		{
-			throw("Flag logic violation, value can only be set once!");
-		}
+		assert(!m_flag);
 		m_flag = true;
 	}
 

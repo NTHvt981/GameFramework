@@ -3,7 +3,7 @@
 namespace ids
 {
 
-enum class FileId
+enum class FileId : uint64_t
 {
 	EnemiesTexture,
 	PlayerTexture,

@@ -48,7 +48,7 @@ void String::Set(const std::string& i_str)
 
 void String::Set(const std::wstring& i_wstr)
 {
-	m_innerString = std::string(i_wstr.begin(), i_wstr.end());
+	m_innerString = std::string(i_wstr.cbegin(), i_wstr.cend());
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -62,7 +62,7 @@ const std::string String::ToStdStr() const
 
 const std::wstring String::ToStdWStr() const
 {
-	return std::wstring(m_innerString.begin(), m_innerString.end());
+	return std::wstring(m_innerString.cbegin(), m_innerString.cend());
 }
 
 ////////////////////////////////////////////////////////////////////////////////

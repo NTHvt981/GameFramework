@@ -3,7 +3,7 @@
 namespace ids
 {
 
-enum class SpriteId
+enum class SpriteId : uint64_t
 {
 #pragma region Sophia
 	SophiaGunLeft,

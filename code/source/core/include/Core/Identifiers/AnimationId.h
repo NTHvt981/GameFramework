@@ -3,7 +3,7 @@
 namespace ids
 {
 
-enum class AnimationId
+enum class AnimationId : uint64_t
 {
 	COUNT // Special enum
 };

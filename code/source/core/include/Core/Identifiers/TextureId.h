@@ -3,7 +3,7 @@
 namespace ids
 {
 
-enum class TextureId
+enum class TextureId : uint64_t
 {
 	Enemies,
 	Player,

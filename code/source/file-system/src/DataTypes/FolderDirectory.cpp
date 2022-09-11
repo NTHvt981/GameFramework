@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "FileSystem/DataTypes/Folder.h"
 #include "FileSystem/DataTypes/FolderDirectory.h"
 #include "Core/Helpers/StringHelper.h"
 #include <iterator>
@@ -47,7 +48,7 @@ void FolderDirectory::operator=(const FolderDirectory& i_other)
 
 void FolderDirectory::SetFolders(data_types::String i_path)
 {
-	std::vector<data_types::String> folderNames = data_types::string::Split(i_path, m_delimiter.GetName());
+	std::vector<data_types::String> folderNames = data_types::string::Split(i_path, m_delimiter.name);
 	for (const data_types::String& folderName : folderNames)
 	{
 		m_folders.push_back(Folder{ folderName });
@@ -59,7 +60,7 @@ void FolderDirectory::SetFolders(data_types::String i_path)
 data_types::String FolderDirectory::ToString() const
 {
 	std::string result;
-	const std::string& stdDeli = m_delimiter.GetName().ToStdStr();
+	const std::string& stdDeli = m_delimiter.name.ToStdStr();
 
 	for (const Folder& folder : m_folders)
 	{

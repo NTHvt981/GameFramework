@@ -1,10 +1,12 @@
 #include "stdafx.h"
+#include "FileSystem/DataTypes/Folder.h"
 #include "FileSystem/FileSystem.h"
 #include "FileSystem/DataTypes/FolderDirectory.h"
 #include "FileSystem/DataTypes/FileDirectory.h"
 #include "Core/Identifiers/FileId.h"
 #include "Core/DataTypes/Flag.h"
 #include "Core/DataTypes/InitOnce.h"
+#include "Core/DataTypes/String.h"
 #include <windows.h>
 
 data_types::String GetApplicationFolderPath(const data_types::String& i_demiliter);

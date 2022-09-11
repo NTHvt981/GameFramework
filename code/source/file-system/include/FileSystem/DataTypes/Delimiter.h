@@ -7,10 +7,7 @@ namespace files
 class Delimiter
 {
 public:
-	data_types::String GetName() const
-	{
-		return "\\";
-	};
+	data_types::String name = "\\";
 };
 
 } // namespace files

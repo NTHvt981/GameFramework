@@ -1,10 +1,10 @@
 #pragma once
-#include "Folder.h"
 #include "Delimiter.h"
 #include <list>
 
 namespace files
 {
+struct Folder;
 
 class FolderDirectory
 {

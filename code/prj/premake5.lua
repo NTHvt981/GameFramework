@@ -58,7 +58,7 @@ function addCore()
       }
 end
 
-local file_system_path = source_path.."file_system/"
+local file_system_path = source_path.."file-system/"
 local file_system_include_path = file_system_path.."include/"
 function addFileSystem()
    local file_system_src_path = file_system_path.."src/"
@@ -77,7 +77,32 @@ function addFileSystem()
          file_system_include_path,
          file_system_src_path
       }
-      
+
+      links {
+         "core"
+      }
+end
+
+local file_system_path = source_path.."file-system/"
+local file_system_include_path = file_system_path.."include/"
+function addFileSystem()
+   local file_system_src_path = file_system_path.."src/"
+
+   project "file-system"
+      kind "StaticLib"
+
+      files { 
+         file_system_path.."**.h", 
+         file_system_path.."**.cpp" 
+      }
+
+      includedirs { 
+         core_include_path,
+
+         file_system_include_path,
+         file_system_src_path
+      }
+
       links {
          "core"
       }
@@ -128,6 +153,33 @@ function addApp()
          "avrt",
          "legacy_stdio_definitions",
          "X3DAudio"
+      }
+end
+
+local test_path = source_path.."test/"
+local test_include_path = test_path.."include/"
+function addFileSystem()
+   local test_src_path = test_path.."src/"
+
+   project "test"
+      kind "WindowedApp"
+
+      files { 
+         test_path.."**.h", 
+         test_path.."**.cpp" 
+      }
+
+      includedirs { 
+         core_include_path,
+         file_system_include_path,
+
+         test_include_path,
+         test_src_path
+      }
+
+      links {
+         "core",
+         "file-system",
       }
 end
 

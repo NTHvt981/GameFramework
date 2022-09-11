@@ -4,6 +4,7 @@
 #include <windows.h>
 #include <string>
 #include <iostream>
+#include <assert.h>
 
 CGraphic* CGraphic::Instance = new CGraphic();
 
@@ -37,7 +38,7 @@ int64_t CGraphic::Init(HWND hwnd) {
 	d3dpp.BackBufferHeight = r.bottom + 1;
 	d3dpp.BackBufferWidth = r.right + 1;
 
-	d3d->CreateDevice(
+	HRESULT result = d3d->CreateDevice(
 		D3DADAPTER_DEFAULT,
 		D3DDEVTYPE_HAL,
 		hWnd,
@@ -47,17 +48,17 @@ int64_t CGraphic::Init(HWND hwnd) {
 
 	if (d3ddev == NULL)
 	{
-		//OutputDebugString(L"[ERROR] CreateDevice failed\n");
-		MessageBox(hwnd, L"Error CreateDevice failed", L"Error", MB_OK);
-		return 0;
+		throw("CreateDevice fail, error code: %d", result);
 	}
 
 	d3ddev->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &backBuffer);
 
 	// Initialize sprite helper from Direct3DX helper library
 	HRESULT result = D3DXCreateSprite(d3ddev, &spriteHandler);
-	//if (!SUCCEEDED(result))
-
+	if (!SUCCEEDED(result))
+	{
+		throw("D3DXCreateSprite fail, error code: %d", result);
+	}
 
 	OutputDebugString(L"[INFO] Init graphic done;\n");
 	return 1;

@@ -16,6 +16,7 @@ struct AnimationFrameDef
 struct AnimationDef
 {
 	std::valarray<AnimationFrameDef> frames;
+	float alpha;
 };
 
 } // namespace graphics

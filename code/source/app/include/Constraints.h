@@ -14,7 +14,7 @@
 
 #include <vector>
 
-#include "Core/Vector.h"
+#include "Core/DataTypes/Vector2.h"
 #include "Debug.h"
 #include "Timer.h"
 

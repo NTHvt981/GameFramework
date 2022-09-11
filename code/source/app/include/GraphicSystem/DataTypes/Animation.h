@@ -7,8 +7,6 @@
 #define ANIMATION_PAUSE 0
 #define ANIMATION_REVERSE -1
 
-
-
 class CAnimationFrame
 {
 	LPSprite sprite;

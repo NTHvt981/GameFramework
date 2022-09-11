@@ -60,8 +60,8 @@
 #define OPENING_TEXTURE_PATH L"Texture\\Opening.png"
 #define ROLLOUT_TEXTURE_PATH L"Texture\\RollOut.png"
 #define ITEMS_TEXTURE_PATH L"Texture\\Items.png"
-
 #define TEX_BBOX_PATH L"Texture\\bbox.png"
+
 #define ID_TEX_BBOX 999		// special texture to draw object bounding box
 
 #define POSITION_START_X 10

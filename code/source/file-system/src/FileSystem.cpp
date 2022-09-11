@@ -1,4 +1,8 @@
 #include "FileSystem/FileSystem.h"
+#include "FileSystem/DataTypes/FolderDirectory.h"
+#include "FileSystem/DataTypes/FileDirectory.h"
+#include "Core/DataTypes/Flag.h"
+#include "Core/DataTypes/InitOnce.h"
 #include <windows.h>
 
 data_types::String GetApplicationFolderPath(const data_types::String& i_demiliter);
@@ -9,6 +13,8 @@ namespace files
 ////////////////////////////////////////////////////////////////////////////////
 
 FileSystem::FileSystem()
+	: m_applicationFolderDirectory(std::make_unique<data_types::InitOnce<FolderDirectory>>())
+	, m_initializeFlag(std::make_unique<data_types::Flag>())
 {
 	Folder textureFolder{"Texture"};
 	m_mapFileDirectories = {
@@ -96,17 +102,17 @@ FileSystem::~FileSystem()
 
 void FileSystem::Initialize()
 {
-	m_initializeFlag.Set();
+	m_initializeFlag->Set();
 
 	const data_types::String applicationFolderPath = GetApplicationFolderPath("\\");
 
 	FolderDirectory newValue({});
 	newValue.SetFolders(applicationFolderPath);
-	m_applicationFolderDirectory.Set(newValue);
+	m_applicationFolderDirectory->Set(newValue);
 
 	for (auto& [id, fileDirectory] : m_mapFileDirectories)
 	{
-		fileDirectory.folderDirectory =  m_applicationFolderDirectory.Get() + fileDirectory.folderDirectory;
+		fileDirectory.folderDirectory =  m_applicationFolderDirectory->Get() + fileDirectory.folderDirectory;
 	}
 }
 

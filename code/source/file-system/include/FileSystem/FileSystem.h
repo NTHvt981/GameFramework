@@ -1,14 +1,21 @@
 #pragma once
 #include "IFileSystem.h"
-#include "FileSystem/DataTypes/FolderDirectory.h"
-#include "FileSystem/DataTypes/FileDirectory.h"
-#include "Core/DataTypes/Flag.h"
-#include "Core/DataTypes/InitOnce.h"
 
 #include <unordered_map>
+#include <memory>
+
+namespace data_types
+{
+template<typename T>
+class InitOnce;
+class Flag;
+}
 
 namespace files
 {
+class FolderDirectory;
+struct FileDirectory;
+
 class FileSystem final : public IFileSystem
 {
 
@@ -22,8 +29,8 @@ public:
 	data_types::String GetFileDirectory(const ids::FileId i_fileId) const override;
 
 private:
-	data_types::InitOnce<FolderDirectory> m_applicationFolderDirectory;
-	data_types::Flag m_initializeFlag;
+	std::unique_ptr<data_types::InitOnce<FolderDirectory>> m_applicationFolderDirectory;
+	std::unique_ptr<data_types::Flag> m_initializeFlag;
 	std::unordered_map<ids::FileId, FileDirectory> m_mapFileDirectories;
 };
 

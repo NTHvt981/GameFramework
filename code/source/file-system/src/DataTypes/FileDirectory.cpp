@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "FileSystem/DataTypes/FileDirectory.h"
 
 namespace files

@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "FileSystem/FileSystem.h"
 #include "FileSystem/DataTypes/FolderDirectory.h"
 #include "FileSystem/DataTypes/FileDirectory.h"

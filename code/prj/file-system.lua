@@ -9,8 +9,7 @@ local file_system_src_path = file_system_path.."src/"
 function addFileSystem()
    project(file_system_prj_name)
       kind "StaticLib"
-      pchheader "stdafx.h"
-      
+
       files { 
          file_system_path.."**.h", 
          file_system_path.."**.cpp" 
@@ -20,6 +19,9 @@ function addFileSystem()
          file_system_include_path,
          file_system_src_path
       }
+
+      pchheader "stdafx.h"
+      pchsource(file_system_src_path.."stdafx.cpp")
 
       includeCore()
 end

@@ -9,7 +9,7 @@ class Delimiter
 public:
 	data_types::String GetName() const
 	{
-		return "//";
+		return "\\";
 	};
 };
 

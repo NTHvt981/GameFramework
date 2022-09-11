@@ -10,7 +10,79 @@ namespace files
 
 FileSystem::FileSystem()
 {
-
+	Folder textureFolder{"Texture"};
+	m_mapFileDirectories = {
+		{
+			ids::FileId::EnemiesTexture,
+			FileDirectory {
+				FolderDirectory{BackwardFolder, textureFolder},
+				File{"enemies", "png"}
+			}
+		},
+		{
+			ids::FileId::PlayerTexture,
+			FileDirectory {
+				FolderDirectory{BackwardFolder, textureFolder},
+				File{"PlayerSheetTransparent", "png"}
+			}
+		},
+		{
+			ids::FileId::PlayerHealthTexture,
+			FileDirectory {
+				FolderDirectory{BackwardFolder, textureFolder},
+				File{"Player health", "png"}
+			}
+		},
+		{
+			ids::FileId::OtherObjectsTexture,
+			FileDirectory {
+				FolderDirectory{BackwardFolder, textureFolder},
+				File{"OtherObjects", "png"}
+			}
+		},
+		{
+			ids::FileId::BlackScreenTexture,
+			FileDirectory {
+				FolderDirectory{BackwardFolder, textureFolder},
+				File{"BlackScreen", "png"}
+			}
+		},
+		{
+			ids::FileId::BossTexture,
+			FileDirectory {
+				FolderDirectory{BackwardFolder, textureFolder},
+				File{"Boss", "png"}
+			}
+		},
+		{
+			ids::FileId::OpeningTexture,
+			FileDirectory {
+				FolderDirectory{BackwardFolder, textureFolder},
+				File{"Opening", "png"}
+			}
+		},
+		{
+			ids::FileId::BlackScreenTexture,
+			FileDirectory {
+				FolderDirectory{BackwardFolder, textureFolder},
+				File{"RollOut", "png"}
+			}
+		},
+		{
+			ids::FileId::ItemTexture,
+			FileDirectory {
+				FolderDirectory{BackwardFolder, textureFolder},
+				File{"Items", "png"}
+			}
+		},
+		{
+			ids::FileId::CollisionDebugTexture,
+			FileDirectory {
+				FolderDirectory{BackwardFolder, textureFolder},
+				File{"bbox", "png"}
+			}
+		},
+	};
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -26,9 +98,16 @@ void FileSystem::Initialize()
 {
 	m_initializeFlag.Set();
 
+	const data_types::String applicationFolderPath = GetApplicationFolderPath("\\");
+
 	FolderDirectory newValue({});
-	newValue.SetFolders(GetApplicationFolderPath("//"));
+	newValue.SetFolders(applicationFolderPath);
 	m_applicationFolderDirectory.Set(newValue);
+
+	for (auto& [id, fileDirectory] : m_mapFileDirectories)
+	{
+		fileDirectory.folderDirectory =  m_applicationFolderDirectory.Get() + fileDirectory.folderDirectory;
+	}
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -40,37 +119,27 @@ void Initialize()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void FileSystem::WriteTextFile(const FileId i_fileId)
+void FileSystem::WriteTextFile(const ids::FileId i_fileId)
 {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void FileSystem::ReadTextFile(const FileId i_fileId)
+void FileSystem::ReadTextFile(const ids::FileId i_fileId)
 {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-data_types::String FileSystem::GetFileDirectory(const FileId i_fileId) const
+data_types::String FileSystem::GetFileDirectory(const ids::FileId i_fileId) const
 {
-	return data_types::String();
-}
+	if (m_mapFileDirectories.find(i_fileId) == m_mapFileDirectories.end())
+	{
+		throw("Invalid FileId, can not find directory for %d", i_fileId);
+	}
 
-////////////////////////////////////////////////////////////////////////////////
-
-data_types::String FileSystem::ToPath(const FolderDirectory& i_folderDirectory) const
-{
-	return (m_applicationFolderDirectory.Get() + (i_folderDirectory)).ToString();
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-data_types::String FileSystem::ToPath(const FileDirectory& i_fileDirectory) const
-{
-	FileDirectory result;
-	result.folderDirectory = m_applicationFolderDirectory.Get() + (i_fileDirectory.folderDirectory);
-	return result.ToString();
+	const FileDirectory& fileDirectory = m_mapFileDirectories.at(i_fileId);
+	return fileDirectory.ToString();
 }
 
 ////////////////////////////////////////////////////////////////////////////////

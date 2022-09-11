@@ -158,11 +158,11 @@ end
 
 local test_path = source_path.."test/"
 local test_include_path = test_path.."include/"
-function addFileSystem()
+function addTest()
    local test_src_path = test_path.."src/"
 
    project "test"
-      kind "WindowedApp"
+      kind "ConsoleApp"
 
       files { 
          test_path.."**.h", 
@@ -189,3 +189,4 @@ addSln()
 addCore()
 addFileSystem()
 addApp()
+addTest()

@@ -3,7 +3,7 @@
 namespace files
 {
 
-data_types::String FileDirectory::ToString()
+data_types::String FileDirectory::ToString() const
 {
 	return folderDirectory.ToString() + file.name + "." + file.extension;
 }

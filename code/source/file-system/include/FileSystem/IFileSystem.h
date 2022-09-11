@@ -1,6 +1,10 @@
 #pragma once
 #include "Core/DataTypes/String.h"
-#include "Core/Identifiers/FileId.h"
+
+namespace ids
+{
+enum class FileId : uint64_t;
+} // namespace ids
 
 namespace files
 {

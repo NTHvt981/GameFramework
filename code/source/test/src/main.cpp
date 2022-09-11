@@ -1,4 +1,7 @@
 #include "FileSystem/FileSystem.h"
+#include "Core/DataTypes/String.h"
+#include "Core/Identifiers/FileId.h"
+#include <stdint.h>
 #include <memory>
 
 int main()

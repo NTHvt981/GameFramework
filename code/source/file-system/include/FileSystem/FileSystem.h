@@ -22,7 +22,7 @@ class FileSystem final : public IFileSystem
 public:
 	FileSystem();
 	~FileSystem();
-	void Initialize() override;
+	void Initialize();
 	// Inherited via IFileSystem
 	void WriteTextFile(const ids::FileId i_fileId) override;
 	void ReadTextFile(const ids::FileId i_fileId) override;

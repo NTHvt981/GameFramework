@@ -27,9 +27,15 @@ public:
 	virtual void DeregisterDraw(
 		std::weak_ptr<AnimationState> i_animationState
 	) = 0;
-	virtual void SetRenderLayer(
+	virtual void SetSpriteRenderLayer(
 		const SpriteState::Id i_spriteStateId,
-		const ids::RenderLayer i_renderLayer = ids::RenderLayer::Default
+		const ids::RenderLayer i_oldRenderLayer,
+		const ids::RenderLayer i_newRenderLayer
+	) = 0;
+	virtual void SetAnimationRenderLayer(
+		const AnimationState::Id i_animationStateId,
+		const ids::RenderLayer i_oldRenderLayer,
+		const ids::RenderLayer i_newRenderLayer
 	) = 0;
 
 private:

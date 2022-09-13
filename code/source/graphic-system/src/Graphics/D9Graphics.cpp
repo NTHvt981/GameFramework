@@ -56,4 +56,67 @@ D9Graphics::~D9Graphics()
 	m_direct3D9->Release();
 }
 
+void D9Graphics::LoadTexture(
+	const ids::TextureId i_textureId, 
+	const data_types::String i_textureFilePath)
+{
+	assert(!m_mapTextures.contains(i_textureId));
+	m_mapTextures[i_textureId] = CreateTextureFromFile(i_textureFilePath);
+}
+
+void D9Graphics::Draw(const DrawParams& i_drawParams)
+{
+	const ids::TextureId id = i_drawParams.textureId;
+	assert(m_mapTextures.contains(id));
+	const LPDIRECT3DTEXTURE9 texture = m_mapTextures[id];
+
+	const data_types::Vector2F pos = i_drawParams.position;
+	D3DXVECTOR3 position(pos.x, pos.y, 0);
+
+	const data_types::BoxI64 box = i_drawParams.boundary;
+	RECT destRect;
+	destRect.left = box.left;
+	destRect.top = box.top;
+	destRect.right = box.right;
+	destRect.bottom = box.bottom;
+
+	D3DXMATRIX matrix;
+	D3DXMatrixIdentity(&matrix);
+
+	int64_t opacity = i_drawParams.alpha * 255.0;
+
+	m_spriteHandler->SetTransform(&matrix);
+
+	m_spriteHandler->Draw(texture, &destRect, NULL, &position, D3DCOLOR_RGBA(255, 255, 255, opacity));
+}
+
+LPDIRECT3DTEXTURE9 D9Graphics::CreateTextureFromFile(const data_types::String& imagePath)
+{
+	D3DXIMAGE_INFO info;
+	LPDIRECT3DTEXTURE9 o_texture;
+
+	const wchar_t* rawPath = imagePath.ToWStr();
+	HRESULT result = D3DXGetImageInfoFromFile(rawPath, &info);
+	assert(SUCCEEDED(result));
+
+	result = D3DXCreateTextureFromFileEx(
+		m_direct3DDevice9,
+		rawPath,
+		info.Width,	
+		info.Height,
+		1,
+		D3DUSAGE_DYNAMIC,
+		D3DFMT_UNKNOWN,
+		D3DPOOL_DEFAULT,
+		D3DX_DEFAULT,
+		D3DX_DEFAULT,
+		D3DCOLOR_XRGB(251, 255, 0),	
+		&info,
+		NULL,
+		&o_texture);
+	assert(SUCCEEDED(result));
+
+	return o_texture;
+}
+
 } // namespace graphics

@@ -1,5 +1,6 @@
-#include "GraphicsWrapper.h"
+#include "GraphicSystem/Graphics/GraphicsWrapper.h"
 #include "D9Graphics.h"
+#include "NoGraphics.h"
 #include <assert.h>
 
 namespace graphics
@@ -9,7 +10,12 @@ GraphicsWrapper::GraphicsWrapper()
 {
 }
 
-void GraphicsWrapper::Initialize(const GraphicSystemInitParam& i_initParams)
+GraphicsWrapper::~GraphicsWrapper()
+{
+	m_graphics.release();
+}
+
+void GraphicsWrapper::Initialize(const InitParams& i_initParams)
 {
 	switch (i_initParams.apiMode)
 	{
@@ -21,7 +27,7 @@ void GraphicsWrapper::Initialize(const GraphicSystemInitParam& i_initParams)
 		break;
 	}
 	default:
-		throw("Invalid");
+		m_graphics = std::make_unique<NoGraphics>();
 		break;
 	}
 }

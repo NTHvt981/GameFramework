@@ -1,15 +1,15 @@
 #pragma once
 #include "IGraphicSystem.h"
 #include "FileSystem/IFileSystem.h"
-#include "Graphics/GraphicsWrapper.h"
+#include "GraphicSystem/Graphics/GraphicsWrapper.h"
 #include "Core/Identifiers/APIMode.h"
-#include "DataTypes/GraphicSystemInitParam.h"
 #include "DataTypes/SpriteState.h"
 #include "DataTypes/AnimationState.h"
 #include "Core/DataTypes/Flag.h"
 #include <memory>
 #include <Windows.h>
 #include <map>
+#include <optional>
 
 namespace graphics
 {
@@ -17,8 +17,10 @@ namespace graphics
 class GraphicsSystem final: public IGraphicsSystem
 {
 public:
+	using InitParams = GraphicsWrapper::InitParams;
 	GraphicsSystem(std::weak_ptr<files::IFileSystem> i_fileSystem);
-	void Initialize(const GraphicSystemInitParam& i_initParams);
+	~GraphicsSystem();
+	void Initialize(const InitParams& i_initParams);
 
 	// Inherited via IGraphicsSystem
 	std::weak_ptr<SpriteState> RegisterDraw(
@@ -35,8 +37,15 @@ public:
 	void DeregisterDraw(
 		std::weak_ptr<AnimationState> i_animationState
 	) override;
-	void SetRenderLayer(
-		const SpriteState::Id i_spriteStateId, const ids::RenderLayer i_renderLayer
+	void SetSpriteRenderLayer(
+		const SpriteState::Id i_spriteStateId,
+		const ids::RenderLayer i_oldRenderLayer,
+		const ids::RenderLayer i_newRenderLayer
+	) override;
+	void SetAnimationRenderLayer(
+		const AnimationState::Id i_animationStateId,
+		const ids::RenderLayer i_oldRenderLayer,
+		const ids::RenderLayer i_newRenderLayer
 	) override;
 
 private:

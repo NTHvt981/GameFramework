@@ -4,6 +4,7 @@ require("file-system")
 require("graphic-system")
 require("app")
 require("test-console")
+require("test-win")
 
 local core_prj_name = "core"
 local core_path = source_path.."core/"
@@ -48,4 +49,5 @@ addCore()
 addFileSystem()
 addGraphicSystem()
 addApp()
-addTest()
+addTestConsole()
+addTestWin()

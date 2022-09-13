@@ -10,7 +10,13 @@ GraphicsSystem::GraphicsSystem(std::weak_ptr<files::IFileSystem> i_fileSystem)
     InitRenderStateContainers();
 }
 
-void GraphicsSystem::Initialize(const GraphicSystemInitParam& i_initParams)
+GraphicsSystem::~GraphicsSystem()
+{
+    m_graphicsWrapper.release();
+    m_fileSystem.reset();
+}
+
+void GraphicsSystem::Initialize(const InitParams& i_initParams)
 {
     m_graphicsWrapper->Initialize(i_initParams);
 }
@@ -60,19 +66,36 @@ void GraphicsSystem::DeregisterDraw(const std::weak_ptr<AnimationState> i_animat
     }
 }
 
-void GraphicsSystem::SetRenderLayer(const SpriteState::Id i_spriteStateId, const ids::RenderLayer i_renderLayer)
+void GraphicsSystem::SetSpriteRenderLayer(
+    const SpriteState::Id i_spriteStateId,
+    const ids::RenderLayer i_oldRenderLayer,
+    const ids::RenderLayer i_newRenderLayer)
 {
-    // TODO: Implement this
-    //ids::RenderLayer oldContainerId = ids::RenderLayer::COUNT;
-    //for (auto& [layerId, container] : m_mapRenderStateContainers)
-    //{
-    //    MapAnimationStates& mapStates = container.animationStates;
-    //    if (mapStates)
-    //}
+    RenderStateContainer& oldContainer = m_mapRenderStateContainers.at(i_oldRenderLayer);
 
-    //assert(oldContainerId != ids::RenderLayer::COUNT);
+    assert(oldContainer.spriteStates.contains(i_spriteStateId));
+    std::shared_ptr<SpriteState> state = std::move(oldContainer.spriteStates[i_spriteStateId]);
 
-    //RenderStateContainer& newContainer = m_mapRenderStateContainers.at(i_renderLayer);
+    RenderStateContainer& newContainer = m_mapRenderStateContainers.at(i_newRenderLayer);
+
+    assert(!newContainer.spriteStates.contains(i_spriteStateId));
+    newContainer.spriteStates.try_emplace(i_spriteStateId, state);
+}
+
+void GraphicsSystem::SetAnimationRenderLayer(
+    const AnimationState::Id i_animationStateId,
+    const ids::RenderLayer i_oldRenderLayer,
+    const ids::RenderLayer i_newRenderLayer)
+{
+    RenderStateContainer& oldContainer = m_mapRenderStateContainers.at(i_oldRenderLayer);
+
+    assert(oldContainer.animationStates.contains(i_animationStateId));
+    std::shared_ptr<AnimationState> state = std::move(oldContainer.animationStates[i_animationStateId]);
+
+    RenderStateContainer& newContainer = m_mapRenderStateContainers.at(i_newRenderLayer);
+
+    assert(!newContainer.animationStates.contains(i_animationStateId));
+    newContainer.animationStates.try_emplace(i_animationStateId, state);
 }
 
 SpriteState GraphicsSystem::GenerateSpriteState()

@@ -4,7 +4,7 @@ local lib_directx_path = libs_path.."DirectXSDK/"
 
 function includeDirectXSDK()
     externalincludedirs { 
-        lib_directx_path.."include"
+        lib_directx_path.."Include"
      }
 
      libdirs { 

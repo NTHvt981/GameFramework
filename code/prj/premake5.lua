@@ -3,7 +3,7 @@ require("core")
 require("file-system")
 require("graphic-system")
 require("app")
-require("test")
+require("test-console")
 
 local core_prj_name = "core"
 local core_path = source_path.."core/"

@@ -34,8 +34,11 @@ public:
 	size_t Find(const String& i_subStr, const size_t i_offSet) const;
 	String SubString(const size_t i_start, const size_t i_end) const;
 private:
-	//std::string m_innerString;
+#ifdef UNICODE
 	std::wstring m_innerString;
+#else
+	std::string m_innerString;
+#endif
 };
 
 } // namespace data_types

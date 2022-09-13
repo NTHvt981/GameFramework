@@ -1,6 +1,7 @@
 #pragma once
 #include "Core/Identifiers/AnimationId.h"
 #include "GraphicSystem/DataTypes/AnimationDef.h"
+#include "GraphicSystem/DataTypes/SpriteState.h"
 
 namespace graphics
 {
@@ -13,9 +14,10 @@ struct AnimationState
 		Reverse
 	};
 
+	using Id = uint64_t;
+	Id id;
 	std::weak_ptr<const AnimationDef> animationDef;
-	data_types::Vector2F position;
-	float alpha;
+	SpriteState spriteState;
 	Direction direction;
 	bool pause;
 };

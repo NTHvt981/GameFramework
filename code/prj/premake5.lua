@@ -21,6 +21,7 @@ function addSln()
       system "Windows"
 
       targetdir (release_path.."%{cfg.buildcfg}")
+      objdir (temp_path)
    
       filter {"configurations:Debug*"}
          defines { "DEBUG" }

@@ -22,8 +22,8 @@ int WINAPI WinMain(
 	std::shared_ptr<files::FileSystem> fileSystem = std::make_shared<files::FileSystem>();
 	fileSystem->Initialize();
 
-	std::shared_ptr<graphics::GraphicsSystem> graphicSystem = std::make_shared<graphics::GraphicsSystem>(fileSystem);
-	graphics::GraphicsSystem::InitParams initParam;
+	std::shared_ptr<graphics::GraphicSystem> graphicSystem = std::make_shared<graphics::GraphicSystem>(fileSystem);
+	graphics::GraphicSystem::InitParams initParam;
 	initParam.apiMode = ids::APIMode::D3D9;
 	initParam.optHwnd = hwnd;
 	graphicSystem->Initialize(initParam);

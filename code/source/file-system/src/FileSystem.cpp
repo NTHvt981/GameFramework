@@ -14,82 +14,75 @@ data_types::String GetApplicationFolderPath(const data_types::String& i_demilite
 namespace files
 {
 
+data_types::Flag s_initFlag;
+data_types::InitOnce<FolderDirectory> s_applicationFolderDirectory;
+
 ////////////////////////////////////////////////////////////////////////////////
 
 FileSystem::FileSystem()
-	: m_applicationFolderDirectory(std::make_unique<data_types::InitOnce<FolderDirectory>>())
-	, m_initializeFlag(std::make_unique<data_types::Flag>())
 {
-	Folder textureFolder{"Texture"};
+	Folder textureFolder{ "Texture" };
+	Folder dataFolder{ "data" };
+	FolderDirectory textureDir{ BackwardFolder, dataFolder, textureFolder };
 	m_mapFileDirectories = {
 		{
 			ids::FileId::EnemiesTexture,
 			FileDirectory {
-				FolderDirectory{BackwardFolder, textureFolder},
-				File{"enemies", "png"}
+				textureDir, File{"enemies", extPng}
 			}
 		},
 		{
 			ids::FileId::PlayerTexture,
 			FileDirectory {
-				FolderDirectory{BackwardFolder, textureFolder},
-				File{"PlayerSheetTransparent", "png"}
+				textureDir, File{"PlayerSheetTransparent", extPng}
 			}
 		},
 		{
 			ids::FileId::PlayerHealthTexture,
 			FileDirectory {
-				FolderDirectory{BackwardFolder, textureFolder},
-				File{"Player health", "png"}
+				textureDir, File{"Player health", extPng}
 			}
 		},
 		{
 			ids::FileId::OtherObjectsTexture,
 			FileDirectory {
-				FolderDirectory{BackwardFolder, textureFolder},
-				File{"OtherObjects", "png"}
+				textureDir, File{"OtherObjects", extPng}
 			}
 		},
 		{
 			ids::FileId::BlackScreenTexture,
 			FileDirectory {
-				FolderDirectory{BackwardFolder, textureFolder},
-				File{"BlackScreen", "png"}
+				textureDir, File{"BlackScreen", extPng}
 			}
 		},
 		{
 			ids::FileId::BossTexture,
 			FileDirectory {
-				FolderDirectory{BackwardFolder, textureFolder},
-				File{"Boss", "png"}
+				textureDir, File{"Boss", extPng}
 			}
 		},
 		{
 			ids::FileId::OpeningTexture,
 			FileDirectory {
-				FolderDirectory{BackwardFolder, textureFolder},
-				File{"Opening", "png"}
+				textureDir, File{"Opening", extPng}
 			}
 		},
 		{
 			ids::FileId::BlackScreenTexture,
 			FileDirectory {
-				FolderDirectory{BackwardFolder, textureFolder},
-				File{"RollOut", "png"}
+				textureDir, File{"RollOut", extPng}
 			}
 		},
 		{
 			ids::FileId::ItemTexture,
 			FileDirectory {
-				FolderDirectory{BackwardFolder, textureFolder},
-				File{"Items", "png"}
+				textureDir, File{"Items", extPng}
 			}
 		},
 		{
 			ids::FileId::CollisionDebugTexture,
 			FileDirectory {
-				FolderDirectory{BackwardFolder, textureFolder},
-				File{"bbox", "png"}
+				textureDir, File{"bbox", extPng}
 			}
 		},
 	};
@@ -106,17 +99,18 @@ FileSystem::~FileSystem()
 
 void FileSystem::Initialize()
 {
-	m_initializeFlag->Set();
+	s_initFlag.Set();
 
 	const data_types::String applicationFolderPath = GetApplicationFolderPath("\\");
 
 	FolderDirectory newValue({});
 	newValue.SetFolders(applicationFolderPath);
-	m_applicationFolderDirectory->Set(newValue);
+	s_applicationFolderDirectory.Set(newValue);
+	FolderDirectory dataFolderPath{  };
 
 	for (auto& [id, fileDirectory] : m_mapFileDirectories)
 	{
-		fileDirectory.folderDirectory =  m_applicationFolderDirectory->Get() + fileDirectory.folderDirectory;
+		fileDirectory.folderDirectory = s_applicationFolderDirectory.Get() + fileDirectory.folderDirectory;
 	}
 }
 

@@ -1,8 +1,8 @@
 #pragma once
 #include "IGraphicSystem.h"
 #include "FileSystem/IFileSystem.h"
-#include "GraphicSystem/Graphics/GraphicsWrapper.h"
 #include "Core/Identifiers/APIMode.h"
+#include "Core/Interfaces/IRenderable.h"
 #include "DataTypes/SpriteState.h"
 #include "DataTypes/AnimationState.h"
 #include "Core/DataTypes/Flag.h"
@@ -14,15 +14,16 @@
 namespace graphics
 {
 
-class GraphicsSystem final: public IGraphicsSystem
+class GraphicSystem final: public IGraphicSystem
 {
 public:
-	using InitParams = GraphicsWrapper::InitParams;
-	GraphicsSystem(std::weak_ptr<files::IFileSystem> i_fileSystem);
-	~GraphicsSystem();
-	void Initialize(const InitParams& i_initParams);
+	GraphicSystem(std::weak_ptr<files::IFileSystem> i_fileSystem);
+	~GraphicSystem();
+	// Inherited via IGraphicSystem
+	void Initialize(const IGraphicSystem::InitParams& i_initParams) override;
+	void Render() override;
 
-	// Inherited via IGraphicsSystem
+	// Inherited via IGraphicAPI
 	std::weak_ptr<SpriteState> RegisterDraw(
 		const ids::SpriteId i_spriteId, 
 		const ids::RenderLayer i_renderLayer = ids::RenderLayer::Default
@@ -47,7 +48,6 @@ public:
 		const ids::RenderLayer i_oldRenderLayer,
 		const ids::RenderLayer i_newRenderLayer
 	) override;
-
 private:
 	using MapSrpiteStates = std::map<SpriteState::Id, std::shared_ptr<SpriteState>>;
 	using MapAnimationStates = std::map<AnimationState::Id, std::shared_ptr<AnimationState>>;
@@ -59,7 +59,7 @@ private:
 	};
 
 	std::weak_ptr<files::IFileSystem> m_fileSystem;
-	std::unique_ptr<GraphicsWrapper> m_graphicsWrapper;
+	std::unique_ptr<RendererWrapper> m_graphicsWrapper;
 	std::map<ids::RenderLayer, RenderStateContainer> m_mapRenderStateContainers;
 
 	SpriteState GenerateSpriteState();
@@ -70,6 +70,8 @@ private:
 
 	void InitRenderStateContainers();
 	data_types::Flag m_initRenderStateContainersFlag;
+
+	void LoadTexture(const ids::TextureId i_textureId);
 };
 
 } // namespace graphics

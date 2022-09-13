@@ -1,4 +1,4 @@
-#include "D9Graphics.h"
+#include "D3D9Renderer.h"
 #include "Core/DataTypes/Flag.h"
 
 #include <assert.h>
@@ -8,7 +8,7 @@ namespace graphics
 
 data_types::Flag s_initFlag;
 
-D9Graphics::D9Graphics(const HWND i_hwnd)
+D3D9Renderer::D3D9Renderer(const HWND i_hwnd)
 	: m_hwnd(i_hwnd)
 {
 	s_initFlag.Set();
@@ -48,7 +48,7 @@ D9Graphics::D9Graphics(const HWND i_hwnd)
 	assert(SUCCEEDED(result));
 }
 
-D9Graphics::~D9Graphics()
+D3D9Renderer::~D3D9Renderer()
 {
 	m_spriteHandler->Release();
 	m_backBuffer->Release();
@@ -56,7 +56,7 @@ D9Graphics::~D9Graphics()
 	m_direct3D9->Release();
 }
 
-void D9Graphics::LoadTexture(
+void D3D9Renderer::LoadTexture(
 	const ids::TextureId i_textureId, 
 	const data_types::String i_textureFilePath)
 {
@@ -64,7 +64,7 @@ void D9Graphics::LoadTexture(
 	m_mapTextures[i_textureId] = CreateTextureFromFile(i_textureFilePath);
 }
 
-void D9Graphics::Draw(const DrawParams& i_drawParams)
+void D3D9Renderer::Draw(const DrawParams& i_drawParams)
 {
 	const ids::TextureId id = i_drawParams.textureId;
 	assert(m_mapTextures.contains(id));
@@ -90,7 +90,7 @@ void D9Graphics::Draw(const DrawParams& i_drawParams)
 	m_spriteHandler->Draw(texture, &destRect, NULL, &position, D3DCOLOR_RGBA(255, 255, 255, opacity));
 }
 
-LPDIRECT3DTEXTURE9 D9Graphics::CreateTextureFromFile(const data_types::String& imagePath)
+LPDIRECT3DTEXTURE9 D3D9Renderer::CreateTextureFromFile(const data_types::String& imagePath)
 {
 	D3DXIMAGE_INFO info;
 	LPDIRECT3DTEXTURE9 o_texture;

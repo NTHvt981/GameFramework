@@ -1,5 +1,5 @@
 #pragma once
-#include "GraphicSystem/Graphics/IGraphics.h"
+#include "GraphicSystem/Renderers/IRenderer.h"
 #include <Windows.h>
 #include <d3d9.h>
 #include <d3dx9core.h>
@@ -9,13 +9,13 @@
 namespace graphics
 {
 
-class D9Graphics final : public IGraphics
+class D3D9Renderer final : public IRenderer
 {
 public:
-	D9Graphics(const HWND i_hwnd);
-	~D9Graphics();
+	D3D9Renderer(const HWND i_hwnd);
+	~D3D9Renderer();
 
-	// Inherited via IGraphics
+	// Inherited via IRenderer
 	virtual void LoadTexture(
 		const ids::TextureId i_textureId, 
 		const data_types::String i_textureFilePath

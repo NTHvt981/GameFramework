@@ -6,6 +6,7 @@ namespace ids
 
 enum class FileId : uint64_t
 {
+	TextureDataXml,
 	EnemiesTexture,
 	PlayerTexture,
 	PlayerHealthTexture,

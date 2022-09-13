@@ -10,4 +10,6 @@ struct File
 	data_types::String extension;
 };
 
+const data_types::String extPng = "png";
+
 } // namespace file

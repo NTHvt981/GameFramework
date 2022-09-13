@@ -10,7 +10,7 @@
 namespace graphics
 {
 
-class IGraphics
+class IRenderer
 {
 public:
 	virtual void LoadTexture(const ids::TextureId i_textureId, const data_types::String i_textureFilePath) = 0;
@@ -35,23 +35,3 @@ public:
 };
 
 } // namespace graphics
-
-
-//void Draw(
-//	LPDIRECT3DTEXTURE9 texture, float x, float y,
-//	int64_t left, int64_t top, int64_t right, int64_t bottom,
-//	float origin_x = 0, float origin_y = 0, float alpha = 1);
-//void Draw(LPDIRECT3DTEXTURE9 texture, float x, float y,
-//	float origin_x = 0, float origin_y = 0, float alpha = 1);
-//void Draw(LPDIRECT3DTEXTURE9 texture, Vector position,
-//	Vector origin = Vector(0, 0), float alpha = 1);
-//
-//
-//void DrawWithFixedPosition(
-//	LPDIRECT3DTEXTURE9 texture, float x, float y,
-//	int64_t left, int64_t top, int64_t right, int64_t bottom, float alpha = 1
-//);
-//void DrawWithTransformation(
-//	LPDIRECT3DTEXTURE9 texture, float x, float y,
-//	int64_t left, int64_t top, int64_t right, int64_t bottom, float alpha = 1
-//);

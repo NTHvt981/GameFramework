@@ -8,7 +8,6 @@ namespace data_types
 {
 template<typename T>
 class InitOnce;
-class Flag;
 }
 
 namespace files
@@ -29,8 +28,6 @@ public:
 	data_types::String GetFileDirectory(const ids::FileId i_fileId) const override;
 
 private:
-	std::unique_ptr<data_types::InitOnce<FolderDirectory>> m_applicationFolderDirectory;
-	std::unique_ptr<data_types::Flag> m_initializeFlag;
 	std::unordered_map<ids::FileId, FileDirectory> m_mapFileDirectories;
 };
 

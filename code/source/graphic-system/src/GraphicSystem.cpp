@@ -1,27 +1,39 @@
 #include "GraphicSystem/GraphicSystem.h"
+#include "Core/Identifiers/FileId.h"
 
 namespace graphics
 {
 
-GraphicsSystem::GraphicsSystem(std::weak_ptr<files::IFileSystem> i_fileSystem)
+GraphicSystem::GraphicSystem(std::weak_ptr<files::IFileSystem> i_fileSystem)
     : m_fileSystem(i_fileSystem)
-    , m_graphicsWrapper(std::make_unique<GraphicsWrapper>())
+    , m_graphicsWrapper(std::make_unique<RendererWrapper>())
 {
     InitRenderStateContainers();
 }
 
-GraphicsSystem::~GraphicsSystem()
+GraphicSystem::~GraphicSystem()
 {
     m_graphicsWrapper.release();
     m_fileSystem.reset();
 }
 
-void GraphicsSystem::Initialize(const InitParams& i_initParams)
+void GraphicSystem::Initialize(const InitParams& i_initParams)
 {
     m_graphicsWrapper->Initialize(i_initParams);
+
+    LoadTexture(ids::TextureId::BlackScreen);
+    LoadTexture(ids::TextureId::Boss);
+    LoadTexture(ids::TextureId::CollisionDebug);
+    LoadTexture(ids::TextureId::Enemies);
+    LoadTexture(ids::TextureId::Item);
+    LoadTexture(ids::TextureId::Opening);
+    LoadTexture(ids::TextureId::OtherObjects);
+    LoadTexture(ids::TextureId::Player);
+    LoadTexture(ids::TextureId::PlayerHealth);
+    LoadTexture(ids::TextureId::Rollout);
 }
 
-std::weak_ptr<SpriteState> GraphicsSystem::RegisterDraw(
+std::weak_ptr<SpriteState> GraphicSystem::RegisterDraw(
     const ids::SpriteId i_spriteId, 
     const ids::RenderLayer i_renderLayer)
 {
@@ -33,7 +45,7 @@ std::weak_ptr<SpriteState> GraphicsSystem::RegisterDraw(
     return result;
 }
 
-void GraphicsSystem::DeregisterDraw(std::weak_ptr<SpriteState> i_spriteState)
+void GraphicSystem::DeregisterDraw(std::weak_ptr<SpriteState> i_spriteState)
 {
     std::shared_ptr<SpriteState> lockPtr = i_spriteState.lock();
 
@@ -44,7 +56,7 @@ void GraphicsSystem::DeregisterDraw(std::weak_ptr<SpriteState> i_spriteState)
     }
 }
 
-std::weak_ptr<AnimationState> GraphicsSystem::RegisterDraw(
+std::weak_ptr<AnimationState> GraphicSystem::RegisterDraw(
     const ids::AnimationId i_animationId, 
     const ids::RenderLayer i_renderLayer)
 {
@@ -55,7 +67,7 @@ std::weak_ptr<AnimationState> GraphicsSystem::RegisterDraw(
     return result;
 }
 
-void GraphicsSystem::DeregisterDraw(const std::weak_ptr<AnimationState> i_animationState)
+void GraphicSystem::DeregisterDraw(const std::weak_ptr<AnimationState> i_animationState)
 {
     std::shared_ptr<AnimationState> lockPtr = i_animationState.lock();
 
@@ -66,7 +78,7 @@ void GraphicsSystem::DeregisterDraw(const std::weak_ptr<AnimationState> i_animat
     }
 }
 
-void GraphicsSystem::SetSpriteRenderLayer(
+void GraphicSystem::SetSpriteRenderLayer(
     const SpriteState::Id i_spriteStateId,
     const ids::RenderLayer i_oldRenderLayer,
     const ids::RenderLayer i_newRenderLayer)
@@ -82,7 +94,7 @@ void GraphicsSystem::SetSpriteRenderLayer(
     newContainer.spriteStates.try_emplace(i_spriteStateId, state);
 }
 
-void GraphicsSystem::SetAnimationRenderLayer(
+void GraphicSystem::SetAnimationRenderLayer(
     const AnimationState::Id i_animationStateId,
     const ids::RenderLayer i_oldRenderLayer,
     const ids::RenderLayer i_newRenderLayer)
@@ -98,27 +110,27 @@ void GraphicsSystem::SetAnimationRenderLayer(
     newContainer.animationStates.try_emplace(i_animationStateId, state);
 }
 
-SpriteState GraphicsSystem::GenerateSpriteState()
+SpriteState GraphicSystem::GenerateSpriteState()
 {
     SpriteState state;
     state.id = GenerateId();
     return state;
 }
 
-AnimationState GraphicsSystem::GenerateAnimationState()
+AnimationState GraphicSystem::GenerateAnimationState()
 {
     AnimationState state;
     state.id = GenerateId();
     return state;
 }
 
-uint64_t GraphicsSystem::GenerateId()
+uint64_t GraphicSystem::GenerateId()
 {
     m_countId++;
     return m_countId;
 }
 
-void GraphicsSystem::InitRenderStateContainers()
+void GraphicSystem::InitRenderStateContainers()
 {
     m_initRenderStateContainersFlag.Set();
     uint64_t count = static_cast<uint64_t>(ids::RenderLayer::COUNT);
@@ -127,6 +139,56 @@ void GraphicsSystem::InitRenderStateContainers()
         const ids::RenderLayer layerId = static_cast<ids::RenderLayer>(i);
         m_mapRenderStateContainers.try_emplace(layerId, RenderStateContainer{});
     }
+}
+
+void GraphicSystem::LoadTexture(const ids::TextureId i_textureId)
+{
+    std::shared_ptr<files::IFileSystem> fileSystem = m_fileSystem.lock();
+
+    data_types::String path;
+    switch (i_textureId)
+    {
+    case ids::TextureId::BlackScreen:
+        path = fileSystem->GetFileDirectory(ids::FileId::BlackScreenTexture);
+        break;
+    case ids::TextureId::Boss:
+        path = fileSystem->GetFileDirectory(ids::FileId::BlackScreenTexture);
+        break;
+    case ids::TextureId::CollisionDebug:
+        path = fileSystem->GetFileDirectory(ids::FileId::BlackScreenTexture);
+        break;
+    case ids::TextureId::Enemies:
+        path = fileSystem->GetFileDirectory(ids::FileId::BlackScreenTexture);
+        break;
+    case ids::TextureId::Item:
+        path = fileSystem->GetFileDirectory(ids::FileId::BlackScreenTexture);
+        break;
+    case ids::TextureId::Opening:
+        path = fileSystem->GetFileDirectory(ids::FileId::BlackScreenTexture);
+        break;
+    case ids::TextureId::OtherObjects:
+        path = fileSystem->GetFileDirectory(ids::FileId::BlackScreenTexture);
+        break;
+    case ids::TextureId::Player:
+        path = fileSystem->GetFileDirectory(ids::FileId::BlackScreenTexture);
+        break;
+    case ids::TextureId::PlayerHealth:
+        path = fileSystem->GetFileDirectory(ids::FileId::BlackScreenTexture);
+        break;
+    case ids::TextureId::Rollout:
+        path = fileSystem->GetFileDirectory(ids::FileId::BlackScreenTexture);
+        break;
+    case ids::TextureId::COUNT:
+        assert(false);
+        break;
+    }
+
+    m_graphicsWrapper->LoadTexture(i_textureId, path);
+}
+
+void GraphicSystem::Render()
+{
+    // TODO: implement this
 }
 
 } // namespace graphics

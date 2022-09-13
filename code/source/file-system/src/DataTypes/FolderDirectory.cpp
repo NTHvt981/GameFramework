@@ -27,8 +27,7 @@ FolderDirectory::FolderDirectory(const std::list<Folder>& i_folders)
 
 FolderDirectory FolderDirectory::operator+(const FolderDirectory& i_other) const
 {
-	std::list<Folder> folders;
-	std::copy(m_folders.begin(), m_folders.end(), std::back_inserter(folders));
+	std::list<Folder> folders = m_folders;
 	std::copy(i_other.m_folders.begin(), i_other.m_folders.end(), std::back_inserter(folders));
 
 	FolderDirectory result(folders);

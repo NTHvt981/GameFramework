@@ -14,6 +14,10 @@ public:
 		assert(!m_value.has_value());
 		m_value = i_newValue;
 	}
+	void operator=(const T& i_newValue)
+	{
+		Set(i_newValue);
+	}
 
 	T Get() const
 	{
@@ -28,6 +32,7 @@ public:
 
 private:
 	std::optional<T> m_value;
+	T* m_value2;
 };
 
 } // namespace data_types

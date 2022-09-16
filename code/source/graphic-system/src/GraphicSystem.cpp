@@ -33,7 +33,7 @@ void GraphicSystem::Initialize(const InitParams& i_initParams)
     LoadTexture(ids::TextureId::Rollout);
 }
 
-std::weak_ptr<SpriteState> GraphicSystem::RegisterDraw(
+std::weak_ptr<SpriteState> GraphicSystem::RegisterSprite(
     const ids::SpriteId i_spriteId, 
     const ids::RenderLayer i_renderLayer)
 {
@@ -45,7 +45,7 @@ std::weak_ptr<SpriteState> GraphicSystem::RegisterDraw(
     return result;
 }
 
-void GraphicSystem::DeregisterDraw(std::weak_ptr<SpriteState> i_spriteState)
+void GraphicSystem::DeregisterSprite(std::weak_ptr<SpriteState> i_spriteState)
 {
     std::shared_ptr<SpriteState> lockPtr = i_spriteState.lock();
 
@@ -56,7 +56,7 @@ void GraphicSystem::DeregisterDraw(std::weak_ptr<SpriteState> i_spriteState)
     }
 }
 
-std::weak_ptr<AnimationState> GraphicSystem::RegisterDraw(
+std::weak_ptr<AnimationState> GraphicSystem::RegisterAnimation(
     const ids::AnimationId i_animationId, 
     const ids::RenderLayer i_renderLayer)
 {
@@ -67,7 +67,7 @@ std::weak_ptr<AnimationState> GraphicSystem::RegisterDraw(
     return result;
 }
 
-void GraphicSystem::DeregisterDraw(const std::weak_ptr<AnimationState> i_animationState)
+void GraphicSystem::DeregisterAnimation(const std::weak_ptr<AnimationState> i_animationState)
 {
     std::shared_ptr<AnimationState> lockPtr = i_animationState.lock();
 

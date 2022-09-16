@@ -1,6 +1,6 @@
 #pragma once
 #include <array>
-#include <valarray>
+#include <vector>
 #include <memory>
 #include "GraphicSystem/DataTypes/SpriteDef.h"
 
@@ -15,7 +15,7 @@ struct AnimationFrameDef
 
 struct AnimationDef
 {
-	std::valarray<AnimationFrameDef> frames;
+	std::vector<AnimationFrameDef> frames;
 	float alpha;
 };
 

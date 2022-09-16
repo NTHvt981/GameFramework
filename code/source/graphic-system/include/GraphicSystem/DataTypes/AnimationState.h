@@ -17,6 +17,8 @@ struct AnimationState
 	using Id = uint64_t;
 	Id id;
 	std::weak_ptr<const AnimationDef> animationDef;
+	uint64_t currentFrameIndex;
+	uint64_t currentTime;
 	SpriteState spriteState;
 	Direction direction;
 	bool pause;

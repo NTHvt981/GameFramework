@@ -23,25 +23,27 @@ public:
 	void Initialize(const IGraphicSystem::InitParams& i_initParams) override;
 	void Render() override;
 
-	// Inherited via IGraphicAPI
-	std::weak_ptr<SpriteState> RegisterDraw(
+	// Inherited via ISpriteGraphicAPI
+	std::weak_ptr<SpriteState> RegisterSprite(
 		const ids::SpriteId i_spriteId, 
 		const ids::RenderLayer i_renderLayer = ids::RenderLayer::Default
 	) override;
-	void DeregisterDraw(
+	void DeregisterSprite(
 		std::weak_ptr<SpriteState> i_spriteState
-	) override;
-	std::weak_ptr<AnimationState> RegisterDraw(
-		const ids::AnimationId i_animationId, 
-		const ids::RenderLayer i_renderLayer = ids::RenderLayer::Default
-	) override;
-	void DeregisterDraw(
-		std::weak_ptr<AnimationState> i_animationState
 	) override;
 	void SetSpriteRenderLayer(
 		const SpriteState::Id i_spriteStateId,
 		const ids::RenderLayer i_oldRenderLayer,
 		const ids::RenderLayer i_newRenderLayer
+	) override;
+
+	// Inherited via IAnimationGraphicAPI
+	std::weak_ptr<AnimationState> RegisterAnimation(
+		const ids::AnimationId i_animationId, 
+		const ids::RenderLayer i_renderLayer = ids::RenderLayer::Default
+	) override;
+	void DeregisterAnimation(
+		std::weak_ptr<AnimationState> i_animationState
 	) override;
 	void SetAnimationRenderLayer(
 		const AnimationState::Id i_animationStateId,

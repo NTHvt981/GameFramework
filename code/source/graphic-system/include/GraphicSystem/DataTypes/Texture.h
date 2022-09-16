@@ -1,6 +1,7 @@
 #pragma once
 #include "Core/Identifiers/TextureId.h"
 #include "Core/DataTypes/Box.h"
+#include "Xml/CommonParser.h"
 
 namespace graphics
 {

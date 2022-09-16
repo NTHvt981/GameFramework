@@ -41,7 +41,7 @@ public:
 		m_functions.clear();
 	}
 
-	void Emit(Args... args)
+	void Emit(Args... args) const
 	{
 		for (std::shared_ptr<Callback> function : m_functions)
 		{

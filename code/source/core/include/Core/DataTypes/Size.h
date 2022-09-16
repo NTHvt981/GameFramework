@@ -1,7 +1,7 @@
 #pragma once
 #include <cstdint>
 
-namespace data_types
+namespace core
 {
 
 template <typename T>
@@ -13,4 +13,4 @@ struct Size
 using SizeF = Size<float>;
 using SizeI64 = Size<int64_t>;
 
-} // namespace data_types
+} // namespace core

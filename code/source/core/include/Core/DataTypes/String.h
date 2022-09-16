@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 
-namespace data_types
+namespace core
 {
 class String
 {
@@ -41,4 +41,4 @@ private:
 #endif
 };
 
-} // namespace data_types
+} // namespace core

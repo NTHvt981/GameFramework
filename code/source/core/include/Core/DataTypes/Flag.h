@@ -1,7 +1,7 @@
 #pragma once
 #include <assert.h>
 
-namespace data_types
+namespace core
 {
 
 class Flag
@@ -22,4 +22,4 @@ private:
 	bool m_flag = false;
 };
 
-} // namespace data_types
+} // namespace core

@@ -1,6 +1,6 @@
 #include "Core/Helpers/StringHelper.h"
 
-namespace data_types::string
+namespace core::string
 {
 
 std::vector<String> Split(const String i_totalStr, const String i_delimiter)
@@ -18,4 +18,4 @@ std::vector<String> Split(const String i_totalStr, const String i_delimiter)
     return result;
 }
 
-} // namespace data_types::string
+} // namespace core::string

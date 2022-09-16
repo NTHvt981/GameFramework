@@ -2,7 +2,7 @@
 #include "Core/DataTypes/Vector2.h"
 #include <math.h>
 
-namespace data_types
+namespace core
 {
 
 // declare
@@ -56,4 +56,4 @@ float GetLength(const Vector2<T>& i_vector)
 	return sqrtf(powf(i_vector.x, 2) + powf(i_vector.y, 2));
 }
 
-} // namespace data_types::string
+} // namespace core

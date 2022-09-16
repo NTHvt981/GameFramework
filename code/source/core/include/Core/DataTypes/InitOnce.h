@@ -2,7 +2,7 @@
 #include <optional>
 #include <assert.h>
 
-namespace data_types
+namespace core
 {
 
 template<typename T>
@@ -35,4 +35,4 @@ private:
 	T* m_value2;
 };
 
-} // namespace data_types
+} // namespace core

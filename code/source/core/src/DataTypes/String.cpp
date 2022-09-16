@@ -1,6 +1,6 @@
 #include "Core/DataTypes/String.h"
 
-namespace data_types
+namespace core
 {
 
 #ifdef UNICODE
@@ -345,4 +345,4 @@ String String::SubString(const size_t i_start, const size_t i_end) const
 
 #endif // NOT UNICODE
 
-} // namespace data_types
+} // namespace core

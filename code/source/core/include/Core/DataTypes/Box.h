@@ -1,7 +1,7 @@
 #pragma once
 #include <cstdint>
 
-namespace data_types
+namespace core
 {
 
 template <typename T>
@@ -15,4 +15,4 @@ struct Box
 using BoxF = Box<float>;
 using BoxI64 = Box<int64_t>;
 
-} // namespace data_types
+} // namespace core

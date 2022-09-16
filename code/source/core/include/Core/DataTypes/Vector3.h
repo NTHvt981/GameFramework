@@ -1,7 +1,7 @@
 #pragma once
 #include <cstdint>
 
-namespace data_types
+namespace core
 {
 
 template <typename T>
@@ -14,4 +14,4 @@ struct Vector3
 using Vector3F = Vector3<float>;
 using Vector3I = Vector3<int64_t>;
 
-} // namespace data_types
+} // namespace core

@@ -1,9 +1,8 @@
 #pragma once
 #include "Core/DataTypes/Box.h"
-#include "Core/DataTypes/Vector2.h"
 #include <math.h>
 
-namespace data_types
+namespace core
 {
 
 // Box param order
@@ -12,8 +11,6 @@ namespace data_types
 // declare
 template <typename T>
 Box<T> operator+(const Box<T>& a, const Box<T>& b);
-template <typename T>
-Box<T> operator+(const Box<T>& a, const Vector2<T>& b);
 template <typename T>
 Box<T> operator*(const Box<T>& a, const float b);
 template <typename T>
@@ -29,18 +26,6 @@ Box<T> operator+(const Box<T>& a, const Box<T>& b)
 		a.top + b.top,
 		a.right + b.right,
 		a.bottom + b.bottom,
-	};
-}
-
-template <typename T>
-Box<T> operator+(const Box<T>& a, const Vector2<T>& b)
-{
-	return Box<T>
-	{
-		a.left + b.x,
-		a.top + b.y,
-		a.right + b.x,
-		a.bottom + b.y,
 	};
 }
 
@@ -69,4 +54,4 @@ Box<T> operator/(const Box<T>& a, const float b)
 	};
 }
 
-} // namespace data_types::string
+} // namespace core::string

@@ -1,7 +1,7 @@
 #pragma once
 #include <memory>
 
-namespace data_types
+namespace core
 {
 
 template <typename T>
@@ -13,4 +13,4 @@ using MakeRef = std::ref<T>;
 template <typename T>
 using MakeCRef = std::cref<const T>;
 
-} // namespace data_types
+} // namespace core

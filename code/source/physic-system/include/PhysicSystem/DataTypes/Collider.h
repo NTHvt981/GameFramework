@@ -8,7 +8,7 @@ namespace physics
 
 struct Collider
 {
-	virtual data_types::BoxF GetBoundary() const = 0;
+	virtual core::BoxF GetBoundary() const = 0;
 };
 
 } // namespace physics

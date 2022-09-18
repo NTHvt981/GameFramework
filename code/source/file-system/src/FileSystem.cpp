@@ -9,19 +9,19 @@
 #include "Core/DataTypes/String.h"
 #include <windows.h>
 
-data_types::String GetApplicationFolderPath(const data_types::String& i_demiliter);
+core::String GetApplicationFolderPath(const core::String& i_demiliter);
 
 namespace files
 {
 
-data_types::Flag s_initFlag;
-data_types::InitOnce<FolderDirectory> s_applicationFolderDirectory;
+core::Flag s_initFlag;
+core::InitOnce<FolderDirectory> s_applicationFolderDirectory;
 
 ////////////////////////////////////////////////////////////////////////////////
 
 FileSystem::FileSystem()
 {
-	Folder textureFolder{ "Texture" };
+	Folder textureFolder{ "Textures" };
 	Folder dataFolder{ "data" };
 	FolderDirectory textureDir{ BackwardFolder, dataFolder, textureFolder };
 	m_mapFileDirectories = {
@@ -101,7 +101,7 @@ void FileSystem::Initialize()
 {
 	s_initFlag.Set();
 
-	const data_types::String applicationFolderPath = GetApplicationFolderPath("\\");
+	const core::String applicationFolderPath = GetApplicationFolderPath("\\");
 
 	FolderDirectory newValue({});
 	newValue.SetFolders(applicationFolderPath);
@@ -116,9 +116,8 @@ void FileSystem::Initialize()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Initialize()
+void FileSystem::ShutDown()
 {
-
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -135,7 +134,7 @@ void FileSystem::ReadTextFile(const ids::FileId i_fileId)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-data_types::String FileSystem::GetFileDirectory(const ids::FileId i_fileId) const
+core::String FileSystem::GetFileDirectory(const ids::FileId i_fileId) const
 {
 	if (m_mapFileDirectories.find(i_fileId) == m_mapFileDirectories.end())
 	{
@@ -150,12 +149,12 @@ data_types::String FileSystem::GetFileDirectory(const ids::FileId i_fileId) cons
 
 } // namespace files
 
-data_types::String GetApplicationFolderPath(const data_types::String& i_demiliter)
+core::String GetApplicationFolderPath(const core::String& i_demiliter)
 {
 	TCHAR buffer[MAX_PATH] = { 0 };
 	GetModuleFileName(NULL, buffer, MAX_PATH);
 
-	data_types::String result(buffer);
+	core::String result(buffer);
 	std::wstring::size_type pos = result.FindLastOf(i_demiliter);
-	return data_types::String(buffer).SubString(0, pos);
+	return core::String(buffer).SubString(0, pos);
 }

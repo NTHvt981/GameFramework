@@ -6,10 +6,10 @@ namespace files
 
 struct File
 {
-	data_types::String name;
-	data_types::String extension;
+	core::String name;
+	core::String extension;
 };
 
-const data_types::String extPng = "png";
+const core::String extPng = "png";
 
 } // namespace file

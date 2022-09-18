@@ -21,6 +21,7 @@ public:
 
 	}
 
+#pragma warning(error:4834)
 	[[nodiscard]]
 	Connection Connect(Callback i_function)
 	{
@@ -48,6 +49,14 @@ public:
 			(*function)(args...);
 		}
 	}
+
+	//void Emit() const
+	//{
+	//	for (std::shared_ptr<Callback> function : m_functions)
+	//	{
+	//		(*function)();
+	//	}
+	//}
 
 private:
 	std::list<std::shared_ptr<Callback>> m_functions;

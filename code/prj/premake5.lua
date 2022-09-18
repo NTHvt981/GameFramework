@@ -1,10 +1,17 @@
 require("common")
 require("core")
 require("file-system")
+require("xml")
+require("database")
 require("graphic-system")
+require("render-debug")
+require("render-directx9")
+require("physic-system")
 require("app")
+require("logic")
 require("test-console")
 require("test-win")
+require("old-code")
 
 local core_prj_name = "core"
 local core_path = source_path.."core/"
@@ -47,7 +54,18 @@ end
 addSln()
 addCore()
 addFileSystem()
+addXml()
+addDatabase()
 addGraphicSystem()
+
+group("render-api")
+   addRenderDebug()
+   addRenderDirectx9()
+group("")
+
+addPhysicSystem()
+addLogic()
 addApp()
 addTestConsole()
 addTestWin()
+addOldCode()

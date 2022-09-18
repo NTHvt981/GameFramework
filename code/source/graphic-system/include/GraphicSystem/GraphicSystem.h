@@ -2,13 +2,15 @@
 #include "IGraphicSystem.h"
 #include "FileSystem/IFileSystem.h"
 #include "Core/Identifiers/APIMode.h"
-#include "Core/Interfaces/IRenderable.h"
+#include "Core/GameClock/IGameClock.h"
+#include "Core/DataTypes/Flag.h"
 #include "DataTypes/SpriteState.h"
 #include "DataTypes/AnimationState.h"
-#include "Core/DataTypes/Flag.h"
+#include "API/INativeRenderAPI.h"
 #include <memory>
 #include <Windows.h>
 #include <map>
+#include <set>
 #include <optional>
 
 namespace graphics
@@ -17,11 +19,16 @@ namespace graphics
 class GraphicSystem final: public IGraphicSystem
 {
 public:
-	GraphicSystem(std::weak_ptr<files::IFileSystem> i_fileSystem);
+	// In initialization of every systems, gameclock must be first
+	GraphicSystem(
+		std::weak_ptr<core::logic::IGameClock> i_gameClock,
+		std::weak_ptr<files::IFileSystem> i_fileSystem,
+		std::shared_ptr<INativeRenderAPI> i_renderAPI
+	);
 	~GraphicSystem();
 	// Inherited via IGraphicSystem
-	void Initialize(const IGraphicSystem::InitParams& i_initParams) override;
-	void Render() override;
+	void Initialize() override;
+	void Shutdown() override;
 
 	// Inherited via ISpriteGraphicAPI
 	std::weak_ptr<SpriteState> RegisterSprite(
@@ -29,12 +36,11 @@ public:
 		const ids::RenderLayer i_renderLayer = ids::RenderLayer::Default
 	) override;
 	void DeregisterSprite(
-		std::weak_ptr<SpriteState> i_spriteState
+		const SpriteState::Id i_spriteStateId
 	) override;
 	void SetSpriteRenderLayer(
 		const SpriteState::Id i_spriteStateId,
-		const ids::RenderLayer i_oldRenderLayer,
-		const ids::RenderLayer i_newRenderLayer
+		const ids::RenderLayer i_renderLayer
 	) override;
 
 	// Inherited via IAnimationGraphicAPI
@@ -43,37 +49,47 @@ public:
 		const ids::RenderLayer i_renderLayer = ids::RenderLayer::Default
 	) override;
 	void DeregisterAnimation(
-		std::weak_ptr<AnimationState> i_animationState
+		const AnimationState::Id i_animationStateId
 	) override;
 	void SetAnimationRenderLayer(
 		const AnimationState::Id i_animationStateId,
-		const ids::RenderLayer i_oldRenderLayer,
-		const ids::RenderLayer i_newRenderLayer
+		const ids::RenderLayer i_renderLayer
 	) override;
 private:
-	using MapSrpiteStates = std::map<SpriteState::Id, std::shared_ptr<SpriteState>>;
-	using MapAnimationStates = std::map<AnimationState::Id, std::shared_ptr<AnimationState>>;
+	SpriteState GenerateSpriteState();
+	void InsertSpriteState(std::shared_ptr<SpriteState> i_spriteState);
+	std::shared_ptr<SpriteState> GetSpriteState(const SpriteState::Id i_spriteStateId) const;
+	void RemoveSpriteState(std::shared_ptr<SpriteState> i_spriteState);
+	void DrawSprite(const SpriteState::Id i_spriteStateId);
+	INativeRenderAPI::DrawParams ToDrawParams(std::shared_ptr<const SpriteState> i_spriteState);
 
-	struct RenderStateContainer
-	{
-		MapSrpiteStates spriteStates;
-		MapAnimationStates animationStates;
-	};
+	AnimationState GenerateAnimationState();
+	void InsertAnimationState(std::shared_ptr<AnimationState> i_animationState);
+	std::shared_ptr<AnimationState> GetAnimationState(const AnimationState::Id i_animationStateId) const;
+	void RemoveAnimationState(std::shared_ptr<AnimationState> i_animationState);
+
+	using SpriteStateIds = std::set<SpriteState::Id>;
+	std::map<ids::RenderLayer, SpriteStateIds> m_mapLayerSpriteStateIds;
+	std::map<SpriteState::Id, std::shared_ptr<SpriteState>> m_allSpriteStates;
+	std::map<AnimationState::Id, std::shared_ptr<AnimationState>> m_allAnimationStates;
 
 	std::weak_ptr<files::IFileSystem> m_fileSystem;
-	std::unique_ptr<RendererWrapper> m_graphicsWrapper;
-	std::map<ids::RenderLayer, RenderStateContainer> m_mapRenderStateContainers;
-
-	SpriteState GenerateSpriteState();
-	AnimationState GenerateAnimationState();
+	std::shared_ptr<INativeRenderAPI> m_renderAPI;
 
 	uint64_t GenerateId();
 	uint64_t m_countId = 0;
 
-	void InitRenderStateContainers();
-	data_types::Flag m_initRenderStateContainersFlag;
+	void InitLayerSpriteStateIds();
 
 	void LoadTexture(const ids::TextureId i_textureId);
+
+	// IGameClock funcs
+	void OnPreRender(const uint64_t dt);
+	void OnRender(const uint64_t dt);
+	void OnPostRender(const uint64_t dt);
+	signals::Connection<const uint64_t> m_onPreRenderCon;
+	signals::Connection<const uint64_t> m_onRenderCon;
+	signals::Connection<const uint64_t> m_onPostRenderCon;
 };
 
 } // namespace graphics

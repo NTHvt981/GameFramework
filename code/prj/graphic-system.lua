@@ -1,7 +1,7 @@
 require("common")
 require("core")
 require("file-system")
-require("DirectXSDK")
+require("xml")
 
 local graphic_system_prj_name = "graphic-system"
 local graphic_system_path = source_path.."graphic-system/"
@@ -24,7 +24,7 @@ function addGraphicSystem()
 
       includeCore()
       includeFileSystem()
-      includeDirectXSDK()
+      includeXml()
 end
 
 function includeGraphicSystem()

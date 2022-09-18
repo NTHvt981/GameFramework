@@ -10,16 +10,16 @@ namespace helper
 
 bool CheckCollideResult::IsCollide() const
 {
-	return collideDirection == data_types::Vector2F();
+	return collideDirection == core::Vector2F();
 }
 
 CheckCollideResult CheckCollide(
-	const data_types::BoxF i_move,
-	const data_types::Vector2F i_moveVelocity,
-	const data_types::BoxF i_static)
+	const core::BoxF i_move,
+	const core::Vector2F i_moveVelocity,
+	const core::BoxF i_static)
 {
-	data_types::Vector2F entry;
-	data_types::Vector2F exit;
+	core::Vector2F entry;
+	core::Vector2F exit;
 
 	//	what is entryand exit, look at this
 	//	move_l		 move_r	   static_l			static_r
@@ -53,8 +53,8 @@ CheckCollideResult CheckCollide(
 
 	// find time of collision and time of leaving for
 	// each axis(if statement is to prevent divide by zero)
-	data_types::Vector2F entryTimeVector;
-	data_types::Vector2F exitTimeVector;
+	core::Vector2F entryTimeVector;
+	core::Vector2F exitTimeVector;
 
 	//we will devide entry position to velocity to get the entry time
 	//for x entry_x / velocity_x
@@ -94,7 +94,7 @@ CheckCollideResult CheckCollide(
 		return CheckCollideResult
 		{
 			1.0f,
-			data_types::Vector2F{0.0f, 0.0f}
+			core::Vector2F{0.0f, 0.0f}
 		};
 	}
 	else //I dont understand these line
@@ -104,7 +104,7 @@ CheckCollideResult CheckCollide(
 			return CheckCollideResult
 			{
 				entryTime,
-				data_types::Vector2F{-math::Sign(entry.x), 0.0f}
+				core::Vector2F{-math::Sign(entry.x), 0.0f}
 			};
 		}
 		else
@@ -112,17 +112,17 @@ CheckCollideResult CheckCollide(
 			return CheckCollideResult
 			{
 				entryTime,
-				data_types::Vector2F{0.0f, -math::Sign(entry.y)}
+				core::Vector2F{0.0f, -math::Sign(entry.y)}
 			};
 		}
 	}
 }
 
-data_types::BoxF GetBroadphaseBox(
-	const data_types::BoxF i_move,
-	const data_types::Vector2F i_moveVelocity)
+core::BoxF GetBroadphaseBox(
+	const core::BoxF i_move,
+	const core::Vector2F i_moveVelocity)
 {
-	data_types::BoxF result;
+	core::BoxF result;
 
 	if (i_moveVelocity.x > 0)
 	{
@@ -150,8 +150,8 @@ data_types::BoxF GetBroadphaseBox(
 }
 
 bool CheckOverlap(
-	const data_types::BoxF i_boxA,
-	const data_types::BoxF i_boxB)
+	const core::BoxF i_boxA,
+	const core::BoxF i_boxB)
 {
 	return (
 		i_boxA.right <= i_boxB.left ||
@@ -161,16 +161,16 @@ bool CheckOverlap(
 		) == false;
 }
 
-data_types::Vector2F CalculateDeflect(
-	const data_types::Vector2F i_oldPosition,
-	const data_types::Vector2F i_oldVelocity,
+core::Vector2F CalculateDeflect(
+	const core::Vector2F i_oldPosition,
+	const core::Vector2F i_oldVelocity,
 	const CheckCollideResult i_collideResult)
 {
 	NewPosition result = CalculateStop(i_oldPosition, i_oldVelocity, i_collideResult);
 
 	float remainTime = 1 - i_collideResult.collideTime;
-	data_types::Vector2F newVelocity = i_oldVelocity * remainTime;
-	data_types::Vector2F direction = i_collideResult.collideDirection;
+	core::Vector2F newVelocity = i_oldVelocity * remainTime;
+	core::Vector2F direction = i_collideResult.collideDirection;
 
 	if (fabsf(direction.x) > 0.0001f)
 	{
@@ -185,14 +185,14 @@ data_types::Vector2F CalculateDeflect(
 }
 
 NewPosition CalculatePush(
-	const data_types::Vector2F i_oldPosition,
-	const data_types::Vector2F i_oldVelocity,
+	const core::Vector2F i_oldPosition,
+	const core::Vector2F i_oldVelocity,
 	const CheckCollideResult i_collideResult)
 {
 	NewPosition result = CalculateStop(i_oldPosition, i_oldVelocity, i_collideResult);
 
 	float remainTime = 1 - i_collideResult.collideTime;
-	data_types::Vector2F direction = i_collideResult.collideDirection;
+	core::Vector2F direction = i_collideResult.collideDirection;
 
 	float dotProduct = (i_oldVelocity.x * direction.y + i_oldVelocity.y * direction.x);
 	if (dotProduct > 0.0f)
@@ -211,18 +211,18 @@ NewPosition CalculatePush(
 }
 
 NewPosition CalculateSlide(
-	const data_types::Vector2F i_oldPosition,
-	const data_types::Vector2F i_oldVelocity,
+	const core::Vector2F i_oldPosition,
+	const core::Vector2F i_oldVelocity,
 	const CheckCollideResult i_collideResult)
 {
 	NewPosition result = CalculateStop(i_oldPosition, i_oldVelocity, i_collideResult);
 
 	float remainTime = 1 - i_collideResult.collideTime;
-	data_types::Vector2F direction = i_collideResult.collideDirection;
+	core::Vector2F direction = i_collideResult.collideDirection;
 	//beware v_x * normal_y NOT v_x * normal_x
 	float dotProduct = (i_oldVelocity.x * direction.y + i_oldVelocity.y * direction.x) * remainTime;
 
-	const data_types::Vector2F newVelocity = direction * dotProduct;
+	const core::Vector2F newVelocity = direction * dotProduct;
 
 	//update position
 	result = result + newVelocity;
@@ -231,8 +231,8 @@ NewPosition CalculateSlide(
 }
 
 NewPosition CalculateStop(
-	const data_types::Vector2F i_oldPosition,
-	const data_types::Vector2F i_oldVelocity,
+	const core::Vector2F i_oldPosition,
+	const core::Vector2F i_oldVelocity,
 	const CheckCollideResult i_collideResult)
 {
 	NewPosition result = i_oldPosition;

@@ -8,9 +8,9 @@ namespace physics
 
 struct DynamicCollider : public Collider
 {
-	data_types::BoxF RelativeBoundary;
-	data_types::Vector2F Position;
-	data_types::BoxF GetBoundary() const override
+	core::BoxF RelativeBoundary;
+	core::Vector2F Position;
+	core::BoxF GetBoundary() const override
 	{
 		return RelativeBoundary + Position;
 	}

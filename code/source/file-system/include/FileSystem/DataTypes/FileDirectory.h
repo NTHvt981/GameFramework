@@ -9,7 +9,7 @@ struct FileDirectory
 {
 	FolderDirectory folderDirectory;
 	File file;
-	data_types::String ToString() const;
+	core::String ToString() const;
 };
 
 } // namespace files

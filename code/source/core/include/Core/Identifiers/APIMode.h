@@ -6,8 +6,8 @@ namespace ids
 
 enum class APIMode : uint64_t
 {
-	D3D9,
-	COUNT // Special enum
+	NoAPIMode,
+	D3D9
 };
 
 } // namespace ids

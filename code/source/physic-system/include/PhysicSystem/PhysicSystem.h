@@ -18,7 +18,7 @@ public:
 	void DeregisterDynamicCollider(ids::EntityId i_entityId) override;
 	void RegisterStaticCollider(ids::EntityId i_entityId, std::weak_ptr<StaticCollider> i_collider) override;
 	void DeregisterStaticCollider(ids::EntityId i_entityId) override;
-	CalculatePosition CheckMove(ids::EntityId i_selfEntityId, const data_types::Vector2F& i_velocity) override;
+	CalculatePosition CheckMove(ids::EntityId i_selfEntityId, const core::Vector2F& i_velocity) override;
 
 private:
 	struct UpdateDynamicColliderStateParam

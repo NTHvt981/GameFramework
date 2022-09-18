@@ -11,11 +11,12 @@ namespace graphics
 struct SpriteState
 {
 	using Id = uint64_t;
-	Id id;
+	const Id id;
+	SpriteState(Id i_id) : id(i_id) {};
 	std::weak_ptr<const SpriteDef> spriteDef;
-	data_types::Vector2F position;
-	float alpha;
-	ids::RenderLayer renderLayer;
+	core::Vector2F position = core::Vector2F();
+	float alpha = 1;
+	ids::RenderLayer renderLayer = ids::RenderLayer::Default;
 };
 
 } // namespace graphics

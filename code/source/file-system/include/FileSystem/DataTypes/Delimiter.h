@@ -7,7 +7,7 @@ namespace files
 class Delimiter
 {
 public:
-	data_types::String name = "\\";
+	core::String name = "\\";
 };
 
 } // namespace files

@@ -45,10 +45,10 @@ void FolderDirectory::operator=(const FolderDirectory& i_other)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void FolderDirectory::SetFolders(data_types::String i_path)
+void FolderDirectory::SetFolders(core::String i_path)
 {
-	std::vector<data_types::String> folderNames = data_types::string::Split(i_path, m_delimiter.name);
-	for (const data_types::String& folderName : folderNames)
+	std::vector<core::String> folderNames = core::Split(i_path, m_delimiter.name);
+	for (const core::String& folderName : folderNames)
 	{
 		m_folders.push_back(Folder{ folderName });
 	}
@@ -56,7 +56,7 @@ void FolderDirectory::SetFolders(data_types::String i_path)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-data_types::String FolderDirectory::ToString() const
+core::String FolderDirectory::ToString() const
 {
 	std::string result;
 	const std::string& stdDeli = m_delimiter.name.ToStdStr();
@@ -69,7 +69,7 @@ data_types::String FolderDirectory::ToString() const
 
 	if (result.empty())
 	{
-		return data_types::String();
+		return core::String();
 	}
 
 	return result;

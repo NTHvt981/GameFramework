@@ -1,5 +1,4 @@
 #include "Xml/CommonParser.h"
-#include "Core/DataTypes/Box.h"
 #include "Core/Identifiers/TextureId.h"
 #include "tinyxml2.h"
 
@@ -26,12 +25,12 @@ void Parse(const tinyxml2::XMLElement* i_element, double& o_value)
 	o_value = std::atof(i_element->GetText());
 }
 
-void Parse(const tinyxml2::XMLElement* i_element, data_types::String& o_value)
+void Parse(const tinyxml2::XMLElement* i_element, core::String& o_value)
 {
 	o_value = i_element->GetText();
 }
 
-void Parse(const tinyxml2::XMLElement* i_element, data_types::BoxI64& o_value)
+void Parse(const tinyxml2::XMLElement* i_element, core::BoxI64& o_value)
 {
 	Parse(i_element->FirstChildElement("bottom"), o_value.bottom);
 	Parse(i_element->FirstChildElement("top"), o_value.top);

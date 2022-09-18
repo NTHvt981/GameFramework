@@ -1,7 +1,7 @@
 #pragma once
 #include "Core/Identifiers/TextureId.h"
-#include "Core/DataTypes/Box.h"
-#include "Xml/CommonParser.h"
+#include "Core/DataTypes/Size.h"
+#include "Core/DataTypes/String.h"
 
 namespace graphics
 {
@@ -9,7 +9,8 @@ namespace graphics
 struct Texture
 {
 	ids::TextureId id;
-	data_types::BoxI64 bound;
+	core::SizeI64 size;
+	core::String textureFilePath;
 };
 
 } // namespace graphics

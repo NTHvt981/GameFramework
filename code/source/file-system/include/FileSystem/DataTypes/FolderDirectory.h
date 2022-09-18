@@ -13,8 +13,8 @@ public:
 	FolderDirectory(const std::list<Folder>& i_folders);
 	FolderDirectory operator+(const FolderDirectory& i_other) const;
 	void operator=(const FolderDirectory& i_other);
-	void SetFolders(data_types::String i_path);
-	data_types::String ToString() const;
+	void SetFolders(core::String i_path);
+	core::String ToString() const;
 	void Optimize();
 
 private:

@@ -1,8 +1,8 @@
 #pragma once
-#include <array>
 #include <vector>
 #include <memory>
 #include "GraphicSystem/DataTypes/SpriteDef.h"
+#include "Core/Identifiers/AnimationId.h"
 
 namespace graphics
 {
@@ -15,6 +15,7 @@ struct AnimationFrameDef
 
 struct AnimationDef
 {
+	ids::AnimationId id;
 	std::vector<AnimationFrameDef> frames;
 	float alpha;
 };

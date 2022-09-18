@@ -1,8 +1,7 @@
 #pragma once
-#include "APIs/ITileGraphicAPI.h"
-#include "APIs/ISpriteGraphicAPI.h"
-#include "APIs/IAnimationGraphicAPI.h"
-#include "GraphicSystem/Renderers/RendererWrapper.h"
+#include "API/ITileGraphicAPI.h"
+#include "API/ISpriteGraphicAPI.h"
+#include "API/IAnimationGraphicAPI.h"
 
 namespace graphics
 {
@@ -12,9 +11,8 @@ class IGraphicSystem:	public ISpriteGraphicAPI,
 						public ITileGraphicAPI
 {
 public:
-	using InitParams = RendererWrapper::InitParams;
-	virtual void Initialize(const InitParams& i_initParams) = 0;
-	virtual void Render() = 0;
+	virtual void Initialize() = 0;
+	virtual void Shutdown() = 0;
 };
 
 } // namespace graphics

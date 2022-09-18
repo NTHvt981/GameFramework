@@ -6,8 +6,8 @@ namespace physics
 
 struct StaticCollider: public Collider
 {
-	data_types::BoxF AbsoluteBoundary;
-	data_types::BoxF GetBoundary() const override
+	core::BoxF AbsoluteBoundary;
+	core::BoxF GetBoundary() const override
 	{
 		return AbsoluteBoundary;
 	}

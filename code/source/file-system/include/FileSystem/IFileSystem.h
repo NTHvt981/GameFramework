@@ -6,7 +6,7 @@ namespace ids
 enum class FileId : uint64_t;
 } // namespace ids
 
-namespace data_types
+namespace core
 {
 class String;
 }
@@ -19,7 +19,7 @@ class IFileSystem
 public:
 	virtual void WriteTextFile(const ids::FileId i_fileId) = 0;
 	virtual void ReadTextFile(const ids::FileId i_fileId) = 0;
-	virtual data_types::String GetFileDirectory(const ids::FileId i_fileId) const = 0;
+	virtual core::String GetFileDirectory(const ids::FileId i_fileId) const = 0;
 };
 
 } // namespace files

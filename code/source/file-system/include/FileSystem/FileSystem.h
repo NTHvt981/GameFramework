@@ -4,7 +4,7 @@
 #include <unordered_map>
 #include <memory>
 
-namespace data_types
+namespace core
 {
 template<typename T>
 class InitOnce;
@@ -22,10 +22,11 @@ public:
 	FileSystem();
 	~FileSystem();
 	void Initialize();
+	void ShutDown();
 	// Inherited via IFileSystem
 	void WriteTextFile(const ids::FileId i_fileId) override;
 	void ReadTextFile(const ids::FileId i_fileId) override;
-	data_types::String GetFileDirectory(const ids::FileId i_fileId) const override;
+	core::String GetFileDirectory(const ids::FileId i_fileId) const override;
 
 private:
 	std::unordered_map<ids::FileId, FileDirectory> m_mapFileDirectories;

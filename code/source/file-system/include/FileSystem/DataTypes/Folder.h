@@ -6,8 +6,8 @@ namespace files
 
 struct Folder
 {
-	data_types::String name;
+	core::String name;
 };
-static const Folder BackwardFolder{ data_types::String("..") };
+static const Folder BackwardFolder{ core::String("..") };
 
 } // namespace file

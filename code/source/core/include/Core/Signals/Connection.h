@@ -1,6 +1,7 @@
 #pragma once
 #include "Signal.h"
 #include "Callback.h"
+#include <assert.h>
 
 namespace signals
 {
@@ -22,6 +23,16 @@ public:
 	{
 
 	}
+	Connection()
+	{
+
+	}
+
+	void operator=(const Connection& i_other)
+	{
+		this->m_signal = i_other.m_signal;
+		this->m_function = i_other.m_function;
+	}
 
 	~Connection()
 	{
@@ -30,15 +41,21 @@ public:
 
 	void Disconnect()
 	{
-		assert(m_signal != nullptr);
-		m_signal->Disconnect(m_function);
-		m_function.reset();
+		if (m_signal != nullptr)
+		{
+			if (m_function.use_count() == 2)
+			{
+				m_signal->Disconnect(m_function);
+			}
+			m_function.reset();
+
+			m_signal = nullptr;
+		}
 	}
 
 private:
-	Signal* m_signal;
+	Signal* m_signal = nullptr;
 	std::shared_ptr<Callback> m_function;
 };
 
 } // namespace signals
-

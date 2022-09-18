@@ -51,11 +51,11 @@ void PhysicSystem::DeregisterStaticCollider(ids::EntityId i_entityId)
 	m_colliders[i_entityId].reset();
 }
 
-PhysicSystem::CalculatePosition PhysicSystem::CheckMove(ids::EntityId i_selfEntityId, const data_types::Vector2F& i_velocity)
+PhysicSystem::CalculatePosition PhysicSystem::CheckMove(ids::EntityId i_selfEntityId, const core::Vector2F& i_velocity)
 {
 	std::shared_ptr<const DynamicCollider> selfCollider = m_dynamicColliders[i_selfEntityId].lock();
-	data_types::Vector2F selfPosition = selfCollider->Position;
-	data_types::Vector2F resultVelocity = i_velocity;
+	core::Vector2F selfPosition = selfCollider->Position;
+	core::Vector2F resultVelocity = i_velocity;
 
 	for (const auto& [otherEntityId, otherCollider] : m_colliders)
 	{
@@ -75,7 +75,7 @@ PhysicSystem::CalculatePosition PhysicSystem::CheckMove(ids::EntityId i_selfEnti
 			sig_onEntityCollide.Emit(i_selfEntityId, otherEntityId);
 
 			const helper::NewPosition newPosition = helper::CalculateStop(selfPosition, resultVelocity, result);
-			data_types::Vector2F newVelocity = newPosition - selfPosition;
+			core::Vector2F newVelocity = newPosition - selfPosition;
 
 			if (std::abs(resultVelocity.x) < std::abs(newVelocity.x))
 			{

@@ -1,6 +1,6 @@
 #include "Core/Helpers/StringHelper.h"
 
-namespace core::string
+namespace core
 {
 
 std::vector<String> Split(const String i_totalStr, const String i_delimiter)

@@ -1,16 +1,17 @@
 #include "Logic/Game.h"
-#include "RenderDebug/DebugRenderAPI.h"
-#include "RenderDirectx9/Directx9RenderAPI.h"
+#include "GraphicDebug/DebugGraphicAPI.h"
+#include "GraphicDirectx9/Directx9GraphicAPI.h"
+#include "InputDirectx/DirectxInputAPI.h"
 #include <windows.h>
 #include <tchar.h>
 #include <cstdint>
 #include <sysinfoapi.h>
 
-HWND CreateTestWindow(HINSTANCE hInstance, int64_t nCmdShow, int64_t ScreenWidth, int64_t ScreenHeight);
+HWND CreateGameWindow(HINSTANCE hInstance, int64_t nCmdShow, int64_t ScreenWidth, int64_t ScreenHeight);
 LRESULT CALLBACK WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 void OnGameRequestShutdown();
 
-std::unique_ptr<logic::Game> s_game;
+std::unique_ptr<logic::Game> s_game = nullptr;
 bool s_isRunning = true;
 
 int WINAPI WinMain(
@@ -20,15 +21,17 @@ int WINAPI WinMain(
 	_In_ int       nCmdShow
 )
 {
-	HWND hwnd = CreateTestWindow(hInstance, nCmdShow, 800, 600);
+	HWND hwnd = CreateGameWindow(hInstance, nCmdShow, 800, 600);
 
 	MSG msg;
 	bool done = 0;
 	ULONGLONG currentFrameTime = GetTickCount64();
 	ULONGLONG previousFrameTime = GetTickCount64();
 
-	std::unique_ptr<graphics::INativeRenderAPI> nativeRenderAPI = std::make_unique<graphics::DebugRenderAPI>();
-	s_game = std::make_unique<logic::Game>(std::move(nativeRenderAPI));
+	std::unique_ptr<graphics::INativeGraphicAPI> nativeRenderAPI = std::make_unique<graphics::Directx9GraphicAPI>(hwnd);
+	std::unique_ptr<input::DirectxInputAPI> nativeInputAPI = std::make_unique<input::DirectxInputAPI>(hwnd, hInstance);
+
+	s_game = std::make_unique<logic::Game>(std::move(nativeRenderAPI), std::move(nativeInputAPI));
 	s_game->Initialize();
 	auto connection = s_game->sig_requestShutdown.Connect(std::function(OnGameRequestShutdown));
 
@@ -65,7 +68,7 @@ int WINAPI WinMain(
 	return 0;
 }
 
-HWND CreateTestWindow(HINSTANCE hInstance, int64_t nCmdShow, int64_t ScreenWidth, int64_t ScreenHeight)
+HWND CreateGameWindow(HINSTANCE hInstance, int64_t nCmdShow, int64_t ScreenWidth, int64_t ScreenHeight)
 {
 	WNDCLASSEX wc;
 	wc.cbSize = sizeof(WNDCLASSEX);
@@ -115,8 +118,16 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	switch (message) {
 	case WM_KILLFOCUS:
+		if (s_game.get() != nullptr && s_game->IsInitialized())
+		{
+			s_game->Pause();
+		}
 		break;
 	case WM_SETFOCUS:
+		if (s_game.get() != nullptr && s_game->IsInitialized())
+		{
+			s_game->Resume();
+		}
 		break;
 		//if the player close the window
 	case WM_DESTROY:

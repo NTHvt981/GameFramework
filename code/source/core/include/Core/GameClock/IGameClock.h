@@ -8,6 +8,7 @@ namespace core::logic
 class IGameClock
 {
 public:
+	signals::Signal<const uint64_t> sig_onUpdateInput;
 	signals::Signal<const uint64_t> sig_onPreFixedUpdate;
 	signals::Signal<const uint64_t> sig_onFixedUpdate;
 	signals::Signal<const uint64_t> sig_onPostFixedUpdate;

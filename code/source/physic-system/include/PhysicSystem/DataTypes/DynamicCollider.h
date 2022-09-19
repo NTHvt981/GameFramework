@@ -1,7 +1,7 @@
 #pragma once
 #include "Collider.h"
 #include "Core/DataTypes/Vector2.h"
-#include "Core/Helpers/BoxHelper.h"
+#include "Core/Helpers/BoxVector2Helper.h"
 
 namespace physics
 {

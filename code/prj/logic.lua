@@ -2,6 +2,8 @@ require("common")
 require("core")
 require("file-system")
 require("graphic-system")
+require("physic-system")
+require("input-system")
 
 local logic_prj_name = "logic"
 local logic_path = source_path.."logic/"
@@ -26,6 +28,8 @@ function addLogic()
       includeCore()
       includeFileSystem()
       includeGraphicSystem()
+      includePhysicSystem()
+      includeInputSystem()
 end
 
 function includeLogic()
@@ -36,4 +40,9 @@ function includeLogic()
    links {
       logic_prj_name
    }
+   
+   includeCore()
+   includeFileSystem()
+   includeGraphicSystem()
+   includePhysicSystem()
 end

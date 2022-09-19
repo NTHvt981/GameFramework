@@ -1,0 +1,16 @@
+<Textures>
+    <Texture Id="1">
+        <File>BlackScreen.png</File>
+        <Size>
+            <Width>600</Width>
+            <Width>600</Width>
+        </Size>
+    </Texture>
+    <Texture Id="2">
+        <File>RedScreen.png</File>
+        <Size>
+            <Width>400</Width>
+            <Width>400</Width>
+        </Size>
+    </Texture>
+</Textures>

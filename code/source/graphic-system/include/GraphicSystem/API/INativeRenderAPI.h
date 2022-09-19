@@ -11,7 +11,7 @@
 namespace graphics
 {
 
-class INativeRenderAPI
+class INativeGraphicAPI
 {
 public:
 	virtual void Initialize() = 0;

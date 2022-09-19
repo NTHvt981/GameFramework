@@ -5,6 +5,14 @@
 namespace physics
 {
 
+PhysicSystem::PhysicSystem(std::weak_ptr<core::logic::IGameClock> i_gameClock)
+{
+	std::shared_ptr<core::logic::IGameClock> gameClock = i_gameClock.lock();
+	m_onPreFixedUpdateCon = gameClock->sig_onPreRender.Connect(std::bind(&PhysicSystem::OnPreFixedUpdate, this, std::placeholders::_1));
+	m_onFixedUpdateCon = gameClock->sig_onRender.Connect(std::bind(&PhysicSystem::OnFixedUpdate, this, std::placeholders::_1));
+	m_onPostFixedUpdateCon = gameClock->sig_onPostRender.Connect(std::bind(&PhysicSystem::OnPostFixedUpdate, this, std::placeholders::_1));
+}
+
 void PhysicSystem::Initialize()
 {
 }
@@ -123,6 +131,18 @@ void PhysicSystem::UpdateDynamicColliderState(UpdateDynamicColliderStateParam pa
 			sig_onEntityTouch.Emit(selfEntityId, otherEntityId);
 		}
 	}
+}
+
+void PhysicSystem::OnPreFixedUpdate(const uint64_t dt)
+{
+}
+
+void PhysicSystem::OnFixedUpdate(const uint64_t dt)
+{
+}
+
+void PhysicSystem::OnPostFixedUpdate(const uint64_t dt)
+{
 }
 
 } // namespace physics

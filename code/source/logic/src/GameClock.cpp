@@ -7,6 +7,16 @@ GameClock::GameClock()
 {
 }
 
+void GameClock::UpdateInput(const uint64_t dt)
+{
+	if (m_shutDown)
+	{
+		return;
+	}
+
+	sig_onUpdateInput.Emit(dt);
+}
+
 void GameClock::PreFixedUpdate(const uint64_t dt)
 {
 	if (m_shutDown)

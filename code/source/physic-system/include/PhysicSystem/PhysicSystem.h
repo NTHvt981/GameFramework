@@ -1,5 +1,6 @@
 #pragma once
 #include "IPhysicSystem.h"
+#include "Core/GameClock/IGameClock.h"
 #include <map>
 
 namespace physics
@@ -8,6 +9,8 @@ namespace physics
 class PhysicSystem final : public IPhysicSystem
 {
 public:
+	PhysicSystem(std::weak_ptr<core::logic::IGameClock> i_gameClock);
+
 	// Inherited via IPhysicSystem
 	void Initialize() override;
 	void Shutdown() override;
@@ -31,6 +34,14 @@ private:
 	std::map<ids::EntityId, std::shared_ptr<Collider>> m_colliders;
 	std::map<ids::EntityId, std::weak_ptr<DynamicCollider>> m_dynamicColliders;
 	std::map<ids::EntityId, std::weak_ptr<StaticCollider>> m_staticColliders;
+
+	// IGameClock funcs
+	void OnPreFixedUpdate(const uint64_t dt);
+	void OnFixedUpdate(const uint64_t dt);
+	void OnPostFixedUpdate(const uint64_t dt);
+	signals::Connection<const uint64_t> m_onPreFixedUpdateCon;
+	signals::Connection<const uint64_t> m_onFixedUpdateCon;
+	signals::Connection<const uint64_t> m_onPostFixedUpdateCon;
 };
 
 } // namespace physics

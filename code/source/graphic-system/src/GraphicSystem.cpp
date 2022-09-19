@@ -4,49 +4,78 @@
 namespace graphics
 {
 
+////////////////////////////////////////////////////////////////////////////////
+
 GraphicSystem::GraphicSystem(
-    std::weak_ptr<core::logic::IGameClock> i_gameClock,
     std::weak_ptr<files::IFileSystem> i_fileSystem,
-    std::shared_ptr<INativeRenderAPI> i_renderAPI)
+    std::shared_ptr<INativeGraphicAPI> i_renderAPI)
     : m_fileSystem(i_fileSystem)
-    , m_renderAPI(std::move(i_renderAPI))
+    , m_nativeGraphicAPI(std::move(i_renderAPI))
 {
     InitLayerSpriteStateIds();
-    
-    std::shared_ptr<core::logic::IGameClock> gameClock = i_gameClock.lock();
-    m_onPreRenderCon = gameClock->sig_onPreRender.Connect(std::bind(&GraphicSystem::OnPreRender, this, std::placeholders::_1));
-    m_onRenderCon = gameClock->sig_onRender.Connect(std::bind(&GraphicSystem::OnRender, this, std::placeholders::_1));
-    m_onPostRenderCon = gameClock->sig_onPostRender.Connect(std::bind(&GraphicSystem::OnPostRender, this, std::placeholders::_1));
 }
+
+////////////////////////////////////////////////////////////////////////////////
 
 GraphicSystem::~GraphicSystem()
 {
-    m_renderAPI.reset();
+    m_nativeGraphicAPI.reset();
     m_fileSystem.reset();
 }
 
+////////////////////////////////////////////////////////////////////////////////
+
 void GraphicSystem::Initialize()
 {
-    m_renderAPI->Initialize();
-    LoadTexture(ids::TextureId::BlackScreen);
-    LoadTexture(ids::TextureId::Boss);
-    LoadTexture(ids::TextureId::CollisionDebug);
-    LoadTexture(ids::TextureId::Enemies);
-    LoadTexture(ids::TextureId::Item);
-    LoadTexture(ids::TextureId::Opening);
-    LoadTexture(ids::TextureId::OtherObjects);
-    LoadTexture(ids::TextureId::Player);
-    LoadTexture(ids::TextureId::PlayerHealth);
-    LoadTexture(ids::TextureId::Rollout);
+    m_nativeGraphicAPI->Initialize();
+    //LoadTexture(ids::TextureId::BlackScreen);
+    //LoadTexture(ids::TextureId::Boss);
+    //LoadTexture(ids::TextureId::CollisionDebug);
+    //LoadTexture(ids::TextureId::Enemies);
+    //LoadTexture(ids::TextureId::Item);
+    //LoadTexture(ids::TextureId::Opening);
+    //LoadTexture(ids::TextureId::OtherObjects);
+    //LoadTexture(ids::TextureId::Player);
+    //LoadTexture(ids::TextureId::PlayerHealth);
+    //LoadTexture(ids::TextureId::Rollout);
 }
+
+////////////////////////////////////////////////////////////////////////////////
 
 void GraphicSystem::Shutdown()
 {
-    m_renderAPI->Shutdown();
+    m_nativeGraphicAPI->Shutdown();
 }
 
+////////////////////////////////////////////////////////////////////////////////
+
+void GraphicSystem::PreRender(const uint64_t dt)
+{
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void GraphicSystem::Render(const uint64_t dt)
+{
+    for (const ids::RenderLayer renderLayer : ids::RenderLayerIterator())
+    {
+        for (const SpriteState::Id spriteStateId : m_mapLayerSpriteStateIds[renderLayer])
+        {
+            DrawSprite(spriteStateId);
+        }
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void GraphicSystem::PostRender(const uint64_t dt)
+{
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 std::weak_ptr<SpriteState> GraphicSystem::RegisterSprite(
-    const ids::SpriteId i_spriteId, 
+    const ids::SpriteId i_spriteId,
     const ids::RenderLayer i_renderLayer)
 {
     std::shared_ptr<SpriteState> result = std::make_shared<SpriteState>(GenerateSpriteState());
@@ -54,11 +83,15 @@ std::weak_ptr<SpriteState> GraphicSystem::RegisterSprite(
     return result;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+
 void GraphicSystem::DeregisterSprite(const SpriteState::Id i_spriteStateId)
 {
     std::shared_ptr<SpriteState> spriteState = GetSpriteState(i_spriteStateId);
     RemoveSpriteState(spriteState);
 }
+
+////////////////////////////////////////////////////////////////////////////////
 
 void GraphicSystem::SetSpriteRenderLayer(
     const SpriteState::Id i_spriteStateId,
@@ -69,10 +102,19 @@ void GraphicSystem::SetSpriteRenderLayer(
 
     SpriteStateIds& oldIds = m_mapLayerSpriteStateIds[oldRenderLayer];
     SpriteStateIds& newIds = m_mapLayerSpriteStateIds[i_renderLayer];
-    
+
     oldIds.erase(oldIds.find(i_spriteStateId));
     newIds.emplace(i_spriteStateId);
 }
+
+////////////////////////////////////////////////////////////////////////////////
+
+void GraphicSystem::SetSpriteDefinition(const SpriteState::Id i_spriteStateId, const ids::SpriteId i_newSpriteId)
+{
+
+}
+
+////////////////////////////////////////////////////////////////////////////////
 
 // when system register animation, it also register sprite with same id
 std::weak_ptr<AnimationState> GraphicSystem::RegisterAnimation(
@@ -84,11 +126,15 @@ std::weak_ptr<AnimationState> GraphicSystem::RegisterAnimation(
     return result;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+
 void GraphicSystem::DeregisterAnimation(const AnimationState::Id i_animationStateId)
 {
     std::shared_ptr<AnimationState> spriteState = GetAnimationState(i_animationStateId);
     RemoveAnimationState(spriteState);
 }
+
+////////////////////////////////////////////////////////////////////////////////
 
 void GraphicSystem::SetAnimationRenderLayer(
     const AnimationState::Id i_animationStateId,
@@ -97,31 +143,39 @@ void GraphicSystem::SetAnimationRenderLayer(
     SetSpriteRenderLayer(i_animationStateId, i_renderLayer);
 }
 
+////////////////////////////////////////////////////////////////////////////////
+
 SpriteState GraphicSystem::GenerateSpriteState()
 {
     SpriteState state(GenerateId());
     return state;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+
 void GraphicSystem::InsertSpriteState(std::shared_ptr<SpriteState> i_spriteState)
 {
     const SpriteState::Id id = i_spriteState->id;
     m_allSpriteStates[id] = i_spriteState;
-    
+
     const ids::RenderLayer renderLayer = i_spriteState->renderLayer;
     m_mapLayerSpriteStateIds[renderLayer].emplace(id);
 }
+
+////////////////////////////////////////////////////////////////////////////////
 
 std::shared_ptr<SpriteState> GraphicSystem::GetSpriteState(const SpriteState::Id i_spriteStateId) const
 {
     return m_allSpriteStates.at(i_spriteStateId);
 }
 
+////////////////////////////////////////////////////////////////////////////////
+
 void GraphicSystem::RemoveSpriteState(std::shared_ptr<SpriteState> i_spriteState)
 {
     const ids::RenderLayer renderLayer = i_spriteState->renderLayer;
     const SpriteState::Id id = i_spriteState->id;
-    
+
     SpriteStateIds& layer = m_mapLayerSpriteStateIds[renderLayer];
     auto it = layer.find(id);
     if (it != layer.end())
@@ -132,18 +186,22 @@ void GraphicSystem::RemoveSpriteState(std::shared_ptr<SpriteState> i_spriteState
     m_allSpriteStates.try_emplace(id, nullptr);
 }
 
+////////////////////////////////////////////////////////////////////////////////
+
 void GraphicSystem::DrawSprite(const SpriteState::Id i_spriteStateId)
 {
     std::shared_ptr<const SpriteState> spriteState = GetSpriteState(i_spriteStateId);
-    const INativeRenderAPI::DrawParams drawParams = ToDrawParams(spriteState);
-    m_renderAPI->Draw(drawParams);
+    const INativeGraphicAPI::DrawParams drawParams = ToDrawParams(spriteState);
+    m_nativeGraphicAPI->Draw(drawParams);
 }
 
-INativeRenderAPI::DrawParams GraphicSystem::ToDrawParams(std::shared_ptr<const SpriteState> i_spriteState)
+////////////////////////////////////////////////////////////////////////////////
+
+INativeGraphicAPI::DrawParams GraphicSystem::ToDrawParams(std::shared_ptr<const SpriteState> i_spriteState)
 {
     std::shared_ptr<const SpriteDef> spriteDef = i_spriteState->spriteDef.lock();
     std::shared_ptr<const Texture> textureDef = spriteDef->texture.lock();
-    INativeRenderAPI::DrawParams result;
+    INativeGraphicAPI::DrawParams result;
     
     result.position = i_spriteState->position;
     result.alpha = i_spriteState->alpha;
@@ -153,6 +211,8 @@ INativeRenderAPI::DrawParams GraphicSystem::ToDrawParams(std::shared_ptr<const S
 
     return result;
 }
+
+////////////////////////////////////////////////////////////////////////////////
 
 AnimationState GraphicSystem::GenerateAnimationState()
 {
@@ -164,6 +224,8 @@ AnimationState GraphicSystem::GenerateAnimationState()
     return animationstate;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+
 void GraphicSystem::InsertAnimationState(std::shared_ptr<AnimationState> i_animationState)
 {
     m_allAnimationStates[i_animationState->id] = i_animationState;
@@ -171,10 +233,14 @@ void GraphicSystem::InsertAnimationState(std::shared_ptr<AnimationState> i_anima
     InsertSpriteState(spriteState);
 }
 
+////////////////////////////////////////////////////////////////////////////////
+
 std::shared_ptr<AnimationState> GraphicSystem::GetAnimationState(const AnimationState::Id i_animationStateId) const
 {
     return m_allAnimationStates.at(i_animationStateId);
 }
+
+////////////////////////////////////////////////////////////////////////////////
 
 void GraphicSystem::RemoveAnimationState(std::shared_ptr<AnimationState> i_animationState)
 {
@@ -183,11 +249,46 @@ void GraphicSystem::RemoveAnimationState(std::shared_ptr<AnimationState> i_anima
     m_allSpriteStates.try_emplace(id, nullptr);
 }
 
+////////////////////////////////////////////////////////////////////////////////
+
+void GraphicSystem::ProccessAnimationState(std::shared_ptr<AnimationState> i_animationState, const uint64_t dt)
+{
+    uint64_t& currentFrameIndex = i_animationState->currentFrameIndex;
+    uint64_t& currentFrameTime = i_animationState->currentFrameTime;
+    auto animationDef = i_animationState->animationDef.lock();
+    
+    uint64_t newFrameTime = currentFrameTime + dt;
+    const AnimationFrameDef& currentFrame = animationDef->frames[currentFrameIndex];
+    if (newFrameTime >= currentFrame.time)
+    {
+        currentFrameTime = newFrameTime - currentFrame.time;
+        currentFrameIndex++;
+        auto frameSize = animationDef->frames.size();
+        if (currentFrameIndex >= frameSize)
+        {
+            currentFrameIndex = currentFrameIndex - frameSize;
+        }
+
+        const AnimationFrameDef& newFrame = animationDef->frames[currentFrameIndex];
+        auto spriteDef = newFrame.sprite.lock();
+
+        SetSpriteDefinition(i_animationState->spriteStateRef->id, spriteDef->id);
+    }
+    else
+    {
+        currentFrameTime = newFrameTime;
+    }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 uint64_t GraphicSystem::GenerateId()
 {
     m_countId++;
     return m_countId;
 }
+
+////////////////////////////////////////////////////////////////////////////////
 
 void GraphicSystem::InitLayerSpriteStateIds()
 {
@@ -196,6 +297,8 @@ void GraphicSystem::InitLayerSpriteStateIds()
         m_mapLayerSpriteStateIds.try_emplace(renderLayer, std::set<SpriteState::Id>());
     }
 }
+
+////////////////////////////////////////////////////////////////////////////////
 
 void GraphicSystem::LoadTexture(const ids::TextureId i_textureId)
 {
@@ -239,26 +342,9 @@ void GraphicSystem::LoadTexture(const ids::TextureId i_textureId)
         break;
     }
 
-    m_renderAPI->LoadTexture(i_textureId, path);
+    m_nativeGraphicAPI->LoadTexture(i_textureId, path);
 }
 
-void GraphicSystem::OnPreRender(const uint64_t dt)
-{
-}
-
-void GraphicSystem::OnRender(const uint64_t dt)
-{
-    for (const ids::RenderLayer renderLayer : ids::RenderLayerIterator())
-    {
-        for (const SpriteState::Id spriteStateId : m_mapLayerSpriteStateIds[renderLayer])
-        {
-            DrawSprite(spriteStateId);
-        }
-    }
-}
-
-void GraphicSystem::OnPostRender(const uint64_t dt)
-{
-}
+////////////////////////////////////////////////////////////////////////////////
 
 } // namespace graphics

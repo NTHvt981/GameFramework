@@ -50,13 +50,13 @@ public:
 		}
 	}
 
-	//void Emit() const
-	//{
-	//	for (std::shared_ptr<Callback> function : m_functions)
-	//	{
-	//		(*function)();
-	//	}
-	//}
+	void EmitReverseOrder(Args... args) const
+	{
+		for (auto function = m_functions.rbegin(); function != m_functions.rend(); ++function)
+		{
+			(*function)(args...);
+		}
+	}
 
 private:
 	std::list<std::shared_ptr<Callback>> m_functions;

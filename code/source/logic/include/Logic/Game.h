@@ -1,7 +1,11 @@
 #pragma once
 #include "GameClock.h"
+#include "Core/GameSetting/GameSetting.h"
 #include "GraphicSystem/GraphicSystem.h"
+#include "PhysicSystem/PhysicSystem.h"
+#include "InputSystem/InputSystem.h"
 #include "GraphicSystem/API/INativeRenderAPI.h"
+#include "InputSystem/API/INativeInputAPI.h"
 #include "FileSystem/FileSystem.h"
 #include "Core/Signals/Signal.h"
 #include <memory>
@@ -12,24 +16,60 @@ namespace logic
 class Game
 {
 public:
-	Game(std::unique_ptr<graphics::INativeRenderAPI> i_nativeRenderAPI);
+	Game(
+		std::unique_ptr<graphics::INativeGraphicAPI> i_nativeGraphicAPI,
+		std::unique_ptr<input::INativeInputAPI> i_nativeInputAPI
+	);
 	void Initialize();
+	bool IsInitialized() const;
 	void LoadResource();
 	void RunLoop(uint64_t dt);
+	void Pause();
+	void Resume();
 	void UnLoadResource();
 	void Shutdown();
 
 	signals::Signal<> sig_requestShutdown;
 private:
+	void UpdateInput(const uint64_t dt);
+
+	void FixedUpdate(const uint64_t dt);
+	void PreFixedUpdate(const uint64_t dt);
+	void DuringFixedUpdate(const uint64_t dt);
+	void PostFixedUpdate(const uint64_t dt);
+
+	void Update(const uint64_t dt);
+	void PreUpdate(const uint64_t dt);
+	void DuringUpdate(const uint64_t dt);
+	void PostUpdate(const uint64_t dt);
+
+	void Render(const uint64_t dt);
+	void PreRender(const uint64_t dt);
+	void DuringRender(const uint64_t dt);
+	void PostRender(const uint64_t dt);
+
 	void OnRequestShutdown();
 
 	// own, self init
 	std::shared_ptr<GameClock> m_gameClock;
 	std::shared_ptr<files::FileSystem> m_fileSystem;
 	std::shared_ptr<graphics::GraphicSystem> m_graphicSystem;
+	std::shared_ptr<physics::PhysicSystem> m_physicSystem;
+	std::shared_ptr<input::InputSystem> m_inputSystem;
+	std::shared_ptr<core::GameSetting> m_gameSetting;
 
 	// own, pass by param
-	std::shared_ptr<graphics::INativeRenderAPI> m_nativeRenderAPI;
+	std::shared_ptr<graphics::INativeGraphicAPI> m_nativeGraphicAPI;
+	std::shared_ptr<input::INativeInputAPI> m_nativeInputAPI;
+
+	// game clock relate
+	uint64_t m_millisecondsPerFrame = 0;
+	uint64_t m_millisecondsSinceLastFixedUpdate = 0;
+	bool m_waitForFixedUpdate = false;
+
+	// others
+	bool m_isInitialized = false;
+	bool m_isPaused = false;
 };
 
 } // namespace logic

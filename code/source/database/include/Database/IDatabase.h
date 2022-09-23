@@ -7,8 +7,7 @@ namespace database
 class IDatabase: public graphics::database::IGraphicDatabaseAPI
 {
 public:
-
-private:
+	virtual void LoadResource() = 0;
 
 };
 

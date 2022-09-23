@@ -1,6 +1,7 @@
 #include "PhysicSystem/PhysicSystem.h"
 #include "CollisionHelper.h"
 #include "Core/Helpers/Vector2Helper.h"
+#include "Core/Math/Math.h"
 
 namespace physics
 {
@@ -113,6 +114,16 @@ void PhysicSystem::UpdateDynamicColliderStates() const
 	}
 }
 
+void PhysicSystem::SetCollisionCheckFilter(const core::BoxI64 i_boundary)
+{
+	m_filterBound = i_boundary;
+}
+
+void PhysicSystem::RemoveCollisionCheckFilter()
+{
+	m_filterBound.reset();
+}
+
 void PhysicSystem::UpdateDynamicColliderState(UpdateDynamicColliderStateParam param) const
 {
 	const ids::EntityId selfEntityId = param.entityId;
@@ -143,6 +154,16 @@ void PhysicSystem::OnFixedUpdate(const uint64_t dt)
 
 void PhysicSystem::OnPostFixedUpdate(const uint64_t dt)
 {
+}
+
+bool PhysicSystem::CheckFilter(const core::BoxI64 i_renderBoundary) const
+{
+	if (m_filterBound.has_value())
+	{
+		const core::BoxI64& filterBound = m_filterBound.value();
+		return core::IsOverlap(i_renderBoundary, filterBound);
+	}
+	return true;
 }
 
 } // namespace physics

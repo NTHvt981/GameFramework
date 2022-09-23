@@ -2,6 +2,7 @@
 #include "IPhysicSystem.h"
 #include "Core/GameClock/IGameClock.h"
 #include <map>
+#include <optional>
 
 namespace physics
 {
@@ -15,6 +16,8 @@ public:
 	void Initialize() override;
 	void Shutdown() override;
 	void UpdateDynamicColliderStates() const override;
+	void SetCollisionCheckFilter(const core::BoxI64 i_boundary) override;
+	void RemoveCollisionCheckFilter() override;
 
 	// Inherited via IPhysicAPI
 	void RegisterDynamicCollider(ids::EntityId i_entityId, std::weak_ptr<DynamicCollider> i_collider) override;
@@ -42,6 +45,9 @@ private:
 	signals::Connection<const uint64_t> m_onPreFixedUpdateCon;
 	signals::Connection<const uint64_t> m_onFixedUpdateCon;
 	signals::Connection<const uint64_t> m_onPostFixedUpdateCon;
+
+	bool CheckFilter(const core::BoxI64 i_renderBoundary) const;
+	std::optional<core::BoxI64> m_filterBound;
 };
 
 } // namespace physics

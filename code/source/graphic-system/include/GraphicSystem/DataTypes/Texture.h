@@ -10,7 +10,7 @@ struct Texture
 {
 	ids::TextureId id;
 	core::SizeI64 size;
-	core::String textureFilePath;
+	core::String filePath;
 };
 
 } // namespace graphics

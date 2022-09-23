@@ -3,7 +3,6 @@
 #include "FileSystem/FileSystem.h"
 #include "FileSystem/DataTypes/FolderDirectory.h"
 #include "FileSystem/DataTypes/FileDirectory.h"
-#include "Core/Identifiers/FileId.h"
 #include "Core/DataTypes/Flag.h"
 #include "Core/DataTypes/InitOnce.h"
 #include "Core/DataTypes/String.h"
@@ -14,78 +13,17 @@ core::String GetApplicationFolderPath(const core::String& i_demiliter);
 namespace files
 {
 
+const Folder sk_dataFolder{ "data" };
+const Folder sk_xmlFolder{ "Xml" };
+const Folder sk_texturesFolder{ "Textures" };
+const File sk_texturesDefinitionFile{ "Textures", files::extXml };
 core::Flag s_initFlag;
-core::InitOnce<FolderDirectory> s_applicationFolderDirectory;
+FolderDirectory s_applicationFolderDirectory{};
 
 ////////////////////////////////////////////////////////////////////////////////
 
 FileSystem::FileSystem()
 {
-	Folder textureFolder{ "Textures" };
-	Folder dataFolder{ "data" };
-	FolderDirectory textureDir{ BackwardFolder, dataFolder, textureFolder };
-	m_mapFileDirectories = {
-		{
-			ids::FileId::EnemiesTexture,
-			FileDirectory {
-				textureDir, File{"enemies", extPng}
-			}
-		},
-		{
-			ids::FileId::PlayerTexture,
-			FileDirectory {
-				textureDir, File{"PlayerSheetTransparent", extPng}
-			}
-		},
-		{
-			ids::FileId::PlayerHealthTexture,
-			FileDirectory {
-				textureDir, File{"Player health", extPng}
-			}
-		},
-		{
-			ids::FileId::OtherObjectsTexture,
-			FileDirectory {
-				textureDir, File{"OtherObjects", extPng}
-			}
-		},
-		{
-			ids::FileId::BlackScreenTexture,
-			FileDirectory {
-				textureDir, File{"BlackScreen", extPng}
-			}
-		},
-		{
-			ids::FileId::BossTexture,
-			FileDirectory {
-				textureDir, File{"Boss", extPng}
-			}
-		},
-		{
-			ids::FileId::OpeningTexture,
-			FileDirectory {
-				textureDir, File{"Opening", extPng}
-			}
-		},
-		{
-			ids::FileId::BlackScreenTexture,
-			FileDirectory {
-				textureDir, File{"RollOut", extPng}
-			}
-		},
-		{
-			ids::FileId::ItemTexture,
-			FileDirectory {
-				textureDir, File{"Items", extPng}
-			}
-		},
-		{
-			ids::FileId::CollisionDebugTexture,
-			FileDirectory {
-				textureDir, File{"bbox", extPng}
-			}
-		},
-	};
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -105,13 +43,7 @@ void FileSystem::Initialize()
 
 	FolderDirectory newValue({});
 	newValue.SetFolders(applicationFolderPath);
-	s_applicationFolderDirectory.Set(newValue);
-	FolderDirectory dataFolderPath{  };
-
-	for (auto& [id, fileDirectory] : m_mapFileDirectories)
-	{
-		fileDirectory.folderDirectory = s_applicationFolderDirectory.Get() + fileDirectory.folderDirectory;
-	}
+	s_applicationFolderDirectory = newValue;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -122,27 +54,29 @@ void FileSystem::ShutDown()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void FileSystem::WriteTextFile(const ids::FileId i_fileId)
+core::String FileSystem::GetAbsolutePath(const core::String i_relativePath) const
 {
+	return s_applicationFolderDirectory.ToString() + i_relativePath;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void FileSystem::ReadTextFile(const ids::FileId i_fileId)
+core::String FileSystem::GetXmlTexturesFilePath() const
 {
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-core::String FileSystem::GetFileDirectory(const ids::FileId i_fileId) const
-{
-	if (m_mapFileDirectories.find(i_fileId) == m_mapFileDirectories.end())
+	FileDirectory result
 	{
-		throw("Invalid FileId, can not find directory for %d", i_fileId);
-	}
+		s_applicationFolderDirectory + FolderDirectory{sk_dataFolder, sk_xmlFolder},
+		sk_texturesDefinitionFile
+	};
+	return result.ToString();
+}
 
-	const FileDirectory& fileDirectory = m_mapFileDirectories.at(i_fileId);
-	return fileDirectory.ToString();
+////////////////////////////////////////////////////////////////////////////////
+
+core::String FileSystem::GetTexturesFolderPath() const
+{
+	FolderDirectory result = s_applicationFolderDirectory + FolderDirectory{ sk_dataFolder, sk_texturesFolder };
+	return result.ToString();
 }
 
 ////////////////////////////////////////////////////////////////////////////////

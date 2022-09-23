@@ -1,5 +1,4 @@
 #include "Logic/Game.h"
-#include "GraphicDebug/DebugGraphicAPI.h"
 #include "GraphicDirectx9/Directx9GraphicAPI.h"
 #include "InputDirectx/DirectxInputAPI.h"
 #include <windows.h>
@@ -37,6 +36,8 @@ int WINAPI WinMain(
 
 	try
 	{
+		s_game->LoadResource();
+
 		while (s_isRunning)
 		{
 			if (PeekMessage(&msg, NULL, 0, 0, PM_REMOVE))
@@ -56,6 +57,8 @@ int WINAPI WinMain(
 
 			previousFrameTime = currentFrameTime;
 		}
+
+		s_game->UnLoadResource();
 	}
 	catch (const std::exception& ex)
 	{

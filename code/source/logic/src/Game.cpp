@@ -1,4 +1,9 @@
 #include "Logic/Game.h"
+#include "GraphicSystem/GraphicSystem.h"
+#include "PhysicSystem/PhysicSystem.h"
+#include "InputSystem/InputSystem.h"
+#include "FileSystem/FileSystem.h"
+#include "Database/Database.h"
 
 namespace logic
 {
@@ -11,9 +16,11 @@ Game::Game(std::unique_ptr<graphics::INativeGraphicAPI> i_nativeGraphicAPI,
 	, m_nativeInputAPI(std::move(i_nativeInputAPI))
 {
 	m_gameSetting = std::make_shared<core::GameSetting>();
+	
 	m_gameClock = std::make_shared<logic::GameClock>();
 	m_fileSystem = std::make_shared<files::FileSystem>();
-	m_graphicSystem = std::make_shared<graphics::GraphicSystem>(m_fileSystem, m_nativeGraphicAPI);
+	m_database = std::make_shared<database::Database>(m_fileSystem);
+	m_graphicSystem = std::make_shared<graphics::GraphicSystem>(m_nativeGraphicAPI, m_database);
 	m_physicSystem = std::make_shared<physics::PhysicSystem>(m_gameClock);
 	m_inputSystem = std::make_shared<input::InputSystem>(m_nativeInputAPI);
 }
@@ -25,8 +32,6 @@ void Game::Initialize()
 	m_fileSystem->Initialize();
 	m_graphicSystem->Initialize();
 	m_inputSystem->Initialize();
-
-	LoadResource();
 
 	m_millisecondsPerFrame = m_gameSetting->GetMillisecondsPerFrame();
 
@@ -44,6 +49,8 @@ bool Game::IsInitialized() const
 
 void Game::LoadResource()
 {
+	m_database->LoadResource();
+	m_graphicSystem->LoadTextures();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -109,6 +116,8 @@ void Game::UpdateInput(const uint64_t dt)
 	m_inputSystem->UpdateInput(dt);
 	m_gameClock->UpdateInput(dt);
 }
+
+////////////////////////////////////////////////////////////////////////////////
 
 void Game::FixedUpdate(const uint64_t dt)
 {

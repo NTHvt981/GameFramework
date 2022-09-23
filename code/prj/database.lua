@@ -2,10 +2,9 @@ require("common")
 require("core")
 require("file-system")
 require("graphic-system")
-require("xml")
 
 local database_prj_name = "database"
-local database_path = source_path.."database/"
+local database_path = source_path..database_prj_name.."/"
 local database_include_path = database_path.."include/"
 
 function addDatabase()
@@ -27,7 +26,6 @@ function addDatabase()
       includeCore()
       includeFileSystem()
       includeGraphicSystem()
-      includeXml()
 end
 
 function includeDatabase()

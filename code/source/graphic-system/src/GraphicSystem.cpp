@@ -1,5 +1,5 @@
 #include "GraphicSystem/GraphicSystem.h"
-#include "Core/Identifiers/FileId.h"
+#include "Core/Math/Math.h"
 
 namespace graphics
 {
@@ -7,10 +7,10 @@ namespace graphics
 ////////////////////////////////////////////////////////////////////////////////
 
 GraphicSystem::GraphicSystem(
-    std::weak_ptr<files::IFileSystem> i_fileSystem,
-    std::shared_ptr<INativeGraphicAPI> i_renderAPI)
-    : m_fileSystem(i_fileSystem)
-    , m_nativeGraphicAPI(std::move(i_renderAPI))
+    std::shared_ptr<INativeGraphicAPI> i_renderAPI,
+    std::shared_ptr<database::IGraphicDatabaseAPI> i_databaseAPI)
+    : m_nativeGraphicAPI(std::move(i_renderAPI))
+    , m_databaseAPI(i_databaseAPI)
 {
     InitLayerSpriteStateIds();
 }
@@ -20,7 +20,7 @@ GraphicSystem::GraphicSystem(
 GraphicSystem::~GraphicSystem()
 {
     m_nativeGraphicAPI.reset();
-    m_fileSystem.reset();
+    m_databaseAPI.reset();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -28,16 +28,17 @@ GraphicSystem::~GraphicSystem()
 void GraphicSystem::Initialize()
 {
     m_nativeGraphicAPI->Initialize();
-    //LoadTexture(ids::TextureId::BlackScreen);
-    //LoadTexture(ids::TextureId::Boss);
-    //LoadTexture(ids::TextureId::CollisionDebug);
-    //LoadTexture(ids::TextureId::Enemies);
-    //LoadTexture(ids::TextureId::Item);
-    //LoadTexture(ids::TextureId::Opening);
-    //LoadTexture(ids::TextureId::OtherObjects);
-    //LoadTexture(ids::TextureId::Player);
-    //LoadTexture(ids::TextureId::PlayerHealth);
-    //LoadTexture(ids::TextureId::Rollout);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void GraphicSystem::LoadTextures()
+{
+    for (const ids::TextureId id : ids::TextureIdIterators())
+    {
+        const Texture texture = m_databaseAPI->GetTexture(id);
+        m_nativeGraphicAPI->LoadTexture(id, texture.filePath);
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -51,17 +52,26 @@ void GraphicSystem::Shutdown()
 
 void GraphicSystem::PreRender(const uint64_t dt)
 {
+    for (auto& [animationStateId, animationState] : m_allAnimationStates)
+    {
+        ProccessAnimationState(animationState, dt);
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void GraphicSystem::Render(const uint64_t dt)
 {
-    for (const ids::RenderLayer renderLayer : ids::RenderLayerIterator())
+    for (const ids::RenderLayer renderLayer : ids::RenderLayerIterators())
     {
         for (const SpriteState::Id spriteStateId : m_mapLayerSpriteStateIds[renderLayer])
         {
-            DrawSprite(spriteStateId);
+            std::shared_ptr<SpriteState> spriteState = GetSpriteState(spriteStateId);
+            std::shared_ptr<const SpriteDef> spriteDef = spriteState->spriteDef.lock();
+            if (CheckFilter(spriteDef->boundary))
+            {
+                DrawSprite(spriteState);
+            }
         }
     }
 }
@@ -70,6 +80,21 @@ void GraphicSystem::Render(const uint64_t dt)
 
 void GraphicSystem::PostRender(const uint64_t dt)
 {
+
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void GraphicSystem::SetRenderFilter(const core::BoxI64 i_boundary)
+{
+    m_filterBound = i_boundary;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void GraphicSystem::RemoveRenderFilter()
+{
+    m_filterBound.reset();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -105,13 +130,6 @@ void GraphicSystem::SetSpriteRenderLayer(
 
     oldIds.erase(oldIds.find(i_spriteStateId));
     newIds.emplace(i_spriteStateId);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void GraphicSystem::SetSpriteDefinition(const SpriteState::Id i_spriteStateId, const ids::SpriteId i_newSpriteId)
-{
-
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -188,28 +206,19 @@ void GraphicSystem::RemoveSpriteState(std::shared_ptr<SpriteState> i_spriteState
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void GraphicSystem::DrawSprite(const SpriteState::Id i_spriteStateId)
-{
-    std::shared_ptr<const SpriteState> spriteState = GetSpriteState(i_spriteStateId);
-    const INativeGraphicAPI::DrawParams drawParams = ToDrawParams(spriteState);
-    m_nativeGraphicAPI->Draw(drawParams);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-INativeGraphicAPI::DrawParams GraphicSystem::ToDrawParams(std::shared_ptr<const SpriteState> i_spriteState)
+void GraphicSystem::DrawSprite(std::shared_ptr<const SpriteState> i_spriteState)
 {
     std::shared_ptr<const SpriteDef> spriteDef = i_spriteState->spriteDef.lock();
     std::shared_ptr<const Texture> textureDef = spriteDef->texture.lock();
-    INativeGraphicAPI::DrawParams result;
-    
-    result.position = i_spriteState->position;
-    result.alpha = i_spriteState->alpha;
-    result.boundary = spriteDef->boundary;
-    result.origin = spriteDef->origin;
-    result.textureId = textureDef->id;
+    INativeGraphicAPI::DrawParams drawParams;
 
-    return result;
+    drawParams.position = i_spriteState->position;
+    drawParams.alpha = i_spriteState->alpha;
+    drawParams.boundary = spriteDef->boundary;
+    drawParams.origin = spriteDef->origin;
+    drawParams.textureId = textureDef->id;
+
+    m_nativeGraphicAPI->Draw(drawParams);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -270,9 +279,7 @@ void GraphicSystem::ProccessAnimationState(std::shared_ptr<AnimationState> i_ani
         }
 
         const AnimationFrameDef& newFrame = animationDef->frames[currentFrameIndex];
-        auto spriteDef = newFrame.sprite.lock();
-
-        SetSpriteDefinition(i_animationState->spriteStateRef->id, spriteDef->id);
+        i_animationState->spriteStateRef->spriteDef = newFrame.sprite;
     }
     else
     {
@@ -292,7 +299,7 @@ uint64_t GraphicSystem::GenerateId()
 
 void GraphicSystem::InitLayerSpriteStateIds()
 {
-    for (const ids::RenderLayer renderLayer : ids::RenderLayerIterator())
+    for (const ids::RenderLayer renderLayer : ids::RenderLayerIterators())
     {
         m_mapLayerSpriteStateIds.try_emplace(renderLayer, std::set<SpriteState::Id>());
     }
@@ -300,49 +307,14 @@ void GraphicSystem::InitLayerSpriteStateIds()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void GraphicSystem::LoadTexture(const ids::TextureId i_textureId)
+bool GraphicSystem::CheckFilter(const core::BoxI64 i_renderBoundary) const
 {
-    std::shared_ptr<files::IFileSystem> fileSystem = m_fileSystem.lock();
-
-    core::String path;
-    switch (i_textureId)
+    if (m_filterBound.has_value())
     {
-    case ids::TextureId::BlackScreen:
-        path = fileSystem->GetFileDirectory(ids::FileId::BlackScreenTexture);
-        break;
-    case ids::TextureId::Boss:
-        path = fileSystem->GetFileDirectory(ids::FileId::BossTexture);
-        break;
-    case ids::TextureId::CollisionDebug:
-        path = fileSystem->GetFileDirectory(ids::FileId::CollisionDebugTexture);
-        break;
-    case ids::TextureId::Enemies:
-        path = fileSystem->GetFileDirectory(ids::FileId::EnemiesTexture);
-        break;
-    case ids::TextureId::Item:
-        path = fileSystem->GetFileDirectory(ids::FileId::ItemTexture);
-        break;
-    case ids::TextureId::Opening:
-        path = fileSystem->GetFileDirectory(ids::FileId::OpeningTexture);
-        break;
-    case ids::TextureId::OtherObjects:
-        path = fileSystem->GetFileDirectory(ids::FileId::OtherObjectsTexture);
-        break;
-    case ids::TextureId::Player:
-        path = fileSystem->GetFileDirectory(ids::FileId::PlayerTexture);
-        break;
-    case ids::TextureId::PlayerHealth:
-        path = fileSystem->GetFileDirectory(ids::FileId::PlayerHealthTexture);
-        break;
-    case ids::TextureId::Rollout:
-        path = fileSystem->GetFileDirectory(ids::FileId::RolloutTexture);
-        break;
-    case ids::TextureId::COUNT:
-        assert(false);
-        break;
+        const core::BoxI64& filterBound = m_filterBound.value();
+        return core::IsOverlap(i_renderBoundary, filterBound);
     }
-
-    m_nativeGraphicAPI->LoadTexture(i_textureId, path);
+    return true;
 }
 
 ////////////////////////////////////////////////////////////////////////////////

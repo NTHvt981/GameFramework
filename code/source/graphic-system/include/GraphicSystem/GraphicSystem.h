@@ -1,6 +1,6 @@
 #pragma once
 #include "IGraphicSystem.h"
-#include "FileSystem/IFileSystem.h"
+#include "Database/IGraphicDatabaseAPI.h"
 #include "Core/Identifiers/APIMode.h"
 #include "Core/GameClock/IGameClock.h"
 #include "Core/DataTypes/Flag.h"
@@ -8,6 +8,7 @@
 #include "DataTypes/AnimationState.h"
 #include "API/INativeRenderAPI.h"
 #include <memory>
+#include <optional>
 #include <Windows.h>
 #include <map>
 #include <set>
@@ -19,16 +20,19 @@ class GraphicSystem final: public IGraphicSystem
 {
 public:
 	GraphicSystem(
-		std::weak_ptr<files::IFileSystem> i_fileSystem,
-		std::shared_ptr<INativeGraphicAPI> i_renderAPI
+		std::shared_ptr<INativeGraphicAPI> i_renderAPI,
+		std::shared_ptr<database::IGraphicDatabaseAPI> i_databaseAPI
 	);
 	~GraphicSystem();
 	// Inherited via IGraphicSystem
 	void Initialize() override;
+	void LoadTextures() override;
 	void Shutdown() override;
-	void PreRender(const uint64_t dt);
-	void Render(const uint64_t dt);
-	void PostRender(const uint64_t dt);
+	void PreRender(const uint64_t dt) override;
+	void Render(const uint64_t dt) override;
+	void PostRender(const uint64_t dt) override;
+	void SetRenderFilter(const core::BoxI64 i_boundary) override;
+	void RemoveRenderFilter() override;
 
 	// Inherited via ISpriteGraphicAPI
 	std::weak_ptr<SpriteState> RegisterSprite(
@@ -42,10 +46,6 @@ public:
 		const SpriteState::Id i_spriteStateId,
 		const ids::RenderLayer i_renderLayer
 	) override;
-	void SetSpriteDefinition(
-		const SpriteState::Id i_spriteStateId,
-		const ids::SpriteId i_newSpriteId
-	);
 
 	// Inherited via IAnimationGraphicAPI
 	std::weak_ptr<AnimationState> RegisterAnimation(
@@ -64,8 +64,7 @@ private:
 	void InsertSpriteState(std::shared_ptr<SpriteState> i_spriteState);
 	std::shared_ptr<SpriteState> GetSpriteState(const SpriteState::Id i_spriteStateId) const;
 	void RemoveSpriteState(std::shared_ptr<SpriteState> i_spriteState);
-	void DrawSprite(const SpriteState::Id i_spriteStateId);
-	INativeGraphicAPI::DrawParams ToDrawParams(std::shared_ptr<const SpriteState> i_spriteState);
+	void DrawSprite(std::shared_ptr<const SpriteState> i_spriteState);
 
 	AnimationState GenerateAnimationState();
 	void InsertAnimationState(std::shared_ptr<AnimationState> i_animationState);
@@ -78,7 +77,7 @@ private:
 	std::map<SpriteState::Id, std::shared_ptr<SpriteState>> m_allSpriteStates;
 	std::map<AnimationState::Id, std::shared_ptr<AnimationState>> m_allAnimationStates;
 
-	std::weak_ptr<files::IFileSystem> m_fileSystem;
+	std::shared_ptr<database::IGraphicDatabaseAPI> m_databaseAPI;
 	std::shared_ptr<INativeGraphicAPI> m_nativeGraphicAPI;
 
 	uint64_t GenerateId();
@@ -86,7 +85,8 @@ private:
 
 	void InitLayerSpriteStateIds();
 
-	void LoadTexture(const ids::TextureId i_textureId);
+	bool CheckFilter(const core::BoxI64 i_renderBoundary) const;
+	std::optional<core::BoxI64> m_filterBound;
 };
 
 } // namespace graphics

@@ -1,6 +1,7 @@
 require("common")
 require("core")
 require("file-system")
+require("database")
 require("graphic-system")
 require("physic-system")
 require("input-system")
@@ -30,6 +31,7 @@ function addLogic()
       includeGraphicSystem()
       includePhysicSystem()
       includeInputSystem()
+      includeDatabase()
 end
 
 function includeLogic()
@@ -40,9 +42,10 @@ function includeLogic()
    links {
       logic_prj_name
    }
-   
    includeCore()
    includeFileSystem()
    includeGraphicSystem()
    includePhysicSystem()
+   includeInputSystem()
+   includeDatabase()
 end

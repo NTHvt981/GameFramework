@@ -1,6 +1,5 @@
 #include "Xml/CommonParser.h"
 #include "Core/Identifiers/TextureId.h"
-#include "tinyxml2.h"
 
 namespace xml
 {
@@ -38,11 +37,10 @@ void Parse(const tinyxml2::XMLElement* i_element, core::BoxI64& o_value)
 	Parse(i_element->FirstChildElement("left"), o_value.left);
 }
 
-void Parse(const tinyxml2::XMLElement* i_element, ids::TextureId& o_value)
+void Parse(const tinyxml2::XMLElement* i_element, core::SizeI64& o_value)
 {
-	uint64_t temp;
-	Parse(i_element, temp);
-	o_value = static_cast<ids::TextureId>(temp);
+	Parse(i_element->FirstChildElement("Width"), o_value.width);
+	Parse(i_element->FirstChildElement("Height"), o_value.height);
 }
 
 } // namespace xml

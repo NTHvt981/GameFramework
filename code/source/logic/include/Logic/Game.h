@@ -1,13 +1,13 @@
 #pragma once
 #include "GameClock.h"
 #include "Core/GameSetting/GameSetting.h"
-#include "GraphicSystem/GraphicSystem.h"
-#include "PhysicSystem/PhysicSystem.h"
-#include "InputSystem/InputSystem.h"
+#include "GraphicSystem/IGraphicSystem.h"
+#include "PhysicSystem/IPhysicSystem.h"
+#include "InputSystem/IInputSystem.h"
 #include "GraphicSystem/API/INativeRenderAPI.h"
 #include "InputSystem/API/INativeInputAPI.h"
-#include "FileSystem/FileSystem.h"
-#include "Core/Signals/Signal.h"
+#include "FileSystem/IFileSystem.h"
+#include "Database/IDatabase.h"
 #include <memory>
 
 namespace logic
@@ -52,11 +52,12 @@ private:
 
 	// own, self init
 	std::shared_ptr<GameClock> m_gameClock;
-	std::shared_ptr<files::FileSystem> m_fileSystem;
-	std::shared_ptr<graphics::GraphicSystem> m_graphicSystem;
-	std::shared_ptr<physics::PhysicSystem> m_physicSystem;
-	std::shared_ptr<input::InputSystem> m_inputSystem;
+	std::shared_ptr<files::IFileSystem> m_fileSystem;
+	std::shared_ptr<graphics::IGraphicSystem> m_graphicSystem;
+	std::shared_ptr<physics::IPhysicSystem> m_physicSystem;
+	std::shared_ptr<input::IInputSystem> m_inputSystem;
 	std::shared_ptr<core::GameSetting> m_gameSetting;
+	std::shared_ptr<database::IDatabase> m_database;
 
 	// own, pass by param
 	std::shared_ptr<graphics::INativeGraphicAPI> m_nativeGraphicAPI;

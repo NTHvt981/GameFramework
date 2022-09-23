@@ -1,5 +1,4 @@
 #include "stdafx.h"
-#include "FileSystem/DataTypes/Folder.h"
 #include "FileSystem/DataTypes/FolderDirectory.h"
 #include "Core/Helpers/StringHelper.h"
 #include <iterator>
@@ -69,7 +68,7 @@ core::String FolderDirectory::ToString() const
 
 	if (result.empty())
 	{
-		return core::String();
+		return stdDeli;
 	}
 
 	return result;

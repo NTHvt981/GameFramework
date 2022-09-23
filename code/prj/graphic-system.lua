@@ -1,7 +1,5 @@
 require("common")
 require("core")
-require("file-system")
-require("xml")
 
 local graphic_system_prj_name = "graphic-system"
 local graphic_system_path = source_path.."graphic-system/"
@@ -23,8 +21,6 @@ function addGraphicSystem()
       }
 
       includeCore()
-      includeFileSystem()
-      includeXml()
 end
 
 function includeGraphicSystem()

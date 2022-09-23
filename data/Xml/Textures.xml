@@ -1,16 +1,82 @@
 <Textures>
-    <Texture Id="1">
+    <Texture>
+        <Id>0</Id>
+        <File>Enemies.png</File>
+        <Size>
+            <Width>253</Width>
+            <Height>1820</Height>
+        </Size>
+    </Texture>
+    <Texture>
+        <Id>1</Id>
+        <File>PlayerSheetTransparent.png</File>
+        <Size>
+            <Width>410</Width>
+            <Height>175</Height>
+        </Size>
+    </Texture>
+    <Texture>
+        <Id>2</Id>
+        <File>PlayerHealth.png</File>
+        <Size>
+            <Width>36</Width>
+            <Height>94</Height>
+        </Size>
+    </Texture>
+    <Texture>
+        <Id>3</Id>
+        <File>OtherObjects.png</File>
+        <Size>
+            <Width>72</Width>
+            <Height>68</Height>
+        </Size>
+    </Texture>
+    <Texture>
+        <Id>4</Id>
         <File>BlackScreen.png</File>
         <Size>
             <Width>600</Width>
-            <Width>600</Width>
+            <Height>600</Height>
         </Size>
     </Texture>
-    <Texture Id="2">
+    <Texture>
+        <Id>5</Id>
+        <File>Boss.png</File>
+        <Size>
+            <Width>428</Width>
+            <Height>2601</Height>
+        </Size>
+    </Texture>
+    <Texture>
+        <Id>6</Id>
+        <File>Opening.png</File>
+        <Size>
+            <Width>1033</Width>
+            <Height>2303</Height>
+        </Size>
+    </Texture>
+    <Texture>
+        <Id>7</Id>
+        <File>RollOut.png</File>
+        <Size>
+            <Width>774</Width>
+            <Height>941</Height>
+        </Size>
+    </Texture>
+    <Texture>
+        <Id>8</Id>
+        <File>Items.png</File>
+        <Size>
+            <Width>372</Width>
+            <Height>176</Height>
+        </Size>
+    </Texture>
+    <Texture>
+        <Id>9</Id>
         <File>RedScreen.png</File>
         <Size>
             <Width>400</Width>
-            <Width>400</Width>
+            <Height>400</Height>
         </Size>
     </Texture>
 </Textures>

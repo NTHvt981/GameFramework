@@ -21,15 +21,12 @@ class FileSystem final : public IFileSystem
 public:
 	FileSystem();
 	~FileSystem();
-	void Initialize();
-	void ShutDown();
+	void Initialize() override;
+	void ShutDown() override;
 	// Inherited via IFileSystem
-	void WriteTextFile(const ids::FileId i_fileId) override;
-	void ReadTextFile(const ids::FileId i_fileId) override;
-	core::String GetFileDirectory(const ids::FileId i_fileId) const override;
-
-private:
-	std::unordered_map<ids::FileId, FileDirectory> m_mapFileDirectories;
+	core::String GetAbsolutePath(const core::String i_relativePath) const override;
+	core::String GetXmlTexturesFilePath() const override;
+	core::String GetTexturesFolderPath() const override;
 };
 
 } // namespace files

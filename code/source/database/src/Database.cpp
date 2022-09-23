@@ -1,23 +1,70 @@
 #include "Database/Database.h"
+#include "FileSystem/DataTypes/Folder.h"
+#include "Xml/TexureParser.h"
+
+const files::Folder sk_xmlFolder = files::Folder{ "Xml" };
 
 namespace database
 {
+Database::Database(std::shared_ptr<files::IFileSystem> i_fileSystem)
+	: m_fileSystem(i_fileSystem)
+{
+}
+
+void Database::LoadResource()
+{
+	LoadTextures();
+}
+
 std::weak_ptr<const graphics::Texture> Database::GetTextureRef(const ids::TextureId i_textureId)
 {
+	return m_textures[i_textureId];
 }
+
 const graphics::Texture Database::GetTexture(const ids::TextureId i_textureId)
 {
+	return *m_textures[i_textureId].get();
 }
+
 std::weak_ptr<const graphics::SpriteDef> Database::GetSpriteRef(const ids::SpriteId i_spriteId)
 {
+	return m_sprites[i_spriteId];
 }
+
 const graphics::SpriteDef Database::GetSprite(const ids::SpriteId i_spriteId)
 {
+	return *m_sprites[i_spriteId].get();
 }
+
 std::weak_ptr<const graphics::AnimationDef> Database::GetAnimationRef(const ids::AnimationId i_animationId)
 {
+	return m_animations[i_animationId];
 }
+
 const graphics::AnimationDef Database::GetAnimation(const ids::AnimationId i_animationId)
 {
+	return *m_animations[i_animationId].get();
 }
+
+void Database::LoadTextures()
+{
+	const core::String path = m_fileSystem->GetXmlTexturesFilePath();
+	const std::string stringPath = path.ToStdStr();
+	std::vector<graphics::Texture> textures = xml::LoadFile(stringPath.c_str());
+
+	for (graphics::Texture& texture: textures)
+	{
+		texture.filePath = m_fileSystem->GetTexturesFolderPath() + texture.filePath;
+		m_textures.try_emplace(texture.id, std::make_shared<graphics::Texture>(texture));
+	}
+}
+
+void Database::LoadSprites()
+{
+}
+
+void Database::LoadAnimation()
+{
+}
+
 } // namespace database

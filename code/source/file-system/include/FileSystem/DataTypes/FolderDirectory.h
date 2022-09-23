@@ -1,10 +1,10 @@
 #pragma once
 #include "Delimiter.h"
+#include "FileSystem/DataTypes/Folder.h"
 #include <list>
 
 namespace files
 {
-struct Folder;
 
 class FolderDirectory
 {
@@ -14,6 +14,7 @@ public:
 	FolderDirectory operator+(const FolderDirectory& i_other) const;
 	void operator=(const FolderDirectory& i_other);
 	void SetFolders(core::String i_path);
+	// Folder Directory will include delimiter at the end
 	core::String ToString() const;
 	void Optimize();
 

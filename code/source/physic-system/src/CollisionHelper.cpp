@@ -104,7 +104,7 @@ CheckCollideResult CheckCollide(
 			return CheckCollideResult
 			{
 				entryTime,
-				core::Vector2F{-math::Sign(entry.x), 0.0f}
+				core::Vector2F{-core::Sign(entry.x), 0.0f}
 			};
 		}
 		else
@@ -112,7 +112,7 @@ CheckCollideResult CheckCollide(
 			return CheckCollideResult
 			{
 				entryTime,
-				core::Vector2F{0.0f, -math::Sign(entry.y)}
+				core::Vector2F{0.0f, -core::Sign(entry.y)}
 			};
 		}
 	}

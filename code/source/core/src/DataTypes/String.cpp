@@ -87,7 +87,7 @@ void String::Set(const wchar_t* i_wchars)
 
 const char* String::ToStr() const
 {
-	return std::move(ToStdStr().c_str());
+	return ToStdStr().c_str();
 }
 
 ////////////////////////////////////////////////////////////////////////////////

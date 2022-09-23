@@ -2,10 +2,8 @@ require("common")
 require("core")
 require("file-system")
 require("graphic-system")
-require("graphic-debug")
 require("graphic-directx9")
 require("input-system")
-require("input-debug")
 require("input-directx")
 require("logic")
 
@@ -32,14 +30,8 @@ function addApp()
       }
       
       includeCore()
-      includeFileSystem()
-      includeGraphicSystem()
       includeGraphicDirectx9()
-      includeGraphicDebug()
-      includeInputSystem()
       includeInputDirectx()
-      includeInputDebug()
-      includeLogic()
-
       includeDirectXSDK()
+      includeLogic()
 end

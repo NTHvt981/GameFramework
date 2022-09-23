@@ -12,4 +12,6 @@ struct FileDirectory
 	core::String ToString() const;
 };
 
+FileDirectory operator+(const FolderDirectory& folder, const File& file);
+
 } // namespace files

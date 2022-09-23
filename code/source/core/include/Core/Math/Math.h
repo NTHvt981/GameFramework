@@ -1,7 +1,7 @@
 #pragma once
 #include <cmath>
 
-namespace math
+namespace core
 {
 
 template<typename T>
@@ -21,4 +21,15 @@ T Sign(const T magnitude)
 	}
 }
 
-} // namespace math
+template<typename T>
+bool IsOverlap(const Box<T> a, const Box<T> b)
+{
+	return (
+		a.right <= b.left ||
+		b.right <= a.left ||
+		a.bottom <= b.top ||
+		b.bottom <= a.top
+		) == false;
+}
+
+} // namespace core

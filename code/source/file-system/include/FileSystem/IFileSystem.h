@@ -17,9 +17,11 @@ namespace files
 class IFileSystem
 {
 public:
-	virtual void WriteTextFile(const ids::FileId i_fileId) = 0;
-	virtual void ReadTextFile(const ids::FileId i_fileId) = 0;
-	virtual core::String GetFileDirectory(const ids::FileId i_fileId) const = 0;
+	virtual void Initialize() = 0;
+	virtual void ShutDown() = 0;
+	virtual core::String GetXmlTexturesFilePath() const = 0;
+	virtual core::String GetTexturesFolderPath() const = 0;
+	virtual core::String GetAbsolutePath(const core::String i_relativePath) const = 0;
 };
 
 } // namespace files

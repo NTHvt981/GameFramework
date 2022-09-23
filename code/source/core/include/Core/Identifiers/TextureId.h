@@ -1,4 +1,5 @@
 #pragma once
+#include "Core/DataTypes/Iterator.h"
 #include <cstdint>
 
 namespace ids
@@ -15,8 +16,9 @@ enum class TextureId : uint64_t
 	Opening,
 	Rollout,
 	Item,
-	CollisionDebug,
-	COUNT // Special enum
+	CollisionDebug
 };
+
+typedef core::Iterator<TextureId, TextureId::Enemies, TextureId::CollisionDebug> TextureIdIterators;
 
 } // namespace ids

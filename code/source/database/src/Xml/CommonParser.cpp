@@ -67,20 +67,20 @@ void Parse(const tinyxml2::XMLElement* i_element, core::SizeI64& o_value)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Parse(const tinyxml2::XMLElement* i_element, ids::TextureId& o_value)
+void Parse(const tinyxml2::XMLElement* i_element, core::TextureId& o_value)
 {
 	uint64_t temp;
 	Parse(i_element, temp);
-	o_value = static_cast<ids::TextureId>(temp);
+	o_value = static_cast<core::TextureId>(temp);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Parse(const tinyxml2::XMLElement* i_element, ids::SpriteId& o_value)
+void Parse(const tinyxml2::XMLElement* i_element, core::SpriteId& o_value)
 {
 	uint64_t temp;
 	Parse(i_element, temp);
-	o_value = static_cast<ids::SpriteId>(temp);
+	o_value = static_cast<core::SpriteId>(temp);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

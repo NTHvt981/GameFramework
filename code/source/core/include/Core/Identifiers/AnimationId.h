@@ -1,7 +1,7 @@
 #pragma once
 #include <cstdint>
 
-namespace ids
+namespace core
 {
 
 using AnimationId = uint64_t;
@@ -10,4 +10,4 @@ using AnimationId = uint64_t;
 //	COUNT // Special enum
 //};
 
-} // namespace ids
+} // namespace core

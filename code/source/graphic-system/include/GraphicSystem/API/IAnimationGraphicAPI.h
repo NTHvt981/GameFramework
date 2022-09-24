@@ -14,15 +14,15 @@ class IAnimationGraphicAPI
 {
 public:
 	virtual std::weak_ptr<AnimationState> RegisterAnimation(
-		const ids::AnimationId i_animationId,
-		const ids::RenderLayer i_renderLayer = ids::RenderLayer::Default
+		const core::AnimationId i_animationId,
+		const core::RenderLayer i_renderLayer = core::RenderLayer::Default
 	) = 0;
 	virtual void DeregisterAnimation(
 		const AnimationState::Id i_animationStateId
 	) = 0;
 	virtual void SetAnimationRenderLayer(
 		const AnimationState::Id i_animationStateId,
-		const ids::RenderLayer i_renderLayer
+		const core::RenderLayer i_renderLayer
 	) = 0;
 };
 

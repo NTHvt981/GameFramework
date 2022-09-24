@@ -10,10 +10,10 @@ namespace graphics
 
 struct SpriteDef
 {
-	ids::SpriteId id;
+	core::SpriteId id;
 	core::BoxI64 boundary;
 	core::Vector2F origin;
-	ids::TextureId textureId;
+	core::TextureId textureId;
 	std::weak_ptr<const Texture> textureRef;
 };
 

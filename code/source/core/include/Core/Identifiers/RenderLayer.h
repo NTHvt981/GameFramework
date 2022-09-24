@@ -2,7 +2,7 @@
 #include <cstdint>
 #include "Core/DataTypes/Iterator.h"
 
-namespace ids
+namespace core
 {
 
 enum class RenderLayer : uint64_t
@@ -10,6 +10,6 @@ enum class RenderLayer : uint64_t
 	Default,
 	Pause
 };
-typedef core::Iterator<RenderLayer, RenderLayer::Default, RenderLayer::Pause> RenderLayerIterators;
+typedef Iterator<RenderLayer, RenderLayer::Default, RenderLayer::Pause> RenderLayerIterators;
 
-} // namespace ids
+} // namespace core

@@ -63,7 +63,7 @@ void Directx9GraphicAPI::Initialize()
 }
 
 void Directx9GraphicAPI::LoadTexture(
-	const ids::TextureId i_textureId, 
+	const core::TextureId i_textureId, 
 	const core::String i_textureFilePath)
 {
 	assert(!m_mapTextures.contains(i_textureId));
@@ -72,7 +72,7 @@ void Directx9GraphicAPI::LoadTexture(
 
 void Directx9GraphicAPI::Draw(const DrawParams& i_drawParams)
 {
-	const ids::TextureId id = i_drawParams.textureId;
+	const core::TextureId id = i_drawParams.textureId;
 	assert(m_mapTextures.contains(id));
 	const LPDIRECT3DTEXTURE9 texture = m_mapTextures[id];
 
@@ -138,9 +138,9 @@ void Directx9GraphicAPI::Shutdown()
 	m_direct3D9->Release();
 }
 
-ids::APIMode Directx9GraphicAPI::GetAPIMode() const
+core::APIMode Directx9GraphicAPI::GetAPIMode() const
 {
-	return ids::APIMode::D3D9;
+	return core::APIMode::D3D9;
 }
 
 } // namespace graphics

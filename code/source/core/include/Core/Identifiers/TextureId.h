@@ -2,7 +2,7 @@
 #include "Core/DataTypes/Iterator.h"
 #include <cstdint>
 
-namespace ids
+namespace core
 {
 
 enum class TextureId : uint64_t
@@ -19,6 +19,6 @@ enum class TextureId : uint64_t
 	CollisionDebug
 };
 
-typedef core::Iterator<TextureId, TextureId::Enemies, TextureId::CollisionDebug> TextureIdIterators;
+typedef Iterator<TextureId, TextureId::Enemies, TextureId::CollisionDebug> TextureIdIterators;
 
-} // namespace ids
+} // namespace core

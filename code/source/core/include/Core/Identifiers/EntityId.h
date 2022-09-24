@@ -1,9 +1,9 @@
 #pragma once
 #include <cstdint>
 
-namespace ids
+namespace core
 {
 
 using EntityId = uint64_t;
 
-} // namespace ids
+} // namespace core

@@ -7,7 +7,7 @@ namespace graphics
 
 struct Texture
 {
-	ids::TextureId id;
+	core::TextureId id;
 	core::BoxI64 bound;
 };
 

@@ -1,7 +1,7 @@
 #pragma once
 #include <cstdint>
 
-namespace ids
+namespace core
 {
 
 enum class SpriteId : uint64_t
@@ -288,4 +288,4 @@ enum class SpriteId : uint64_t
 	COUNT // Special enum
 };
 
-} // namespace ids
+} // namespace core

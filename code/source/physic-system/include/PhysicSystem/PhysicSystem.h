@@ -20,23 +20,23 @@ public:
 	void RemoveCollisionCheckFilter() override;
 
 	// Inherited via IPhysicAPI
-	void RegisterDynamicCollider(ids::EntityId i_entityId, std::weak_ptr<DynamicCollider> i_collider) override;
-	void DeregisterDynamicCollider(ids::EntityId i_entityId) override;
-	void RegisterStaticCollider(ids::EntityId i_entityId, std::weak_ptr<StaticCollider> i_collider) override;
-	void DeregisterStaticCollider(ids::EntityId i_entityId) override;
-	CalculatePosition CheckMove(ids::EntityId i_selfEntityId, const core::Vector2F& i_velocity) override;
+	void RegisterDynamicCollider(core::EntityId i_entityId, std::weak_ptr<DynamicCollider> i_collider) override;
+	void DeregisterDynamicCollider(core::EntityId i_entityId) override;
+	void RegisterStaticCollider(core::EntityId i_entityId, std::weak_ptr<StaticCollider> i_collider) override;
+	void DeregisterStaticCollider(core::EntityId i_entityId) override;
+	CalculatePosition CheckMove(core::EntityId i_selfEntityId, const core::Vector2F& i_velocity) override;
 
 private:
 	struct UpdateDynamicColliderStateParam
 	{
-		const ids::EntityId entityId;
+		const core::EntityId entityId;
 		std::shared_ptr<const Collider> collider;
 	};
 	void UpdateDynamicColliderState(UpdateDynamicColliderStateParam param) const;
 
-	std::map<ids::EntityId, std::shared_ptr<Collider>> m_colliders;
-	std::map<ids::EntityId, std::weak_ptr<DynamicCollider>> m_dynamicColliders;
-	std::map<ids::EntityId, std::weak_ptr<StaticCollider>> m_staticColliders;
+	std::map<core::EntityId, std::shared_ptr<Collider>> m_colliders;
+	std::map<core::EntityId, std::weak_ptr<DynamicCollider>> m_dynamicColliders;
+	std::map<core::EntityId, std::weak_ptr<StaticCollider>> m_staticColliders;
 
 	// IGameClock funcs
 	void OnPreFixedUpdate(const uint64_t dt);

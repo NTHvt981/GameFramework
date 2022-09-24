@@ -19,11 +19,11 @@ public:
 	// Inherited via IRenderer
 	void Initialize() override;
 	void LoadTexture(
-		const ids::TextureId i_textureId, 
+		const core::TextureId i_textureId, 
 		const core::String i_textureFilePath
 	) override;
 	void Draw(const DrawParams& i_drawParams) override;
-	ids::APIMode GetAPIMode() const override;
+	core::APIMode GetAPIMode() const override;
 	void Shutdown() override;
 
 private:
@@ -33,7 +33,7 @@ private:
 	LPDIRECT3DSURFACE9 m_backBuffer = nullptr;
 	LPD3DXSPRITE m_spriteHandler = nullptr;
 
-	std::unordered_map<ids::TextureId, LPDIRECT3DTEXTURE9> m_mapTextures;
+	std::unordered_map<core::TextureId, LPDIRECT3DTEXTURE9> m_mapTextures;
 	LPDIRECT3DTEXTURE9 CreateTextureFromFile(const core::String& imagePath);
 };
 

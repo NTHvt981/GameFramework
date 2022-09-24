@@ -14,8 +14,8 @@ public:
 	virtual void SetCollisionCheckFilter(const core::BoxI64 i_boundary) = 0;
 	virtual void RemoveCollisionCheckFilter() = 0;
 
-	signals::Signal<ids::EntityId, ids::EntityId> sig_onEntityTouch;
-	signals::Signal<ids::EntityId, ids::EntityId> sig_onEntityCollide;
+	signals::Signal<core::EntityId, core::EntityId> sig_onEntityTouch;
+	signals::Signal<core::EntityId, core::EntityId> sig_onEntityCollide;
 };
 
 } // namespace physics

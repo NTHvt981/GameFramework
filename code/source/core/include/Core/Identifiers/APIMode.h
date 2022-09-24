@@ -1,7 +1,7 @@
 #pragma once
 #include <cstdint>
 
-namespace ids
+namespace core
 {
 
 enum class APIMode : uint64_t
@@ -10,4 +10,4 @@ enum class APIMode : uint64_t
 	D3D9
 };
 
-} // namespace ids
+} // namespace core

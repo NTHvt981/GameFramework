@@ -23,8 +23,8 @@ void Parse(const tinyxml2::XMLElement* i_element, core::Vector2F& o_value);
 void Parse(const tinyxml2::XMLElement* i_element, core::BoxI64& o_value);
 void Parse(const tinyxml2::XMLElement* i_element, core::SizeI64& o_value);
 
-void Parse(const tinyxml2::XMLElement* i_element, ids::TextureId& o_value);
-void Parse(const tinyxml2::XMLElement* i_element, ids::SpriteId& o_value);
+void Parse(const tinyxml2::XMLElement* i_element, core::TextureId& o_value);
+void Parse(const tinyxml2::XMLElement* i_element, core::SpriteId& o_value);
 
 template<typename T>
 void ParseList(

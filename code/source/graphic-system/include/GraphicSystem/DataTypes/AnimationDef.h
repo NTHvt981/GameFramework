@@ -9,14 +9,14 @@ namespace graphics
 
 struct AnimationFrameDef
 {
-	ids::SpriteId spriteId;
+	core::SpriteId spriteId;
 	std::weak_ptr<const SpriteDef> spriteRef;
 	uint64_t timeSpan;
 };
 
 struct AnimationDef
 {
-	ids::AnimationId id;
+	core::AnimationId id;
 	std::vector<AnimationFrameDef> frames;
 };
 

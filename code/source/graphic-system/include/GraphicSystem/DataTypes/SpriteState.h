@@ -16,7 +16,7 @@ struct SpriteState
 	std::weak_ptr<const SpriteDef> spriteDef;
 	core::Vector2F position = core::Vector2F();
 	float alpha = 1;
-	ids::RenderLayer renderLayer = ids::RenderLayer::Default;
+	core::RenderLayer renderLayer = core::RenderLayer::Default;
 };
 
 } // namespace graphics

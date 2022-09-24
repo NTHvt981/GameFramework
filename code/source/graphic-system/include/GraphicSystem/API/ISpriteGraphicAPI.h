@@ -14,15 +14,15 @@ class ISpriteGraphicAPI
 {
 public:
 	virtual std::weak_ptr<SpriteState> RegisterSprite(
-		const ids::SpriteId i_spriteId,
-		const ids::RenderLayer i_renderLayer = ids::RenderLayer::Default
+		const core::SpriteId i_spriteId,
+		const core::RenderLayer i_renderLayer = core::RenderLayer::Default
 	) = 0;
 	virtual void DeregisterSprite(
 		const SpriteState::Id i_spriteStateId
 	) = 0;
 	virtual void SetSpriteRenderLayer(
 		const SpriteState::Id i_spriteStateId,
-		const ids::RenderLayer i_renderLayer
+		const core::RenderLayer i_renderLayer
 	) = 0;
 };
 

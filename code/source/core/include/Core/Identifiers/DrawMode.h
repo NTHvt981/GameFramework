@@ -1,7 +1,7 @@
 #pragma once
 #include <cstdint>
 
-namespace ids
+namespace core
 {
 
 enum class DrawMode : uint64_t
@@ -10,4 +10,4 @@ enum class DrawMode : uint64_t
 	Relative	// Use for game entites like player, enemies, ... .Recalculate draw position base on camera
 };
 
-} // namespace ids
+} // namespace core

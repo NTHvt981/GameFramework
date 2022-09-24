@@ -22,7 +22,7 @@ void PhysicSystem::Shutdown()
 {
 }
 
-void PhysicSystem::RegisterDynamicCollider(ids::EntityId i_entityId, std::weak_ptr<DynamicCollider> i_collider)
+void PhysicSystem::RegisterDynamicCollider(core::EntityId i_entityId, std::weak_ptr<DynamicCollider> i_collider)
 {
 	assert(!m_colliders.contains(i_entityId));
 	assert(!m_dynamicColliders.contains(i_entityId));
@@ -32,7 +32,7 @@ void PhysicSystem::RegisterDynamicCollider(ids::EntityId i_entityId, std::weak_p
 	m_dynamicColliders.emplace(i_entityId, colliderSharedPtr);
 }
 
-void PhysicSystem::DeregisterDynamicCollider(ids::EntityId i_entityId)
+void PhysicSystem::DeregisterDynamicCollider(core::EntityId i_entityId)
 {
 	assert(m_colliders.contains(i_entityId));
 	assert(m_dynamicColliders.contains(i_entityId));
@@ -41,7 +41,7 @@ void PhysicSystem::DeregisterDynamicCollider(ids::EntityId i_entityId)
 	m_colliders[i_entityId].reset();
 }
 
-void PhysicSystem::RegisterStaticCollider(ids::EntityId i_entityId, std::weak_ptr<StaticCollider> i_collider)
+void PhysicSystem::RegisterStaticCollider(core::EntityId i_entityId, std::weak_ptr<StaticCollider> i_collider)
 {
 	assert(!m_colliders.contains(i_entityId));
 	assert(!m_staticColliders.contains(i_entityId));
@@ -51,7 +51,7 @@ void PhysicSystem::RegisterStaticCollider(ids::EntityId i_entityId, std::weak_pt
 	m_staticColliders.emplace(i_entityId, colliderSharedPtr);
 }
 
-void PhysicSystem::DeregisterStaticCollider(ids::EntityId i_entityId)
+void PhysicSystem::DeregisterStaticCollider(core::EntityId i_entityId)
 {
 	assert(m_colliders.contains(i_entityId));
 	assert(m_staticColliders.contains(i_entityId));
@@ -60,7 +60,7 @@ void PhysicSystem::DeregisterStaticCollider(ids::EntityId i_entityId)
 	m_colliders[i_entityId].reset();
 }
 
-PhysicSystem::CalculatePosition PhysicSystem::CheckMove(ids::EntityId i_selfEntityId, const core::Vector2F& i_velocity)
+PhysicSystem::CalculatePosition PhysicSystem::CheckMove(core::EntityId i_selfEntityId, const core::Vector2F& i_velocity)
 {
 	std::shared_ptr<const DynamicCollider> selfCollider = m_dynamicColliders[i_selfEntityId].lock();
 	core::Vector2F selfPosition = selfCollider->Position;
@@ -126,7 +126,7 @@ void PhysicSystem::RemoveCollisionCheckFilter()
 
 void PhysicSystem::UpdateDynamicColliderState(UpdateDynamicColliderStateParam param) const
 {
-	const ids::EntityId selfEntityId = param.entityId;
+	const core::EntityId selfEntityId = param.entityId;
 	std::shared_ptr<const Collider> selfCollider = param.collider;
 
 	for (const auto& [otherEntityId, otherCollider] : m_colliders)

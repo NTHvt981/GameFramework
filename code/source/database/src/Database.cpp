@@ -4,8 +4,6 @@
 #include "Xml/SpriteParser.h"
 #include "Xml/AnimationParser.h"
 
-const files::Folder sk_xmlFolder = files::Folder{ "Xml" };
-
 namespace database
 {
 
@@ -27,42 +25,42 @@ void Database::LoadResource()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-std::weak_ptr<const graphics::Texture> Database::GetTextureRef(const ids::TextureId i_textureId)
+std::weak_ptr<const graphics::Texture> Database::GetTextureRef(const core::TextureId i_textureId)
 {
 	return m_textures[i_textureId];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-const graphics::Texture Database::GetTexture(const ids::TextureId i_textureId)
+const graphics::Texture Database::GetTexture(const core::TextureId i_textureId)
 {
 	return *m_textures[i_textureId].get();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-std::weak_ptr<const graphics::SpriteDef> Database::GetSpriteRef(const ids::SpriteId i_spriteId)
+std::weak_ptr<const graphics::SpriteDef> Database::GetSpriteRef(const core::SpriteId i_spriteId)
 {
 	return m_sprites[i_spriteId];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-const graphics::SpriteDef Database::GetSprite(const ids::SpriteId i_spriteId)
+const graphics::SpriteDef Database::GetSprite(const core::SpriteId i_spriteId)
 {
 	return *m_sprites[i_spriteId].get();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-std::weak_ptr<const graphics::AnimationDef> Database::GetAnimationRef(const ids::AnimationId i_animationId)
+std::weak_ptr<const graphics::AnimationDef> Database::GetAnimationRef(const core::AnimationId i_animationId)
 {
 	return m_animations[i_animationId];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-const graphics::AnimationDef Database::GetAnimation(const ids::AnimationId i_animationId)
+const graphics::AnimationDef Database::GetAnimation(const core::AnimationId i_animationId)
 {
 	return *m_animations[i_animationId].get();
 }

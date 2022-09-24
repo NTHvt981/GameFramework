@@ -34,7 +34,7 @@ void GraphicSystem::Initialize()
 
 void GraphicSystem::LoadTextures()
 {
-    for (const ids::TextureId id : ids::TextureIdIterators())
+    for (const core::TextureId id : core::TextureIdIterators())
     {
         const Texture texture = m_databaseAPI->GetTexture(id);
         m_nativeGraphicAPI->LoadTexture(id, texture.filePath);
@@ -62,7 +62,7 @@ void GraphicSystem::PreRender(const uint64_t dt)
 
 void GraphicSystem::Render(const uint64_t dt)
 {
-    for (const ids::RenderLayer renderLayer : ids::RenderLayerIterators())
+    for (const core::RenderLayer renderLayer : core::RenderLayerIterators())
     {
         for (const SpriteState::Id spriteStateId : m_mapLayerSpriteStateIds[renderLayer])
         {
@@ -100,8 +100,8 @@ void GraphicSystem::RemoveRenderFilter()
 ////////////////////////////////////////////////////////////////////////////////
 
 std::weak_ptr<SpriteState> GraphicSystem::RegisterSprite(
-    const ids::SpriteId i_spriteId,
-    const ids::RenderLayer i_renderLayer)
+    const core::SpriteId i_spriteId,
+    const core::RenderLayer i_renderLayer)
 {
     std::shared_ptr<SpriteState> result = std::make_shared<SpriteState>(GenerateSpriteState());
     InsertSpriteState(result);
@@ -120,10 +120,10 @@ void GraphicSystem::DeregisterSprite(const SpriteState::Id i_spriteStateId)
 
 void GraphicSystem::SetSpriteRenderLayer(
     const SpriteState::Id i_spriteStateId,
-    const ids::RenderLayer i_renderLayer)
+    const core::RenderLayer i_renderLayer)
 {
     std::shared_ptr<SpriteState> spriteState = GetSpriteState(i_spriteStateId);
-    const ids::RenderLayer oldRenderLayer = spriteState->renderLayer;
+    const core::RenderLayer oldRenderLayer = spriteState->renderLayer;
 
     SpriteStateIds& oldIds = m_mapLayerSpriteStateIds[oldRenderLayer];
     SpriteStateIds& newIds = m_mapLayerSpriteStateIds[i_renderLayer];
@@ -136,8 +136,8 @@ void GraphicSystem::SetSpriteRenderLayer(
 
 // when system register animation, it also register spriteRef with same id
 std::weak_ptr<AnimationState> GraphicSystem::RegisterAnimation(
-    const ids::AnimationId i_animationId, 
-    const ids::RenderLayer i_renderLayer)
+    const core::AnimationId i_animationId, 
+    const core::RenderLayer i_renderLayer)
 {
     std::shared_ptr<AnimationState> result = std::make_shared<AnimationState>(GenerateAnimationState());
     InsertAnimationState(result);
@@ -156,7 +156,7 @@ void GraphicSystem::DeregisterAnimation(const AnimationState::Id i_animationStat
 
 void GraphicSystem::SetAnimationRenderLayer(
     const AnimationState::Id i_animationStateId,
-    const ids::RenderLayer i_renderLayer)
+    const core::RenderLayer i_renderLayer)
 {
     SetSpriteRenderLayer(i_animationStateId, i_renderLayer);
 }
@@ -176,7 +176,7 @@ void GraphicSystem::InsertSpriteState(std::shared_ptr<SpriteState> i_spriteState
     const SpriteState::Id id = i_spriteState->id;
     m_allSpriteStates[id] = i_spriteState;
 
-    const ids::RenderLayer renderLayer = i_spriteState->renderLayer;
+    const core::RenderLayer renderLayer = i_spriteState->renderLayer;
     m_mapLayerSpriteStateIds[renderLayer].emplace(id);
 }
 
@@ -191,7 +191,7 @@ std::shared_ptr<SpriteState> GraphicSystem::GetSpriteState(const SpriteState::Id
 
 void GraphicSystem::RemoveSpriteState(std::shared_ptr<SpriteState> i_spriteState)
 {
-    const ids::RenderLayer renderLayer = i_spriteState->renderLayer;
+    const core::RenderLayer renderLayer = i_spriteState->renderLayer;
     const SpriteState::Id id = i_spriteState->id;
 
     SpriteStateIds& layer = m_mapLayerSpriteStateIds[renderLayer];
@@ -299,7 +299,7 @@ uint64_t GraphicSystem::GenerateId()
 
 void GraphicSystem::InitLayerSpriteStateIds()
 {
-    for (const ids::RenderLayer renderLayer : ids::RenderLayerIterators())
+    for (const core::RenderLayer renderLayer : core::RenderLayerIterators())
     {
         m_mapLayerSpriteStateIds.try_emplace(renderLayer, std::set<SpriteState::Id>());
     }

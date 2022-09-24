@@ -1,4 +1,4 @@
-#include "GraphicDirectx9/Directx9GraphicAPI.h"
+#include "DirectWrapper/Graphic/Direct9GraphicAPI.h"
 #include "Core/DataTypes/Flag.h"
 #include "Core/DataTypes/Box.h"
 #include <assert.h>
@@ -9,17 +9,21 @@ namespace graphics
 core::Flag s_initFlag;
 core::Flag s_shutdownFlag;
 
-Directx9GraphicAPI::Directx9GraphicAPI(const HWND i_hwnd)
+Direct9GraphicAPI::Direct9GraphicAPI(const HWND i_hwnd)
 	: m_hwnd(i_hwnd)
 {
 }
 
-Directx9GraphicAPI::~Directx9GraphicAPI()
+////////////////////////////////////////////////////////////////////////////////
+
+Direct9GraphicAPI::~Direct9GraphicAPI()
 {
 	Shutdown();
 }
 
-void Directx9GraphicAPI::Initialize()
+////////////////////////////////////////////////////////////////////////////////
+
+void Direct9GraphicAPI::Initialize()
 {
 	if (s_initFlag.IsSet())
 	{
@@ -62,7 +66,9 @@ void Directx9GraphicAPI::Initialize()
 	assert(SUCCEEDED(result));
 }
 
-void Directx9GraphicAPI::LoadTexture(
+////////////////////////////////////////////////////////////////////////////////
+
+void Direct9GraphicAPI::LoadTexture(
 	const core::TextureId i_textureId, 
 	const core::String i_textureFilePath)
 {
@@ -70,7 +76,9 @@ void Directx9GraphicAPI::LoadTexture(
 	m_mapTextures[i_textureId] = CreateTextureFromFile(i_textureFilePath);
 }
 
-void Directx9GraphicAPI::Draw(const DrawParams& i_drawParams)
+////////////////////////////////////////////////////////////////////////////////
+
+void Direct9GraphicAPI::Draw(const DrawParams& i_drawParams)
 {
 	const core::TextureId id = i_drawParams.textureId;
 	assert(m_mapTextures.contains(id));
@@ -95,7 +103,9 @@ void Directx9GraphicAPI::Draw(const DrawParams& i_drawParams)
 	m_spriteHandler->Draw(texture, &destRect, NULL, &position, D3DCOLOR_RGBA(255, 255, 255, opacity));
 }
 
-LPDIRECT3DTEXTURE9 Directx9GraphicAPI::CreateTextureFromFile(const core::String& imagePath)
+////////////////////////////////////////////////////////////////////////////////
+
+LPDIRECT3DTEXTURE9 Direct9GraphicAPI::CreateTextureFromFile(const core::String& imagePath)
 {
 	D3DXIMAGE_INFO info;
 	LPDIRECT3DTEXTURE9 o_texture;
@@ -124,7 +134,9 @@ LPDIRECT3DTEXTURE9 Directx9GraphicAPI::CreateTextureFromFile(const core::String&
 	return o_texture;
 }
 
-void Directx9GraphicAPI::Shutdown()
+////////////////////////////////////////////////////////////////////////////////
+
+void Direct9GraphicAPI::Shutdown()
 {
 	if (s_shutdownFlag.IsSet())
 	{
@@ -138,9 +150,25 @@ void Directx9GraphicAPI::Shutdown()
 	m_direct3D9->Release();
 }
 
-core::APIMode Directx9GraphicAPI::GetAPIMode() const
+////////////////////////////////////////////////////////////////////////////////
+
+void Direct9GraphicAPI::DrawAbsolute()
+{
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void Direct9GraphicAPI::DrawRelative()
+{
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+core::APIMode Direct9GraphicAPI::GetAPIMode() const
 {
 	return core::APIMode::D3D9;
 }
+
+////////////////////////////////////////////////////////////////////////////////
 
 } // namespace graphics

@@ -4,7 +4,7 @@
 #include "GraphicSystem/IGraphicSystem.h"
 #include "PhysicSystem/IPhysicSystem.h"
 #include "InputSystem/IInputSystem.h"
-#include "GraphicSystem/API/INativeRenderAPI.h"
+#include "GraphicSystem/API/INativeGraphicAPI.h"
 #include "InputSystem/API/INativeInputAPI.h"
 #include "FileSystem/IFileSystem.h"
 #include "Database/IDatabase.h"

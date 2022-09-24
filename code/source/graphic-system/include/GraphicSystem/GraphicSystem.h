@@ -6,7 +6,7 @@
 #include "Core/DataTypes/Flag.h"
 #include "DataTypes/SpriteState.h"
 #include "DataTypes/AnimationState.h"
-#include "API/INativeRenderAPI.h"
+#include "API/INativeGraphicAPI.h"
 #include <memory>
 #include <optional>
 #include <Windows.h>

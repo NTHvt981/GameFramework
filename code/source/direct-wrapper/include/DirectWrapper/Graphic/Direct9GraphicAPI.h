@@ -1,5 +1,5 @@
 #pragma once
-#include "GraphicSystem/API/INativeRenderAPI.h"
+#include "GraphicSystem/API/INativeGraphicAPI.h"
 #include "Core/Identifiers/APIMode.h"
 #include <Windows.h>
 #include <d3d9.h>
@@ -10,11 +10,11 @@
 namespace graphics
 {
 
-class Directx9GraphicAPI final : public INativeGraphicAPI
+class Direct9GraphicAPI final : public INativeGraphicAPI
 {
 public:
-	Directx9GraphicAPI(const HWND i_hwnd);
-	~Directx9GraphicAPI();
+	Direct9GraphicAPI(const HWND i_hwnd);
+	~Direct9GraphicAPI();
 
 	// Inherited via IRenderer
 	void Initialize() override;
@@ -27,6 +27,9 @@ public:
 	void Shutdown() override;
 
 private:
+	void DrawAbsolute();
+	void DrawRelative();
+
 	const HWND m_hwnd;
 	LPDIRECT3D9 m_direct3D9 = nullptr;
 	LPDIRECT3DDEVICE9 m_direct3DDevice9 = nullptr;

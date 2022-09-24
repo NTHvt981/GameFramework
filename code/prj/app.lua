@@ -2,12 +2,10 @@ require("common")
 require("core")
 require("file-system")
 require("graphic-system")
-require("graphic-directx9")
 require("input-system")
-require("input-directx")
+require("audio-system")
+require("direct-wrapper")
 require("logic")
-
-require("DirectXSDK")
 
 local app_prj_name = "app"
 local app_path = source_path..app_prj_name.."/"
@@ -30,8 +28,12 @@ function addApp()
       }
       
       includeCore()
-      includeGraphicDirectx9()
-      includeInputDirectx()
-      includeDirectXSDK()
+      includeFileSystem()
+      includeDatabase()
+      includeGraphicSystem()
+      includeInputSystem()
+      includeAudioSystem()
+      includePhysicSystem()
+      includeDirectWrapper()
       includeLogic()
 end

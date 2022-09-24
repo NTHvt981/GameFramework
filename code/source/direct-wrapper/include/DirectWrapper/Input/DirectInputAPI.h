@@ -7,11 +7,11 @@
 namespace input
 {
 
-class DirectxInputAPI final : public INativeInputAPI
+class DirectInputAPI final : public INativeInputAPI
 {
 public:
-	DirectxInputAPI(const HWND i_hwnd, const HINSTANCE i_hInstance);
-	~DirectxInputAPI();
+	DirectInputAPI(const HWND i_hwnd, const HINSTANCE i_hInstance);
+	~DirectInputAPI();
 
 	// Inherited via INativeInputAPI
 	void Initialize() override;

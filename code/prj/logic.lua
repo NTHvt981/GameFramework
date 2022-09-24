@@ -42,10 +42,4 @@ function includeLogic()
    links {
       logic_prj_name
    }
-   includeCore()
-   includeFileSystem()
-   includeGraphicSystem()
-   includePhysicSystem()
-   includeInputSystem()
-   includeDatabase()
 end

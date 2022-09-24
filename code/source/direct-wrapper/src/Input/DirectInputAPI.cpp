@@ -1,4 +1,4 @@
-#include "InputDirectx/DirectxInputAPI.h"
+#include "DirectWrapper/Input/DirectInputAPI.h"
 #include "Core/DataTypes/Flag.h"
 #include "KeyboardKeyHelper.h"
 #include <assert.h>
@@ -10,17 +10,17 @@ namespace input
 core::Flag s_initFlag;
 core::Flag s_shutdownFlag;
 
-DirectxInputAPI::DirectxInputAPI(const HWND i_hwnd, const HINSTANCE i_hInstance)
+DirectInputAPI::DirectInputAPI(const HWND i_hwnd, const HINSTANCE i_hInstance)
 	: m_hwnd(i_hwnd)
 	, m_hInstance(i_hInstance)
 {
 }
 
-DirectxInputAPI::~DirectxInputAPI()
+DirectInputAPI::~DirectInputAPI()
 {
 }
 
-void DirectxInputAPI::Initialize()
+void DirectInputAPI::Initialize()
 {
 	HRESULT result = DirectInput8Create(
 		m_hInstance,
@@ -44,7 +44,7 @@ void DirectxInputAPI::Initialize()
 	assert(SUCCEEDED(result));
 }
 
-void DirectxInputAPI::UpdateInput()
+void DirectInputAPI::UpdateInput()
 {
 	for (int64_t i = 0; i < sizeof(m_currentKeys); i++)
 	{
@@ -55,46 +55,46 @@ void DirectxInputAPI::UpdateInput()
 	assert(SUCCEEDED(result));
 }
 
-void DirectxInputAPI::ShutDown()
+void DirectInputAPI::ShutDown()
 {
 }
 
-void DirectxInputAPI::Pause()
+void DirectInputAPI::Pause()
 {
 	HRESULT result = m_directInputDevice->Unacquire();
 	assert(SUCCEEDED(result));
 }
 
-void DirectxInputAPI::Resume()
+void DirectInputAPI::Resume()
 {
 	HRESULT result = m_directInputDevice->Acquire();
 	assert(SUCCEEDED(result));
 }
 
-bool DirectxInputAPI::IsKeyDown(const KeyboardKey i_key)
+bool DirectInputAPI::IsKeyDown(const KeyboardKey i_key)
 {
 	uint64_t index = ToDirectKeyboardKey(i_key);
 	return m_currentKeys[index];
 }
 
-bool DirectxInputAPI::IsKeyUp(const KeyboardKey i_key)
+bool DirectInputAPI::IsKeyUp(const KeyboardKey i_key)
 {
 	return !IsKeyDown(i_key);
 }
 
-bool DirectxInputAPI::IsKeyPressed(const KeyboardKey i_key)
+bool DirectInputAPI::IsKeyPressed(const KeyboardKey i_key)
 {
 	uint64_t index = ToDirectKeyboardKey(i_key);
 	return m_currentKeys[index] && (! m_previousKeys[index]);
 }
 
-bool DirectxInputAPI::IsKeyRelease(const KeyboardKey i_key)
+bool DirectInputAPI::IsKeyRelease(const KeyboardKey i_key)
 {
 	uint64_t index = ToDirectKeyboardKey(i_key);
 	return (! m_currentKeys[index]) && m_previousKeys[index];
 }
 
-bool DirectxInputAPI::IsKeyHold(const KeyboardKey i_key)
+bool DirectInputAPI::IsKeyHold(const KeyboardKey i_key)
 {
 	uint64_t index = ToDirectKeyboardKey(i_key);
 	return m_currentKeys[index] && m_previousKeys[index];

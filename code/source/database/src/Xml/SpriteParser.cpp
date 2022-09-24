@@ -1,5 +1,4 @@
 #include "SpriteParser.h"
-#include "TexureParser.h"
 #include "Xml/CommonParser.h"
 #include "tinyxml2.h"
 
@@ -18,7 +17,8 @@ std::vector<graphics::SpriteDef> LoadSpritesFile(const char* i_filePath)
 
 	tinyxml2::XMLDocument doc;
 	doc.LoadFile(i_filePath);
-	ParseList<graphics::SpriteDef>(doc.FirstChildElement("Sprites"), result, "Sprite", [](tinyxml2::XMLElement* itemElement, graphics::SpriteDef& o_value)
+	ParseList<graphics::SpriteDef>(doc.FirstChildElement("Sprites"), result, "Sprite", 
+		[](tinyxml2::XMLElement* itemElement, graphics::SpriteDef& o_value)
 		{
 			Parse(itemElement, o_value);
 		}

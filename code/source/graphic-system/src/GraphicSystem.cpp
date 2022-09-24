@@ -268,9 +268,9 @@ void GraphicSystem::ProccessAnimationState(std::shared_ptr<AnimationState> i_ani
     
     uint64_t newFrameTime = currentFrameTime + dt;
     const AnimationFrameDef& currentFrame = animationDef->frames[currentFrameIndex];
-    if (newFrameTime >= currentFrame.time)
+    if (newFrameTime >= currentFrame.timeSpan)
     {
-        currentFrameTime = newFrameTime - currentFrame.time;
+        currentFrameTime = newFrameTime - currentFrame.timeSpan;
         currentFrameIndex++;
         auto frameSize = animationDef->frames.size();
         if (currentFrameIndex >= frameSize)

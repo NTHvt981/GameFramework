@@ -1,0 +1,19 @@
+<Animations>
+    <Animation>
+        <Id>0</Id>
+        <Frames>
+            <Frame>
+                <SpriteId>0</SpriteId>
+                <TimeSpan>50</TimeSpan>
+            </Frame>
+            <Frame>
+                <SpriteId>1</SpriteId>
+                <TimeSpan>100</TimeSpan>
+            </Frame>
+            <Frame>
+                <SpriteId>3</SpriteId>
+                <TimeSpan>150</TimeSpan>
+            </Frame>
+        </Frames>
+    </Animation>
+</Animations>

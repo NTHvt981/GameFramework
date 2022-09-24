@@ -19,6 +19,7 @@ const Folder sk_texturesFolder{ "Textures" };
 const Folder sk_spritesFolder{ "Sprites" };
 const File sk_texturesXmlFile{ "Textures", files::extXml };
 const File sk_spritesXmlFile{ "Sprites", files::extXml };
+const File sk_animationsXmlFile{ "Animations", files::extXml };
 core::Flag s_initFlag;
 FolderDirectory s_applicationFolderDirectory{};
 
@@ -75,14 +76,6 @@ core::String FileSystem::GetTexturesXmlFilePath() const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-core::String FileSystem::GetTexturesFolderPath() const
-{
-	FolderDirectory result = s_applicationFolderDirectory + FolderDirectory{ sk_dataFolder, sk_texturesFolder };
-	return result.ToString();
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
 core::String FileSystem::GetSpritesXmlFilePath() const
 {
 	FileDirectory result
@@ -95,9 +88,21 @@ core::String FileSystem::GetSpritesXmlFilePath() const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-core::String FileSystem::GetSpritesFolderPath() const
+core::String FileSystem::GetAnimationsXmlFilePath() const
 {
-	FolderDirectory result = s_applicationFolderDirectory + FolderDirectory{ sk_dataFolder, sk_spritesFolder };
+	FileDirectory result
+	{
+		s_applicationFolderDirectory + FolderDirectory{sk_dataFolder, sk_xmlFolder},
+		sk_animationsXmlFile
+	};
+	return result.ToString();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+core::String FileSystem::GetTexturesFolderPath() const
+{
+	FolderDirectory result = s_applicationFolderDirectory + FolderDirectory{ sk_dataFolder, sk_texturesFolder };
 	return result.ToString();
 }
 

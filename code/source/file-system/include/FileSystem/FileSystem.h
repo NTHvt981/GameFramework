@@ -27,8 +27,8 @@ public:
 	core::String GetAbsolutePath(const core::String i_relativePath) const override;
 	core::String GetTexturesXmlFilePath() const override;
 	core::String GetSpritesXmlFilePath() const override;
+	core::String GetAnimationsXmlFilePath() const override;
 	core::String GetTexturesFolderPath() const override;
-	core::String GetSpritesFolderPath() const override;
 };
 
 } // namespace files

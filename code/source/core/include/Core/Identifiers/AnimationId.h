@@ -4,9 +4,10 @@
 namespace ids
 {
 
-enum class AnimationId : uint64_t
-{
-	COUNT // Special enum
-};
+using AnimationId = uint64_t;
+//enum class AnimationId : uint64_t
+//{
+//	COUNT // Special enum
+//};
 
 } // namespace ids

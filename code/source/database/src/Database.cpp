@@ -2,6 +2,7 @@
 #include "FileSystem/DataTypes/Folder.h"
 #include "Xml/TexureParser.h"
 #include "Xml/SpriteParser.h"
+#include "Xml/AnimationParser.h"
 
 const files::Folder sk_xmlFolder = files::Folder{ "Xml" };
 
@@ -100,6 +101,18 @@ void Database::LoadSprites()
 
 void Database::LoadAnimation()
 {
+	const core::String path = m_fileSystem->GetAnimationsXmlFilePath();
+	const std::string stringPath = path.ToStdStr();
+	std::vector<graphics::AnimationDef> animations = xml::LoadAnimationsFile(stringPath.c_str());
+
+	for (graphics::AnimationDef& animation : animations)
+	{
+		for (graphics::AnimationFrameDef& frame : animation.frames)
+		{
+			frame.spriteRef = GetSpriteRef(frame.spriteId);
+		}
+		m_animations.try_emplace(animation.id, std::make_shared<graphics::AnimationDef>(animation));
+	}
 }
 
 ////////////////////////////////////////////////////////////////////////////////

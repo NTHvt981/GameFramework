@@ -11,14 +11,13 @@ struct AnimationFrameDef
 {
 	ids::SpriteId spriteId;
 	std::weak_ptr<const SpriteDef> spriteRef;
-	uint64_t time;
+	uint64_t timeSpan;
 };
 
 struct AnimationDef
 {
 	ids::AnimationId id;
 	std::vector<AnimationFrameDef> frames;
-	float alpha;
 };
 
 } // namespace graphics

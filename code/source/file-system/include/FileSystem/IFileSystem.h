@@ -21,8 +21,8 @@ public:
 	virtual void ShutDown() = 0;
 	virtual core::String GetTexturesXmlFilePath() const = 0;
 	virtual core::String GetSpritesXmlFilePath() const = 0;
+	virtual core::String GetAnimationsXmlFilePath() const = 0;
 	virtual core::String GetTexturesFolderPath() const = 0;
-	virtual core::String GetSpritesFolderPath() const = 0;
 	virtual core::String GetAbsolutePath(const core::String i_relativePath) const = 0;
 };
 

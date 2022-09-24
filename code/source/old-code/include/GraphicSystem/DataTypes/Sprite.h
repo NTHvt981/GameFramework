@@ -5,7 +5,7 @@
 
 class CSprite
 {
-	int64_t id;				// Sprite ID in the sprite database
+	int64_t id;				// Sprite ID in the spriteRef database
 
 	int64_t left;
 	int64_t top;

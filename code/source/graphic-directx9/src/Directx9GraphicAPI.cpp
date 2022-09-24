@@ -57,7 +57,7 @@ void Directx9GraphicAPI::Initialize()
 
 	m_direct3DDevice9->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &m_backBuffer);
 
-	// Initialize sprite helper from Direct3DX helper library
+	// Initialize spriteRef helper from Direct3DX helper library
 	result = D3DXCreateSprite(m_direct3DDevice9, &m_spriteHandler);
 	assert(SUCCEEDED(result));
 }

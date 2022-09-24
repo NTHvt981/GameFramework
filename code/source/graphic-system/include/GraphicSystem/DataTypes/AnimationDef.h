@@ -9,7 +9,8 @@ namespace graphics
 
 struct AnimationFrameDef
 {
-	std::weak_ptr<const SpriteDef> sprite;
+	ids::SpriteId spriteId;
+	std::weak_ptr<const SpriteDef> spriteRef;
 	uint64_t time;
 };
 

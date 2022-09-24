@@ -417,7 +417,7 @@ void CGame::LoadSprites()
 	//	132	297	18	16
 	//	152	296	18	17
 
-	//other object sprite
+	//other object spriteRef
 	lib->Add(ID_BREAKABLE_WALL, 1, 35, 17, 51, textOtherObjects);
 }
 

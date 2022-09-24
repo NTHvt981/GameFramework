@@ -134,7 +134,7 @@ void GraphicSystem::SetSpriteRenderLayer(
 
 ////////////////////////////////////////////////////////////////////////////////
 
-// when system register animation, it also register sprite with same id
+// when system register animation, it also register spriteRef with same id
 std::weak_ptr<AnimationState> GraphicSystem::RegisterAnimation(
     const ids::AnimationId i_animationId, 
     const ids::RenderLayer i_renderLayer)
@@ -209,7 +209,7 @@ void GraphicSystem::RemoveSpriteState(std::shared_ptr<SpriteState> i_spriteState
 void GraphicSystem::DrawSprite(std::shared_ptr<const SpriteState> i_spriteState)
 {
     std::shared_ptr<const SpriteDef> spriteDef = i_spriteState->spriteDef.lock();
-    std::shared_ptr<const Texture> textureDef = spriteDef->texture.lock();
+    std::shared_ptr<const Texture> textureDef = spriteDef->textureRef.lock();
     INativeGraphicAPI::DrawParams drawParams;
 
     drawParams.position = i_spriteState->position;
@@ -279,7 +279,7 @@ void GraphicSystem::ProccessAnimationState(std::shared_ptr<AnimationState> i_ani
         }
 
         const AnimationFrameDef& newFrame = animationDef->frames[currentFrameIndex];
-        i_animationState->spriteStateRef->spriteDef = newFrame.sprite;
+        i_animationState->spriteStateRef->spriteDef = newFrame.spriteRef;
     }
     else
     {

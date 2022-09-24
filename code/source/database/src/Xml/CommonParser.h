@@ -1,7 +1,10 @@
 #pragma once
 #include "Core/DataTypes/String.h"
+#include "Core/DataTypes/Vector2.h"
 #include "Core/DataTypes/Box.h"
 #include "Core/DataTypes/Size.h"
+#include "Core/Identifiers/TextureId.h"
+#include "Core/Identifiers/SpriteId.h"
 #include <stdint.h>
 #include <vector>
 #include <functional>
@@ -16,8 +19,12 @@ void Parse(const tinyxml2::XMLElement* i_element, float& o_value);
 void Parse(const tinyxml2::XMLElement* i_element, double& o_value);
 
 void Parse(const tinyxml2::XMLElement* i_element, core::String& o_value);
+void Parse(const tinyxml2::XMLElement* i_element, core::Vector2F& o_value);
 void Parse(const tinyxml2::XMLElement* i_element, core::BoxI64& o_value);
 void Parse(const tinyxml2::XMLElement* i_element, core::SizeI64& o_value);
+
+void Parse(const tinyxml2::XMLElement* i_element, ids::TextureId& o_value);
+void Parse(const tinyxml2::XMLElement* i_element, ids::SpriteId& o_value);
 
 template<typename T>
 void ParseList(

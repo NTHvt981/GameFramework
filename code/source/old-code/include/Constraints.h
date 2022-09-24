@@ -62,7 +62,7 @@
 #define ITEMS_TEXTURE_PATH L"Texture\\Items.png"
 #define TEX_BBOX_PATH L"Texture\\bbox.png"
 
-#define ID_TEX_BBOX 999		// special texture to draw object bounding box
+#define ID_TEX_BBOX 999		// special textureRef to draw object bounding box
 
 #define POSITION_START_X 10
 #define POSITION_START_Y 10

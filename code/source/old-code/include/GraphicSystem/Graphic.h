@@ -47,7 +47,7 @@ public:
 	void SetRenderData(
 		D3DXVECTOR2& center, D3DXVECTOR2& translate, D3DXVECTOR2& scaling);
 
-	//void Render(LPDIRECT3DTEXTURE9 texture);
+	//void Render(LPDIRECT3DTEXTURE9 textureRef);
 
 	void End();
 };

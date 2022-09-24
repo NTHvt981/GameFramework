@@ -53,7 +53,7 @@ int64_t CGraphic::Init(HWND hwnd) {
 
 	d3ddev->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &backBuffer);
 
-	// Initialize sprite helper from Direct3DX helper library
+	// Initialize spriteRef helper from Direct3DX helper library
 	HRESULT result = D3DXCreateSprite(d3ddev, &spriteHandler);
 	if (!SUCCEEDED(result))
 	{
@@ -100,7 +100,7 @@ LPDIRECT3DTEXTURE9 CGraphic::LoadTexture(LPCWSTR texturePath)
 		D3DCOLOR_XRGB(251, 255, 0),			// Transparent color
 		&info,
 		NULL,
-		&texture);								// Created texture pointer
+		&texture);								// Created textureRef pointer
 
 	if (!SUCCEEDED(result))
 	{

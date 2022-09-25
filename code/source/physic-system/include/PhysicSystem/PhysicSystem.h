@@ -1,6 +1,6 @@
 #pragma once
 #include "IPhysicSystem.h"
-#include "Core/GameClock/IGameClock.h"
+#include "Core/Generator/IncrementIdGenerator.h"
 #include <map>
 #include <optional>
 
@@ -10,44 +10,44 @@ namespace physics
 class PhysicSystem final : public IPhysicSystem
 {
 public:
-	PhysicSystem(std::weak_ptr<core::logic::IGameClock> i_gameClock);
+	PhysicSystem();
 
 	// Inherited via IPhysicSystem
 	void Initialize() override;
 	void Shutdown() override;
-	void UpdateDynamicColliderStates() const override;
-	void SetCollisionCheckFilter(const core::BoxI64 i_boundary) override;
+
+	void SetCollisionCheckFilter(const core::BoxF i_boundary) override;
 	void RemoveCollisionCheckFilter() override;
 
+	void PreFixedUpdate(const uint64_t dt) override;
+	void FixedUpdate(const uint64_t dt) override;
+	void PostFixedUpdate(const uint64_t dt) override;
+
 	// Inherited via IPhysicAPI
-	void RegisterDynamicCollider(core::EntityId i_entityId, std::weak_ptr<DynamicCollider> i_collider) override;
-	void DeregisterDynamicCollider(core::EntityId i_entityId) override;
-	void RegisterStaticCollider(core::EntityId i_entityId, std::weak_ptr<StaticCollider> i_collider) override;
-	void DeregisterStaticCollider(core::EntityId i_entityId) override;
-	CalculatePosition CheckMove(core::EntityId i_selfEntityId, const core::Vector2F& i_velocity) override;
+	void RegisterCollider(std::shared_ptr<DynamicCollider> i_collider) override;
+	void RegisterCollider(std::shared_ptr<StaticCollider> i_collider) override;
+	void DeregisterCollider(Collider::Id id) override;
+	NewPosition CheckMove(Collider::Id i_colliderId, const core::Vector2F& i_velocity, bool i_emitSignal) override;
 
 private:
-	struct UpdateDynamicColliderStateParam
-	{
-		const core::EntityId entityId;
-		std::shared_ptr<const Collider> collider;
-	};
-	void UpdateDynamicColliderState(UpdateDynamicColliderStateParam param) const;
+	void UpdateDynamicColliderOverlapStates() const;
+	void UpdateDynamicColliderOverlapState(std::shared_ptr<const Collider> collider) const;
+	bool CheckCollideOtherConditions(
+		std::shared_ptr<const Collider> i_moveCollider,
+		std::shared_ptr<const Collider> i_staticCollider
+	) const;
+	bool CheckOverlapOtherConditions(
+		std::shared_ptr<const Collider> i_colliderA,
+		std::shared_ptr<const Collider> i_colliderB
+	) const;
 
-	std::map<core::EntityId, std::shared_ptr<Collider>> m_colliders;
-	std::map<core::EntityId, std::weak_ptr<DynamicCollider>> m_dynamicColliders;
-	std::map<core::EntityId, std::weak_ptr<StaticCollider>> m_staticColliders;
+	std::map<Collider::Id, std::shared_ptr<Collider>> m_colliders;
+	std::map<Collider::Id, std::weak_ptr<DynamicCollider>> m_dynamicColliders;
+	std::map<Collider::Id, std::weak_ptr<StaticCollider>> m_staticColliders;
+	core::IncrementIdGenerator m_idGenerator;
 
-	// IGameClock funcs
-	void OnPreFixedUpdate(const uint64_t dt);
-	void OnFixedUpdate(const uint64_t dt);
-	void OnPostFixedUpdate(const uint64_t dt);
-	signals::Connection<const uint64_t> m_onPreFixedUpdateCon;
-	signals::Connection<const uint64_t> m_onFixedUpdateCon;
-	signals::Connection<const uint64_t> m_onPostFixedUpdateCon;
-
-	bool CheckFilter(const core::BoxI64 i_renderBoundary) const;
-	std::optional<core::BoxI64> m_filterBound;
+	bool CheckCollisionFilter(std::shared_ptr<const Collider> i_collider) const;
+	std::optional<core::BoxF> m_collisionFilter;
 };
 
 } // namespace physics

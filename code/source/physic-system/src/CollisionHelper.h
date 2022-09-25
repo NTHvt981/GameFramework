@@ -1,6 +1,7 @@
 #pragma once
 #include "Core/DataTypes/Box.h"
 #include "Core/DataTypes/Vector2.h"
+#include "Core/Identifiers/CollisionLayer.h"
 
 namespace physics
 {
@@ -54,6 +55,14 @@ NewPosition CalculateStop(
 	const core::Vector2F i_oldPosition,
 	const core::Vector2F i_oldVelocity,
 	const CheckCollideResult i_collideResult
+);
+
+/// <summary>
+/// Note: param order is important
+/// </summary>
+bool CheckCollisionLayerCondition(
+	const core::CollisionLayer i_moveLayer,
+	const core::CollisionLayer i_staticLayer
 );
 
 } // namespace helper

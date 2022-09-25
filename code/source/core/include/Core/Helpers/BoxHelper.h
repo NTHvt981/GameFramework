@@ -16,6 +16,8 @@ Box<T> operator*(const Box<T>& a, const float b);
 template <typename T>
 Box<T> operator/(const Box<T>& a, const float b);
 
+BoxF ToFloat(const BoxI64& a);
+
 // impl
 template <typename T>
 Box<T> operator+(const Box<T>& a, const Box<T>& b)
@@ -51,6 +53,17 @@ Box<T> operator/(const Box<T>& a, const float b)
 		a.top / b,
 		a.right / b,
 		a.bottom / b,
+	};
+}
+
+BoxF core::ToFloat(const BoxI64& a)
+{
+	return BoxF
+	{
+		float(a.left),
+		float(a.top),
+		float(a.right),
+		float(a.bottom)
 	};
 }
 

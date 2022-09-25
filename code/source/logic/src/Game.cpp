@@ -21,7 +21,7 @@ Game::Game(std::unique_ptr<graphics::INativeGraphicAPI> i_nativeGraphicAPI,
 	m_fileSystem = std::make_shared<files::FileSystem>();
 	m_database = std::make_shared<database::Database>(m_fileSystem);
 	m_graphicSystem = std::make_shared<graphics::GraphicSystem>(m_nativeGraphicAPI, m_database);
-	m_physicSystem = std::make_shared<physics::PhysicSystem>(m_gameClock);
+	m_physicSystem = std::make_shared<physics::PhysicSystem>();
 	m_inputSystem = std::make_shared<input::InputSystem>(m_nativeInputAPI);
 }
 
@@ -133,6 +133,7 @@ void Game::FixedUpdate(const uint64_t dt)
 void Game::PreFixedUpdate(const uint64_t dt)
 {
 	m_gameClock->PreFixedUpdate(dt);
+	m_physicSystem->PreFixedUpdate(dt);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -140,6 +141,7 @@ void Game::PreFixedUpdate(const uint64_t dt)
 void Game::DuringFixedUpdate(const uint64_t dt)
 {
 	m_gameClock->FixedUpdate(dt);
+	m_physicSystem->FixedUpdate(dt);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -147,6 +149,7 @@ void Game::DuringFixedUpdate(const uint64_t dt)
 void Game::PostFixedUpdate(const uint64_t dt)
 {
 	m_gameClock->PostFixedUpdate(dt);
+	m_physicSystem->PostFixedUpdate(dt);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

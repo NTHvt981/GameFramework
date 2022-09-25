@@ -4,6 +4,7 @@
 #include "Core/Identifiers/APIMode.h"
 #include "Core/GameClock/IGameClock.h"
 #include "Core/DataTypes/Flag.h"
+#include "Core/Generator/IncrementIdGenerator.h"
 #include "DataTypes/SpriteState.h"
 #include "DataTypes/AnimationState.h"
 #include "API/INativeGraphicAPI.h"
@@ -31,7 +32,7 @@ public:
 	void PreRender(const uint64_t dt) override;
 	void Render(const uint64_t dt) override;
 	void PostRender(const uint64_t dt) override;
-	void SetRenderFilter(const core::BoxI64 i_boundary) override;
+	void SetRenderFilter(const core::BoxF i_boundary) override;
 	void RemoveRenderFilter() override;
 
 	// Inherited via ISpriteGraphicAPI
@@ -79,14 +80,12 @@ private:
 
 	std::shared_ptr<database::IGraphicDatabaseAPI> m_databaseAPI;
 	std::shared_ptr<INativeGraphicAPI> m_nativeGraphicAPI;
-
-	uint64_t GenerateId();
-	uint64_t m_countId = 0;
+	core::IncrementIdGenerator m_idGenerator;
 
 	void InitLayerSpriteStateIds();
 
-	bool CheckFilter(const core::BoxI64 i_renderBoundary) const;
-	std::optional<core::BoxI64> m_filterBound;
+	bool CheckRenderFilter(std::shared_ptr<const SpriteState> i_spriteState) const;
+	std::optional<core::BoxF> m_renderFilter;
 };
 
 } // namespace graphics

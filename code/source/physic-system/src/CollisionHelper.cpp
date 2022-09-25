@@ -1,6 +1,7 @@
 #include "CollisionHelper.h"
 #include "Core/Math/Math.h"
 #include "Core/Helpers/Vector2Helper.h"
+#include <map>
 
 namespace physics
 {
@@ -239,6 +240,24 @@ NewPosition CalculateStop(
 	result = result + (i_oldVelocity * i_collideResult.collideTime);
 
 	return result;
+}
+
+const std::map<core::CollisionLayer, core::CollisionLayer> sk_mapCollisionLayersInteraction =
+{
+	{ core::CollisionLayer::Enemy, core::CollisionLayer::Wall },
+	{ core::CollisionLayer::Player, core::CollisionLayer::Wall },
+	{ core::CollisionLayer::Wall, core::CollisionLayer::Wall },
+};
+
+bool CheckCollisionLayerCondition(
+	const core::CollisionLayer i_moveLayer,
+	const core::CollisionLayer i_staticLayer)
+{
+	if (sk_mapCollisionLayersInteraction.contains(i_moveLayer))
+	{
+		return false;
+	}
+	return sk_mapCollisionLayersInteraction.at(i_moveLayer) == i_staticLayer;
 }
 
 } // namespace helper

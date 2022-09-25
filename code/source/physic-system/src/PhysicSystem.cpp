@@ -6,12 +6,8 @@
 namespace physics
 {
 
-PhysicSystem::PhysicSystem(std::weak_ptr<core::logic::IGameClock> i_gameClock)
+PhysicSystem::PhysicSystem()
 {
-	std::shared_ptr<core::logic::IGameClock> gameClock = i_gameClock.lock();
-	m_onPreFixedUpdateCon = gameClock->sig_onPreRender.Connect(std::bind(&PhysicSystem::OnPreFixedUpdate, this, std::placeholders::_1));
-	m_onFixedUpdateCon = gameClock->sig_onRender.Connect(std::bind(&PhysicSystem::OnFixedUpdate, this, std::placeholders::_1));
-	m_onPostFixedUpdateCon = gameClock->sig_onPostRender.Connect(std::bind(&PhysicSystem::OnPostFixedUpdate, this, std::placeholders::_1));
 }
 
 void PhysicSystem::Initialize()
@@ -22,146 +18,147 @@ void PhysicSystem::Shutdown()
 {
 }
 
-void PhysicSystem::RegisterDynamicCollider(core::EntityId i_entityId, std::weak_ptr<DynamicCollider> i_collider)
+void PhysicSystem::PreFixedUpdate(const uint64_t dt)
 {
-	assert(!m_colliders.contains(i_entityId));
-	assert(!m_dynamicColliders.contains(i_entityId));
-
-	std::shared_ptr<DynamicCollider> colliderSharedPtr = i_collider.lock();
-	m_colliders.emplace(i_entityId, colliderSharedPtr);
-	m_dynamicColliders.emplace(i_entityId, colliderSharedPtr);
 }
 
-void PhysicSystem::DeregisterDynamicCollider(core::EntityId i_entityId)
+void PhysicSystem::FixedUpdate(const uint64_t dt)
 {
-	assert(m_colliders.contains(i_entityId));
-	assert(m_dynamicColliders.contains(i_entityId));
-
-	m_dynamicColliders[i_entityId].reset();
-	m_colliders[i_entityId].reset();
 }
 
-void PhysicSystem::RegisterStaticCollider(core::EntityId i_entityId, std::weak_ptr<StaticCollider> i_collider)
+void PhysicSystem::PostFixedUpdate(const uint64_t dt)
 {
-	assert(!m_colliders.contains(i_entityId));
-	assert(!m_staticColliders.contains(i_entityId));
-
-	std::shared_ptr<StaticCollider> colliderSharedPtr = i_collider.lock();
-	m_colliders.emplace(i_entityId, colliderSharedPtr);
-	m_staticColliders.emplace(i_entityId, colliderSharedPtr);
+	UpdateDynamicColliderOverlapStates();
 }
 
-void PhysicSystem::DeregisterStaticCollider(core::EntityId i_entityId)
+void PhysicSystem::RegisterCollider(std::shared_ptr<DynamicCollider> i_collider)
 {
-	assert(m_colliders.contains(i_entityId));
-	assert(m_staticColliders.contains(i_entityId));
-
-	m_staticColliders[i_entityId].reset();
-	m_colliders[i_entityId].reset();
+	i_collider->id = m_idGenerator.Generate();
+	m_colliders.emplace(i_collider->id, i_collider);
+	m_dynamicColliders.emplace(i_collider->id, i_collider);
 }
 
-PhysicSystem::CalculatePosition PhysicSystem::CheckMove(core::EntityId i_selfEntityId, const core::Vector2F& i_velocity)
+void PhysicSystem::RegisterCollider(std::shared_ptr<StaticCollider> i_collider)
 {
-	std::shared_ptr<const DynamicCollider> selfCollider = m_dynamicColliders[i_selfEntityId].lock();
-	core::Vector2F selfPosition = selfCollider->Position;
+	i_collider->id = m_idGenerator.Generate();
+	m_colliders.emplace(i_collider->id, i_collider);
+	m_staticColliders.emplace(i_collider->id, i_collider);
+}
+
+void PhysicSystem::DeregisterCollider(Collider::Id id)
+{
+	if (m_staticColliders.contains(id))
+	{
+		m_staticColliders[id].reset();
+	}
+	if (m_dynamicColliders.contains(id))
+	{
+		m_dynamicColliders[id].reset();
+	}
+	m_colliders[id].reset();
+}
+
+PhysicSystem::NewPosition PhysicSystem::CheckMove(
+	Collider::Id i_colliderId, 
+	const core::Vector2F& i_velocity, 
+	bool i_emitSignal)
+{
+	std::shared_ptr<const DynamicCollider> moveCollider = m_dynamicColliders[i_colliderId].lock();
+	core::Vector2F movePosition = moveCollider->Position;
 	core::Vector2F resultVelocity = i_velocity;
 
-	for (const auto& [otherEntityId, otherCollider] : m_colliders)
+	for (const auto& [staticColliderId, staticCollider] : m_colliders)
 	{
-		if (i_selfEntityId == otherEntityId)
+		if (!CheckCollideOtherConditions(moveCollider, staticCollider))
 		{
 			continue;
 		}
 
 		const helper::CheckCollideResult result = helper::CheckCollide(
-			selfCollider->GetBoundary(),
+			moveCollider->GetBoundary(),
 			resultVelocity,
-			otherCollider->GetBoundary()
+			staticCollider->GetBoundary()
 		);
 
 		if (result.IsCollide())
 		{
-			sig_onEntityCollide.Emit(i_selfEntityId, otherEntityId);
+			const helper::NewPosition newPosition = helper::CalculateStop(movePosition, resultVelocity, result);
+			core::Vector2F newVelocity = newPosition - movePosition;
 
-			const helper::NewPosition newPosition = helper::CalculateStop(selfPosition, resultVelocity, result);
-			core::Vector2F newVelocity = newPosition - selfPosition;
+			resultVelocity = core::GetNearestZero(resultVelocity, newVelocity);
 
-			if (std::abs(resultVelocity.x) < std::abs(newVelocity.x))
+			if (i_emitSignal)
 			{
-				resultVelocity.x = newVelocity.x;
-			}
-
-			if (std::abs(resultVelocity.y) < std::abs(newVelocity.y))
-			{
-				resultVelocity.y = newVelocity.y;
+				moveCollider->sig_onEntityCollide.Emit(staticCollider->entityId);
 			}
 		}
 	}
 
-	return selfPosition + resultVelocity;
+	return movePosition + resultVelocity;
 }
 
-void PhysicSystem::UpdateDynamicColliderStates() const
+void PhysicSystem::UpdateDynamicColliderOverlapStates() const
 {
-	for (const auto& [entityId, collider] : m_dynamicColliders)
+	for (const auto& [entityId, collider] : m_colliders)
 	{
-		UpdateDynamicColliderState(UpdateDynamicColliderStateParam
-			{
-				entityId,
-				collider.lock()
-			}
-		);
+		UpdateDynamicColliderOverlapState(collider);
 	}
 }
 
-void PhysicSystem::SetCollisionCheckFilter(const core::BoxI64 i_boundary)
+void PhysicSystem::SetCollisionCheckFilter(const core::BoxF i_boundary)
 {
-	m_filterBound = i_boundary;
+	m_collisionFilter = i_boundary;
 }
 
 void PhysicSystem::RemoveCollisionCheckFilter()
 {
-	m_filterBound.reset();
+	m_collisionFilter.reset();
 }
 
-void PhysicSystem::UpdateDynamicColliderState(UpdateDynamicColliderStateParam param) const
+void PhysicSystem::UpdateDynamicColliderOverlapState(std::shared_ptr<const Collider> collider) const
 {
-	const core::EntityId selfEntityId = param.entityId;
-	std::shared_ptr<const Collider> selfCollider = param.collider;
-
 	for (const auto& [otherEntityId, otherCollider] : m_colliders)
 	{
-		if (selfEntityId == otherEntityId)
+		if (!CheckOverlapOtherConditions(collider, otherCollider))
 		{
 			continue;
 		}
 
-		const bool isOverlap = helper::CheckOverlap(selfCollider->GetBoundary(), otherCollider->GetBoundary());
-		if (isOverlap)
+		const bool IsOverlap = core::IsOverlap(collider->GetBoundary(), otherCollider->GetBoundary());
+
+		if (IsOverlap && CheckCollideOtherConditions(collider, otherCollider))
 		{
-			sig_onEntityTouch.Emit(selfEntityId, otherEntityId);
+			collider->sig_onEntityOverlap.Emit(otherCollider->entityId);
+			otherCollider->sig_onEntityOverlap.Emit(collider->entityId);
 		}
 	}
 }
 
-void PhysicSystem::OnPreFixedUpdate(const uint64_t dt)
+bool PhysicSystem::CheckCollideOtherConditions(
+	std::shared_ptr<const Collider> i_moveCollider,
+	std::shared_ptr<const Collider> i_staticCollider) const
 {
+	const bool isASolid = i_moveCollider->isSolid;
+	const bool isBSolid = i_staticCollider->isSolid;
+	return CheckOverlapOtherConditions(i_moveCollider, i_staticCollider) &&
+		(isASolid || isBSolid);
 }
 
-void PhysicSystem::OnFixedUpdate(const uint64_t dt)
+bool PhysicSystem::CheckOverlapOtherConditions(
+	std::shared_ptr<const Collider> i_colliderA,
+	std::shared_ptr<const Collider> i_colliderB) const
 {
+	const bool sameCollider = i_colliderA->id == i_colliderB->id;
+	const bool sameOwner = i_colliderA->entityId == i_colliderB->entityId;
+	return !(sameCollider || sameOwner);
 }
 
-void PhysicSystem::OnPostFixedUpdate(const uint64_t dt)
+bool PhysicSystem::CheckCollisionFilter(std::shared_ptr<const Collider> i_collider) const
 {
-}
-
-bool PhysicSystem::CheckFilter(const core::BoxI64 i_renderBoundary) const
-{
-	if (m_filterBound.has_value())
+	if (m_collisionFilter.has_value())
 	{
-		const core::BoxI64& filterBound = m_filterBound.value();
-		return core::IsOverlap(i_renderBoundary, filterBound);
+		const core::BoxF& filterBound = m_collisionFilter.value();
+		return core::IsOverlap(i_collider->GetBoundary(), filterBound);
 	}
 	return true;
 }

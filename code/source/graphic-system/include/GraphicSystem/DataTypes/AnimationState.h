@@ -2,6 +2,7 @@
 #include "Core/Identifiers/AnimationId.h"
 #include "GraphicSystem/DataTypes/AnimationDef.h"
 #include "GraphicSystem/DataTypes/SpriteState.h"
+#include "Core/Signals/Signal.h"
 #include <memory>
 
 namespace graphics
@@ -23,6 +24,9 @@ struct AnimationState
 	};
 	Direction direction = Direction::Normal;
 	bool pause = false;
+	bool loop = true;
+
+	signals::Signal<> sig_onAnimationFinished;
 };
 
 } // namespace graphics

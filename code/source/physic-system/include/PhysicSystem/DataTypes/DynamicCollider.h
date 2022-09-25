@@ -14,6 +14,8 @@ struct DynamicCollider : public Collider
 	{
 		return RelativeBoundary + Position;
 	}
+
+	signals::Signal<core::EntityId> sig_onEntityCollide;
 };
 
 } // namespace physics

@@ -7,12 +7,12 @@ namespace logic
 {
 
 /// <summary>
-/// A simple component with position, no child
+/// Contain multiple components, return position of the first
 /// </summary>
-class TransformComponent final: public IComponent
+class CompositionComponent final: public IComponent
 {
 public:
-	TransformComponent(const core::Vector2F i_position = core::Vector2F());
+	CompositionComponent(std::initializer_list<std::shared_ptr<IComponent>> i_children);
 
 	// Inherited via IComponent
 	void SetPosition(const core::Vector2F& i_position) override;
@@ -21,7 +21,7 @@ public:
 	void Deregister() override;
 
 private:
-	core::Vector2F m_position;
+	std::vector<std::shared_ptr<IComponent>> m_children;
 };
 
 

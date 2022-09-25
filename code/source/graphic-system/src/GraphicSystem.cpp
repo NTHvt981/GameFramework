@@ -1,5 +1,6 @@
 #include "GraphicSystem/GraphicSystem.h"
 #include "Core/Math/Math.h"
+#include "Core/Helpers/BoxHelper.h"
 
 namespace graphics
 {
@@ -68,7 +69,7 @@ void GraphicSystem::Render(const uint64_t dt)
         {
             std::shared_ptr<SpriteState> spriteState = GetSpriteState(spriteStateId);
             std::shared_ptr<const SpriteDef> spriteDef = spriteState->spriteDef.lock();
-            if (CheckFilter(spriteDef->boundary))
+            if (CheckRenderFilter(spriteState))
             {
                 DrawSprite(spriteState);
             }
@@ -85,16 +86,16 @@ void GraphicSystem::PostRender(const uint64_t dt)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void GraphicSystem::SetRenderFilter(const core::BoxI64 i_boundary)
+void GraphicSystem::SetRenderFilter(const core::BoxF i_boundary)
 {
-    m_filterBound = i_boundary;
+    m_renderFilter = i_boundary;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void GraphicSystem::RemoveRenderFilter()
 {
-    m_filterBound.reset();
+    m_renderFilter.reset();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -165,7 +166,7 @@ void GraphicSystem::SetAnimationRenderLayer(
 
 SpriteState GraphicSystem::GenerateSpriteState()
 {
-    SpriteState state(GenerateId());
+    SpriteState state(m_idGenerator.Generate());
     return state;
 }
 
@@ -225,7 +226,7 @@ void GraphicSystem::DrawSprite(std::shared_ptr<const SpriteState> i_spriteState)
 
 AnimationState GraphicSystem::GenerateAnimationState()
 {
-    AnimationState animationstate(GenerateId());
+    AnimationState animationstate(m_idGenerator.Generate());
 
     SpriteState spriteState(animationstate.id);
     animationstate.spriteStateRef = std::make_unique<SpriteState>(spriteState);
@@ -262,6 +263,11 @@ void GraphicSystem::RemoveAnimationState(std::shared_ptr<AnimationState> i_anima
 
 void GraphicSystem::ProccessAnimationState(std::shared_ptr<AnimationState> i_animationState, const uint64_t dt)
 {
+    if (i_animationState->pause)
+    {
+        return;
+    }
+
     uint64_t& currentFrameIndex = i_animationState->currentFrameIndex;
     uint64_t& currentFrameTime = i_animationState->currentFrameTime;
     auto animationDef = i_animationState->animationDef.lock();
@@ -275,7 +281,13 @@ void GraphicSystem::ProccessAnimationState(std::shared_ptr<AnimationState> i_ani
         auto frameSize = animationDef->frames.size();
         if (currentFrameIndex >= frameSize)
         {
+            if (!i_animationState->loop)
+            {
+                return;
+            }
+
             currentFrameIndex = currentFrameIndex - frameSize;
+            i_animationState->sig_onAnimationFinished.Emit();
         }
 
         const AnimationFrameDef& newFrame = animationDef->frames[currentFrameIndex];
@@ -285,14 +297,6 @@ void GraphicSystem::ProccessAnimationState(std::shared_ptr<AnimationState> i_ani
     {
         currentFrameTime = newFrameTime;
     }
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-uint64_t GraphicSystem::GenerateId()
-{
-    m_countId++;
-    return m_countId;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -307,12 +311,12 @@ void GraphicSystem::InitLayerSpriteStateIds()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-bool GraphicSystem::CheckFilter(const core::BoxI64 i_renderBoundary) const
+bool GraphicSystem::CheckRenderFilter(std::shared_ptr<const SpriteState> i_spriteState) const
 {
-    if (m_filterBound.has_value())
+    if (m_renderFilter.has_value())
     {
-        const core::BoxI64& filterBound = m_filterBound.value();
-        return core::IsOverlap(i_renderBoundary, filterBound);
+        const core::BoxI64 spriteDefBoundary = i_spriteState->spriteDef.lock()->boundary;
+        return core::IsOverlap(core::ToFloat(spriteDefBoundary), m_renderFilter.value());
     }
     return true;
 }

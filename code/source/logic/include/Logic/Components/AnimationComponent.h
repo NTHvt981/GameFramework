@@ -1,5 +1,5 @@
 #pragma once
-#include "IComponent.h"
+#include "Component.h"
 #include "GraphicSystem/API/IAnimationGraphicAPI.h"
 #include "GraphicSystem/DataTypes/AnimationState.h"
 #include "Core/Signals/Connection.h"
@@ -8,7 +8,7 @@
 namespace logic
 {
 
-class AnimationComponent final : public IComponent
+class AnimationComponent final : public Component
 {
 public:
 	AnimationComponent(
@@ -17,11 +17,14 @@ public:
 	);
 	~AnimationComponent();
 
-	// Inherited via IComponent
+	// Inherited via Component
 	void SetPosition(const core::Vector2F& i_position) override;
 	core::Vector2F GetPosition() const override;
 	void Register() override;
 	void Deregister() override;
+
+	void SetVisible(const bool i_visible);
+	bool GetVisible() const;
 
 	signals::Signal<> sig_onAnimationFinished;
 private:

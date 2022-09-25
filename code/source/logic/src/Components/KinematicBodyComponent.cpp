@@ -12,6 +12,16 @@ KinematicBodyComponent::KinematicBodyComponent(
 {
 }
 
+void KinematicBodyComponent::OnEntityOverlap(core::EntityId i_entityId)
+{
+	sig_onEntityOverlap.Emit(i_entityId);
+}
+
+void KinematicBodyComponent::OnEntityCollide(core::EntityId i_entityId)
+{
+	sig_onEntityCollide.Emit(i_entityId);
+}
+
 void KinematicBodyComponent::SetPosition(const core::Vector2F& i_position)
 {
 	m_dynamicCollider->Position = i_position;
@@ -31,6 +41,13 @@ void KinematicBodyComponent::Register()
 	isRegistered = true;
 
 	m_physicAPI.lock()->RegisterCollider(m_dynamicCollider);
+
+	m_onEntityCollideCon = m_dynamicCollider->sig_onEntityCollide.Connect(
+		std::bind(&KinematicBodyComponent::OnEntityCollide, this, std::placeholders::_1)
+	);
+	m_onEntityOverlapCon = m_dynamicCollider->sig_onEntityOverlap.Connect(
+		std::bind(&KinematicBodyComponent::OnEntityOverlap, this, std::placeholders::_1)
+	);
 }
 
 void KinematicBodyComponent::Deregister()
@@ -42,14 +59,19 @@ void KinematicBodyComponent::Deregister()
 	isRegistered = false;
 
 	m_physicAPI.lock()->DeregisterCollider(m_dynamicCollider->id);
+
+	m_onEntityOverlapCon.Disconnect();
+	m_onEntityCollideCon.Disconnect();
 }
 
 KinematicBodyComponent::RemainVelocity KinematicBodyComponent::Move(const core::Vector2F& i_velocity)
 {
 	const bool requestEmitSignal = true;
 	core::Vector2F newPosition = m_physicAPI.lock()->CheckMove(m_dynamicCollider->id, i_velocity, requestEmitSignal);
+	
 	RemainVelocity result = newPosition - GetPosition();
 	SetPosition(newPosition);
+	sig_onMove.Emit(newPosition);
 	return result;
 }
 

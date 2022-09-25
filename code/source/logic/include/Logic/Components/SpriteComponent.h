@@ -1,5 +1,5 @@
 #pragma once
-#include "IComponent.h"
+#include "Component.h"
 #include "GraphicSystem/API/ISpriteGraphicAPI.h"
 #include "GraphicSystem/DataTypes/SpriteState.h"
 #include <memory>
@@ -10,7 +10,7 @@ namespace logic
 /// <summary>
 /// A component wrap sprite
 /// </summary>
-class SpriteComponent final: public IComponent
+class SpriteComponent final: public Component
 {
 public:
 	SpriteComponent(
@@ -19,11 +19,14 @@ public:
 	);
 	~SpriteComponent();
 	
-	// Inherited via IComponent
+	// Inherited via Component
 	void SetPosition(const core::Vector2F& i_position) override;
 	core::Vector2F GetPosition() const override;
 	void Register() override;
 	void Deregister() override;
+
+	void SetVisible(const bool i_visible);
+	bool GetVisible() const;
 
 private:
 	std::weak_ptr<graphics::ISpriteGraphicAPI> m_spriteGraphicAPI;

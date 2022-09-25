@@ -84,6 +84,7 @@ private:
 
 	void InitLayerSpriteStateIds();
 
+	bool CheckRenderConditions(std::shared_ptr<const SpriteState> i_spriteState) const;
 	bool CheckRenderFilter(std::shared_ptr<const SpriteState> i_spriteState) const;
 	std::optional<core::BoxF> m_renderFilter;
 };

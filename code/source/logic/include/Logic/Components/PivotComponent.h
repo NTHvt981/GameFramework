@@ -1,5 +1,5 @@
 #pragma once
-#include "IComponent.h"
+#include "Component.h"
 #include <memory>
 
 namespace logic
@@ -8,22 +8,22 @@ namespace logic
 /// <summary>
 /// A component with 1 child, 1 pivot (relative position)
 /// </summary>
-class PivotComponent final: public IComponent
+class PivotComponent final: public Component
 {
 public:
 	PivotComponent(
-		std::shared_ptr<IComponent> i_child,
+		std::shared_ptr<Component> i_child,
 		core::Vector2F i_pivot = core::Vector2F()
 	);
 
-	// Inherited via IComponent
+	// Inherited via Component
 	void SetPosition(const core::Vector2F& i_position) override;
 	core::Vector2F GetPosition() const override;
 	void Register() override;
 	void Deregister() override;
 
 private:
-	std::shared_ptr<IComponent> m_child;
+	std::shared_ptr<Component> m_child;
 	core::Vector2F m_pivot;
 };
 

@@ -8,6 +8,8 @@ namespace physics
 
 struct DynamicCollider : public Collider
 {
+	using Collider::Collider;
+
 	core::BoxF RelativeBoundary;
 	core::Vector2F Position;
 	core::BoxF GetBoundary() const override

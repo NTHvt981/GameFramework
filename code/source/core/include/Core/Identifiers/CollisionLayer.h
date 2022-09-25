@@ -6,6 +6,7 @@ namespace core
 
 enum class CollisionLayer : uint64_t
 {
+	Default,
 	Player,
 	Enemy,
 	Wall,

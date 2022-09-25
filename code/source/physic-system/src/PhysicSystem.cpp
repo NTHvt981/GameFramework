@@ -138,10 +138,11 @@ bool PhysicSystem::CheckCollideOtherConditions(
 	std::shared_ptr<const Collider> i_moveCollider,
 	std::shared_ptr<const Collider> i_staticCollider) const
 {
-	const bool isASolid = i_moveCollider->isSolid;
-	const bool isBSolid = i_staticCollider->isSolid;
-	return CheckOverlapOtherConditions(i_moveCollider, i_staticCollider) &&
-		(isASolid || isBSolid);
+	const bool checkCollisionLayerCondition = helper::CheckCollisionLayerCondition(
+		i_moveCollider->collisionLayer,
+		i_staticCollider->collisionLayer
+	);
+	return CheckOverlapOtherConditions(i_moveCollider, i_staticCollider) && checkCollisionLayerCondition;
 }
 
 bool PhysicSystem::CheckOverlapOtherConditions(

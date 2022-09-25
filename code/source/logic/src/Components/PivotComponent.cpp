@@ -4,7 +4,7 @@
 namespace logic
 {
 
-PivotComponent::PivotComponent(std::shared_ptr<IComponent> i_child, core::Vector2F i_pivot)
+PivotComponent::PivotComponent(std::shared_ptr<Component> i_child, core::Vector2F i_pivot)
 	: m_child(i_child)
 	, m_pivot(i_pivot)
 {

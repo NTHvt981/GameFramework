@@ -69,7 +69,7 @@ void GraphicSystem::Render(const uint64_t dt)
         {
             std::shared_ptr<SpriteState> spriteState = GetSpriteState(spriteStateId);
             std::shared_ptr<const SpriteDef> spriteDef = spriteState->spriteDef.lock();
-            if (CheckRenderFilter(spriteState))
+            if (CheckRenderConditions(spriteState))
             {
                 DrawSprite(spriteState);
             }
@@ -307,6 +307,14 @@ void GraphicSystem::InitLayerSpriteStateIds()
     {
         m_mapLayerSpriteStateIds.try_emplace(renderLayer, std::set<SpriteState::Id>());
     }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+bool GraphicSystem::CheckRenderConditions(std::shared_ptr<const SpriteState> i_spriteState) const
+{
+    const bool isVisible = i_spriteState->visible;
+    return isVisible && CheckRenderFilter(i_spriteState);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

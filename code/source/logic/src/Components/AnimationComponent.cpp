@@ -56,6 +56,16 @@ void AnimationComponent::Deregister()
 	m_onAnimationFinishedCon.Disconnect();
 }
 
+void AnimationComponent::SetVisible(const bool i_visible)
+{
+	m_animationState->spriteStateRef->visible = i_visible;
+}
+
+bool AnimationComponent::GetVisible() const
+{
+	return m_animationState->spriteStateRef->visible;
+}
+
 void AnimationComponent::OnAnimationFinished()
 {
 	sig_onAnimationFinished.Emit();

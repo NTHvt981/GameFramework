@@ -7,7 +7,7 @@ namespace logic
 /// <summary>
 /// Every component inherit this class
 /// </summary>
-class IComponent
+class Component
 {
 public:
 	virtual void SetPosition(const core::Vector2F& i_position) = 0;

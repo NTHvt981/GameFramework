@@ -8,6 +8,8 @@
 #include "InputSystem/API/INativeInputAPI.h"
 #include "FileSystem/IFileSystem.h"
 #include "Database/IDatabase.h"
+#include "Factories/IComponentFactory.h"
+#include "Factories/IEntityFactory.h"
 #include <memory>
 
 namespace logic
@@ -58,6 +60,8 @@ private:
 	std::shared_ptr<input::IInputSystem> m_inputSystem;
 	std::shared_ptr<core::GameSetting> m_gameSetting;
 	std::shared_ptr<database::IDatabase> m_database;
+	std::shared_ptr<IComponentFactory> m_componentFactory;
+	std::shared_ptr<IEntityFactory> m_entityFactory;
 
 	// own, pass by param
 	std::shared_ptr<graphics::INativeGraphicAPI> m_nativeGraphicAPI;

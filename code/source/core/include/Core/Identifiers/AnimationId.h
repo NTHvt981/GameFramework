@@ -4,10 +4,11 @@
 namespace core
 {
 
-using AnimationId = uint64_t;
-//enum class AnimationId : uint64_t
-//{
-//	COUNT // Special enum
-//};
+enum class AnimationId : uint64_t
+{
+	WormMoveLeft,
+	WormMoveRight,
+	COUNT // Special enum
+};
 
 } // namespace core

@@ -50,4 +50,14 @@ void SpriteComponent::Deregister()
 	graphicAPI->DeregisterSprite(m_spriteState->id);
 }
 
+void SpriteComponent::SetVisible(const bool i_visible)
+{
+	m_spriteState->visible = i_visible;
+}
+
+bool SpriteComponent::GetVisible() const
+{
+	return m_spriteState->visible;
+}
+
 } // namespace logic

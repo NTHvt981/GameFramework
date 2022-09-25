@@ -1,5 +1,5 @@
 #pragma once
-#include "IComponent.h"
+#include "Component.h"
 #include <memory>
 #include <vector>
 
@@ -9,12 +9,12 @@ namespace logic
 /// <summary>
 /// A simple component with position, no child
 /// </summary>
-class TransformComponent final: public IComponent
+class TransformComponent final: public Component
 {
 public:
 	TransformComponent(const core::Vector2F i_position = core::Vector2F());
 
-	// Inherited via IComponent
+	// Inherited via Component
 	void SetPosition(const core::Vector2F& i_position) override;
 	core::Vector2F GetPosition() const override;
 	void Register() override;

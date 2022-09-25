@@ -4,6 +4,8 @@
 #include "InputSystem/InputSystem.h"
 #include "FileSystem/FileSystem.h"
 #include "Database/Database.h"
+#include "Logic/Factories/ComponentFactory.h"
+#include "Logic/Factories/EntityFactory.h"
 
 namespace logic
 {
@@ -23,6 +25,9 @@ Game::Game(std::unique_ptr<graphics::INativeGraphicAPI> i_nativeGraphicAPI,
 	m_graphicSystem = std::make_shared<graphics::GraphicSystem>(m_nativeGraphicAPI, m_database);
 	m_physicSystem = std::make_shared<physics::PhysicSystem>();
 	m_inputSystem = std::make_shared<input::InputSystem>(m_nativeInputAPI);
+
+	m_componentFactory = std::make_shared<ComponentFactory>(m_graphicSystem, m_physicSystem);
+	m_entityFactory = std::make_shared<EntityFactory>(m_componentFactory);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -5,6 +5,7 @@ require("database")
 require("graphic-system")
 require("physic-system")
 require("input-system")
+require("audio-system")
 
 local logic_prj_name = "logic"
 local logic_path = source_path.."logic/"
@@ -28,9 +29,10 @@ function addLogic()
 
       includeCore()
       includeFileSystem()
-      includeGraphicSystem()
       includePhysicSystem()
+      includeGraphicSystem()
       includeInputSystem()
+      includeAudioSystem()
       includeDatabase()
 end
 

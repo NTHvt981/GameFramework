@@ -144,6 +144,11 @@ void Direct9GraphicAPI::Shutdown()
 	}
 	s_shutdownFlag.Set();
 
+	for (auto& [id, texture] : m_mapTextures)
+	{
+		texture->Release();
+	}
+
 	m_spriteHandler->Release();
 	m_backBuffer->Release();
 	m_direct3DDevice9->Release();

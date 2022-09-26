@@ -8,9 +8,9 @@ namespace graphics
 ////////////////////////////////////////////////////////////////////////////////
 
 GraphicSystem::GraphicSystem(
-    std::shared_ptr<INativeGraphicAPI> i_renderAPI,
+    std::unique_ptr<INativeGraphicAPI> i_nativeGraphicAPI,
     std::shared_ptr<database::IGraphicDatabaseAPI> i_databaseAPI)
-    : m_nativeGraphicAPI(std::move(i_renderAPI))
+    : m_nativeGraphicAPI(std::move(i_nativeGraphicAPI))
     , m_databaseAPI(i_databaseAPI)
 {
     InitLayerSpriteStateIds();

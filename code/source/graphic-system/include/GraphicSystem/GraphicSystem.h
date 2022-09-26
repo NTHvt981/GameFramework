@@ -21,7 +21,7 @@ class GraphicSystem final: public IGraphicSystem
 {
 public:
 	GraphicSystem(
-		std::shared_ptr<INativeGraphicAPI> i_renderAPI,
+		std::unique_ptr<INativeGraphicAPI> i_nativeGraphicAPI,
 		std::shared_ptr<database::IGraphicDatabaseAPI> i_databaseAPI
 	);
 	~GraphicSystem();
@@ -79,7 +79,7 @@ private:
 	std::map<AnimationState::Id, std::shared_ptr<AnimationState>> m_allAnimationStates;
 
 	std::shared_ptr<database::IGraphicDatabaseAPI> m_databaseAPI;
-	std::shared_ptr<INativeGraphicAPI> m_nativeGraphicAPI;
+	std::unique_ptr<INativeGraphicAPI> m_nativeGraphicAPI;
 	core::IncrementIdGenerator m_idGenerator;
 
 	void InitLayerSpriteStateIds();

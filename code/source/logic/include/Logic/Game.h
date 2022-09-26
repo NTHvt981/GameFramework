@@ -4,8 +4,10 @@
 #include "GraphicSystem/IGraphicSystem.h"
 #include "PhysicSystem/IPhysicSystem.h"
 #include "InputSystem/IInputSystem.h"
+#include "AudioSystem/IAudioSystem.h"
 #include "GraphicSystem/API/INativeGraphicAPI.h"
 #include "InputSystem/API/INativeInputAPI.h"
+#include "AudioSystem/API/INativeAudioAPI.h"
 #include "FileSystem/IFileSystem.h"
 #include "Database/IDatabase.h"
 #include "Factories/IComponentFactory.h"
@@ -20,7 +22,8 @@ class Game
 public:
 	Game(
 		std::unique_ptr<graphics::INativeGraphicAPI> i_nativeGraphicAPI,
-		std::unique_ptr<input::INativeInputAPI> i_nativeInputAPI
+		std::unique_ptr<input::INativeInputAPI> i_nativeInputAPI,
+		std::unique_ptr<audios::INativeAudioAPI> i_nativeAudioAPI
 	);
 	void Initialize();
 	bool IsInitialized() const;
@@ -28,7 +31,6 @@ public:
 	void RunLoop(uint64_t dt);
 	void Pause();
 	void Resume();
-	void UnLoadResource();
 	void Shutdown();
 
 	signals::Signal<> sig_requestShutdown;
@@ -58,14 +60,16 @@ private:
 	std::shared_ptr<graphics::IGraphicSystem> m_graphicSystem;
 	std::shared_ptr<physics::IPhysicSystem> m_physicSystem;
 	std::shared_ptr<input::IInputSystem> m_inputSystem;
+	std::shared_ptr<audios::IAudioSystem> m_audioSystem;
 	std::shared_ptr<core::GameSetting> m_gameSetting;
 	std::shared_ptr<database::IDatabase> m_database;
 	std::shared_ptr<IComponentFactory> m_componentFactory;
 	std::shared_ptr<IEntityFactory> m_entityFactory;
 
 	// own, pass by param
-	std::shared_ptr<graphics::INativeGraphicAPI> m_nativeGraphicAPI;
-	std::shared_ptr<input::INativeInputAPI> m_nativeInputAPI;
+	std::unique_ptr<graphics::INativeGraphicAPI> m_nativeGraphicAPI;
+	std::unique_ptr<input::INativeInputAPI> m_nativeInputAPI;
+	std::unique_ptr<audios::INativeAudioAPI> m_nativeAudioAPI;
 
 	// game clock relate
 	uint64_t m_millisecondsPerFrame = 0;

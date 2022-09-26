@@ -2,6 +2,7 @@
 #include "GraphicSystem/GraphicSystem.h"
 #include "PhysicSystem/PhysicSystem.h"
 #include "InputSystem/InputSystem.h"
+#include "AudioSystem/AudioSystem.h"
 #include "FileSystem/FileSystem.h"
 #include "Database/Database.h"
 #include "Logic/Factories/ComponentFactory.h"
@@ -13,18 +14,21 @@ namespace logic
 ////////////////////////////////////////////////////////////////////////////////
 
 Game::Game(std::unique_ptr<graphics::INativeGraphicAPI> i_nativeGraphicAPI,
-	std::unique_ptr<input::INativeInputAPI> i_nativeInputAPI)
+	std::unique_ptr<input::INativeInputAPI> i_nativeInputAPI,
+	std::unique_ptr<audios::INativeAudioAPI> i_nativeAudioAPI)
 	: m_nativeGraphicAPI(std::move(i_nativeGraphicAPI))
 	, m_nativeInputAPI(std::move(i_nativeInputAPI))
+	, m_nativeAudioAPI(std::move(i_nativeAudioAPI))
 {
 	m_gameSetting = std::make_shared<core::GameSetting>();
 	
 	m_gameClock = std::make_shared<logic::GameClock>();
 	m_fileSystem = std::make_shared<files::FileSystem>();
 	m_database = std::make_shared<database::Database>(m_fileSystem);
-	m_graphicSystem = std::make_shared<graphics::GraphicSystem>(m_nativeGraphicAPI, m_database);
+	m_graphicSystem = std::make_shared<graphics::GraphicSystem>(std::move(m_nativeGraphicAPI), m_database);
+	m_inputSystem = std::make_shared<input::InputSystem>(std::move(m_nativeInputAPI));
+	m_audioSystem = std::make_shared<audios::AudioSystem>(std::move(m_nativeAudioAPI));
 	m_physicSystem = std::make_shared<physics::PhysicSystem>();
-	m_inputSystem = std::make_shared<input::InputSystem>(m_nativeInputAPI);
 
 	m_componentFactory = std::make_shared<ComponentFactory>(m_graphicSystem, m_physicSystem);
 	m_entityFactory = std::make_shared<EntityFactory>(m_componentFactory);
@@ -37,6 +41,7 @@ void Game::Initialize()
 	m_fileSystem->Initialize();
 	m_graphicSystem->Initialize();
 	m_inputSystem->Initialize();
+	m_audioSystem->Initialize();
 
 	m_millisecondsPerFrame = m_gameSetting->GetMillisecondsPerFrame();
 
@@ -84,6 +89,7 @@ void Game::RunLoop(uint64_t dt)
 
 void Game::Pause()
 {
+	m_audioSystem->Pause();
 	m_inputSystem->Pause();
 	m_isPaused = true;
 }
@@ -92,26 +98,20 @@ void Game::Pause()
 
 void Game::Resume()
 {
+	m_audioSystem->Resume();
 	m_inputSystem->Resume();
 	m_isPaused = false;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Game::UnLoadResource()
-{
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
 void Game::Shutdown()
 {
-	UnLoadResource();
-
-	m_graphicSystem->Shutdown();
 	m_gameClock->ShutDown();
 	m_fileSystem->ShutDown();
+	m_graphicSystem->Shutdown();
 	m_inputSystem->Shutdown();
+	m_audioSystem->Shutdown();
 }
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -1,6 +1,7 @@
 #include "Logic/Game.h"
 #include "DirectWrapper/Graphic/Direct9GraphicAPI.h"
 #include "DirectWrapper/Input/DirectInputAPI.h"
+#include "DirectWrapper/Audio/DirectAudioAPI.h"
 #include <windows.h>
 #include <tchar.h>
 #include <cstdint>
@@ -28,9 +29,14 @@ int WINAPI WinMain(
 	ULONGLONG previousFrameTime = GetTickCount64();
 
 	std::unique_ptr<graphics::INativeGraphicAPI> nativeRenderAPI = std::make_unique<graphics::Direct9GraphicAPI>(hwnd);
-	std::unique_ptr<input::DirectInputAPI> nativeInputAPI = std::make_unique<input::DirectInputAPI>(hwnd, hInstance);
+	std::unique_ptr<input::INativeInputAPI> nativeInputAPI = std::make_unique<input::DirectInputAPI>(hwnd, hInstance);
+	std::unique_ptr<audios::INativeAudioAPI> nativeAudioAPI = std::make_unique<audios::DirectAudioAPI>(hwnd);
 
-	s_game = std::make_unique<logic::Game>(std::move(nativeRenderAPI), std::move(nativeInputAPI));
+	s_game = std::make_unique<logic::Game>(
+		std::move(nativeRenderAPI), 
+		std::move(nativeInputAPI), 
+		std::move(nativeAudioAPI)
+	);
 	s_game->Initialize();
 	auto connection = s_game->sig_requestShutdown.Connect(std::function(OnGameRequestShutdown));
 

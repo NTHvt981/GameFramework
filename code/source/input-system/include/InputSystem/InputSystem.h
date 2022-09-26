@@ -11,7 +11,7 @@ class InputSystem final: public IInputSystem
 public:
 	// In initialization of every systems, gameclock must be first
 	InputSystem(
-		std::shared_ptr<INativeInputAPI> i_nativeInputAPI
+		std::unique_ptr<INativeInputAPI> i_nativeInputAPI
 	);
 	// Inherited via IInputSystem
 	void Initialize() override;
@@ -21,7 +21,7 @@ public:
 	void Shutdown() override;
 
 private:
-	std::shared_ptr<INativeInputAPI> m_nativeInputAPI;
+	std::unique_ptr<INativeInputAPI> m_nativeInputAPI;
 };
 
 } // namespace input

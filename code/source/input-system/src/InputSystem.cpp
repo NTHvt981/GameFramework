@@ -5,8 +5,8 @@ namespace input
 
 ////////////////////////////////////////////////////////////////////////////////
 
-InputSystem::InputSystem(std::shared_ptr<INativeInputAPI> i_nativeInputAPI)
-	: m_nativeInputAPI(i_nativeInputAPI)
+InputSystem::InputSystem(std::unique_ptr<INativeInputAPI> i_nativeInputAPI)
+	: m_nativeInputAPI(std::move(i_nativeInputAPI))
 {
 }
 

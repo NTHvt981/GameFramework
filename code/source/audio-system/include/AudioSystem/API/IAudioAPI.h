@@ -3,7 +3,7 @@
 namespace audios
 {
 
-class INativeAudioAPI
+class IAudioAPI
 {
 public:
 };

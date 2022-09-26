@@ -26,13 +26,15 @@ public:
 	std::shared_ptr<KinematicBodyComponent> MakeKinematicBodyComponent(std::shared_ptr<physics::DynamicCollider> i_dynamicCollider) override;
 
 	std::shared_ptr<PivotComponent> MakePivotComponent(
-		std::shared_ptr<Component> i_component, 
+		std::shared_ptr<PositionSetterComponent> i_component,
 		const core::Vector2F i_position = core::Vector2F()
 	) override;
 
 	std::shared_ptr<CompositionComponent> MakeCompositionComponent(
-		std::initializer_list<std::shared_ptr<Component>> i_componentList
+		std::initializer_list<std::shared_ptr<PositionSetterComponent>> i_componentList
 	) override;
+
+	virtual std::shared_ptr<RootComponent> MakeRootComponent() override;
 
 private:
 	std::shared_ptr<physics::IPhysicSystem> m_physicSystem;

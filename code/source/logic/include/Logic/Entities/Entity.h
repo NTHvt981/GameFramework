@@ -1,5 +1,5 @@
 #pragma once
-#include "Logic/Components/Component.h"
+#include "Logic/Components/RootComponent.h"
 #include "Core/Identifiers/EntityId.h"
 #include "Core/DataTypes/String.h"
 #include <memory>
@@ -14,13 +14,7 @@ namespace logic
 struct Entity
 {
     const core::EntityId id;
-    std::shared_ptr<Component> root;
-    Entity(const core::EntityId i_id, std::shared_ptr<Component> i_root) 
-        : id(i_id), root(i_root) 
-    {
-    }
-
-    core::String name; // this should be set by script
+    const std::shared_ptr<RootComponent> root;
 };
 
 } // namespace logic

@@ -4,7 +4,7 @@
 namespace logic
 {
 
-CompositionComponent::CompositionComponent(std::initializer_list<std::shared_ptr<Component>> i_children)
+CompositionComponent::CompositionComponent(std::initializer_list<std::shared_ptr<PositionSetterComponent>> i_children)
 	: m_children(i_children)
 {
 	assert(i_children.size() > 0);
@@ -12,31 +12,15 @@ CompositionComponent::CompositionComponent(std::initializer_list<std::shared_ptr
 
 void CompositionComponent::SetPosition(const core::Vector2F& i_position)
 {
-	for (std::shared_ptr<Component> child : m_children)
+	for (std::shared_ptr<PositionSetterComponent> child : m_children)
 	{
 		child->SetPosition(i_position);
 	}
 }
 
-core::Vector2F CompositionComponent::GetPosition() const
+void CompositionComponent::InsertComponent(std::shared_ptr<PositionSetterComponent> i_component)
 {
-	return m_children[0]->GetPosition();
-}
-
-void CompositionComponent::Register()
-{
-	for (std::shared_ptr<Component> child : m_children)
-	{
-		child->Register();
-	}
-}
-
-void CompositionComponent::Deregister()
-{
-	for (std::shared_ptr<Component> child : m_children)
-	{
-		child->Deregister();
-	}
+	m_children.push_back(i_component);
 }
 
 } // namespace logic

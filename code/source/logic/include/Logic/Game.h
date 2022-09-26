@@ -12,6 +12,8 @@
 #include "Database/IDatabase.h"
 #include "Factories/IComponentFactory.h"
 #include "Factories/IEntityFactory.h"
+#include "Logic/Scripts/IScriptContext.h"
+#include "Logic/Scripts/Script.h"
 #include <memory>
 
 namespace logic
@@ -65,6 +67,7 @@ private:
 	std::shared_ptr<database::IDatabase> m_database;
 	std::shared_ptr<IComponentFactory> m_componentFactory;
 	std::shared_ptr<IEntityFactory> m_entityFactory;
+	std::shared_ptr<IScriptContext> m_scriptContext;
 
 	// own, pass by param
 	std::unique_ptr<graphics::INativeGraphicAPI> m_nativeGraphicAPI;
@@ -79,6 +82,9 @@ private:
 	// others
 	bool m_isInitialized = false;
 	bool m_isPaused = false;
+
+	// test
+	std::unique_ptr<Script> m_wormScript;
 };
 
 } // namespace logic

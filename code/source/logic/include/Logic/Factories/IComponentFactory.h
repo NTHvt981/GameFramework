@@ -6,6 +6,7 @@
 #include "Logic/Components/KinematicBodyComponent.h"
 #include "Logic/Components/TransformComponent.h"
 #include "Logic/Components/PivotComponent.h"
+#include "Logic/Components/RootComponent.h"
 #include <memory>
 
 namespace logic
@@ -21,12 +22,13 @@ public:
 		std::shared_ptr<physics::DynamicCollider> i_dynamicCollider
 	) = 0;
 	virtual std::shared_ptr<PivotComponent> MakePivotComponent(
-		std::shared_ptr<Component> i_component,
+		std::shared_ptr<PositionSetterComponent> i_child,
 		const core::Vector2F i_position = core::Vector2F()
 	) = 0;
 	virtual std::shared_ptr<CompositionComponent> MakeCompositionComponent(
-		std::initializer_list<std::shared_ptr<Component>> i_componentList
+		std::initializer_list<std::shared_ptr<PositionSetterComponent>> i_componentList
 	) = 0;
+	virtual std::shared_ptr<RootComponent> MakeRootComponent() = 0;
 };
 
 

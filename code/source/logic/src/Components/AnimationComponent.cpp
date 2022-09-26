@@ -23,11 +23,6 @@ void AnimationComponent::SetPosition(const core::Vector2F& i_position)
 	m_animationState->spriteStateRef->position = i_position;
 }
 
-core::Vector2F AnimationComponent::GetPosition() const
-{
-	return m_animationState->spriteStateRef->position;
-}
-
 void AnimationComponent::Register()
 {
 	if (isRegistered)

@@ -27,11 +27,6 @@ void KinematicBodyComponent::SetPosition(const core::Vector2F& i_position)
 	m_dynamicCollider->Position = i_position;
 }
 
-core::Vector2F KinematicBodyComponent::GetPosition() const
-{
-	return m_dynamicCollider->Position;
-}
-
 void KinematicBodyComponent::Register()
 {
 	if (isRegistered)
@@ -69,7 +64,7 @@ KinematicBodyComponent::RemainVelocity KinematicBodyComponent::Move(const core::
 	const bool requestEmitSignal = true;
 	core::Vector2F newPosition = m_physicAPI.lock()->CheckMove(m_dynamicCollider->id, i_velocity, requestEmitSignal);
 	
-	RemainVelocity result = newPosition - GetPosition();
+	RemainVelocity result = newPosition - m_dynamicCollider->Position;
 	SetPosition(newPosition);
 	sig_onMove.Emit(newPosition);
 	return result;

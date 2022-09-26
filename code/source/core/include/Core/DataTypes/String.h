@@ -26,6 +26,7 @@ public:
 	void Trim();
 
 	bool operator==(const String& i_other) const;
+	bool operator<(const String& i_other) const;
 	String operator+(const String& i_other) const;
 
 	size_t Size() const;

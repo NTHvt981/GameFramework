@@ -129,6 +129,11 @@ bool String::operator==(const String& i_other) const
 	return m_innerString == i_other.m_innerString;
 }
 
+bool String::operator<(const String& i_other) const
+{
+	return m_innerString < i_other.m_innerString;
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 
 String String::operator+(const String& i_other) const

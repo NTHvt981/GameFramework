@@ -20,6 +20,13 @@ public:
 	void Resume() override;
 	void Shutdown() override;
 
+	// Inherited via IInputAPI
+	bool IsKeyDown(const KeyboardKey i_key) override;
+	bool IsKeyUp(const KeyboardKey i_key) override;
+	bool IsKeyPressed(const KeyboardKey i_key) override;
+	bool IsKeyRelease(const KeyboardKey i_key) override;
+	bool IsKeyHold(const KeyboardKey i_key) override;
+
 private:
 	std::unique_ptr<INativeInputAPI> m_nativeInputAPI;
 };

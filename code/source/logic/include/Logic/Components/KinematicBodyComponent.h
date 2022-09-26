@@ -1,5 +1,5 @@
 #pragma once
-#include "Component.h"
+#include "PositionSetterComponent.h"
 #include "Core/Identifiers/EntityId.h"
 #include "Core/Signals/Signal.h"
 #include "PhysicSystem/DataTypes/DynamicCollider.h"
@@ -12,7 +12,7 @@ namespace logic
 /// <summary>
 /// Hold dynamic colliders
 /// </summary>
-class KinematicBodyComponent final: public Component
+class KinematicBodyComponent final: public PositionSetterComponent
 {
 public:
 	KinematicBodyComponent(
@@ -21,7 +21,6 @@ public:
 	);
 
 	// Inherited via Component
-	core::Vector2F GetPosition() const override;
 	void Register() override;
 	void Deregister() override;
 

@@ -1,5 +1,5 @@
 #pragma once
-#include "Component.h"
+#include "PositionSetterComponent.h"
 #include "GraphicSystem/API/IAnimationGraphicAPI.h"
 #include "GraphicSystem/DataTypes/AnimationState.h"
 #include "GraphicSystem/Database/IGraphicDatabaseAPI.h"
@@ -9,7 +9,7 @@
 namespace logic
 {
 
-class AnimationComponent final : public Component
+class AnimationComponent final : public PositionSetterComponent
 {
 public:
 	AnimationComponent(
@@ -21,7 +21,6 @@ public:
 
 	// Inherited via Component
 	void SetPosition(const core::Vector2F& i_position) override;
-	core::Vector2F GetPosition() const override;
 	void Register() override;
 	void Deregister() override;
 

@@ -4,7 +4,7 @@
 namespace logic
 {
 
-PivotComponent::PivotComponent(std::shared_ptr<Component> i_child, core::Vector2F i_pivot)
+PivotComponent::PivotComponent(std::shared_ptr<PositionSetterComponent> i_child, core::Vector2F i_pivot)
 	: m_child(i_child)
 	, m_pivot(i_pivot)
 {
@@ -13,11 +13,6 @@ PivotComponent::PivotComponent(std::shared_ptr<Component> i_child, core::Vector2
 void PivotComponent::SetPosition(const core::Vector2F& i_position)
 {
 	m_child->SetPosition(i_position + m_pivot);
-}
-
-core::Vector2F PivotComponent::GetPosition() const
-{
-	return m_child->GetPosition() - m_pivot;
 }
 
 void PivotComponent::Register()

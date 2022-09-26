@@ -7,6 +7,8 @@
 #include "Database/Database.h"
 #include "Logic/Factories/ComponentFactory.h"
 #include "Logic/Factories/EntityFactory.h"
+#include "Logic/Scripts/ScriptContext.h"
+#include "Logic/Scripts/WormScript.h"
 
 namespace logic
 {
@@ -29,9 +31,13 @@ Game::Game(std::unique_ptr<graphics::INativeGraphicAPI> i_nativeGraphicAPI,
 	m_inputSystem = std::make_shared<input::InputSystem>(std::move(m_nativeInputAPI));
 	m_audioSystem = std::make_shared<audios::AudioSystem>(std::move(m_nativeAudioAPI));
 	m_physicSystem = std::make_shared<physics::PhysicSystem>();
-
+	
 	m_componentFactory = std::make_shared<ComponentFactory>(m_graphicSystem, m_physicSystem, m_database);
 	m_entityFactory = std::make_shared<EntityFactory>(m_componentFactory);
+	m_scriptContext = std::make_shared<ScriptContext>(m_gameClock, m_entityFactory);
+
+	//test
+	m_wormScript = std::make_unique<WormScript>();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -46,6 +52,9 @@ void Game::Initialize()
 	m_millisecondsPerFrame = m_gameSetting->GetMillisecondsPerFrame();
 
 	m_isInitialized = true;
+
+	//test
+	m_wormScript->Initialize(m_scriptContext);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -112,6 +121,9 @@ void Game::Shutdown()
 	m_graphicSystem->Shutdown();
 	m_inputSystem->Shutdown();
 	m_audioSystem->Shutdown();
+
+	//test
+	m_wormScript->Shutdown();
 }
 
 ////////////////////////////////////////////////////////////////////////////////

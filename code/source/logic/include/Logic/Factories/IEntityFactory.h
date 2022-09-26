@@ -1,5 +1,5 @@
 #pragma once
-#include "Logic/Entities/WormEntity.h"
+#include "Logic/Entities/Entity.h"
 #include <memory>
 
 namespace logic
@@ -8,7 +8,7 @@ namespace logic
 class IEntityFactory
 {
 public:
-	virtual std::shared_ptr<WormEntity> MakeWormEntity() = 0;
+	virtual std::shared_ptr<Entity> MakeWormEntity() = 0;
 };
 
 } // namespace logic

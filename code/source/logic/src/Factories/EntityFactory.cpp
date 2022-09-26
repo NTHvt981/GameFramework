@@ -8,7 +8,7 @@ EntityFactory::EntityFactory(std::shared_ptr<IComponentFactory> i_componentFacto
 {
 }
 
-std::shared_ptr<WormEntity> EntityFactory::MakeWormEntity()
+std::shared_ptr<Entity> EntityFactory::MakeWormEntity()
 {
 	const core::EntityId entityId = m_idGenerator.Generate();
 	
@@ -27,7 +27,7 @@ std::shared_ptr<WormEntity> EntityFactory::MakeWormEntity()
 		core::AnimationId::WormMoveRight
 	);
 
-	std::shared_ptr<CompositionComponent> rootComponent = m_componentFactory->MakeCompositionComponent(
+	std::shared_ptr<CompositionComponent> compositionComponent = m_componentFactory->MakeCompositionComponent(
 		{
 			bodyComponent,
 			detectorComponent,
@@ -35,12 +35,20 @@ std::shared_ptr<WormEntity> EntityFactory::MakeWormEntity()
 		}
 	);
 
-	WormEntity result(entityId, rootComponent);
-	result.body = bodyComponent;
-	result.detectorBody = detectorComponent;
-	result.animation = moveRightAnimationComponent;
+	std::shared_ptr<TransformComponent> transformComponent = m_componentFactory->MakeTransformComponent();
 
-	return std::make_shared<WormEntity>(result);
+	std::shared_ptr<RootComponent> rootComponent = m_componentFactory->MakeRootComponent();
+	rootComponent->InsertComponent("CompositionComponent", compositionComponent);
+	rootComponent->InsertComponent("detectorComponent", detectorComponent);
+	rootComponent->InsertComponent("bodyComponent", bodyComponent);
+	rootComponent->InsertComponent("TransformComponent", transformComponent);
+
+	Entity result
+	{
+		entityId, rootComponent
+	};
+
+	return std::make_shared<Entity>(result);
 }
 
 } // namespace logic

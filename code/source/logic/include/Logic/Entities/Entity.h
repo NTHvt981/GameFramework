@@ -1,6 +1,7 @@
 #pragma once
 #include "Logic/Components/Component.h"
 #include "Core/Identifiers/EntityId.h"
+#include "Core/DataTypes/String.h"
 #include <memory>
 
 namespace logic
@@ -19,7 +20,7 @@ struct Entity
     {
     }
 
-    virtual const char* GetName() const = 0;
+    core::String name; // this should be set by script
 };
 
 } // namespace logic

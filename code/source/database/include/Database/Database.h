@@ -12,12 +12,12 @@ public:
 	Database(std::shared_ptr<files::IFileSystem> i_fileSystem);
 	void LoadResource() override;
 	// IGraphicDatabaseAPI impl
-	virtual std::weak_ptr<const graphics::Texture> GetTextureRef(const core::TextureId i_textureId) override;
-	virtual const graphics::Texture GetTexture(const core::TextureId i_textureId) override;
-	virtual std::weak_ptr<const graphics::SpriteDef> GetSpriteRef(const core::SpriteId i_spriteId) override;
-	virtual const graphics::SpriteDef GetSprite(const core::SpriteId i_spriteId) override;
-	virtual std::weak_ptr<const graphics::AnimationDef> GetAnimationRef(const core::AnimationId i_animationId) override;
-	virtual const graphics::AnimationDef GetAnimation(const core::AnimationId i_animationId) override;
+	virtual std::weak_ptr<const graphics::Texture> GetTextureRef(const core::TextureId i_textureId) const override;
+	virtual const graphics::Texture GetTexture(const core::TextureId i_textureId) const override;
+	virtual std::weak_ptr<const graphics::SpriteDef> GetSpriteRef(const core::SpriteId i_spriteId) const override;
+	virtual const graphics::SpriteDef GetSprite(const core::SpriteId i_spriteId) const override;
+	virtual std::weak_ptr<const graphics::AnimationDef> GetAnimationRef(const core::AnimationId i_animationId) const override;
+	virtual const graphics::AnimationDef GetAnimation(const core::AnimationId i_animationId) const override;
 
 private:
 	void LoadTextures();

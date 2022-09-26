@@ -89,10 +89,10 @@ void Direct9GraphicAPI::Draw(const DrawParams& i_drawParams)
 
 	const core::BoxI64 box = i_drawParams.boundary;
 	RECT destRect;
-	destRect.left = box.left;
-	destRect.top = box.top;
-	destRect.right = box.right;
-	destRect.bottom = box.bottom;
+	destRect.left = (long) box.left;
+	destRect.top = (long) box.top;
+	destRect.right = (long) box.right;
+	destRect.bottom = (long) box.bottom;
 
 	D3DXMATRIX matrix;
 	D3DXMatrixIdentity(&matrix);

@@ -15,7 +15,7 @@ public:
 	void Initialize() override;
 	void Pause() override;
 	void Resume() override;
-	void ShutDown() override;
+	void Shutdown() override;
 
 private:
 	const HWND m_hwnd;

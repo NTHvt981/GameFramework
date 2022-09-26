@@ -30,7 +30,7 @@ Game::Game(std::unique_ptr<graphics::INativeGraphicAPI> i_nativeGraphicAPI,
 	m_audioSystem = std::make_shared<audios::AudioSystem>(std::move(m_nativeAudioAPI));
 	m_physicSystem = std::make_shared<physics::PhysicSystem>();
 
-	m_componentFactory = std::make_shared<ComponentFactory>(m_graphicSystem, m_physicSystem);
+	m_componentFactory = std::make_shared<ComponentFactory>(m_graphicSystem, m_physicSystem, m_database);
 	m_entityFactory = std::make_shared<EntityFactory>(m_componentFactory);
 }
 
@@ -107,8 +107,8 @@ void Game::Resume()
 
 void Game::Shutdown()
 {
-	m_gameClock->ShutDown();
-	m_fileSystem->ShutDown();
+	m_gameClock->Shutdown();
+	m_fileSystem->Shutdown();
 	m_graphicSystem->Shutdown();
 	m_inputSystem->Shutdown();
 	m_audioSystem->Shutdown();

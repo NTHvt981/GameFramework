@@ -22,7 +22,7 @@ public:
 	FileSystem();
 	~FileSystem();
 	void Initialize() override;
-	void ShutDown() override;
+	void Shutdown() override;
 	// Inherited via IFileSystem
 	core::String GetAbsolutePath(const core::String i_relativePath) const override;
 	core::String GetTexturesXmlFilePath() const override;

@@ -63,8 +63,6 @@ int WINAPI WinMain(
 
 			previousFrameTime = currentFrameTime;
 		}
-
-		s_game->UnLoadResource();
 	}
 	catch (const std::exception& ex)
 	{

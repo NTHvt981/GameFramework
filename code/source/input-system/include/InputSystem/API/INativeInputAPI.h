@@ -11,7 +11,7 @@ public:
 	virtual void UpdateInput() = 0;
 	virtual void Pause() = 0;
 	virtual void Resume() = 0;
-	virtual void ShutDown() = 0;
+	virtual void Shutdown() = 0;
 
 	virtual bool IsKeyDown(const KeyboardKey i_key) = 0; // when press of hold key
 	virtual bool IsKeyUp(const KeyboardKey i_key) = 0; // oposite of IsKeyDown

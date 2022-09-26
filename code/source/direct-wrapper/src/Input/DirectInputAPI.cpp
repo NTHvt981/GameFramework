@@ -55,7 +55,7 @@ void DirectInputAPI::UpdateInput()
 	assert(SUCCEEDED(result));
 }
 
-void DirectInputAPI::ShutDown()
+void DirectInputAPI::Shutdown()
 {
 }
 

@@ -75,4 +75,9 @@ KinematicBodyComponent::RemainVelocity KinematicBodyComponent::Move(const core::
 	return result;
 }
 
+void KinematicBodyComponent::SetCollisionLayer(const core::CollisionLayer i_collisionLayer)
+{
+	m_dynamicCollider->collisionLayer = i_collisionLayer;
+}
+
 } // namespace logic

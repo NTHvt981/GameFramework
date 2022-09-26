@@ -51,7 +51,7 @@ void FileSystem::Initialize()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void FileSystem::ShutDown()
+void FileSystem::Shutdown()
 {
 }
 

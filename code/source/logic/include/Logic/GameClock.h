@@ -18,7 +18,7 @@ public:
 	void PreRender(const uint64_t dt);
 	void Render(const uint64_t dt);
 	void PostRender(const uint64_t dt);
-	void ShutDown();
+	void Shutdown();
 
 private:
 	bool m_shutDown = false;

@@ -26,7 +26,7 @@ void AudioSystem::Resume()
 
 void AudioSystem::Shutdown()
 {
-	m_nativeAudioAPI->ShutDown();
+	m_nativeAudioAPI->Shutdown();
 }
 
 } // namespace audios

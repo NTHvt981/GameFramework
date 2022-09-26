@@ -107,7 +107,7 @@ void GameClock::PostRender(const uint64_t dt)
 	sig_onPostRender.Emit(dt);
 }
 
-void GameClock::ShutDown()
+void GameClock::Shutdown()
 {
 	m_shutDown = true;
 }

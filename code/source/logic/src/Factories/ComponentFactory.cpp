@@ -5,9 +5,11 @@ namespace logic
 
 ComponentFactory::ComponentFactory(
 	std::shared_ptr<graphics::IGraphicSystem> i_graphicSystem,
-	std::shared_ptr<physics::IPhysicSystem> i_physicSystem)
+	std::shared_ptr<physics::IPhysicSystem> i_physicSystem,
+	std::shared_ptr<database::IDatabase> i_database)
 	: m_physicSystem(i_physicSystem)
 	, m_graphicSystem(i_graphicSystem)
+	, m_database(i_database)
 {
 }
 
@@ -24,7 +26,8 @@ std::shared_ptr<AnimationComponent> ComponentFactory::MakeAnimationComponent(con
 {
 	return std::make_shared<AnimationComponent>(
 		m_graphicSystem,
-		i_animationId
+		m_database,
+		i_animationId		
 	);
 }
 

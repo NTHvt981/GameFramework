@@ -32,7 +32,7 @@ void InputSystem::Resume()
 
 void InputSystem::Shutdown()
 {
-	m_nativeInputAPI->ShutDown();
+	m_nativeInputAPI->Shutdown();
 }
 
 ////////////////////////////////////////////////////////////////////////////////

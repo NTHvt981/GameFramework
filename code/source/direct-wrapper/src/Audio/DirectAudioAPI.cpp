@@ -56,7 +56,7 @@ void DirectAudioAPI::Resume()
 {
 }
 
-void DirectAudioAPI::ShutDown()
+void DirectAudioAPI::Shutdown()
 {
     m_directSound->Release();
     m_directSoundBuffer->Release();

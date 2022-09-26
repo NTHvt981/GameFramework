@@ -16,7 +16,7 @@ public:
 	// Inherited via INativeInputAPI
 	void Initialize() override;
 	void UpdateInput() override;
-	void ShutDown() override;
+	void Shutdown() override;
 	void Pause() override;
 	void Resume() override;
 

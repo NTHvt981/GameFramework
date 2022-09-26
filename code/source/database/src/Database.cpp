@@ -25,44 +25,44 @@ void Database::LoadResource()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-std::weak_ptr<const graphics::Texture> Database::GetTextureRef(const core::TextureId i_textureId)
+std::weak_ptr<const graphics::Texture> Database::GetTextureRef(const core::TextureId i_textureId) const
 {
-	return m_textures[i_textureId];
+	return m_textures.at(i_textureId);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-const graphics::Texture Database::GetTexture(const core::TextureId i_textureId)
+const graphics::Texture Database::GetTexture(const core::TextureId i_textureId) const
 {
-	return *m_textures[i_textureId].get();
+	return *m_textures.at(i_textureId).get();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-std::weak_ptr<const graphics::SpriteDef> Database::GetSpriteRef(const core::SpriteId i_spriteId)
+std::weak_ptr<const graphics::SpriteDef> Database::GetSpriteRef(const core::SpriteId i_spriteId) const
 {
-	return m_sprites[i_spriteId];
+	return m_sprites.at(i_spriteId);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-const graphics::SpriteDef Database::GetSprite(const core::SpriteId i_spriteId)
+const graphics::SpriteDef Database::GetSprite(const core::SpriteId i_spriteId) const
 {
-	return *m_sprites[i_spriteId].get();
+	return *m_sprites.at(i_spriteId).get();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-std::weak_ptr<const graphics::AnimationDef> Database::GetAnimationRef(const core::AnimationId i_animationId)
+std::weak_ptr<const graphics::AnimationDef> Database::GetAnimationRef(const core::AnimationId i_animationId) const
 {
-	return m_animations[i_animationId];
+	return m_animations.at(i_animationId);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-const graphics::AnimationDef Database::GetAnimation(const core::AnimationId i_animationId)
+const graphics::AnimationDef Database::GetAnimation(const core::AnimationId i_animationId) const
 {
-	return *m_animations[i_animationId].get();
+	return *m_animations.at(i_animationId).get();
 }
 
 ////////////////////////////////////////////////////////////////////////////////

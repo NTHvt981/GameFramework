@@ -27,6 +27,7 @@ public:
 
 	using RemainVelocity = core::Vector2F;
 	RemainVelocity Move(const core::Vector2F& i_velocity);
+	void SetCollisionLayer(const core::CollisionLayer i_collisionLayer);
 
 	signals::Signal<core::Vector2F> sig_onMove;
 	signals::Signal<core::EntityId> sig_onEntityOverlap;

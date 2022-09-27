@@ -40,8 +40,8 @@ int WINAPI WinMain(
 	s_game->Initialize();
 	auto connection = s_game->sig_requestShutdown.Connect(std::function(OnGameRequestShutdown));
 
-	try
-	{
+	//try
+	//{
 		s_game->LoadResource();
 
 		while (s_isRunning)
@@ -63,12 +63,12 @@ int WINAPI WinMain(
 
 			previousFrameTime = currentFrameTime;
 		}
-	}
-	catch (const std::exception& ex)
-	{
-		s_game->Shutdown();
-		return -1;
-	}
+	//}
+	//catch (const std::exception& ex)
+	//{
+	//	s_game->Shutdown();
+	//	return -1;
+	//}
 
 	s_game->Shutdown();
 

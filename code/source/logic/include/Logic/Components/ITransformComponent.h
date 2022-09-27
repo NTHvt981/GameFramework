@@ -9,7 +9,7 @@ namespace logic
 class ITransformComponent: public IComponent
 {
 public:
-	virtual void SetPosition(const core::Vector2F& i_position) = 0;
+	virtual void SetPosition(core::Vector2F i_position) = 0;
 	virtual core::Vector2F GetPosition() const = 0;
 };
 

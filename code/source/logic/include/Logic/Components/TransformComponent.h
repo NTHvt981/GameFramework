@@ -10,7 +10,7 @@ class TransformComponent final: public ITransformComponent
 {
 public:
 	TransformComponent(const core::Vector2F i_position = core::Vector2F());
-	void SetPosition(const core::Vector2F& i_position) override;
+	void SetPosition(core::Vector2F i_position) override;
 	core::Vector2F GetPosition() const override;
 	void Register() override {};
 	void Deregister() override {};

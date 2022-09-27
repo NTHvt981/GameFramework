@@ -10,7 +10,7 @@ PivotComponent::PivotComponent(std::shared_ptr<ITransformComponent> i_child, con
 {
 }
 
-void PivotComponent::SetPosition(const core::Vector2F& i_position)
+void PivotComponent::SetPosition(core::Vector2F i_position)
 {
 	m_child->SetPosition(i_position + m_pivot);
 }

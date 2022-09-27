@@ -21,7 +21,7 @@ public:
 	);
 
 	// Inherited via Component
-	void SetPosition(const core::Vector2F& i_position) override;
+	void SetPosition(core::Vector2F i_position) override;
 	core::Vector2F GetPosition() const;
 	void Register() override;
 	void Deregister() override;

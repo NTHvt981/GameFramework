@@ -22,7 +22,7 @@ void KinematicBodyComponent::OnEntityCollide(core::EntityId i_entityId)
 	sig_onEntityCollide.Emit(i_entityId);
 }
 
-void KinematicBodyComponent::SetPosition(const core::Vector2F& i_position)
+void KinematicBodyComponent::SetPosition(core::Vector2F i_position)
 {
 	m_dynamicCollider->position = i_position;
 }

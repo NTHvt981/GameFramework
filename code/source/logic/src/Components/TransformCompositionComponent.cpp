@@ -10,7 +10,7 @@ TransformCompositionComponent::TransformCompositionComponent(std::initializer_li
 	assert(i_children.size() > 0);
 }
 
-void TransformCompositionComponent::SetPosition(const core::Vector2F& i_position)
+void TransformCompositionComponent::SetPosition(core::Vector2F i_position)
 {
 	for (std::shared_ptr<ITransformComponent> child : m_children)
 	{

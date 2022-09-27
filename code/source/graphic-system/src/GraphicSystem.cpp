@@ -105,6 +105,9 @@ std::weak_ptr<SpriteState> GraphicSystem::RegisterSprite(
     const core::RenderLayer i_renderLayer)
 {
     std::shared_ptr<SpriteState> result = std::make_shared<SpriteState>(GenerateSpriteState());
+
+    result->spriteDef = m_databaseAPI->GetSpriteRef(i_spriteId);
+
     InsertSpriteState(result);
     return result;
 }
@@ -141,6 +144,10 @@ std::weak_ptr<AnimationState> GraphicSystem::RegisterAnimation(
     const core::RenderLayer i_renderLayer)
 {
     std::shared_ptr<AnimationState> result = std::make_shared<AnimationState>(GenerateAnimationState());
+
+    result->animationDef = m_databaseAPI->GetAnimationRef(i_animationId);
+    result->spriteStateRef->spriteDef = result->animationDef.lock()->frames.front().spriteRef;
+    
     InsertAnimationState(result);
     return result;
 }

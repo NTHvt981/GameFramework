@@ -16,7 +16,7 @@ SpriteComponent::~SpriteComponent()
 	Deregister();
 }
 
-void SpriteComponent::SetPosition(const core::Vector2F& i_position)
+void SpriteComponent::SetPosition(core::Vector2F i_position)
 {
 	m_spriteState->position = i_position;
 }

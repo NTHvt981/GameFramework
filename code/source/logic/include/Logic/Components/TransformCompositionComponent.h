@@ -16,7 +16,7 @@ public:
 	TransformCompositionComponent(std::initializer_list<std::shared_ptr<ITransformComponent>> i_children);
 
 	// Inherited via Component
-	void SetPosition(const core::Vector2F& i_position) override;
+	void SetPosition(core::Vector2F i_position) override;
 	virtual core::Vector2F GetPosition() const override;
 	void Register() override {};
 	void Deregister() override {};

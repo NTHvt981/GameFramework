@@ -16,4 +16,17 @@
             </Frame>
         </Frames>
     </Animation>
+    <Animation>
+        <Id>1</Id>
+        <Frames>
+            <Frame>
+                <SpriteId>0</SpriteId>
+                <TimeSpan>50</TimeSpan>
+            </Frame>
+            <Frame>
+                <SpriteId>1</SpriteId>
+                <TimeSpan>100</TimeSpan>
+            </Frame>
+        </Frames>
+    </Animation>
 </Animations>

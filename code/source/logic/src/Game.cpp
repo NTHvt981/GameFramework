@@ -52,9 +52,6 @@ void Game::Initialize()
 	m_millisecondsPerFrame = m_gameSetting->GetMillisecondsPerFrame();
 
 	m_isInitialized = true;
-
-	//test
-	m_wormScript->Initialize(m_scriptContext);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -70,6 +67,8 @@ void Game::LoadResource()
 {
 	m_database->LoadResource();
 	m_graphicSystem->LoadTextures();
+
+	m_wormScript->Initialize(m_scriptContext);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

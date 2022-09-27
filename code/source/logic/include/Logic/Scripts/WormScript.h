@@ -3,6 +3,9 @@
 #include "Core/GameClock/IGameClock.h"
 #include "Core/Signals/Connection.h"
 #include "Logic/Entities/Entity.h"
+#include "Logic/Components/TransformCompositionComponent.h"
+#include "Logic/Components/KinematicBodyComponent.h"
+#include "Core/Signals/Connection.h"
 #include <memory>
 
 namespace logic
@@ -23,6 +26,10 @@ private:
 	signals::Connection<const uint64_t> m_onUpdateCon;
 
 	std::shared_ptr<Entity> m_wormEntity;
+	std::shared_ptr<TransformCompositionComponent> m_transformComponent;
+	std::shared_ptr<KinematicBodyComponent> m_kinematicComponent;
+
+	signals::Connection<core::Vector2F> m_moveCon;
 };
 
 } // namespace logic

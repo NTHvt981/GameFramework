@@ -1,4 +1,6 @@
 #include "Logic/Factories/EntityFactory.h"
+#include "Logic/ComponentKeys/CommonKeys.h"
+#include "Logic/ComponentKeys/WormKeys.h"
 
 namespace logic
 {
@@ -11,7 +13,7 @@ EntityFactory::EntityFactory(std::shared_ptr<IComponentFactory> i_componentFacto
 std::shared_ptr<Entity> EntityFactory::MakeWormEntity()
 {
 	const core::EntityId entityId = m_idGenerator.Generate();
-	
+
 	physics::DynamicCollider collider(entityId);
 	collider.collisionLayer = core::CollisionLayer::Enemy;
 	std::shared_ptr<KinematicBodyComponent> bodyComponent = m_componentFactory->MakeKinematicBodyComponent(
@@ -27,26 +29,25 @@ std::shared_ptr<Entity> EntityFactory::MakeWormEntity()
 		core::AnimationId::WormMoveRight
 	);
 
-	std::shared_ptr<CompositionComponent> compositionComponent = m_componentFactory->MakeCompositionComponent(
+	std::shared_ptr<AnimationComponent> moveLeftAnimationComponent = m_componentFactory->MakeAnimationComponent(
+		core::AnimationId::WormMoveLeft
+	);
+
+	std::shared_ptr<TransformCompositionComponent> transformCompositionComponent = m_componentFactory->MakeTransformCompositionComponent(
 		{
 			bodyComponent,
 			detectorComponent,
 			moveRightAnimationComponent,
+			moveLeftAnimationComponent
 		}
 	);
 
-	std::shared_ptr<TransformComponent> transformComponent = m_componentFactory->MakeTransformComponent();
-
-	std::shared_ptr<RootComponent> rootComponent = m_componentFactory->MakeRootComponent();
-	rootComponent->InsertComponent("CompositionComponent", compositionComponent);
-	rootComponent->InsertComponent("detectorComponent", detectorComponent);
-	rootComponent->InsertComponent("bodyComponent", bodyComponent);
-	rootComponent->InsertComponent("TransformComponent", transformComponent);
-
-	Entity result
-	{
-		entityId, rootComponent
-	};
+	Entity result(entityId);
+	result.InsertComponent(common::sk_transformCompositionComponentKey, transformCompositionComponent);
+	result.InsertComponent(worm::sk_detectorComponentKey, detectorComponent);
+	result.InsertComponent(common::sk_kinematicBodyComponentKey, bodyComponent);
+	result.InsertComponent(worm::sk_moveLeftAnimationComponentKey, moveRightAnimationComponent);
+	result.InsertComponent(worm::sk_moveRightAnimationComponentKey, moveLeftAnimationComponent);
 
 	return std::make_shared<Entity>(result);
 }

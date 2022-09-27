@@ -18,12 +18,4 @@ core::Vector2F TransformComponent::GetPosition() const
 	return m_position;
 }
 
-void TransformComponent::Register()
-{
-}
-
-void TransformComponent::Deregister()
-{
-}
-
 } // namespace logic

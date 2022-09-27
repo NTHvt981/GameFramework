@@ -64,7 +64,7 @@ PhysicSystem::NewPosition PhysicSystem::CheckMove(
 	bool i_emitSignal)
 {
 	std::shared_ptr<const DynamicCollider> moveCollider = m_dynamicColliders[i_colliderId].lock();
-	core::Vector2F movePosition = moveCollider->Position;
+	core::Vector2F movePosition = moveCollider->position;
 	core::Vector2F resultVelocity = i_velocity;
 
 	for (const auto& [staticColliderId, staticCollider] : m_colliders)

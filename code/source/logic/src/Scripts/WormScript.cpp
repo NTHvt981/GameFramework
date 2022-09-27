@@ -14,11 +14,12 @@ void WormScript::Initialize(std::shared_ptr<IScriptContext> i_scriptContext)
 	);
 
 	m_wormEntity = i_scriptContext->GetEntityFactory()->MakeWormEntity();
-	m_wormEntity->root->Register();
+	m_wormEntity->Register();
 }
 
 void WormScript::Shutdown()
 {
+	m_wormEntity->Deregister();
 	m_onFixedUpdateCon.Disconnect();
 	m_onUpdateCon.Disconnect();
 }

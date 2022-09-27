@@ -21,6 +21,11 @@ void SpriteComponent::SetPosition(const core::Vector2F& i_position)
 	m_spriteState->position = i_position;
 }
 
+core::Vector2F SpriteComponent::GetPosition() const
+{
+	return m_spriteState->position;
+}
+
 void SpriteComponent::Register()
 {
 	if (isRegistered)

@@ -1,5 +1,5 @@
 #pragma once
-#include "PositionSetterComponent.h"
+#include "ITransformComponent.h"
 #include "GraphicSystem/API/ISpriteGraphicAPI.h"
 #include "GraphicSystem/DataTypes/SpriteState.h"
 #include <memory>
@@ -10,7 +10,7 @@ namespace logic
 /// <summary>
 /// A component wrap sprite
 /// </summary>
-class SpriteComponent final: public PositionSetterComponent
+class SpriteComponent final: public ITransformComponent
 {
 public:
 	SpriteComponent(
@@ -19,8 +19,8 @@ public:
 	);
 	~SpriteComponent();
 	
-	// Inherited via Component
 	void SetPosition(const core::Vector2F& i_position) override;
+	core::Vector2F GetPosition() const override;
 	void Register() override;
 	void Deregister() override;
 

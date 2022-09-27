@@ -2,11 +2,11 @@
 #include "Core/DataTypes/Vector2.h"
 #include "Logic/Components/AnimationComponent.h"
 #include "Logic/Components/SpriteComponent.h"
-#include "Logic/Components/CompositionComponent.h"
+#include "Logic/Components/TransformCompositionComponent.h"
 #include "Logic/Components/KinematicBodyComponent.h"
 #include "Logic/Components/TransformComponent.h"
 #include "Logic/Components/PivotComponent.h"
-#include "Logic/Components/RootComponent.h"
+#include "Logic/Components/TransformComponent.h"
 #include <memory>
 
 namespace logic
@@ -22,13 +22,12 @@ public:
 		std::shared_ptr<physics::DynamicCollider> i_dynamicCollider
 	) = 0;
 	virtual std::shared_ptr<PivotComponent> MakePivotComponent(
-		std::shared_ptr<PositionSetterComponent> i_child,
+		std::shared_ptr<ITransformComponent> i_child,
 		const core::Vector2F i_position = core::Vector2F()
 	) = 0;
-	virtual std::shared_ptr<CompositionComponent> MakeCompositionComponent(
-		std::initializer_list<std::shared_ptr<PositionSetterComponent>> i_componentList
+	virtual std::shared_ptr<TransformCompositionComponent> MakeTransformCompositionComponent(
+		std::initializer_list<std::shared_ptr<ITransformComponent>> i_componentList
 	) = 0;
-	virtual std::shared_ptr<RootComponent> MakeRootComponent() = 0;
 };
 
 

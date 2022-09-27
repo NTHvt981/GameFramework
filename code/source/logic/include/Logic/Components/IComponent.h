@@ -7,7 +7,7 @@ namespace logic
 /// <summary>
 /// Every component inherit this class
 /// </summary>
-class Component
+class IComponent
 {
 public:
 	virtual void Register() = 0;

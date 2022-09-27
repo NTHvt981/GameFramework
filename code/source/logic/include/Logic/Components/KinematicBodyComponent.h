@@ -1,5 +1,5 @@
 #pragma once
-#include "PositionSetterComponent.h"
+#include "ITransformComponent.h"
 #include "Core/Identifiers/EntityId.h"
 #include "Core/Signals/Signal.h"
 #include "PhysicSystem/DataTypes/DynamicCollider.h"
@@ -12,7 +12,7 @@ namespace logic
 /// <summary>
 /// Hold dynamic colliders
 /// </summary>
-class KinematicBodyComponent final: public PositionSetterComponent
+class KinematicBodyComponent final: public ITransformComponent
 {
 public:
 	KinematicBodyComponent(
@@ -21,6 +21,8 @@ public:
 	);
 
 	// Inherited via Component
+	void SetPosition(const core::Vector2F& i_position) override;
+	core::Vector2F GetPosition() const;
 	void Register() override;
 	void Deregister() override;
 
@@ -34,7 +36,6 @@ public:
 private:
 	void OnEntityOverlap(core::EntityId i_entityId);
 	void OnEntityCollide(core::EntityId i_entityId);
-	void SetPosition(const core::Vector2F& i_position) override;
 
 	std::weak_ptr<physics::IPhysicAPI> m_physicAPI;
 	std::shared_ptr<physics::DynamicCollider> m_dynamicCollider;
@@ -42,6 +43,8 @@ private:
 
 	signals::Connection<core::EntityId> m_onEntityOverlapCon;
 	signals::Connection<core::EntityId> m_onEntityCollideCon;
+
+	// Inherited via ITransformComponent
 };
 
 } // namespace logic

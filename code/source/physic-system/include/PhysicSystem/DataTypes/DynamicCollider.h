@@ -10,11 +10,11 @@ struct DynamicCollider : public Collider
 {
 	using Collider::Collider;
 
-	core::BoxF RelativeBoundary;
-	core::Vector2F Position;
+	core::BoxF relativeBoundary;
+	core::Vector2F position;
 	core::BoxF GetBoundary() const override
 	{
-		return RelativeBoundary + Position;
+		return relativeBoundary + position;
 	}
 
 	signals::Signal<core::EntityId> sig_onEntityCollide;

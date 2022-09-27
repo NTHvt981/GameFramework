@@ -24,7 +24,12 @@ void KinematicBodyComponent::OnEntityCollide(core::EntityId i_entityId)
 
 void KinematicBodyComponent::SetPosition(const core::Vector2F& i_position)
 {
-	m_dynamicCollider->Position = i_position;
+	m_dynamicCollider->position = i_position;
+}
+
+core::Vector2F KinematicBodyComponent::GetPosition() const
+{
+	return m_dynamicCollider->position;
 }
 
 void KinematicBodyComponent::Register()
@@ -64,8 +69,7 @@ KinematicBodyComponent::RemainVelocity KinematicBodyComponent::Move(const core::
 	const bool requestEmitSignal = true;
 	core::Vector2F newPosition = m_physicAPI.lock()->CheckMove(m_dynamicCollider->id, i_velocity, requestEmitSignal);
 	
-	RemainVelocity result = newPosition - m_dynamicCollider->Position;
-	SetPosition(newPosition);
+	RemainVelocity result = newPosition - m_dynamicCollider->position;
 	sig_onMove.Emit(newPosition);
 	return result;
 }

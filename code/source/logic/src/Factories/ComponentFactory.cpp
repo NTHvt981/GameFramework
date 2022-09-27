@@ -48,21 +48,16 @@ std::shared_ptr<KinematicBodyComponent> ComponentFactory::MakeKinematicBodyCompo
 }
 
 std::shared_ptr<PivotComponent> ComponentFactory::MakePivotComponent(
-	std::shared_ptr<PositionSetterComponent> i_component,
+	std::shared_ptr<ITransformComponent> i_component,
 	const core::Vector2F i_position)
 {
 	return std::make_shared<PivotComponent>(i_component, i_position);
 }
 
-std::shared_ptr<CompositionComponent> ComponentFactory::MakeCompositionComponent(
-	std::initializer_list<std::shared_ptr<PositionSetterComponent>> i_componentList)
+std::shared_ptr<TransformCompositionComponent> ComponentFactory::MakeTransformCompositionComponent(
+	std::initializer_list<std::shared_ptr<ITransformComponent>> i_componentList)
 {
-	return std::make_shared<CompositionComponent>(i_componentList);
-}
-
-std::shared_ptr<RootComponent> ComponentFactory::MakeRootComponent()
-{
-	return std::make_shared<RootComponent>(std::map<core::String, std::shared_ptr<Component>>());
+	return std::make_shared<TransformCompositionComponent>(i_componentList);
 }
 
 } // namespace logic

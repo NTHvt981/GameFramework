@@ -1542,10 +1542,10 @@
     <Sprite name="JumperMoveLeft1">
         <Id>113</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>67</Left>
+            <Top>499</Top>
+            <Right>84</Right>
+            <Bottom>525</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -1556,10 +1556,10 @@
     <Sprite name="JumperMoveLeft2">
         <Id>114</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>85</Left>
+            <Top>499</Top>
+            <Right>102</Right>
+            <Bottom>525</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -1570,10 +1570,10 @@
     <Sprite name="JumperMoveLeft3">
         <Id>115</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>105</Left>
+            <Top>499</Top>
+            <Right>122</Right>
+            <Bottom>525</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -1584,10 +1584,10 @@
     <Sprite name="JumperMoveRight1">
         <Id>116</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>132</Left>
+            <Top>499</Top>
+            <Right>149</Right>
+            <Bottom>525</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -1598,10 +1598,10 @@
     <Sprite name="JumperMoveRight2">
         <Id>117</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>152</Left>
+            <Top>499</Top>
+            <Right>169</Right>
+            <Bottom>525</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -1612,10 +1612,10 @@
     <Sprite name="JumperMoveRight3">
         <Id>118</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>170</Left>
+            <Top>499</Top>
+            <Right>187</Right>
+            <Bottom>525</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -1626,10 +1626,10 @@
     <Sprite name="Orb1">
         <Id>119</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>78</Left>
+            <Top>387</Top>
+            <Right>96</Right>
+            <Bottom>405</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -1640,10 +1640,10 @@
     <Sprite name="Orb2">
         <Id>120</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>98</Left>
+            <Top>387</Top>
+            <Right>116</Right>
+            <Bottom>405</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -1654,10 +1654,10 @@
     <Sprite name="Orb3">
         <Id>121</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>118</Left>
+            <Top>387</Top>
+            <Right>136</Right>
+            <Bottom>405</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -1668,10 +1668,10 @@
     <Sprite name="Orb4">
         <Id>122</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>138</Left>
+            <Top>387</Top>
+            <Right>156</Right>
+            <Bottom>405</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -1682,10 +1682,10 @@
     <Sprite name="Orb5">
         <Id>123</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>158</Left>
+            <Top>387</Top>
+            <Right>176</Right>
+            <Bottom>405</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -1696,10 +1696,10 @@
     <Sprite name="Walker1">
         <Id>124</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>84</Left>
+            <Top>296</Top>
+            <Right>102</Right>
+            <Bottom>313</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -1710,10 +1710,10 @@
     <Sprite name="Walker2">
         <Id>125</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>104</Left>
+            <Top>296</Top>
+            <Right>122</Right>
+            <Bottom>313</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -1724,10 +1724,10 @@
     <Sprite name="Walker3">
         <Id>126</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>132</Left>
+            <Top>296</Top>
+            <Right>150</Right>
+            <Bottom>313</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -1738,10 +1738,10 @@
     <Sprite name="Walker4">
         <Id>127</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>152</Left>
+            <Top>296</Top>
+            <Right>170</Right>
+            <Bottom>313</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -1752,10 +1752,10 @@
     <Sprite name="SkullMoveLeft1">
         <Id>128</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>42</Left>
+            <Top>530</Top>
+            <Right>60</Right>
+            <Bottom>548</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -1766,10 +1766,10 @@
     <Sprite name="SkullMoveLeft2">
         <Id>129</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>62</Left>
+            <Top>527</Top>
+            <Right>80</Right>
+            <Bottom>548</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -1780,10 +1780,10 @@
     <Sprite name="SkullMoveRight1">
         <Id>130</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>194</Left>
+            <Top>530</Top>
+            <Right>212</Right>
+            <Bottom>548</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -1794,10 +1794,10 @@
     <Sprite name="SkullMoveRight2">
         <Id>131</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>174</Left>
+            <Top>527</Top>
+            <Right>192</Right>
+            <Bottom>548</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -1808,10 +1808,10 @@
     <Sprite name="SkullBullet">
         <Id>132</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>51</Left>
+            <Top>515</Top>
+            <Right>61</Right>
+            <Bottom>525</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -1822,10 +1822,10 @@
     <Sprite name="FloaterMove1">
         <Id>133</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>84</Left>
+            <Top>407</Top>
+            <Right>102</Right>
+            <Bottom>422</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -1836,10 +1836,10 @@
     <Sprite name="FloaterMove2">
         <Id>134</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>104</Left>
+            <Top>406</Top>
+            <Right>122</Right>
+            <Bottom>422</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -1850,10 +1850,10 @@
     <Sprite name="InsectMoveLeft1">
         <Id>135</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>84</Left>
+            <Top>533</Top>
+            <Right>102</Right>
+            <Bottom>548</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -1864,10 +1864,10 @@
     <Sprite name="InsectMoveLeft2">
         <Id>136</Id>
         <Boundary>
-            <Left>0</Left>
+            <Left>104</Left>
             <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Right>122</Right>
+            <Bottom>548</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -1878,10 +1878,10 @@
     <Sprite name="InsectMoveRight1">
         <Id>137</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>152</Left>
+            <Top>533</Top>
+            <Right>170</Right>
+            <Bottom>548</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -1892,10 +1892,10 @@
     <Sprite name="InsectMoveRight2">
         <Id>138</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>132</Left>
+            <Top>530</Top>
+            <Right>150</Right>
+            <Bottom>548</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -1906,10 +1906,10 @@
     <Sprite name="DasherIdle1">
         <Id>139</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>44</Left>
+            <Top>277</Top>
+            <Right>62</Right>
+            <Bottom>293</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -1920,10 +1920,10 @@
     <Sprite name="DasherIdle2">
         <Id>140</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>84</Left>
+            <Top>277</Top>
+            <Right>102</Right>
+            <Bottom>293</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -1934,10 +1934,10 @@
     <Sprite name="DasherIdle3">
         <Id>141</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>152</Left>
+            <Top>277</Top>
+            <Right>170</Right>
+            <Bottom>293</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -1948,10 +1948,10 @@
     <Sprite name="DasherIdle4">
         <Id>142</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>192</Left>
+            <Top>277</Top>
+            <Right>210</Right>
+            <Bottom>293</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -1962,10 +1962,10 @@
     <Sprite name="DasherMove1">
         <Id>143</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>44</Left>
+            <Top>277</Top>
+            <Right>62</Right>
+            <Bottom>293</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -1976,10 +1976,10 @@
     <Sprite name="DasherMove2">
         <Id>144</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>64</Left>
+            <Top>275</Top>
+            <Right>82</Right>
+            <Bottom>291</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -1990,10 +1990,10 @@
     <Sprite name="DasherMove3">
         <Id>145</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>152</Left>
+            <Top>277</Top>
+            <Right>170</Right>
+            <Bottom>293</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -2004,10 +2004,10 @@
     <Sprite name="DasherMove4">
         <Id>146</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>132</Left>
+            <Top>275</Top>
+            <Right>150</Right>
+            <Bottom>291</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -2018,10 +2018,10 @@
     <Sprite name="HeadLeft1">
         <Id>147</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>67</Left>
+            <Top>351</Top>
+            <Right>93</Right>
+            <Bottom>385</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -2032,10 +2032,10 @@
     <Sprite name="HeadLeft2">
         <Id>148</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>96</Left>
+            <Top>352</Top>
+            <Right>122</Right>
+            <Bottom>385</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -2046,10 +2046,10 @@
     <Sprite name="HeadRight1">
         <Id>149</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>161</Left>
+            <Top>351</Top>
+            <Right>187</Right>
+            <Bottom>385</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -2060,10 +2060,10 @@
     <Sprite name="HeadRight2">
         <Id>150</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>132</Left>
+            <Top>352</Top>
+            <Right>158</Right>
+            <Bottom>385</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -2074,10 +2074,10 @@
     <Sprite name="SpiralLeft1">
         <Id>151</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>65</Left>
+            <Top>316</Top>
+            <Right>91</Right>
+            <Bottom>349</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -2088,10 +2088,10 @@
     <Sprite name="SpiralLeft2">
         <Id>152</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>96</Left>
+            <Top>316</Top>
+            <Right>122</Right>
+            <Bottom>349</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -2102,10 +2102,10 @@
     <Sprite name="SpiralRight1">
         <Id>153</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>163</Left>
+            <Top>316</Top>
+            <Right>189</Right>
+            <Bottom>349</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -2116,10 +2116,10 @@
     <Sprite name="SpiralRight2">
         <Id>154</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>132</Left>
+            <Top>316</Top>
+            <Right>158</Right>
+            <Bottom>349</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -2130,10 +2130,10 @@
     <Sprite name="TeleporterLeft1">
         <Id>155</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>71</Left>
+            <Top>568</Top>
+            <Right>95</Right>
+            <Bottom>600</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -2144,10 +2144,10 @@
     <Sprite name="TeleporterLeft2">
         <Id>156</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>98</Left>
+            <Top>568</Top>
+            <Right>122</Right>
+            <Bottom>600</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -2158,10 +2158,10 @@
     <Sprite name="TeleporterRight1">
         <Id>157</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>159</Left>
+            <Top>568</Top>
+            <Right>183</Right>
+            <Bottom>600</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -2172,10 +2172,10 @@
     <Sprite name="TeleporterRight2">
         <Id>158</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>132</Left>
+            <Top>568</Top>
+            <Right>156</Right>
+            <Bottom>600</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -2186,10 +2186,10 @@
     <Sprite name="Eyeball1">
         <Id>159</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>102</Left>
+            <Top>550</Top>
+            <Right>118</Right>
+            <Bottom>566</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -2200,10 +2200,10 @@
     <Sprite name="Eyeball2">
         <Id>160</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>119</Left>
+            <Top>550</Top>
+            <Right>135</Right>
+            <Bottom>566</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -2214,10 +2214,10 @@
     <Sprite name="Eyeball3">
         <Id>161</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>136</Left>
+            <Top>550</Top>
+            <Right>152</Right>
+            <Bottom>566</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -2228,10 +2228,10 @@
     <Sprite name="Canon1">
         <Id>162</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>96</Left>
+            <Top>603</Top>
+            <Right>122</Right>
+            <Bottom>629</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -2242,10 +2242,10 @@
     <Sprite name="Canon2">
         <Id>163</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>70</Left>
+            <Top>603</Top>
+            <Right>92</Right>
+            <Bottom>629</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -2256,10 +2256,10 @@
     <Sprite name="Canon3">
         <Id>164</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>41</Left>
+            <Top>607</Top>
+            <Right>67</Right>
+            <Bottom>629</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -2270,10 +2270,10 @@
     <Sprite name="BossHead1">
         <Id>165</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>80</Left>
+            <Top>303</Top>
+            <Right>140</Right>
+            <Bottom>367</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -2284,10 +2284,10 @@
     <Sprite name="BossHead2">
         <Id>166</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>146</Left>
+            <Top>302</Top>
+            <Right>206</Right>
+            <Bottom>367</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -2298,10 +2298,10 @@
     <Sprite name="BossHead3">
         <Id>167</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>213</Left>
+            <Top>303</Top>
+            <Right>273</Right>
+            <Bottom>367</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -2312,10 +2312,10 @@
     <Sprite name="BossHead4">
         <Id>168</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>280</Left>
+            <Top>302</Top>
+            <Right>340</Right>
+            <Bottom>367</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -2326,10 +2326,10 @@
     <Sprite name="BossHead5">
         <Id>169</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>83</Left>
+            <Top>371</Top>
+            <Right>143</Right>
+            <Bottom>436</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -2340,10 +2340,10 @@
     <Sprite name="BossHead6">
         <Id>170</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>147</Left>
+            <Top>370</Top>
+            <Right>207</Right>
+            <Bottom>436</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -2354,10 +2354,10 @@
     <Sprite name="BossHead7">
         <Id>171</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>212</Left>
+            <Top>371</Top>
+            <Right>272</Right>
+            <Bottom>436</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -2368,10 +2368,10 @@
     <Sprite name="BossHead8">
         <Id>172</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>277</Left>
+            <Top>370</Top>
+            <Right>337</Right>
+            <Bottom>436</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -2382,10 +2382,10 @@
     <Sprite name="BossLeftArm">
         <Id>173</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>222</Left>
+            <Top>1129</Top>
+            <Right>238</Right>
+            <Bottom>1136</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -2396,10 +2396,10 @@
     <Sprite name="BossLeftHand">
         <Id>174</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>218</Left>
+            <Top>1147</Top>
+            <Right>236</Right>
+            <Bottom>1179</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -2410,10 +2410,10 @@
     <Sprite name="BossRightArm">
         <Id>175</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>188</Left>
+            <Top>1129</Top>
+            <Right>204</Right>
+            <Bottom>1136</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -2424,10 +2424,10 @@
     <Sprite name="BossRightHand">
         <Id>176</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>190</Left>
+            <Top>1147</Top>
+            <Right>208</Right>
+            <Bottom>1179</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -2438,10 +2438,10 @@
     <Sprite name="MineBullet">
         <Id>177</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>32</Left>
+            <Top>305</Top>
+            <Right>40</Right>
+            <Bottom>313</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -2452,10 +2452,10 @@
     <Sprite name="EnemySideScrollBullet1">
         <Id>178</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>51</Left>
+            <Top>515</Top>
+            <Right>61</Right>
+            <Bottom>525</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -2466,10 +2466,10 @@
     <Sprite name="EnemySideScrollBullet2">
         <Id>179</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>32</Left>
+            <Top>305</Top>
+            <Right>40</Right>
+            <Bottom>313</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -2480,10 +2480,10 @@
     <Sprite name="EnemyTopDownBullet1">
         <Id>180</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>51</Left>
+            <Top>1370</Top>
+            <Right>61</Right>
+            <Bottom>1380</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>
@@ -2494,10 +2494,10 @@
     <Sprite name="EnemyTopDownBullet2">
         <Id>181</Id>
         <Boundary>
-            <Left>0</Left>
-            <Top>0</Top>
-            <Right>0</Right>
-            <Bottom>0</Bottom>
+            <Left>51</Left>
+            <Top>1370</Top>
+            <Right>61</Right>
+            <Bottom>1380</Bottom>
         </Boundary>
         <Origin>
             <X>0</X>

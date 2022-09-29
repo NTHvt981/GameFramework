@@ -36,23 +36,17 @@ public:
 	void RemoveRenderFilter() override;
 
 	// Inherited via ISpriteGraphicAPI
-	std::weak_ptr<SpriteState> RegisterSprite(
-		const core::SpriteId i_spriteId, 
-		const core::RenderLayer i_renderLayer = core::RenderLayer::Default
-	) override;
-	void DeregisterSprite(
-		const SpriteState::Id i_spriteStateId
-	) override;
+	SpriteState::Id GenerateSpriteStateId() override;
+	void RegisterSprite(std::shared_ptr<SpriteState> i_spriteState) override;
+	void DeregisterSprite(const SpriteState::Id i_spriteStateId) override;
 	void SetSpriteRenderLayer(
 		const SpriteState::Id i_spriteStateId,
 		const core::RenderLayer i_renderLayer
 	) override;
 
 	// Inherited via IAnimationGraphicAPI
-	std::weak_ptr<AnimationState> RegisterAnimation(
-		const core::AnimationId i_animationId, 
-		const core::RenderLayer i_renderLayer = core::RenderLayer::Default
-	) override;
+	AnimationState::Id GenerateAnimationStateId() override;
+	void RegisterAnimation(std::shared_ptr<AnimationState> i_animationState) override;
 	void DeregisterAnimation(
 		const AnimationState::Id i_animationStateId
 	) override;
@@ -61,17 +55,15 @@ public:
 		const core::RenderLayer i_renderLayer
 	) override;
 private:
-	SpriteState GenerateSpriteState();
 	void InsertSpriteState(std::shared_ptr<SpriteState> i_spriteState);
 	std::shared_ptr<SpriteState> GetSpriteState(const SpriteState::Id i_spriteStateId) const;
 	void RemoveSpriteState(std::shared_ptr<SpriteState> i_spriteState);
 	void DrawSprite(std::shared_ptr<const SpriteState> i_spriteState);
 
-	AnimationState GenerateAnimationState();
 	void InsertAnimationState(std::shared_ptr<AnimationState> i_animationState);
 	std::shared_ptr<AnimationState> GetAnimationState(const AnimationState::Id i_animationStateId) const;
 	void RemoveAnimationState(std::shared_ptr<AnimationState> i_animationState);
-	void ProccessAnimationState(std::shared_ptr<AnimationState> i_animationState, const uint64_t dt);
+	void UpdateAnimationStates(const uint64_t dt);
 
 	using SpriteStateIds = std::set<SpriteState::Id>;
 	std::map<core::RenderLayer, SpriteStateIds> m_mapLayerSpriteStateIds;
@@ -84,7 +76,6 @@ private:
 
 	void InitLayerSpriteStateIds();
 
-	bool CheckRenderConditions(std::shared_ptr<const SpriteState> i_spriteState) const;
 	bool CheckRenderFilter(std::shared_ptr<const SpriteState> i_spriteState) const;
 	std::optional<core::BoxF> m_renderFilter;
 };

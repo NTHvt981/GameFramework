@@ -14,8 +14,7 @@ class AnimationComponent final : public ITransformComponent
 public:
 	AnimationComponent(
 		std::weak_ptr<graphics::IAnimationGraphicAPI> i_animationGraphicAPI,
-		std::weak_ptr<const graphics::database::IGraphicDatabaseAPI> i_graphicDatabaseAPI,
-		core::AnimationId i_animationId
+		std::weak_ptr<const graphics::database::IGraphicDatabaseAPI> i_graphicDatabaseAPI
 	);
 	~AnimationComponent();
 
@@ -24,8 +23,6 @@ public:
 	void Register() override;
 	void Deregister() override;
 
-	void SetVisible(const bool i_visible);
-	bool GetVisible() const;
 	void SetAnimation(const core::AnimationId i_animationId);
 	core::AnimationId GetAnimationId() const;
 
@@ -35,7 +32,6 @@ private:
 
 	std::weak_ptr<graphics::IAnimationGraphicAPI> m_animationGraphicAPI;
 	std::weak_ptr<const graphics::database::IGraphicDatabaseAPI> m_graphicDatabaseAPI;
-	core::AnimationId m_animationId;
 	std::shared_ptr<graphics::AnimationState> m_animationState;
 	bool isRegistered = false;
 	

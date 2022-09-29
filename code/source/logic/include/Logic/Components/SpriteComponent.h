@@ -1,6 +1,7 @@
 #pragma once
 #include "ITransformComponent.h"
 #include "GraphicSystem/API/ISpriteGraphicAPI.h"
+#include "GraphicSystem/Database/IGraphicDatabaseAPI.h"
 #include "GraphicSystem/DataTypes/SpriteState.h"
 #include <memory>
 
@@ -15,7 +16,7 @@ class SpriteComponent final: public ITransformComponent
 public:
 	SpriteComponent(
 		std::weak_ptr<graphics::ISpriteGraphicAPI> i_spriteGraphicAPI,
-		const core::SpriteId i_spriteId
+		std::weak_ptr<const graphics::database::IGraphicDatabaseAPI> i_graphicDatabaseAPI
 	);
 	~SpriteComponent();
 	
@@ -24,12 +25,11 @@ public:
 	void Register() override;
 	void Deregister() override;
 
-	void SetVisible(const bool i_visible);
-	bool GetVisible() const;
+	void SetSprite(const core::SpriteId i_spriteId);
 
 private:
 	std::weak_ptr<graphics::ISpriteGraphicAPI> m_spriteGraphicAPI;
-	const core::SpriteId m_spriteId;
+	std::weak_ptr<const graphics::database::IGraphicDatabaseAPI> m_graphicDatabaseAPI;
 	std::shared_ptr<graphics::SpriteState> m_spriteState;
 	bool isRegistered = false;
 };

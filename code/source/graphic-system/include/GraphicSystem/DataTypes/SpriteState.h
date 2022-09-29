@@ -14,9 +14,9 @@ struct SpriteState
 	const Id id;
 	SpriteState(Id i_id) : id(i_id) {};
 	std::weak_ptr<const SpriteDef> spriteDef;
+
 	core::Vector2F position = core::Vector2F();
 	float alpha = 1;
-	bool visible = true;
 	core::RenderLayer renderLayer = core::RenderLayer::Default;
 };
 

@@ -1,4 +1,5 @@
 #include "GraphicSystem/GraphicSystem.h"
+#include "GraphicSystem/Helpers/AnimationStateHelper.h"
 #include "Core/Math/Math.h"
 #include "Core/Helpers/BoxHelper.h"
 
@@ -53,10 +54,6 @@ void GraphicSystem::Shutdown()
 
 void GraphicSystem::PreRender(const uint64_t dt)
 {
-    for (auto& [animationStateId, animationState] : m_allAnimationStates)
-    {
-        ProccessAnimationState(animationState, dt);
-    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -69,10 +66,7 @@ void GraphicSystem::Render(const uint64_t dt)
         {
             std::shared_ptr<SpriteState> spriteState = GetSpriteState(spriteStateId);
             std::shared_ptr<const SpriteDef> spriteDef = spriteState->spriteDef.lock();
-            if (CheckRenderConditions(spriteState))
-            {
-                DrawSprite(spriteState);
-            }
+            DrawSprite(spriteState);
         }
     }
 }
@@ -100,16 +94,13 @@ void GraphicSystem::RemoveRenderFilter()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-std::weak_ptr<SpriteState> GraphicSystem::RegisterSprite(
-    const core::SpriteId i_spriteId,
-    const core::RenderLayer i_renderLayer)
+void GraphicSystem::RegisterSprite(std::shared_ptr<SpriteState> i_spriteState)
 {
-    std::shared_ptr<SpriteState> result = std::make_shared<SpriteState>(GenerateSpriteState());
+    const SpriteState::Id id = i_spriteState->id;
+    m_allSpriteStates[id] = i_spriteState;
 
-    result->spriteDef = m_databaseAPI->GetSpriteRef(i_spriteId);
-
-    InsertSpriteState(result);
-    return result;
+    const core::RenderLayer renderLayer = i_spriteState->renderLayer;
+    m_mapLayerSpriteStateIds[renderLayer].emplace(id);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -138,18 +129,10 @@ void GraphicSystem::SetSpriteRenderLayer(
 
 ////////////////////////////////////////////////////////////////////////////////
 
-// when system register animation, it also register spriteRef with same id
-std::weak_ptr<AnimationState> GraphicSystem::RegisterAnimation(
-    const core::AnimationId i_animationId, 
-    const core::RenderLayer i_renderLayer)
+// when system register animation, it also register spriteDefRef with same id
+void GraphicSystem::RegisterAnimation(std::shared_ptr<AnimationState> i_animationState)
 {
-    std::shared_ptr<AnimationState> result = std::make_shared<AnimationState>(GenerateAnimationState());
-
-    result->animationDef = m_databaseAPI->GetAnimationRef(i_animationId);
-    result->spriteStateRef->spriteDef = result->animationDef.lock()->frames.front().spriteRef;
-    
-    InsertAnimationState(result);
-    return result;
+    InsertAnimationState(i_animationState);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -167,14 +150,6 @@ void GraphicSystem::SetAnimationRenderLayer(
     const core::RenderLayer i_renderLayer)
 {
     SetSpriteRenderLayer(i_animationStateId, i_renderLayer);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-SpriteState GraphicSystem::GenerateSpriteState()
-{
-    SpriteState state(m_idGenerator.Generate());
-    return state;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -231,18 +206,6 @@ void GraphicSystem::DrawSprite(std::shared_ptr<const SpriteState> i_spriteState)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-AnimationState GraphicSystem::GenerateAnimationState()
-{
-    AnimationState animationstate(m_idGenerator.Generate());
-
-    SpriteState spriteState(animationstate.id);
-    animationstate.spriteStateRef = std::make_unique<SpriteState>(spriteState);
-
-    return animationstate;
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
 void GraphicSystem::InsertAnimationState(std::shared_ptr<AnimationState> i_animationState)
 {
     m_allAnimationStates[i_animationState->id] = i_animationState;
@@ -268,41 +231,11 @@ void GraphicSystem::RemoveAnimationState(std::shared_ptr<AnimationState> i_anima
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void GraphicSystem::ProccessAnimationState(std::shared_ptr<AnimationState> i_animationState, const uint64_t dt)
+void GraphicSystem::UpdateAnimationStates(const uint64_t dt)
 {
-    if (i_animationState->pause)
+    for (auto& [animationStateId, animationState] : m_allAnimationStates)
     {
-        return;
-    }
-
-    uint64_t& currentFrameIndex = i_animationState->currentFrameIndex;
-    uint64_t& currentFrameTime = i_animationState->currentFrameTime;
-    auto animationDef = i_animationState->animationDef.lock();
-    
-    uint64_t newFrameTime = currentFrameTime + dt;
-    const AnimationFrameDef& currentFrame = animationDef->frames[currentFrameIndex];
-    if (newFrameTime >= currentFrame.timeSpan)
-    {
-        currentFrameTime = newFrameTime - currentFrame.timeSpan;
-        currentFrameIndex++;
-        auto frameSize = animationDef->frames.size();
-        if (currentFrameIndex >= frameSize)
-        {
-            if (!i_animationState->loop)
-            {
-                return;
-            }
-
-            currentFrameIndex = currentFrameIndex - frameSize;
-            i_animationState->sig_onAnimationFinished.Emit();
-        }
-
-        const AnimationFrameDef& newFrame = animationDef->frames[currentFrameIndex];
-        i_animationState->spriteStateRef->spriteDef = newFrame.spriteRef;
-    }
-    else
-    {
-        currentFrameTime = newFrameTime;
+        UpdateAnimationState(*animationState.get(), dt);
     }
 }
 
@@ -318,14 +251,6 @@ void GraphicSystem::InitLayerSpriteStateIds()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-bool GraphicSystem::CheckRenderConditions(std::shared_ptr<const SpriteState> i_spriteState) const
-{
-    const bool isVisible = i_spriteState->visible;
-    return isVisible && CheckRenderFilter(i_spriteState);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
 bool GraphicSystem::CheckRenderFilter(std::shared_ptr<const SpriteState> i_spriteState) const
 {
     if (m_renderFilter.has_value())
@@ -334,6 +259,16 @@ bool GraphicSystem::CheckRenderFilter(std::shared_ptr<const SpriteState> i_sprit
         return core::IsOverlap(core::ToFloat(spriteDefBoundary), m_renderFilter.value());
     }
     return true;
+}
+
+SpriteState::Id GraphicSystem::GenerateSpriteStateId()
+{
+    return m_idGenerator.Generate();
+}
+
+AnimationState::Id GraphicSystem::GenerateAnimationStateId()
+{
+    return m_idGenerator.Generate();
 }
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -13,13 +13,9 @@ namespace graphics
 class IAnimationGraphicAPI
 {
 public:
-	virtual std::weak_ptr<AnimationState> RegisterAnimation(
-		const core::AnimationId i_animationId,
-		const core::RenderLayer i_renderLayer = core::RenderLayer::Default
-	) = 0;
-	virtual void DeregisterAnimation(
-		const AnimationState::Id i_animationStateId
-	) = 0;
+	virtual AnimationState::Id GenerateAnimationStateId() = 0;
+	virtual void RegisterAnimation(std::shared_ptr<AnimationState> i_animationState) = 0;
+	virtual void DeregisterAnimation(const AnimationState::Id i_animationStateId) = 0;
 	virtual void SetAnimationRenderLayer(
 		const AnimationState::Id i_animationStateId,
 		const core::RenderLayer i_renderLayer

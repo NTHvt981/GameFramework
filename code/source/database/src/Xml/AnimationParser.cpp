@@ -47,7 +47,7 @@ void Parse(tinyxml2::XMLElement* i_element, graphics::AnimationDef& o_value)
 void Parse(const tinyxml2::XMLElement* i_element, graphics::AnimationFrameDef& o_value)
 {
 	Parse(i_element->FirstChildElement("SpriteId"), o_value.spriteId);
-	Parse(i_element->FirstChildElement("TimeSpan"), o_value.timeSpan);
+	Parse(i_element->FirstChildElement("TimeSpan"), o_value.duration);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

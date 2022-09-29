@@ -25,29 +25,22 @@ std::shared_ptr<Entity> EntityFactory::MakeWormEntity()
 		std::make_shared<physics::DynamicCollider>(detectorCollider)
 	);
 
-	std::shared_ptr<AnimationComponent> moveRightAnimationComponent = m_componentFactory->MakeAnimationComponent(
-		core::AnimationId::WormMoveRight
-	);
-
-	std::shared_ptr<AnimationComponent> moveLeftAnimationComponent = m_componentFactory->MakeAnimationComponent(
-		core::AnimationId::WormMoveLeft
-	);
+	std::shared_ptr<AnimationComponent> aniComponent = m_componentFactory->MakeAnimationComponent();
+	aniComponent->SetAnimation(core::AnimationId::WormMoveRight);
 
 	std::shared_ptr<TransformCompositionComponent> transformCompositionComponent = m_componentFactory->MakeTransformCompositionComponent(
 		{
 			bodyComponent,
 			detectorComponent,
-			moveRightAnimationComponent,
-			moveLeftAnimationComponent
+			aniComponent
 		}
 	);
 
 	Entity result(entityId);
 	result.InsertComponent(common::sk_transformCompositionComponentKey, transformCompositionComponent);
-	result.InsertComponent(worm::sk_detectorComponentKey, detectorComponent);
 	result.InsertComponent(common::sk_kinematicBodyComponentKey, bodyComponent);
-	result.InsertComponent(worm::sk_moveLeftAnimationComponentKey, moveRightAnimationComponent);
-	result.InsertComponent(worm::sk_moveRightAnimationComponentKey, moveLeftAnimationComponent);
+	result.InsertComponent(common::sk_animationComponentKey, aniComponent);
+	result.InsertComponent(worm::sk_detectorComponentKey, detectorComponent);
 
 	return std::make_shared<Entity>(result);
 }

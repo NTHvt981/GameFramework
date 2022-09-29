@@ -13,13 +13,9 @@ namespace graphics
 class ISpriteGraphicAPI
 {
 public:
-	virtual std::weak_ptr<SpriteState> RegisterSprite(
-		const core::SpriteId i_spriteId,
-		const core::RenderLayer i_renderLayer = core::RenderLayer::Default
-	) = 0;
-	virtual void DeregisterSprite(
-		const SpriteState::Id i_spriteStateId
-	) = 0;
+	virtual SpriteState::Id GenerateSpriteStateId() = 0;
+	virtual void RegisterSprite(std::shared_ptr<SpriteState> i_spriteState) = 0;
+	virtual void DeregisterSprite(const SpriteState::Id i_spriteStateId) = 0;
 	virtual void SetSpriteRenderLayer(
 		const SpriteState::Id i_spriteStateId,
 		const core::RenderLayer i_renderLayer

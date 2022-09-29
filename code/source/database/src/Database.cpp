@@ -107,7 +107,7 @@ void Database::LoadAnimation()
 	{
 		for (graphics::AnimationFrameDef& frame : animation.frames)
 		{
-			frame.spriteRef = GetSpriteRef(frame.spriteId);
+			frame.spriteDefRef = GetSpriteRef(frame.spriteId);
 		}
 		m_animations.try_emplace(animation.id, std::make_shared<graphics::AnimationDef>(animation));
 	}

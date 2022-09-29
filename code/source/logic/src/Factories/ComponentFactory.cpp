@@ -17,25 +17,24 @@ ComponentFactory::~ComponentFactory()
 {
 }
 
-std::shared_ptr<TransformComponent> ComponentFactory::MakeTransformComponent(const core::Vector2F i_position)
+std::shared_ptr<TransformComponent> ComponentFactory::MakeTransformComponent()
 {
-	return std::make_shared<TransformComponent>(i_position);
+	return std::make_shared<TransformComponent>();
 }
 
-std::shared_ptr<AnimationComponent> ComponentFactory::MakeAnimationComponent(const core::AnimationId i_animationId)
+std::shared_ptr<AnimationComponent> ComponentFactory::MakeAnimationComponent()
 {
 	return std::make_shared<AnimationComponent>(
 		m_graphicSystem,
-		m_database,
-		i_animationId		
+		m_database
 	);
 }
 
-std::shared_ptr<SpriteComponent> ComponentFactory::MakeSpriteComponent(const core::SpriteId i_spriteId)
+std::shared_ptr<SpriteComponent> ComponentFactory::MakeSpriteComponent()
 {
 	return std::make_shared<SpriteComponent>(
 		m_graphicSystem,
-		i_spriteId
+		m_database
 	);
 }
 
@@ -47,11 +46,9 @@ std::shared_ptr<KinematicBodyComponent> ComponentFactory::MakeKinematicBodyCompo
 	);
 }
 
-std::shared_ptr<PivotComponent> ComponentFactory::MakePivotComponent(
-	std::shared_ptr<ITransformComponent> i_component,
-	const core::Vector2F i_position)
+std::shared_ptr<PivotComponent> ComponentFactory::MakePivotComponent(std::shared_ptr<ITransformComponent> i_child)
 {
-	return std::make_shared<PivotComponent>(i_component, i_position);
+	return std::make_shared<PivotComponent>(i_child);
 }
 
 std::shared_ptr<TransformCompositionComponent> ComponentFactory::MakeTransformCompositionComponent(

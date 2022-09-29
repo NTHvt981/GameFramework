@@ -12,7 +12,13 @@ struct AnimationState
 {
 	using Id = uint64_t;
 	const Id id;
-	AnimationState(Id i_id) : id(i_id) {};
+	AnimationState(Id i_id) 
+		: id(i_id) 
+		, spriteStateRef(std::make_shared<SpriteState>(i_id))
+	{
+
+	};
+
 	std::weak_ptr<const AnimationDef> animationDef;
 	std::shared_ptr<SpriteState> spriteStateRef;
 	uint64_t currentFrameIndex = 0;

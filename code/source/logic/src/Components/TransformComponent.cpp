@@ -3,8 +3,7 @@
 namespace logic
 {
 
-TransformComponent::TransformComponent(const core::Vector2F i_position)
-	: m_position(i_position)
+TransformComponent::TransformComponent()
 {
 }
 

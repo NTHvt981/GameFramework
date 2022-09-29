@@ -17,17 +17,16 @@ public:
 	);
 	~ComponentFactory();
 
-	std::shared_ptr<TransformComponent> MakeTransformComponent(const core::Vector2F i_position = core::Vector2F()) override;
+	std::shared_ptr<TransformComponent> MakeTransformComponent() override;
 
-	std::shared_ptr<AnimationComponent> MakeAnimationComponent(const core::AnimationId i_animationId) override;
+	std::shared_ptr<AnimationComponent> MakeAnimationComponent() override;
 
-	std::shared_ptr<SpriteComponent> MakeSpriteComponent(const core::SpriteId i_spriteId) override;
+	std::shared_ptr<SpriteComponent> MakeSpriteComponent() override;
 
 	std::shared_ptr<KinematicBodyComponent> MakeKinematicBodyComponent(std::shared_ptr<physics::DynamicCollider> i_dynamicCollider) override;
 
 	std::shared_ptr<PivotComponent> MakePivotComponent(
-		std::shared_ptr<ITransformComponent> i_component,
-		const core::Vector2F i_position = core::Vector2F()
+		std::shared_ptr<ITransformComponent> i_child
 	) override;
 
 	std::shared_ptr<TransformCompositionComponent> MakeTransformCompositionComponent(

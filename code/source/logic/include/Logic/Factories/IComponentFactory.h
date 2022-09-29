@@ -15,15 +15,14 @@ namespace logic
 class IComponentFactory
 {
 public:
-	virtual std::shared_ptr<TransformComponent> MakeTransformComponent(const core::Vector2F i_position = core::Vector2F()) = 0;
-	virtual std::shared_ptr<AnimationComponent> MakeAnimationComponent(const core::AnimationId i_animationId) = 0;
-	virtual std::shared_ptr<SpriteComponent> MakeSpriteComponent(const core::SpriteId i_spriteId) = 0;
+	virtual std::shared_ptr<TransformComponent> MakeTransformComponent() = 0;
+	virtual std::shared_ptr<AnimationComponent> MakeAnimationComponent() = 0;
+	virtual std::shared_ptr<SpriteComponent> MakeSpriteComponent() = 0;
 	virtual std::shared_ptr<KinematicBodyComponent> MakeKinematicBodyComponent(
 		std::shared_ptr<physics::DynamicCollider> i_dynamicCollider
 	) = 0;
 	virtual std::shared_ptr<PivotComponent> MakePivotComponent(
-		std::shared_ptr<ITransformComponent> i_child,
-		const core::Vector2F i_position = core::Vector2F()
+		std::shared_ptr<ITransformComponent> i_child
 	) = 0;
 	virtual std::shared_ptr<TransformCompositionComponent> MakeTransformCompositionComponent(
 		std::initializer_list<std::shared_ptr<ITransformComponent>> i_componentList

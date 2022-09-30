@@ -19,10 +19,13 @@ void WormScript::Initialize(std::shared_ptr<IScriptContext> i_scriptContext)
 
 	m_kinematicComponent = m_wormEntity->GetComponent<KinematicBodyComponent>(sk_kinematicBodyComponentKey);
 	m_transformComponent = m_wormEntity->GetComponent<TransformCompositionComponent>(sk_transformCompositionComponentKey);
+	m_animationComponent = m_wormEntity->GetComponent<AnimationComponent>(sk_animationComponentKey);
 
 	m_moveCon = m_kinematicComponent->sig_onMove.Connect(
 		std::bind(&TransformCompositionComponent::SetPosition, m_transformComponent.get(), std::placeholders::_1)
 	);
+
+	m_transformComponent->SetPosition(core::Vector2F{ 100, 100 });
 }
 
 void WormScript::Shutdown()
@@ -34,7 +37,6 @@ void WormScript::Shutdown()
 
 void WormScript::OnFixedUpdate(uint64_t dt)
 {
-	m_kinematicComponent->Move(core::Vector2F{ 0, 10 });
 }
 
 void WormScript::OnUpdate(uint64_t dt)

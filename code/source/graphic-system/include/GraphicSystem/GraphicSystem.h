@@ -55,6 +55,9 @@ public:
 		const core::RenderLayer i_renderLayer
 	) override;
 private:
+	void StartDraw();
+	void EndDraw();
+
 	void InsertSpriteState(std::shared_ptr<SpriteState> i_spriteState);
 	std::shared_ptr<SpriteState> GetSpriteState(const SpriteState::Id i_spriteStateId) const;
 	void RemoveSpriteState(std::shared_ptr<SpriteState> i_spriteState);

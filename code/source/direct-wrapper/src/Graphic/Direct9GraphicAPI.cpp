@@ -87,7 +87,7 @@ void Direct9GraphicAPI::Draw(const DrawParams& i_drawParams)
 	const core::Vector2F pos = i_drawParams.position;
 	D3DXVECTOR3 position(pos.x, pos.y, 0);
 
-	const core::BoxI64 box = i_drawParams.boundary;
+	const core::BoxI64 box = i_drawParams.textureBoundary;
 	RECT destRect;
 	destRect.left = (long) box.left;
 	destRect.top = (long) box.top;
@@ -101,6 +101,34 @@ void Direct9GraphicAPI::Draw(const DrawParams& i_drawParams)
 
 	m_spriteHandler->SetTransform(&matrix);
 	m_spriteHandler->Draw(texture, &destRect, NULL, &position, D3DCOLOR_RGBA(255, 255, 255, opacity));
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void Direct9GraphicAPI::StartDraw()
+{
+	HRESULT result = m_direct3DDevice9->BeginScene();
+	assert(SUCCEEDED(result));
+
+	result = m_direct3DDevice9->ColorFill(m_backBuffer, NULL, D3DCOLOR_XRGB(0, 0, 0));
+	assert(SUCCEEDED(result));
+
+	result = m_spriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
+	assert(SUCCEEDED(result));
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void Direct9GraphicAPI::EndDraw()
+{
+	HRESULT result = m_spriteHandler->End();
+	assert(SUCCEEDED(result));
+
+	result = m_direct3DDevice9->EndScene();
+	assert(SUCCEEDED(result));
+
+	result = m_direct3DDevice9->Present(NULL, NULL, NULL, NULL);
+	assert(SUCCEEDED(result));
 }
 
 ////////////////////////////////////////////////////////////////////////////////

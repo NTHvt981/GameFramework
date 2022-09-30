@@ -20,20 +20,17 @@ public:
 	struct DrawParams
 	{
 		core::TextureId textureId;
-		core::Vector2F position{0, 0};
+		core::Vector2F position{ 0, 0 };
 		core::Vector2F origin{ 0, 0 };
-		core::BoxI64 boundary{ 0, 0, 0, 0 };
+		core::BoxI64 textureBoundary{ 0, 0, 0, 0 };
+		core::BoxI64 cameraBoundary{ 0, 0, 0, 0 };
 		float alpha = 1;
 		float scale = 1;
 		core::DrawMode drawMode;
-		struct CameraParams
-		{
-			core::Vector2F position{ 0, 0 };
-			core::BoxI64 boundary{ 0, 0, 0, 0 };
-		};
-		std::optional<CameraParams> optCameraParams;
 	};
 	virtual void Draw(const DrawParams& i_drawParams) = 0;
+	virtual void StartDraw() = 0;
+	virtual void EndDraw() = 0;
 	virtual core::APIMode GetAPIMode() const = 0;
 	virtual void Shutdown() = 0;
 };

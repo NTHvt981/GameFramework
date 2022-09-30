@@ -23,6 +23,8 @@ public:
 		const core::String i_textureFilePath
 	) override;
 	void Draw(const DrawParams& i_drawParams) override;
+	void StartDraw() override;
+	void EndDraw() override;
 	core::APIMode GetAPIMode() const override;
 	void Shutdown() override;
 
@@ -38,6 +40,8 @@ private:
 
 	std::unordered_map<core::TextureId, LPDIRECT3DTEXTURE9> m_mapTextures;
 	LPDIRECT3DTEXTURE9 CreateTextureFromFile(const core::String& imagePath);
+
+	// Inherited via INativeGraphicAPI
 };
 
 } // namespace graphics

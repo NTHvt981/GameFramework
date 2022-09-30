@@ -79,9 +79,9 @@ void KinematicBodyComponent::SetCollisionLayer(const core::CollisionLayer i_coll
 	m_dynamicCollider->collisionLayer = i_collisionLayer;
 }
 
-void KinematicBodyComponent::SetRelativeBoundary(const core::BoxF& i_relativeBoundary)
+void KinematicBodyComponent::SetColliderSize(const core::SizeF& i_size)
 {
-	m_dynamicCollider->relativeBoundary = i_relativeBoundary;
+	m_dynamicCollider->size = i_size;
 }
 
 } // namespace logic

@@ -253,7 +253,7 @@ bool CheckCollisionLayerCondition(
 	const core::CollisionLayer i_moveLayer,
 	const core::CollisionLayer i_staticLayer)
 {
-	if (sk_mapCollisionLayersInteraction.contains(i_moveLayer))
+	if (!sk_mapCollisionLayersInteraction.contains(i_moveLayer))
 	{
 		return false;
 	}

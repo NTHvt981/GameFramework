@@ -3,16 +3,12 @@
         <Id>0</Id>
         <Frames>
             <Frame>
-                <SpriteId>0</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <SpriteId>93</SpriteId>
+                <TimeSpan>200</TimeSpan>
             </Frame>
             <Frame>
-                <SpriteId>1</SpriteId>
-                <TimeSpan>100</TimeSpan>
-            </Frame>
-            <Frame>
-                <SpriteId>3</SpriteId>
-                <TimeSpan>150</TimeSpan>
+                <SpriteId>94</SpriteId>
+                <TimeSpan>200</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -20,12 +16,12 @@
         <Id>1</Id>
         <Frames>
             <Frame>
-                <SpriteId>0</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <SpriteId>95</SpriteId>
+                <TimeSpan>200</TimeSpan>
             </Frame>
             <Frame>
-                <SpriteId>1</SpriteId>
-                <TimeSpan>100</TimeSpan>
+                <SpriteId>96</SpriteId>
+                <TimeSpan>200</TimeSpan>
             </Frame>
         </Frames>
     </Animation>

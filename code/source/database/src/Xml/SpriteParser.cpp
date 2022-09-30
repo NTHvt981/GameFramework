@@ -32,7 +32,7 @@ std::vector<graphics::SpriteDef> LoadSpritesFile(const char* i_filePath)
 void Parse(const tinyxml2::XMLElement* i_element, graphics::SpriteDef& o_value)
 {
 	Parse(i_element->FirstChildElement("Id"), o_value.id);
-	Parse(i_element->FirstChildElement("Boundary"), o_value.boundary);
+	Parse(i_element->FirstChildElement("Boundary"), o_value.textureBoundary);
 	Parse(i_element->FirstChildElement("Origin"), o_value.origin);
 	Parse(i_element->FirstChildElement("TextureId"), o_value.textureId);
 }

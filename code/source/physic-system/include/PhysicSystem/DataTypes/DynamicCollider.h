@@ -1,7 +1,8 @@
 #pragma once
 #include "Collider.h"
 #include "Core/DataTypes/Vector2.h"
-#include "Core/Helpers/BoxVector2Helper.h"
+#include "Core/DataTypes/Size.h"
+#include "Core/Helpers/SizeBoxHelper.h"
 
 namespace physics
 {
@@ -10,11 +11,11 @@ struct DynamicCollider : public Collider
 {
 	using Collider::Collider;
 
-	core::BoxF relativeBoundary;
+	core::SizeF size;
 	core::Vector2F position;
 	core::BoxF GetBoundary() const override
 	{
-		return relativeBoundary + position;
+		return position + size;
 	}
 
 	signals::Signal<core::EntityId> sig_onEntityCollide;

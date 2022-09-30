@@ -60,6 +60,8 @@ void GraphicSystem::PreRender(const uint64_t dt)
 
 void GraphicSystem::Render(const uint64_t dt)
 {
+    StartDraw();
+
     for (const core::RenderLayer renderLayer : core::RenderLayerIterators())
     {
         for (const SpriteState::Id spriteStateId : m_mapLayerSpriteStateIds[renderLayer])
@@ -69,6 +71,8 @@ void GraphicSystem::Render(const uint64_t dt)
             DrawSprite(spriteState);
         }
     }
+
+    EndDraw();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -154,6 +158,20 @@ void GraphicSystem::SetAnimationRenderLayer(
 
 ////////////////////////////////////////////////////////////////////////////////
 
+void GraphicSystem::StartDraw()
+{
+    m_nativeGraphicAPI->StartDraw();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void GraphicSystem::EndDraw()
+{
+    m_nativeGraphicAPI->EndDraw();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 void GraphicSystem::InsertSpriteState(std::shared_ptr<SpriteState> i_spriteState)
 {
     const SpriteState::Id id = i_spriteState->id;
@@ -197,7 +215,7 @@ void GraphicSystem::DrawSprite(std::shared_ptr<const SpriteState> i_spriteState)
 
     drawParams.position = i_spriteState->position;
     drawParams.alpha = i_spriteState->alpha;
-    drawParams.boundary = spriteDef->boundary;
+    drawParams.textureBoundary = spriteDef->textureBoundary;
     drawParams.origin = spriteDef->origin;
     drawParams.textureId = textureDef->id;
 
@@ -255,7 +273,7 @@ bool GraphicSystem::CheckRenderFilter(std::shared_ptr<const SpriteState> i_sprit
 {
     if (m_renderFilter.has_value())
     {
-        const core::BoxI64 spriteDefBoundary = i_spriteState->spriteDef.lock()->boundary;
+        const core::BoxI64 spriteDefBoundary = i_spriteState->spriteDef.lock()->textureBoundary;
         return core::IsOverlap(core::ToFloat(spriteDefBoundary), m_renderFilter.value());
     }
     return true;

@@ -59,7 +59,7 @@ void DirectAudioAPI::Resume()
 void DirectAudioAPI::Shutdown()
 {
     m_directSound->Release();
-    m_directSoundBuffer->Release();
+    //m_directSoundBuffer->Release();
 }
 
 } // namespace audios

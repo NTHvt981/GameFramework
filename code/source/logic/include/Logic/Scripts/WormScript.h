@@ -5,6 +5,7 @@
 #include "Logic/Entities/Entity.h"
 #include "Logic/Components/TransformCompositionComponent.h"
 #include "Logic/Components/KinematicBodyComponent.h"
+#include "Logic/Components/AnimationComponent.h"
 #include "Core/Signals/Connection.h"
 #include <memory>
 
@@ -28,6 +29,7 @@ private:
 	std::shared_ptr<Entity> m_wormEntity;
 	std::shared_ptr<TransformCompositionComponent> m_transformComponent;
 	std::shared_ptr<KinematicBodyComponent> m_kinematicComponent;
+	std::shared_ptr<AnimationComponent> m_animationComponent;
 
 	signals::Connection<core::Vector2F> m_moveCon;
 };

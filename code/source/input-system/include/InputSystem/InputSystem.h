@@ -3,7 +3,7 @@
 #include "API/INativeInputAPI.h"
 #include <memory>
 
-namespace input
+namespace inputs
 {
 
 class InputSystem final: public IInputSystem
@@ -31,4 +31,4 @@ private:
 	std::unique_ptr<INativeInputAPI> m_nativeInputAPI;
 };
 
-} // namespace input
+} // namespace inputs

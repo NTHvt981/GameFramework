@@ -1,7 +1,7 @@
 #pragma once
 #include "API/IInputAPI.h"
 
-namespace input
+namespace inputs
 {
 
 class IInputSystem : public IInputAPI
@@ -14,4 +14,4 @@ public:
 	virtual void Shutdown() = 0;
 };
 
-} // namespace input
+} // namespace inputs

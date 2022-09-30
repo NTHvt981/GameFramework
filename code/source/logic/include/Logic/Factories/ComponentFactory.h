@@ -14,7 +14,7 @@ class ComponentFactory final: public IComponentFactory
 public:
 	ComponentFactory(
 		std::shared_ptr<graphics::IGraphicSystem> i_graphicSystem,
-		std::shared_ptr<input::IInputSystem> i_inputSystem,
+		std::shared_ptr<inputs::IInputSystem> i_inputSystem,
 		std::shared_ptr<audios::IAudioSystem> i_audioSystem,
 		std::shared_ptr<physics::IPhysicSystem> i_physicSystem,
 		std::shared_ptr<database::IDatabase> i_database
@@ -48,7 +48,7 @@ public:
 private:
 	std::shared_ptr<physics::IPhysicSystem> m_physicSystem;
 	std::shared_ptr<graphics::IGraphicSystem> m_graphicSystem;
-	std::shared_ptr<input::IInputSystem> m_inputSystem;
+	std::shared_ptr<inputs::IInputSystem> m_inputSystem;
 	std::shared_ptr<audios::IAudioSystem> m_audioSystem;
 	std::shared_ptr<database::IDatabase> m_database;
 };

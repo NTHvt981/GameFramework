@@ -24,7 +24,7 @@ class Game
 public:
 	Game(
 		std::unique_ptr<graphics::INativeGraphicAPI> i_nativeGraphicAPI,
-		std::unique_ptr<input::INativeInputAPI> i_nativeInputAPI,
+		std::unique_ptr<inputs::INativeInputAPI> i_nativeInputAPI,
 		std::unique_ptr<audios::INativeAudioAPI> i_nativeAudioAPI
 	);
 	void Initialize();
@@ -61,7 +61,7 @@ private:
 	std::shared_ptr<files::IFileSystem> m_fileSystem;
 	std::shared_ptr<graphics::IGraphicSystem> m_graphicSystem;
 	std::shared_ptr<physics::IPhysicSystem> m_physicSystem;
-	std::shared_ptr<input::IInputSystem> m_inputSystem;
+	std::shared_ptr<inputs::IInputSystem> m_inputSystem;
 	std::shared_ptr<audios::IAudioSystem> m_audioSystem;
 	std::shared_ptr<core::GameSetting> m_gameSetting;
 	std::shared_ptr<database::IDatabase> m_database;
@@ -71,7 +71,7 @@ private:
 
 	// own, pass by param
 	std::unique_ptr<graphics::INativeGraphicAPI> m_nativeGraphicAPI;
-	std::unique_ptr<input::INativeInputAPI> m_nativeInputAPI;
+	std::unique_ptr<inputs::INativeInputAPI> m_nativeInputAPI;
 	std::unique_ptr<audios::INativeAudioAPI> m_nativeAudioAPI;
 
 	// game clock relate

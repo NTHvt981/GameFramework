@@ -5,7 +5,7 @@ namespace logic
 
 ComponentFactory::ComponentFactory(
 	std::shared_ptr<graphics::IGraphicSystem> i_graphicSystem,
-	std::shared_ptr<input::IInputSystem> i_inputSystem,
+	std::shared_ptr<inputs::IInputSystem> i_inputSystem,
 	std::shared_ptr<audios::IAudioSystem> i_audioSystem,
 	std::shared_ptr<physics::IPhysicSystem> i_physicSystem,
 	std::shared_ptr<database::IDatabase> i_database)

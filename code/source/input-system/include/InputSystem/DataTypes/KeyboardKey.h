@@ -2,7 +2,7 @@
 #include <stdint.h>
 #include "Core/DataTypes/Iterator.h"
 
-namespace input
+namespace inputs
 {
 
 enum class KeyboardKey: uint64_t
@@ -252,4 +252,4 @@ typedef core::Iterator<KeyboardKey, KeyboardKey::Escape, KeyboardKey::MediaSelec
 //#define DIK_MAIL            0xEC    /* Mail */
 //#define DIK_MEDIASELECT     0xED    /* Media Select */
 
-} // namespace input
+} // namespace inputs

@@ -29,7 +29,7 @@ int WINAPI WinMain(
 	ULONGLONG previousFrameTime = GetTickCount64();
 
 	std::unique_ptr<graphics::INativeGraphicAPI> nativeRenderAPI = std::make_unique<graphics::Direct9GraphicAPI>(hwnd);
-	std::unique_ptr<input::INativeInputAPI> nativeInputAPI = std::make_unique<input::DirectInputAPI>(hwnd, hInstance);
+	std::unique_ptr<inputs::INativeInputAPI> nativeInputAPI = std::make_unique<inputs::DirectInputAPI>(hwnd, hInstance);
 	std::unique_ptr<audios::INativeAudioAPI> nativeAudioAPI = std::make_unique<audios::DirectAudioAPI>(hwnd);
 
 	s_game = std::make_unique<logic::Game>(

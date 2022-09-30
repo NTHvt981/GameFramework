@@ -4,7 +4,7 @@
 #include <Windows.h>
 #include <dinput.h>
 
-namespace input
+namespace inputs
 {
 
 class DirectInputAPI final : public INativeInputAPI
@@ -37,4 +37,4 @@ private:
 	bool m_previousKeys[256];
 };
 
-} // namespace input
+} // namespace inputs

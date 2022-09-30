@@ -1,7 +1,7 @@
 #pragma once
 #include "InputSystem/DataTypes/KeyboardKey.h"
 
-namespace input
+namespace inputs
 {
 
 class INativeInputAPI
@@ -20,4 +20,4 @@ public:
 	virtual bool IsKeyHold(const KeyboardKey i_key) = 0;
 };
 
-} // namespace input
+} // namespace inputs

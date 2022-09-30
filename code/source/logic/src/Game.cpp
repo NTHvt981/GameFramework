@@ -16,7 +16,7 @@ namespace logic
 ////////////////////////////////////////////////////////////////////////////////
 
 Game::Game(std::unique_ptr<graphics::INativeGraphicAPI> i_nativeGraphicAPI,
-	std::unique_ptr<input::INativeInputAPI> i_nativeInputAPI,
+	std::unique_ptr<inputs::INativeInputAPI> i_nativeInputAPI,
 	std::unique_ptr<audios::INativeAudioAPI> i_nativeAudioAPI)
 	: m_nativeGraphicAPI(std::move(i_nativeGraphicAPI))
 	, m_nativeInputAPI(std::move(i_nativeInputAPI))
@@ -28,7 +28,7 @@ Game::Game(std::unique_ptr<graphics::INativeGraphicAPI> i_nativeGraphicAPI,
 	m_fileSystem = std::make_shared<files::FileSystem>();
 	m_database = std::make_shared<database::Database>(m_fileSystem);
 	m_graphicSystem = std::make_shared<graphics::GraphicSystem>(std::move(m_nativeGraphicAPI), m_database);
-	m_inputSystem = std::make_shared<input::InputSystem>(std::move(m_nativeInputAPI));
+	m_inputSystem = std::make_shared<inputs::InputSystem>(std::move(m_nativeInputAPI));
 	m_audioSystem = std::make_shared<audios::AudioSystem>(std::move(m_nativeAudioAPI));
 	m_physicSystem = std::make_shared<physics::PhysicSystem>();
 	

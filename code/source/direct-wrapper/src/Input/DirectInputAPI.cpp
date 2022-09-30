@@ -4,7 +4,7 @@
 #include <assert.h>
 #include <iostream>
 
-namespace input
+namespace inputs
 {
 
 core::Flag s_initFlag;
@@ -100,4 +100,4 @@ bool DirectInputAPI::IsKeyHold(const KeyboardKey i_key)
 	return m_currentKeys[index] && m_previousKeys[index];
 }
 
-} // namespace input
+} // namespace inputs

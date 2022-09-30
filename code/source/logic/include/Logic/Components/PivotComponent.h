@@ -5,9 +5,8 @@
 namespace logic
 {
 
-/// <summary>
-/// A component with 1 child, 1 pivot (relative position)
-/// </summary>
+static constexpr core::ComponentKey sk_pivotComponentKey = "PivotComponent";
+
 class PivotComponent final: public ITransformComponent
 {
 public:

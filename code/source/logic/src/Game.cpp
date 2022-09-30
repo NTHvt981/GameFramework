@@ -32,7 +32,9 @@ Game::Game(std::unique_ptr<graphics::INativeGraphicAPI> i_nativeGraphicAPI,
 	m_audioSystem = std::make_shared<audios::AudioSystem>(std::move(m_nativeAudioAPI));
 	m_physicSystem = std::make_shared<physics::PhysicSystem>();
 	
-	m_componentFactory = std::make_shared<ComponentFactory>(m_graphicSystem, m_physicSystem, m_database);
+	m_componentFactory = std::make_shared<ComponentFactory>(
+		m_graphicSystem, m_inputSystem, m_audioSystem, m_physicSystem, m_database
+	);
 	m_entityFactory = std::make_shared<EntityFactory>(m_componentFactory);
 	m_scriptContext = std::make_shared<ScriptContext>(m_gameClock, m_entityFactory);
 

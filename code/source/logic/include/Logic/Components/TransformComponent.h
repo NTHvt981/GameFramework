@@ -6,6 +6,8 @@
 namespace logic
 {
 
+static constexpr core::ComponentKey sk_transformComponentKey = "TransformComponent";
+
 class TransformComponent final: public ITransformComponent
 {
 public:

@@ -6,9 +6,9 @@ namespace logic
 
 KinematicBodyComponent::KinematicBodyComponent(
 	std::weak_ptr<physics::IPhysicAPI> i_physicAPI, 
-	std::shared_ptr<physics::DynamicCollider> i_dynamicCollider)
+	core::EntityId i_entityId)
 	: m_physicAPI(i_physicAPI)
-	, m_dynamicCollider(i_dynamicCollider)
+	, m_dynamicCollider(std::make_shared<physics::DynamicCollider>(i_entityId))
 {
 }
 
@@ -77,6 +77,11 @@ KinematicBodyComponent::RemainVelocity KinematicBodyComponent::Move(const core::
 void KinematicBodyComponent::SetCollisionLayer(const core::CollisionLayer i_collisionLayer)
 {
 	m_dynamicCollider->collisionLayer = i_collisionLayer;
+}
+
+void KinematicBodyComponent::SetRelativeBoundary(const core::BoxF& i_relativeBoundary)
+{
+	m_dynamicCollider->relativeBoundary = i_relativeBoundary;
 }
 
 } // namespace logic

@@ -8,9 +8,8 @@
 namespace logic
 {
 
-/// <summary>
-/// A component wrap sprite
-/// </summary>
+static constexpr core::ComponentKey sk_spriteComponentKey = "SpriteComponent";
+
 class SpriteComponent final: public ITransformComponent
 {
 public:

@@ -1,5 +1,5 @@
 #pragma once
-#include "Core/DataTypes/Vector2.h"
+#include "Core/Identifiers/ComponentKey.h"
 
 namespace logic
 {

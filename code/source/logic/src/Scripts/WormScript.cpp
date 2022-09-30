@@ -1,5 +1,4 @@
 #include "Logic/Scripts/WormScript.h"
-#include "Logic/ComponentKeys/CommonKeys.h"
 #include "Logic/ComponentKeys/WormKeys.h"
 
 namespace logic
@@ -18,8 +17,8 @@ void WormScript::Initialize(std::shared_ptr<IScriptContext> i_scriptContext)
 	m_wormEntity = i_scriptContext->GetEntityFactory()->MakeWormEntity();
 	m_wormEntity->Register();
 
-	m_kinematicComponent = m_wormEntity->GetComponent<KinematicBodyComponent>(common::sk_kinematicBodyComponentKey);
-	m_transformComponent = m_wormEntity->GetComponent<TransformCompositionComponent>(common::sk_transformCompositionComponentKey);
+	m_kinematicComponent = m_wormEntity->GetComponent<KinematicBodyComponent>(sk_kinematicBodyComponentKey);
+	m_transformComponent = m_wormEntity->GetComponent<TransformCompositionComponent>(sk_transformCompositionComponentKey);
 
 	m_moveCon = m_kinematicComponent->sig_onMove.Connect(
 		std::bind(&TransformCompositionComponent::SetPosition, m_transformComponent.get(), std::placeholders::_1)

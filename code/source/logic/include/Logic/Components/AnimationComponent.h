@@ -9,6 +9,8 @@
 namespace logic
 {
 
+static constexpr core::ComponentKey sk_animationComponentKey = "AnimationComponent";
+
 class AnimationComponent final : public ITransformComponent
 {
 public:

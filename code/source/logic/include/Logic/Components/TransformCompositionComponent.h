@@ -7,9 +7,8 @@
 namespace logic
 {
 
-/// <summary>
-/// Contain multiple components
-/// </summary>
+static constexpr core::ComponentKey sk_transformCompositionComponentKey = "TransformCompositionComponent";
+
 class TransformCompositionComponent final: public ITransformComponent
 {
 public:

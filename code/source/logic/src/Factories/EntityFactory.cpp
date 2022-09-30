@@ -1,6 +1,6 @@
 #include "Logic/Factories/EntityFactory.h"
-#include "Logic/ComponentKeys/CommonKeys.h"
 #include "Logic/ComponentKeys/WormKeys.h"
+#include "Logic/Components/TagComponents.h"
 
 namespace logic
 {
@@ -17,12 +17,12 @@ std::shared_ptr<Entity> EntityFactory::MakeWormEntity()
 	physics::DynamicCollider collider(entityId);
 	collider.collisionLayer = core::CollisionLayer::Enemy;
 	std::shared_ptr<KinematicBodyComponent> bodyComponent = m_componentFactory->MakeKinematicBodyComponent(
-		std::make_shared<physics::DynamicCollider>(collider)
+		entityId
 	);
 
 	physics::DynamicCollider detectorCollider(entityId);
 	std::shared_ptr<KinematicBodyComponent> detectorComponent = m_componentFactory->MakeKinematicBodyComponent(
-		std::make_shared<physics::DynamicCollider>(detectorCollider)
+		entityId
 	);
 
 	std::shared_ptr<AnimationComponent> aniComponent = m_componentFactory->MakeAnimationComponent();
@@ -36,10 +36,12 @@ std::shared_ptr<Entity> EntityFactory::MakeWormEntity()
 		}
 	);
 
+	std::shared_ptr<AnimationComponent> tagComponent = m_componentFactory->MakeAnimationComponent();
+
 	Entity result(entityId);
-	result.InsertComponent(common::sk_transformCompositionComponentKey, transformCompositionComponent);
-	result.InsertComponent(common::sk_kinematicBodyComponentKey, bodyComponent);
-	result.InsertComponent(common::sk_animationComponentKey, aniComponent);
+	result.InsertComponent(sk_transformCompositionComponentKey, transformCompositionComponent);
+	result.InsertComponent(sk_kinematicBodyComponentKey, bodyComponent);
+	result.InsertComponent(sk_animationComponentKey, aniComponent);
 	result.InsertComponent(worm::sk_detectorComponentKey, detectorComponent);
 
 	return std::make_shared<Entity>(result);

@@ -20,11 +20,11 @@ public:
 	void Shutdown() override;
 
 private:
-	void OnFixedUpdate(const uint64_t dt);
-	void OnUpdate(const uint64_t dt);
+	void OnFixedUpdate(const const core::Duration& dt);
+	void OnUpdate(const const core::Duration& dt);
 
-	signals::Connection<const uint64_t> m_onFixedUpdateCon;
-	signals::Connection<const uint64_t> m_onUpdateCon;
+	signals::Connection<const core::Duration&> m_onFixedUpdateCon;
+	signals::Connection<const core::Duration&> m_onUpdateCon;
 
 	std::shared_ptr<Entity> m_wormEntity;
 	std::shared_ptr<TransformCompositionComponent> m_transformComponent;

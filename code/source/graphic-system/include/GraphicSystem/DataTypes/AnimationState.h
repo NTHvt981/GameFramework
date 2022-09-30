@@ -3,6 +3,7 @@
 #include "GraphicSystem/DataTypes/AnimationDef.h"
 #include "GraphicSystem/DataTypes/SpriteState.h"
 #include "Core/Signals/Signal.h"
+#include "Core/DataTypes/Duration.h"
 #include <memory>
 
 namespace graphics
@@ -22,7 +23,7 @@ struct AnimationState
 	std::weak_ptr<const AnimationDef> animationDef;
 	std::shared_ptr<SpriteState> spriteStateRef;
 	uint64_t currentFrameIndex = 0;
-	uint64_t currentFrameTime = 0;
+	core::Duration currentDuration = 0;
 	enum class Direction
 	{
 		Normal,

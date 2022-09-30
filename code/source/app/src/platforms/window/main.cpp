@@ -4,6 +4,7 @@
 #include "DirectWrapper/Audio/DirectAudioAPI.h"
 #include "Core/Macros/Macros.h"
 #include "Core/GameSetting/GameSetting.h"
+#include "Core/DataTypes/Duration.h"
 #include <windows.h>
 #include <tchar.h>
 #include <cstdint>
@@ -70,7 +71,7 @@ int WINAPI WinMain(
 
 			currentFrameTime = GetTickCount64();
 
-			s_game->RunLoop(currentFrameTime - previousFrameTime);
+			s_game->RunLoop(core::Duration::FromMillisecond(currentFrameTime - previousFrameTime));
 
 			previousFrameTime = currentFrameTime;
 		}

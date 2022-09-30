@@ -15,7 +15,7 @@ void InputSystem::Initialize()
 	m_nativeInputAPI->Initialize();
 }
 
-void InputSystem::UpdateInput(uint64_t dt)
+void InputSystem::UpdateInput(const core::Duration& dt)
 {
 	m_nativeInputAPI->UpdateInput();
 }

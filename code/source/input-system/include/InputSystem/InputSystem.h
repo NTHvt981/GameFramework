@@ -15,7 +15,7 @@ public:
 	);
 	// Inherited via IInputSystem
 	void Initialize() override;
-	void UpdateInput(const uint64_t dt) override;
+	void UpdateInput(const const core::Duration& dt) override;
 	void Pause() override;
 	void Resume() override;
 	void Shutdown() override;

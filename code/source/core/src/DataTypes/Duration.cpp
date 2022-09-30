@@ -1,0 +1,96 @@
+#include "Core/DataTypes/Duration.h"
+#include "Core/Macros/Macros.h"
+#include <assert.h>
+
+namespace core
+{
+
+////////////////////////////////////////////////////////////////////////////////
+
+Duration::Duration(uint64_t i_milisecond)
+	: m_milisecond(i_milisecond)
+{
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+Duration Duration::FromMillisecond(uint64_t i_milisecond)
+{
+	return Duration(i_milisecond);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+Duration Duration::FromSecond(float i_milisecond)
+{
+	return Duration(static_cast<uint64_t>(i_milisecond * 1000.0));
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+uint64_t Duration::ToMilisecond() const
+{
+	return m_milisecond;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+float Duration::ToSecond() const
+{
+	return m_milisecond / 1000.0f;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+Duration Duration::operator+(const Duration& i_other) const
+{
+	return Duration(this->m_milisecond + i_other.m_milisecond);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+Duration Duration::operator-(const Duration& i_other) const
+{
+	int32_t result = this->m_milisecond - i_other.m_milisecond;
+	DEBUG(assert(result >= 0));
+	return Duration(result);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+bool Duration::operator>(const Duration& i_other) const
+{
+	return this->m_milisecond > i_other.m_milisecond;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+bool Duration::operator<(const Duration& i_other) const
+{
+	return this->m_milisecond < i_other.m_milisecond;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+bool Duration::operator==(const Duration& i_other) const
+{
+	return this->m_milisecond == i_other.m_milisecond;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+bool Duration::operator>=(const Duration& i_other) const
+{
+	return this->m_milisecond >= i_other.m_milisecond;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+bool Duration::operator<=(const Duration& i_other) const
+{
+	return this->m_milisecond <= i_other.m_milisecond;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+} // namespace core

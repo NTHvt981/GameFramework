@@ -32,29 +32,29 @@ public:
 	void Initialize();
 	bool IsInitialized() const;
 	void LoadResource();
-	void RunLoop(uint64_t dt);
+	void RunLoop(const core::Duration& dt);
 	void Pause();
 	void Resume();
 	void Shutdown();
 
 	signals::Signal<> sig_requestShutdown;
 private:
-	void UpdateInput(const uint64_t dt);
+	void UpdateInput(const const core::Duration& dt);
 
-	void FixedUpdate(const uint64_t dt);
-	void PreFixedUpdate(const uint64_t dt);
-	void DuringFixedUpdate(const uint64_t dt);
-	void PostFixedUpdate(const uint64_t dt);
+	void FixedUpdate(const const core::Duration& dt);
+	void PreFixedUpdate(const const core::Duration& dt);
+	void DuringFixedUpdate(const const core::Duration& dt);
+	void PostFixedUpdate(const const core::Duration& dt);
 
-	void Update(const uint64_t dt);
-	void PreUpdate(const uint64_t dt);
-	void DuringUpdate(const uint64_t dt);
-	void PostUpdate(const uint64_t dt);
+	void Update(const const core::Duration& dt);
+	void PreUpdate(const const core::Duration& dt);
+	void DuringUpdate(const const core::Duration& dt);
+	void PostUpdate(const const core::Duration& dt);
 
-	void Render(const uint64_t dt);
-	void PreRender(const uint64_t dt);
-	void DuringRender(const uint64_t dt);
-	void PostRender(const uint64_t dt);
+	void Render(const const core::Duration& dt);
+	void PreRender(const const core::Duration& dt);
+	void DuringRender(const const core::Duration& dt);
+	void PostRender(const const core::Duration& dt);
 
 	void OnRequestShutdown();
 
@@ -78,8 +78,8 @@ private:
 	std::unique_ptr<audios::INativeAudioAPI> m_nativeAudioAPI;
 
 	// game clock relate
-	uint64_t m_millisecondsPerFrame = 0;
-	uint64_t m_millisecondsSinceLastFixedUpdate = 0;
+	core::Duration m_perFrameDuration = 0;
+	core::Duration m_lastFixedUpdateDuration = 0;
 	bool m_waitForFixedUpdate = false;
 
 	// others

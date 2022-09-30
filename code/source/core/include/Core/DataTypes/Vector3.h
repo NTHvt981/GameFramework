@@ -7,6 +7,7 @@ namespace core
 template <typename T>
 struct Vector3
 {
+	static_assert(std::is_arithmetic<T>::value);
 	T x;
 	T y;
 	T z;

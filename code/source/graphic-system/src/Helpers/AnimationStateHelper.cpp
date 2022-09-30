@@ -10,7 +10,7 @@ void SetAnimationDef(AnimationState& i_animationState, std::shared_ptr<const Ani
     i_animationState.spriteStateRef->spriteDef = currentFrame.spriteDefRef;
 }
 
-void UpdateAnimationState(AnimationState& animationState, uint64_t dt)
+void UpdateAnimationState(AnimationState& animationState, const core::Duration& dt)
 {
     if (animationState.pause)
     {
@@ -18,14 +18,14 @@ void UpdateAnimationState(AnimationState& animationState, uint64_t dt)
     }
 
     uint64_t& currentFrameIndex = animationState.currentFrameIndex;
-    uint64_t& currentFrameTime = animationState.currentFrameTime;
+    core::Duration& currentDuration = animationState.currentDuration;
     auto animationDef = animationState.animationDef.lock();
 
-    uint64_t newFrameTime = currentFrameTime + dt;
+    core::Duration newDuration = currentDuration + dt;
     const AnimationFrameDef& currentFrame = animationDef->frames[currentFrameIndex];
-    if (newFrameTime >= currentFrame.duration)
+    if (newDuration >= currentFrame.duration)
     {
-        currentFrameTime = newFrameTime - currentFrame.duration;
+        currentDuration = newDuration - currentFrame.duration;
         currentFrameIndex++;
         auto frameSize = animationDef->frames.size();
         if (currentFrameIndex >= frameSize)
@@ -42,7 +42,7 @@ void UpdateAnimationState(AnimationState& animationState, uint64_t dt)
     }
     else
     {
-        currentFrameTime = newFrameTime;
+        currentDuration = newDuration;
     }
 }
 

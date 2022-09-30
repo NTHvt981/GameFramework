@@ -7,6 +7,7 @@ namespace core
 template <typename T>
 struct Box
 {
+	static_assert(std::is_arithmetic<T>::value);
 	T left = 0;
 	T top = 0;
 	T right = 0;

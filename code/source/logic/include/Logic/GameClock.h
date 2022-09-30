@@ -8,16 +8,16 @@ class GameClock: public core::logic::IGameClock
 {
 public:
 	GameClock();
-	void UpdateInput(const uint64_t dt);
-	void PreFixedUpdate(const uint64_t dt);
-	void FixedUpdate(const uint64_t dt);
-	void PostFixedUpdate(const uint64_t dt);
-	void PreUpdate(const uint64_t dt);
-	void Update(const uint64_t dt);
-	void PostUpdate(const uint64_t dt);
-	void PreRender(const uint64_t dt);
-	void Render(const uint64_t dt);
-	void PostRender(const uint64_t dt);
+	void UpdateInput(const const core::Duration& dt);
+	void PreFixedUpdate(const const core::Duration& dt);
+	void FixedUpdate(const const core::Duration& dt);
+	void PostFixedUpdate(const const core::Duration& dt);
+	void PreUpdate(const const core::Duration& dt);
+	void Update(const const core::Duration& dt);
+	void PostUpdate(const const core::Duration& dt);
+	void PreRender(const const core::Duration& dt);
+	void Render(const const core::Duration& dt);
+	void PostRender(const const core::Duration& dt);
 	void Shutdown();
 
 private:

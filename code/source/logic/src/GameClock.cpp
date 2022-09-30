@@ -7,7 +7,7 @@ GameClock::GameClock()
 {
 }
 
-void GameClock::UpdateInput(const uint64_t dt)
+void GameClock::UpdateInput(const const core::Duration& dt)
 {
 	if (m_shutDown)
 	{
@@ -17,7 +17,7 @@ void GameClock::UpdateInput(const uint64_t dt)
 	sig_onUpdateInput.Emit(dt);
 }
 
-void GameClock::PreFixedUpdate(const uint64_t dt)
+void GameClock::PreFixedUpdate(const const core::Duration& dt)
 {
 	if (m_shutDown)
 	{
@@ -27,7 +27,7 @@ void GameClock::PreFixedUpdate(const uint64_t dt)
 	sig_onPreFixedUpdate.Emit(dt);
 }
 
-void GameClock::FixedUpdate(const uint64_t dt)
+void GameClock::FixedUpdate(const const core::Duration& dt)
 {
 	if (m_shutDown)
 	{
@@ -37,7 +37,7 @@ void GameClock::FixedUpdate(const uint64_t dt)
 	sig_onFixedUpdate.Emit(dt);
 }
 
-void GameClock::PostFixedUpdate(const uint64_t dt)
+void GameClock::PostFixedUpdate(const const core::Duration& dt)
 {
 	if (m_shutDown)
 	{
@@ -47,7 +47,7 @@ void GameClock::PostFixedUpdate(const uint64_t dt)
 	sig_onPostFixedUpdate.Emit(dt);
 }
 
-void GameClock::PreUpdate(const uint64_t dt)
+void GameClock::PreUpdate(const const core::Duration& dt)
 {
 	if (m_shutDown)
 	{
@@ -57,7 +57,7 @@ void GameClock::PreUpdate(const uint64_t dt)
 	sig_onPreUpdate.Emit(dt);
 }
 
-void GameClock::Update(const uint64_t dt)
+void GameClock::Update(const const core::Duration& dt)
 {
 	if (m_shutDown)
 	{
@@ -67,7 +67,7 @@ void GameClock::Update(const uint64_t dt)
 	sig_onUpdate.Emit(dt);
 }
 
-void GameClock::PostUpdate(const uint64_t dt)
+void GameClock::PostUpdate(const const core::Duration& dt)
 {
 	if (m_shutDown)
 	{
@@ -77,7 +77,7 @@ void GameClock::PostUpdate(const uint64_t dt)
 	sig_onPostUpdate.Emit(dt);
 }
 
-void GameClock::PreRender(const uint64_t dt)
+void GameClock::PreRender(const const core::Duration& dt)
 {
 	if (m_shutDown)
 	{
@@ -87,7 +87,7 @@ void GameClock::PreRender(const uint64_t dt)
 	sig_onPreRender.Emit(dt);
 }
 
-void GameClock::Render(const uint64_t dt)
+void GameClock::Render(const const core::Duration& dt)
 {
 	if (m_shutDown)
 	{
@@ -97,7 +97,7 @@ void GameClock::Render(const uint64_t dt)
 	sig_onRender.Emit(dt);
 }
 
-void GameClock::PostRender(const uint64_t dt)
+void GameClock::PostRender(const const core::Duration& dt)
 {
 	if (m_shutDown)
 	{

@@ -1,5 +1,6 @@
 #pragma once
 #include <cstdint>
+#include <type_traits>
 
 namespace core
 {
@@ -7,6 +8,7 @@ namespace core
 template <typename T>
 struct Vector2
 {
+	static_assert(std::is_arithmetic<T>::value);
 	T x = 0;
 	T y = 0;
 };

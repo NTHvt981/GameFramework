@@ -9,6 +9,7 @@
 #include "Logic/Factories/EntityFactory.h"
 #include "Logic/Scripts/ScriptContext.h"
 #include "Logic/Scripts/WormScript.h"
+#include "Logic/LogicSystems/CameraSystem/CameraSystem.h"
 
 namespace logic
 {
@@ -17,17 +18,23 @@ namespace logic
 
 Game::Game(std::unique_ptr<graphics::INativeGraphicAPI> i_nativeGraphicAPI,
 	std::unique_ptr<inputs::INativeInputAPI> i_nativeInputAPI,
-	std::unique_ptr<audios::INativeAudioAPI> i_nativeAudioAPI)
+	std::unique_ptr<audios::INativeAudioAPI> i_nativeAudioAPI,
+	std::shared_ptr<core::GameSetting> i_gameSetting)
 	: m_nativeGraphicAPI(std::move(i_nativeGraphicAPI))
 	, m_nativeInputAPI(std::move(i_nativeInputAPI))
 	, m_nativeAudioAPI(std::move(i_nativeAudioAPI))
+	, m_gameSetting(i_gameSetting)
 {
-	m_gameSetting = std::make_shared<core::GameSetting>();
-	
 	m_gameClock = std::make_shared<logic::GameClock>();
 	m_fileSystem = std::make_shared<files::FileSystem>();
 	m_database = std::make_shared<database::Database>(m_fileSystem);
-	m_graphicSystem = std::make_shared<graphics::GraphicSystem>(std::move(m_nativeGraphicAPI), m_database);
+	m_cameraSystem = std::make_shared<camera::CameraSystem>();
+	m_graphicSystem = std::make_shared<graphics::GraphicSystem>(
+		std::move(m_nativeGraphicAPI), 
+		m_database,
+		m_cameraSystem,
+		m_gameSetting
+	);
 	m_inputSystem = std::make_shared<inputs::InputSystem>(std::move(m_nativeInputAPI));
 	m_audioSystem = std::make_shared<audios::AudioSystem>(std::move(m_nativeAudioAPI));
 	m_physicSystem = std::make_shared<physics::PhysicSystem>();

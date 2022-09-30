@@ -3,6 +3,7 @@
 #include "KeyboardKeyHelper.h"
 #include <assert.h>
 #include <iostream>
+#include "Core/Macros/Macros.h"
 
 namespace inputs
 {

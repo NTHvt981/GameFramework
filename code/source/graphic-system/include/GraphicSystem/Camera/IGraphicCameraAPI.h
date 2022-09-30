@@ -1,5 +1,6 @@
 #pragma once
 #include "Core/DataTypes/Box.h"
+#include "Core/Signals/Signal.h"
 
 namespace graphics::camera
 {

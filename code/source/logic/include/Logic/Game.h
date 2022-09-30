@@ -14,6 +14,7 @@
 #include "Factories/IEntityFactory.h"
 #include "Logic/Scripts/IScriptContext.h"
 #include "Logic/Scripts/Script.h"
+#include "Logic/LogicSystems/CameraSystem/ICameraSystem.h"
 #include <memory>
 
 namespace logic
@@ -25,7 +26,8 @@ public:
 	Game(
 		std::unique_ptr<graphics::INativeGraphicAPI> i_nativeGraphicAPI,
 		std::unique_ptr<inputs::INativeInputAPI> i_nativeInputAPI,
-		std::unique_ptr<audios::INativeAudioAPI> i_nativeAudioAPI
+		std::unique_ptr<audios::INativeAudioAPI> i_nativeAudioAPI,
+		std::shared_ptr<core::GameSetting> i_gameSetting
 	);
 	void Initialize();
 	bool IsInitialized() const;
@@ -63,6 +65,7 @@ private:
 	std::shared_ptr<physics::IPhysicSystem> m_physicSystem;
 	std::shared_ptr<inputs::IInputSystem> m_inputSystem;
 	std::shared_ptr<audios::IAudioSystem> m_audioSystem;
+	std::shared_ptr<camera::ICameraSystem> m_cameraSystem;
 	std::shared_ptr<core::GameSetting> m_gameSetting;
 	std::shared_ptr<database::IDatabase> m_database;
 	std::shared_ptr<IComponentFactory> m_componentFactory;

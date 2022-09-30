@@ -10,11 +10,25 @@ namespace graphics
 
 GraphicSystem::GraphicSystem(
     std::unique_ptr<INativeGraphicAPI> i_nativeGraphicAPI,
-    std::shared_ptr<database::IGraphicDatabaseAPI> i_databaseAPI)
+    std::shared_ptr<const database::IGraphicDatabaseAPI> i_databaseAPI,
+    std::shared_ptr<const camera::IGraphicCameraAPI> i_graphicCameraAPI,
+    std::shared_ptr<core::GameSetting> i_gameSetting)
     : m_nativeGraphicAPI(std::move(i_nativeGraphicAPI))
     , m_databaseAPI(i_databaseAPI)
+    , m_graphicCameraAPI(i_graphicCameraAPI)
+    , m_gameSetting(i_gameSetting)
 {
     InitLayerSpriteStateIds();
+
+    m_onWindowSizeChangeCon = m_gameSetting->sig_onWindowSizeChange.Connect(
+        std::bind(&GraphicSystem::OnWindowSizeChange, this, std::placeholders::_1)
+    );
+    OnWindowSizeChange(m_gameSetting->GetWindowSize());
+
+    // test code
+    m_nativeGraphicAPI->SetDisplaySize({ 400, 300 });
+    m_nativeGraphicAPI->SetDisplayPosition({ 0, 0 });
+    m_nativeGraphicAPI->SetWindowSize(m_gameSetting->GetWindowSize());
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -54,6 +68,7 @@ void GraphicSystem::Shutdown()
 
 void GraphicSystem::PreRender(const uint64_t dt)
 {
+    UpdateAnimationStates(dt);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -279,10 +294,21 @@ bool GraphicSystem::CheckRenderFilter(std::shared_ptr<const SpriteState> i_sprit
     return true;
 }
 
+////////////////////////////////////////////////////////////////////////////////
+
+void GraphicSystem::OnWindowSizeChange(core::SizeF i_newSize)
+{
+    m_nativeGraphicAPI->SetWindowSize(i_newSize);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 SpriteState::Id GraphicSystem::GenerateSpriteStateId()
 {
     return m_idGenerator.Generate();
 }
+
+////////////////////////////////////////////////////////////////////////////////
 
 AnimationState::Id GraphicSystem::GenerateAnimationStateId()
 {

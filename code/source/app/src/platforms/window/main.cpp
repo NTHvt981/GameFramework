@@ -2,16 +2,19 @@
 #include "DirectWrapper/Graphic/Direct9GraphicAPI.h"
 #include "DirectWrapper/Input/DirectInputAPI.h"
 #include "DirectWrapper/Audio/DirectAudioAPI.h"
+#include "Core/Macros/Macros.h"
+#include "Core/GameSetting/GameSetting.h"
 #include <windows.h>
 #include <tchar.h>
 #include <cstdint>
 #include <sysinfoapi.h>
 
-HWND CreateGameWindow(HINSTANCE hInstance, int64_t nCmdShow, int64_t ScreenWidth, int64_t ScreenHeight);
+HWND CreateGameWindow(HINSTANCE hInstance, int64_t nCmdShow);
 LRESULT CALLBACK WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 void OnGameRequestShutdown();
 
 std::unique_ptr<logic::Game> s_game = nullptr;
+std::shared_ptr<core::GameSetting> s_gameSetting = nullptr;
 bool s_isRunning = true;
 
 int WINAPI WinMain(
@@ -21,7 +24,12 @@ int WINAPI WinMain(
 	_In_ int       nCmdShow
 )
 {
-	HWND hwnd = CreateGameWindow(hInstance, nCmdShow, 800, 600);
+	s_gameSetting = std::make_unique<core::GameSetting>();
+	s_gameSetting->SetFPS(60);
+	s_gameSetting->SetWindowTitle("Blaster Master");
+	s_gameSetting->SetWindowSize({ 800, 600 });
+
+	HWND hwnd = CreateGameWindow(hInstance, nCmdShow);
 
 	MSG msg;
 	bool done = 0;
@@ -31,17 +39,20 @@ int WINAPI WinMain(
 	std::unique_ptr<graphics::INativeGraphicAPI> nativeRenderAPI = std::make_unique<graphics::Direct9GraphicAPI>(hwnd);
 	std::unique_ptr<inputs::INativeInputAPI> nativeInputAPI = std::make_unique<inputs::DirectInputAPI>(hwnd, hInstance);
 	std::unique_ptr<audios::INativeAudioAPI> nativeAudioAPI = std::make_unique<audios::DirectAudioAPI>(hwnd);
-
+	
 	s_game = std::make_unique<logic::Game>(
 		std::move(nativeRenderAPI), 
 		std::move(nativeInputAPI), 
-		std::move(nativeAudioAPI)
+		std::move(nativeAudioAPI),
+		s_gameSetting
 	);
 	s_game->Initialize();
 	auto connection = s_game->sig_requestShutdown.Connect(std::function(OnGameRequestShutdown));
-
-	//try
-	//{
+	
+	RELEASE(
+	try
+	{
+	)
 		s_game->LoadResource();
 
 		while (s_isRunning)
@@ -63,19 +74,21 @@ int WINAPI WinMain(
 
 			previousFrameTime = currentFrameTime;
 		}
-	//}
-	//catch (const std::exception& ex)
-	//{
-	//	s_game->Shutdown();
-	//	return -1;
-	//}
+	RELEASE(
+	}
+	catch (const std::exception& ex)
+	{
+		s_game->Shutdown();
+		return -1;
+	}
+	)
 
 	s_game->Shutdown();
 
 	return 0;
 }
 
-HWND CreateGameWindow(HINSTANCE hInstance, int64_t nCmdShow, int64_t ScreenWidth, int64_t ScreenHeight)
+HWND CreateGameWindow(HINSTANCE hInstance, int64_t nCmdShow)
 {
 	WNDCLASSEX wc;
 	wc.cbSize = sizeof(WNDCLASSEX);
@@ -86,6 +99,8 @@ HWND CreateGameWindow(HINSTANCE hInstance, int64_t nCmdShow, int64_t ScreenWidth
 	//Try this to see how the debug function prints out file and line 
 	//wc.hInstance = (HINSTANCE)-100; 
 
+	const std::wstring className = s_gameSetting->GetWindowTitle().ToStdWStr();
+
 	wc.lpfnWndProc = (WNDPROC)WinProc;
 	wc.cbClsExtra = 0;
 	wc.cbWndExtra = 0;
@@ -93,11 +108,13 @@ HWND CreateGameWindow(HINSTANCE hInstance, int64_t nCmdShow, int64_t ScreenWidth
 	wc.hCursor = LoadCursor(NULL, IDC_ARROW);
 	wc.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
 	wc.lpszMenuName = NULL;
-	wc.lpszClassName = L"Test-Win";
+	wc.lpszClassName = className.c_str();
 	wc.hIconSm = NULL;
 
 	ATOM result = RegisterClassEx(&wc);
 	assert(result != NULL);
+
+	core::SizeF ScreenSize = s_gameSetting->GetWindowSize();
 
 	HWND hwnd = CreateWindow(
 		wc.lpszClassName,
@@ -105,8 +122,8 @@ HWND CreateGameWindow(HINSTANCE hInstance, int64_t nCmdShow, int64_t ScreenWidth
 		WS_OVERLAPPEDWINDOW, // WS_EX_TOPMOST | WS_VISIBLE | WS_POPUP,
 		CW_USEDEFAULT,
 		CW_USEDEFAULT,
-		ScreenWidth,
-		ScreenHeight,
+		ScreenSize.width,
+		ScreenSize.height,
 		NULL,
 		NULL,
 		hInstance,

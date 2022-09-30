@@ -78,6 +78,30 @@ void Direct9GraphicAPI::LoadTexture(
 
 ////////////////////////////////////////////////////////////////////////////////
 
+void Direct9GraphicAPI::SetWindowSize(const core::SizeF i_screenSize)
+{
+	m_screenSize = i_screenSize;
+	ResetDrawMatrix();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void Direct9GraphicAPI::SetDisplaySize(const core::SizeF i_displaySize)
+{
+	m_displaySize = i_displaySize;
+	ResetDrawMatrix();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void Direct9GraphicAPI::SetDisplayPosition(const core::Vector2F i_displayPosition)
+{
+	m_displayPosition = i_displayPosition;
+	ResetDrawMatrix();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 void Direct9GraphicAPI::Draw(const DrawParams& i_drawParams)
 {
 	const core::TextureId id = i_drawParams.textureId;
@@ -94,12 +118,8 @@ void Direct9GraphicAPI::Draw(const DrawParams& i_drawParams)
 	destRect.right = (long) box.right;
 	destRect.bottom = (long) box.bottom;
 
-	D3DXMATRIX matrix;
-	D3DXMatrixIdentity(&matrix);
-
 	int64_t opacity = i_drawParams.alpha * 255.0;
 
-	m_spriteHandler->SetTransform(&matrix);
 	m_spriteHandler->Draw(texture, &destRect, NULL, &position, D3DCOLOR_RGBA(255, 255, 255, opacity));
 }
 
@@ -114,6 +134,9 @@ void Direct9GraphicAPI::StartDraw()
 	assert(SUCCEEDED(result));
 
 	result = m_spriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
+	assert(SUCCEEDED(result));
+
+	result = m_spriteHandler->SetTransform(&m_drawMatrix);
 	assert(SUCCEEDED(result));
 }
 
@@ -160,6 +183,33 @@ LPDIRECT3DTEXTURE9 Direct9GraphicAPI::CreateTextureFromFile(const core::String& 
 	assert(SUCCEEDED(result));
 
 	return o_texture;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void Direct9GraphicAPI::ResetDrawMatrix()
+{
+	const D3DXVECTOR2 scale = D3DXVECTOR2(
+		m_screenSize.width / m_displaySize.width,
+		m_screenSize.height / m_displaySize.height
+	);
+
+	const D3DXVECTOR2 translate = D3DXVECTOR2(
+		m_displayPosition.x, 
+		m_displayPosition.y
+	);
+
+	const D3DXVECTOR2 scaleOrigin = D3DXVECTOR2(0, 0);
+
+	D3DXMatrixTransformation2D(
+		&m_drawMatrix,
+		&scaleOrigin,
+		NULL,
+		& scale,
+		NULL,
+		0,
+		&translate
+	);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

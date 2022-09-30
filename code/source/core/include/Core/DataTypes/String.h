@@ -7,6 +7,7 @@ class String
 {
 public:
 	String();
+	String(const String& other);
 	String(const char* i_chars);
 	String(const wchar_t* i_chars);
 	String(const std::string& i_stdString);

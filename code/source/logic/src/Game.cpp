@@ -77,7 +77,7 @@ void Game::LoadResource()
 	m_database->LoadResource();
 	m_graphicSystem->LoadTextures();
 
-	m_wormScript->Initialize(m_scriptContext);
+	m_wormScript->OnInitialize(m_scriptContext);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -131,7 +131,7 @@ void Game::Shutdown()
 	m_audioSystem->Shutdown();
 
 	//test
-	m_wormScript->Shutdown();
+	m_wormScript->OnShutdown();
 }
 
 ////////////////////////////////////////////////////////////////////////////////

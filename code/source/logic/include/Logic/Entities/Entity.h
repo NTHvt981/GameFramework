@@ -13,6 +13,7 @@ class Entity
 {
 public:
 	Entity(core::EntityId i_id);
+	core::EntityId GetId() const;
 	void InsertComponent(core::ComponentKey i_componentKey, std::shared_ptr<IComponent> i_component);
 	bool HasComponent(core::ComponentKey i_componentKey) const;
 	std::shared_ptr<IComponent> GetComponent(core::ComponentKey i_componentKey) const;

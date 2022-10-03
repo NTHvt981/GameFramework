@@ -9,6 +9,11 @@ Entity::Entity(core::EntityId i_id)
 {
 }
 
+core::EntityId Entity::GetId() const
+{
+	return m_id;
+}
+
 void Entity::InsertComponent(core::ComponentKey i_componentKey, std::shared_ptr<IComponent> i_component)
 {
 	m_components.emplace(i_componentKey, i_component);

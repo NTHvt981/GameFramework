@@ -5,12 +5,12 @@ namespace logic
 {
 
 AnimationComponent::AnimationComponent(
-	std::weak_ptr<graphics::IAnimationGraphicAPI> i_animationGraphicAPI,
+	std::shared_ptr<graphics::IAnimationGraphicAPI> i_animationGraphicAPI,
 	std::weak_ptr<const graphics::database::IGraphicDatabaseAPI> i_graphicDatabaseAPI)
-	: m_animationGraphicAPI(i_animationGraphicAPI)
+	: m_animationGraphicAPI(std::ref(*i_animationGraphicAPI.get()))
 	, m_graphicDatabaseAPI(i_graphicDatabaseAPI)
 	, m_animationState(std::make_shared<graphics::AnimationState>(
-		i_animationGraphicAPI.lock()->GenerateAnimationStateId()
+		m_animationGraphicAPI.get().GenerateAnimationStateId()
 	))
 {
 }
@@ -38,8 +38,7 @@ void AnimationComponent::Register()
 	}
 	isRegistered = true;
 
-	std::shared_ptr<graphics::IAnimationGraphicAPI> graphicAPI = m_animationGraphicAPI.lock();
-	graphicAPI->RegisterAnimation(m_animationState);
+	m_animationGraphicAPI.get().RegisterAnimation(m_animationState);
 
 	m_onAnimationFinishedCon = m_animationState->sig_onAnimationFinished.Connect(
 		std::bind(&AnimationComponent::OnAnimationFinished, this)
@@ -54,8 +53,7 @@ void AnimationComponent::Deregister()
 	}
 	isRegistered = false;
 
-	std::shared_ptr<graphics::IAnimationGraphicAPI> graphicAPI = m_animationGraphicAPI.lock();
-	graphicAPI->DeregisterAnimation(m_animationState->id);
+	m_animationGraphicAPI.get().DeregisterAnimation(m_animationState->id);
 
 	m_onAnimationFinishedCon.Disconnect();
 }

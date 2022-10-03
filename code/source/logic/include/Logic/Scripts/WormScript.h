@@ -16,12 +16,10 @@ class WormScript final: public Script
 {
 public:
 	// Inherited via Script
-	void Initialize(std::shared_ptr<IScriptContext> i_scriptContext) override;
-	void Shutdown() override;
-
-private:
-	void OnFixedUpdate(const const core::Duration& dt);
-	void OnUpdate(const const core::Duration& dt);
+	void OnInitialize(std::shared_ptr<IScriptContext> i_scriptContext) override;
+	void OnShutdown() override;
+	void OnFixedUpdate(const core::Duration& dt) override;
+	void OnUpdate(const core::Duration& dt) override;
 
 	signals::Connection<const core::Duration&> m_onFixedUpdateCon;
 	signals::Connection<const core::Duration&> m_onUpdateCon;

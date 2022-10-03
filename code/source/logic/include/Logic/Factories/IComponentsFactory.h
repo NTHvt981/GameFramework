@@ -18,7 +18,7 @@ class EnemyTagComponent;
 class PlayerTagComponent;
 class BulletTagComponent;
 	
-class IComponentFactory
+class IComponentsFactory
 {
 public:
 	virtual std::shared_ptr<TransformComponent> MakeTransformComponent() = 0;

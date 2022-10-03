@@ -10,8 +10,8 @@
 #include "AudioSystem/API/INativeAudioAPI.h"
 #include "FileSystem/IFileSystem.h"
 #include "Database/IDatabase.h"
-#include "Factories/IComponentFactory.h"
-#include "Factories/IEntityFactory.h"
+#include "Factories/IComponentsFactory.h"
+#include "Factories/IEntitiesFactory.h"
 #include "Logic/Scripts/IScriptContext.h"
 #include "Logic/Scripts/Script.h"
 #include "Logic/LogicSystems/CameraSystem/ICameraSystem.h"
@@ -68,8 +68,8 @@ private:
 	std::shared_ptr<camera::ICameraSystem> m_cameraSystem;
 	std::shared_ptr<core::GameSetting> m_gameSetting;
 	std::shared_ptr<database::IDatabase> m_database;
-	std::shared_ptr<IComponentFactory> m_componentFactory;
-	std::shared_ptr<IEntityFactory> m_entityFactory;
+	std::shared_ptr<IComponentsFactory> m_componentFactory;
+	std::shared_ptr<IEntitiesFactory> m_entityFactory;
 	std::shared_ptr<IScriptContext> m_scriptContext;
 
 	// own, pass by param

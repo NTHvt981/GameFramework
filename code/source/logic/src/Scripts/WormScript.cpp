@@ -1,7 +1,7 @@
 #include "Logic/Scripts/WormScript.h"
 #include "Logic/ComponentKeys/WormKeys.h"
 #include "Core/GameClock/IGameClock.h"
-#include "Logic/Factories/IEntityFactory.h"
+#include "Logic/Factories/IEntitiesFactory.h"
 #include "Logic/Entities/Entity.h"
 #include "Logic/Components/TransformCompositionComponent.h"
 #include "Logic/Components/KinematicBodyComponent.h"

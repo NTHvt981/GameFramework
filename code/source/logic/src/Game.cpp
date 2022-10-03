@@ -5,8 +5,8 @@
 #include "AudioSystem/AudioSystem.h"
 #include "FileSystem/FileSystem.h"
 #include "Database/Database.h"
-#include "Logic/Factories/ComponentFactory.h"
-#include "Logic/Factories/EntityFactory.h"
+#include "Logic/Factories/ComponentsFactory.h"
+#include "Logic/Factories/EntitiesFactory.h"
 #include "Logic/Scripts/ScriptContext.h"
 #include "Logic/Scripts/WormScript.h"
 #include "Logic/LogicSystems/CameraSystem/CameraSystem.h"
@@ -39,10 +39,10 @@ Game::Game(std::unique_ptr<graphics::INativeGraphicAPI> i_nativeGraphicAPI,
 	m_audioSystem = std::make_shared<audios::AudioSystem>(std::move(m_nativeAudioAPI));
 	m_physicSystem = std::make_shared<physics::PhysicSystem>();
 	
-	m_componentFactory = std::make_shared<ComponentFactory>(
+	m_componentFactory = std::make_shared<ComponentsFactory>(
 		m_graphicSystem, m_inputSystem, m_audioSystem, m_physicSystem, m_database
 	);
-	m_entityFactory = std::make_shared<EntityFactory>(m_componentFactory);
+	m_entityFactory = std::make_shared<EntitiesFactory>(m_componentFactory);
 	m_scriptContext = std::make_shared<ScriptContext>(m_gameClock, m_entityFactory);
 
 	//test

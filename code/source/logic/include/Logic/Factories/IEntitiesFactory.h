@@ -5,7 +5,7 @@
 namespace logic
 {
 
-class IEntityFactory
+class IEntitiesFactory
 {
 public:
 	virtual std::shared_ptr<Entity> MakeWormEntity() = 0;

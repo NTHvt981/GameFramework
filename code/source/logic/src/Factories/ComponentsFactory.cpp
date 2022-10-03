@@ -1,4 +1,4 @@
-#include "Logic/Factories/ComponentFactory.h"
+#include "Logic/Factories/ComponentsFactory.h"
 #include "PhysicSystem/IPhysicSystem.h"
 #include "GraphicSystem/IGraphicSystem.h"
 #include "InputSystem/IInputSystem.h"
@@ -18,7 +18,7 @@
 namespace logic
 {
 
-ComponentFactory::ComponentFactory(
+ComponentsFactory::ComponentsFactory(
 	std::shared_ptr<graphics::IGraphicSystem> i_graphicSystem,
 	std::shared_ptr<inputs::IInputSystem> i_inputSystem,
 	std::shared_ptr<audios::IAudioSystem> i_audioSystem,
@@ -32,16 +32,16 @@ ComponentFactory::ComponentFactory(
 {
 }
 
-ComponentFactory::~ComponentFactory()
+ComponentsFactory::~ComponentsFactory()
 {
 }
 
-std::shared_ptr<TransformComponent> ComponentFactory::MakeTransformComponent()
+std::shared_ptr<TransformComponent> ComponentsFactory::MakeTransformComponent()
 {
 	return std::make_shared<TransformComponent>();
 }
 
-std::shared_ptr<AnimationComponent> ComponentFactory::MakeAnimationComponent()
+std::shared_ptr<AnimationComponent> ComponentsFactory::MakeAnimationComponent()
 {
 	return std::make_shared<AnimationComponent>(
 		m_graphicSystem,
@@ -49,7 +49,7 @@ std::shared_ptr<AnimationComponent> ComponentFactory::MakeAnimationComponent()
 	);
 }
 
-std::shared_ptr<SpriteComponent> ComponentFactory::MakeSpriteComponent()
+std::shared_ptr<SpriteComponent> ComponentsFactory::MakeSpriteComponent()
 {
 	return std::make_shared<SpriteComponent>(
 		m_graphicSystem,
@@ -57,17 +57,17 @@ std::shared_ptr<SpriteComponent> ComponentFactory::MakeSpriteComponent()
 	);
 }
 
-std::shared_ptr<InputComponent> ComponentFactory::MakeInputComponent()
+std::shared_ptr<InputComponent> ComponentsFactory::MakeInputComponent()
 {
 	return std::make_shared<InputComponent>(m_inputSystem);
 }
 
-std::shared_ptr<AudioComponent> ComponentFactory::MakeAudioComponent()
+std::shared_ptr<AudioComponent> ComponentsFactory::MakeAudioComponent()
 {
 	return std::make_shared<AudioComponent>(m_audioSystem);
 }
 
-std::shared_ptr<KinematicBodyComponent> ComponentFactory::MakeKinematicBodyComponent(const core::EntityId i_entityId)
+std::shared_ptr<KinematicBodyComponent> ComponentsFactory::MakeKinematicBodyComponent(const core::EntityId i_entityId)
 {
 	return std::make_shared<KinematicBodyComponent>(
 		m_physicSystem,
@@ -75,28 +75,28 @@ std::shared_ptr<KinematicBodyComponent> ComponentFactory::MakeKinematicBodyCompo
 	);
 }
 
-std::shared_ptr<PivotComponent> ComponentFactory::MakePivotComponent(std::shared_ptr<ITransformComponent> i_child)
+std::shared_ptr<PivotComponent> ComponentsFactory::MakePivotComponent(std::shared_ptr<ITransformComponent> i_child)
 {
 	return std::make_shared<PivotComponent>(i_child);
 }
 
-std::shared_ptr<TransformCompositionComponent> ComponentFactory::MakeTransformCompositionComponent(
+std::shared_ptr<TransformCompositionComponent> ComponentsFactory::MakeTransformCompositionComponent(
 	std::initializer_list<std::shared_ptr<ITransformComponent>> i_componentList)
 {
 	return std::make_shared<TransformCompositionComponent>(i_componentList);
 }
 
-std::shared_ptr<EnemyTagComponent> ComponentFactory::MakeEnemyTagComponent()
+std::shared_ptr<EnemyTagComponent> ComponentsFactory::MakeEnemyTagComponent()
 {
 	return std::make_shared<EnemyTagComponent>();
 }
 
-std::shared_ptr<PlayerTagComponent> ComponentFactory::MakePlayerTagComponent()
+std::shared_ptr<PlayerTagComponent> ComponentsFactory::MakePlayerTagComponent()
 {
 	return std::make_shared<PlayerTagComponent>();
 }
 
-std::shared_ptr<BulletTagComponent> ComponentFactory::MakeBulletTagComponent()
+std::shared_ptr<BulletTagComponent> ComponentsFactory::MakeBulletTagComponent()
 {
 	return std::make_shared<BulletTagComponent>();
 }

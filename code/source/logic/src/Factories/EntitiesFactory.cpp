@@ -1,4 +1,4 @@
-#include "Logic/Factories/EntityFactory.h"
+#include "Logic/Factories/EntitiesFactory.h"
 #include "Logic/ComponentKeys/WormKeys.h"
 #include "Logic/Components/TagComponents.h"
 #include "Logic/Components/AnimationComponent.h"
@@ -16,12 +16,12 @@
 namespace logic
 {
 
-EntityFactory::EntityFactory(std::shared_ptr<IComponentFactory> i_componentFactory)
+EntitiesFactory::EntitiesFactory(std::shared_ptr<IComponentsFactory> i_componentFactory)
 	: m_componentFactory(i_componentFactory)
 {
 }
 
-std::shared_ptr<Entity> EntityFactory::MakeWormEntity()
+std::shared_ptr<Entity> EntitiesFactory::MakeWormEntity()
 {
 	const core::EntityId entityId = m_idGenerator.Generate();
 

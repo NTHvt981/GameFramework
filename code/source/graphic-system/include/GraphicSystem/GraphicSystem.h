@@ -34,9 +34,9 @@ public:
 	void Initialize() override;
 	void LoadTextures() override;
 	void Shutdown() override;
-	void PreRender(const const core::Duration& dt) override;
-	void Render(const const core::Duration& dt) override;
-	void PostRender(const const core::Duration& dt) override;
+	void PreRender(const core::Duration& dt) override;
+	void Render(const core::Duration& dt) override;
+	void PostRender(const core::Duration& dt) override;
 	void SetRenderFilter(const core::BoxF i_boundary) override;
 	void RemoveRenderFilter() override;
 
@@ -71,7 +71,7 @@ private:
 	void InsertAnimationState(std::shared_ptr<AnimationState> i_animationState);
 	std::shared_ptr<AnimationState> GetAnimationState(const AnimationState::Id i_animationStateId) const;
 	void RemoveAnimationState(std::shared_ptr<AnimationState> i_animationState);
-	void UpdateAnimationStates(const const core::Duration& dt);
+	void UpdateAnimationStates(const core::Duration& dt);
 
 	using SpriteStateIds = std::set<SpriteState::Id>;
 	std::map<core::RenderLayer, SpriteStateIds> m_mapLayerSpriteStateIds;

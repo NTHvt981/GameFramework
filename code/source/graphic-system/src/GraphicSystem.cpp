@@ -69,14 +69,14 @@ void GraphicSystem::Shutdown()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void GraphicSystem::PreRender(const const core::Duration& dt)
+void GraphicSystem::PreRender(const core::Duration& dt)
 {
     UpdateAnimationStates(dt);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void GraphicSystem::Render(const const core::Duration& dt)
+void GraphicSystem::Render(const core::Duration& dt)
 {
     StartDraw();
 
@@ -95,7 +95,7 @@ void GraphicSystem::Render(const const core::Duration& dt)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void GraphicSystem::PostRender(const const core::Duration& dt)
+void GraphicSystem::PostRender(const core::Duration& dt)
 {
 
 }
@@ -267,7 +267,7 @@ void GraphicSystem::RemoveAnimationState(std::shared_ptr<AnimationState> i_anima
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void GraphicSystem::UpdateAnimationStates(const const core::Duration& dt)
+void GraphicSystem::UpdateAnimationStates(const core::Duration& dt)
 {
     for (auto& [animationStateId, animationState] : m_allAnimationStates)
     {

@@ -8,20 +8,20 @@ class GameClock: public core::logic::IGameClock
 {
 public:
 	GameClock();
-	void UpdateInput(const const core::Duration& dt);
-	void PreFixedUpdate(const const core::Duration& dt);
-	void FixedUpdate(const const core::Duration& dt);
-	void PostFixedUpdate(const const core::Duration& dt);
-	void PreUpdate(const const core::Duration& dt);
-	void Update(const const core::Duration& dt);
-	void PostUpdate(const const core::Duration& dt);
-	void PreRender(const const core::Duration& dt);
-	void Render(const const core::Duration& dt);
-	void PostRender(const const core::Duration& dt);
+	void UpdateInput(const core::Duration& dt);
+	void PreFixedUpdate(const core::Duration& dt);
+	void FixedUpdate(const core::Duration& dt);
+	void PostFixedUpdate(const core::Duration& dt);
+	void PreUpdate(const core::Duration& dt);
+	void Update(const core::Duration& dt);
+	void PostUpdate(const core::Duration& dt);
+	void PreRender(const core::Duration& dt);
+	void Render(const core::Duration& dt);
+	void PostRender(const core::Duration& dt);
 	void Shutdown();
 
 private:
-	bool m_shutDown = false;
+	bool m_shutdown = false;
 };
 
 } // namespace logic

@@ -136,7 +136,7 @@ void Game::Shutdown()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Game::UpdateInput(const const core::Duration& dt)
+void Game::UpdateInput(const core::Duration& dt)
 {
 	m_inputSystem->UpdateInput(dt);
 	m_gameClock->UpdateInput(dt);
@@ -144,7 +144,7 @@ void Game::UpdateInput(const const core::Duration& dt)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Game::FixedUpdate(const const core::Duration& dt)
+void Game::FixedUpdate(const core::Duration& dt)
 {
 	PreFixedUpdate(dt);
 	DuringFixedUpdate(dt);
@@ -155,7 +155,7 @@ void Game::FixedUpdate(const const core::Duration& dt)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Game::PreFixedUpdate(const const core::Duration& dt)
+void Game::PreFixedUpdate(const core::Duration& dt)
 {
 	m_gameClock->PreFixedUpdate(dt);
 	m_physicSystem->PreFixedUpdate(dt);
@@ -163,7 +163,7 @@ void Game::PreFixedUpdate(const const core::Duration& dt)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Game::DuringFixedUpdate(const const core::Duration& dt)
+void Game::DuringFixedUpdate(const core::Duration& dt)
 {
 	m_gameClock->FixedUpdate(dt);
 	m_physicSystem->FixedUpdate(dt);
@@ -171,7 +171,7 @@ void Game::DuringFixedUpdate(const const core::Duration& dt)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Game::PostFixedUpdate(const const core::Duration& dt)
+void Game::PostFixedUpdate(const core::Duration& dt)
 {
 	m_gameClock->PostFixedUpdate(dt);
 	m_physicSystem->PostFixedUpdate(dt);
@@ -179,7 +179,7 @@ void Game::PostFixedUpdate(const const core::Duration& dt)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Game::Update(const const core::Duration& dt)
+void Game::Update(const core::Duration& dt)
 {
 	PreUpdate(dt);
 	DuringUpdate(dt);
@@ -188,28 +188,28 @@ void Game::Update(const const core::Duration& dt)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Game::PreUpdate(const const core::Duration& dt)
+void Game::PreUpdate(const core::Duration& dt)
 {
 	m_gameClock->PreUpdate(dt);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Game::DuringUpdate(const const core::Duration& dt)
+void Game::DuringUpdate(const core::Duration& dt)
 {
 	m_gameClock->Update(dt);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Game::PostUpdate(const const core::Duration& dt)
+void Game::PostUpdate(const core::Duration& dt)
 {
 	m_gameClock->PostUpdate(dt);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Game::Render(const const core::Duration& dt)
+void Game::Render(const core::Duration& dt)
 {
 	if (m_waitForFixedUpdate)
 	{
@@ -225,7 +225,7 @@ void Game::Render(const const core::Duration& dt)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Game::PreRender(const const core::Duration& dt)
+void Game::PreRender(const core::Duration& dt)
 {
 	m_graphicSystem->PreRender(dt);
 	m_gameClock->PreRender(dt);
@@ -233,7 +233,7 @@ void Game::PreRender(const const core::Duration& dt)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Game::DuringRender(const const core::Duration& dt)
+void Game::DuringRender(const core::Duration& dt)
 {
 	m_graphicSystem->Render(dt);
 	m_gameClock->Render(dt);
@@ -241,7 +241,7 @@ void Game::DuringRender(const const core::Duration& dt)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Game::PostRender(const const core::Duration& dt)
+void Game::PostRender(const core::Duration& dt)
 {
 	m_graphicSystem->PostRender(dt);
 	m_gameClock->PostRender(dt);

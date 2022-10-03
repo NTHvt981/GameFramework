@@ -17,7 +17,7 @@ static constexpr core::ComponentKey sk_inputComponentKey = "InputComponent";
 class InputComponent final : public IComponent
 {
 public:
-	InputComponent(std::weak_ptr<inputs::IInputAPI> i_inputAPI);
+	InputComponent(std::shared_ptr<inputs::IInputAPI> i_inputAPI);
 
 	// Inherited via Component
 	void Register() override {};
@@ -30,7 +30,7 @@ public:
 	bool IsKeyHold(const inputs::KeyboardKey i_key);
 
 private:
-	std::weak_ptr<inputs::IInputAPI> m_inputAPI;
+	const inputs::IInputAPI& m_inputAPI;
 };
 
 } // namespace logic

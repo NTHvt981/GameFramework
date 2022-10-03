@@ -39,22 +39,22 @@ public:
 
 	signals::Signal<> sig_requestShutdown;
 private:
-	void UpdateInput(const const core::Duration& dt);
+	void UpdateInput(const core::Duration& dt);
 
-	void FixedUpdate(const const core::Duration& dt);
-	void PreFixedUpdate(const const core::Duration& dt);
-	void DuringFixedUpdate(const const core::Duration& dt);
-	void PostFixedUpdate(const const core::Duration& dt);
+	void FixedUpdate(const core::Duration& dt);
+	void PreFixedUpdate(const core::Duration& dt);
+	void DuringFixedUpdate(const core::Duration& dt);
+	void PostFixedUpdate(const core::Duration& dt);
 
-	void Update(const const core::Duration& dt);
-	void PreUpdate(const const core::Duration& dt);
-	void DuringUpdate(const const core::Duration& dt);
-	void PostUpdate(const const core::Duration& dt);
+	void Update(const core::Duration& dt);
+	void PreUpdate(const core::Duration& dt);
+	void DuringUpdate(const core::Duration& dt);
+	void PostUpdate(const core::Duration& dt);
 
-	void Render(const const core::Duration& dt);
-	void PreRender(const const core::Duration& dt);
-	void DuringRender(const const core::Duration& dt);
-	void PostRender(const const core::Duration& dt);
+	void Render(const core::Duration& dt);
+	void PreRender(const core::Duration& dt);
+	void DuringRender(const core::Duration& dt);
+	void PostRender(const core::Duration& dt);
 
 	void OnRequestShutdown();
 

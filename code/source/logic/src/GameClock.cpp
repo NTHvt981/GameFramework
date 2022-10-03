@@ -7,9 +7,9 @@ GameClock::GameClock()
 {
 }
 
-void GameClock::UpdateInput(const const core::Duration& dt)
+void GameClock::UpdateInput(const core::Duration& dt)
 {
-	if (m_shutDown)
+	if (m_shutdown)
 	{
 		return;
 	}
@@ -17,9 +17,9 @@ void GameClock::UpdateInput(const const core::Duration& dt)
 	sig_onUpdateInput.Emit(dt);
 }
 
-void GameClock::PreFixedUpdate(const const core::Duration& dt)
+void GameClock::PreFixedUpdate(const core::Duration& dt)
 {
-	if (m_shutDown)
+	if (m_shutdown)
 	{
 		return;
 	}
@@ -27,9 +27,9 @@ void GameClock::PreFixedUpdate(const const core::Duration& dt)
 	sig_onPreFixedUpdate.Emit(dt);
 }
 
-void GameClock::FixedUpdate(const const core::Duration& dt)
+void GameClock::FixedUpdate(const core::Duration& dt)
 {
-	if (m_shutDown)
+	if (m_shutdown)
 	{
 		return;
 	}
@@ -37,9 +37,9 @@ void GameClock::FixedUpdate(const const core::Duration& dt)
 	sig_onFixedUpdate.Emit(dt);
 }
 
-void GameClock::PostFixedUpdate(const const core::Duration& dt)
+void GameClock::PostFixedUpdate(const core::Duration& dt)
 {
-	if (m_shutDown)
+	if (m_shutdown)
 	{
 		return;
 	}
@@ -47,9 +47,9 @@ void GameClock::PostFixedUpdate(const const core::Duration& dt)
 	sig_onPostFixedUpdate.Emit(dt);
 }
 
-void GameClock::PreUpdate(const const core::Duration& dt)
+void GameClock::PreUpdate(const core::Duration& dt)
 {
-	if (m_shutDown)
+	if (m_shutdown)
 	{
 		return;
 	}
@@ -57,9 +57,9 @@ void GameClock::PreUpdate(const const core::Duration& dt)
 	sig_onPreUpdate.Emit(dt);
 }
 
-void GameClock::Update(const const core::Duration& dt)
+void GameClock::Update(const core::Duration& dt)
 {
-	if (m_shutDown)
+	if (m_shutdown)
 	{
 		return;
 	}
@@ -67,9 +67,9 @@ void GameClock::Update(const const core::Duration& dt)
 	sig_onUpdate.Emit(dt);
 }
 
-void GameClock::PostUpdate(const const core::Duration& dt)
+void GameClock::PostUpdate(const core::Duration& dt)
 {
-	if (m_shutDown)
+	if (m_shutdown)
 	{
 		return;
 	}
@@ -77,9 +77,9 @@ void GameClock::PostUpdate(const const core::Duration& dt)
 	sig_onPostUpdate.Emit(dt);
 }
 
-void GameClock::PreRender(const const core::Duration& dt)
+void GameClock::PreRender(const core::Duration& dt)
 {
-	if (m_shutDown)
+	if (m_shutdown)
 	{
 		return;
 	}
@@ -87,9 +87,9 @@ void GameClock::PreRender(const const core::Duration& dt)
 	sig_onPreRender.Emit(dt);
 }
 
-void GameClock::Render(const const core::Duration& dt)
+void GameClock::Render(const core::Duration& dt)
 {
-	if (m_shutDown)
+	if (m_shutdown)
 	{
 		return;
 	}
@@ -97,9 +97,9 @@ void GameClock::Render(const const core::Duration& dt)
 	sig_onRender.Emit(dt);
 }
 
-void GameClock::PostRender(const const core::Duration& dt)
+void GameClock::PostRender(const core::Duration& dt)
 {
-	if (m_shutDown)
+	if (m_shutdown)
 	{
 		return;
 	}
@@ -109,7 +109,7 @@ void GameClock::PostRender(const const core::Duration& dt)
 
 void GameClock::Shutdown()
 {
-	m_shutDown = true;
+	m_shutdown = true;
 }
 
 } // namespace logic

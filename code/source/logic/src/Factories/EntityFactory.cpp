@@ -54,6 +54,7 @@ std::shared_ptr<Entity> EntityFactory::MakeWormEntity()
 	result.InsertComponent(sk_kinematicBodyComponentKey, bodyComponent);
 	result.InsertComponent(sk_animationComponentKey, aniComponent);
 	result.InsertComponent(worm::sk_detectorComponentKey, detectorComponent);
+	result.InsertComponent(sk_enemyTagComponentKey, m_componentFactory->MakeEnemyTagComponent());
 
 	return std::make_shared<Entity>(result);
 }

@@ -17,9 +17,9 @@ public:
 	virtual void LoadTextures() = 0;
 	virtual void Shutdown() = 0;
 
-	virtual void PreRender(const const core::Duration& dt) = 0;
-	virtual void Render(const const core::Duration& dt) = 0;
-	virtual void PostRender(const const core::Duration& dt) = 0;
+	virtual void PreRender(const core::Duration& dt) = 0;
+	virtual void Render(const core::Duration& dt) = 0;
+	virtual void PostRender(const core::Duration& dt) = 0;
 
 	virtual void SetRenderFilter(const core::BoxF i_boundary) = 0;
 	virtual void RemoveRenderFilter() = 0;

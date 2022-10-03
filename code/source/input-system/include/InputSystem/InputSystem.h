@@ -16,17 +16,17 @@ public:
 	);
 	// Inherited via IInputSystem
 	void Initialize() override;
-	void UpdateInput(const const core::Duration& dt) override;
+	void UpdateInput(const core::Duration& dt) override;
 	void Pause() override;
 	void Resume() override;
 	void Shutdown() override;
 
 	// Inherited via IInputAPI
-	bool IsKeyDown(const KeyboardKey i_key) override;
-	bool IsKeyUp(const KeyboardKey i_key) override;
-	bool IsKeyPressed(const KeyboardKey i_key) override;
-	bool IsKeyRelease(const KeyboardKey i_key) override;
-	bool IsKeyHold(const KeyboardKey i_key) override;
+	bool IsKeyDown(const KeyboardKey i_key) const override;
+	bool IsKeyUp(const KeyboardKey i_key) const override;
+	bool IsKeyPressed(const KeyboardKey i_key) const override;
+	bool IsKeyRelease(const KeyboardKey i_key) const override;
+	bool IsKeyHold(const KeyboardKey i_key) const override;
 
 private:
 	std::unique_ptr<INativeInputAPI> m_nativeInputAPI;

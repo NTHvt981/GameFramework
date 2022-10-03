@@ -7,12 +7,12 @@ namespace logic
 {
 
 SpriteComponent::SpriteComponent(
-	std::weak_ptr<graphics::ISpriteGraphicAPI> i_spriteGraphicAPI, 
-	std::weak_ptr<const graphics::database::IGraphicDatabaseAPI> i_graphicDatabaseAPI)
-	: m_spriteGraphicAPI(i_spriteGraphicAPI)
-	, m_graphicDatabaseAPI(i_graphicDatabaseAPI)
+	std::shared_ptr<graphics::ISpriteGraphicAPI> i_spriteGraphicAPI,
+	std::shared_ptr<const graphics::database::IGraphicDatabaseAPI> i_graphicDatabaseAPI)
+	: m_spriteGraphicAPI(*i_spriteGraphicAPI.get())
+	, m_graphicDatabaseAPI(*i_graphicDatabaseAPI.get())
 	, m_spriteState(std::make_shared<graphics::SpriteState>(
-		i_spriteGraphicAPI.lock()->GenerateSpriteStateId()
+		i_spriteGraphicAPI->GenerateSpriteStateId()
 	))
 {
 }
@@ -40,8 +40,7 @@ void SpriteComponent::Register()
 	}
 	isRegistered = true;
 
-	std::shared_ptr<graphics::ISpriteGraphicAPI> graphicAPI = m_spriteGraphicAPI.lock();
-	graphicAPI->RegisterSprite(m_spriteState);
+	m_spriteGraphicAPI.RegisterSprite(m_spriteState);
 }
 
 void SpriteComponent::Deregister()
@@ -52,13 +51,12 @@ void SpriteComponent::Deregister()
 	}
 	isRegistered = false;
 
-	std::shared_ptr<graphics::ISpriteGraphicAPI> graphicAPI = m_spriteGraphicAPI.lock();
-	graphicAPI->DeregisterSprite(m_spriteState->id);
+	m_spriteGraphicAPI.DeregisterSprite(m_spriteState->id);
 }
 
 void SpriteComponent::SetSprite(const core::SpriteId i_spriteId)
 {
-	m_spriteState->spriteDef = m_graphicDatabaseAPI.lock()->GetSpriteRef(i_spriteId);
+	m_spriteState->spriteDef = m_graphicDatabaseAPI.GetSpriteRef(i_spriteId);
 }
 
 } // namespace logic

@@ -20,15 +20,15 @@ void PhysicSystem::Shutdown()
 {
 }
 
-void PhysicSystem::PreFixedUpdate(const const core::Duration& dt)
+void PhysicSystem::PreFixedUpdate(const core::Duration& dt)
 {
 }
 
-void PhysicSystem::FixedUpdate(const const core::Duration& dt)
+void PhysicSystem::FixedUpdate(const core::Duration& dt)
 {
 }
 
-void PhysicSystem::PostFixedUpdate(const const core::Duration& dt)
+void PhysicSystem::PostFixedUpdate(const core::Duration& dt)
 {
 	UpdateDynamicColliderOverlapStates();
 }

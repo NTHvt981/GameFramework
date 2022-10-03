@@ -19,9 +19,9 @@ public:
 	void SetCollisionCheckFilter(const core::BoxF i_boundary) override;
 	void RemoveCollisionCheckFilter() override;
 
-	void PreFixedUpdate(const const core::Duration& dt) override;
-	void FixedUpdate(const const core::Duration& dt) override;
-	void PostFixedUpdate(const const core::Duration& dt) override;
+	void PreFixedUpdate(const core::Duration& dt) override;
+	void FixedUpdate(const core::Duration& dt) override;
+	void PostFixedUpdate(const core::Duration& dt) override;
 
 	// Inherited via IPhysicAPI
 	void RegisterCollider(std::shared_ptr<DynamicCollider> i_collider) override;

@@ -47,14 +47,14 @@ std::shared_ptr<Entity> EntityFactory::MakeWormEntity()
 		}
 	);
 
-	std::shared_ptr<AnimationComponent> tagComponent = m_componentFactory->MakeAnimationComponent();
+	std::shared_ptr<EnemyTagComponent> tagComponent = m_componentFactory->MakeEnemyTagComponent();
 
 	Entity result(entityId);
 	result.InsertComponent(sk_transformCompositionComponentKey, transformCompositionComponent);
 	result.InsertComponent(sk_kinematicBodyComponentKey, bodyComponent);
 	result.InsertComponent(sk_animationComponentKey, aniComponent);
 	result.InsertComponent(worm::sk_detectorComponentKey, detectorComponent);
-	result.InsertComponent(sk_enemyTagComponentKey, m_componentFactory->MakeEnemyTagComponent());
+	result.InsertComponent(sk_enemyTagComponentKey, tagComponent);
 
 	return std::make_shared<Entity>(result);
 }

@@ -88,17 +88,17 @@ std::shared_ptr<TransformCompositionComponent> ComponentFactory::MakeTransformCo
 
 std::shared_ptr<EnemyTagComponent> ComponentFactory::MakeEnemyTagComponent()
 {
-	return std::shared_ptr<EnemyTagComponent>();
+	return std::make_shared<EnemyTagComponent>();
 }
 
 std::shared_ptr<PlayerTagComponent> ComponentFactory::MakePlayerTagComponent()
 {
-	return std::shared_ptr<PlayerTagComponent>();
+	return std::make_shared<PlayerTagComponent>();
 }
 
 std::shared_ptr<BulletTagComponent> ComponentFactory::MakeBulletTagComponent()
 {
-	return std::shared_ptr<BulletTagComponent>();
+	return std::make_shared<BulletTagComponent>();
 }
 
 } // namespace logic

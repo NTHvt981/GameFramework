@@ -1,14 +1,7 @@
 #pragma once
 #include "IFileSystem.h"
-
 #include <unordered_map>
 #include <memory>
-
-namespace core
-{
-template<typename T>
-class InitOnce;
-}
 
 namespace files
 {

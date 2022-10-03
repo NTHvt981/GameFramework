@@ -1,8 +1,15 @@
 #pragma once
-#include "GraphicSystem/DataTypes/Texture.h"
-#include "GraphicSystem/DataTypes/AnimationDef.h"
-#include "GraphicSystem/DataTypes/SpriteDef.h"
+#include "Core/Identifiers/TextureId.h"
+#include "Core/Identifiers/SpriteId.h"
+#include "Core/Identifiers/AnimationId.h"
 #include <memory>
+
+namespace graphics
+{
+struct Texture;
+struct SpriteDef;
+struct AnimationDef;
+} // namespace graphics
 
 namespace graphics::database
 {

@@ -1,6 +1,5 @@
 #pragma once
 #include "ITransformComponent.h"
-#include <memory>
 #include <vector>
 
 namespace logic

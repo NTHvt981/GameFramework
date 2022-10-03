@@ -1,10 +1,16 @@
 #pragma once
 #include "ITransformComponent.h"
 #include "Core/Identifiers/EntityId.h"
+#include "Core/Identifiers/CollisionLayer.h"
+#include "Core/DataTypes/Size.h"
 #include "Core/Signals/Signal.h"
-#include "PhysicSystem/DataTypes/DynamicCollider.h"
-#include "PhysicSystem/IPhysicAPI.h"
 #include <memory>
+
+namespace physics
+{
+class IPhysicAPI;
+struct DynamicCollider;
+} // namespace physics
 
 namespace logic
 {

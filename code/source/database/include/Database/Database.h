@@ -1,7 +1,11 @@
 #pragma once
 #include "IDatabase.h"
-#include "FileSystem/IFileSystem.h"
 #include <map>
+
+namespace files
+{
+class IFileSystem;
+} // namespace files
 
 namespace database
 {

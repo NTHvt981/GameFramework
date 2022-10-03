@@ -1,8 +1,14 @@
 #pragma once
 #include "IComponent.h"
-#include "InputSystem/API/IInputAPI.h"
+#include <stdint.h>
 #include <memory>
 
+namespace inputs
+{
+class IInputAPI;
+enum class KeyboardKey : uint64_t;
+} // namespace inputs
+	
 namespace logic
 {
 

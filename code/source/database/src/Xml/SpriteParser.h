@@ -1,6 +1,10 @@
 #pragma once
-#include "GraphicSystem/DataTypes/SpriteDef.h"
 #include <vector>
+
+namespace graphics
+{
+struct SpriteDef;
+} // namespace graphics
 
 namespace xml
 {

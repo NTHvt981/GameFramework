@@ -1,4 +1,5 @@
 #include "DirectWrapper/Input/DirectInputAPI.h"
+#include "InputSystem/DataTypes/KeyboardKey.h"
 #include "Core/DataTypes/Flag.h"
 #include "KeyboardKeyHelper.h"
 #include <assert.h>
@@ -30,19 +31,19 @@ void DirectInputAPI::Initialize()
 		reinterpret_cast<void**>(&m_directInput),
 		NULL
 	);
-	assert(SUCCEEDED(result));
+	DEBUG(assert(SUCCEEDED(result)));
 
 	result = m_directInput->CreateDevice(GUID_SysKeyboard, &m_directInputDevice, NULL);
-	assert(SUCCEEDED(result));
+	DEBUG(assert(SUCCEEDED(result)));
 
 	result = m_directInputDevice->SetDataFormat(&c_dfDIKeyboard);
-	assert(SUCCEEDED(result));
+	DEBUG(assert(SUCCEEDED(result)));
 
 	result = m_directInputDevice->SetCooperativeLevel(m_hwnd, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE);
-	assert(SUCCEEDED(result));
+	DEBUG(assert(SUCCEEDED(result)));
 
 	result = m_directInputDevice->Acquire();
-	assert(SUCCEEDED(result));
+	DEBUG(assert(SUCCEEDED(result)));
 }
 
 void DirectInputAPI::UpdateInput()
@@ -53,7 +54,7 @@ void DirectInputAPI::UpdateInput()
 	}
 
 	HRESULT result = m_directInputDevice->GetDeviceState(sizeof(m_currentKeys), (LPVOID)&m_currentKeys);
-	assert(SUCCEEDED(result));
+	DEBUG(assert(SUCCEEDED(result)));
 }
 
 void DirectInputAPI::Shutdown()
@@ -63,13 +64,13 @@ void DirectInputAPI::Shutdown()
 void DirectInputAPI::Pause()
 {
 	HRESULT result = m_directInputDevice->Unacquire();
-	assert(SUCCEEDED(result));
+	DEBUG(assert(SUCCEEDED(result)));
 }
 
 void DirectInputAPI::Resume()
 {
 	HRESULT result = m_directInputDevice->Acquire();
-	assert(SUCCEEDED(result));
+	DEBUG(assert(SUCCEEDED(result)));
 }
 
 bool DirectInputAPI::IsKeyDown(const KeyboardKey i_key)

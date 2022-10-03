@@ -1,16 +1,18 @@
 #pragma once
-#include "GraphicSystem/DataTypes/SpriteState.h"
-#include "GraphicSystem/DataTypes/Texture.h"
 #include "Core/Identifiers/TextureId.h"
 #include "Core/Identifiers/DrawMode.h"
 #include "Core/Identifiers/APIMode.h"
 #include "Core/DataTypes/Box.h"
+#include "Core/DataTypes/Size.h"
 #include "Core/DataTypes/Vector2.h"
 #include "Core/DataTypes/String.h"
 #include <optional>
 
 namespace graphics
 {
+
+struct SpriteState;
+struct Texture;
 
 class INativeGraphicAPI
 {

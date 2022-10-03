@@ -1,6 +1,10 @@
 #pragma once
-#include "GraphicSystem/DataTypes/AnimationDef.h"
 #include <vector>
+
+namespace graphics
+{
+struct AnimationDef;
+} // namespace graphics
 
 namespace xml
 {

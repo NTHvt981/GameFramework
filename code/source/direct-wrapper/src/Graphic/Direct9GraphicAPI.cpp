@@ -1,6 +1,9 @@
 #include "DirectWrapper/Graphic/Direct9GraphicAPI.h"
+#include "GraphicSystem/DataTypes/SpriteState.h"
+#include "GraphicSystem/DataTypes/Texture.h"
 #include "Core/DataTypes/Flag.h"
 #include "Core/DataTypes/Box.h"
+#include "Core/Macros/Macros.h"
 #include <assert.h>
 
 namespace graphics
@@ -57,13 +60,13 @@ void Direct9GraphicAPI::Initialize()
 		D3DCREATE_SOFTWARE_VERTEXPROCESSING,
 		&d3dparams,
 		&m_direct3DDevice9);
-	assert(SUCCEEDED(result));
+	DEBUG(assert(SUCCEEDED(result)));
 
 	m_direct3DDevice9->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &m_backBuffer);
 
 	// Initialize spriteRef helper from Direct3DX helper library
 	result = D3DXCreateSprite(m_direct3DDevice9, &m_spriteHandler);
-	assert(SUCCEEDED(result));
+	DEBUG(assert(SUCCEEDED(result)));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -128,16 +131,16 @@ void Direct9GraphicAPI::Draw(const DrawParams& i_drawParams)
 void Direct9GraphicAPI::StartDraw()
 {
 	HRESULT result = m_direct3DDevice9->BeginScene();
-	assert(SUCCEEDED(result));
+	DEBUG(assert(SUCCEEDED(result)));
 
 	result = m_direct3DDevice9->ColorFill(m_backBuffer, NULL, D3DCOLOR_XRGB(0, 0, 0));
-	assert(SUCCEEDED(result));
+	DEBUG(assert(SUCCEEDED(result)));
 
 	result = m_spriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
-	assert(SUCCEEDED(result));
+	DEBUG(assert(SUCCEEDED(result)));
 
 	result = m_spriteHandler->SetTransform(&m_drawMatrix);
-	assert(SUCCEEDED(result));
+	DEBUG(assert(SUCCEEDED(result)));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -145,13 +148,13 @@ void Direct9GraphicAPI::StartDraw()
 void Direct9GraphicAPI::EndDraw()
 {
 	HRESULT result = m_spriteHandler->End();
-	assert(SUCCEEDED(result));
+	DEBUG(assert(SUCCEEDED(result)));
 
 	result = m_direct3DDevice9->EndScene();
-	assert(SUCCEEDED(result));
+	DEBUG(assert(SUCCEEDED(result)));
 
 	result = m_direct3DDevice9->Present(NULL, NULL, NULL, NULL);
-	assert(SUCCEEDED(result));
+	DEBUG(assert(SUCCEEDED(result)));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -163,7 +166,7 @@ LPDIRECT3DTEXTURE9 Direct9GraphicAPI::CreateTextureFromFile(const core::String& 
 
 	const wchar_t* rawPath = imagePath.ToWStr();
 	HRESULT result = D3DXGetImageInfoFromFile(rawPath, &info);
-	assert(SUCCEEDED(result));
+	DEBUG(assert(SUCCEEDED(result)));
 
 	result = D3DXCreateTextureFromFileEx(
 		m_direct3DDevice9,
@@ -180,7 +183,7 @@ LPDIRECT3DTEXTURE9 Direct9GraphicAPI::CreateTextureFromFile(const core::String& 
 		&info,
 		NULL,
 		&o_texture);
-	assert(SUCCEEDED(result));
+	DEBUG(assert(SUCCEEDED(result)));
 
 	return o_texture;
 }

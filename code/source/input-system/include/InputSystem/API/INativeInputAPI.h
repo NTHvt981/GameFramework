@@ -1,8 +1,9 @@
 #pragma once
-#include "InputSystem/DataTypes/KeyboardKey.h"
+#include <stdint.h>
 
 namespace inputs
 {
+enum class KeyboardKey : uint64_t;
 
 class INativeInputAPI
 {

@@ -1,6 +1,5 @@
 #pragma once
 #include "API/IAudioAPI.h"
-#include <stdint.h>
 
 namespace audios
 {

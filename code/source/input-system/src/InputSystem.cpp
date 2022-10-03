@@ -1,4 +1,5 @@
 #include "InputSystem/InputSystem.h"
+#include "InputSystem/API/INativeInputAPI.h"
 
 namespace inputs
 {

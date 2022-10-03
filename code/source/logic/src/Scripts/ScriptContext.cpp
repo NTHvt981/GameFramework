@@ -1,4 +1,6 @@
 #include "Logic/Scripts/ScriptContext.h"
+#include "Core/GameClock/IGameClock.h"
+#include "Logic/Factories/IEntityFactory.h"
 
 namespace logic
 {

@@ -1,8 +1,6 @@
 #pragma once
 #include "IComponent.h"
 #include "Core/DataTypes/Vector2.h"
-#include <memory>
-#include <vector>
 
 namespace logic
 {

@@ -1,4 +1,5 @@
 #include "DirectWrapper/Audio/DirectAudioAPI.h"
+#include "Core/Macros/Macros.h"
 #include <mmsystem.h>
 #include <mmreg.h>
 #include <dsound.h>
@@ -17,10 +18,10 @@ DirectAudioAPI::DirectAudioAPI(const HWND i_hwnd)
 void DirectAudioAPI::Initialize()
 {
     HRESULT result = DirectSoundCreate8(NULL, &m_directSound, NULL);
-    assert(SUCCEEDED(result));
+    DEBUG(assert(SUCCEEDED(result)));
 
     result = m_directSound->SetCooperativeLevel(m_hwnd, DISCL_FOREGROUND);
-    assert(SUCCEEDED(result));
+    DEBUG(assert(SUCCEEDED(result)));
 
     DSBUFFERDESC bufferDescription;
     ZeroMemory(&bufferDescription, sizeof(DSBUFFERDESC));
@@ -34,7 +35,7 @@ void DirectAudioAPI::Initialize()
         &m_directSoundBuffer,
         NULL
     );
-    assert(SUCCEEDED(result));
+    DEBUG(assert(SUCCEEDED(result)));
 
     WAVEFORMATEX waveFormat;
     ZeroMemory(&waveFormat, sizeof(WAVEFORMATEX));
@@ -45,7 +46,7 @@ void DirectAudioAPI::Initialize()
     waveFormat.nBlockAlign = (WORD)(waveFormat.wBitsPerSample / 8 * waveFormat.nChannels);
     waveFormat.nAvgBytesPerSec = (DWORD)(waveFormat.nSamplesPerSec * waveFormat.nBlockAlign);
     result = m_directSoundBuffer->SetFormat(&waveFormat);
-    assert(SUCCEEDED(result));
+    DEBUG(assert(SUCCEEDED(result)));
 }
 
 void DirectAudioAPI::Pause()

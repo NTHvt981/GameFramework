@@ -1,12 +1,13 @@
 #pragma once
 #include <memory>
 #include "DataTypes/Collider.h"
-#include "DataTypes/DynamicCollider.h"
-#include "DataTypes/StaticCollider.h"
 #include "Core/DataTypes/Vector2.h"
 
 namespace physics
 {
+
+struct DynamicCollider;
+struct StaticCollider;
 
 class IPhysicAPI
 {

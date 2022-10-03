@@ -1,10 +1,30 @@
 #pragma once
 #include "IComponentFactory.h"
-#include "PhysicSystem/IPhysicSystem.h"
-#include "GraphicSystem/IGraphicSystem.h"
-#include "InputSystem/IInputSystem.h"
-#include "AudioSystem/IAudioSystem.h"
-#include "Database/IDatabase.h"
+
+namespace graphics
+{
+class IGraphicSystem;
+} // namespace graphics
+
+namespace inputs
+{
+class IInputSystem;
+} // namespace inputs
+
+namespace audios
+{
+class IAudioSystem;
+} // namespace audios
+
+namespace physics
+{
+class IPhysicSystem;
+} // namespace physics
+
+namespace database
+{
+class IDatabase;
+} // namespace database
 
 namespace logic
 {

@@ -1,4 +1,6 @@
 #include "PhysicSystem/PhysicSystem.h"
+#include "PhysicSystem/DataTypes/DynamicCollider.h"
+#include "PhysicSystem/DataTypes/StaticCollider.h"
 #include "CollisionHelper.h"
 #include "Core/Helpers/Vector2Helper.h"
 #include "Core/Math/Math.h"

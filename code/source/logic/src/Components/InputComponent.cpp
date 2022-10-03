@@ -1,4 +1,6 @@
 #include "Logic/Components/InputComponent.h"
+#include "InputSystem/API/IInputAPI.h"
+#include "InputSystem/DataTypes/KeyboardKey.h"
 
 namespace logic
 {

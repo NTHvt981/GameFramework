@@ -1,4 +1,5 @@
 #include "SpriteParser.h"
+#include "GraphicSystem/DataTypes/SpriteDef.h"
 #include "Xml/CommonParser.h"
 #include "tinyxml2.h"
 

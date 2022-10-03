@@ -1,10 +1,11 @@
 #pragma once
 #include "IInputSystem.h"
-#include "API/INativeInputAPI.h"
 #include <memory>
 
 namespace inputs
 {
+
+class INativeInputAPI;
 
 class InputSystem final: public IInputSystem
 {

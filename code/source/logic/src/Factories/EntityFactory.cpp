@@ -1,6 +1,17 @@
 #include "Logic/Factories/EntityFactory.h"
 #include "Logic/ComponentKeys/WormKeys.h"
 #include "Logic/Components/TagComponents.h"
+#include "Logic/Components/AnimationComponent.h"
+#include "Logic/Components/SpriteComponent.h"
+#include "Logic/Components/InputComponent.h"
+#include "Logic/Components/AudioComponent.h"
+#include "Logic/Components/TransformCompositionComponent.h"
+#include "Logic/Components/KinematicBodyComponent.h"
+#include "Logic/Components/TransformComponent.h"
+#include "Logic/Components/PivotComponent.h"
+#include "Logic/Components/TransformComponent.h"
+#include "Logic/Components/TagComponents.h"
+#include "PhysicSystem/DataTypes/DynamicCollider.h"
 
 namespace logic
 {

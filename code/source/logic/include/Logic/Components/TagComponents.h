@@ -1,6 +1,5 @@
 #pragma once
 #include "IComponent.h"
-#include <memory>
 
 namespace logic
 {

@@ -1,7 +1,11 @@
 #pragma once
 #include "IComponent.h"
-#include "AudioSystem/API/IAudioAPI.h"
 #include <memory>
+
+namespace audios
+{
+class IAudioAPI;
+} // namespace audios
 
 namespace logic
 {

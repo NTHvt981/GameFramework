@@ -1,4 +1,5 @@
 #include "KeyboardKeyHelper.h"
+#include "InputSystem/DataTypes/KeyboardKey.h"
 #include <dinput.h>
 
 namespace inputs

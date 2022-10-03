@@ -1,4 +1,7 @@
 #include "GraphicSystem/GraphicSystem.h"
+#include "GraphicSystem/DataTypes/Texture.h"
+#include "GraphicSystem/DataTypes/SpriteState.h"
+#include "GraphicSystem/DataTypes/AnimationState.h"
 #include "GraphicSystem/Helpers/AnimationStateHelper.h"
 #include "Core/Math/Math.h"
 #include "Core/Helpers/BoxHelper.h"

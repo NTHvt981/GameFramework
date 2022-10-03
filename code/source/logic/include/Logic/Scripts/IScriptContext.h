@@ -1,10 +1,15 @@
 #pragma once
-#include "Core/GameClock/IGameClock.h"
-#include "Logic/Factories/IEntityFactory.h"
 #include "Logic/Entities/Entities.h"
+
+namespace core::logic
+{
+class IGameClock;
+} // namespace core::logic
 
 namespace logic
 {
+
+class IEntityFactory;
 
 /// <summary>
 /// script context contains every interface needed for script

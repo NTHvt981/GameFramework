@@ -1,10 +1,10 @@
 #pragma once
 #include "IAudioSystem.h"
-#include "API/INativeAudioAPI.h"
 #include <memory>
 
 namespace audios
 {
+class INativeAudioAPI;
 
 class AudioSystem final: public IAudioSystem
 {

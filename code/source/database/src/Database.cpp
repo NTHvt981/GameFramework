@@ -1,8 +1,12 @@
 #include "Database/Database.h"
+#include "FileSystem/IFileSystem.h"
 #include "FileSystem/DataTypes/Folder.h"
 #include "Xml/TexureParser.h"
 #include "Xml/SpriteParser.h"
 #include "Xml/AnimationParser.h"
+#include "GraphicSystem/DataTypes/Texture.h"
+#include "GraphicSystem/DataTypes/SpriteDef.h"
+#include "GraphicSystem/DataTypes/AnimationDef.h"
 
 namespace database
 {

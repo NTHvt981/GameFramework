@@ -1,5 +1,12 @@
 #include "Logic/Scripts/WormScript.h"
 #include "Logic/ComponentKeys/WormKeys.h"
+#include "Core/GameClock/IGameClock.h"
+#include "Logic/Factories/IEntityFactory.h"
+#include "Logic/Entities/Entity.h"
+#include "Logic/Components/TransformCompositionComponent.h"
+#include "Logic/Components/KinematicBodyComponent.h"
+#include "Logic/Components/AnimationComponent.h"
+#include "Core/Signals/Connection.h"
 
 namespace logic
 {

@@ -1,5 +1,6 @@
 #pragma once
 #include "AudioSystem/AudioSystem.h"
+#include "AudioSystem/API/INativeAudioAPI.h"
 
 namespace audios
 {

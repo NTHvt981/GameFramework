@@ -1,19 +1,22 @@
 #pragma once
 #include "Core/DataTypes/Vector2.h"
-#include "Logic/Components/AnimationComponent.h"
-#include "Logic/Components/SpriteComponent.h"
-#include "Logic/Components/InputComponent.h"
-#include "Logic/Components/AudioComponent.h"
-#include "Logic/Components/TransformCompositionComponent.h"
-#include "Logic/Components/KinematicBodyComponent.h"
-#include "Logic/Components/TransformComponent.h"
-#include "Logic/Components/PivotComponent.h"
-#include "Logic/Components/TransformComponent.h"
-#include "Logic/Components/TagComponents.h"
+#include "Core/Identifiers/EntityId.h"
 #include <memory>
 
 namespace logic
 {
+class TransformComponent;
+class AnimationComponent;
+class SpriteComponent;
+class InputComponent;
+class AudioComponent;
+class KinematicBodyComponent;
+class PivotComponent;
+class TransformCompositionComponent;
+class ITransformComponent;
+class EnemyTagComponent;
+class PlayerTagComponent;
+class BulletTagComponent;
 	
 class IComponentFactory
 {

@@ -1,16 +1,19 @@
 #include "Logic/Components/AnimationComponent.h"
+#include "GraphicSystem/DataTypes/AnimationState.h"
 #include "GraphicSystem/Helpers/AnimationStateHelper.h"
+#include "GraphicSystem/API/IAnimationGraphicAPI.h"
+#include "GraphicSystem/Database/IGraphicDatabaseAPI.h"
 
 namespace logic
 {
 
 AnimationComponent::AnimationComponent(
 	std::shared_ptr<graphics::IAnimationGraphicAPI> i_animationGraphicAPI,
-	std::weak_ptr<const graphics::database::IGraphicDatabaseAPI> i_graphicDatabaseAPI)
-	: m_animationGraphicAPI(std::ref(*i_animationGraphicAPI.get()))
-	, m_graphicDatabaseAPI(i_graphicDatabaseAPI)
+	std::shared_ptr<const graphics::database::IGraphicDatabaseAPI> i_graphicDatabaseAPI)
+	: m_animationGraphicAPI(*i_animationGraphicAPI.get())
+	, m_graphicDatabaseAPI(*i_graphicDatabaseAPI.get())
 	, m_animationState(std::make_shared<graphics::AnimationState>(
-		m_animationGraphicAPI.get().GenerateAnimationStateId()
+		i_animationGraphicAPI->GenerateAnimationStateId()
 	))
 {
 }
@@ -38,7 +41,7 @@ void AnimationComponent::Register()
 	}
 	isRegistered = true;
 
-	m_animationGraphicAPI.get().RegisterAnimation(m_animationState);
+	m_animationGraphicAPI.RegisterAnimation(m_animationState);
 
 	m_onAnimationFinishedCon = m_animationState->sig_onAnimationFinished.Connect(
 		std::bind(&AnimationComponent::OnAnimationFinished, this)
@@ -53,15 +56,14 @@ void AnimationComponent::Deregister()
 	}
 	isRegistered = false;
 
-	m_animationGraphicAPI.get().DeregisterAnimation(m_animationState->id);
+	m_animationGraphicAPI.DeregisterAnimation(m_animationState->id);
 
 	m_onAnimationFinishedCon.Disconnect();
 }
 
 void AnimationComponent::SetAnimation(const core::AnimationId i_animationId)
 {
-	std::shared_ptr<const graphics::database::IGraphicDatabaseAPI> graphicDatabaseAPI = m_graphicDatabaseAPI.lock();
-	std::shared_ptr<const graphics::AnimationDef> animationDef = graphicDatabaseAPI->GetAnimationRef(i_animationId).lock();
+	std::shared_ptr<const graphics::AnimationDef> animationDef = m_graphicDatabaseAPI.GetAnimationRef(i_animationId).lock();
 
 	graphics::SetAnimationDef(*m_animationState.get(), animationDef);
 }

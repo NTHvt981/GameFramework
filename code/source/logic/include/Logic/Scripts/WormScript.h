@@ -1,16 +1,16 @@
 #pragma once
 #include "Script.h"
-#include "Core/GameClock/IGameClock.h"
 #include "Core/Signals/Connection.h"
-#include "Logic/Entities/Entity.h"
-#include "Logic/Components/TransformCompositionComponent.h"
-#include "Logic/Components/KinematicBodyComponent.h"
-#include "Logic/Components/AnimationComponent.h"
-#include "Core/Signals/Connection.h"
+#include "Core/DataTypes/Vector2.h"
 #include <memory>
 
 namespace logic
 {
+
+class Entity;
+class TransformCompositionComponent;
+class KinematicBodyComponent;
+class AnimationComponent;
 
 class WormScript final: public Script
 {

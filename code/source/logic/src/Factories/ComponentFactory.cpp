@@ -1,4 +1,19 @@
 #include "Logic/Factories/ComponentFactory.h"
+#include "PhysicSystem/IPhysicSystem.h"
+#include "GraphicSystem/IGraphicSystem.h"
+#include "InputSystem/IInputSystem.h"
+#include "AudioSystem/IAudioSystem.h"
+#include "Database/IDatabase.h"
+#include "Logic/Components/AnimationComponent.h"
+#include "Logic/Components/SpriteComponent.h"
+#include "Logic/Components/InputComponent.h"
+#include "Logic/Components/AudioComponent.h"
+#include "Logic/Components/TransformCompositionComponent.h"
+#include "Logic/Components/KinematicBodyComponent.h"
+#include "Logic/Components/TransformComponent.h"
+#include "Logic/Components/PivotComponent.h"
+#include "Logic/Components/TransformComponent.h"
+#include "Logic/Components/TagComponents.h"
 
 namespace logic
 {

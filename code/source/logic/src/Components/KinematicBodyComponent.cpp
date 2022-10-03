@@ -1,4 +1,6 @@
 #include "Logic/Components/KinematicBodyComponent.h"
+#include "PhysicSystem/DataTypes/DynamicCollider.h"
+#include "PhysicSystem/IPhysicAPI.h"
 #include "Core/Helpers/Vector2Helper.h"
 
 namespace logic

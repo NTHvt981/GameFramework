@@ -1,9 +1,17 @@
 #pragma once
 #include "ITransformComponent.h"
-#include "GraphicSystem/API/ISpriteGraphicAPI.h"
-#include "GraphicSystem/Database/IGraphicDatabaseAPI.h"
-#include "GraphicSystem/DataTypes/SpriteState.h"
+#include "Core/Identifiers/SpriteId.h"
 #include <memory>
+
+namespace graphics
+{
+class ISpriteGraphicAPI;
+struct SpriteState;
+namespace database
+{
+class IGraphicDatabaseAPI;
+} // namespace database
+} // namespace graphics
 
 namespace logic
 {

@@ -12,11 +12,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+
       - name: Setup premake
         uses: abel0b/setup-premake@v2.1
         with:
           version: "5.0.0-beta2"
-          
+
       - name: Execute Premake
         run: .\premake5.exe vs2019
         shell: powershell

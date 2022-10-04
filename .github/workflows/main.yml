@@ -25,7 +25,7 @@ jobs:
       - name: Generate project 2019
         run: |
           pushd ./code/prj
-            call 'gen_prj_2019.bat'
+            call "gen_prj_2019.bat"
           popd
         shell: cmd
 

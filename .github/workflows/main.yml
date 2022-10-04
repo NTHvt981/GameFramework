@@ -10,10 +10,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: List files in the repository
-        run: |
-          dir ${{ github.workspace }} /s/w/o/p
-
       - name: Setup premake
         uses: abel0b/setup-premake@v2.1
         with:

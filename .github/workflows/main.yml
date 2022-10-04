@@ -27,6 +27,6 @@ jobs:
       - name: Build Debug project 2019
         run: |
           cd ${{github.workspace}}/code/prj/vs2019
-            msbuild Game.sln -t:rebuild -verbosity:diag -property:Configuration=Debug
+            msbuild app.vcxproj -t:rebuild -property:Configuration=Debug
         shell: cmd
           

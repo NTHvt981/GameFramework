@@ -19,6 +19,6 @@ jobs:
         with:
           version: "5.0.0-beta2"
 
-      - name: Execute Premake
-        run: .\premake5.exe vs2019
+      - name: Generate project 2019
+        run: .\code\prj\gen_prj_2019.bat
         shell: powershell

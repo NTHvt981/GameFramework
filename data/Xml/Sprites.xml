@@ -741,7 +741,7 @@
         </Origin>
         <TextureId>1</TextureId>
     </Sprite>
-    <Sprite name="JasonWalkClimb1">
+    <Sprite name="JasonClimb1">
         <Id>56</Id>
         <Boundary>
             <Left>0</Left>
@@ -755,7 +755,7 @@
         </Origin>
         <TextureId>1</TextureId>
     </Sprite>
-    <Sprite name="JasonWalkClimb2">
+    <Sprite name="JasonClimb2">
         <Id>57</Id>
         <Boundary>
             <Left>0</Left>
@@ -769,7 +769,7 @@
         </Origin>
         <TextureId>1</TextureId>
     </Sprite>
-    <Sprite name="JasonWalkCrawlLeft1">
+    <Sprite name="JasonCrawlLeft1">
         <Id>58</Id>
         <Boundary>
             <Left>2</Left>
@@ -783,7 +783,7 @@
         </Origin>
         <TextureId>1</TextureId>
     </Sprite>
-    <Sprite name="JasonWalkCrawlLeft2">
+    <Sprite name="JasonCrawlLeft2">
         <Id>59</Id>
         <Boundary>
             <Left>20</Left>
@@ -797,7 +797,7 @@
         </Origin>
         <TextureId>1</TextureId>
     </Sprite>
-    <Sprite name="JasonWalkCrawlRight1">
+    <Sprite name="JasonCrawlRight1">
         <Id>60</Id>
         <Boundary>
             <Left>38</Left>
@@ -811,7 +811,7 @@
         </Origin>
         <TextureId>1</TextureId>
     </Sprite>
-    <Sprite name="JasonWalkCrawlRight2">
+    <Sprite name="JasonCrawlRight2">
         <Id>61</Id>
         <Boundary>
             <Left>56</Left>

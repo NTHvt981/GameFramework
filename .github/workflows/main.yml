@@ -21,6 +21,5 @@ jobs:
 
       - name: Generate project 2019
         run: |
-          pushd ./code/prj
+          cd ./code/prj
             gen_prj_2019.bat
-          popd

@@ -21,4 +21,3 @@ jobs:
 
       - name: Generate project 2019
         run: .\code\prj\gen_prj_2019.bat
-        shell: powershell

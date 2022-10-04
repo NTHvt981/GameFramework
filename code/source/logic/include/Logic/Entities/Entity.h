@@ -5,6 +5,7 @@
 #include <memory>
 #include <map>
 #include <type_traits>
+#include <initializer_list>
 
 namespace logic
 {
@@ -16,6 +17,8 @@ public:
 	core::EntityId GetId() const;
 	void InsertComponent(core::ComponentKey i_componentKey, std::shared_ptr<IComponent> i_component);
 	bool HasComponent(core::ComponentKey i_componentKey) const;
+	bool HasAnyComponents(std::initializer_list<core::ComponentKey> i_componentKeys) const;
+	bool HasAllComponents(std::initializer_list<core::ComponentKey> i_componentKeys) const;
 	std::shared_ptr<IComponent> GetComponent(core::ComponentKey i_componentKey) const;
 
 	template<class T>

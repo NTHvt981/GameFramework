@@ -1,5 +1,5 @@
 #pragma once
-#include "Logic/Entities/Entities.h"
+#include <memory>
 
 namespace core::logic
 {
@@ -10,6 +10,7 @@ namespace logic
 {
 
 class IEntitiesFactory;
+class EntitiesManager;
 
 /// <summary>
 /// script context contains every interface needed for script
@@ -18,9 +19,9 @@ class IEntitiesFactory;
 class IScriptContext
 {
 public:
-	virtual std::shared_ptr<IEntitiesFactory> GetEntityFactory() = 0;
 	virtual std::shared_ptr<core::logic::IGameClock> GetGameClock() = 0;
-	virtual std::shared_ptr<Entities> GetEntities() = 0;
+	virtual std::shared_ptr<IEntitiesFactory> GetEntitiesFactory() = 0;
+	virtual std::shared_ptr<EntitiesManager> GetEntitiesManager() = 0;
 };
 
 } // namespace logic

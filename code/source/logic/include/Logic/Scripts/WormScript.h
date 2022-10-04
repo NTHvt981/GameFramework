@@ -16,8 +16,8 @@ class WormScript final: public Script
 {
 public:
 	// Inherited via Script
-	void OnInitialize(std::shared_ptr<IScriptContext> i_scriptContext) override;
-	void OnShutdown() override;
+	void OnCreate(std::shared_ptr<IScriptContext> i_scriptContext) override;
+	void OnDestroy() override;
 	void OnFixedUpdate(const core::Duration& dt) override;
 	void OnUpdate(const core::Duration& dt) override;
 

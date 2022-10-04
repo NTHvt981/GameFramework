@@ -24,6 +24,30 @@ bool Entity::HasComponent(core::ComponentKey i_componentKey) const
 	return m_components.contains(i_componentKey);
 }
 
+bool Entity::HasAnyComponents(std::initializer_list<core::ComponentKey> i_componentKeys) const
+{
+	for (const core::ComponentKey& componentKey: i_componentKeys)
+	{
+		if (HasComponent(componentKey))
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+bool Entity::HasAllComponents(std::initializer_list<core::ComponentKey> i_componentKeys) const
+{
+	for (const core::ComponentKey& componentKey: i_componentKeys)
+	{
+		if (!HasComponent(componentKey))
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
 void Entity::Register()
 {
 	if (isRegistered)

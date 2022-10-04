@@ -1,14 +1,20 @@
 #include "Logic/Game.h"
+#include "Core/GameSetting/GameSetting.h"
 #include "GraphicSystem/GraphicSystem.h"
+#include "GraphicSystem/API/INativeGraphicAPI.h"
 #include "PhysicSystem/PhysicSystem.h"
 #include "InputSystem/InputSystem.h"
+#include "InputSystem/API/INativeInputAPI.h"
 #include "AudioSystem/AudioSystem.h"
+#include "AudioSystem/API/INativeAudioAPI.h"
 #include "FileSystem/FileSystem.h"
 #include "Database/Database.h"
 #include "Logic/Factories/ComponentsFactory.h"
 #include "Logic/Factories/EntitiesFactory.h"
+#include "Logic/Managers/EntitiesManager.h"
 #include "Logic/Scripts/ScriptContext.h"
 #include "Logic/Scripts/WormScript.h"
+#include "Logic/Scripts/Script.h"
 #include "Logic/LogicSystems/CameraSystem/CameraSystem.h"
 
 namespace logic
@@ -42,8 +48,9 @@ Game::Game(std::unique_ptr<graphics::INativeGraphicAPI> i_nativeGraphicAPI,
 	m_componentFactory = std::make_shared<ComponentsFactory>(
 		m_graphicSystem, m_inputSystem, m_audioSystem, m_physicSystem, m_database
 	);
-	m_entityFactory = std::make_shared<EntitiesFactory>(m_componentFactory);
-	m_scriptContext = std::make_shared<ScriptContext>(m_gameClock, m_entityFactory);
+	m_entitiesFactory = std::make_shared<EntitiesFactory>(m_componentFactory);
+	m_entitiesManager = std::make_shared<EntitiesManager>();
+	m_scriptContext = std::make_shared<ScriptContext>(m_gameClock, m_entitiesFactory, m_entitiesManager);
 
 	//test
 	m_wormScript = std::make_unique<WormScript>();
@@ -77,7 +84,7 @@ void Game::LoadResource()
 	m_database->LoadResource();
 	m_graphicSystem->LoadTextures();
 
-	m_wormScript->OnInitialize(m_scriptContext);
+	m_wormScript->OnCreate(m_scriptContext);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -131,7 +138,7 @@ void Game::Shutdown()
 	m_audioSystem->Shutdown();
 
 	//test
-	m_wormScript->OnShutdown();
+	m_wormScript->OnDestroy();
 }
 
 ////////////////////////////////////////////////////////////////////////////////

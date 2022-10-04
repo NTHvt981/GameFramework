@@ -2,6 +2,7 @@
 #include "Logic/ComponentKeys/WormKeys.h"
 #include "Core/GameClock/IGameClock.h"
 #include "Logic/Factories/IEntitiesFactory.h"
+#include "Logic/Managers/EntitiesManager.h"
 #include "Logic/Entities/Entity.h"
 #include "Logic/Components/TransformCompositionComponent.h"
 #include "Logic/Components/KinematicBodyComponent.h"
@@ -11,7 +12,7 @@
 namespace logic
 {
 
-void WormScript::OnInitialize(std::shared_ptr<IScriptContext> i_scriptContext)
+void WormScript::OnCreate(std::shared_ptr<IScriptContext> i_scriptContext)
 {
 	auto gameClock = i_scriptContext->GetGameClock();
 	m_onFixedUpdateCon = gameClock->sig_onFixedUpdate.Connect(
@@ -21,8 +22,8 @@ void WormScript::OnInitialize(std::shared_ptr<IScriptContext> i_scriptContext)
 		std::bind(&WormScript::OnUpdate, this, std::placeholders::_1)
 	);
 	
-	m_wormEntity = i_scriptContext->GetEntityFactory()->MakeWormEntity();
-	i_scriptContext->GetEntities()->emplace(m_wormEntity->GetId(), m_wormEntity);
+	m_wormEntity = i_scriptContext->GetEntitiesFactory()->MakeWormEntity();
+	i_scriptContext->GetEntitiesManager()->AddEntity(m_wormEntity);
 	m_wormEntity->Register();
 
 	m_kinematicComponent = m_wormEntity->GetComponent<KinematicBodyComponent>(sk_kinematicBodyComponentKey);
@@ -36,7 +37,7 @@ void WormScript::OnInitialize(std::shared_ptr<IScriptContext> i_scriptContext)
 	m_transformComponent->SetPosition(core::Vector2F{ 50, 100 });
 }
 
-void WormScript::OnShutdown()
+void WormScript::OnDestroy()
 {
 	m_wormEntity->Deregister();
 	m_onFixedUpdateCon.Disconnect();

@@ -8,8 +8,8 @@ namespace logic
 class Script
 {
 public:
-	virtual void OnInitialize(std::shared_ptr<IScriptContext> i_scriptContext) = 0;
-	virtual void OnShutdown() = 0;
+	virtual void OnCreate(std::shared_ptr<IScriptContext> i_scriptContext) = 0;
+	virtual void OnDestroy() = 0;
 	virtual void OnPause() {};
 	virtual void OnResume() {};
 	virtual void OnUpdate(const core::Duration& dt) {};

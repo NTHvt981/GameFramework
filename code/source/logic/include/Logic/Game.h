@@ -1,24 +1,46 @@
 #pragma once
 #include "GameClock.h"
-#include "Core/GameSetting/GameSetting.h"
-#include "GraphicSystem/IGraphicSystem.h"
 #include "PhysicSystem/IPhysicSystem.h"
-#include "InputSystem/IInputSystem.h"
-#include "AudioSystem/IAudioSystem.h"
-#include "GraphicSystem/API/INativeGraphicAPI.h"
-#include "InputSystem/API/INativeInputAPI.h"
-#include "AudioSystem/API/INativeAudioAPI.h"
 #include "FileSystem/IFileSystem.h"
 #include "Database/IDatabase.h"
-#include "Factories/IComponentsFactory.h"
-#include "Factories/IEntitiesFactory.h"
-#include "Logic/Scripts/IScriptContext.h"
-#include "Logic/Scripts/Script.h"
 #include "Logic/LogicSystems/CameraSystem/ICameraSystem.h"
+#include "Logic/Scripts/Script.h"
 #include <memory>
+
+namespace graphics
+{
+class INativeGraphicAPI;
+class IGraphicSystem;
+} // namespace graphics
+
+namespace inputs
+{
+class INativeInputAPI;
+class IInputSystem;
+} // namespace inputs
+
+namespace audios
+{
+class INativeAudioAPI;
+class IAudioSystem;
+} // namespace audios
+
+namespace core
+{
+class GameSetting;
+} // namespace core
 
 namespace logic
 {
+
+class IScriptContext;
+class IComponentsFactory;
+class IEntitiesFactory;
+class EntitiesManager;
+namespace camera
+{
+class ICameraSystem;
+} // namespace camera
 
 class Game
 {
@@ -69,7 +91,8 @@ private:
 	std::shared_ptr<core::GameSetting> m_gameSetting;
 	std::shared_ptr<database::IDatabase> m_database;
 	std::shared_ptr<IComponentsFactory> m_componentFactory;
-	std::shared_ptr<IEntitiesFactory> m_entityFactory;
+	std::shared_ptr<IEntitiesFactory> m_entitiesFactory;
+	std::shared_ptr<EntitiesManager> m_entitiesManager;
 	std::shared_ptr<IScriptContext> m_scriptContext;
 
 	// own, pass by param

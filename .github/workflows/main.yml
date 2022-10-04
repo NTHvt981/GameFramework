@@ -16,3 +16,7 @@ jobs:
         uses: abel0b/setup-premake@v2.1
         with:
           version: "5.0.0-beta2"
+          
+      - name: Execute Premake
+        run: .\premake5.exe vs2019
+        shell: powershell

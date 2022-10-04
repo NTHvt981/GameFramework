@@ -20,17 +20,13 @@ jobs:
 
       - name: Generate project 2019
         run: |
-          pushd code/prj
-            call "dir /s/w/o/p"
+          cd ${{github.workspace}}/code/prj
             call gen_prj_2019.bat
-          popd
         shell: cmd
 
       - name: Build Debug project 2019
         run: |
-          pushd code/prj/vs2019
-            call "dir /s/w/o/p"
+          cd ${{github.workspace}}/code/prj/vs2019
             call 'msbuild Game.sln -t:rebuild -verbosity:diag -property:Configuration=Debug'
-          popd
         shell: cmd
           

@@ -2,11 +2,9 @@
 
 name: CI
 
-on: push
-
+on: [push]
 jobs:
-  super-lint:
-    name: Lint code base
+  Test-Debug:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code

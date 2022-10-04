@@ -26,4 +26,15 @@ jobs:
               gen_prj_2019.bat
             popd
           "
+
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.1
+
+      - name: Build Debug project 2019
+        run: |
+          cmd /c "
+            pushd ./code/prj/vs2019
+              msbuild app.vcxproj -t:rebuild -verbosity:diag -property:Configuration=Debug
+            popd
+          "
           

@@ -12,7 +12,7 @@ jobs:
 
       - name: List files in the repository
         run: |
-          ls ${{ github.workspace }}
+          dir ${{ github.workspace }} /s/w/o/p
 
       - name: Setup premake
         uses: abel0b/setup-premake@v2.1
@@ -25,7 +25,7 @@ jobs:
       - name: Generate project 2019
         run: |
           pushd code/prj
-            ls ${{ github.workspace }}
+            call "dir /s/w/o/p"
             call gen_prj_2019.bat
           popd
         shell: cmd
@@ -33,7 +33,7 @@ jobs:
       - name: Build Debug project 2019
         run: |
           pushd code/prj/vs2019
-            ls ${{ github.workspace }}
+            call "dir /s/w/o/p"
             call 'msbuild Game.sln -t:rebuild -verbosity:diag -property:Configuration=Debug'
           popd
         shell: cmd

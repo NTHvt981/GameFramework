@@ -50,7 +50,7 @@ std::shared_ptr<Entity> EntitiesFactory::MakeWormEntity()
 	std::shared_ptr<EnemyTagComponent> tagComponent = m_componentFactory->MakeEnemyTagComponent();
 
 	Entity result(entityId);
-	result.InsertComponent(sk_transformCompositionComponentKey, transformCompositionComponent);
+	result.Insert Component(sk_transformCompositionComponentKey, transformCompositionComponent);
 	result.InsertComponent(sk_kinematicBodyComponentKey, bodyComponent);
 	result.InsertComponent(sk_animationComponentKey, aniComponent);
 	result.InsertComponent(worm::sk_detectorComponentKey, detectorComponent);

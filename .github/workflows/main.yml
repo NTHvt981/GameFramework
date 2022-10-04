@@ -23,7 +23,7 @@ jobs:
         run: |
           cmd /c "
             pushd ./code/prj
-              gen_prj_2019.bat
+              call 'gen_prj_2019.bat'
             popd
           "
 
@@ -34,7 +34,7 @@ jobs:
         run: |
           cmd /c "
             pushd ./code/prj/vs2019
-              msbuild app.vcxproj -t:rebuild -verbosity:diag -property:Configuration=Debug
+              call 'msbuild app.vcxproj -t:rebuild -verbosity:diag -property:Configuration=Debug'
             popd
           "
           

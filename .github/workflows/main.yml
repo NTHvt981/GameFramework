@@ -11,7 +11,7 @@ jobs:
     steps:
     - id: set-matrix
       run: |
-        ::set-output name=matrix:: 
+        echo "::set-output name=matrix:: 
           {
             \"include\": 
               [
@@ -25,9 +25,9 @@ jobs:
                   \"config\":\"Release\"
                 }
               ]
-          }
+          }"
       shell: cmd
-      
+
   test-build:
     needs: set-configs
     runs-on: windows-latest

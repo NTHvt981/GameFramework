@@ -37,6 +37,7 @@ class IScriptContext;
 class IComponentsFactory;
 class IEntitiesFactory;
 class EntitiesManager;
+class ScriptsManager;
 namespace camera
 {
 class ICameraSystem;
@@ -94,6 +95,7 @@ private:
 	std::shared_ptr<IEntitiesFactory> m_entitiesFactory;
 	std::shared_ptr<EntitiesManager> m_entitiesManager;
 	std::shared_ptr<IScriptContext> m_scriptContext;
+	std::shared_ptr<ScriptsManager> m_scriptsManager;
 
 	// own, pass by param
 	std::unique_ptr<graphics::INativeGraphicAPI> m_nativeGraphicAPI;

@@ -12,6 +12,7 @@
 #include "Logic/Factories/ComponentsFactory.h"
 #include "Logic/Factories/EntitiesFactory.h"
 #include "Logic/Managers/EntitiesManager.h"
+#include "Logic/Managers/ScriptsManager.h"
 #include "Logic/Scripts/ScriptContext.h"
 #include "Logic/Scripts/WormScript.h"
 #include "Logic/Scripts/Script.h"
@@ -51,7 +52,7 @@ Game::Game(std::unique_ptr<graphics::INativeGraphicAPI> i_nativeGraphicAPI,
 	m_entitiesFactory = std::make_shared<EntitiesFactory>(m_componentFactory);
 	m_entitiesManager = std::make_shared<EntitiesManager>();
 	m_scriptContext = std::make_shared<ScriptContext>(m_gameClock, m_entitiesFactory, m_entitiesManager);
-
+	m_scriptsManager = std::make_shared<ScriptsManager>(m_scriptContext);
 	//test
 	m_wormScript = std::make_unique<WormScript>();
 }

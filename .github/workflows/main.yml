@@ -11,7 +11,7 @@ jobs:
     steps:
     - id: set-matrix
       run: |
-        ::set-output name=matrix::{\"include\":[{\"config\":\"Debug\"},{\"config\":\"Profile\"},{\"config\":\"Release\"}]}
+        ::set-output name=matrix::{\"include\":[{\"config\":\"Debug Win64\"},{\"config\":\"Profile Win64\"},{\"config\":\"Release Win64\"}]}
       shell: cmd
 
   test-build:
@@ -38,6 +38,6 @@ jobs:
 
       - run: |
           cd ${{github.workspace}}/code/prj/vs2019
-            msbuild app.vcxproj -t:rebuild /p:Configuration=$ {{matrix.config}} /p:Platform=x64
+            msbuild app.vcxproj -t:rebuild /p:Configuration=${{matrix.config}} /p:Platform=x64
         shell: cmd
           

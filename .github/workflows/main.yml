@@ -26,7 +26,8 @@ jobs:
                 }
               ]
           }
-
+      shell: cmd
+      
   test-build:
     needs: set-configs
     runs-on: windows-latest

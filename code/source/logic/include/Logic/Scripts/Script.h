@@ -1,6 +1,7 @@
 #pragma once
 #include "IScriptContext.h"
 #include "Core/DataTypes/Duration.h"
+#include "Core/Identifiers/ScriptState.h"
 
 namespace logic
 {
@@ -15,6 +16,7 @@ public:
 	virtual void OnUpdate(const core::Duration& dt) {};
 	virtual void OnFixedUpdate(const core::Duration& dt) {};
 	virtual void OnRender(const core::Duration& dt) {};
+	core::ScriptState scriptState = core::ScriptState::Created;
 };
 
 } // namespace logic

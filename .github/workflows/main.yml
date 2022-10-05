@@ -4,7 +4,7 @@ name: build
 
 on: [push, workflow_dispatch]
 jobs:
-  set-configs:
+  set_configs:
     runs-on: windows-latest
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
@@ -15,11 +15,11 @@ jobs:
       shell: cmd
 
   test-build:
-    needs: set-configs
+    needs: [set_configs]
     runs-on: windows-latest
 
     strategy:
-      matrix: ${{fromJson(needs.set-configs.outputs.matrix)}}
+      matrix: ${{fromJson(needs.set_configs.outputs.matrix)}}
 
     steps:
       - uses: actions/checkout@v3

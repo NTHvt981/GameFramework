@@ -1,6 +1,6 @@
 name: Debug
 
-on: [push]
+on: push
 jobs:
   build_debug:
     runs-on: windows-latest

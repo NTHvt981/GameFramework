@@ -6,11 +6,12 @@ namespace core
 
 enum class ScriptState : uint64_t
 {
-	OnCreated,
-	OnGoing,
-	OnPaused,
-	OnResumed,
-	OnDestroyed
+	Created,
+	Active,
+	Paused,
+	Inactive,
+	Resumed,
+	Destroyed
 };
 
 } // namespace core

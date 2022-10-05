@@ -8,6 +8,7 @@ jobs:
     runs-on: windows-latest
 
     steps:
+      - uses: actions/checkout@v3.1.0
       - uses: ./.github/actions/build-action
         with:
           config: "Debug Win64"
@@ -16,6 +17,7 @@ jobs:
     runs-on: windows-latest
 
     steps:
+      - uses: actions/checkout@v3.1.0
       - uses: ./.github/actions/build-action
         with:
           config: "Profile Win64"
@@ -24,6 +26,7 @@ jobs:
     runs-on: windows-latest
 
     steps:
+      - uses: actions/checkout@v3.1.0
       - uses: ./.github/actions/build-action
         with:
           config: "Release Win64"

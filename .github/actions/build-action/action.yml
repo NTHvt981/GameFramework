@@ -15,8 +15,6 @@ runs:
   runs-on: windows-latest
   using: "composite"
   steps:
-    - uses: actions/checkout@v3
-
     - uses: abel0b/setup-premake@v2.1
       with:
         version: "5.0.0-beta2"

@@ -1,0 +1,35 @@
+name: build-action
+
+inputs:
+  config:
+    description: |
+      Configuration buidl, valid values = 
+        {
+          Debug Win64,
+          Profile Win64,
+          Release Win64
+        }
+    required: true
+
+runs:
+  runs-on: windows-latest
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v3
+
+    - uses: abel0b/setup-premake@v2.1
+      with:
+        version: "5.0.0-beta2"
+
+    - uses: microsoft/setup-msbuild@v1.1
+
+    - name: Generate project vs2019
+      run: |
+        cd ${{github.workspace}}/code/prj
+          call gen_prj_2019.bat
+      shell: cmd
+
+    - run: |
+        cd ${{github.workspace}}/code/prj/vs2019
+          msbuild app.vcxproj -t:rebuild /p:Configuration=${{ inputs.config }} /p:Platform=x64
+      shell: cmd

@@ -28,5 +28,5 @@ runs:
 
     - run: |
         cd ${{github.workspace}}/code/prj/vs2019
-          msbuild app.vcxproj -t:rebuild /p:Configuration=\"${{ inputs.config }}\" /p:Platform=x64
+          msbuild app.vcxproj -t:rebuild /p:Configuration="${{ inputs.config }}" /p:Platform=x64
       shell: cmd

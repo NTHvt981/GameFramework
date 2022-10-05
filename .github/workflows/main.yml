@@ -4,7 +4,7 @@ name: builds
 
 on: [push, workflow_dispatch]
 jobs:
-  debug-build:
+  all-build:
     runs-on: windows-latest
 
     strategy:

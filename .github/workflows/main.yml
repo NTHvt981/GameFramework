@@ -13,6 +13,7 @@ jobs:
       run: echo "::set-output name=matrix::{\"include\":[{\"config\":\"Debug\"},{\"config\":\"Profile\"}, {\"config\":\"Release\"}]}"
 
   test-build:
+    needs: set-configs
     runs-on: windows-latest
 
     strategy:

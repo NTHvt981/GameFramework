@@ -1,0 +1,15 @@
+name: Debug
+
+on: [push]
+jobs:
+  build_debug:
+    runs-on: windows-latest
+    call_prepare:
+      uses: ./.github/workflows/prepare.yml
+
+    steps:
+      - name: Build Debug
+        run: |
+          cd ${{github.workspace}}/code/prj/vs2019
+            msbuild app.vcxproj -t:rebuild /p:Configuration="Debug Win64" /p:Platform=x64
+        shell: cmd

@@ -4,10 +4,13 @@ name: CI
 
 on: [push]
 jobs:
-  Test-Debug:
+  prepare:
     runs-on: windows-2019
     steps:
-      - name: Checkout code
+      - name: Cleanup
+        uses: rokroskar/workflow-run-cleanup-action@v0.3.3
+
+      - name: Checkout
         uses: actions/checkout@v3
 
       - name: Setup premake
@@ -15,18 +18,45 @@ jobs:
         with:
           version: "5.0.0-beta2"
 
-      - name: Add msbuild to PATH
+      - name: Setup msbuild
         uses: microsoft/setup-msbuild@v1.1
 
+  generate_projects:
+    needs: prepare
+    runs-on: windows-2019
+    steps:
       - name: Generate project 2019
         run: |
           cd ${{github.workspace}}/code/prj
             call gen_prj_2019.bat
         shell: cmd
 
-      - name: Build Debug project 2019
+  build_debug:
+    needs: [prepare, generate_projects]
+    runs-on: windows-2019
+    steps:
+      - name: Build Debug
         run: |
           cd ${{github.workspace}}/code/prj/vs2019
             msbuild app.vcxproj -t:rebuild /p:Configuration="Debug Win64" /p:Platform=x64
         shell: cmd
-          
+        
+  build_profile:
+    needs: [prepare, generate_projects]
+    runs-on: windows-2019
+    steps:
+      - name: Build Profile
+        run: |
+          cd ${{github.workspace}}/code/prj/vs2019
+            msbuild app.vcxproj -t:rebuild /p:Configuration="Profile Win64" /p:Platform=x64
+        shell: cmd
+        
+  build_release:
+    needs: [prepare, generate_projects]
+    runs-on: windows-2019
+    steps:
+      - name: Build Release
+        run: |
+          cd ${{github.workspace}}/code/prj/vs2019
+            msbuild app.vcxproj -t:rebuild /p:Configuration="Release Win64" /p:Platform=x64
+        shell: cmd

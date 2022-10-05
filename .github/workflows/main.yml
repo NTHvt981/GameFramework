@@ -2,7 +2,7 @@
 
 name: builds
 
-on: [push, workflow_dispatch]
+on: [push]
 jobs:
   all-builds:
     runs-on: windows-latest

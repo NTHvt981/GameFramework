@@ -4,7 +4,7 @@ name: builds
 
 on: [push, workflow_dispatch]
 jobs:
-  all-build:
+  all-builds:
     runs-on: windows-latest
 
     strategy:
@@ -16,22 +16,4 @@ jobs:
       - uses: ./.github/actions/build-action
         with:
           config: ${{ matrix.configs }}
-          
-  profile-build:
-    runs-on: windows-latest
-
-    steps:
-      - uses: actions/checkout@v3.1.0
-      - uses: ./.github/actions/build-action
-        with:
-          config: Profile Win64
-          
-  release-build:
-    runs-on: windows-latest
-
-    steps:
-      - uses: actions/checkout@v3.1.0
-      - uses: ./.github/actions/build-action
-        with:
-          config: Release Win64
           

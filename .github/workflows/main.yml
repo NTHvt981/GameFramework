@@ -1,19 +1,24 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: build
 
 on: [push, workflow_dispatch]
 jobs:
+  set-configs:
+    runs-on: windows-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+    - id: set-matrix
+      run: echo "::set-output name=matrix::{\"include\":[{\"config\":\"Debug\"},{\"config\":\"Profile\"}, {\"config\":\"Release\"}]}"
+
   test-build:
-    runs-on: windows-2019
+    runs-on: windows-latest
 
     strategy:
-      matrix:
-        configuration: [
-          "Debug Win64",
-          "Profile Win64",
-          "Release Win64"
-        ]
+      matrix: ${{fromJson(needs.set-configs.outputs.matrix)}}
+      include:
+        continue-on-error: true
 
     steps:
       - uses: actions/checkout@v3
@@ -24,14 +29,13 @@ jobs:
 
       - uses: microsoft/setup-msbuild@v1.1
 
-      - name: Generate project 2019
+      - name: Generate project vs2019
         run: |
           cd ${{github.workspace}}/code/prj
             call gen_prj_2019.bat
         shell: cmd
 
-      - name: Build Debug project 2019
-        run: |
+      - run: |
           cd ${{github.workspace}}/code/prj/vs2019
             msbuild app.vcxproj -t:rebuild /p:Configuration=$ {{matrix.configuration}} /p:Platform=x64
         shell: cmd

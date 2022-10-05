@@ -2,21 +2,27 @@
 
 name: CI
 
-on: [push]
+on: [push, workflow_dispatch]
 jobs:
-  Test-Debug:
+  test-build:
     runs-on: windows-2019
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
 
-      - name: Setup premake
-        uses: abel0b/setup-premake@v2.1
+    strategy:
+      matrix:
+        configuration: [
+          "Debug Win64",
+          "Profile Win64",
+          "Release Win64"
+        ]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: abel0b/setup-premake@v2.1
         with:
           version: "5.0.0-beta2"
 
-      - name: Add msbuild to PATH
-        uses: microsoft/setup-msbuild@v1.1
+      - uses: microsoft/setup-msbuild@v1.1
 
       - name: Generate project 2019
         run: |
@@ -27,6 +33,6 @@ jobs:
       - name: Build Debug project 2019
         run: |
           cd ${{github.workspace}}/code/prj/vs2019
-            msbuild app.vcxproj -t:rebuild /p:Configuration="Debug Win64" /p:Platform=x64
+            msbuild app.vcxproj -t:rebuild /p:Configuration=$ {{matrix.configuration}} /p:Platform=x64
         shell: cmd
           

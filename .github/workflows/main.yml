@@ -1,43 +1,33 @@
 # This is a basic workflow to help you get started with Actions
 
-name: build
+name: builds
 
 on: [push, workflow_dispatch]
 jobs:
-  set_configs:
-    runs-on: windows-latest
-    outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
-    steps:
-    - id: set-matrix
-      run: |
-        echo ::set-output name=matrix::{\"include\":[{\"config\":\"Debug Win64\"},{\"config\":\"Profile Win64\"},{\"config\":\"Release Win64\"}]}
-      shell: cmd
-
-  test-build:
-    needs: [set_configs]
+  debug-build:
     runs-on: windows-latest
 
-    strategy:
-      matrix: ${{fromJson(needs.set_configs.outputs.matrix)}}
-
     steps:
-      - uses: actions/checkout@v3
-
-      - uses: abel0b/setup-premake@v2.1
+      - uses: actions/checkout@v3.1.0
+      - uses: ./.github/actions/build-action
         with:
-          version: "5.0.0-beta2"
+          config: Debug Win64
+          
+  profile-build:
+    runs-on: windows-latest
 
-      - uses: microsoft/setup-msbuild@v1.1
+    steps:
+      - uses: actions/checkout@v3.1.0
+      - uses: ./.github/actions/build-action
+        with:
+          config: Profile Win64
+          
+  release-build:
+    runs-on: windows-latest
 
-      - name: Generate project vs2019
-        run: |
-          cd ${{github.workspace}}/code/prj
-            call gen_prj_2019.bat
-        shell: cmd
-
-      - run: |
-          cd ${{github.workspace}}/code/prj/vs2019
-            msbuild app.vcxproj -t:rebuild /p:Configuration=${{matrix.config}} /p:Platform=x64
-        shell: cmd
+    steps:
+      - uses: actions/checkout@v3.1.0
+      - uses: ./.github/actions/build-action
+        with:
+          config: Release Win64
           

@@ -17,8 +17,6 @@ jobs:
 
     strategy:
       matrix: ${{fromJson(needs.set-configs.outputs.matrix)}}
-      include:
-        continue-on-error: true
 
     steps:
       - uses: actions/checkout@v3

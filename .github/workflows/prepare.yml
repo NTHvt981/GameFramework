@@ -2,8 +2,7 @@
 
 name: Prepare
 
-on:
-  workflow_call:
+on: [workflow_call]
 jobs:
   prepare:
     runs-on: windows-latest

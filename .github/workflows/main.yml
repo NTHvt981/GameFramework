@@ -11,21 +11,7 @@ jobs:
     steps:
     - id: set-matrix
       run: |
-        echo "::set-output name=matrix:: 
-          {
-            \"include\": 
-              [
-                {
-                  \"config\":\"Debug\"
-                },
-                {
-                  \"config\":\"Profile\"
-                }, 
-                {
-                  \"config\":\"Release\"
-                }
-              ]
-          }"
+        ::set-output name=matrix:: {\"include\": [{\"config\":\"Debug\"},{\"config\":\"Profile\"}, {\"config\":\"Release\"}]}
       shell: cmd
 
   test-build:

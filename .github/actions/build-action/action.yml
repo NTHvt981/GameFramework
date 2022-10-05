@@ -12,7 +12,6 @@ inputs:
     required: true
 
 runs:
-  runs-on: windows-latest
   using: "composite"
   steps:
     - uses: abel0b/setup-premake@v2.1

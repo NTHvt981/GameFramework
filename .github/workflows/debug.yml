@@ -1,11 +1,9 @@
 name: Debug
 
-on: push
+on: [push]
 jobs:
   build_debug:
-    runs-on: windows-latest
-    call_prepare:
-      uses: ./.github/workflows/prepare.yml
+    uses: ./.github/workflows/prepare.yml
 
     steps:
       - name: Build Debug

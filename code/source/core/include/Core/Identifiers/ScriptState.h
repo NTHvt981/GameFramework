@@ -11,7 +11,8 @@ enum class ScriptState : uint64_t
 	Paused,
 	Inactive,
 	Resumed,
-	Destroyed
+	Destroyed,
+	ConfirmedDestroyed
 };
 
 } // namespace core

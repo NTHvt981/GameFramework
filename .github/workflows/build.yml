@@ -1,0 +1,28 @@
+name: build
+
+on: 
+  workflow_call:
+    inputs:
+      config:
+        description: |
+          Configuration buidl, valid values = 
+            {
+              Debug Win64,
+              Profile Win64,
+              Release Win64
+            }
+        required: true
+        type: string
+
+jobs:
+  triage:
+jobs:
+  all-builds:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v3.1.0
+      - uses: ./.github/actions/build-action@main
+        with:
+          config: ${{ inputs.config }}
+          

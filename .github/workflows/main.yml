@@ -1,6 +1,4 @@
-# This is a basic workflow to help you get started with Actions
-
-name: builds
+name: build-all
 
 on: [push, workflow_dispatch]
 jobs:
@@ -11,9 +9,7 @@ jobs:
       matrix: 
         configs: [Debug Win64, Profile Win64, Release Win64]
 
-    steps:
-      - uses: actions/checkout@v3.1.0
-      - uses: ./.github/actions/build-action
-        with:
-          config: ${{ matrix.configs }}
-          
+    uses: ./.github/workflows/build.yml@main
+      with:
+        config: ${{ matrix.configs }}
+         

@@ -4,19 +4,19 @@
         <Frames>
             <Frame>
                 <SpriteId>28</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>29</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>30</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>31</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -25,19 +25,19 @@
         <Frames>
             <Frame>
                 <SpriteId>31</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>30</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>29</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>28</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -106,11 +106,11 @@
         <Frames>
             <Frame>
                 <SpriteId>12</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>13</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -119,11 +119,11 @@
         <Frames>
             <Frame>
                 <SpriteId>14</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>15</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -132,19 +132,19 @@
         <Frames>
             <Frame>
                 <SpriteId>48</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>49</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>50</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>51</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -153,19 +153,19 @@
         <Frames>
             <Frame>
                 <SpriteId>52</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>53</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>54</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>55</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -174,11 +174,11 @@
         <Frames>
             <Frame>
                 <SpriteId>56</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>57</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -187,11 +187,11 @@
         <Frames>
             <Frame>
                 <SpriteId>58</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>59</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -200,11 +200,11 @@
         <Frames>
             <Frame>
                 <SpriteId>60</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>61</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -213,11 +213,11 @@
         <Frames>
             <Frame>
                 <SpriteId>62</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>63</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -226,15 +226,15 @@
         <Frames>
             <Frame>
                 <SpriteId>65</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>66</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>67</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -243,15 +243,15 @@
         <Frames>
             <Frame>
                 <SpriteId>68</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>69</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>70</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -260,15 +260,15 @@
         <Frames>
             <Frame>
                 <SpriteId>71</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>72</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>73</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -277,15 +277,15 @@
         <Frames>
             <Frame>
                 <SpriteId>74</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>75</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>76</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -294,19 +294,19 @@
         <Frames>
             <Frame>
                 <SpriteId>89</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>90</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>91</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>92</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -315,15 +315,15 @@
         <Frames>
             <Frame>
                 <SpriteId>89</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>90</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>91</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -332,11 +332,11 @@
         <Frames>
             <Frame>
                 <SpriteId>89</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>90</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -345,11 +345,11 @@
         <Frames>
             <Frame>
                 <SpriteId>93</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>94</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -358,11 +358,11 @@
         <Frames>
             <Frame>
                 <SpriteId>95</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>96</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -371,11 +371,11 @@
         <Frames>
             <Frame>
                 <SpriteId>97</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>98</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -384,11 +384,11 @@
         <Frames>
             <Frame>
                 <SpriteId>99</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>100</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -397,11 +397,11 @@
         <Frames>
             <Frame>
                 <SpriteId>101</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>102</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -410,11 +410,11 @@
         <Frames>
             <Frame>
                 <SpriteId>103</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>104</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -423,11 +423,11 @@
         <Frames>
             <Frame>
                 <SpriteId>105</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>106</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -436,11 +436,11 @@
         <Frames>
             <Frame>
                 <SpriteId>107</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>108</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -449,11 +449,11 @@
         <Frames>
             <Frame>
                 <SpriteId>109</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>110</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -462,11 +462,11 @@
         <Frames>
             <Frame>
                 <SpriteId>111</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>112</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -475,15 +475,15 @@
         <Frames>
             <Frame>
                 <SpriteId>113</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>114</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>115</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -492,15 +492,15 @@
         <Frames>
             <Frame>
                 <SpriteId>116</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>117</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>118</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -509,23 +509,23 @@
         <Frames>
             <Frame>
                 <SpriteId>119</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>120</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>121</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>122</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>123</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -534,19 +534,19 @@
         <Frames>
             <Frame>
                 <SpriteId>124</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>125</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>126</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>127</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -555,11 +555,11 @@
         <Frames>
             <Frame>
                 <SpriteId>128</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>129</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -568,11 +568,11 @@
         <Frames>
             <Frame>
                 <SpriteId>130</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>131</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -581,11 +581,11 @@
         <Frames>
             <Frame>
                 <SpriteId>133</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>134</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -594,11 +594,11 @@
         <Frames>
             <Frame>
                 <SpriteId>135</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>136</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -607,11 +607,11 @@
         <Frames>
             <Frame>
                 <SpriteId>137</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>138</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -620,19 +620,19 @@
         <Frames>
             <Frame>
                 <SpriteId>139</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>140</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>141</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>142</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -641,19 +641,19 @@
         <Frames>
             <Frame>
                 <SpriteId>143</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>144</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>145</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>146</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -662,11 +662,11 @@
         <Frames>
             <Frame>
                 <SpriteId>147</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>148</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -675,11 +675,11 @@
         <Frames>
             <Frame>
                 <SpriteId>149</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>150</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -688,11 +688,11 @@
         <Frames>
             <Frame>
                 <SpriteId>151</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>152</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -701,11 +701,11 @@
         <Frames>
             <Frame>
                 <SpriteId>153</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>154</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -714,11 +714,11 @@
         <Frames>
             <Frame>
                 <SpriteId>155</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>156</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -727,11 +727,11 @@
         <Frames>
             <Frame>
                 <SpriteId>157</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>158</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -740,15 +740,15 @@
         <Frames>
             <Frame>
                 <SpriteId>159</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>160</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>161</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -757,15 +757,15 @@
         <Frames>
             <Frame>
                 <SpriteId>162</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>163</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>164</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -774,35 +774,35 @@
         <Frames>
             <Frame>
                 <SpriteId>165</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>166</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>167</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>168</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>169</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>170</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>171</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>172</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -811,151 +811,151 @@
         <Frames>
             <Frame>
                 <SpriteId>186</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>187</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>188</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>189</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>190</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>191</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>192</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>193</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>194</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>195</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>196</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>197</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>198</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>199</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>200</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>201</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>202</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>203</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>204</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>205</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>206</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>207</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>208</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>209</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>210</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>211</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>212</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>213</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>214</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>215</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>216</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>217</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>218</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>219</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>220</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>221</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>222</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>
@@ -964,51 +964,43 @@
         <Frames>
             <Frame>
                 <SpriteId>223</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>224</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>225</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>226</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>227</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>228</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>229</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>230</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>231</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
             <Frame>
                 <SpriteId>232</SpriteId>
-                <TimeSpan>50</TimeSpan>
-            </Frame>
-            <Frame>
-                <SpriteId>233</SpriteId>
-                <TimeSpan>50</TimeSpan>
-            </Frame>
-            <Frame>
-                <SpriteId>234</SpriteId>
-                <TimeSpan>50</TimeSpan>
+                <TimeSpan>500</TimeSpan>
             </Frame>
         </Frames>
     </Animation>

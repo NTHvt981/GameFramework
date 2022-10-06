@@ -3220,7 +3220,7 @@
         <TextureId>7</TextureId>
     </Sprite>
     <Sprite name="BreakableWall">
-        <Id>234</Id>
+        <Id>233</Id>
         <Boundary>
             <Left>1</Left>
             <Top>35</Top>

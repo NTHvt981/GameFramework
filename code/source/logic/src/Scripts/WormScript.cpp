@@ -46,11 +46,11 @@ void WormScript::OnDestroy()
 
 void WormScript::OnFixedUpdate(const core::Duration& dt)
 {
-	m_kinematicComponent->Move(core::Vector2F{ 10 * dt.ToSecond(), 0 });
 }
 
 void WormScript::OnUpdate(const core::Duration& dt)
 {
+	m_kinematicComponent->Move(core::Vector2F{ 10 * dt.ToSeconds(), 0 });
 }
 
 } // namespace logic

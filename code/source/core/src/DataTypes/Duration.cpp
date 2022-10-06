@@ -14,28 +14,28 @@ Duration::Duration(uint64_t i_milisecond)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Duration Duration::FromMillisecond(uint64_t i_milisecond)
+Duration Duration::FromMilliseconds(uint64_t i_milisecond)
 {
 	return Duration(i_milisecond);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Duration Duration::FromSecond(float i_milisecond)
+Duration Duration::FromSeconds(float i_milisecond)
 {
 	return Duration(static_cast<uint64_t>(i_milisecond * 1000.0));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-uint64_t Duration::ToMilisecond() const
+uint64_t Duration::ToMiliseconds() const
 {
 	return m_milisecond;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-float Duration::ToSecond() const
+float Duration::ToSeconds() const
 {
 	return m_milisecond / 1000.0f;
 }

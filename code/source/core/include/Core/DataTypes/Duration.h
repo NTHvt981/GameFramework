@@ -8,11 +8,11 @@ class Duration
 {
 public:
 	Duration(uint64_t i_milisecond);
-	static Duration FromMillisecond(uint64_t i_milisecond);
-	static Duration FromSecond(float i_milisecond);
+	static Duration FromMilliseconds(uint64_t i_milisecond);
+	static Duration FromSeconds(float i_milisecond);
 
-	uint64_t ToMilisecond() const;
-	float ToSecond() const;
+	uint64_t ToMiliseconds() const;
+	float ToSeconds() const;
 
 	Duration operator+(const Duration& i_other) const;
 	Duration operator-(const Duration& i_other) const;

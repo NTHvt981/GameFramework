@@ -71,7 +71,7 @@ int WINAPI WinMain(
 
 			currentFrameTime = GetTickCount64();
 
-			s_game->RunLoop(core::Duration::FromMillisecond(currentFrameTime - previousFrameTime));
+			s_game->RunLoop(core::Duration::FromMilliseconds(currentFrameTime - previousFrameTime));
 
 			previousFrameTime = currentFrameTime;
 		}

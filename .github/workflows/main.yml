@@ -7,7 +7,7 @@ jobs:
       matrix: 
         configs: [Debug Win64, Profile Win64, Release Win64]
 
-    uses: ./.github/workflows/build.yml
+    uses: NTHvt981/GameFramework/blob/master/.github/workflows/build.yml@main
     with:
       config: ${{ matrix.configs }}
          

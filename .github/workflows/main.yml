@@ -3,8 +3,6 @@ name: build-all
 on: [push, workflow_dispatch]
 jobs:
   all-builds:
-    runs-on: windows-latest
-
     strategy:
       matrix: 
         configs: [Debug Win64, Profile Win64, Release Win64]

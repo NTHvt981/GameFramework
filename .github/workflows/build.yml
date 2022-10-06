@@ -16,8 +16,6 @@ on:
 
 jobs:
   triage:
-jobs:
-  all-builds:
     runs-on: windows-latest
 
     steps:

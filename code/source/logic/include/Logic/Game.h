@@ -110,9 +110,6 @@ private:
 	// others
 	bool m_isInitialized = false;
 	bool m_isPaused = false;
-
-	// test
-	std::unique_ptr<Script> m_wormScript;
 };
 
 } // namespace logic

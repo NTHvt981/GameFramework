@@ -14,7 +14,6 @@
 #include "Logic/Managers/EntitiesManager.h"
 #include "Logic/Managers/ScriptsManager.h"
 #include "Logic/Scripts/ScriptContext.h"
-#include "Logic/Scripts/WormScript.h"
 #include "Logic/Scripts/Script.h"
 #include "Logic/LogicSystems/CameraSystem/CameraSystem.h"
 
@@ -53,8 +52,6 @@ Game::Game(std::unique_ptr<graphics::INativeGraphicAPI> i_nativeGraphicAPI,
 	m_entitiesManager = std::make_shared<EntitiesManager>();
 	m_scriptContext = std::make_shared<ScriptContext>(m_gameClock, m_entitiesFactory, m_entitiesManager);
 	m_scriptsManager = std::make_shared<ScriptsManager>(m_scriptContext);
-	//test
-	m_wormScript = std::make_unique<WormScript>();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -65,6 +62,7 @@ void Game::Initialize()
 	m_graphicSystem->Initialize();
 	m_inputSystem->Initialize();
 	m_audioSystem->Initialize();
+	m_scriptsManager->Initialize();
 
 	m_perFrameDuration = m_gameSetting->GetMillisecondsPerFrame();
 
@@ -84,8 +82,6 @@ void Game::LoadResource()
 {
 	m_database->LoadResource();
 	m_graphicSystem->LoadTextures();
-
-	m_wormScript->OnCreate(m_scriptContext);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -137,9 +133,7 @@ void Game::Shutdown()
 	m_graphicSystem->Shutdown();
 	m_inputSystem->Shutdown();
 	m_audioSystem->Shutdown();
-
-	//test
-	m_wormScript->OnDestroy();
+	m_scriptsManager->Shutdown();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -199,6 +193,7 @@ void Game::Update(const core::Duration& dt)
 void Game::PreUpdate(const core::Duration& dt)
 {
 	m_gameClock->PreUpdate(dt);
+	m_scriptsManager->OnPreUpdate(dt);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -206,6 +201,7 @@ void Game::PreUpdate(const core::Duration& dt)
 void Game::DuringUpdate(const core::Duration& dt)
 {
 	m_gameClock->Update(dt);
+	m_scriptsManager->OnRender(dt);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -213,6 +209,7 @@ void Game::DuringUpdate(const core::Duration& dt)
 void Game::PostUpdate(const core::Duration& dt)
 {
 	m_gameClock->PostUpdate(dt);
+	m_scriptsManager->OnPostUpdate(dt);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -237,6 +234,7 @@ void Game::PreRender(const core::Duration& dt)
 {
 	m_graphicSystem->PreRender(dt);
 	m_gameClock->PreRender(dt);
+	m_scriptsManager->OnPreRender(dt);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -245,6 +243,7 @@ void Game::DuringRender(const core::Duration& dt)
 {
 	m_graphicSystem->Render(dt);
 	m_gameClock->Render(dt);
+	m_scriptsManager->OnRender(dt);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -253,6 +252,7 @@ void Game::PostRender(const core::Duration& dt)
 {
 	m_graphicSystem->PostRender(dt);
 	m_gameClock->PostRender(dt);
+	m_scriptsManager->OnPostRender(dt);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

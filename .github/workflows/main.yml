@@ -7,7 +7,7 @@ jobs:
       matrix: 
         configs: [Debug Win64, Profile Win64, Release Win64]
 
-    uses: ./.github/workflows/build.yml@main
+    uses: ./.github/workflows/build.yml@master
     with:
       config: ${{ matrix.configs }}
          

@@ -16,6 +16,7 @@ public:
 
 	Duration operator+(const Duration& i_other) const;
 	Duration operator-(const Duration& i_other) const;
+	Duration operator*(const float i_magnitude) const;
 	bool operator>(const Duration& i_other) const;
 	bool operator<(const Duration& i_other) const;
 	bool operator==(const Duration& i_other) const;

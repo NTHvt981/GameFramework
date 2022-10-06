@@ -58,6 +58,13 @@ Duration Duration::operator-(const Duration& i_other) const
 
 ////////////////////////////////////////////////////////////////////////////////
 
+Duration Duration::operator*(const float i_magnitude) const
+{
+	return Duration(m_milisecond * i_magnitude);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 bool Duration::operator>(const Duration& i_other) const
 {
 	return this->m_milisecond > i_other.m_milisecond;

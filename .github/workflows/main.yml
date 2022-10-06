@@ -2,12 +2,16 @@ name: build-all
 
 on: [push, workflow_dispatch]
 jobs:
-  all-builds:
+  build:
+    runs-on: windows-latest
+
     strategy:
       matrix: 
         configs: [Debug Win64, Profile Win64, Release Win64]
 
-    uses: NTHvt981/GameFramework/.github/workflows/build.yml@master
-    with:
-      config: ${{ matrix.configs }}
-         
+    steps:
+      - uses: actions/checkout@v3.1.0
+      - uses: ./.github/actions/build-action
+        with:
+          config: ${{ matrix.configs }}
+          

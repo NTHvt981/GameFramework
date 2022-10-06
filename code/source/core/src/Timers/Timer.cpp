@@ -1,4 +1,4 @@
-#include "Core/GameClock/Timer.h"
+#include "Core/Timers/Timer.h"
 #include <math.h>
 
 namespace core
@@ -58,7 +58,7 @@ bool Timer::IsFinished() const
 
 void Timer::OnPreUpdate(const core::Duration& i_duration)
 {
-	m_currentDuration = m_currentDuration + i_duration;
+	m_currentDuration = m_currentDuration + i_duration * speed;
 	if (m_currentDuration > m_duration)
 	{
 		m_isFinished = true;

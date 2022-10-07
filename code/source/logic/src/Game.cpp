@@ -46,7 +46,7 @@ Game::Game(std::unique_ptr<graphics::INativeGraphicAPI> i_nativeGraphicAPI,
 	m_physicSystem = std::make_shared<physics::PhysicSystem>();
 	
 	m_componentFactory = std::make_shared<ComponentsFactory>(
-		m_graphicSystem, m_inputSystem, m_audioSystem, m_physicSystem, m_database
+		m_graphicSystem, m_inputSystem, m_audioSystem, m_physicSystem, m_cameraSystem, m_database
 	);
 	m_entitiesFactory = std::make_shared<EntitiesFactory>(m_componentFactory);
 	m_entitiesManager = std::make_shared<EntitiesManager>();

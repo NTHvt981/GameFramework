@@ -1,5 +1,6 @@
 #include "Logic/Factories/ComponentsFactory.h"
 #include "PhysicSystem/IPhysicSystem.h"
+#include "Logic/LogicSystems/CameraSystem/ICameraSystem.h"
 #include "GraphicSystem/IGraphicSystem.h"
 #include "InputSystem/IInputSystem.h"
 #include "AudioSystem/IAudioSystem.h"
@@ -10,10 +11,12 @@
 #include "Logic/Components/AudioComponent.h"
 #include "Logic/Components/TransformCompositionComponent.h"
 #include "Logic/Components/KinematicBodyComponent.h"
+#include "Logic/Components/CameraComponent.h"
 #include "Logic/Components/TransformComponent.h"
 #include "Logic/Components/PivotComponent.h"
 #include "Logic/Components/TransformComponent.h"
 #include "Logic/Components/TagComponents.h"
+#include "Core/DataTypes/Ref.h"
 
 namespace logic
 {
@@ -23,8 +26,10 @@ ComponentsFactory::ComponentsFactory(
 	std::shared_ptr<inputs::IInputSystem> i_inputSystem,
 	std::shared_ptr<audios::IAudioSystem> i_audioSystem,
 	std::shared_ptr<physics::IPhysicSystem> i_physicSystem,
+	std::shared_ptr<camera::ICameraSystem> i_cameraSystem,
 	std::shared_ptr<database::IDatabase> i_database)
 	: m_physicSystem(i_physicSystem)
+	, m_cameraSystem(i_cameraSystem)
 	, m_graphicSystem(i_graphicSystem)
 	, m_audioSystem(i_audioSystem)
 	, m_inputSystem(i_inputSystem)
@@ -71,6 +76,14 @@ std::shared_ptr<KinematicBodyComponent> ComponentsFactory::MakeKinematicBodyComp
 {
 	return std::make_shared<KinematicBodyComponent>(
 		m_physicSystem,
+		i_entityId
+	);
+}
+
+std::shared_ptr<CameraComponent> ComponentsFactory::MakeCameraComponent(const core::EntityId i_entityId)
+{
+	return std::make_shared<CameraComponent>(
+		m_cameraSystem,
 		i_entityId
 	);
 }

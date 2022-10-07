@@ -1,11 +1,13 @@
 #pragma once
 #include "GraphicSystem/Camera/IGraphicCameraAPI.h"
+#include "IEntityCameraAPI.h"
 #include "Core/DataTypes/Vector2.h"
 
 namespace logic::camera
 {
 
-class ICameraSystem : public graphics::camera::IGraphicCameraAPI
+class ICameraSystem :	public graphics::camera::IGraphicCameraAPI,
+						public IEntityCameraAPI
 {
 public:
 	virtual void SetPosition(core::Vector2F i_position) = 0;

@@ -11,6 +11,7 @@ class SpriteComponent;
 class InputComponent;
 class AudioComponent;
 class KinematicBodyComponent;
+class CameraComponent;
 class PivotComponent;
 class TransformCompositionComponent;
 class ITransformComponent;
@@ -27,6 +28,9 @@ public:
 	virtual std::shared_ptr<InputComponent> MakeInputComponent() = 0;
 	virtual std::shared_ptr<AudioComponent> MakeAudioComponent() = 0;
 	virtual std::shared_ptr<KinematicBodyComponent> MakeKinematicBodyComponent(
+		const core::EntityId i_entityId
+	) = 0;
+	virtual std::shared_ptr<CameraComponent> MakeCameraComponent(
 		const core::EntityId i_entityId
 	) = 0;
 	virtual std::shared_ptr<PivotComponent> MakePivotComponent(

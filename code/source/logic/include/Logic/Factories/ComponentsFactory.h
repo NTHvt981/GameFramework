@@ -29,6 +29,11 @@ class IDatabase;
 namespace logic
 {
 
+namespace camera
+{
+class ICameraSystem;
+} // namespace camera
+
 class ComponentsFactory final: public IComponentsFactory
 {
 public:
@@ -37,6 +42,7 @@ public:
 		std::shared_ptr<inputs::IInputSystem> i_inputSystem,
 		std::shared_ptr<audios::IAudioSystem> i_audioSystem,
 		std::shared_ptr<physics::IPhysicSystem> i_physicSystem,
+		std::shared_ptr<camera::ICameraSystem> i_cameraSystem,
 		std::shared_ptr<database::IDatabase> i_database
 	);
 	~ComponentsFactory();
@@ -53,6 +59,10 @@ public:
 
 	std::shared_ptr<KinematicBodyComponent> MakeKinematicBodyComponent(const core::EntityId i_entityId) override;
 
+	std::shared_ptr<CameraComponent> MakeCameraComponent(
+		const core::EntityId i_entityId
+	) override;
+
 	std::shared_ptr<PivotComponent> MakePivotComponent(
 		std::shared_ptr<ITransformComponent> i_child
 	) override;
@@ -67,6 +77,7 @@ public:
 
 private:
 	std::shared_ptr<physics::IPhysicSystem> m_physicSystem;
+	std::shared_ptr<camera::ICameraSystem> m_cameraSystem;
 	std::shared_ptr<graphics::IGraphicSystem> m_graphicSystem;
 	std::shared_ptr<inputs::IInputSystem> m_inputSystem;
 	std::shared_ptr<audios::IAudioSystem> m_audioSystem;

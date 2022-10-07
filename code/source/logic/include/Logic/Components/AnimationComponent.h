@@ -35,6 +35,8 @@ public:
 
 	void SetAnimation(const core::AnimationId i_animationId);
 	core::AnimationId GetAnimationId() const;
+	bool IsLoop();
+	void SetLoop(bool i_value);
 
 	signals::Signal<> sig_onAnimationFinished;
 private:

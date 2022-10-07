@@ -13,15 +13,7 @@ namespace logic
 {
 
 void WormScript::OnCreate(std::shared_ptr<IScriptContext> i_scriptContext)
-{
-	auto gameClock = i_scriptContext->GetGameClock();
-	m_onFixedUpdateCon = gameClock->sig_onFixedUpdate.Connect(
-		std::bind(&WormScript::OnFixedUpdate, this, std::placeholders::_1)
-	);
-	m_onUpdateCon = gameClock->sig_onUpdate.Connect(
-		std::bind(&WormScript::OnUpdate, this, std::placeholders::_1)
-	);
-	
+{	
 	m_wormEntity = i_scriptContext->GetEntitiesFactory()->MakeWormEntity();
 	i_scriptContext->GetEntitiesManager()->AddEntity(m_wormEntity);
 	m_wormEntity->Register();
@@ -40,15 +32,9 @@ void WormScript::OnCreate(std::shared_ptr<IScriptContext> i_scriptContext)
 void WormScript::OnDestroy()
 {
 	m_wormEntity->Deregister();
-	m_onFixedUpdateCon.Disconnect();
-	m_onUpdateCon.Disconnect();
 }
 
 void WormScript::OnFixedUpdate(const core::Duration& dt)
-{
-}
-
-void WormScript::OnUpdate(const core::Duration& dt)
 {
 	m_kinematicComponent->Move(core::Vector2F{ 10 * dt.ToSeconds(), 0 });
 }

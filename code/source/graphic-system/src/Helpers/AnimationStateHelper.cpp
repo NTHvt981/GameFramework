@@ -30,10 +30,14 @@ void UpdateAnimationState(AnimationState& animationState, const core::Duration& 
         auto frameSize = animationDef->frames.size();
         if (currentFrameIndex >= frameSize)
         {
+            animationState.sig_onAnimationFinished.Emit();
             if (animationState.loop)
             {
                 currentFrameIndex = currentFrameIndex - frameSize;
-                animationState.sig_onAnimationFinished.Emit();
+            }
+            else
+            {
+                currentFrameIndex = frameSize - 1;
             }
         }
 

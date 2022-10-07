@@ -1,5 +1,6 @@
 #pragma once
 #include "Logic/Managers/ScriptsManager.h"
+#include "Logic/Scripts/ScenesScript.h"
 #include "Logic/Scripts/WormScript.h" // test
 
 namespace logic
@@ -13,8 +14,8 @@ ScriptsManager::ScriptsManager(std::shared_ptr<IScriptContext> i_scriptContext)
 void ScriptsManager::Initialize()
 {
 	// test
-	m_rootScript = std::make_unique<WormScript>();
-	m_createdScripts.emplace(m_rootScript.get());
+	m_rootScript = std::make_unique<ScenesScript>();
+	AddScript(m_rootScript.get());
 }
 
 void ScriptsManager::OnPreFixedUpdate(const core::Duration& dt)
@@ -204,9 +205,12 @@ void ScriptsManager::ProcessDestroyedScripts()
 	}
 }
 
-void ScriptsManager::RequestCreateScript(core::Ref<Script> i_script)
+void ScriptsManager::AddScript(core::Ref<Script> i_script)
 {
 	m_createdScripts.emplace(i_script);
+	i_script->requestAddScriptToManagerCallback = std::bind(
+		&ScriptsManager::AddScript, this, std::placeholders::_1
+	);
 }
 
 } // namespace logic

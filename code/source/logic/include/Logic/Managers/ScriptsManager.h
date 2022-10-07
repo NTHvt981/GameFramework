@@ -35,7 +35,7 @@ private:
 	void ProcessInactiveScripts();
 	void ProcessResumedScripts();
 	void ProcessDestroyedScripts();
-	void RequestCreateScript(core::Ref<Script> i_script);
+	void AddScript(core::Ref<Script> i_script);
 
 	std::queue<core::Ref<Script>> m_createdScripts;
 	std::list<core::Ref<Script>> m_activeScripts;

@@ -2,6 +2,9 @@
 #include "Logic/Components/IComponent.h"
 #include "Core/Identifiers/EntityId.h"
 #include "Core/Identifiers/ComponentKey.h"
+#include "Core/Signals/Callback.h"
+#include "Core/Signals/Signal.h"
+#include "Core/Signals/Connection.h"
 #include <memory>
 #include <map>
 #include <type_traits>
@@ -30,11 +33,13 @@ public:
 
 	void Register();
 	void Deregister();
+	void SetDeregisterCallback(const signals::Callback<>& i_callback);
 
 private:
 	const core::EntityId m_id;
 	std::map<core::ComponentKey, std::shared_ptr<IComponent>> m_components;
-
+	signals::Signal<> sig_onDeregistered;
+	signals::Connection<> m_onDeregisteredCon;
 	bool isRegistered = false;
 };
 

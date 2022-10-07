@@ -21,11 +21,11 @@ public:
 
 private:
 	void ProccessActiveScene();
+	void PopNewActiveScene();
 	void OnSceneRequestAddScene(std::unique_ptr<SceneScript> i_scene);
+	void OnSceneRequestReplaceScene(std::unique_ptr<SceneScript> i_scene);
 	std::unique_ptr<SceneScript> m_activeScene;
 	std::stack<std::unique_ptr<SceneScript>> m_pausedScenes;
-
-
 };
 
 } // namespace logic

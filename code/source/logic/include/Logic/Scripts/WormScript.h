@@ -19,10 +19,6 @@ public:
 	void OnCreate(std::shared_ptr<IScriptContext> i_scriptContext) override;
 	void OnDestroy() override;
 	void OnFixedUpdate(const core::Duration& dt) override;
-	void OnUpdate(const core::Duration& dt) override;
-
-	signals::Connection<const core::Duration&> m_onFixedUpdateCon;
-	signals::Connection<const core::Duration&> m_onUpdateCon;
 
 	std::shared_ptr<Entity> m_wormEntity;
 	std::shared_ptr<TransformCompositionComponent> m_transformComponent;

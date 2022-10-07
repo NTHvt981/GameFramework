@@ -15,6 +15,7 @@ public:
 	std::shared_ptr<Entity> GetEntity(core::EntityId i_entityId) const;
 
 private:
+	void RemoveEntity(core::EntityId i_entityId);
 	std::unordered_map<core::EntityId, std::shared_ptr<Entity>> m_entities;
 };
 

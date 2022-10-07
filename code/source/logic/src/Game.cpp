@@ -161,6 +161,7 @@ void Game::PreFixedUpdate(const core::Duration& dt)
 {
 	m_gameClock->PreFixedUpdate(dt);
 	m_physicSystem->PreFixedUpdate(dt);
+	m_scriptsManager->OnPreFixedUpdate(dt);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -169,6 +170,7 @@ void Game::DuringFixedUpdate(const core::Duration& dt)
 {
 	m_gameClock->FixedUpdate(dt);
 	m_physicSystem->FixedUpdate(dt);
+	m_scriptsManager->OnFixedUpdate(dt);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -177,6 +179,7 @@ void Game::PostFixedUpdate(const core::Duration& dt)
 {
 	m_gameClock->PostFixedUpdate(dt);
 	m_physicSystem->PostFixedUpdate(dt);
+	m_scriptsManager->OnPostFixedUpdate(dt);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

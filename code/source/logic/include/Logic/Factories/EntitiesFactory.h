@@ -12,7 +12,8 @@ public:
 	EntitiesFactory(std::shared_ptr<IComponentsFactory> i_componentFactory);
 
 	// Inherited via IEntitiesFactory
-	virtual std::shared_ptr<Entity> MakeWormEntity() override;
+	std::shared_ptr<Entity> MakeWormEntity() override;
+	std::shared_ptr<Entity> MakeIntroEntity() override;
 
 private:
 	std::shared_ptr<IComponentsFactory> m_componentFactory;

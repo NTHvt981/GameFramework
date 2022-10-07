@@ -21,8 +21,7 @@ public:
 	virtual void OnRender(const core::Duration& dt) {};
 
 	core::ScriptState scriptState = core::ScriptState::Created;
-	signals::Connection<core::Ref<Script>> requestCreateScriptCon;
-	signals::Signal<core::Ref<Script>> sig_requestCreateScript;
+	signals::Callback<core::Ref<Script>> requestAddScriptToManagerCallback;
 };
 
 } // namespace logic

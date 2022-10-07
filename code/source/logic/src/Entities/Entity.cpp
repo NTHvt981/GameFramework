@@ -72,8 +72,13 @@ void Entity::Deregister()
 
 	for (auto& [key, component] : m_components)
 	{
-		component->Register();
+		component->Deregister();
 	}
+}
+
+void Entity::SetDeregisterCallback(const signals::Callback<>& i_callback)
+{
+	m_onDeregisteredCon = sig_onDeregistered.Connect(i_callback);
 }
 
 std::shared_ptr<IComponent> Entity::GetComponent(core::ComponentKey i_componentKey) const

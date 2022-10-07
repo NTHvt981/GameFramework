@@ -59,4 +59,17 @@ std::shared_ptr<Entity> EntitiesFactory::MakeWormEntity()
 	return std::make_shared<Entity>(result);
 }
 
+std::shared_ptr<Entity> EntitiesFactory::MakeIntroEntity()
+{
+	const core::EntityId entityId = m_idGenerator.Generate();
+
+	std::shared_ptr<AnimationComponent> aniComponent = m_componentFactory->MakeAnimationComponent();
+	aniComponent->SetAnimation(core::AnimationId::Opening);
+
+	Entity result(entityId);
+	result.InsertComponent(sk_animationComponentKey, aniComponent);
+
+	return std::make_shared<Entity>(result);
+}
+
 } // namespace logic

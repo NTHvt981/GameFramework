@@ -73,6 +73,16 @@ core::AnimationId AnimationComponent::GetAnimationId() const
 	return m_animationState->animationDef.lock()->id;
 }
 
+bool AnimationComponent::IsLoop()
+{
+	return m_animationState->loop;
+}
+
+void AnimationComponent::SetLoop(bool i_value)
+{
+	m_animationState->loop = i_value;
+}
+
 void AnimationComponent::OnAnimationFinished()
 {
 	sig_onAnimationFinished.Emit();

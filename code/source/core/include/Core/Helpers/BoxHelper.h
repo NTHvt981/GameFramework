@@ -15,8 +15,8 @@ template <typename T>
 Box<T> operator*(const Box<T>& a, const float b);
 template <typename T>
 Box<T> operator/(const Box<T>& a, const float b);
-
-BoxF ToFloat(const BoxI64& a);
+template <typename V, typename T>
+Box<T> CastBox(const Box<V>& a);
 
 // impl
 template <typename T>
@@ -56,15 +56,15 @@ Box<T> operator/(const Box<T>& a, const float b)
 	};
 }
 
-BoxF core::ToFloat(const BoxI64& a)
+template<typename V, typename T>
+Box<T> CastBox(const Box<V>& a)
 {
-	return BoxF
-	{
-		float(a.left),
-		float(a.top),
-		float(a.right),
-		float(a.bottom)
-	};
+	return Box<T>(
+		static_cast<T>(a.left),
+		static_cast<T>(a.top),
+		static_cast<T>(a.right),
+		static_cast<T>(a.bottom)
+	);
 }
 
 } // namespace core::string

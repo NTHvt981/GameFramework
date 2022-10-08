@@ -292,7 +292,10 @@ bool GraphicSystem::CheckRenderFilter(std::shared_ptr<const SpriteState> i_sprit
     if (m_renderFilter.has_value())
     {
         const core::BoxI64 spriteDefBoundary = i_spriteState->spriteDef.lock()->textureBoundary;
-        return core::IsOverlap(core::ToFloat(spriteDefBoundary), m_renderFilter.value());
+        return core::IsOverlap(
+            core::CastBox<int64_t, float>(spriteDefBoundary), 
+            m_renderFilter.value()
+        );
     }
     return true;
 }

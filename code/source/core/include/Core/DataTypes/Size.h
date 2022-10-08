@@ -13,5 +13,6 @@ struct Size
 };
 using SizeF = Size<float>;
 using SizeI64 = Size<int64_t>;
+using SizeUI64 = Size<uint64_t>;
 
 } // namespace core

@@ -15,5 +15,6 @@ struct Box
 };
 using BoxF = Box<float>;
 using BoxI64 = Box<int64_t>;
+using BoxUI64 = Box<uint64_t>;
 
 } // namespace core

@@ -10,6 +10,7 @@
 #include "Logic/Components/TransformComponent.h"
 #include "Logic/Components/PivotComponent.h"
 #include "Logic/Components/TransformComponent.h"
+#include "Logic/Components/CameraComponent.h"
 #include "Logic/Components/TagComponents.h"
 #include "PhysicSystem/DataTypes/DynamicCollider.h"
 
@@ -63,11 +64,17 @@ std::shared_ptr<Entity> EntitiesFactory::MakeIntroEntity()
 {
 	const core::EntityId entityId = m_idGenerator.Generate();
 
-	std::shared_ptr<AnimationComponent> aniComponent = m_componentFactory->MakeAnimationComponent();
-	aniComponent->SetAnimation(core::AnimationId::Opening);
+	std::shared_ptr<AnimationComponent> animationCom = m_componentFactory->MakeAnimationComponent();
+	animationCom->SetAnimation(core::AnimationId::Opening);
+
+	std::shared_ptr<CameraComponent> cameraCom = m_componentFactory->MakeCameraComponent(entityId);
+
+	std::shared_ptr<AudioComponent> audioCom = m_componentFactory->MakeAudioComponent();
 
 	Entity result(entityId);
-	result.InsertComponent(sk_animationComponentKey, aniComponent);
+	result.InsertComponent(sk_animationComponentKey, animationCom);
+	result.InsertComponent(sk_cameraComponentKey, cameraCom);
+	result.InsertComponent(sk_audioComponentKey, audioCom);
 
 	return std::make_shared<Entity>(result);
 }

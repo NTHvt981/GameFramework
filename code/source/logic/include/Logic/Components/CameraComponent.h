@@ -24,6 +24,7 @@ public:
 	core::Vector2F GetPosition() const override;
 
 	void SetCameraPosition(core::Vector2F i_position);
+	void SetCameraSize(core::SizeF i_size);
 	void SetCameraCentralPosition(core::Vector2F i_position);
 
 private:

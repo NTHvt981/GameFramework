@@ -36,6 +36,11 @@ void CameraComponent::SetCameraPosition(core::Vector2F i_position)
 	m_cameraAPI->TrySetPosition(m_entityId, i_position);
 }
 
+void CameraComponent::SetCameraSize(core::SizeF i_size)
+{
+	m_cameraAPI->TrySetSize(m_entityId, i_size);
+}
+
 void CameraComponent::SetCameraCentralPosition(core::Vector2F i_position)
 {
 	m_cameraAPI->TrySetCentralPosition(m_entityId, i_position);

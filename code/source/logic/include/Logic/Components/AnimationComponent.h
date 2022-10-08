@@ -2,6 +2,7 @@
 #include "ITransformComponent.h"
 #include "Core/Signals/Connection.h"
 #include "Core/Identifiers/AnimationId.h"
+#include "Core/DataTypes/Size.h"
 #include <memory>
 
 namespace graphics
@@ -37,6 +38,7 @@ public:
 	core::AnimationId GetAnimationId() const;
 	bool IsLoop();
 	void SetLoop(bool i_value);
+	core::SizeI64 GetSpriteSizeInFrame(uint64_t i_frameIndex);
 
 	signals::Signal<> sig_onAnimationFinished;
 private:

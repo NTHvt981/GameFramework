@@ -3,6 +3,7 @@
 #include "GraphicSystem/Helpers/AnimationStateHelper.h"
 #include "GraphicSystem/API/IAnimationGraphicAPI.h"
 #include "GraphicSystem/Database/IGraphicDatabaseAPI.h"
+#include "Core/Helpers/SizeBoxHelper.h"
 
 namespace logic
 {
@@ -81,6 +82,13 @@ bool AnimationComponent::IsLoop()
 void AnimationComponent::SetLoop(bool i_value)
 {
 	m_animationState->loop = i_value;
+}
+
+core::SizeI64 AnimationComponent::GetSpriteSizeInFrame(uint64_t i_frameIndex)
+{
+	std::shared_ptr<const graphics::AnimationDef> animationDef = m_animationState->animationDef.lock();
+	std::shared_ptr<const graphics::SpriteDef> spriteDef = animationDef->frames[i_frameIndex].spriteDefRef.lock();
+	return core::ToSize<int64_t>(spriteDef->textureBoundary);
 }
 
 void AnimationComponent::OnAnimationFinished()

@@ -10,7 +10,6 @@
 #include "DataTypes/SpriteState.h"
 #include "DataTypes/AnimationState.h"
 #include "API/INativeGraphicAPI.h"
-#include "Camera/IGraphicCameraAPI.h"
 #include <memory>
 #include <optional>
 #include <Windows.h>
@@ -25,9 +24,7 @@ class GraphicSystem final: public IGraphicSystem
 public:
 	GraphicSystem(
 		std::unique_ptr<INativeGraphicAPI> i_nativeGraphicAPI,
-		std::shared_ptr<const database::IGraphicDatabaseAPI> i_databaseAPI,
-		std::shared_ptr<const camera::IGraphicCameraAPI> i_graphicCameraAPI,
-		std::shared_ptr<core::GameSetting> i_gameSetting
+		std::shared_ptr<const database::IGraphicDatabaseAPI> i_databaseAPI
 	);
 	~GraphicSystem();
 	// Inherited via IGraphicSystem
@@ -39,6 +36,11 @@ public:
 	void PostRender(const core::Duration& dt) override;
 	void SetRenderFilter(const core::BoxF i_boundary) override;
 	void RemoveRenderFilter() override;
+
+	// Inherited via IViewportGraphicAPI
+	void SetWindowSize(const core::SizeF i_screenSize) override;
+	void SetViewportSize(const core::SizeF& i_viewportSize) override;
+	void SetViewportPosition(const core::Vector2F& i_viewportPosition) override;
 
 	// Inherited via ISpriteGraphicAPI
 	SpriteState::Id GenerateSpriteStateId() override;
@@ -79,8 +81,6 @@ private:
 	std::map<AnimationState::Id, std::shared_ptr<AnimationState>> m_allAnimationStates;
 
 	std::shared_ptr<const database::IGraphicDatabaseAPI> m_databaseAPI;
-	std::shared_ptr<const camera::IGraphicCameraAPI> m_graphicCameraAPI;
-	std::shared_ptr<core::GameSetting> m_gameSetting;
 	std::unique_ptr<INativeGraphicAPI> m_nativeGraphicAPI;
 	core::IncrementIdGenerator m_idGenerator;
 
@@ -89,8 +89,6 @@ private:
 	bool CheckRenderFilter(std::shared_ptr<const SpriteState> i_spriteState) const;
 	std::optional<core::BoxF> m_renderFilter;
 
-	signals::Connection<core::SizeF> m_onWindowSizeChangeCon;
-	void OnWindowSizeChange(core::SizeF i_newSize);
 };
 
 } // namespace graphics

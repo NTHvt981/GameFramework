@@ -10,6 +10,7 @@
 #include <cstdint>
 #include <sysinfoapi.h>
 
+HWND s_hwnd;
 HWND CreateGameWindow(HINSTANCE hInstance, int64_t nCmdShow);
 LRESULT CALLBACK WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 void OnGameRequestShutdown();
@@ -30,16 +31,16 @@ int WINAPI WinMain(
 	s_gameSetting->SetWindowTitle("Blaster Master");
 	s_gameSetting->SetWindowSize({ 800, 600 });
 
-	HWND hwnd = CreateGameWindow(hInstance, nCmdShow);
+	s_hwnd = CreateGameWindow(hInstance, nCmdShow);
 
 	MSG msg;
 	bool done = 0;
 	ULONGLONG currentFrameTime = GetTickCount64();
 	ULONGLONG previousFrameTime = GetTickCount64();
 
-	std::unique_ptr<graphics::INativeGraphicAPI> nativeRenderAPI = std::make_unique<graphics::Direct9GraphicAPI>(hwnd);
-	std::unique_ptr<inputs::INativeInputAPI> nativeInputAPI = std::make_unique<inputs::DirectInputAPI>(hwnd, hInstance);
-	std::unique_ptr<audios::INativeAudioAPI> nativeAudioAPI = std::make_unique<audios::DirectAudioAPI>(hwnd);
+	std::unique_ptr<graphics::INativeGraphicAPI> nativeRenderAPI = std::make_unique<graphics::Direct9GraphicAPI>(s_hwnd);
+	std::unique_ptr<inputs::INativeInputAPI> nativeInputAPI = std::make_unique<inputs::DirectInputAPI>(s_hwnd, hInstance);
+	std::unique_ptr<audios::INativeAudioAPI> nativeAudioAPI = std::make_unique<audios::DirectAudioAPI>(s_hwnd);
 	
 	s_game = std::make_unique<logic::Game>(
 		std::move(nativeRenderAPI), 
@@ -48,6 +49,7 @@ int WINAPI WinMain(
 		s_gameSetting
 	);
 	s_game->Initialize();
+	s_game->OnResizeWindow(core::SizeF{ 800.0f, 600.0f });
 	auto connection = s_game->sig_requestShutdown.Connect(std::function(OnGameRequestShutdown));
 	
 	RELEASE(
@@ -141,23 +143,63 @@ HWND CreateGameWindow(HINSTANCE hInstance, int64_t nCmdShow)
 
 LRESULT CALLBACK WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+	// add special case check here
+	if (message == WM_DESTROY) // when user click [x] button
+	{
+		PostQuitMessage(0);
+		return DefWindowProc(hWnd, message, wParam, lParam);
+	}
+
+	if (s_game.get() == nullptr || (!s_game->IsInitialized()))
+	{
+		return DefWindowProc(hWnd, message, wParam, lParam);
+	}
+
 	switch (message) {
-	case WM_KILLFOCUS:
-		if (s_game.get() != nullptr && s_game->IsInitialized())
+	case WM_KILLFOCUS: // when user click outside window
+	{
+		s_game->Pause();
+		break;
+	}
+	case WM_SETFOCUS: // when user click in window
+	{
+		s_game->Resume();
+		break;
+	}
+	case WM_SIZE: // when user resize window
+	{
+		switch (wParam)
 		{
-			s_game->Pause();
+		case SIZE_MAXHIDE: [[fallthrough]];
+		case SIZE_MAXIMIZED: [[fallthrough]];
+		case SIZE_MAXSHOW: [[fallthrough]];
+		case SIZE_RESTORED: [[fallthrough]];
+		{
+			RECT rect;
+			bool result = GetWindowRect(s_hwnd, &rect);
+			DEBUG(assert(result));
+			if (result)
+			{
+				int width = rect.right - rect.left + 1;
+				int height = rect.bottom - rect.top + 1;
+				s_game->OnResizeWindow(core::SizeF
+					{
+						static_cast<float>(width),
+						static_cast<float>(height),
+					}
+				);
+			}
+			break;
+		}
+		case SIZE_MINIMIZED: [[fallthrough]];
+		default:
+			break;
 		}
 		break;
-	case WM_SETFOCUS:
-		if (s_game.get() != nullptr && s_game->IsInitialized())
-		{
-			s_game->Resume();
-		}
-		break;
+	}
 		//if the player close the window
 	case WM_DESTROY:
 		//tell window to kill this program
-		PostQuitMessage(0);
 		break;
 	default:
 		return DefWindowProc(hWnd, message, wParam, lParam);

@@ -38,6 +38,8 @@ public:
 	core::AnimationId GetAnimationId() const;
 	bool IsLoop();
 	void SetLoop(bool i_value);
+	float GetSpeed() const;
+	void SetSpeed(float i_speed);
 	core::SizeI64 GetSpriteSizeInFrame(uint64_t i_frameIndex);
 
 	signals::Signal<> sig_onAnimationFinished;

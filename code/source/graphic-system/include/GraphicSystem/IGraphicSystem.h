@@ -2,6 +2,7 @@
 #include "API/ITileGraphicAPI.h"
 #include "API/ISpriteGraphicAPI.h"
 #include "API/IAnimationGraphicAPI.h"
+#include "API/IViewportGraphicAPI.h"
 #include "Core/DataTypes/Box.h"
 #include "Core/DataTypes/Duration.h"
 
@@ -10,7 +11,8 @@ namespace graphics
 
 class IGraphicSystem:	public ISpriteGraphicAPI,
 						public IAnimationGraphicAPI,
-						public ITileGraphicAPI
+						public ITileGraphicAPI,
+						public IViewportGraphicAPI
 {
 public:
 	virtual void Initialize() = 0;

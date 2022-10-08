@@ -34,16 +34,14 @@ Game::Game(std::unique_ptr<graphics::INativeGraphicAPI> i_nativeGraphicAPI,
 	m_gameClock = std::make_shared<logic::GameClock>();
 	m_fileSystem = std::make_shared<files::FileSystem>();
 	m_database = std::make_shared<database::Database>(m_fileSystem);
-	m_cameraSystem = std::make_shared<camera::CameraSystem>();
-	m_graphicSystem = std::make_shared<graphics::GraphicSystem>(
-		std::move(m_nativeGraphicAPI), 
-		m_database,
-		m_cameraSystem,
-		m_gameSetting
-	);
 	m_inputSystem = std::make_shared<inputs::InputSystem>(std::move(m_nativeInputAPI));
 	m_audioSystem = std::make_shared<audios::AudioSystem>(std::move(m_nativeAudioAPI));
+	m_graphicSystem = std::make_shared<graphics::GraphicSystem>(
+		std::move(m_nativeGraphicAPI),
+		m_database
+		);
 	m_physicSystem = std::make_shared<physics::PhysicSystem>();
+	m_cameraSystem = std::make_shared<camera::CameraSystem>(m_graphicSystem);
 	
 	m_componentFactory = std::make_shared<ComponentsFactory>(
 		m_graphicSystem, m_inputSystem, m_audioSystem, m_physicSystem, m_cameraSystem, m_database
@@ -134,6 +132,13 @@ void Game::Shutdown()
 	m_inputSystem->Shutdown();
 	m_audioSystem->Shutdown();
 	m_scriptsManager->Shutdown();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void Game::OnResizeWindow(const core::SizeF& i_size)
+{
+	m_graphicSystem->SetWindowSize(i_size);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

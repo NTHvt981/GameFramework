@@ -23,8 +23,8 @@ public:
 		const core::String i_textureFilePath
 	) override;
 	void SetWindowSize(const core::SizeF i_screenSize) override;
-	void SetDisplaySize(const core::SizeF i_displaySize) override;
-	void SetDisplayPosition(const core::Vector2F i_displayPosition) override;
+	void SetViewportSize(const core::SizeF& i_viewportSize) override;
+	void SetViewportPosition(const core::Vector2F& i_viewportPosition) override;
 	void Draw(const DrawParams& i_drawParams) override;
 	void StartDraw() override;
 	void EndDraw() override;
@@ -44,9 +44,9 @@ private:
 	std::unordered_map<core::TextureId, LPDIRECT3DTEXTURE9> m_mapTextures;
 	LPDIRECT3DTEXTURE9 CreateTextureFromFile(const core::String& imagePath);
 
-	core::SizeF m_screenSize{ 0,0 };
-	core::SizeF m_displaySize{ 0,0 };
-	core::Vector2F m_displayPosition{ 0,0 };
+	core::SizeF m_windowSize{ 400,300 };
+	core::SizeF m_viewportSize{ 400,300 };
+	core::Vector2F m_viewportPosition{ 0,0 };
 
 	void ResetDrawMatrix();
 	D3DXMATRIX m_drawMatrix;

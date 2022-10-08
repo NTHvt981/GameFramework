@@ -59,6 +59,7 @@ public:
 	void Pause();
 	void Resume();
 	void Shutdown();
+	void OnResizeWindow(const core::SizeF& i_size);
 
 	signals::Signal<> sig_requestShutdown;
 private:

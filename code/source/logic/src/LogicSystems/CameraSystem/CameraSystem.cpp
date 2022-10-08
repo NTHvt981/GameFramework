@@ -6,9 +6,11 @@
 namespace logic::camera
 {
 
-core::BoxF CameraSystem::GetRenderBoundary() const
+CameraSystem::CameraSystem(
+	std::shared_ptr<graphics::IViewportGraphicAPI> i_viewportGraphicAPI)
+	: m_viewportGraphicAPI(i_viewportGraphicAPI)
+	, m_authorizedEntityId(-1)
 {
-	return m_position + m_size;
 }
 
 void CameraSystem::RegisterCameraControl(core::EntityId i_entityId)
@@ -21,10 +23,6 @@ void CameraSystem::DeregisterCameraControl(core::EntityId i_entityId)
 	if (m_authorizedEntityId == i_entityId)
 	{
 		m_authorizedEntityId = -1;
-	}
-	else
-	{
-		DEBUG(throw_with_nested(std::runtime_error("Deregister unregistered entityId!")));
 	}
 }
 
@@ -63,6 +61,7 @@ void CameraSystem::TrySetSize(core::EntityId i_callerId, core::SizeF i_size)
 void CameraSystem::SetPosition(core::Vector2F i_position)
 {
 	m_position = i_position;
+	m_viewportGraphicAPI->SetViewportPosition(m_position);
 }
 
 void CameraSystem::SetCentralPosition(core::Vector2F i_centralPosition)
@@ -72,17 +71,21 @@ void CameraSystem::SetCentralPosition(core::Vector2F i_centralPosition)
 		i_centralPosition.x - m_size.width / 2,
 		i_centralPosition.y - m_size.height / 2
 	};
+	m_viewportGraphicAPI->SetViewportPosition(m_position);
 }
 
 void CameraSystem::SetAbsoluteBoundary(core::BoxF i_absoluteBoundary)
 {
 	m_size = core::ToSize(i_absoluteBoundary);
 	m_position = core::Vector2F();
+	m_viewportGraphicAPI->SetViewportSize(m_size);
+	m_viewportGraphicAPI->SetViewportPosition(m_position);
 }
 
 void CameraSystem::SetSize(core::SizeF i_size)
 {
 	m_size = i_size;
+	m_viewportGraphicAPI->SetViewportSize(m_size);
 }
 
 } // namespace logic::camera

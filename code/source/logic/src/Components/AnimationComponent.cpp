@@ -84,6 +84,16 @@ void AnimationComponent::SetLoop(bool i_value)
 	m_animationState->loop = i_value;
 }
 
+float AnimationComponent::GetSpeed() const
+{
+	return m_animationState->speed;
+}
+
+void AnimationComponent::SetSpeed(float i_speed)
+{
+	m_animationState->speed = i_speed;
+}
+
 core::SizeI64 AnimationComponent::GetSpriteSizeInFrame(uint64_t i_frameIndex)
 {
 	std::shared_ptr<const graphics::AnimationDef> animationDef = m_animationState->animationDef.lock();

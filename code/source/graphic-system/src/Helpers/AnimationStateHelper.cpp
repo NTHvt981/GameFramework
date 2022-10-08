@@ -21,7 +21,8 @@ void UpdateAnimationState(AnimationState& animationState, const core::Duration& 
     core::Duration& currentDuration = animationState.currentDuration;
     auto animationDef = animationState.animationDef.lock();
 
-    core::Duration newDuration = currentDuration + dt;
+    const core::Duration calculatedDt = dt * animationState.speed;
+    core::Duration newDuration = currentDuration + calculatedDt;
     const AnimationFrameDef& currentFrame = animationDef->frames[currentFrameIndex];
     if (newDuration >= currentFrame.duration)
     {

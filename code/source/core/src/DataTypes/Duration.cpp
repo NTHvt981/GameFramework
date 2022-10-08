@@ -60,7 +60,7 @@ Duration Duration::operator-(const Duration& i_other) const
 
 Duration Duration::operator*(const float i_magnitude) const
 {
-	return Duration(m_milisecond * i_magnitude);
+	return Duration(m_milisecond * static_cast<double>(i_magnitude));
 }
 
 ////////////////////////////////////////////////////////////////////////////////

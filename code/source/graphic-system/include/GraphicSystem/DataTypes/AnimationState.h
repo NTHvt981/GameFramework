@@ -32,6 +32,7 @@ struct AnimationState
 	Direction direction = Direction::Normal;
 	bool pause = false;
 	bool loop = true;
+	float speed = 1.0f;
 
 	signals::Signal<> sig_onAnimationFinished;
 };

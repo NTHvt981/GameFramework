@@ -61,8 +61,9 @@ void Direct9GraphicAPI::Initialize()
 		&d3dparams,
 		&m_direct3DDevice9);
 	DEBUG(assert(SUCCEEDED(result)));
-
-	m_direct3DDevice9->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &m_backBuffer);
+	
+	result = m_direct3DDevice9->GetBackBuffer(0, 0, D3DBACKBUFFER_TYPE_MONO, &m_backBuffer);
+	DEBUG(assert(SUCCEEDED(result)));
 
 	// Initialize spriteRef helper from Direct3DX helper library
 	result = D3DXCreateSprite(m_direct3DDevice9, &m_spriteHandler);
@@ -83,23 +84,23 @@ void Direct9GraphicAPI::LoadTexture(
 
 void Direct9GraphicAPI::SetWindowSize(const core::SizeF i_screenSize)
 {
-	m_screenSize = i_screenSize;
+	m_windowSize = i_screenSize;
 	ResetDrawMatrix();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Direct9GraphicAPI::SetDisplaySize(const core::SizeF i_displaySize)
+void Direct9GraphicAPI::SetViewportSize(const core::SizeF& i_viewportSize)
 {
-	m_displaySize = i_displaySize;
+	m_viewportSize = i_viewportSize;
 	ResetDrawMatrix();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Direct9GraphicAPI::SetDisplayPosition(const core::Vector2F i_displayPosition)
+void Direct9GraphicAPI::SetViewportPosition(const core::Vector2F& i_viewportPosition)
 {
-	m_displayPosition = i_displayPosition;
+	m_viewportPosition = i_viewportPosition;
 	ResetDrawMatrix();
 }
 
@@ -137,9 +138,6 @@ void Direct9GraphicAPI::StartDraw()
 	DEBUG(assert(SUCCEEDED(result)));
 
 	result = m_spriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
-	DEBUG(assert(SUCCEEDED(result)));
-
-	result = m_spriteHandler->SetTransform(&m_drawMatrix);
 	DEBUG(assert(SUCCEEDED(result)));
 }
 
@@ -192,14 +190,18 @@ LPDIRECT3DTEXTURE9 Direct9GraphicAPI::CreateTextureFromFile(const core::String& 
 
 void Direct9GraphicAPI::ResetDrawMatrix()
 {
-	const D3DXVECTOR2 scale = D3DXVECTOR2(
-		m_screenSize.width / m_displaySize.width,
-		m_screenSize.height / m_displaySize.height
+	float scaleWidth = m_windowSize.width / m_viewportSize.width;
+	float scaleHeight = m_windowSize.height / m_viewportSize.height;
+	float scale = scaleWidth < scaleHeight ? scaleWidth : scaleHeight;
+
+	const D3DXVECTOR2 scaleVector = D3DXVECTOR2(
+		scaleWidth,
+		scaleHeight
 	);
 
 	const D3DXVECTOR2 translate = D3DXVECTOR2(
-		m_displayPosition.x, 
-		m_displayPosition.y
+		m_viewportPosition.x, 
+		m_viewportPosition.y
 	);
 
 	const D3DXVECTOR2 scaleOrigin = D3DXVECTOR2(0, 0);
@@ -208,11 +210,14 @@ void Direct9GraphicAPI::ResetDrawMatrix()
 		&m_drawMatrix,
 		&scaleOrigin,
 		NULL,
-		& scale,
+		&scaleVector,
 		NULL,
 		0,
 		&translate
 	);
+
+	HRESULT result = m_spriteHandler->SetTransform(&m_drawMatrix);
+	DEBUG(assert(SUCCEEDED(result)));
 }
 
 ////////////////////////////////////////////////////////////////////////////////

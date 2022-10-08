@@ -2,7 +2,8 @@
 #include "ICameraSystem.h"
 #include "Core/DataTypes/Size.h"
 #include "Core/Identifiers/EntityId.h"
-#include <set>
+#include "GraphicSystem/API/IViewportGraphicAPI.h"
+#include <memory>
 
 namespace logic::camera
 {
@@ -10,7 +11,7 @@ namespace logic::camera
 class CameraSystem final : public ICameraSystem
 {
 public:
-	core::BoxF GetRenderBoundary() const override;
+	CameraSystem(std::shared_ptr<graphics::IViewportGraphicAPI> i_viewportGraphicAPI);
 
 	// Inherited via ICameraSystem
 	void RegisterCameraControl(core::EntityId i_entityId) override;
@@ -26,9 +27,10 @@ public:
 	void SetAbsoluteBoundary(core::BoxF i_absoluteBoundary) override;
 	void SetSize(core::SizeF i_size) override;
 private:
+	std::shared_ptr<graphics::IViewportGraphicAPI> m_viewportGraphicAPI;
 	core::EntityId m_authorizedEntityId;
-	core::SizeF m_size;
-	core::Vector2F m_position;
+	core::SizeF m_size = core::SizeF{ 0, 0 };
+	core::Vector2F m_position = core::Vector2F{ 0, 0 };
 };
 
 } // namespace logic::camera

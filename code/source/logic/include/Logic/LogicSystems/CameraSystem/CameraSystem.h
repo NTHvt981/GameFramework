@@ -19,14 +19,14 @@ public:
 	void TrySetPosition(core::EntityId i_callerId, core::Vector2F i_position) override;
 	void TrySetCentralPosition(core::EntityId i_callerId, core::Vector2F i_centralPosition) override;
 	void TrySetAbsoluteBoundary(core::EntityId i_callerId, core::BoxF i_absoluteBoundary) override;
-	void TrySetRelativeBoundary(core::EntityId i_callerId, core::BoxF i_relativeBoundary) override;
+	void TrySetSize(core::EntityId i_callerId, core::SizeF i_size) override;
 
 	void SetPosition(core::Vector2F i_position) override;
 	void SetCentralPosition(core::Vector2F i_centralPosition) override;
 	void SetAbsoluteBoundary(core::BoxF i_absoluteBoundary) override;
-	void SetRelativeBoundary(core::BoxF i_relativeBoundary) override;
+	void SetSize(core::SizeF i_size) override;
 private:
-	std::set<core::EntityId> m_authorizedEntityIds;
+	core::EntityId m_authorizedEntityId;
 	core::SizeF m_size;
 	core::Vector2F m_position;
 };

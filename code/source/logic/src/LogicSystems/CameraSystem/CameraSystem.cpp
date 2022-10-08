@@ -13,14 +13,14 @@ core::BoxF CameraSystem::GetRenderBoundary() const
 
 void CameraSystem::RegisterCameraControl(core::EntityId i_entityId)
 {
-	m_authorizedEntityIds.emplace(i_entityId);
+	m_authorizedEntityId = i_entityId;
 }
 
 void CameraSystem::DeregisterCameraControl(core::EntityId i_entityId)
 {
-	if (m_authorizedEntityIds.contains(i_entityId))
+	if (m_authorizedEntityId == i_entityId)
 	{
-		m_authorizedEntityIds.erase(m_authorizedEntityIds.find(i_entityId));
+		m_authorizedEntityId = -1;
 	}
 	else
 	{
@@ -30,7 +30,7 @@ void CameraSystem::DeregisterCameraControl(core::EntityId i_entityId)
 
 void CameraSystem::TrySetPosition(core::EntityId i_callerId, core::Vector2F i_position)
 {
-	if (m_authorizedEntityIds.contains(i_callerId))
+	if (m_authorizedEntityId == i_callerId)
 	{
 		SetPosition(i_position);
 	}
@@ -38,7 +38,7 @@ void CameraSystem::TrySetPosition(core::EntityId i_callerId, core::Vector2F i_po
 
 void CameraSystem::TrySetCentralPosition(core::EntityId i_callerId, core::Vector2F i_centralPosition)
 {
-	if (m_authorizedEntityIds.contains(i_callerId))
+	if (m_authorizedEntityId == i_callerId)
 	{
 		SetCentralPosition(i_centralPosition);
 	}
@@ -46,17 +46,17 @@ void CameraSystem::TrySetCentralPosition(core::EntityId i_callerId, core::Vector
 
 void CameraSystem::TrySetAbsoluteBoundary(core::EntityId i_callerId, core::BoxF i_absoluteBoundary)
 {
-	if (m_authorizedEntityIds.contains(i_callerId))
+	if (m_authorizedEntityId == i_callerId)
 	{
 		SetAbsoluteBoundary(i_absoluteBoundary);
 	}
 }
 
-void CameraSystem::TrySetRelativeBoundary(core::EntityId i_callerId, core::BoxF i_relativeBoundary)
+void CameraSystem::TrySetSize(core::EntityId i_callerId, core::SizeF i_size)
 {
-	if (m_authorizedEntityIds.contains(i_callerId))
+	if (m_authorizedEntityId == i_callerId)
 	{
-		SetRelativeBoundary(i_relativeBoundary);
+		SetSize(i_size);
 	}
 }
 
@@ -80,9 +80,9 @@ void CameraSystem::SetAbsoluteBoundary(core::BoxF i_absoluteBoundary)
 	m_position = core::Vector2F();
 }
 
-void CameraSystem::SetRelativeBoundary(core::BoxF i_relativeBoundary)
+void CameraSystem::SetSize(core::SizeF i_size)
 {
-	m_size = core::ToSize(i_relativeBoundary);
+	m_size = i_size;
 }
 
 } // namespace logic::camera

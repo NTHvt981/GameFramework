@@ -136,7 +136,7 @@ void Game::Shutdown()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Game::OnResizeWindow(const core::SizeF& i_size)
+void Game::OnResizeWindow(const core::SizeUI64& i_size)
 {
 }
 

@@ -55,12 +55,12 @@ int WINAPI WinMain(
 	DEBUG(assert(result));
 	if (result)
 	{
-		int width = rect.right - rect.left;
-		int height = rect.bottom - rect.top;
-		s_game->OnResizeWindow(core::SizeF
+		uint64_t width = rect.right - rect.left;
+		uint64_t height = rect.bottom - rect.top;
+		s_game->OnResizeWindow(core::SizeUI64
 			{
-				static_cast<float>(width),
-				static_cast<float>(height),
+				width,
+				height,
 			}
 		);
 	}
@@ -132,13 +132,13 @@ HWND CreateGameWindow(HINSTANCE hInstance, int64_t nCmdShow)
 	assert(result != NULL);
 
 	DWORD windowStyle = WS_OVERLAPPEDWINDOW; // WS_EX_TOPMOST | WS_VISIBLE | WS_POPUP,
-	core::SizeF clientSize = s_gameSetting->GetWindowSize();
+	core::SizeUI64 clientSize = s_gameSetting->GetWindowSize();
 	RECT windowRect = RECT
 	{
 		100,
 		100,
-		100 + static_cast<long>(clientSize.width),
-		100 + static_cast<long>(clientSize.height)
+		100 + static_cast<int>(clientSize.width),
+		100 + static_cast<int>(clientSize.height)
 	};
 	bool adjustResult = AdjustWindowRectEx(&windowRect, windowStyle, false, windowStyle);
 
@@ -203,12 +203,12 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			DEBUG(assert(result));
 			if (result)
 			{
-				int width = rect.right - rect.left + 1;
-				int height = rect.bottom - rect.top + 1;
-				s_game->OnResizeWindow(core::SizeF
+				uint64_t width = rect.right - rect.left;
+				uint64_t height = rect.bottom - rect.top;
+				s_game->OnResizeWindow(core::SizeUI64
 					{
-						static_cast<float>(width),
-						static_cast<float>(height),
+						width,
+						height,
 					}
 				);
 			}

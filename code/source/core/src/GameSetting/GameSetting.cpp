@@ -13,12 +13,12 @@ uint64_t GameSetting::GetMillisecondsPerFrame() const
 	return 1000 / m_fps;
 }
 
-SizeF GameSetting::GetWindowSize() const
+SizeUI64 GameSetting::GetWindowSize() const
 {
 	return m_windowSize;
 }
 
-void GameSetting::SetWindowSize(const SizeF& i_windowSize)
+void GameSetting::SetWindowSize(const SizeUI64& i_windowSize)
 {
 	m_windowSize = i_windowSize;
 	sig_onWindowSizeChange.Emit(i_windowSize);

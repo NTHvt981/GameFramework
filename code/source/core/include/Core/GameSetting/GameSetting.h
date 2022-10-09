@@ -12,18 +12,18 @@ public:
 	GameSetting();
 
 	uint64_t GetMillisecondsPerFrame() const;
-	SizeF GetWindowSize() const;
-	void SetWindowSize(const SizeF& i_windowSize);
+	SizeUI64 GetWindowSize() const;
+	void SetWindowSize(const SizeUI64& i_windowSize);
 	String GetWindowTitle() const;
 	void SetWindowTitle(const String& i_windowTitle);
 	uint64_t GetFPS() const;
 	void SetFPS(const uint64_t i_fps);
 
-	signals::Signal<SizeF> sig_onWindowSizeChange;
+	signals::Signal<SizeUI64> sig_onWindowSizeChange;
 	signals::Signal<uint64_t> sig_onChangeFPS;
 
 private:
-	SizeF m_windowSize;
+	SizeUI64 m_windowSize;
 	String m_windowTitle;
 	uint64_t m_fps;
 };

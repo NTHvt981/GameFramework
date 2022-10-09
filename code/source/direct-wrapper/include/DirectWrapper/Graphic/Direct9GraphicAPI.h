@@ -22,7 +22,6 @@ public:
 		const core::TextureId i_textureId, 
 		const core::String i_textureFilePath
 	) override;
-	void SetWindowSize(const core::SizeF i_screenSize) override;
 	void SetViewportSize(const core::SizeF& i_viewportSize) override;
 	void SetViewportPosition(const core::Vector2F& i_viewportPosition) override;
 	void Draw(const DrawParams& i_drawParams) override;
@@ -37,6 +36,7 @@ private:
 
 	const HWND m_hwnd;
 	LPDIRECT3D9 m_direct3D9 = nullptr;
+	D3DPRESENT_PARAMETERS m_direct3DParams;
 	LPDIRECT3DDEVICE9 m_direct3DDevice9 = nullptr;
 	LPDIRECT3DSURFACE9 m_backBuffer = nullptr;
 	LPD3DXSPRITE m_spriteHandler = nullptr;
@@ -44,12 +44,11 @@ private:
 	std::unordered_map<core::TextureId, LPDIRECT3DTEXTURE9> m_mapTextures;
 	LPDIRECT3DTEXTURE9 CreateTextureFromFile(const core::String& imagePath);
 
-	core::SizeF m_windowSize{ 400,300 };
-	core::SizeF m_viewportSize{ 400,300 };
+	core::SizeF m_backBufferSize{ 256, 224 };
+	core::SizeF m_viewportSize{ 256, 224 };
 	core::Vector2F m_viewportPosition{ 0,0 };
 
 	void ResetDrawMatrix();
-	D3DXMATRIX m_drawMatrix;
 };
 
 } // namespace graphics

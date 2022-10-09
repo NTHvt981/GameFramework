@@ -37,28 +37,25 @@ void Direct9GraphicAPI::Initialize()
 	m_direct3D9 = Direct3DCreate9(D3D_SDK_VERSION);
 	assert(m_direct3D9 != nullptr);
 
-	D3DPRESENT_PARAMETERS d3dparams;
-
 	//Set up parameter to create directx device
-	ZeroMemory(&d3dparams, sizeof(d3dparams));
+	ZeroMemory(&m_direct3DParams, sizeof(m_direct3DParams));
 
-	d3dparams.Windowed = TRUE;
-	d3dparams.SwapEffect = D3DSWAPEFFECT_DISCARD;
-	d3dparams.BackBufferFormat = D3DFMT_X8R8G8B8;
-	d3dparams.BackBufferCount = 1;
+	m_direct3DParams.Windowed = TRUE;
+	m_direct3DParams.SwapEffect = D3DSWAPEFFECT_DISCARD;
+	m_direct3DParams.BackBufferFormat = D3DFMT_X8R8G8B8;
+	m_direct3DParams.BackBufferCount = 2;
 
-	RECT windowRect;
-	GetClientRect(m_hwnd, &windowRect);
-
-	d3dparams.BackBufferHeight = windowRect.bottom + 1;
-	d3dparams.BackBufferWidth = windowRect.right + 1;
+	RECT clientRect;
+	GetClientRect(m_hwnd, &clientRect);
+	m_direct3DParams.BackBufferWidth = m_backBufferSize.width;
+	m_direct3DParams.BackBufferHeight = m_backBufferSize.height;
 
 	HRESULT result = m_direct3D9->CreateDevice(
 		D3DADAPTER_DEFAULT,
 		D3DDEVTYPE_HAL,
 		m_hwnd,
 		D3DCREATE_SOFTWARE_VERTEXPROCESSING,
-		&d3dparams,
+		&m_direct3DParams,
 		&m_direct3DDevice9);
 	DEBUG(assert(SUCCEEDED(result)));
 	
@@ -78,14 +75,6 @@ void Direct9GraphicAPI::LoadTexture(
 {
 	assert(!m_mapTextures.contains(i_textureId));
 	m_mapTextures[i_textureId] = CreateTextureFromFile(i_textureFilePath);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void Direct9GraphicAPI::SetWindowSize(const core::SizeF i_screenSize)
-{
-	m_windowSize = i_screenSize;
-	ResetDrawMatrix();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -115,16 +104,25 @@ void Direct9GraphicAPI::Draw(const DrawParams& i_drawParams)
 	const core::Vector2F pos = i_drawParams.position;
 	D3DXVECTOR3 position(pos.x, pos.y, 0);
 
+	const core::Vector2F origin = i_drawParams.origin;
+	D3DXVECTOR3 center(origin.x, origin.y, 0);
+
 	const core::BoxI64 box = i_drawParams.textureBoundary;
-	RECT destRect;
-	destRect.left = (long) box.left;
-	destRect.top = (long) box.top;
-	destRect.right = (long) box.right;
-	destRect.bottom = (long) box.bottom;
+	RECT srcRect;
+	srcRect.left = (long) box.left;
+	srcRect.top = (long) box.top;
+	srcRect.right = (long) box.right;
+	srcRect.bottom = (long) box.bottom;
 
 	int64_t opacity = i_drawParams.alpha * 255.0;
 
-	m_spriteHandler->Draw(texture, &destRect, NULL, &position, D3DCOLOR_RGBA(255, 255, 255, opacity));
+	m_spriteHandler->Draw(
+		texture, 
+		&srcRect, 
+		&center, 
+		&position, 
+		D3DCOLOR_RGBA(255, 255, 255, opacity)
+	);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -160,7 +158,7 @@ void Direct9GraphicAPI::EndDraw()
 LPDIRECT3DTEXTURE9 Direct9GraphicAPI::CreateTextureFromFile(const core::String& imagePath)
 {
 	D3DXIMAGE_INFO info;
-	LPDIRECT3DTEXTURE9 o_texture;
+	LPDIRECT3DTEXTURE9 o_texture = nullptr;
 
 	const wchar_t* rawPath = imagePath.ToWStr();
 	HRESULT result = D3DXGetImageInfoFromFile(rawPath, &info);
@@ -173,7 +171,7 @@ LPDIRECT3DTEXTURE9 Direct9GraphicAPI::CreateTextureFromFile(const core::String& 
 		info.Height,
 		1,
 		D3DUSAGE_DYNAMIC,
-		D3DFMT_UNKNOWN,
+		info.Format,
 		D3DPOOL_DEFAULT,
 		D3DX_DEFAULT,
 		D3DX_DEFAULT,
@@ -181,6 +179,7 @@ LPDIRECT3DTEXTURE9 Direct9GraphicAPI::CreateTextureFromFile(const core::String& 
 		&info,
 		NULL,
 		&o_texture);
+
 	DEBUG(assert(SUCCEEDED(result)));
 
 	return o_texture;
@@ -190,13 +189,13 @@ LPDIRECT3DTEXTURE9 Direct9GraphicAPI::CreateTextureFromFile(const core::String& 
 
 void Direct9GraphicAPI::ResetDrawMatrix()
 {
-	float scaleWidth = m_windowSize.width / m_viewportSize.width;
-	float scaleHeight = m_windowSize.height / m_viewportSize.height;
+	float scaleWidth = (m_backBufferSize.width / m_viewportSize.width);
+	float scaleHeight = (m_backBufferSize.height / m_viewportSize.height);
 	float scale = scaleWidth < scaleHeight ? scaleWidth : scaleHeight;
 
 	const D3DXVECTOR2 scaleVector = D3DXVECTOR2(
-		scaleWidth,
-		scaleHeight
+		scale,
+		scale
 	);
 
 	const D3DXVECTOR2 translate = D3DXVECTOR2(
@@ -205,9 +204,10 @@ void Direct9GraphicAPI::ResetDrawMatrix()
 	);
 
 	const D3DXVECTOR2 scaleOrigin = D3DXVECTOR2(0, 0);
-
+	D3DXMATRIX drawMatrix;
+	D3DXMatrixIdentity(&drawMatrix);
 	D3DXMatrixTransformation2D(
-		&m_drawMatrix,
+		&drawMatrix,
 		&scaleOrigin,
 		NULL,
 		&scaleVector,
@@ -216,7 +216,10 @@ void Direct9GraphicAPI::ResetDrawMatrix()
 		&translate
 	);
 
-	HRESULT result = m_spriteHandler->SetTransform(&m_drawMatrix);
+	HRESULT result = m_spriteHandler->SetTransform(&drawMatrix);
+	DEBUG(assert(SUCCEEDED(result)));
+
+	result = m_direct3DDevice9->TestCooperativeLevel();
 	DEBUG(assert(SUCCEEDED(result)));
 }
 

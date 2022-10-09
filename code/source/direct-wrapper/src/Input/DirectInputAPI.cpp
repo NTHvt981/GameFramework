@@ -43,7 +43,7 @@ void DirectInputAPI::Initialize()
 	DEBUG(assert(SUCCEEDED(result)));
 
 	result = m_directInputDevice->Acquire();
-	DEBUG(assert(SUCCEEDED(result)));
+	//DEBUG(assert(SUCCEEDED(result)));
 }
 
 void DirectInputAPI::UpdateInput()
@@ -54,7 +54,7 @@ void DirectInputAPI::UpdateInput()
 	}
 
 	HRESULT result = m_directInputDevice->GetDeviceState(sizeof(m_currentKeys), (LPVOID)&m_currentKeys);
-	DEBUG(assert(SUCCEEDED(result)));
+	//DEBUG(assert(SUCCEEDED(result)));
 }
 
 void DirectInputAPI::Shutdown()

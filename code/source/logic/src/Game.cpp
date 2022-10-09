@@ -138,7 +138,6 @@ void Game::Shutdown()
 
 void Game::OnResizeWindow(const core::SizeF& i_size)
 {
-	m_graphicSystem->SetWindowSize(i_size);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

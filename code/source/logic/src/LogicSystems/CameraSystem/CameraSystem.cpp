@@ -77,7 +77,7 @@ void CameraSystem::SetCentralPosition(core::Vector2F i_centralPosition)
 void CameraSystem::SetAbsoluteBoundary(core::BoxF i_absoluteBoundary)
 {
 	m_size = core::ToSize(i_absoluteBoundary);
-	m_position = core::Vector2F();
+	m_position = core::Vector2F{ 0,0 };
 	m_viewportGraphicAPI->SetViewportSize(m_size);
 	m_viewportGraphicAPI->SetViewportPosition(m_position);
 }

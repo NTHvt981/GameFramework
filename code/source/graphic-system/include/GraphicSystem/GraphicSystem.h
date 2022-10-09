@@ -38,7 +38,6 @@ public:
 	void RemoveRenderFilter() override;
 
 	// Inherited via IViewportGraphicAPI
-	void SetWindowSize(const core::SizeF i_screenSize) override;
 	void SetViewportSize(const core::SizeF& i_viewportSize) override;
 	void SetViewportPosition(const core::Vector2F& i_viewportPosition) override;
 

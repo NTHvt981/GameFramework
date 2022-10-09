@@ -176,13 +176,6 @@ void GraphicSystem::EndDraw()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void GraphicSystem::SetWindowSize(const core::SizeF i_screenSize)
-{
-    m_nativeGraphicAPI->SetWindowSize(i_screenSize);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
 void GraphicSystem::SetViewportSize(const core::SizeF& i_viewportSize)
 {
     m_nativeGraphicAPI->SetViewportSize(i_viewportSize);

@@ -29,7 +29,7 @@ int WINAPI WinMain(
 	s_gameSetting = std::make_unique<core::GameSetting>();
 	s_gameSetting->SetFPS(60);
 	s_gameSetting->SetWindowTitle("Blaster Master");
-	s_gameSetting->SetWindowSize({ 800, 600 });
+	s_gameSetting->SetWindowSize({ 256, 224 });
 
 	s_hwnd = CreateGameWindow(hInstance, nCmdShow);
 
@@ -49,7 +49,21 @@ int WINAPI WinMain(
 		s_gameSetting
 	);
 	s_game->Initialize();
-	s_game->OnResizeWindow(core::SizeF{ 800.0f, 600.0f });
+
+	RECT rect;
+	bool result = GetClientRect(s_hwnd, &rect);
+	DEBUG(assert(result));
+	if (result)
+	{
+		int width = rect.right - rect.left;
+		int height = rect.bottom - rect.top;
+		s_game->OnResizeWindow(core::SizeF
+			{
+				static_cast<float>(width),
+				static_cast<float>(height),
+			}
+		);
+	}
 	auto connection = s_game->sig_requestShutdown.Connect(std::function(OnGameRequestShutdown));
 	
 	RELEASE(
@@ -117,16 +131,25 @@ HWND CreateGameWindow(HINSTANCE hInstance, int64_t nCmdShow)
 	ATOM result = RegisterClassEx(&wc);
 	assert(result != NULL);
 
-	core::SizeF ScreenSize = s_gameSetting->GetWindowSize();
+	DWORD windowStyle = WS_OVERLAPPEDWINDOW; // WS_EX_TOPMOST | WS_VISIBLE | WS_POPUP,
+	core::SizeF clientSize = s_gameSetting->GetWindowSize();
+	RECT windowRect = RECT
+	{
+		100,
+		100,
+		100 + static_cast<long>(clientSize.width),
+		100 + static_cast<long>(clientSize.height)
+	};
+	bool adjustResult = AdjustWindowRectEx(&windowRect, windowStyle, false, windowStyle);
 
 	HWND hwnd = CreateWindow(
 		wc.lpszClassName,
 		wc.lpszClassName,
-		WS_OVERLAPPEDWINDOW, // WS_EX_TOPMOST | WS_VISIBLE | WS_POPUP,
-		CW_USEDEFAULT,
-		CW_USEDEFAULT,
-		ScreenSize.width,
-		ScreenSize.height,
+		windowStyle,
+		windowRect.left,
+		windowRect.top,
+		windowRect.right - windowRect.left,
+		windowRect.bottom - windowRect.top,
 		NULL,
 		NULL,
 		hInstance,
@@ -176,7 +199,7 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		case SIZE_RESTORED: [[fallthrough]];
 		{
 			RECT rect;
-			bool result = GetWindowRect(s_hwnd, &rect);
+			bool result = GetClientRect(s_hwnd, &rect);
 			DEBUG(assert(result));
 			if (result)
 			{

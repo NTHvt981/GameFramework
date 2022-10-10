@@ -21,7 +21,9 @@ public:
 	core::String GetTexturesXmlFilePath() const override;
 	core::String GetSpritesXmlFilePath() const override;
 	core::String GetAnimationsXmlFilePath() const override;
+	core::String GetSoundsXmlFilePath() const override;
 	core::String GetTexturesFolderPath() const override;
+	core::String GetSoundsFolderPath() const override;
 };
 
 } // namespace files

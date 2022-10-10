@@ -6,6 +6,7 @@
 #include "Core/Identifiers/TextureId.h"
 #include "Core/Identifiers/SpriteId.h"
 #include "Core/Identifiers/AnimationId.h"
+#include "Core/Identifiers/SoundId.h"
 #include <stdint.h>
 #include <vector>
 #include <functional>
@@ -27,6 +28,7 @@ void Parse(const tinyxml2::XMLElement* i_element, core::SizeI64& o_value);
 void Parse(const tinyxml2::XMLElement* i_element, core::TextureId& o_value);
 void Parse(const tinyxml2::XMLElement* i_element, core::SpriteId& o_value);
 void Parse(const tinyxml2::XMLElement* i_element, core::AnimationId& o_value);
+void Parse(const tinyxml2::XMLElement* i_element, core::SoundId& o_value);
 
 template<typename T>
 void ParseList(

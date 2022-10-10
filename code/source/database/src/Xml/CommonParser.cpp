@@ -83,11 +83,22 @@ void Parse(const tinyxml2::XMLElement* i_element, core::SpriteId& o_value)
 	o_value = static_cast<core::SpriteId>(temp);
 }
 
+////////////////////////////////////////////////////////////////////////////////
+
 void Parse(const tinyxml2::XMLElement* i_element, core::AnimationId& o_value)
 {
 	uint64_t temp;
 	Parse(i_element, temp);
 	o_value = static_cast<core::AnimationId>(temp);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void Parse(const tinyxml2::XMLElement* i_element, core::SoundId& o_value)
+{
+	uint64_t temp;
+	Parse(i_element, temp);
+	o_value = static_cast<core::SoundId>(temp);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

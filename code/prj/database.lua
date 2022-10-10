@@ -2,6 +2,7 @@ require("common")
 require("core")
 require("file-system")
 require("graphic-system")
+require("audio-system")
 
 local database_prj_name = "database"
 local database_path = source_path..database_prj_name.."/"
@@ -26,6 +27,7 @@ function addDatabase()
       includeCore()
       includeFileSystem()
       includeGraphicSystem()
+      includeAudioSystem()
 end
 
 function includeDatabase()

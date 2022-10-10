@@ -4,9 +4,11 @@
 #include "Xml/TexureParser.h"
 #include "Xml/SpriteParser.h"
 #include "Xml/AnimationParser.h"
+#include "Xml/SoundParser.h"
 #include "GraphicSystem/DataTypes/Texture.h"
 #include "GraphicSystem/DataTypes/SpriteDef.h"
 #include "GraphicSystem/DataTypes/AnimationDef.h"
+#include "AudioSystem/DataTypes/Sound.h"
 
 namespace database
 {
@@ -24,7 +26,8 @@ void Database::LoadResource()
 {
 	LoadTextures();
 	LoadSprites();
-	LoadAnimation();
+	LoadAnimations();
+	LoadSounds();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -71,6 +74,13 @@ const graphics::AnimationDef Database::GetAnimation(const core::AnimationId i_an
 
 ////////////////////////////////////////////////////////////////////////////////
 
+core::Ref<audios::Sound> Database::GetSoundRef(const core::SoundId i_soundId) const
+{
+	return core::Ref<audios::Sound>(m_sounds.at(i_soundId).get());
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 void Database::LoadTextures()
 {
 	const core::String path = m_fileSystem->GetTexturesXmlFilePath();
@@ -101,7 +111,7 @@ void Database::LoadSprites()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Database::LoadAnimation()
+void Database::LoadAnimations()
 {
 	const core::String path = m_fileSystem->GetAnimationsXmlFilePath();
 	const std::string stringPath = path.ToStdStr();
@@ -114,6 +124,21 @@ void Database::LoadAnimation()
 			frame.spriteDefRef = GetSpriteRef(frame.spriteId);
 		}
 		m_animations.try_emplace(animation.id, std::make_shared<graphics::AnimationDef>(animation));
+	}
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+void Database::LoadSounds()
+{
+	const core::String path = m_fileSystem->GetSoundsXmlFilePath();
+	const std::string stringPath = path.ToStdStr();
+	std::vector<audios::Sound> sounds = xml::LoadSoundsFile(stringPath.c_str());
+
+	for (audios::Sound& sound : sounds)
+	{
+		sound.filePath = m_fileSystem->GetSoundsFolderPath() + sound.filePath;
+		m_sounds.try_emplace(sound.id, std::make_shared<audios::Sound>(sound));
 	}
 }
 

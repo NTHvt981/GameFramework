@@ -16,10 +16,12 @@ namespace files
 const Folder sk_dataFolder{ "data" };
 const Folder sk_xmlFolder{ "Xml" };
 const Folder sk_texturesFolder{ "Textures" };
+const Folder sk_soundsFolder{ "Sounds" };
 const Folder sk_spritesFolder{ "Sprites" };
 const File sk_texturesXmlFile{ "Textures", files::extXml };
 const File sk_spritesXmlFile{ "Sprites", files::extXml };
 const File sk_animationsXmlFile{ "Animations", files::extXml };
+const File sk_soundsXmlFile{ "Sounds", files::extXml };
 core::Flag s_initFlag;
 FolderDirectory s_applicationFolderDirectory{};
 
@@ -100,9 +102,29 @@ core::String FileSystem::GetAnimationsXmlFilePath() const
 
 ////////////////////////////////////////////////////////////////////////////////
 
+core::String FileSystem::GetSoundsXmlFilePath() const
+{
+	FileDirectory result
+	{
+		s_applicationFolderDirectory + FolderDirectory{sk_dataFolder, sk_xmlFolder},
+		sk_soundsXmlFile
+	};
+	return result.ToString();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 core::String FileSystem::GetTexturesFolderPath() const
 {
 	FolderDirectory result = s_applicationFolderDirectory + FolderDirectory{ sk_dataFolder, sk_texturesFolder };
+	return result.ToString();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+core::String FileSystem::GetSoundsFolderPath() const
+{
+	FolderDirectory result = s_applicationFolderDirectory + FolderDirectory{ sk_dataFolder, sk_soundsFolder };
 	return result.ToString();
 }
 

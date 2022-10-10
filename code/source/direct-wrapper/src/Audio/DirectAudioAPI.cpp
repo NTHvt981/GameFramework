@@ -1,5 +1,6 @@
 #include "DirectWrapper/Audio/DirectAudioAPI.h"
 #include "Core/Macros/Macros.h"
+#include <assert.h>
 #include <mmsystem.h>
 #include <mmreg.h>
 #include <dsound.h>
@@ -20,7 +21,7 @@ void DirectAudioAPI::Initialize()
     HRESULT result = DirectSoundCreate8(NULL, &m_directSound, NULL);
     DEBUG(assert(SUCCEEDED(result)));
 
-    result = m_directSound->SetCooperativeLevel(m_hwnd, DISCL_FOREGROUND);
+    result = m_directSound->SetCooperativeLevel(m_hwnd, DSSCL_PRIORITY);
     DEBUG(assert(SUCCEEDED(result)));
 
     DSBUFFERDESC bufferDescription;
@@ -49,8 +50,31 @@ void DirectAudioAPI::Initialize()
     DEBUG(assert(SUCCEEDED(result)));
 }
 
+void DirectAudioAPI::LoadSound(const core::SoundId i_soundId, const core::String& i_textureFilePath)
+{
+    std::wstring wString = i_textureFilePath.ToStdWStr();
+    HANDLE fileHandle = CreateFile(
+        wString.c_str(),
+        GENERIC_READ,
+        0, // Prevents other processes from opening a file
+        NULL,
+        OPEN_EXISTING, // crash if file not found (better than unexpect behavior)
+        FILE_ATTRIBUTE_READONLY, // File attribute (read-only for now)
+        NULL
+    );
+    if (fileHandle == INVALID_HANDLE_VALUE)
+    {
+        const DWORD errorCode = GetLastError();
+        throw("Read file invalid");
+    }
+
+    bool closeResult = CloseHandle(fileHandle);
+    assert(closeResult);
+}
+
 void DirectAudioAPI::Pause()
 {
+
 }
 
 void DirectAudioAPI::Resume()

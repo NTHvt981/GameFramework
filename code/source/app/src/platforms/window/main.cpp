@@ -220,10 +220,6 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		}
 		break;
 	}
-		//if the player close the window
-	case WM_DESTROY:
-		//tell window to kill this program
-		break;
 	default:
 		return DefWindowProc(hWnd, message, wParam, lParam);
 	}

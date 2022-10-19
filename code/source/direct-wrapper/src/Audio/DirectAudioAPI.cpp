@@ -1,12 +1,25 @@
 #include "DirectWrapper/Audio/DirectAudioAPI.h"
 #include "Core/Macros/Macros.h"
+#include "wave_file.h"
 #include <assert.h>
 #include <mmsystem.h>
+#include <Windows.h>
 #include <mmreg.h>
 #include <dsound.h>
 #include <DxErr.h>
 #include <assert.h>
 #include <dinput.h>
+
+// test function
+inline bool FileExist(const std::string& name) {
+    if (FILE* file = fopen(name.c_str(), "r")) {
+        fclose(file);
+        return true;
+    }
+    else {
+        return false;
+    }
+}
 
 namespace audios
 {
@@ -33,7 +46,7 @@ void DirectAudioAPI::Initialize()
 
     result = m_directSound->CreateSoundBuffer(
         &bufferDescription,
-        &m_directSoundBuffer,
+        &m_primarySoundBuffer,
         NULL
     );
     DEBUG(assert(SUCCEEDED(result)));
@@ -46,30 +59,70 @@ void DirectAudioAPI::Initialize()
     waveFormat.wBitsPerSample = (WORD) 16;
     waveFormat.nBlockAlign = (WORD)(waveFormat.wBitsPerSample / 8 * waveFormat.nChannels);
     waveFormat.nAvgBytesPerSec = (DWORD)(waveFormat.nSamplesPerSec * waveFormat.nBlockAlign);
-    result = m_directSoundBuffer->SetFormat(&waveFormat);
+    result = m_primarySoundBuffer->SetFormat(&waveFormat);
     DEBUG(assert(SUCCEEDED(result)));
 }
 
 void DirectAudioAPI::LoadSound(const core::SoundId i_soundId, const core::String& i_textureFilePath)
 {
-    std::wstring wString = i_textureFilePath.ToStdWStr();
-    HANDLE fileHandle = CreateFile(
-        wString.c_str(),
-        GENERIC_READ,
-        0, // Prevents other processes from opening a file
-        NULL,
-        OPEN_EXISTING, // crash if file not found (better than unexpect behavior)
-        FILE_ATTRIBUTE_READONLY, // File attribute (read-only for now)
-        NULL
-    );
-    if (fileHandle == INVALID_HANDLE_VALUE)
-    {
-        const DWORD errorCode = GetLastError();
-        throw("Read file invalid");
-    }
+    wav_file waveFileData;
+    std::string stdString = i_textureFilePath.ToStdStr();
+    readWaveData(stdString.c_str(), &waveFileData);
+    printWaveData(&waveFileData);
 
-    bool closeResult = CloseHandle(fileHandle);
-    assert(closeResult);
+    WAVEFORMATEX formatEx;
+    ZeroMemory(&formatEx, sizeof(WAVEFORMATEX));
+    formatEx.cbSize = waveFileData.cbSize;
+    formatEx.wFormatTag = waveFileData.audioFormat;
+    formatEx.nChannels = waveFileData.numChannels;
+    formatEx.wBitsPerSample = waveFileData.bitsPerSample;
+    formatEx.nAvgBytesPerSec = waveFileData.byteRate;
+    formatEx.nBlockAlign = waveFileData.blockAlign;
+    formatEx.nSamplesPerSec = waveFileData.sampleRate;
+    
+    DSBUFFERDESC bufferDescription;
+    ZeroMemory(&bufferDescription, sizeof(DSBUFFERDESC));
+    bufferDescription.dwSize = sizeof(DSBUFFERDESC);
+    bufferDescription.dwBufferBytes = waveFileData.chunkSize;
+    bufferDescription.dwFlags = DSBCAPS_LOCSOFTWARE | DSBCAPS_CTRLPAN | DSBCAPS_CTRLVOLUME | DSBCAPS_CTRLFREQUENCY;
+    bufferDescription.lpwfxFormat = &formatEx;
+    bufferDescription.dwReserved = 0;
+    bufferDescription.guid3DAlgorithm = DS3DALG_DEFAULT;
+
+    LPDIRECTSOUNDBUFFER soundBuffer = nullptr;
+    HRESULT createResult = m_directSound->CreateSoundBuffer(
+        &bufferDescription,
+        &soundBuffer,
+        NULL // Must be NULL.
+    );
+    assert(SUCCEEDED(createResult));
+
+    m_mapSoundBuffers[i_soundId] = soundBuffer;
+}
+
+void DirectAudioAPI::Play(const core::SoundId i_soundId, const SoundSettings& i_settings)
+{
+    DWORD status;
+    HRESULT getStatusResult = m_primarySoundBuffer->GetStatus(&status);
+    assert(SUCCEEDED(getStatusResult));
+
+    assert(status != DSBSTATUS_BUFFERLOST);
+    
+    assert(m_mapSoundBuffers.contains(i_soundId));
+    LPDIRECTSOUNDBUFFER bufferToPlay = m_mapSoundBuffers[i_soundId];
+
+    HRESULT result = bufferToPlay->SetCurrentPosition(0);
+    result = bufferToPlay->SetVolume(-i_settings.volume);
+    assert(SUCCEEDED(result));
+    result = bufferToPlay->SetFrequency(i_settings.frequency);
+    assert(SUCCEEDED(result));
+    result = bufferToPlay->SetPan(i_settings.pan);
+    assert(SUCCEEDED(result));
+    DWORD playFlag = 0;
+    playFlag = i_settings.loop ? playFlag | DSBPLAY_LOOPING : playFlag;
+
+    result = bufferToPlay->Play(0, 0, playFlag);
+    assert(SUCCEEDED(result));
 }
 
 void DirectAudioAPI::Pause()
@@ -83,8 +136,13 @@ void DirectAudioAPI::Resume()
 
 void DirectAudioAPI::Shutdown()
 {
+    for (auto& [id, buffer] : m_mapSoundBuffers)
+    {
+        buffer->Release();
+    }
+
+    m_primarySoundBuffer->Release();
     m_directSound->Release();
-    //m_directSoundBuffer->Release();
 }
 
 } // namespace audios

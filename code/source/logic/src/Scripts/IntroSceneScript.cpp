@@ -28,6 +28,10 @@ void IntroSceneScript::OnCreate(std::shared_ptr<IScriptContext> i_scriptContext)
 		std::bind(&IntroSceneScript::OnAnimationFinished, this)
 	);
 
+	m_audioComponent->SetLoop(true);
+	m_audioComponent->SetVolume(10000);
+	m_audioComponent->Play(core::SoundId::SoundTrack);
+
 	m_cameraComponent->SetCameraSize(
 		core::CastSize<int64_t, float>(m_animationComponent->GetSpriteSizeInFrame(0))
 	);

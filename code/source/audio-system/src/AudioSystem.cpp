@@ -37,6 +37,13 @@ void AudioSystem::LoadSounds()
 
 ////////////////////////////////////////////////////////////////////////////////
 
+void AudioSystem::Play(const core::SoundId i_soundId, const SoundSettings& i_settings)
+{
+	m_nativeAudioAPI->Play(i_soundId, i_settings);
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 void AudioSystem::Pause()
 {
 	m_nativeAudioAPI->Pause();

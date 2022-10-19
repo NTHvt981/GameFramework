@@ -17,12 +17,17 @@ function addDirectWrapper()
 
       files { 
          direct_wrapper_path.."**.h", 
-         direct_wrapper_path.."**.cpp" 
+         direct_wrapper_path.."**.cpp",
+         direct_wrapper_path.."**.c"
       }
 
       includedirs { 
          direct_wrapper_include_path,
          direct_wrapper_src_path
+      }
+
+      links {
+         "Winmm"
       }
 
       includeCore()

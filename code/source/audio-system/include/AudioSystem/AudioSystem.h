@@ -18,6 +18,7 @@ public:
 	// Inherited via IAudioSystem
 	void Initialize() override;
 	void LoadSounds() override;
+	void Play(const core::SoundId i_soundId, const SoundSettings& i_settings) override;
 	void Pause() override;
 	void Resume() override;
 	void Shutdown() override;

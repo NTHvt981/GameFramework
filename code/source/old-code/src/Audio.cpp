@@ -1001,8 +1001,9 @@ HRESULT CWaveFile::WriteMMIO(WAVEFORMATEX* pwfxDest)
     // Write the PCMWAVEFORMAT structure to the 'fmt ' chunk if its that type. 
     if (pwfxDest->wFormatTag == WAVE_FORMAT_PCM)
     {
-        if (mmioWrite(m_hmmio, (HPSTR)pwfxDest,
-            sizeof(PCMWAVEFORMAT)) != sizeof(PCMWAVEFORMAT))
+        if (
+            mmioWrite(m_hmmio, (HPSTR)pwfxDest, sizeof(PCMWAVEFORMAT)
+        ) != sizeof(PCMWAVEFORMAT))
             return DXTRACE_ERR(TEXT("mmioWrite"), E_FAIL);
     }
     else

@@ -16,6 +16,7 @@ public:
 	// Inherited via INativeAudioAPI
 	void Initialize() override;
 	void LoadSound(const core::SoundId i_soundId, const core::String& i_textureFilePath) override;
+	void Play(const core::SoundId i_soundId, const SoundSettings& i_settings) override;
 	void Pause() override;
 	void Resume() override;
 	void Shutdown() override;
@@ -23,9 +24,8 @@ public:
 private:
 	const HWND m_hwnd;
 	LPDIRECTSOUND8 m_directSound = nullptr;
-	LPDIRECTSOUNDBUFFER m_directSoundBuffer = NULL;
-	using WAVEFORMATEX_SHARED_PTR = std::unique_ptr<WAVEFORMATEX>;
-	std::unordered_map<core::SoundId, WAVEFORMATEX_SHARED_PTR> m_mapWaveDatas;
+	LPDIRECTSOUNDBUFFER m_primarySoundBuffer;
+	std::unordered_map<core::SoundId, LPDIRECTSOUNDBUFFER> m_mapSoundBuffers;
 };
 
 } // namespace audios

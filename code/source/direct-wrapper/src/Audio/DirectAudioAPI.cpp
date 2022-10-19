@@ -13,12 +13,12 @@
 namespace audios
 {
 
-DirectAudioAPI::DirectAudioAPI(const HWND i_hwnd)
+DirectSoundAPI::DirectSoundAPI(const HWND i_hwnd)
 	: m_hwnd(i_hwnd)
 {
 }
 
-void DirectAudioAPI::Initialize()
+void DirectSoundAPI::Initialize()
 {
     HRESULT result = DirectSoundCreate8(NULL, &m_directSound, NULL);
     DEBUG(assert(SUCCEEDED(result)));
@@ -52,7 +52,7 @@ void DirectAudioAPI::Initialize()
     DEBUG(assert(SUCCEEDED(result)));
 }
 
-void DirectAudioAPI::LoadSound(const core::SoundId i_soundId, const core::String& i_textureFilePath)
+void DirectSoundAPI::LoadSound(const core::SoundId i_soundId, const core::String& i_textureFilePath)
 {
     wav_file waveFileData;
     std::string stdString = i_textureFilePath.ToStdStr();
@@ -89,7 +89,7 @@ void DirectAudioAPI::LoadSound(const core::SoundId i_soundId, const core::String
     m_mapSoundBuffers[i_soundId] = soundBuffer;
 }
 
-void DirectAudioAPI::Play(const core::SoundId i_soundId, const SoundSettings& i_settings)
+void DirectSoundAPI::Play(const core::SoundId i_soundId, const SoundSettings& i_settings)
 {
     DWORD status;
     HRESULT getStatusResult = m_primarySoundBuffer->GetStatus(&status);
@@ -114,16 +114,16 @@ void DirectAudioAPI::Play(const core::SoundId i_soundId, const SoundSettings& i_
     assert(SUCCEEDED(result));
 }
 
-void DirectAudioAPI::Pause()
+void DirectSoundAPI::Pause()
 {
 
 }
 
-void DirectAudioAPI::Resume()
+void DirectSoundAPI::Resume()
 {
 }
 
-void DirectAudioAPI::Shutdown()
+void DirectSoundAPI::Shutdown()
 {
     for (auto& [id, buffer] : m_mapSoundBuffers)
     {

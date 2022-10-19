@@ -8,10 +8,10 @@
 namespace audios
 {
 
-class DirectAudioAPI final: public INativeAudioAPI
+class DirectSoundAPI final: public INativeAudioAPI
 {
 public:
-	DirectAudioAPI(const HWND i_hwnd);
+	DirectSoundAPI(const HWND i_hwnd);
 
 	// Inherited via INativeAudioAPI
 	void Initialize() override;

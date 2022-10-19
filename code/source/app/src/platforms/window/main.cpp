@@ -2,6 +2,7 @@
 #include "DirectWrapper/Graphic/Direct9GraphicAPI.h"
 #include "DirectWrapper/Input/DirectInputAPI.h"
 #include "DirectWrapper/Audio/DirectSoundAPI.h"
+#include "DirectWrapper/Audio/XAudio2API.h"
 #include "Core/Macros/Macros.h"
 #include "Core/GameSetting/GameSetting.h"
 #include "Core/DataTypes/Duration.h"
@@ -40,7 +41,8 @@ int WINAPI WinMain(
 
 	std::unique_ptr<graphics::INativeGraphicAPI> nativeRenderAPI = std::make_unique<graphics::Direct9GraphicAPI>(s_hwnd);
 	std::unique_ptr<inputs::INativeInputAPI> nativeInputAPI = std::make_unique<inputs::DirectInputAPI>(s_hwnd, hInstance);
-	std::unique_ptr<audios::INativeAudioAPI> nativeAudioAPI = std::make_unique<audios::DirectSoundAPI>(s_hwnd);
+	//std::unique_ptr<audios::INativeAudioAPI> nativeAudioAPI = std::make_unique<audios::DirectSoundAPI>(s_hwnd);
+	std::unique_ptr<audios::INativeAudioAPI> nativeAudioAPI = std::make_unique<audios::XAudio2API>();
 	
 	s_game = std::make_unique<logic::Game>(
 		std::move(nativeRenderAPI), 

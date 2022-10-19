@@ -1,7 +1,7 @@
 #include "Logic/Game.h"
 #include "DirectWrapper/Graphic/Direct9GraphicAPI.h"
 #include "DirectWrapper/Input/DirectInputAPI.h"
-#include "DirectWrapper/Audio/DirectAudioAPI.h"
+#include "DirectWrapper/Audio/DirectSoundAPI.h"
 #include "Core/Macros/Macros.h"
 #include "Core/GameSetting/GameSetting.h"
 #include "Core/DataTypes/Duration.h"

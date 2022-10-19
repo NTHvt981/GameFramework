@@ -1,4 +1,4 @@
-#include "DirectWrapper/Audio/DirectAudioAPI.h"
+#include "DirectWrapper/Audio/DirectSoundAPI.h"
 #include "Core/Macros/Macros.h"
 #include "wave_file.h"
 #include <assert.h>

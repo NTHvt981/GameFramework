@@ -1,4 +1,4 @@
-#include "DirectWrapper/Graphic/Direct9GraphicAPI.h"
+#include "DirectWrapper/Graphic/Direct9API.h"
 #include "GraphicSystem/DataTypes/SpriteState.h"
 #include "GraphicSystem/DataTypes/Texture.h"
 #include "Core/DataTypes/Flag.h"
@@ -12,21 +12,21 @@ namespace graphics
 core::Flag s_initFlag;
 core::Flag s_shutdownFlag;
 
-Direct9GraphicAPI::Direct9GraphicAPI(const HWND i_hwnd)
+Direct9API::Direct9API(const HWND i_hwnd)
 	: m_hwnd(i_hwnd)
 {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Direct9GraphicAPI::~Direct9GraphicAPI()
+Direct9API::~Direct9API()
 {
 	Shutdown();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Direct9GraphicAPI::Initialize()
+void Direct9API::Initialize()
 {
 	if (s_initFlag.IsSet())
 	{
@@ -69,7 +69,7 @@ void Direct9GraphicAPI::Initialize()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Direct9GraphicAPI::LoadTexture(
+void Direct9API::LoadTexture(
 	const core::TextureId i_textureId, 
 	const core::String i_textureFilePath)
 {
@@ -79,7 +79,7 @@ void Direct9GraphicAPI::LoadTexture(
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Direct9GraphicAPI::SetViewportSize(const core::SizeF& i_viewportSize)
+void Direct9API::SetViewportSize(const core::SizeF& i_viewportSize)
 {
 	m_viewportSize = i_viewportSize;
 	ResetDrawMatrix();
@@ -87,7 +87,7 @@ void Direct9GraphicAPI::SetViewportSize(const core::SizeF& i_viewportSize)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Direct9GraphicAPI::SetViewportPosition(const core::Vector2F& i_viewportPosition)
+void Direct9API::SetViewportPosition(const core::Vector2F& i_viewportPosition)
 {
 	m_viewportPosition = i_viewportPosition;
 	ResetDrawMatrix();
@@ -95,7 +95,7 @@ void Direct9GraphicAPI::SetViewportPosition(const core::Vector2F& i_viewportPosi
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Direct9GraphicAPI::Draw(const DrawParams& i_drawParams)
+void Direct9API::Draw(const DrawParams& i_drawParams)
 {
 	const core::TextureId id = i_drawParams.textureId;
 	assert(m_mapTextures.contains(id));
@@ -127,7 +127,7 @@ void Direct9GraphicAPI::Draw(const DrawParams& i_drawParams)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Direct9GraphicAPI::StartDraw()
+void Direct9API::StartDraw()
 {
 	HRESULT result = m_direct3DDevice9->BeginScene();
 	DEBUG(assert(SUCCEEDED(result)));
@@ -141,7 +141,7 @@ void Direct9GraphicAPI::StartDraw()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Direct9GraphicAPI::EndDraw()
+void Direct9API::EndDraw()
 {
 	HRESULT result = m_spriteHandler->End();
 	DEBUG(assert(SUCCEEDED(result)));
@@ -155,7 +155,7 @@ void Direct9GraphicAPI::EndDraw()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-LPDIRECT3DTEXTURE9 Direct9GraphicAPI::CreateTextureFromFile(const core::String& imagePath)
+LPDIRECT3DTEXTURE9 Direct9API::CreateTextureFromFile(const core::String& imagePath)
 {
 	D3DXIMAGE_INFO info;
 	LPDIRECT3DTEXTURE9 o_texture = nullptr;
@@ -187,7 +187,7 @@ LPDIRECT3DTEXTURE9 Direct9GraphicAPI::CreateTextureFromFile(const core::String& 
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Direct9GraphicAPI::ResetDrawMatrix()
+void Direct9API::ResetDrawMatrix()
 {
 	float scaleWidth = (m_backBufferSize.width / m_viewportSize.width);
 	float scaleHeight = (m_backBufferSize.height / m_viewportSize.height);
@@ -225,7 +225,7 @@ void Direct9GraphicAPI::ResetDrawMatrix()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Direct9GraphicAPI::Shutdown()
+void Direct9API::Shutdown()
 {
 	if (s_shutdownFlag.IsSet())
 	{
@@ -246,19 +246,19 @@ void Direct9GraphicAPI::Shutdown()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Direct9GraphicAPI::DrawAbsolute()
+void Direct9API::DrawAbsolute()
 {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Direct9GraphicAPI::DrawRelative()
+void Direct9API::DrawRelative()
 {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-core::APIMode Direct9GraphicAPI::GetAPIMode() const
+core::APIMode Direct9API::GetAPIMode() const
 {
 	return core::APIMode::D3D9;
 }

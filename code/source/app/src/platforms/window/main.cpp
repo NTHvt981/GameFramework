@@ -1,5 +1,5 @@
 #include "Logic/Game.h"
-#include "DirectWrapper/Graphic/Direct9GraphicAPI.h"
+#include "DirectWrapper/Graphic/Direct9API.h"
 #include "DirectWrapper/Input/DirectInputAPI.h"
 #include "DirectWrapper/Audio/DirectSoundAPI.h"
 #include "DirectWrapper/Audio/XAudio2API.h"
@@ -39,7 +39,7 @@ int WINAPI WinMain(
 	ULONGLONG currentFrameTime = GetTickCount64();
 	ULONGLONG previousFrameTime = GetTickCount64();
 
-	std::unique_ptr<graphics::INativeGraphicAPI> nativeRenderAPI = std::make_unique<graphics::Direct9GraphicAPI>(s_hwnd);
+	std::unique_ptr<graphics::INativeGraphicAPI> nativeRenderAPI = std::make_unique<graphics::Direct9API>(s_hwnd);
 	std::unique_ptr<inputs::INativeInputAPI> nativeInputAPI = std::make_unique<inputs::DirectInputAPI>(s_hwnd, hInstance);
 	//std::unique_ptr<audios::INativeAudioAPI> nativeAudioAPI = std::make_unique<audios::DirectSoundAPI>(s_hwnd);
 	std::unique_ptr<audios::INativeAudioAPI> nativeAudioAPI = std::make_unique<audios::XAudio2API>();

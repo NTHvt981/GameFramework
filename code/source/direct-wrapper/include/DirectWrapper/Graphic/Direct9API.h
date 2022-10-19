@@ -10,11 +10,11 @@
 namespace graphics
 {
 
-class Direct9GraphicAPI final : public INativeGraphicAPI
+class Direct9API final : public INativeGraphicAPI
 {
 public:
-	Direct9GraphicAPI(const HWND i_hwnd);
-	~Direct9GraphicAPI();
+	Direct9API(const HWND i_hwnd);
+	~Direct9API();
 
 	// Inherited via IRenderer
 	void Initialize() override;

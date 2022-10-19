@@ -15,7 +15,7 @@ public:
 
 	// Inherited via INativeAudioAPI
 	void Initialize() override;
-	void LoadSound(const core::SoundId i_soundId, const core::String& i_textureFilePath) override;
+	void LoadSound(const Sound& i_sound) override;
 	void Play(const core::SoundId i_soundId, const SoundSettings& i_settings) override;
 	void Pause() override;
 	void Resume() override;

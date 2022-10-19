@@ -19,6 +19,7 @@ void Parse(const tinyxml2::XMLElement* i_element, int64_t& o_value);
 void Parse(const tinyxml2::XMLElement* i_element, uint64_t& o_value);
 void Parse(const tinyxml2::XMLElement* i_element, float& o_value);
 void Parse(const tinyxml2::XMLElement* i_element, double& o_value);
+void Parse(const tinyxml2::XMLElement* i_element, bool& o_value);
 
 void Parse(const tinyxml2::XMLElement* i_element, core::String& o_value);
 void Parse(const tinyxml2::XMLElement* i_element, core::Vector2F& o_value);

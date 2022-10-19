@@ -9,6 +9,7 @@ struct Sound
 {
 	core::SoundId id;
 	core::String filePath;
+	bool loop;
 };
 
 } // namespace audios

@@ -31,7 +31,7 @@ void AudioSystem::LoadSounds()
 	for (const core::SoundId id : core::SoundIdIterators())
 	{
 		core::Ref<Sound> sound = m_databaseAPI->GetSoundRef(id);
-		m_nativeAudioAPI->LoadSound(id, sound->filePath);
+		m_nativeAudioAPI->LoadSound(sound.Get());
 	}
 }
 

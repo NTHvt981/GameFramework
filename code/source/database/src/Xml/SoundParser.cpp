@@ -34,6 +34,7 @@ void Parse(const tinyxml2::XMLElement* i_element, audios::Sound& o_value)
 {
 	Parse(i_element->FirstChildElement("Id"), o_value.id);
 	Parse(i_element->FirstChildElement("File"), o_value.filePath);
+	Parse(i_element->FirstChildElement("Loop"), o_value.loop);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

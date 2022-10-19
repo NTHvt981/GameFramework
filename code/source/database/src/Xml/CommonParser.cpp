@@ -34,6 +34,21 @@ void Parse(const tinyxml2::XMLElement* i_element, double& o_value)
 
 ////////////////////////////////////////////////////////////////////////////////
 
+void Parse(const tinyxml2::XMLElement* i_element, bool& o_value)
+{
+	const char* text = i_element->GetText();
+	if (strcmp(text, "true") == 0)
+	{
+		o_value = true;
+	}
+	else
+	{
+		o_value = false;
+	}
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
 void Parse(const tinyxml2::XMLElement* i_element, core::String& o_value)
 {
 	o_value = i_element->GetText();

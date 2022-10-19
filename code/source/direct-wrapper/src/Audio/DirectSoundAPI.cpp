@@ -52,10 +52,10 @@ void DirectSoundAPI::Initialize()
     DEBUG(assert(SUCCEEDED(result)));
 }
 
-void DirectSoundAPI::LoadSound(const core::SoundId i_soundId, const core::String& i_textureFilePath)
+void DirectSoundAPI::LoadSound(const Sound& i_sound)
 {
     wav_file waveFileData;
-    std::string stdString = i_textureFilePath.ToStdStr();
+    std::string stdString = i_sound.filePath.ToStdStr();
     readWaveData(stdString.c_str(), &waveFileData);
     printWaveData(&waveFileData);
 
@@ -86,7 +86,7 @@ void DirectSoundAPI::LoadSound(const core::SoundId i_soundId, const core::String
     );
     assert(SUCCEEDED(createResult));
 
-    m_mapSoundBuffers[i_soundId] = soundBuffer;
+    m_mapSoundBuffers[i_sound.id] = soundBuffer;
 }
 
 void DirectSoundAPI::Play(const core::SoundId i_soundId, const SoundSettings& i_settings)

@@ -23,9 +23,9 @@ void XAudio2API::Initialize()
 	assert(SUCCEEDED(result));
 }
 
-void XAudio2API::LoadSound(const core::SoundId i_soundId, const core::String& i_textureFilePath)
+void XAudio2API::LoadSound(const Sound& i_sound)
 {
-	std::wstring stdWString = i_textureFilePath.ToStdWStr();
+	std::wstring stdWString = i_sound.filePath.ToStdWStr();
 	HANDLE fileHandle = CreateFile(
 		stdWString.c_str(),
 		GENERIC_READ,
@@ -79,6 +79,10 @@ void XAudio2API::LoadSound(const core::SoundId i_soundId, const core::String& i_
 	buffer.AudioBytes = dwChunkSize;  //size of the audio buffer in bytes
 	buffer.pAudioData = pDataBuffer;  //buffer containing audio data
 	buffer.Flags = XAUDIO2_END_OF_STREAM; // tell the source voice not to expect any data after this buffer
+	if (i_sound.loop)
+	{
+		buffer.LoopCount = XAUDIO2_MAX_LOOP_COUNT;
+	}
 
 	IXAudio2SourceVoice* pSourceVoice;
 	result = m_xAudio2->CreateSourceVoice(&pSourceVoice, (WAVEFORMATEX*)&wfx);
@@ -87,7 +91,7 @@ void XAudio2API::LoadSound(const core::SoundId i_soundId, const core::String& i_
 	result = pSourceVoice->SubmitSourceBuffer(&buffer);
 	assert(SUCCEEDED(result));
 
-	m_mapSourceVoices[i_soundId] = pSourceVoice;
+	m_mapSourceVoices[i_sound.id] = pSourceVoice;
 }
 
 void XAudio2API::Play(const core::SoundId i_soundId, const SoundSettings& i_settings)

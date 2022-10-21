@@ -16,6 +16,8 @@ DirectInputAPI::DirectInputAPI(const HWND i_hwnd, const HINSTANCE i_hInstance)
 	: m_hwnd(i_hwnd)
 	, m_hInstance(i_hInstance)
 {
+	ZeroMemory(m_currentKeys, sizeof(m_currentKeys));
+	ZeroMemory(m_previousKeys, sizeof(m_previousKeys));
 }
 
 DirectInputAPI::~DirectInputAPI()
@@ -28,19 +30,19 @@ void DirectInputAPI::Initialize()
 		m_hInstance,
 		DIRECTINPUT_VERSION,
 		IID_IDirectInput8,
-		reinterpret_cast<void**>(&m_directInput),
+		&m_directInput,
 		NULL
 	);
-	DEBUG(assert(SUCCEEDED(result)));
+	assert(SUCCEEDED(result));
 
 	result = m_directInput->CreateDevice(GUID_SysKeyboard, &m_directInputDevice, NULL);
-	DEBUG(assert(SUCCEEDED(result)));
+	assert(SUCCEEDED(result));
 
 	result = m_directInputDevice->SetDataFormat(&c_dfDIKeyboard);
-	DEBUG(assert(SUCCEEDED(result)));
+	assert(SUCCEEDED(result));
 
 	result = m_directInputDevice->SetCooperativeLevel(m_hwnd, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE);
-	DEBUG(assert(SUCCEEDED(result)));
+	assert(SUCCEEDED(result));
 
 	result = m_directInputDevice->Acquire();
 	//DEBUG(assert(SUCCEEDED(result)));

@@ -6,6 +6,7 @@
 #include <d3dx9core.h>
 #include <memory>
 #include <unordered_map>
+#include <wrl/client.h>
 
 namespace graphics
 {
@@ -35,14 +36,18 @@ private:
 	void DrawRelative();
 
 	const HWND m_hwnd;
-	LPDIRECT3D9 m_direct3D9 = nullptr;
-	D3DPRESENT_PARAMETERS m_direct3DParams;
-	LPDIRECT3DDEVICE9 m_direct3DDevice9 = nullptr;
-	LPDIRECT3DSURFACE9 m_backBuffer = nullptr;
-	LPD3DXSPRITE m_spriteHandler = nullptr;
 
-	std::unordered_map<core::TextureId, LPDIRECT3DTEXTURE9> m_mapTextures;
-	LPDIRECT3DTEXTURE9 CreateTextureFromFile(const core::String& imagePath);
+	template<class T>
+	using ComPtr = Microsoft::WRL::ComPtr<T>;
+
+	ComPtr<IDirect3D9> m_direct3D9 = nullptr;
+	D3DPRESENT_PARAMETERS m_direct3DParams;
+	ComPtr<IDirect3DDevice9> m_direct3DDevice9 = nullptr;
+	ComPtr<IDirect3DSurface9> m_backBuffer = nullptr;
+	ComPtr<ID3DXSprite> m_spriteHandler = nullptr;
+
+	std::unordered_map<core::TextureId, ComPtr<IDirect3DTexture9>> m_mapTextures;
+	ComPtr<IDirect3DTexture9> CreateTextureFromFile(const core::String& imagePath);
 
 	core::SizeF m_backBufferSize{ 256, 224 };
 	core::SizeF m_viewportSize{ 256, 224 };

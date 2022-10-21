@@ -3,6 +3,7 @@
 #include <array>
 #include <Windows.h>
 #include <dinput.h>
+#include <wrl/client.h>
 
 namespace inputs
 {
@@ -29,9 +30,13 @@ public:
 
 private:
 	const HWND m_hwnd;
-	HINSTANCE m_hInstance = nullptr;
-	LPDIRECTINPUT8 m_directInput = nullptr;
-	LPDIRECTINPUTDEVICE8 m_directInputDevice = nullptr;
+	const HINSTANCE m_hInstance;
+
+	template<class T>
+	using ComPtr = Microsoft::WRL::ComPtr<T>;
+
+	ComPtr<IDirectInput8> m_directInput = nullptr;
+	ComPtr<IDirectInputDevice8> m_directInputDevice = nullptr;
 
 	bool m_currentKeys[256];
 	bool m_previousKeys[256];

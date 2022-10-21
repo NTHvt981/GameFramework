@@ -98,7 +98,7 @@ void DirectSoundAPI::Play(const core::SoundId i_soundId, const SoundSettings& i_
     assert(status != DSBSTATUS_BUFFERLOST);
     
     assert(m_mapSoundBuffers.contains(i_soundId));
-    LPDIRECTSOUNDBUFFER bufferToPlay = m_mapSoundBuffers[i_soundId];
+    ComPtr<IDirectSoundBuffer> bufferToPlay = m_mapSoundBuffers[i_soundId];
 
     HRESULT result = bufferToPlay->SetCurrentPosition(0);
     result = bufferToPlay->SetVolume(-i_settings.volume);

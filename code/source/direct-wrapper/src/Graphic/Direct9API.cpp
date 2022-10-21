@@ -63,7 +63,7 @@ void Direct9API::Initialize()
 	assert(SUCCEEDED(result));
 
 	// Initialize spriteRef helper from Direct3DX helper library
-	result = D3DXCreateSprite(m_direct3DDevice9, &m_spriteHandler);
+	result = D3DXCreateSprite(m_direct3DDevice9.Get(), &m_spriteHandler);
 	assert(SUCCEEDED(result));
 }
 
@@ -99,7 +99,7 @@ void Direct9API::Draw(const DrawParams& i_drawParams)
 {
 	const core::TextureId id = i_drawParams.textureId;
 	assert(m_mapTextures.contains(id));
-	const LPDIRECT3DTEXTURE9 texture = m_mapTextures[id];
+	ComPtr<IDirect3DTexture9> texture = m_mapTextures[id];
 
 	const core::Vector2F pos = i_drawParams.position;
 	D3DXVECTOR3 position(pos.x, pos.y, 0);
@@ -117,7 +117,7 @@ void Direct9API::Draw(const DrawParams& i_drawParams)
 	int64_t opacity = i_drawParams.alpha * 255.0;
 
 	m_spriteHandler->Draw(
-		texture, 
+		texture.Get(), 
 		&srcRect, 
 		&center, 
 		&position, 
@@ -132,7 +132,7 @@ void Direct9API::StartDraw()
 	HRESULT result = m_direct3DDevice9->BeginScene();
 	DEBUG(assert(SUCCEEDED(result)));
 
-	result = m_direct3DDevice9->ColorFill(m_backBuffer, NULL, D3DCOLOR_XRGB(0, 0, 0));
+	result = m_direct3DDevice9->ColorFill(m_backBuffer.Get(), NULL, D3DCOLOR_XRGB(0, 0, 0));
 	DEBUG(assert(SUCCEEDED(result)));
 
 	result = m_spriteHandler->Begin(D3DXSPRITE_ALPHABLEND);
@@ -155,17 +155,17 @@ void Direct9API::EndDraw()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-LPDIRECT3DTEXTURE9 Direct9API::CreateTextureFromFile(const core::String& imagePath)
+Microsoft::WRL::ComPtr<IDirect3DTexture9> Direct9API::CreateTextureFromFile(const core::String& imagePath)
 {
 	D3DXIMAGE_INFO info;
-	LPDIRECT3DTEXTURE9 o_texture = nullptr;
+	ComPtr<IDirect3DTexture9> o_texture = nullptr;
 
 	const wchar_t* rawPath = imagePath.ToWStr();
 	HRESULT result = D3DXGetImageInfoFromFile(rawPath, &info);
 	assert(SUCCEEDED(result));
 
 	result = D3DXCreateTextureFromFileEx(
-		m_direct3DDevice9,
+		m_direct3DDevice9.Get(),
 		rawPath,
 		info.Width,	
 		info.Height,

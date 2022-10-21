@@ -1,5 +1,6 @@
 #pragma once
 #include "AudioSystem/API/INativeAudioAPI.h"
+#include <wrl/client.h>
 #include <unordered_map>
 #include <memory>
 #include <windows.h>
@@ -23,9 +24,13 @@ public:
 
 private:
 	const HWND m_hwnd;
-	LPDIRECTSOUND8 m_directSound = nullptr;
-	LPDIRECTSOUNDBUFFER m_primarySoundBuffer;
-	std::unordered_map<core::SoundId, LPDIRECTSOUNDBUFFER> m_mapSoundBuffers;
+	
+	template<class T>
+	using ComPtr = Microsoft::WRL::ComPtr<T>;
+
+	ComPtr<IDirectSound8> m_directSound = nullptr;
+	ComPtr<IDirectSoundBuffer> m_primarySoundBuffer;
+	std::unordered_map<core::SoundId, ComPtr<IDirectSoundBuffer>> m_mapSoundBuffers;
 };
 
 } // namespace audios

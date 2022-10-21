@@ -7,26 +7,26 @@ namespace logic
 {
 
 ScriptContext::ScriptContext(
-	std::shared_ptr<core::logic::IGameClock> i_gameClock, 
-	std::shared_ptr<IEntitiesFactory> i_entitiesFactory,
-	std::shared_ptr<EntitiesManager> i_entitiesManager)
+	core::Ref<core::logic::IGameClock> i_gameClock,
+	core::Ref<IEntitiesFactory> i_entitiesFactory,
+	core::Ref<EntitiesManager> i_entitiesManager)
 	: m_gameClock(i_gameClock)
 	, m_entitiesFactory(i_entitiesFactory)
 	, m_entitiesManager(i_entitiesManager)
 {
 }
 
-std::shared_ptr<core::logic::IGameClock> ScriptContext::GetGameClock()
+core::Ref<core::logic::IGameClock> ScriptContext::GetGameClock()
 {
 	return m_gameClock;
 }
 
-std::shared_ptr<IEntitiesFactory> ScriptContext::GetEntitiesFactory()
+core::Ref<IEntitiesFactory> ScriptContext::GetEntitiesFactory()
 {
 	return m_entitiesFactory;
 }
 
-std::shared_ptr<EntitiesManager> ScriptContext::GetEntitiesManager()
+core::Ref<EntitiesManager> ScriptContext::GetEntitiesManager()
 {
 	return m_entitiesManager;
 }

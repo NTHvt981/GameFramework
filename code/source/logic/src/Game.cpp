@@ -51,7 +51,11 @@ Game::Game(std::unique_ptr<graphics::INativeGraphicAPI> i_nativeGraphicAPI,
 	);
 	m_entitiesFactory = std::make_shared<EntitiesFactory>(m_componentFactory);
 	m_entitiesManager = std::make_shared<EntitiesManager>();
-	m_scriptContext = std::make_shared<ScriptContext>(m_gameClock, m_entitiesFactory, m_entitiesManager);
+	m_scriptContext = std::make_shared<ScriptContext>(
+		core::Ref<core::logic::IGameClock>(m_gameClock),
+		core::Ref<IEntitiesFactory>(m_entitiesFactory),
+		core::Ref<EntitiesManager>(m_entitiesManager)
+	);
 	m_scriptsManager = std::make_shared<ScriptsManager>(m_scriptContext);
 }
 

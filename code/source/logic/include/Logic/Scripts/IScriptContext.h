@@ -1,4 +1,5 @@
 #pragma once
+#include "Core/DataTypes/Ref.h"
 #include <memory>
 
 namespace core::logic
@@ -19,9 +20,9 @@ class EntitiesManager;
 class IScriptContext
 {
 public:
-	virtual std::shared_ptr<core::logic::IGameClock> GetGameClock() = 0;
-	virtual std::shared_ptr<IEntitiesFactory> GetEntitiesFactory() = 0;
-	virtual std::shared_ptr<EntitiesManager> GetEntitiesManager() = 0;
+	virtual core::Ref<core::logic::IGameClock> GetGameClock() = 0;
+	virtual core::Ref<IEntitiesFactory> GetEntitiesFactory() = 0;
+	virtual core::Ref<EntitiesManager> GetEntitiesManager() = 0;
 };
 
 } // namespace logic

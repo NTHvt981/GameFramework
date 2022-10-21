@@ -8,19 +8,19 @@ class ScriptContext final: public IScriptContext
 {
 public:
 	ScriptContext(
-		std::shared_ptr<core::logic::IGameClock> i_gameClock,
-		std::shared_ptr<IEntitiesFactory> i_entitesFactory,
-		std::shared_ptr<EntitiesManager> i_entitiesManager
+		core::Ref<core::logic::IGameClock> i_gameClock,
+		core::Ref<IEntitiesFactory> i_entitesFactory,
+		core::Ref<EntitiesManager> i_entitiesManager
 	);
 	// Inherited via IScriptContext
-	std::shared_ptr<core::logic::IGameClock> GetGameClock() override;
-	std::shared_ptr<IEntitiesFactory> GetEntitiesFactory() override;
-	std::shared_ptr<EntitiesManager> GetEntitiesManager() override;
+	core::Ref<core::logic::IGameClock> GetGameClock() override;
+	core::Ref<IEntitiesFactory> GetEntitiesFactory() override;
+	core::Ref<EntitiesManager> GetEntitiesManager() override;
 
 private:
-	std::shared_ptr<core::logic::IGameClock> m_gameClock;
-	std::shared_ptr<IEntitiesFactory> m_entitiesFactory;
-	std::shared_ptr<EntitiesManager> m_entitiesManager;
+	core::Ref<core::logic::IGameClock> m_gameClock;
+	core::Ref<IEntitiesFactory> m_entitiesFactory;
+	core::Ref<EntitiesManager> m_entitiesManager;
 };
 
 } // namespace logic

@@ -81,9 +81,9 @@ void Entity::SetDeregisterCallback(const signals::Callback<>& i_callback)
 	m_onDeregisteredCon = sig_onDeregistered.Connect(i_callback);
 }
 
-std::shared_ptr<IComponent> Entity::GetComponent(core::ComponentKey i_componentKey) const
+core::Ref<IComponent> Entity::GetComponent(core::ComponentKey i_componentKey) const
 {
-	return m_components.at(i_componentKey);
+	return core::Ref<IComponent>(m_components.at(i_componentKey));
 }
 
 } // namespace logic

@@ -8,7 +8,7 @@ template<typename T>
 class Ref
 {
 public:
-	Ref(std::shared_ptr<T> i_sharedPtr)
+	Ref(const std::shared_ptr<T> i_sharedPtr)
 		: m_innerRef(std::ref<T>(*i_sharedPtr.get()))
 	{
 

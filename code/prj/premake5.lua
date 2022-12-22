@@ -11,13 +11,9 @@ require("app")
 require("logic")
 require("old-code")
 
-local core_prj_name = "core"
-local core_path = source_path.."core/"
-local core_include_path = core_path.."include/"
-
 function addSln()
    solution "Game"
-      location (prj_2019_path)
+      location (prj_path.._ARGS[1])
       language "C++"
       cppdialect "C++20"
       startproject "app"

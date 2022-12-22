@@ -39,7 +39,7 @@ private:
 	std::map<core::ComponentKey, std::shared_ptr<IComponent>> m_components;
 	signals::Signal<> sig_onDeregistered;
 	signals::Connection<> m_onDeregisteredCon;
-	bool isRegistered = false;
+	bool m_isRegistered = false;
 };
 
 } // namespace logic

@@ -36,11 +36,11 @@ core::Vector2F AnimationComponent::GetPosition() const
 
 void AnimationComponent::Register()
 {
-	if (isRegistered)
+	if (m_isRegistered)
 	{
 		return;
 	}
-	isRegistered = true;
+	m_isRegistered = true;
 
 	m_animationGraphicAPI.RegisterAnimation(m_animationState);
 
@@ -51,11 +51,11 @@ void AnimationComponent::Register()
 
 void AnimationComponent::Deregister()
 {
-	if (!isRegistered)
+	if (!m_isRegistered)
 	{
 		return;
 	}
-	isRegistered = false;
+	m_isRegistered = false;
 
 	m_animationGraphicAPI.DeregisterAnimation(m_animationState->id);
 

@@ -50,11 +50,11 @@ bool Entity::HasAllComponents(std::initializer_list<core::ComponentKey> i_compon
 
 void Entity::Register()
 {
-	if (isRegistered)
+	if (m_isRegistered)
 	{
 		return;
 	}
-	isRegistered = true;
+	m_isRegistered = true;
 
 	for (auto& [key, component] : m_components)
 	{
@@ -64,11 +64,11 @@ void Entity::Register()
 
 void Entity::Deregister()
 {
-	if (!isRegistered)
+	if (!m_isRegistered)
 	{
 		return;
 	}
-	isRegistered = false;
+	m_isRegistered = false;
 
 	for (auto& [key, component] : m_components)
 	{

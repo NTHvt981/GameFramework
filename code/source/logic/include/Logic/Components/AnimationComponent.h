@@ -49,7 +49,7 @@ private:
 	graphics::IAnimationGraphicAPI& m_animationGraphicAPI;
 	const graphics::database::IGraphicDatabaseAPI& m_graphicDatabaseAPI;
 	std::shared_ptr<graphics::AnimationState> m_animationState;
-	bool isRegistered = false;
+	bool m_isRegistered = false;
 	
 	signals::Connection<> m_onAnimationFinishedCon;
 };

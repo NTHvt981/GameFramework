@@ -12,5 +12,4 @@ public:
 	virtual core::Vector2F GetPosition() const = 0;
 };
 
-
 } // namespace logic

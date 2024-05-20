@@ -2,7 +2,7 @@
 #include <memory>
 #include "Core/Identifiers/SpriteId.h"
 #include "Core/DataTypes/Box.h"
-#include "GraphicSystem/DataTypes/Texture.h"
+#include "Core/DataTypes/Texture.h"
 #include "Core/DataTypes/Vector2.h"
 
 namespace graphics

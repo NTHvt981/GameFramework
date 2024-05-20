@@ -1,8 +1,7 @@
-#include "GraphicSystem/GraphicSystem.h"
-#include "GraphicSystem/DataTypes/Texture.h"
-#include "GraphicSystem/DataTypes/SpriteState.h"
-#include "GraphicSystem/DataTypes/AnimationState.h"
-#include "GraphicSystem/Helpers/AnimationStateHelper.h"
+#include "Logic/LogicSystems/GraphicSystem.h"
+#include "Core/DataTypes/Texture.h"
+#include "Core/DataTypes/SpriteState.h"
+#include "Core/DataTypes/AnimationState.h"
 #include "Core/Math/Math.h"
 #include "Core/Helpers/BoxHelper.h"
 
@@ -269,10 +268,6 @@ void GraphicSystem::RemoveAnimationState(std::shared_ptr<AnimationState> i_anima
 
 void GraphicSystem::UpdateAnimationStates(const core::Duration& dt)
 {
-    for (auto& [animationStateId, animationState] : m_allAnimationStates)
-    {
-        UpdateAnimationState(*animationState.get(), dt);
-    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////

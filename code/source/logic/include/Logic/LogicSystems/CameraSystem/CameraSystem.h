@@ -2,7 +2,7 @@
 #include "ICameraSystem.h"
 #include "Core/DataTypes/Size.h"
 #include "Core/Identifiers/EntityId.h"
-#include "GraphicSystem/API/IViewportGraphicAPI.h"
+#include "Core/APIs/IViewportGraphicAPI.h"
 #include <memory>
 
 namespace logic::camera

@@ -1,5 +1,5 @@
 #pragma once
-#include "GraphicSystem/Database/IGraphicDatabaseAPI.h"
+#include "Logic/Databases/IGraphicDatabaseAPI.h"
 #include "AudioSystem/Database/IAudioDatabaseAPI.h"
 
 namespace database
@@ -10,7 +10,6 @@ class IDatabase:	public graphics::database::IGraphicDatabaseAPI,
 {
 public:
 	virtual void LoadResource() = 0;
-
 };
 
 } // namespace database

@@ -1,5 +1,5 @@
 #pragma once
-#include "GraphicSystem/API/INativeGraphicAPI.h"
+#include "Core/APIs/INativeGraphicAPI.h"
 #include "Core/Identifiers/APIMode.h"
 #include <Windows.h>
 #include <d3d9.h>

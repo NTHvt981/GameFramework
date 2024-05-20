@@ -2,7 +2,7 @@
 #include "GameClock.h"
 #include "Logic/LogicSystems/PhysicSystem.h"
 #include "FileSystem/IFileSystem.h"
-#include "Database/IDatabase.h"
+#include "Logic/Databases/IDatabase.h"
 #include "Logic/LogicSystems/CameraSystem/ICameraSystem.h"
 #include "Logic/Scripts/Script.h"
 #include "Mailbox/Mailbox.h"

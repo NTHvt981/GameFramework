@@ -1,8 +1,7 @@
 #include "Logic/Components/AnimationComponent.h"
-#include "GraphicSystem/DataTypes/AnimationState.h"
-#include "GraphicSystem/Helpers/AnimationStateHelper.h"
-#include "GraphicSystem/API/IAnimationGraphicAPI.h"
-#include "GraphicSystem/Database/IGraphicDatabaseAPI.h"
+#include "Core/DataTypes/AnimationState.h"
+#include "Core/APIs/IAnimationGraphicAPI.h"
+#include "Logic/Databases/IGraphicDatabaseAPI.h"
 #include "Core/Helpers/SizeBoxHelper.h"
 
 namespace logic

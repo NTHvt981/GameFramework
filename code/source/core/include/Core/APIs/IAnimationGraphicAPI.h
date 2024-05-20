@@ -1,5 +1,5 @@
 #pragma once
-#include "GraphicSystem/DataTypes/AnimationState.h"
+#include "Core/DataTypes/AnimationState.h"
 #include "Core/Identifiers/RenderLayer.h"
 #include <memory>
 

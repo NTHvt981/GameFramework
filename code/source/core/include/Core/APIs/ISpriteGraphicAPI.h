@@ -1,5 +1,5 @@
 #pragma once
-#include "GraphicSystem/DataTypes/SpriteState.h"
+#include "Core/DataTypes/SpriteState.h"
 #include "Core/Identifiers/RenderLayer.h"
 #include <memory>
 

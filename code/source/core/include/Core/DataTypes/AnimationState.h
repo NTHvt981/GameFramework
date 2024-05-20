@@ -1,7 +1,7 @@
 #pragma once
 #include "Core/Identifiers/AnimationId.h"
-#include "GraphicSystem/DataTypes/AnimationDef.h"
-#include "GraphicSystem/DataTypes/SpriteState.h"
+#include "Core/DataTypes/AnimationDef.h"
+#include "Core/DataTypes/SpriteState.h"
 #include "Core/Signals/Signal.h"
 #include "Core/DataTypes/Duration.h"
 #include <memory>

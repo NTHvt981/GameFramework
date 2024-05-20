@@ -1,8 +1,8 @@
 #pragma once
-#include "API/ITileGraphicAPI.h"
-#include "API/ISpriteGraphicAPI.h"
-#include "API/IAnimationGraphicAPI.h"
-#include "API/IViewportGraphicAPI.h"
+#include "Core/APIs/ITileGraphicAPI.h"
+#include "Core/APIs/ISpriteGraphicAPI.h"
+#include "Core/APIs/IAnimationGraphicAPI.h"
+#include "Core/APIs/IViewportGraphicAPI.h"
 #include "Core/DataTypes/Box.h"
 #include "Core/DataTypes/Duration.h"
 

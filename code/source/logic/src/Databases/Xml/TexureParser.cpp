@@ -1,6 +1,6 @@
 #include "TexureParser.h"
-#include "GraphicSystem/DataTypes/Texture.h"
-#include "Xml/CommonParser.h"
+#include "Core/DataTypes/Texture.h"
+#include "Databases/Xml/CommonParser.h"
 #include "tinyxml2.h"
 
 namespace xml

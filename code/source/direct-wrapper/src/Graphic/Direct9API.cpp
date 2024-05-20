@@ -1,6 +1,6 @@
 #include "DirectWrapper/Graphic/Direct9API.h"
-#include "GraphicSystem/DataTypes/SpriteState.h"
-#include "GraphicSystem/DataTypes/Texture.h"
+#include "Core/DataTypes/SpriteState.h"
+#include "Core/DataTypes/Texture.h"
 #include "Core/DataTypes/Flag.h"
 #include "Core/DataTypes/Box.h"
 #include "Core/Macros/Macros.h"

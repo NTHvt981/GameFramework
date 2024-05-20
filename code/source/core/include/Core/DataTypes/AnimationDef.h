@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include <memory>
-#include "GraphicSystem/DataTypes/SpriteDef.h"
+#include "Core/DataTypes/SpriteDef.h"
 #include "Core/Identifiers/AnimationId.h"
 
 namespace graphics

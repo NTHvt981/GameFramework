@@ -1,7 +1,7 @@
 #include "Logic/Components/SpriteComponent.h"
-#include "GraphicSystem/API/ISpriteGraphicAPI.h"
-#include "GraphicSystem/Database/IGraphicDatabaseAPI.h"
-#include "GraphicSystem/DataTypes/SpriteState.h"
+#include "Core/APIs/ISpriteGraphicAPI.h"
+#include "Logic/Databases/IGraphicDatabaseAPI.h"
+#include "Core/DataTypes/SpriteState.h"
 
 namespace logic
 {

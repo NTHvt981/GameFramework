@@ -1,8 +1,6 @@
 require("common")
 require("core")
 require("file-system")
-require("database")
-require("graphic-system")
 require("input-system")
 require("audio-system")
 
@@ -28,10 +26,8 @@ function addLogic()
 
       includeCore()
       includeFileSystem()
-      includeGraphicSystem()
       includeInputSystem()
       includeAudioSystem()
-      includeDatabase()
 end
 
 function includeLogic()

@@ -1,7 +1,7 @@
 #pragma once
 #include <memory>
 #include <stdint.h>
-#include "GraphicSystem/DataTypes/SpriteDef.h"
+#include "Core/DataTypes/SpriteDef.h"
 #include "Core/DataTypes/Vector2.h"
 #include "Core/Identifiers/RenderLayer.h"
 

@@ -1,7 +1,7 @@
 #include "AnimationParser.h"
-#include "Xml/CommonParser.h"
+#include "Databases/Xml/CommonParser.h"
 #include "Core/Identifiers/TextureId.h"
-#include "GraphicSystem/DataTypes/AnimationDef.h"
+#include "Core/DataTypes/AnimationDef.h"
 #include "tinyxml2.h"
 
 namespace xml

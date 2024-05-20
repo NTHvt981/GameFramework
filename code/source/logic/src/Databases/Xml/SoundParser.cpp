@@ -1,6 +1,6 @@
 #include "SoundParser.h"
 #include "AudioSystem/DataTypes/Sound.h"
-#include "Xml/CommonParser.h"
+#include "Databases/Xml/CommonParser.h"
 #include "tinyxml2.h"
 
 namespace xml

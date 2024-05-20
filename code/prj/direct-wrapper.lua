@@ -2,7 +2,6 @@ require("common")
 require("DirectXSDK")
 require("core")
 require("input-system")
-require("graphic-system")
 require("audio-system")
 
 local direct_wrapper_prj_name = "direct-wrapper"
@@ -33,7 +32,6 @@ function addDirectWrapper()
       includeCore()
       includeInputSystem()
       includeAudioSystem()
-      includeGraphicSystem()
       includeDirectXSDK()
 end
 
@@ -49,6 +47,5 @@ function includeDirectWrapper()
    includeCore()
    includeInputSystem()
    includeAudioSystem()
-   includeGraphicSystem()
    includeDirectXSDK()
 end

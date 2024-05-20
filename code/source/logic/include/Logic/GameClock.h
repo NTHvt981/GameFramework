@@ -8,7 +8,6 @@ class GameClock: public core::logic::IGameClock
 {
 public:
 	GameClock();
-	void UpdateInput(const core::Duration& dt);
 	void PreFixedUpdate(const core::Duration& dt);
 	void FixedUpdate(const core::Duration& dt);
 	void PostFixedUpdate(const core::Duration& dt);

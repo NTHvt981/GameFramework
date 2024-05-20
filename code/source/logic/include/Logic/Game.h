@@ -1,11 +1,14 @@
 #pragma once
 #include "GameClock.h"
-#include "PhysicSystem/IPhysicSystem.h"
+#include "Logic/LogicSystems/PhysicSystem.h"
 #include "FileSystem/IFileSystem.h"
 #include "Database/IDatabase.h"
 #include "Logic/LogicSystems/CameraSystem/ICameraSystem.h"
 #include "Logic/Scripts/Script.h"
+#include "Mailbox/Mailbox.h"
+#include "Scenes/IScene.h"
 #include <memory>
+#include <queue>
 
 namespace graphics
 {
@@ -55,13 +58,12 @@ public:
 	void Initialize();
 	bool IsInitialized() const;
 	void LoadResource();
-	void RunLoop(const core::Duration& dt);
+	using EndLoop = bool;
+	EndLoop RunLoop(const core::Duration& dt);
 	void Pause();
 	void Resume();
 	void Shutdown();
 	void OnResizeWindow(const core::SizeUI64& i_size);
-
-	signals::Signal<> sig_requestShutdown;
 private:
 	void UpdateInput(const core::Duration& dt);
 
@@ -80,13 +82,13 @@ private:
 	void DuringRender(const core::Duration& dt);
 	void PostRender(const core::Duration& dt);
 
-	void OnRequestShutdown();
+	void ProcessMailbox();
 
 	// own, self init
 	std::shared_ptr<GameClock> m_gameClock;
 	std::shared_ptr<files::IFileSystem> m_fileSystem;
 	std::shared_ptr<graphics::IGraphicSystem> m_graphicSystem;
-	std::shared_ptr<physics::IPhysicSystem> m_physicSystem;
+	std::shared_ptr<PhysicSystem> m_physicSystem;
 	std::shared_ptr<inputs::IInputSystem> m_inputSystem;
 	std::shared_ptr<audios::IAudioSystem> m_audioSystem;
 	std::shared_ptr<camera::ICameraSystem> m_cameraSystem;
@@ -94,9 +96,10 @@ private:
 	std::shared_ptr<database::IDatabase> m_database;
 	std::shared_ptr<IComponentsFactory> m_componentFactory;
 	std::shared_ptr<IEntitiesFactory> m_entitiesFactory;
-	std::shared_ptr<EntitiesManager> m_entitiesManager;
-	std::shared_ptr<IScriptContext> m_scriptContext;
-	std::shared_ptr<ScriptsManager> m_scriptsManager;
+
+	// scenes
+	std::queue<std::shared_ptr<IScene>> m_scenes;
+	std::shared_ptr<Mailbox> m_mailboxReceiveFromScene;
 
 	// own, pass by param
 	std::unique_ptr<graphics::INativeGraphicAPI> m_nativeGraphicAPI;

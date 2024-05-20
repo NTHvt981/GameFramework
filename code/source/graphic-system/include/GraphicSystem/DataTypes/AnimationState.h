@@ -35,6 +35,7 @@ struct AnimationState
 	float speed = 1.0f;
 
 	signals::Signal<> sig_onAnimationFinished;
+	bool hasFinished = false; // Only used if not loop
 };
 
 } // namespace graphics

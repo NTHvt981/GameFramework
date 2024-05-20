@@ -17,13 +17,6 @@ public:
 	Ref(T* i_sharedRawPtr)
 		: m_innerRef(std::ref<T>(*i_sharedRawPtr))
 	{
-
-	}
-
-	Ref(T i_sharedValue)
-		: m_innerRef(std::ref<T>(i_sharedValue))
-	{
-
 	}
 
 	constexpr T& Get() const noexcept

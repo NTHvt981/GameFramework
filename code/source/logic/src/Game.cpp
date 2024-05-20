@@ -2,20 +2,22 @@
 #include "Core/GameSetting/GameSetting.h"
 #include "GraphicSystem/GraphicSystem.h"
 #include "GraphicSystem/API/INativeGraphicAPI.h"
-#include "PhysicSystem/PhysicSystem.h"
+#include "Logic/LogicSystems/PhysicSystem.h"
 #include "InputSystem/InputSystem.h"
 #include "InputSystem/API/INativeInputAPI.h"
 #include "AudioSystem/AudioSystem.h"
 #include "AudioSystem/API/INativeAudioAPI.h"
 #include "FileSystem/FileSystem.h"
 #include "Database/Database.h"
-#include "Logic/Factories/ComponentsFactory.h"
-#include "Logic/Factories/EntitiesFactory.h"
-#include "Logic/Managers/EntitiesManager.h"
-#include "Logic/Managers/ScriptsManager.h"
+#include "Logic/Components/ComponentsFactory.h"
+#include "Logic/Entities/EntitiesFactory.h"
+#include "Logic/Entities/EntitiesManager.h"
+#include "Logic/Scripts/ScriptsManager.h"
 #include "Logic/Scripts/ScriptContext.h"
 #include "Logic/Scripts/Script.h"
 #include "Logic/LogicSystems/CameraSystem/CameraSystem.h"
+#include "Logic/Mailbox/Mail.h"
+#include "Logic/Scenes/IntroScene.h"
 
 namespace logic
 {
@@ -42,21 +44,17 @@ Game::Game(std::unique_ptr<graphics::INativeGraphicAPI> i_nativeGraphicAPI,
 	m_graphicSystem = std::make_shared<graphics::GraphicSystem>(
 		std::move(m_nativeGraphicAPI),
 		m_database
-		);
-	m_physicSystem = std::make_shared<physics::PhysicSystem>();
+	);
+	m_physicSystem = std::make_shared<PhysicSystem>();
 	m_cameraSystem = std::make_shared<camera::CameraSystem>(m_graphicSystem);
-	
+
 	m_componentFactory = std::make_shared<ComponentsFactory>(
 		m_graphicSystem, m_inputSystem, m_audioSystem, m_physicSystem, m_cameraSystem, m_database
 	);
+
+	m_mailboxReceiveFromScene = std::make_shared<Mailbox>();
+
 	m_entitiesFactory = std::make_shared<EntitiesFactory>(m_componentFactory);
-	m_entitiesManager = std::make_shared<EntitiesManager>();
-	m_scriptContext = std::make_shared<ScriptContext>(
-		core::Ref<core::logic::IGameClock>(m_gameClock),
-		core::Ref<IEntitiesFactory>(m_entitiesFactory),
-		core::Ref<EntitiesManager>(m_entitiesManager)
-	);
-	m_scriptsManager = std::make_shared<ScriptsManager>(m_scriptContext);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -67,9 +65,13 @@ void Game::Initialize()
 	m_graphicSystem->Initialize();
 	m_inputSystem->Initialize();
 	m_audioSystem->Initialize();
-	m_scriptsManager->Initialize();
 
 	m_perFrameDuration = m_gameSetting->GetMillisecondsPerFrame();
+
+	std::shared_ptr<IScene> introScene = std::make_shared<IntroScene>(m_gameClock,
+		m_entitiesFactory,
+		m_mailboxReceiveFromScene);
+	m_scenes.push(introScene);
 
 	m_isInitialized = true;
 }
@@ -92,11 +94,16 @@ void Game::LoadResource()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Game::RunLoop(const core::Duration& dt)
+Game::EndLoop Game::RunLoop(const core::Duration& dt)
 {
 	if (m_isPaused)
 	{
-		return;
+		return EndLoop(false);
+	}
+
+	if (m_scenes.empty())
+	{
+		return EndLoop(true);
 	}
 
 	UpdateInput(dt);
@@ -110,6 +117,10 @@ void Game::RunLoop(const core::Duration& dt)
 	}
 
 	Render(dt);
+
+	ProcessMailbox();
+
+	return EndLoop(false);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -139,7 +150,6 @@ void Game::Shutdown()
 	m_graphicSystem->Shutdown();
 	m_inputSystem->Shutdown();
 	m_audioSystem->Shutdown();
-	m_scriptsManager->Shutdown();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -153,7 +163,6 @@ void Game::OnResizeWindow(const core::SizeUI64& i_size)
 void Game::UpdateInput(const core::Duration& dt)
 {
 	m_inputSystem->UpdateInput(dt);
-	m_gameClock->UpdateInput(dt);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -172,8 +181,8 @@ void Game::FixedUpdate(const core::Duration& dt)
 void Game::PreFixedUpdate(const core::Duration& dt)
 {
 	m_gameClock->PreFixedUpdate(dt);
-	m_physicSystem->PreFixedUpdate(dt);
-	m_scriptsManager->OnPreFixedUpdate(dt);
+	m_physicSystem->Update(dt);
+	m_scenes.front()->PreFixedUpdate(dt);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -181,8 +190,7 @@ void Game::PreFixedUpdate(const core::Duration& dt)
 void Game::DuringFixedUpdate(const core::Duration& dt)
 {
 	m_gameClock->FixedUpdate(dt);
-	m_physicSystem->FixedUpdate(dt);
-	m_scriptsManager->OnFixedUpdate(dt);
+	m_scenes.front()->DuringFixedUpdate(dt);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -190,8 +198,7 @@ void Game::DuringFixedUpdate(const core::Duration& dt)
 void Game::PostFixedUpdate(const core::Duration& dt)
 {
 	m_gameClock->PostFixedUpdate(dt);
-	m_physicSystem->PostFixedUpdate(dt);
-	m_scriptsManager->OnPostFixedUpdate(dt);
+	m_scenes.front()->PostFixedUpdate(dt);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -208,7 +215,7 @@ void Game::Update(const core::Duration& dt)
 void Game::PreUpdate(const core::Duration& dt)
 {
 	m_gameClock->PreUpdate(dt);
-	m_scriptsManager->OnPreUpdate(dt);
+	m_scenes.front()->PreUpdate(dt);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -216,7 +223,7 @@ void Game::PreUpdate(const core::Duration& dt)
 void Game::DuringUpdate(const core::Duration& dt)
 {
 	m_gameClock->Update(dt);
-	m_scriptsManager->OnRender(dt);
+	m_scenes.front()->DuringUpdate(dt);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -224,7 +231,7 @@ void Game::DuringUpdate(const core::Duration& dt)
 void Game::PostUpdate(const core::Duration& dt)
 {
 	m_gameClock->PostUpdate(dt);
-	m_scriptsManager->OnPostUpdate(dt);
+	m_scenes.front()->PostUpdate(dt);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -249,7 +256,7 @@ void Game::PreRender(const core::Duration& dt)
 {
 	m_graphicSystem->PreRender(dt);
 	m_gameClock->PreRender(dt);
-	m_scriptsManager->OnPreRender(dt);
+	m_scenes.front()->PreRender(dt);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -258,7 +265,7 @@ void Game::DuringRender(const core::Duration& dt)
 {
 	m_graphicSystem->Render(dt);
 	m_gameClock->Render(dt);
-	m_scriptsManager->OnRender(dt);
+	m_scenes.front()->DuringRender(dt);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -267,14 +274,26 @@ void Game::PostRender(const core::Duration& dt)
 {
 	m_graphicSystem->PostRender(dt);
 	m_gameClock->PostRender(dt);
-	m_scriptsManager->OnPostRender(dt);
+	m_scenes.front()->PostRender(dt);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Game::OnRequestShutdown()
+void Game::ProcessMailbox()
 {
-	sig_requestShutdown.Emit();
+	while (!m_mailboxReceiveFromScene->IsEmpty())
+	{
+		std::shared_ptr<Mail> mail = m_mailboxReceiveFromScene->Receive();
+		if (auto popSceneMail = std::static_pointer_cast<PopSceneMail>(mail))
+		{
+			m_scenes.front()->OnDestroy();
+			m_scenes.pop();
+		}
+		else if (auto pushSceneMail = std::static_pointer_cast<PushSceneMail>(mail))
+		{
+
+		}
+	}
 }
 
 ////////////////////////////////////////////////////////////////////////////////

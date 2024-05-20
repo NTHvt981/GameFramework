@@ -3,6 +3,7 @@
 #include "Core/Signals/Connection.h"
 #include "Core/Identifiers/AnimationId.h"
 #include "Core/DataTypes/Size.h"
+#include "Core/DataTypes/Duration.h"
 #include <memory>
 
 namespace graphics
@@ -33,6 +34,8 @@ public:
 	core::Vector2F GetPosition() const override;
 	void Register() override;
 	void Deregister() override;
+
+	void Update(const core::Duration& dt);
 
 	void SetAnimation(const core::AnimationId i_animationId);
 	core::AnimationId GetAnimationId() const;

@@ -1,7 +1,7 @@
 #include "Logic/Scripts/ScriptContext.h"
 #include "Core/GameClock/IGameClock.h"
-#include "Logic/Factories/IEntitiesFactory.h"
-#include "Logic/Managers/EntitiesManager.h"
+#include "Logic/Entities/IEntitiesFactory.h"
+#include "Logic/Entities/EntitiesManager.h"
 
 namespace logic
 {

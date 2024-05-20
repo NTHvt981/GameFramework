@@ -18,7 +18,10 @@ class Signal
 public:
 	Signal()
 	{
-
+	}
+	~Signal()
+	{
+		m_functions.clear();
 	}
 
 #pragma warning(error:4834)
@@ -60,6 +63,7 @@ public:
 
 private:
 	std::list<std::shared_ptr<Callback>> m_functions;
+	int test = 0;
 };
 
 } // namespace signals

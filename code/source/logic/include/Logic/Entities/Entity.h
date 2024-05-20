@@ -21,10 +21,19 @@ public:
 	bool HasComponent(core::ComponentKey i_componentKey) const;
 	bool HasAnyComponents(std::initializer_list<core::ComponentKey> i_componentKeys) const;
 	bool HasAllComponents(std::initializer_list<core::ComponentKey> i_componentKeys) const;
-	core::Ref<IComponent> GetComponent(core::ComponentKey i_componentKey) const;
+	core::Ref<IComponent> GetComponentRef(core::ComponentKey i_componentKey) const;
 
 	template<class T>
-	core::Ref<T> GetComponent(core::ComponentKey i_componentKey) const
+	core::Ref<T> GetComponentRef(core::ComponentKey i_componentKey) const
+	{
+		static_assert(std::is_base_of<IComponent, T>::value);
+		return std::static_pointer_cast<T>(m_components.at(i_componentKey));
+	}
+
+	std::shared_ptr<IComponent> GetComponent(core::ComponentKey i_componentKey) const;
+
+	template<class T>
+	std::shared_ptr<T> GetComponent(core::ComponentKey i_componentKey) const
 	{
 		static_assert(std::is_base_of<IComponent, T>::value);
 		return std::static_pointer_cast<T>(m_components.at(i_componentKey));

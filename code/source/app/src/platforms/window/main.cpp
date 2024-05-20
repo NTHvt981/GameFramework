@@ -14,11 +14,13 @@
 HWND s_hwnd;
 HWND CreateGameWindow(HINSTANCE hInstance, int64_t nCmdShow);
 LRESULT CALLBACK WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
-void OnGameRequestShutdown();
 
 std::unique_ptr<logic::Game> s_game = nullptr;
 std::shared_ptr<core::GameSetting> s_gameSetting = nullptr;
 bool s_isRunning = true;
+
+ULONGLONG s_currentFrameTime = GetTickCount64();
+ULONGLONG s_previousFrameTime = GetTickCount64();
 
 int WINAPI WinMain(
 	_In_ HINSTANCE hInstance,
@@ -30,18 +32,15 @@ int WINAPI WinMain(
 	s_gameSetting = std::make_unique<core::GameSetting>();
 	s_gameSetting->SetFPS(60);
 	s_gameSetting->SetWindowTitle("Blaster Master");
-	s_gameSetting->SetWindowSize({ 256, 224 });
+	s_gameSetting->SetWindowSize({ 256 * 3, 224 * 3 });
 
 	s_hwnd = CreateGameWindow(hInstance, nCmdShow);
 
 	MSG msg;
 	bool done = 0;
-	ULONGLONG currentFrameTime = GetTickCount64();
-	ULONGLONG previousFrameTime = GetTickCount64();
 
 	std::unique_ptr<graphics::INativeGraphicAPI> nativeRenderAPI = std::make_unique<graphics::Direct9API>(s_hwnd);
 	std::unique_ptr<inputs::INativeInputAPI> nativeInputAPI = std::make_unique<inputs::DirectInputAPI>(s_hwnd, hInstance);
-	//std::unique_ptr<audios::INativeAudioAPI> nativeAudioAPI = std::make_unique<audios::DirectSoundAPI>(s_hwnd);
 	std::unique_ptr<audios::INativeAudioAPI> nativeAudioAPI = std::make_unique<audios::XAudio2API>();
 	
 	s_game = std::make_unique<logic::Game>(
@@ -66,13 +65,15 @@ int WINAPI WinMain(
 			}
 		);
 	}
-	auto connection = s_game->sig_requestShutdown.Connect(std::function(OnGameRequestShutdown));
 	
 	RELEASE(
 	try
 	{
 	)
 		s_game->LoadResource();
+
+		s_currentFrameTime = GetTickCount64();
+		s_previousFrameTime = GetTickCount64();
 
 		while (s_isRunning)
 		{
@@ -87,11 +88,11 @@ int WINAPI WinMain(
 				DispatchMessage(&msg);
 			}
 
-			currentFrameTime = GetTickCount64();
+			s_currentFrameTime = GetTickCount64();
 
-			s_game->RunLoop(core::Duration::FromMilliseconds(currentFrameTime - previousFrameTime));
+			s_isRunning = !s_game->RunLoop(core::Duration::FromMilliseconds(s_currentFrameTime - s_previousFrameTime));
 
-			previousFrameTime = currentFrameTime;
+			s_previousFrameTime = s_currentFrameTime;
 		}
 	RELEASE(
 	}
@@ -183,12 +184,20 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	switch (message) {
 	case WM_KILLFOCUS: // when user click outside window
 	{
-		s_game->Pause();
+		if (s_isRunning)
+		{
+			s_game->Pause();
+		}
 		break;
 	}
 	case WM_SETFOCUS: // when user click in window
 	{
-		s_game->Resume();
+		if (s_isRunning)
+		{
+			s_currentFrameTime = GetTickCount64();
+			s_previousFrameTime = GetTickCount64();
+			s_game->Resume();
+		}
 		break;
 	}
 	case WM_SIZE: // when user resize window
@@ -227,9 +236,4 @@ LRESULT CALLBACK WinProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	}
 
 	return 0;
-}
-
-void OnGameRequestShutdown()
-{
-	s_isRunning = false;
 }

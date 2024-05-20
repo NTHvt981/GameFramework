@@ -62,11 +62,59 @@ void AnimationComponent::Deregister()
 	m_onAnimationFinishedCon.Disconnect();
 }
 
+void AnimationComponent::Update(const core::Duration& dt)
+{
+	if (m_animationState->pause)
+	{
+		return;
+	}
+
+	uint64_t& currentFrameIndex = m_animationState->currentFrameIndex;
+	core::Duration& currentDuration = m_animationState->currentDuration;
+	auto animationDef = m_animationState->animationDef.lock();
+
+	const core::Duration calculatedDt = dt * m_animationState->speed;
+	core::Duration newDuration = currentDuration + calculatedDt;
+	const graphics::AnimationFrameDef& currentFrame = animationDef->frames[currentFrameIndex];
+	if (newDuration >= currentFrame.duration)
+	{
+		currentDuration = newDuration - currentFrame.duration;
+		currentFrameIndex++;
+		auto frameSize = animationDef->frames.size();
+		if (currentFrameIndex >= frameSize)
+		{
+			if (m_animationState->loop)
+			{
+				currentFrameIndex = 0;
+				m_animationState->sig_onAnimationFinished.Emit();
+			}
+			else
+			{
+				if (!m_animationState->hasFinished)
+				{
+					m_animationState->sig_onAnimationFinished.Emit();
+					m_animationState->hasFinished = true;
+				}
+				currentFrameIndex = frameSize - 1;
+			}
+		}
+
+		const graphics::AnimationFrameDef& newFrame = animationDef->frames[currentFrameIndex];
+		m_animationState->spriteStateRef->spriteDef = newFrame.spriteDefRef;
+	}
+	else
+	{
+		currentDuration = newDuration;
+	}
+}
+
 void AnimationComponent::SetAnimation(const core::AnimationId i_animationId)
 {
 	std::shared_ptr<const graphics::AnimationDef> animationDef = m_graphicDatabaseAPI.GetAnimationRef(i_animationId).lock();
 
-	graphics::SetAnimationDef(*m_animationState.get(), animationDef);
+	m_animationState->animationDef = animationDef;
+	const graphics::AnimationFrameDef& currentFrame = animationDef->frames[m_animationState->currentFrameIndex];
+	m_animationState->spriteStateRef->spriteDef = currentFrame.spriteDefRef;
 }
 
 core::AnimationId AnimationComponent::GetAnimationId() const

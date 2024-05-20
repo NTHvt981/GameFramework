@@ -4,13 +4,8 @@
 #include "Core/Identifiers/CollisionLayer.h"
 #include "Core/DataTypes/Size.h"
 #include "Core/Signals/Signal.h"
+#include "Core/APIs/IPhysicAPI.h"
 #include <memory>
-
-namespace physics
-{
-class IPhysicAPI;
-struct DynamicCollider;
-} // namespace physics
 
 namespace logic
 {
@@ -21,7 +16,7 @@ class KinematicBodyComponent final: public ITransformComponent
 {
 public:
 	KinematicBodyComponent(
-		std::weak_ptr<physics::IPhysicAPI> i_physicAPI,
+		std::weak_ptr<core::IPhysicAPI> i_physicAPI,
 		core::EntityId i_entityId
 	);
 
@@ -43,8 +38,8 @@ private:
 	void OnEntityOverlap(core::EntityId i_entityId);
 	void OnEntityCollide(core::EntityId i_entityId);
 
-	std::weak_ptr<physics::IPhysicAPI> m_physicAPI;
-	std::shared_ptr<physics::DynamicCollider> m_dynamicCollider;
+	std::weak_ptr<core::IPhysicAPI> m_physicAPI;
+	std::shared_ptr<core::DynamicCollider> m_dynamicCollider;
 	bool isRegistered = false;
 
 	signals::Connection<core::EntityId> m_onEntityOverlapCon;

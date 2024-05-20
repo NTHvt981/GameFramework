@@ -14,12 +14,8 @@ namespace logic
 class Script
 {
 public:
-	Script(
-		core::Ref<Entity> i_entity, 
-		core::Ref<IScriptContext> i_scriptContext
-	);
-	virtual void OnCreate() {};
-	virtual void OnDestroy() {};
+	virtual void OnCreate(core::Ref<IScriptContext> i_scriptContext) {};
+	virtual void OnDestroy() = 0;
 	virtual void OnPause() {};
 	virtual void OnResume() {};
 	virtual void OnUpdate(const core::Duration& dt) {};
@@ -27,17 +23,10 @@ public:
 	virtual void OnRender(const core::Duration& dt) {};
 
 	core::ScriptState scriptState = core::ScriptState::Created;
-	signals::Callback<core::Ref<Script>> requestAddScriptToManagerCallback;
+	signals::Callback<std::unique_ptr<Script>> requestAddScriptToManagerCallback;
 
-protected:
-	template<class T>
-	core::Ref<T> GetComponent(core::ComponentKey i_componentKey) const
-	{
-		return m_entity->GetComponent<T>(i_componentKey);
-	}
-
-	core::Ref<Entity> m_entity;
-	core::Ref<IScriptContext> m_scriptContext;
+	using ID = uint64_t;
+	ID id = 0;
 };
 
 } // namespace logic

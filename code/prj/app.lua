@@ -33,7 +33,6 @@ function addApp()
       includeGraphicSystem()
       includeInputSystem()
       includeAudioSystem()
-      includePhysicSystem()
       includeDirectWrapper()
       includeLogic()
 end

@@ -7,16 +7,6 @@ GameClock::GameClock()
 {
 }
 
-void GameClock::UpdateInput(const core::Duration& dt)
-{
-	if (m_shutdown)
-	{
-		return;
-	}
-
-	sig_onUpdateInput.Emit(dt);
-}
-
 void GameClock::PreFixedUpdate(const core::Duration& dt)
 {
 	if (m_shutdown)

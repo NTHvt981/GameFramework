@@ -1,16 +1,16 @@
 #include "Logic/Components/KinematicBodyComponent.h"
-#include "PhysicSystem/DataTypes/DynamicCollider.h"
-#include "PhysicSystem/IPhysicAPI.h"
+#include "Core/DataTypes/DynamicCollider.h"
+#include "Core/APIs/IPhysicAPI.h"
 #include "Core/Helpers/Vector2Helper.h"
 
 namespace logic
 {
 
 KinematicBodyComponent::KinematicBodyComponent(
-	std::weak_ptr<physics::IPhysicAPI> i_physicAPI, 
+	std::weak_ptr<core::IPhysicAPI> i_physicAPI, 
 	core::EntityId i_entityId)
 	: m_physicAPI(i_physicAPI)
-	, m_dynamicCollider(std::make_shared<physics::DynamicCollider>(i_entityId))
+	, m_dynamicCollider(std::make_shared<core::DynamicCollider>(i_entityId))
 {
 }
 

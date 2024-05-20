@@ -3,13 +3,6 @@
 namespace graphics
 {
 
-void SetAnimationDef(AnimationState& i_animationState, std::shared_ptr<const AnimationDef> i_animationDef)
-{
-    i_animationState.animationDef = i_animationDef;
-    const AnimationFrameDef& currentFrame = i_animationDef->frames[i_animationState.currentFrameIndex];
-    i_animationState.spriteStateRef->spriteDef = currentFrame.spriteDefRef;
-}
-
 void UpdateAnimationState(AnimationState& animationState, const core::Duration& dt)
 {
     if (animationState.pause)
@@ -31,13 +24,18 @@ void UpdateAnimationState(AnimationState& animationState, const core::Duration& 
         auto frameSize = animationDef->frames.size();
         if (currentFrameIndex >= frameSize)
         {
-            animationState.sig_onAnimationFinished.Emit();
             if (animationState.loop)
             {
-                currentFrameIndex = currentFrameIndex - frameSize;
+                currentFrameIndex = 0;
+                animationState.sig_onAnimationFinished.Emit();
             }
             else
             {
+                if (!animationState.hasFinished)
+                {
+                    animationState.sig_onAnimationFinished.Emit();
+                    animationState.hasFinished = true;
+                }
                 currentFrameIndex = frameSize - 1;
             }
         }
@@ -49,12 +47,6 @@ void UpdateAnimationState(AnimationState& animationState, const core::Duration& 
     {
         currentDuration = newDuration;
     }
-}
-
-std::weak_ptr<const SpriteDef> GetCurrentSpriteDefFromAnimationState(const AnimationState& animationState)
-{
-    std::shared_ptr<const AnimationDef> animationDef = animationState.animationDef.lock();
-    return animationDef->frames[animationState.currentFrameIndex].spriteDefRef;
 }
 
 } // namespace graphics

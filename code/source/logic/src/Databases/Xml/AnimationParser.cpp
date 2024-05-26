@@ -1,7 +1,4 @@
 #include "AnimationParser.h"
-#include "Databases/Xml/CommonParser.h"
-#include "Core/Identifiers/TextureId.h"
-#include "Core/DataTypes/AnimationDef.h"
 #include "tinyxml2.h"
 
 namespace xml
@@ -9,19 +6,19 @@ namespace xml
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Parse(tinyxml2::XMLElement* i_element, graphics::AnimationDef& o_value);
-void Parse(const tinyxml2::XMLElement* i_element, graphics::AnimationFrameDef& o_value);
+void Parse(tinyxml2::XMLElement* i_element, core::AnimationDef& o_value);
+void Parse(const tinyxml2::XMLElement* i_element, core::AnimationFrameDef& o_value);
 
 ////////////////////////////////////////////////////////////////////////////////
 
-std::vector<graphics::AnimationDef> LoadAnimationsFile(const char* i_filePath)
+std::vector<core::AnimationDef> LoadAnimationsFile(const char* i_filePath)
 {
-	std::vector<graphics::AnimationDef> result;
+	std::vector<core::AnimationDef> result;
 
 	tinyxml2::XMLDocument doc;
 	doc.LoadFile(i_filePath);
-	ParseList<graphics::AnimationDef>(doc.FirstChildElement("Animations"), result, "Animation", 
-		[](tinyxml2::XMLElement* itemElement, graphics::AnimationDef& o_value)
+	ParseList<core::AnimationDef>(doc.FirstChildElement("Animations"), result, "Animation",
+		[](tinyxml2::XMLElement* itemElement, core::AnimationDef& o_value)
 		{
 			Parse(itemElement, o_value);
 		}
@@ -32,11 +29,11 @@ std::vector<graphics::AnimationDef> LoadAnimationsFile(const char* i_filePath)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Parse(tinyxml2::XMLElement* i_element, graphics::AnimationDef& o_value)
+void Parse(tinyxml2::XMLElement* i_element, core::AnimationDef& o_value)
 {
 	Parse(i_element->FirstChildElement("Id"), o_value.id);
-	ParseList<graphics::AnimationFrameDef>(i_element->FirstChildElement("Frames"), o_value.frames, "Frame",
-		[](tinyxml2::XMLElement* itemElement, graphics::AnimationFrameDef& o_value)
+	ParseList<core::AnimationFrameDef>(i_element->FirstChildElement("Frames"), o_value.frames, "Frame",
+		[](tinyxml2::XMLElement* itemElement, core::AnimationFrameDef& o_value)
 		{
 			Parse(itemElement, o_value);
 		}
@@ -45,7 +42,7 @@ void Parse(tinyxml2::XMLElement* i_element, graphics::AnimationDef& o_value)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Parse(const tinyxml2::XMLElement* i_element, graphics::AnimationFrameDef& o_value)
+void Parse(const tinyxml2::XMLElement* i_element, core::AnimationFrameDef& o_value)
 {
 	Parse(i_element->FirstChildElement("SpriteId"), o_value.spriteId);
 	Parse(i_element->FirstChildElement("TimeSpan"), o_value.duration);

@@ -1,6 +1,6 @@
 #pragma once
 
-namespace graphics
+namespace core
 {
 
 class ITileGraphicAPI
@@ -8,4 +8,4 @@ class ITileGraphicAPI
 public:
 };
 
-} // namespace graphics
+} // namespace core

@@ -7,7 +7,7 @@ namespace logic::camera
 {
 
 CameraSystem::CameraSystem(
-	std::shared_ptr<graphics::IViewportGraphicAPI> i_viewportGraphicAPI)
+	std::shared_ptr<core::IViewportGraphicAPI> i_viewportGraphicAPI)
 	: m_viewportGraphicAPI(i_viewportGraphicAPI)
 	, m_authorizedEntityId(-1)
 {

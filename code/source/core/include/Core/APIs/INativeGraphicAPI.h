@@ -8,7 +8,7 @@
 #include "Core/DataTypes/String.h"
 #include <optional>
 
-namespace graphics
+namespace core
 {
 
 struct SpriteState;
@@ -21,21 +21,21 @@ public:
 	virtual void LoadTexture(const core::TextureId i_textureId, const core::String i_textureFilePath) = 0;
 	struct DrawParams
 	{
-		core::TextureId textureId;
-		core::Vector2F position{ 0, 0 };
-		core::Vector2F origin{ 0, 0 };
-		core::BoxI64 textureBoundary{ 0, 0, 0, 0 };
+		TextureId textureId;
+		Vector2F position{ 0, 0 };
+		Vector2F origin{ 0, 0 };
+		BoxI64 textureBoundary{ 0, 0, 0, 0 };
 		float alpha = 1;
 		float scale = 1;
-		core::DrawMode drawMode;
+		DrawMode drawMode;
 	};
 	virtual void SetViewportSize(const core::SizeF& i_viewportSize) = 0;
 	virtual void SetViewportPosition(const core::Vector2F& i_viewportPosition) = 0;
 	virtual void Draw(const DrawParams& i_drawParams) = 0;
 	virtual void StartDraw() = 0;
 	virtual void EndDraw() = 0;
-	virtual core::APIMode GetAPIMode() const = 0;
+	virtual APIMode GetAPIMode() const = 0;
 	virtual void Shutdown() = 0;
 };
 
-} // namespace graphics
+} // namespace core

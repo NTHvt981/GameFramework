@@ -1,14 +1,14 @@
 #pragma once
 #include <vector>
 
-namespace graphics
+namespace core
 {
 struct Texture;
-} // namespace graphics
+} // namespace core
 
 namespace xml
 {
 
-std::vector<graphics::Texture> LoadTexturesFile(const char* i_filePath);
+std::vector<core::Texture> LoadTexturesFile(const char* i_filePath);
 
 } // namespace xml

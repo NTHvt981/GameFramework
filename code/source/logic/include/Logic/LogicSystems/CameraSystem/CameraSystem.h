@@ -11,7 +11,7 @@ namespace logic::camera
 class CameraSystem final : public ICameraSystem
 {
 public:
-	CameraSystem(std::shared_ptr<graphics::IViewportGraphicAPI> i_viewportGraphicAPI);
+	CameraSystem(std::shared_ptr<core::IViewportGraphicAPI> i_viewportGraphicAPI);
 
 	// Inherited via ICameraSystem
 	void RegisterCameraControl(core::EntityId i_entityId) override;
@@ -27,7 +27,7 @@ public:
 	void SetAbsoluteBoundary(core::BoxF i_absoluteBoundary) override;
 	void SetSize(core::SizeF i_size) override;
 private:
-	std::shared_ptr<graphics::IViewportGraphicAPI> m_viewportGraphicAPI;
+	std::shared_ptr<core::IViewportGraphicAPI> m_viewportGraphicAPI;
 	core::EntityId m_authorizedEntityId;
 	core::SizeF m_size = core::SizeF{ 0, 0 };
 	core::Vector2F m_position = core::Vector2F{ 0, 0 };

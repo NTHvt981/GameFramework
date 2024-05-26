@@ -2,7 +2,7 @@
 #include "Core/DataTypes/Size.h"
 #include "Core/DataTypes/Vector2.h"
 
-namespace graphics
+namespace core
 {
 
 class IViewportGraphicAPI
@@ -12,4 +12,4 @@ public:
 	virtual void SetViewportPosition(const core::Vector2F& i_viewportPosition) = 0;
 };
 
-} // namespace graphics
+} // namespace core

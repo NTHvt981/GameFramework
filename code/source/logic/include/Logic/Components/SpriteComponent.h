@@ -1,17 +1,10 @@
 #pragma once
 #include "ITransformComponent.h"
 #include "Core/Identifiers/SpriteId.h"
+#include "Core/APIs/ISpriteGraphicAPI.h"
+#include "Logic/Databases/IGraphicDatabaseAPI.h"
+#include "Core/DataTypes/SpriteState.h"
 #include <memory>
-
-namespace graphics
-{
-class ISpriteGraphicAPI;
-struct SpriteState;
-namespace database
-{
-class IGraphicDatabaseAPI;
-} // namespace database
-} // namespace graphics
 
 namespace logic
 {
@@ -22,7 +15,7 @@ class SpriteComponent final: public ITransformComponent
 {
 public:
 	SpriteComponent(
-		std::shared_ptr<graphics::ISpriteGraphicAPI> i_spriteGraphicAPI,
+		std::shared_ptr<core::ISpriteGraphicAPI> i_spriteGraphicAPI,
 		std::shared_ptr<const graphics::database::IGraphicDatabaseAPI> i_graphicDatabaseAPI
 	);
 	~SpriteComponent();
@@ -35,9 +28,9 @@ public:
 	void SetSprite(const core::SpriteId i_spriteId);
 
 private:
-	graphics::ISpriteGraphicAPI& m_spriteGraphicAPI;
+	core::ISpriteGraphicAPI& m_spriteGraphicAPI;
 	const graphics::database::IGraphicDatabaseAPI& m_graphicDatabaseAPI;
-	std::shared_ptr<graphics::SpriteState> m_spriteState;
+	std::shared_ptr<core::SpriteState> m_spriteState;
 	bool isRegistered = false;
 };
 

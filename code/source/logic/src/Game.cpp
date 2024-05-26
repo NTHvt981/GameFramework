@@ -24,7 +24,7 @@ namespace logic
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Game::Game(std::unique_ptr<graphics::INativeGraphicAPI> i_nativeGraphicAPI,
+Game::Game(std::unique_ptr<core::INativeGraphicAPI> i_nativeGraphicAPI,
 	std::unique_ptr<inputs::INativeInputAPI> i_nativeInputAPI,
 	std::unique_ptr<audios::INativeAudioAPI> i_nativeAudioAPI,
 	std::shared_ptr<core::GameSetting> i_gameSetting)
@@ -41,12 +41,12 @@ Game::Game(std::unique_ptr<graphics::INativeGraphicAPI> i_nativeGraphicAPI,
 		std::move(m_nativeAudioAPI),
 		m_database
 	);
-	m_graphicSystem = std::make_shared<graphics::GraphicSystem>(
+	m_graphicSystem = std::make_shared<logic::GraphicSystem>(
 		std::move(m_nativeGraphicAPI),
 		m_database
 	);
 	m_physicSystem = std::make_shared<PhysicSystem>();
-	m_cameraSystem = std::make_shared<camera::CameraSystem>(m_graphicSystem);
+	m_cameraSystem = std::make_shared<logic::camera::CameraSystem>(m_graphicSystem);
 
 	m_componentFactory = std::make_shared<ComponentsFactory>(
 		m_graphicSystem, m_inputSystem, m_audioSystem, m_physicSystem, m_cameraSystem, m_database

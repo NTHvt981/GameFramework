@@ -2,11 +2,6 @@
 #include "IComponentsFactory.h"
 #include "Core/APIs/IPhysicAPI.h"
 
-namespace graphics
-{
-class IGraphicSystem;
-} // namespace graphics
-
 namespace inputs
 {
 class IInputSystem;
@@ -24,6 +19,7 @@ class IDatabase;
 
 namespace logic
 {
+class IGraphicSystem;
 
 namespace camera
 {
@@ -34,7 +30,7 @@ class ComponentsFactory final: public IComponentsFactory
 {
 public:
 	ComponentsFactory(
-		std::shared_ptr<graphics::IGraphicSystem> i_graphicSystem,
+		std::shared_ptr<logic::IGraphicSystem> i_graphicSystem,
 		std::shared_ptr<inputs::IInputSystem> i_inputSystem,
 		std::shared_ptr<audios::IAudioSystem> i_audioSystem,
 		std::shared_ptr<core::IPhysicAPI> i_physicAPI,
@@ -74,7 +70,7 @@ public:
 private:
 	std::shared_ptr<core::IPhysicAPI> m_physicAPI;
 	std::shared_ptr<camera::ICameraSystem> m_cameraSystem;
-	std::shared_ptr<graphics::IGraphicSystem> m_graphicSystem;
+	std::shared_ptr<logic::IGraphicSystem> m_graphicSystem;
 	std::shared_ptr<inputs::IInputSystem> m_inputSystem;
 	std::shared_ptr<audios::IAudioSystem> m_audioSystem;
 	std::shared_ptr<database::IDatabase> m_database;

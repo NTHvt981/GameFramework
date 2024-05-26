@@ -3,7 +3,7 @@
 #include "Core/Identifiers/RenderLayer.h"
 #include <memory>
 
-namespace graphics
+namespace core
 {
 
 class ISpriteGraphicAPI
@@ -14,8 +14,8 @@ public:
 	virtual void DeregisterSprite(const SpriteState::Id i_spriteStateId) = 0;
 	virtual void SetSpriteRenderLayer(
 		const SpriteState::Id i_spriteStateId,
-		const core::RenderLayer i_renderLayer
+		const RenderLayer i_renderLayer
 	) = 0;
 };
 
-} // namespace graphics
+} // namespace core

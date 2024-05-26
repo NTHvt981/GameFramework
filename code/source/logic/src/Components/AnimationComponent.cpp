@@ -1,18 +1,17 @@
 #include "Logic/Components/AnimationComponent.h"
 #include "Core/DataTypes/AnimationState.h"
 #include "Core/APIs/IAnimationGraphicAPI.h"
-#include "Logic/Databases/IGraphicDatabaseAPI.h"
 #include "Core/Helpers/SizeBoxHelper.h"
 
 namespace logic
 {
 
 AnimationComponent::AnimationComponent(
-	std::shared_ptr<graphics::IAnimationGraphicAPI> i_animationGraphicAPI,
+	std::shared_ptr<core::IAnimationGraphicAPI> i_animationGraphicAPI,
 	std::shared_ptr<const graphics::database::IGraphicDatabaseAPI> i_graphicDatabaseAPI)
 	: m_animationGraphicAPI(*i_animationGraphicAPI.get())
 	, m_graphicDatabaseAPI(*i_graphicDatabaseAPI.get())
-	, m_animationState(std::make_shared<graphics::AnimationState>(
+	, m_animationState(std::make_shared<core::AnimationState>(
 		i_animationGraphicAPI->GenerateAnimationStateId()
 	))
 {
@@ -74,7 +73,7 @@ void AnimationComponent::Update(const core::Duration& dt)
 
 	const core::Duration calculatedDt = dt * m_animationState->speed;
 	core::Duration newDuration = currentDuration + calculatedDt;
-	const graphics::AnimationFrameDef& currentFrame = animationDef->frames[currentFrameIndex];
+	const core::AnimationFrameDef& currentFrame = animationDef->frames[currentFrameIndex];
 	if (newDuration >= currentFrame.duration)
 	{
 		currentDuration = newDuration - currentFrame.duration;
@@ -98,7 +97,7 @@ void AnimationComponent::Update(const core::Duration& dt)
 			}
 		}
 
-		const graphics::AnimationFrameDef& newFrame = animationDef->frames[currentFrameIndex];
+		const core::AnimationFrameDef& newFrame = animationDef->frames[currentFrameIndex];
 		m_animationState->spriteStateRef->spriteDef = newFrame.spriteDefRef;
 	}
 	else
@@ -109,10 +108,10 @@ void AnimationComponent::Update(const core::Duration& dt)
 
 void AnimationComponent::SetAnimation(const core::AnimationId i_animationId)
 {
-	std::shared_ptr<const graphics::AnimationDef> animationDef = m_graphicDatabaseAPI.GetAnimationRef(i_animationId).lock();
+	std::shared_ptr<const core::AnimationDef> animationDef = m_graphicDatabaseAPI.GetAnimationRef(i_animationId).lock();
 
 	m_animationState->animationDef = animationDef;
-	const graphics::AnimationFrameDef& currentFrame = animationDef->frames[m_animationState->currentFrameIndex];
+	const core::AnimationFrameDef& currentFrame = animationDef->frames[m_animationState->currentFrameIndex];
 	m_animationState->spriteStateRef->spriteDef = currentFrame.spriteDefRef;
 }
 
@@ -143,8 +142,8 @@ void AnimationComponent::SetSpeed(float i_speed)
 
 core::SizeI64 AnimationComponent::GetSpriteSizeInFrame(uint64_t i_frameIndex)
 {
-	std::shared_ptr<const graphics::AnimationDef> animationDef = m_animationState->animationDef.lock();
-	std::shared_ptr<const graphics::SpriteDef> spriteDef = animationDef->frames[i_frameIndex].spriteDefRef.lock();
+	std::shared_ptr<const core::AnimationDef> animationDef = m_animationState->animationDef.lock();
+	std::shared_ptr<const core::SpriteDef> spriteDef = animationDef->frames[i_frameIndex].spriteDefRef.lock();
 	return core::ToSize<int64_t>(spriteDef->textureBoundary);
 }
 

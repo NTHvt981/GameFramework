@@ -3,14 +3,14 @@
 #include "Core/DataTypes/Size.h"
 #include "Core/DataTypes/String.h"
 
-namespace graphics
+namespace core
 {
 
 struct Texture
 {
-	core::TextureId id;
-	core::SizeI64 size;
-	core::String filePath;
+	TextureId id;
+	SizeI64 size;
+	String filePath;
 };
 
-} // namespace graphics
+} // namespace core

@@ -4,17 +4,9 @@
 #include "Core/Identifiers/AnimationId.h"
 #include "Core/DataTypes/Size.h"
 #include "Core/DataTypes/Duration.h"
+#include "Core/APIs/IAnimationGraphicAPI.h"
+#include "Logic/Databases/IGraphicDatabaseAPI.h"
 #include <memory>
-
-namespace graphics
-{
-class IAnimationGraphicAPI;
-struct AnimationState;
-namespace database
-{
-class IGraphicDatabaseAPI;
-} // namespace database
-} // namespace graphics
 
 namespace logic
 {
@@ -25,7 +17,7 @@ class AnimationComponent final : public ITransformComponent
 {
 public:
 	AnimationComponent(
-		std::shared_ptr<graphics::IAnimationGraphicAPI> i_animationGraphicAPI,
+		std::shared_ptr<core::IAnimationGraphicAPI> i_animationGraphicAPI,
 		std::shared_ptr<const graphics::database::IGraphicDatabaseAPI> i_graphicDatabaseAPI
 	);
 	~AnimationComponent();
@@ -49,9 +41,9 @@ public:
 private:
 	void OnAnimationFinished();
 
-	graphics::IAnimationGraphicAPI& m_animationGraphicAPI;
+	core::IAnimationGraphicAPI& m_animationGraphicAPI;
 	const graphics::database::IGraphicDatabaseAPI& m_graphicDatabaseAPI;
-	std::shared_ptr<graphics::AnimationState> m_animationState;
+	std::shared_ptr<core::AnimationState> m_animationState;
 	bool m_isRegistered = false;
 	
 	signals::Connection<> m_onAnimationFinishedCon;

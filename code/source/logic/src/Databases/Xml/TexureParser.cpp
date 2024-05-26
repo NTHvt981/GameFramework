@@ -8,17 +8,17 @@ namespace xml
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Parse(const tinyxml2::XMLElement* i_element, graphics::Texture& o_value);
+void Parse(const tinyxml2::XMLElement* i_element, core::Texture& o_value);
 
 ////////////////////////////////////////////////////////////////////////////////
 
-std::vector<graphics::Texture> LoadTexturesFile(const char* i_filePath)
+std::vector<core::Texture> LoadTexturesFile(const char* i_filePath)
 {
-	std::vector<graphics::Texture> result;
+	std::vector<core::Texture> result;
 
 	tinyxml2::XMLDocument doc;
 	doc.LoadFile(i_filePath);
-	ParseList<graphics::Texture>(doc.FirstChildElement("Textures"), result, "Texture", [](tinyxml2::XMLElement* itemElement, graphics::Texture& o_value)
+	ParseList<core::Texture>(doc.FirstChildElement("Textures"), result, "Texture", [](tinyxml2::XMLElement* itemElement, core::Texture& o_value)
 		{
 			Parse(itemElement, o_value);
 		}
@@ -29,7 +29,7 @@ std::vector<graphics::Texture> LoadTexturesFile(const char* i_filePath)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Parse(const tinyxml2::XMLElement* i_element, graphics::Texture& o_value)
+void Parse(const tinyxml2::XMLElement* i_element, core::Texture& o_value)
 {
 	Parse(i_element->FirstChildElement("Id"), o_value.id);
 	Parse(i_element->FirstChildElement("File"), o_value.filePath);

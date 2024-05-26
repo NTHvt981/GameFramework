@@ -3,7 +3,7 @@
 #include "Core/Identifiers/RenderLayer.h"
 #include <memory>
 
-namespace graphics
+namespace core
 {
 
 class IAnimationGraphicAPI
@@ -14,8 +14,8 @@ public:
 	virtual void DeregisterAnimation(const AnimationState::Id i_animationStateId) = 0;
 	virtual void SetAnimationRenderLayer(
 		const AnimationState::Id i_animationStateId,
-		const core::RenderLayer i_renderLayer
+		const RenderLayer i_renderLayer
 	) = 0;
 };
 
-} // namespace graphics
+} // namespace core

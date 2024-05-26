@@ -5,16 +5,16 @@
 #include "Core/DataTypes/Texture.h"
 #include "Core/DataTypes/Vector2.h"
 
-namespace graphics
+namespace core
 {
 
 struct SpriteDef
 {
-	core::SpriteId id;
-	core::BoxI64 textureBoundary;
-	core::Vector2F origin;
-	core::TextureId textureId;
+	SpriteId id;
+	BoxI64 textureBoundary;
+	Vector2F origin;
+	TextureId textureId;
 	std::weak_ptr<const Texture> textureRef;
 };
 
-} // namespace graphics
+} // namespace core

@@ -8,18 +8,18 @@ namespace xml
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Parse(const tinyxml2::XMLElement* i_element, graphics::SpriteDef& o_value);
+void Parse(const tinyxml2::XMLElement* i_element, core::SpriteDef& o_value);
 
 ////////////////////////////////////////////////////////////////////////////////
 
-std::vector<graphics::SpriteDef> LoadSpritesFile(const char* i_filePath)
+std::vector<core::SpriteDef> LoadSpritesFile(const char* i_filePath)
 {
-	std::vector<graphics::SpriteDef> result;
+	std::vector<core::SpriteDef> result;
 
 	tinyxml2::XMLDocument doc;
 	doc.LoadFile(i_filePath);
-	ParseList<graphics::SpriteDef>(doc.FirstChildElement("Sprites"), result, "Sprite", 
-		[](tinyxml2::XMLElement* itemElement, graphics::SpriteDef& o_value)
+	ParseList<core::SpriteDef>(doc.FirstChildElement("Sprites"), result, "Sprite",
+		[](tinyxml2::XMLElement* itemElement, core::SpriteDef& o_value)
 		{
 			Parse(itemElement, o_value);
 		}
@@ -30,7 +30,7 @@ std::vector<graphics::SpriteDef> LoadSpritesFile(const char* i_filePath)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void Parse(const tinyxml2::XMLElement* i_element, graphics::SpriteDef& o_value)
+void Parse(const tinyxml2::XMLElement* i_element, core::SpriteDef& o_value)
 {
 	Parse(i_element->FirstChildElement("Id"), o_value.id);
 	Parse(i_element->FirstChildElement("Boundary"), o_value.textureBoundary);

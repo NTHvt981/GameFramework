@@ -6,7 +6,7 @@
 #include "Core/DataTypes/Duration.h"
 #include <memory>
 
-namespace graphics
+namespace core
 {
 
 struct AnimationState
@@ -38,4 +38,4 @@ struct AnimationState
 	bool hasFinished = false; // Only used if not loop
 };
 
-} // namespace graphics
+} // namespace core

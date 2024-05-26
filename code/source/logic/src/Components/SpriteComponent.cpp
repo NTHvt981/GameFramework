@@ -1,17 +1,14 @@
 #include "Logic/Components/SpriteComponent.h"
-#include "Core/APIs/ISpriteGraphicAPI.h"
-#include "Logic/Databases/IGraphicDatabaseAPI.h"
-#include "Core/DataTypes/SpriteState.h"
 
 namespace logic
 {
 
 SpriteComponent::SpriteComponent(
-	std::shared_ptr<graphics::ISpriteGraphicAPI> i_spriteGraphicAPI,
+	std::shared_ptr<core::ISpriteGraphicAPI> i_spriteGraphicAPI,
 	std::shared_ptr<const graphics::database::IGraphicDatabaseAPI> i_graphicDatabaseAPI)
 	: m_spriteGraphicAPI(*i_spriteGraphicAPI.get())
 	, m_graphicDatabaseAPI(*i_graphicDatabaseAPI.get())
-	, m_spriteState(std::make_shared<graphics::SpriteState>(
+	, m_spriteState(std::make_shared<core::SpriteState>(
 		i_spriteGraphicAPI->GenerateSpriteStateId()
 	))
 {

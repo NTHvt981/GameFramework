@@ -5,14 +5,14 @@
 #include "Core/Math/Math.h"
 #include "Core/Helpers/BoxHelper.h"
 
-namespace graphics
+namespace logic
 {
 
 ////////////////////////////////////////////////////////////////////////////////
 
 GraphicSystem::GraphicSystem(
-    std::unique_ptr<INativeGraphicAPI> i_nativeGraphicAPI,
-    std::shared_ptr<const database::IGraphicDatabaseAPI> i_databaseAPI)
+    std::unique_ptr<core::INativeGraphicAPI> i_nativeGraphicAPI,
+    std::shared_ptr<const graphics::database::IGraphicDatabaseAPI> i_databaseAPI)
     : m_nativeGraphicAPI(std::move(i_nativeGraphicAPI))
     , m_databaseAPI(i_databaseAPI)
 {
@@ -40,7 +40,7 @@ void GraphicSystem::LoadTextures()
 {
     for (const core::TextureId id : core::TextureIdIterators())
     {
-        const Texture texture = m_databaseAPI->GetTexture(id);
+        const core::Texture texture = m_databaseAPI->GetTexture(id);
         m_nativeGraphicAPI->LoadTexture(id, texture.filePath);
     }
 }
@@ -67,10 +67,10 @@ void GraphicSystem::Render(const core::Duration& dt)
 
     for (const core::RenderLayer renderLayer : core::RenderLayerIterators())
     {
-        for (const SpriteState::Id spriteStateId : m_mapLayerSpriteStateIds[renderLayer])
+        for (const core::SpriteState::Id spriteStateId : m_mapLayerSpriteStateIds[renderLayer])
         {
-            std::shared_ptr<SpriteState> spriteState = GetSpriteState(spriteStateId);
-            std::shared_ptr<const SpriteDef> spriteDef = spriteState->spriteDef.lock();
+            std::shared_ptr<core::SpriteState> spriteState = GetSpriteState(spriteStateId);
+            std::shared_ptr<const core::SpriteDef> spriteDef = spriteState->spriteDef.lock();
             DrawSprite(spriteState);
         }
     }
@@ -101,9 +101,9 @@ void GraphicSystem::RemoveRenderFilter()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void GraphicSystem::RegisterSprite(std::shared_ptr<SpriteState> i_spriteState)
+void GraphicSystem::RegisterSprite(std::shared_ptr<core::SpriteState> i_spriteState)
 {
-    const SpriteState::Id id = i_spriteState->id;
+    const core::SpriteState::Id id = i_spriteState->id;
     m_allSpriteStates[id] = i_spriteState;
 
     const core::RenderLayer renderLayer = i_spriteState->renderLayer;
@@ -112,19 +112,19 @@ void GraphicSystem::RegisterSprite(std::shared_ptr<SpriteState> i_spriteState)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void GraphicSystem::DeregisterSprite(const SpriteState::Id i_spriteStateId)
+void GraphicSystem::DeregisterSprite(const core::SpriteState::Id i_spriteStateId)
 {
-    std::shared_ptr<SpriteState> spriteState = GetSpriteState(i_spriteStateId);
+    std::shared_ptr<core::SpriteState> spriteState = GetSpriteState(i_spriteStateId);
     RemoveSpriteState(spriteState);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void GraphicSystem::SetSpriteRenderLayer(
-    const SpriteState::Id i_spriteStateId,
+    const core::SpriteState::Id i_spriteStateId,
     const core::RenderLayer i_renderLayer)
 {
-    std::shared_ptr<SpriteState> spriteState = GetSpriteState(i_spriteStateId);
+    std::shared_ptr<core::SpriteState> spriteState = GetSpriteState(i_spriteStateId);
     const core::RenderLayer oldRenderLayer = spriteState->renderLayer;
 
     SpriteStateIds& oldIds = m_mapLayerSpriteStateIds[oldRenderLayer];
@@ -137,23 +137,23 @@ void GraphicSystem::SetSpriteRenderLayer(
 ////////////////////////////////////////////////////////////////////////////////
 
 // when system register animation, it also register spriteDefRef with same id
-void GraphicSystem::RegisterAnimation(std::shared_ptr<AnimationState> i_animationState)
+void GraphicSystem::RegisterAnimation(std::shared_ptr<core::AnimationState> i_animationState)
 {
     InsertAnimationState(i_animationState);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void GraphicSystem::DeregisterAnimation(const AnimationState::Id i_animationStateId)
+void GraphicSystem::DeregisterAnimation(const core::AnimationState::Id i_animationStateId)
 {
-    std::shared_ptr<AnimationState> spriteState = GetAnimationState(i_animationStateId);
+    std::shared_ptr<core::AnimationState> spriteState = GetAnimationState(i_animationStateId);
     RemoveAnimationState(spriteState);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void GraphicSystem::SetAnimationRenderLayer(
-    const AnimationState::Id i_animationStateId,
+    const core::AnimationState::Id i_animationStateId,
     const core::RenderLayer i_renderLayer)
 {
     SetSpriteRenderLayer(i_animationStateId, i_renderLayer);
@@ -189,9 +189,9 @@ void GraphicSystem::SetViewportPosition(const core::Vector2F& i_viewportPosition
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void GraphicSystem::InsertSpriteState(std::shared_ptr<SpriteState> i_spriteState)
+void GraphicSystem::InsertSpriteState(std::shared_ptr<core::SpriteState> i_spriteState)
 {
-    const SpriteState::Id id = i_spriteState->id;
+    const core::SpriteState::Id id = i_spriteState->id;
     m_allSpriteStates[id] = i_spriteState;
 
     const core::RenderLayer renderLayer = i_spriteState->renderLayer;
@@ -200,17 +200,17 @@ void GraphicSystem::InsertSpriteState(std::shared_ptr<SpriteState> i_spriteState
 
 ////////////////////////////////////////////////////////////////////////////////
 
-std::shared_ptr<SpriteState> GraphicSystem::GetSpriteState(const SpriteState::Id i_spriteStateId) const
+std::shared_ptr<core::SpriteState> GraphicSystem::GetSpriteState(const core::SpriteState::Id i_spriteStateId) const
 {
     return m_allSpriteStates.at(i_spriteStateId);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void GraphicSystem::RemoveSpriteState(std::shared_ptr<SpriteState> i_spriteState)
+void GraphicSystem::RemoveSpriteState(std::shared_ptr<core::SpriteState> i_spriteState)
 {
     const core::RenderLayer renderLayer = i_spriteState->renderLayer;
-    const SpriteState::Id id = i_spriteState->id;
+    const core::SpriteState::Id id = i_spriteState->id;
 
     SpriteStateIds& layer = m_mapLayerSpriteStateIds[renderLayer];
     auto it = layer.find(id);
@@ -224,11 +224,11 @@ void GraphicSystem::RemoveSpriteState(std::shared_ptr<SpriteState> i_spriteState
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void GraphicSystem::DrawSprite(std::shared_ptr<const SpriteState> i_spriteState)
+void GraphicSystem::DrawSprite(std::shared_ptr<const core::SpriteState> i_spriteState)
 {
-    std::shared_ptr<const SpriteDef> spriteDef = i_spriteState->spriteDef.lock();
-    std::shared_ptr<const Texture> textureDef = spriteDef->textureRef.lock();
-    INativeGraphicAPI::DrawParams drawParams;
+    std::shared_ptr<const core::SpriteDef> spriteDef = i_spriteState->spriteDef.lock();
+    std::shared_ptr<const core::Texture> textureDef = spriteDef->textureRef.lock();
+    core::INativeGraphicAPI::DrawParams drawParams;
 
     drawParams.position = i_spriteState->position;
     drawParams.alpha = i_spriteState->alpha;
@@ -241,26 +241,26 @@ void GraphicSystem::DrawSprite(std::shared_ptr<const SpriteState> i_spriteState)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void GraphicSystem::InsertAnimationState(std::shared_ptr<AnimationState> i_animationState)
+void GraphicSystem::InsertAnimationState(std::shared_ptr<core::AnimationState> i_animationState)
 {
     m_allAnimationStates[i_animationState->id] = i_animationState;
-    std::shared_ptr<SpriteState> spriteState = i_animationState->spriteStateRef;
+    std::shared_ptr<core::SpriteState> spriteState = i_animationState->spriteStateRef;
     InsertSpriteState(spriteState);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-std::shared_ptr<AnimationState> GraphicSystem::GetAnimationState(const AnimationState::Id i_animationStateId) const
+std::shared_ptr<core::AnimationState> GraphicSystem::GetAnimationState(const core::AnimationState::Id i_animationStateId) const
 {
     return m_allAnimationStates.at(i_animationStateId);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void GraphicSystem::RemoveAnimationState(std::shared_ptr<AnimationState> i_animationState)
+void GraphicSystem::RemoveAnimationState(std::shared_ptr<core::AnimationState> i_animationState)
 {
     RemoveSpriteState(i_animationState->spriteStateRef);
-    const AnimationState::Id id = i_animationState->id;
+    const core::AnimationState::Id id = i_animationState->id;
     m_allSpriteStates.try_emplace(id, nullptr);
 }
 
@@ -276,13 +276,13 @@ void GraphicSystem::InitLayerSpriteStateIds()
 {
     for (const core::RenderLayer renderLayer : core::RenderLayerIterators())
     {
-        m_mapLayerSpriteStateIds.try_emplace(renderLayer, std::set<SpriteState::Id>());
+        m_mapLayerSpriteStateIds.try_emplace(renderLayer, std::set<core::SpriteState::Id>());
     }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-bool GraphicSystem::CheckRenderFilter(std::shared_ptr<const SpriteState> i_spriteState) const
+bool GraphicSystem::CheckRenderFilter(std::shared_ptr<const core::SpriteState> i_spriteState) const
 {
     if (m_renderFilter.has_value())
     {
@@ -297,18 +297,18 @@ bool GraphicSystem::CheckRenderFilter(std::shared_ptr<const SpriteState> i_sprit
 
 ////////////////////////////////////////////////////////////////////////////////
 
-SpriteState::Id GraphicSystem::GenerateSpriteStateId()
+core::SpriteState::Id GraphicSystem::GenerateSpriteStateId()
 {
     return m_idGenerator.Generate();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-AnimationState::Id GraphicSystem::GenerateAnimationStateId()
+core::AnimationState::Id GraphicSystem::GenerateAnimationStateId()
 {
     return m_idGenerator.Generate();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-} // namespace graphics
+} // namespace logic

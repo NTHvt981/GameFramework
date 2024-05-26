@@ -1,14 +1,14 @@
 #pragma once
 #include <vector>
 
-namespace graphics
+namespace core
 {
 struct SpriteDef;
-} // namespace graphics
+} // namespace core
 
 namespace xml
 {
 
-std::vector<graphics::SpriteDef> LoadSpritesFile(const char* i_filePath);
+std::vector<core::SpriteDef> LoadSpritesFile(const char* i_filePath);
 
 } // namespace xml

@@ -11,7 +11,7 @@
 namespace graphics
 {
 
-class Direct9API final : public INativeGraphicAPI
+class Direct9API final : public core::INativeGraphicAPI
 {
 public:
 	Direct9API(const HWND i_hwnd);
@@ -25,7 +25,7 @@ public:
 	) override;
 	void SetViewportSize(const core::SizeF& i_viewportSize) override;
 	void SetViewportPosition(const core::Vector2F& i_viewportPosition) override;
-	void Draw(const DrawParams& i_drawParams) override;
+	void Draw(const core::INativeGraphicAPI::DrawParams& i_drawParams) override;
 	void StartDraw() override;
 	void EndDraw() override;
 	core::APIMode GetAPIMode() const override;

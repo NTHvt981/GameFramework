@@ -5,7 +5,7 @@
 #include "Core/DataTypes/Vector2.h"
 #include "Core/Identifiers/RenderLayer.h"
 
-namespace graphics
+namespace core
 {
 
 struct SpriteState
@@ -20,4 +20,4 @@ struct SpriteState
 	core::RenderLayer renderLayer = core::RenderLayer::Default;
 };
 
-} // namespace graphics
+} // namespace core

@@ -6,13 +6,13 @@
 #include "Core/DataTypes/Box.h"
 #include "Core/DataTypes/Duration.h"
 
-namespace graphics
+namespace logic
 {
 
-class IGraphicSystem:	public ISpriteGraphicAPI,
-						public IAnimationGraphicAPI,
-						public ITileGraphicAPI,
-						public IViewportGraphicAPI
+class IGraphicSystem:	public core::ISpriteGraphicAPI,
+						public core::IAnimationGraphicAPI,
+						public core::ITileGraphicAPI,
+						public core::IViewportGraphicAPI
 {
 public:
 	virtual void Initialize() = 0;
@@ -27,4 +27,4 @@ public:
 	virtual void RemoveRenderFilter() = 0;
 };
 
-} // namespace graphics
+} // namespace logic

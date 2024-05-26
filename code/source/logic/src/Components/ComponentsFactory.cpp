@@ -21,7 +21,7 @@ namespace logic
 {
 
 ComponentsFactory::ComponentsFactory(
-	std::shared_ptr<graphics::IGraphicSystem> i_graphicSystem,
+	std::shared_ptr<logic::IGraphicSystem> i_graphicSystem,
 	std::shared_ptr<inputs::IInputSystem> i_inputSystem,
 	std::shared_ptr<audios::IAudioSystem> i_audioSystem,
 	std::shared_ptr<core::IPhysicAPI> i_physicAPI,

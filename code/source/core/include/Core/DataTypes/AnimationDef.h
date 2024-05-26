@@ -4,7 +4,7 @@
 #include "Core/DataTypes/SpriteDef.h"
 #include "Core/Identifiers/AnimationId.h"
 
-namespace graphics
+namespace core
 {
 
 struct AnimationFrameDef
@@ -20,4 +20,4 @@ struct AnimationDef
 	std::vector<AnimationFrameDef> frames;
 };
 
-} // namespace graphics
+} // namespace core

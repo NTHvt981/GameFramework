@@ -10,12 +10,6 @@
 #include <memory>
 #include <queue>
 
-namespace graphics
-{
-class INativeGraphicAPI;
-class IGraphicSystem;
-} // namespace graphics
-
 namespace inputs
 {
 class INativeInputAPI;
@@ -31,11 +25,12 @@ class IAudioSystem;
 namespace core
 {
 class GameSetting;
+class INativeGraphicAPI;
 } // namespace core
 
 namespace logic
 {
-
+class IGraphicSystem;
 class IScriptContext;
 class IComponentsFactory;
 class IEntitiesFactory;
@@ -50,7 +45,7 @@ class Game
 {
 public:
 	Game(
-		std::unique_ptr<graphics::INativeGraphicAPI> i_nativeGraphicAPI,
+		std::unique_ptr<core::INativeGraphicAPI> i_nativeGraphicAPI,
 		std::unique_ptr<inputs::INativeInputAPI> i_nativeInputAPI,
 		std::unique_ptr<audios::INativeAudioAPI> i_nativeAudioAPI,
 		std::shared_ptr<core::GameSetting> i_gameSetting
@@ -87,11 +82,11 @@ private:
 	// own, self init
 	std::shared_ptr<GameClock> m_gameClock;
 	std::shared_ptr<IFileSystem > m_fileSystem;
-	std::shared_ptr<graphics::IGraphicSystem> m_graphicSystem;
+	std::shared_ptr<IGraphicSystem> m_graphicSystem;
 	std::shared_ptr<PhysicSystem> m_physicSystem;
 	std::shared_ptr<inputs::IInputSystem> m_inputSystem;
 	std::shared_ptr<audios::IAudioSystem> m_audioSystem;
-	std::shared_ptr<camera::ICameraSystem> m_cameraSystem;
+	std::shared_ptr<logic::camera::ICameraSystem> m_cameraSystem;
 	std::shared_ptr<core::GameSetting> m_gameSetting;
 	std::shared_ptr<database::IDatabase> m_database;
 	std::shared_ptr<IComponentsFactory> m_componentFactory;
@@ -102,7 +97,7 @@ private:
 	std::shared_ptr<Mailbox> m_mailboxReceiveFromScene;
 
 	// own, pass by param
-	std::unique_ptr<graphics::INativeGraphicAPI> m_nativeGraphicAPI;
+	std::unique_ptr<core::INativeGraphicAPI> m_nativeGraphicAPI;
 	std::unique_ptr<inputs::INativeInputAPI> m_nativeInputAPI;
 	std::unique_ptr<audios::INativeAudioAPI> m_nativeAudioAPI;
 

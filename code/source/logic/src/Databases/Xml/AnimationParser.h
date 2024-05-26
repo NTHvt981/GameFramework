@@ -1,14 +1,12 @@
 #pragma once
 #include <vector>
-
-namespace graphics
-{
-struct AnimationDef;
-} // namespace graphics
+#include "Databases/Xml/CommonParser.h"
+#include "Core/Identifiers/TextureId.h"
+#include "Core/DataTypes/AnimationDef.h"
 
 namespace xml
 {
 
-std::vector<graphics::AnimationDef> LoadAnimationsFile(const char* i_filePath);
+std::vector<core::AnimationDef> LoadAnimationsFile(const char* i_filePath);
 
 } // namespace xml

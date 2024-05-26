@@ -1,7 +1,7 @@
 #pragma once
 #include "Core/DataTypes/String.h"
 
-namespace files
+namespace core
 {
 
 struct File
@@ -17,4 +17,4 @@ struct File
 const core::String extPng = "png";
 const core::String extXml = "xml";
 
-} // namespace file
+} // namespace core

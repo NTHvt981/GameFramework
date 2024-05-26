@@ -1,11 +1,7 @@
 #pragma once
 #include "IDatabase.h"
+#include "Logic/LogicSystems/IFileSystem.h"
 #include <map>
-
-namespace files
-{
-class IFileSystem;
-} // namespace files
 
 namespace database
 {
@@ -13,7 +9,7 @@ namespace database
 class Database final: public IDatabase
 {
 public:
-	Database(std::shared_ptr<files::IFileSystem> i_fileSystem);
+	Database(std::shared_ptr<logic::IFileSystem> i_fileSystem);
 	void LoadResource() override;
 	// IGraphicDatabaseAPI impl
 	virtual std::weak_ptr<const graphics::Texture> GetTextureRef(const core::TextureId i_textureId) const override;
@@ -31,7 +27,7 @@ private:
 	void LoadSprites();
 	void LoadAnimations();
 	void LoadSounds();
-	std::shared_ptr<files::IFileSystem> m_fileSystem;
+	std::shared_ptr<logic::IFileSystem> m_fileSystem;
 
 	std::map<core::TextureId, std::shared_ptr<graphics::Texture>> m_textures;
 	std::map<core::SpriteId, std::shared_ptr<graphics::SpriteDef>> m_sprites;

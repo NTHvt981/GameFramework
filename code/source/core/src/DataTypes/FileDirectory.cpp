@@ -1,10 +1,9 @@
-#include "stdafx.h"
-#include "FileSystem/DataTypes/FileDirectory.h"
+#include "Core/DataTypes/FileDirectory.h"
 
-namespace files
+namespace core
 {
 
-core::String FileDirectory::ToString() const
+String FileDirectory::ToString() const
 {
 	return folderDirectory.ToString() + file.ToString();
 }
@@ -18,4 +17,4 @@ FileDirectory operator+(const FolderDirectory& folder, const File& file)
 	};
 }
 
-} // namespace files
+} // namespace core

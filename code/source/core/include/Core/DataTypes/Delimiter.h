@@ -1,7 +1,7 @@
 #pragma once
 #include "Core/DataTypes/String.h"
 
-namespace files
+namespace core
 {
 
 class Delimiter
@@ -10,4 +10,4 @@ public:
 	core::String name = "\\";
 };
 
-} // namespace files
+} // namespace core

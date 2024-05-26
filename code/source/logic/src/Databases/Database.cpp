@@ -1,6 +1,5 @@
 #include "Logic/Databases/Database.h"
-#include "FileSystem/IFileSystem.h"
-#include "FileSystem/DataTypes/Folder.h"
+#include "Core/DataTypes/Folder.h"
 #include "Xml/TexureParser.h"
 #include "Xml/SpriteParser.h"
 #include "Xml/AnimationParser.h"
@@ -15,7 +14,7 @@ namespace database
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Database::Database(std::shared_ptr<files::IFileSystem> i_fileSystem)
+Database::Database(std::shared_ptr<logic::IFileSystem> i_fileSystem)
 	: m_fileSystem(i_fileSystem)
 {
 }

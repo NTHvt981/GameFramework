@@ -1,6 +1,5 @@
 require("common")
 require("core")
-require("file-system")
 require("direct-wrapper")
 require("audio-system")
 require("input-system")
@@ -44,7 +43,6 @@ end
 
 addSln()
 addCore()
-addFileSystem()
 addInputSystem()
 addAudioSystem()
 addDirectWrapper()

@@ -1,7 +1,7 @@
 #pragma once
 #include "GameClock.h"
 #include "Logic/LogicSystems/PhysicSystem.h"
-#include "FileSystem/IFileSystem.h"
+#include "Logic/LogicSystems/IFileSystem.h"
 #include "Logic/Databases/IDatabase.h"
 #include "Logic/LogicSystems/CameraSystem/ICameraSystem.h"
 #include "Logic/Scripts/Script.h"
@@ -86,7 +86,7 @@ private:
 
 	// own, self init
 	std::shared_ptr<GameClock> m_gameClock;
-	std::shared_ptr<files::IFileSystem> m_fileSystem;
+	std::shared_ptr<IFileSystem > m_fileSystem;
 	std::shared_ptr<graphics::IGraphicSystem> m_graphicSystem;
 	std::shared_ptr<PhysicSystem> m_physicSystem;
 	std::shared_ptr<inputs::IInputSystem> m_inputSystem;

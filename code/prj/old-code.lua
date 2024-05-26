@@ -1,6 +1,5 @@
 require("common")
 require("core")
-require("file-system")
 require("DirectXSDK")
 
 local old_code_prj_name = "old-code"
@@ -28,6 +27,5 @@ function addOldCode()
       }
 
       includeCore()
-      includeFileSystem()
       includeDirectXSDK()
 end

@@ -1,8 +1,7 @@
-#include "stdafx.h"
-#include "FileSystem/DataTypes/Folder.h"
-#include "FileSystem/FileSystem.h"
-#include "FileSystem/DataTypes/FolderDirectory.h"
-#include "FileSystem/DataTypes/FileDirectory.h"
+#include "Logic/LogicSystems/FileSystem.h"
+#include "Core/DataTypes/Folder.h"
+#include "Core/DataTypes/FolderDirectory.h"
+#include "Core/DataTypes/FileDirectory.h"
 #include "Core/DataTypes/Flag.h"
 #include "Core/DataTypes/InitOnce.h"
 #include "Core/DataTypes/String.h"
@@ -10,20 +9,20 @@
 
 core::String GetApplicationFolderPath(const core::String& i_demiliter);
 
-namespace files
+namespace logic
 {
 
-const Folder sk_dataFolder{ "data" };
-const Folder sk_xmlFolder{ "Xml" };
-const Folder sk_texturesFolder{ "Textures" };
-const Folder sk_soundsFolder{ "Sounds" };
-const Folder sk_spritesFolder{ "Sprites" };
-const File sk_texturesXmlFile{ "Textures", files::extXml };
-const File sk_spritesXmlFile{ "Sprites", files::extXml };
-const File sk_animationsXmlFile{ "Animations", files::extXml };
-const File sk_soundsXmlFile{ "Sounds", files::extXml };
+const core::Folder sk_dataFolder{ "data" };
+const core::Folder sk_xmlFolder{ "Xml" };
+const core::Folder sk_texturesFolder{ "Textures" };
+const core::Folder sk_soundsFolder{ "Sounds" };
+const core::Folder sk_spritesFolder{ "Sprites" };
+const core::File sk_texturesXmlFile{ "Textures", core::extXml };
+const core::File sk_spritesXmlFile{ "Sprites", core::extXml };
+const core::File sk_animationsXmlFile{ "Animations", core::extXml };
+const core::File sk_soundsXmlFile{ "Sounds", core::extXml };
 core::Flag s_initFlag;
-FolderDirectory s_applicationFolderDirectory{};
+core::FolderDirectory s_applicationFolderDirectory{};
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -46,7 +45,7 @@ void FileSystem::Initialize()
 
 	const core::String applicationFolderPath = GetApplicationFolderPath("\\");
 
-	FolderDirectory newValue({});
+	core::FolderDirectory newValue({});
 	newValue.SetFolders(applicationFolderPath);
 	s_applicationFolderDirectory = newValue;
 }
@@ -68,9 +67,9 @@ core::String FileSystem::GetAbsolutePath(const core::String i_relativePath) cons
 
 core::String FileSystem::GetTexturesXmlFilePath() const
 {
-	FileDirectory result
+	core::FileDirectory result
 	{
-		s_applicationFolderDirectory + FolderDirectory{sk_dataFolder, sk_xmlFolder},
+		s_applicationFolderDirectory + core::FolderDirectory{sk_dataFolder, sk_xmlFolder},
 		sk_texturesXmlFile
 	};
 	return result.ToString();
@@ -80,9 +79,9 @@ core::String FileSystem::GetTexturesXmlFilePath() const
 
 core::String FileSystem::GetSpritesXmlFilePath() const
 {
-	FileDirectory result
+	core::FileDirectory result
 	{
-		s_applicationFolderDirectory + FolderDirectory{sk_dataFolder, sk_xmlFolder},
+		s_applicationFolderDirectory + core::FolderDirectory{sk_dataFolder, sk_xmlFolder},
 		sk_spritesXmlFile
 	};
 	return result.ToString();
@@ -92,9 +91,9 @@ core::String FileSystem::GetSpritesXmlFilePath() const
 
 core::String FileSystem::GetAnimationsXmlFilePath() const
 {
-	FileDirectory result
+	core::FileDirectory result
 	{
-		s_applicationFolderDirectory + FolderDirectory{sk_dataFolder, sk_xmlFolder},
+		s_applicationFolderDirectory + core::FolderDirectory{sk_dataFolder, sk_xmlFolder},
 		sk_animationsXmlFile
 	};
 	return result.ToString();
@@ -104,9 +103,9 @@ core::String FileSystem::GetAnimationsXmlFilePath() const
 
 core::String FileSystem::GetSoundsXmlFilePath() const
 {
-	FileDirectory result
+	core::FileDirectory result
 	{
-		s_applicationFolderDirectory + FolderDirectory{sk_dataFolder, sk_xmlFolder},
+		s_applicationFolderDirectory + core::FolderDirectory{sk_dataFolder, sk_xmlFolder},
 		sk_soundsXmlFile
 	};
 	return result.ToString();
@@ -116,7 +115,7 @@ core::String FileSystem::GetSoundsXmlFilePath() const
 
 core::String FileSystem::GetTexturesFolderPath() const
 {
-	FolderDirectory result = s_applicationFolderDirectory + FolderDirectory{ sk_dataFolder, sk_texturesFolder };
+	core::FolderDirectory result = s_applicationFolderDirectory + core::FolderDirectory{ sk_dataFolder, sk_texturesFolder };
 	return result.ToString();
 }
 
@@ -124,13 +123,13 @@ core::String FileSystem::GetTexturesFolderPath() const
 
 core::String FileSystem::GetSoundsFolderPath() const
 {
-	FolderDirectory result = s_applicationFolderDirectory + FolderDirectory{ sk_dataFolder, sk_soundsFolder };
+	core::FolderDirectory result = s_applicationFolderDirectory + core::FolderDirectory{ sk_dataFolder, sk_soundsFolder };
 	return result.ToString();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-} // namespace files
+} // namespace logic
 
 core::String GetApplicationFolderPath(const core::String& i_demiliter)
 {

@@ -3,7 +3,7 @@
 #include <unordered_map>
 #include <memory>
 
-namespace files
+namespace logic
 {
 class FolderDirectory;
 struct FileDirectory;
@@ -26,4 +26,4 @@ public:
 	core::String GetSoundsFolderPath() const override;
 };
 
-} // namespace files
+} // namespace logic

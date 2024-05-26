@@ -1,9 +1,8 @@
-#include "stdafx.h"
-#include "FileSystem/DataTypes/FolderDirectory.h"
+#include "Core/DataTypes/FolderDirectory.h"
 #include "Core/Helpers/StringHelper.h"
 #include <iterator>
 
-namespace files
+namespace core
 {
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -98,4 +97,4 @@ void FolderDirectory::Optimize()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-} // namespace files
+} // namespace core

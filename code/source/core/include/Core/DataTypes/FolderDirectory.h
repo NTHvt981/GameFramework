@@ -1,9 +1,9 @@
 #pragma once
 #include "Delimiter.h"
-#include "FileSystem/DataTypes/Folder.h"
+#include "Core/DataTypes/Folder.h"
 #include <list>
 
-namespace files
+namespace core
 {
 
 class FolderDirectory
@@ -23,4 +23,4 @@ private:
 	const Delimiter m_delimiter;
 };
 
-} // namespace files
+} // namespace core

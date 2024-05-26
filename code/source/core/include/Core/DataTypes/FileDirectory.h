@@ -2,16 +2,16 @@
 #include "File.h"
 #include "FolderDirectory.h"
 
-namespace files
+namespace core
 {
 
 struct FileDirectory
 {
 	FolderDirectory folderDirectory;
 	File file;
-	core::String ToString() const;
+	String ToString() const;
 };
 
 FileDirectory operator+(const FolderDirectory& folder, const File& file);
 
-} // namespace files
+} // namespace core

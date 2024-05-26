@@ -7,7 +7,7 @@
 #include "InputSystem/API/INativeInputAPI.h"
 #include "AudioSystem/AudioSystem.h"
 #include "AudioSystem/API/INativeAudioAPI.h"
-#include "FileSystem/FileSystem.h"
+#include "Logic/LogicSystems/FileSystem.h"
 #include "Logic/Databases/Database.h"
 #include "Logic/Components/ComponentsFactory.h"
 #include "Logic/Entities/EntitiesFactory.h"
@@ -33,8 +33,8 @@ Game::Game(std::unique_ptr<graphics::INativeGraphicAPI> i_nativeGraphicAPI,
 	, m_nativeAudioAPI(std::move(i_nativeAudioAPI))
 	, m_gameSetting(i_gameSetting)
 {
-	m_gameClock = std::make_shared<logic::GameClock>();
-	m_fileSystem = std::make_shared<files::FileSystem>();
+	m_gameClock = std::make_shared<GameClock>();
+	m_fileSystem = std::make_shared<FileSystem>();
 	m_database = std::make_shared<database::Database>(m_fileSystem);
 	m_inputSystem = std::make_shared<inputs::InputSystem>(std::move(m_nativeInputAPI));
 	m_audioSystem = std::make_shared<audios::AudioSystem>(

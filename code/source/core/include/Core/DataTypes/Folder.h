@@ -1,7 +1,7 @@
 #pragma once
 #include "Core/DataTypes/String.h"
 
-namespace files
+namespace core
 {
 
 struct Folder
@@ -10,4 +10,4 @@ struct Folder
 };
 static const Folder BackwardFolder{ core::String("..") };
 
-} // namespace file
+} // namespace core

@@ -1,6 +1,5 @@
 require("common")
 require("core")
-require("file-system")
 require("input-system")
 require("audio-system")
 require("direct-wrapper")
@@ -27,7 +26,6 @@ function addApp()
       }
       
       includeCore()
-      includeFileSystem()
       includeInputSystem()
       includeAudioSystem()
       includeDirectWrapper()

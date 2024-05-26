@@ -1,6 +1,5 @@
 require("common")
 require("core")
-require("file-system")
 require("input-system")
 require("audio-system")
 
@@ -25,7 +24,6 @@ function addLogic()
       }
 
       includeCore()
-      includeFileSystem()
       includeInputSystem()
       includeAudioSystem()
 end

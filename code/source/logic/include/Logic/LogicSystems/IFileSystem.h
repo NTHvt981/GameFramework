@@ -11,7 +11,7 @@ namespace core
 class String;
 }
 
-namespace files
+namespace logic
 {
 
 class IFileSystem
@@ -28,4 +28,4 @@ public:
 	virtual core::String GetAbsolutePath(const core::String i_relativePath) const = 0;
 };
 
-} // namespace files
+} // namespace logic

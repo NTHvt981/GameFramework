@@ -18,7 +18,7 @@ class AnimationComponent final : public ITransformComponent
 public:
 	AnimationComponent(
 		std::shared_ptr<core::IAnimationGraphicAPI> i_animationGraphicAPI,
-		std::shared_ptr<const graphics::database::IGraphicDatabaseAPI> i_graphicDatabaseAPI
+		std::shared_ptr<const IGraphicDatabaseAPI> i_graphicDatabaseAPI
 	);
 	~AnimationComponent();
 
@@ -42,7 +42,7 @@ private:
 	void OnAnimationFinished();
 
 	core::IAnimationGraphicAPI& m_animationGraphicAPI;
-	const graphics::database::IGraphicDatabaseAPI& m_graphicDatabaseAPI;
+	const IGraphicDatabaseAPI& m_graphicDatabaseAPI;
 	std::shared_ptr<core::AnimationState> m_animationState;
 	bool m_isRegistered = false;
 	

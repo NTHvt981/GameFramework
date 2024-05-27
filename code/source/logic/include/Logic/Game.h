@@ -88,7 +88,7 @@ private:
 	std::shared_ptr<audios::IAudioSystem> m_audioSystem;
 	std::shared_ptr<logic::camera::ICameraSystem> m_cameraSystem;
 	std::shared_ptr<core::GameSetting> m_gameSetting;
-	std::shared_ptr<database::IDatabase> m_database;
+	std::shared_ptr<IDatabase> m_database;
 	std::shared_ptr<IComponentsFactory> m_componentFactory;
 	std::shared_ptr<IEntitiesFactory> m_entitiesFactory;
 

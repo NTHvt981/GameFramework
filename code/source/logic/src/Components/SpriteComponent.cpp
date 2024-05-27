@@ -5,7 +5,7 @@ namespace logic
 
 SpriteComponent::SpriteComponent(
 	std::shared_ptr<core::ISpriteGraphicAPI> i_spriteGraphicAPI,
-	std::shared_ptr<const graphics::database::IGraphicDatabaseAPI> i_graphicDatabaseAPI)
+	std::shared_ptr<const IGraphicDatabaseAPI> i_graphicDatabaseAPI)
 	: m_spriteGraphicAPI(*i_spriteGraphicAPI.get())
 	, m_graphicDatabaseAPI(*i_graphicDatabaseAPI.get())
 	, m_spriteState(std::make_shared<core::SpriteState>(

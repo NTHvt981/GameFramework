@@ -2,14 +2,14 @@
 #include "Logic/Databases/IGraphicDatabaseAPI.h"
 #include "AudioSystem/Database/IAudioDatabaseAPI.h"
 
-namespace database
+namespace logic
 {
 
-class IDatabase:	public graphics::database::IGraphicDatabaseAPI,
+class IDatabase:	public IGraphicDatabaseAPI,
 					public audios::database::IAudioDatabaseAPI
 {
 public:
 	virtual void LoadResource() = 0;
 };
 
-} // namespace database
+} // namespace logic

@@ -8,7 +8,7 @@ namespace logic
 
 AnimationComponent::AnimationComponent(
 	std::shared_ptr<core::IAnimationGraphicAPI> i_animationGraphicAPI,
-	std::shared_ptr<const graphics::database::IGraphicDatabaseAPI> i_graphicDatabaseAPI)
+	std::shared_ptr<const IGraphicDatabaseAPI> i_graphicDatabaseAPI)
 	: m_animationGraphicAPI(*i_animationGraphicAPI.get())
 	, m_graphicDatabaseAPI(*i_graphicDatabaseAPI.get())
 	, m_animationState(std::make_shared<core::AnimationState>(

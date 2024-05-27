@@ -3,14 +3,15 @@
 #include "Logic/LogicSystems/IFileSystem.h"
 #include <map>
 
-namespace database
+namespace logic
 {
 
 class Database final: public IDatabase
 {
 public:
-	Database(std::shared_ptr<logic::IFileSystem> i_fileSystem);
+	Database(std::shared_ptr<IFileSystem> i_fileSystem);
 	void LoadResource() override;
+
 	// IGraphicDatabaseAPI impl
 	virtual std::weak_ptr<const core::Texture> GetTextureRef(const core::TextureId i_textureId) const override;
 	virtual const core::Texture GetTexture(const core::TextureId i_textureId) const override;
@@ -36,4 +37,4 @@ private:
 	std::map<core::SoundId, std::shared_ptr<audios::Sound>> m_sounds;
 };
 
-} // namespace database
+} // namespace logic

@@ -12,11 +12,6 @@ namespace audios
 class IAudioSystem;
 } // namespace audios
 
-namespace database
-{
-class IDatabase;
-} // namespace database
-
 namespace logic
 {
 class IGraphicSystem;
@@ -25,6 +20,8 @@ namespace camera
 {
 class ICameraSystem;
 } // namespace camera
+
+class IDatabase;
 
 class ComponentsFactory final: public IComponentsFactory
 {
@@ -35,7 +32,7 @@ public:
 		std::shared_ptr<audios::IAudioSystem> i_audioSystem,
 		std::shared_ptr<core::IPhysicAPI> i_physicAPI,
 		std::shared_ptr<camera::ICameraSystem> i_cameraSystem,
-		std::shared_ptr<database::IDatabase> i_database
+		std::shared_ptr<IDatabase> i_database
 	);
 	~ComponentsFactory();
 
@@ -73,7 +70,7 @@ private:
 	std::shared_ptr<logic::IGraphicSystem> m_graphicSystem;
 	std::shared_ptr<inputs::IInputSystem> m_inputSystem;
 	std::shared_ptr<audios::IAudioSystem> m_audioSystem;
-	std::shared_ptr<database::IDatabase> m_database;
+	std::shared_ptr<IDatabase> m_database;
 };
 
 } // namespace logic

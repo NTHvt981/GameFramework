@@ -35,7 +35,7 @@ Game::Game(std::unique_ptr<core::INativeGraphicAPI> i_nativeGraphicAPI,
 {
 	m_gameClock = std::make_shared<GameClock>();
 	m_fileSystem = std::make_shared<FileSystem>();
-	m_database = std::make_shared<database::Database>(m_fileSystem);
+	m_database = std::make_shared<Database>(m_fileSystem);
 	m_inputSystem = std::make_shared<inputs::InputSystem>(std::move(m_nativeInputAPI));
 	m_audioSystem = std::make_shared<audios::AudioSystem>(
 		std::move(m_nativeAudioAPI),

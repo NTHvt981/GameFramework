@@ -26,7 +26,7 @@ ComponentsFactory::ComponentsFactory(
 	std::shared_ptr<audios::IAudioSystem> i_audioSystem,
 	std::shared_ptr<core::IPhysicAPI> i_physicAPI,
 	std::shared_ptr<camera::ICameraSystem> i_cameraSystem,
-	std::shared_ptr<database::IDatabase> i_database)
+	std::shared_ptr<IDatabase> i_database)
 	: m_physicAPI(i_physicAPI)
 	, m_cameraSystem(i_cameraSystem)
 	, m_graphicSystem(i_graphicSystem)

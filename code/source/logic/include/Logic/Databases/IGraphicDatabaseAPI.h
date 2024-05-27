@@ -11,7 +11,7 @@ struct SpriteDef;
 struct AnimationDef;
 } // namespace core
 
-namespace graphics::database
+namespace logic
 {
 
 class IGraphicDatabaseAPI
@@ -25,4 +25,4 @@ public:
 	virtual const core::AnimationDef GetAnimation(const core::AnimationId i_animationId) const = 0;
 };
 
-} // namespace graphics::database
+} // namespace logic

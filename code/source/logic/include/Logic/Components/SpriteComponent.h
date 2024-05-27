@@ -16,7 +16,7 @@ class SpriteComponent final: public ITransformComponent
 public:
 	SpriteComponent(
 		std::shared_ptr<core::ISpriteGraphicAPI> i_spriteGraphicAPI,
-		std::shared_ptr<const graphics::database::IGraphicDatabaseAPI> i_graphicDatabaseAPI
+		std::shared_ptr<const IGraphicDatabaseAPI> i_graphicDatabaseAPI
 	);
 	~SpriteComponent();
 	
@@ -29,7 +29,7 @@ public:
 
 private:
 	core::ISpriteGraphicAPI& m_spriteGraphicAPI;
-	const graphics::database::IGraphicDatabaseAPI& m_graphicDatabaseAPI;
+	const IGraphicDatabaseAPI& m_graphicDatabaseAPI;
 	std::shared_ptr<core::SpriteState> m_spriteState;
 	bool isRegistered = false;
 };

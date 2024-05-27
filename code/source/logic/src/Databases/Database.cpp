@@ -9,12 +9,12 @@
 #include "Core/DataTypes/AnimationDef.h"
 #include "AudioSystem/DataTypes/Sound.h"
 
-namespace database
+namespace logic
 {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-Database::Database(std::shared_ptr<logic::IFileSystem> i_fileSystem)
+Database::Database(std::shared_ptr<IFileSystem> i_fileSystem)
 	: m_fileSystem(i_fileSystem)
 {
 }
@@ -143,4 +143,4 @@ void Database::LoadSounds()
 
 ////////////////////////////////////////////////////////////////////////////////
 
-} // namespace database
+} // namespace logic

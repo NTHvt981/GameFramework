@@ -5,7 +5,7 @@
 #include <dinput.h>
 #include <wrl/client.h>
 
-namespace logic
+namespace direct
 {
 
 class DirectInputAPI final : public core::INativeInputAPI
@@ -42,4 +42,4 @@ private:
 	bool m_previousKeys[256];
 };
 
-} // namespace logic
+} // namespace direct

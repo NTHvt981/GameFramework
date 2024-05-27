@@ -3,11 +3,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-namespace audios
+namespace xaudio
 {
 
 HRESULT FindChunk(HANDLE hFile, DWORD fourcc, DWORD& dwChunkSize, DWORD& dwChunkDataPosition);
 
 HRESULT ReadChunkData(HANDLE hFile, void* buffer, DWORD buffersize, DWORD bufferoffset);
 
-} // namespace audios
+} // namespace xaudio

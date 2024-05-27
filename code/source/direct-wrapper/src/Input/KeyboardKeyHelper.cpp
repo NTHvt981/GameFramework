@@ -1,7 +1,7 @@
 #include "KeyboardKeyHelper.h"
 #include <dinput.h>
 
-namespace logic
+namespace direct
 {
 
 uint64_t ToDirectKeyboardKey(const core::KeyboardKey i_keyboardKey)
@@ -594,4 +594,4 @@ core::KeyboardKey ToKeyboardKey(const uint64_t i_directKey)
 	}
 }
 
-} // namespace logic
+} // namespace direct

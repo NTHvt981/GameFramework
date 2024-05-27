@@ -5,7 +5,7 @@
 #include <iostream>
 #include "Core/Macros/Macros.h"
 
-namespace logic
+namespace direct
 {
 
 DirectInputAPI::DirectInputAPI(const HWND i_hwnd, const HINSTANCE i_hInstance)
@@ -100,4 +100,4 @@ bool DirectInputAPI::IsKeyHold(const core::KeyboardKey i_key)
 	return m_currentKeys[index] && m_previousKeys[index];
 }
 
-} // namespace logic
+} // namespace direct

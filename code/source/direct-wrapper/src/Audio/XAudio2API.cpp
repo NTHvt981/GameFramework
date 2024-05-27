@@ -4,7 +4,7 @@
 #include <assert.h>
 #include <combaseapi.h>
 
-namespace audios
+namespace xaudio
 {
 
 XAudio2API::XAudio2API()
@@ -23,7 +23,7 @@ void XAudio2API::Initialize()
 	assert(SUCCEEDED(result));
 }
 
-void XAudio2API::LoadSound(const Sound& i_sound)
+void XAudio2API::LoadSound(const core::Sound& i_sound)
 {
 	std::wstring stdWString = i_sound.filePath.ToStdWStr();
 	HANDLE fileHandle = CreateFile(
@@ -94,7 +94,7 @@ void XAudio2API::LoadSound(const Sound& i_sound)
 	m_mapSourceVoices[i_sound.id] = pSourceVoice;
 }
 
-void XAudio2API::Play(const core::SoundId i_soundId, const SoundSettings& i_settings)
+void XAudio2API::Play(const core::SoundId i_soundId, const core::SoundSettings& i_settings)
 {
 	HRESULT result = m_mapSourceVoices[i_soundId]->Start(0);
 	assert(SUCCEEDED(result));
@@ -113,4 +113,4 @@ void XAudio2API::Shutdown()
 {
 }
 
-} // namespace audios
+} // namespace xaudio

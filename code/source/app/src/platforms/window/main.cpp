@@ -39,9 +39,9 @@ int WINAPI WinMain(
 	MSG msg;
 	bool done = 0;
 
-	std::unique_ptr<core::INativeGraphicAPI> nativeRenderAPI = std::make_unique<graphics::Direct9API>(s_hwnd);
-	std::unique_ptr<core::INativeInputAPI> nativeInputAPI = std::make_unique<logic::DirectInputAPI>(s_hwnd, hInstance);
-	std::unique_ptr<audios::INativeAudioAPI> nativeAudioAPI = std::make_unique<audios::XAudio2API>();
+	std::unique_ptr<core::INativeGraphicAPI> nativeRenderAPI = std::make_unique<direct::Direct9API>(s_hwnd);
+	std::unique_ptr<core::INativeInputAPI> nativeInputAPI = std::make_unique<direct::DirectInputAPI>(s_hwnd, hInstance);
+	std::unique_ptr<core::INativeAudioAPI> nativeAudioAPI = std::make_unique<xaudio::XAudio2API>();
 	
 	s_game = std::make_unique<logic::Game>(
 		std::move(nativeRenderAPI), 

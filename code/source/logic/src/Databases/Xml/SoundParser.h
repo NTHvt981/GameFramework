@@ -1,14 +1,14 @@
 #pragma once
 #include <vector>
 
-namespace audios
+namespace core
 {
 struct Sound;
-} // namespace graphics
+} // namespace core
 
 namespace xml
 {
 
-std::vector<audios::Sound> LoadSoundsFile(const char* i_filePath);
+std::vector<core::Sound> LoadSoundsFile(const char* i_filePath);
 
 } // namespace xml

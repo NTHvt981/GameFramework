@@ -6,11 +6,8 @@
 #include "Core/Macros/Macros.h"
 #include <assert.h>
 
-namespace graphics
+namespace direct
 {
-
-core::Flag s_initFlag;
-core::Flag s_shutdownFlag;
 
 Direct9API::Direct9API(const HWND i_hwnd)
 	: m_hwnd(i_hwnd)
@@ -28,12 +25,6 @@ Direct9API::~Direct9API()
 
 void Direct9API::Initialize()
 {
-	if (s_initFlag.IsSet())
-	{
-		return;
-	}
-	s_initFlag.Set();
-
 	m_direct3D9 = Direct3DCreate9(D3D_SDK_VERSION);
 	assert(m_direct3D9 != nullptr);
 
@@ -227,12 +218,6 @@ void Direct9API::ResetDrawMatrix()
 
 void Direct9API::Shutdown()
 {
-	if (s_shutdownFlag.IsSet())
-	{
-		return;
-	}
-	s_shutdownFlag.Set();
-
 	for (auto& [id, texture] : m_mapTextures)
 	{
 		texture->Release();
@@ -265,4 +250,4 @@ core::APIMode Direct9API::GetAPIMode() const
 
 ////////////////////////////////////////////////////////////////////////////////
 
-} // namespace graphics
+} // namespace direct

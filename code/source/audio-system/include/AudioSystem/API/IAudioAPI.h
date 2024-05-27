@@ -8,7 +8,7 @@ namespace audios
 class IAudioAPI
 {
 public:
-	virtual void Play(const core::SoundId i_soundId, const SoundSettings& i_settings) = 0;
+	virtual void Play(const core::SoundId i_soundId, const core::SoundSettings& i_settings) = 0;
 };
 
 } // namespace audios

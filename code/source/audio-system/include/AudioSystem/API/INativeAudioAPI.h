@@ -3,7 +3,7 @@
 #include "AudioSystem/DataTypes/SoundSettings.h"
 #include "AudioSystem/DataTypes/Sound.h"
 
-namespace audios
+namespace core
 {
 
 class INativeAudioAPI
@@ -17,4 +17,4 @@ public:
 	virtual void Shutdown() = 0;
 };
 
-} // namespace audios
+} // namespace core

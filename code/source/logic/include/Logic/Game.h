@@ -17,7 +17,6 @@ class IInputSystem;
 
 namespace audios
 {
-class INativeAudioAPI;
 class IAudioSystem;
 } // namespace audios
 
@@ -26,6 +25,7 @@ namespace core
 class GameSetting;
 class INativeGraphicAPI;
 class INativeInputAPI;
+class INativeAudioAPI;
 } // namespace core
 
 namespace logic
@@ -47,7 +47,7 @@ public:
 	Game(
 		std::unique_ptr<core::INativeGraphicAPI> i_nativeGraphicAPI,
 		std::unique_ptr<core::INativeInputAPI> i_nativeInputAPI,
-		std::unique_ptr<audios::INativeAudioAPI> i_nativeAudioAPI,
+		std::unique_ptr<core::INativeAudioAPI> i_nativeAudioAPI,
 		std::shared_ptr<core::GameSetting> i_gameSetting
 	);
 	void Initialize();
@@ -99,7 +99,7 @@ private:
 	// own, pass by param
 	std::unique_ptr<core::INativeGraphicAPI> m_nativeGraphicAPI;
 	std::unique_ptr<core::INativeInputAPI> m_nativeInputAPI;
-	std::unique_ptr<audios::INativeAudioAPI> m_nativeAudioAPI;
+	std::unique_ptr<core::INativeAudioAPI> m_nativeAudioAPI;
 
 	// game clock relate
 	core::Duration m_perFrameDuration = 0;

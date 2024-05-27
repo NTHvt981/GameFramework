@@ -10,7 +10,7 @@ namespace audios
 ////////////////////////////////////////////////////////////////////////////////
 
 AudioSystem::AudioSystem(
-	std::unique_ptr<INativeAudioAPI> i_nativeAudioAPI,
+	std::unique_ptr<core::INativeAudioAPI> i_nativeAudioAPI,
 	std::shared_ptr<const database::IAudioDatabaseAPI> i_databaseAPI)
 	: m_nativeAudioAPI(std::move(i_nativeAudioAPI))
 	, m_databaseAPI(i_databaseAPI)
@@ -30,14 +30,14 @@ void AudioSystem::LoadSounds()
 {
 	for (const core::SoundId id : core::SoundIdIterators())
 	{
-		core::Ref<Sound> sound = m_databaseAPI->GetSoundRef(id);
+		core::Ref<core::Sound> sound = m_databaseAPI->GetSoundRef(id);
 		m_nativeAudioAPI->LoadSound(sound.Get());
 	}
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void AudioSystem::Play(const core::SoundId i_soundId, const SoundSettings& i_settings)
+void AudioSystem::Play(const core::SoundId i_soundId, const core::SoundSettings& i_settings)
 {
 	m_nativeAudioAPI->Play(i_soundId, i_settings);
 }

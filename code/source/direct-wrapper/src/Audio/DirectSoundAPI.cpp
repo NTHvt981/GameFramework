@@ -10,7 +10,7 @@
 #include <assert.h>
 #include <dinput.h>
 
-namespace audios
+namespace direct
 {
 
 DirectSoundAPI::DirectSoundAPI(const HWND i_hwnd)
@@ -52,7 +52,7 @@ void DirectSoundAPI::Initialize()
     DEBUG(assert(SUCCEEDED(result)));
 }
 
-void DirectSoundAPI::LoadSound(const Sound& i_sound)
+void DirectSoundAPI::LoadSound(const core::Sound& i_sound)
 {
     wav_file waveFileData;
     std::string stdString = i_sound.filePath.ToStdStr();
@@ -89,7 +89,7 @@ void DirectSoundAPI::LoadSound(const Sound& i_sound)
     m_mapSoundBuffers[i_sound.id] = soundBuffer;
 }
 
-void DirectSoundAPI::Play(const core::SoundId i_soundId, const SoundSettings& i_settings)
+void DirectSoundAPI::Play(const core::SoundId i_soundId, const core::SoundSettings& i_settings)
 {
     DWORD status;
     HRESULT getStatusResult = m_primarySoundBuffer->GetStatus(&status);
@@ -134,4 +134,4 @@ void DirectSoundAPI::Shutdown()
     m_directSound->Release();
 }
 
-} // namespace audios
+} // namespace direct

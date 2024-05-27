@@ -8,7 +8,7 @@
 #include <unordered_map>
 #include <wrl/client.h>
 
-namespace graphics
+namespace direct
 {
 
 class Direct9API final : public core::INativeGraphicAPI
@@ -56,4 +56,4 @@ private:
 	void ResetDrawMatrix();
 };
 
-} // namespace graphics
+} // namespace direct

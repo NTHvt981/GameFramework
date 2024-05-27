@@ -4,18 +4,18 @@
 #include <wrl/client.h>
 #include <xaudio2.h>
 
-namespace audios
+namespace xaudio
 {
 
-class XAudio2API final: public INativeAudioAPI
+class XAudio2API final: public core::INativeAudioAPI
 {
 public:
 	XAudio2API();
 
 	// Inherited via INativeAudioAPI
 	void Initialize() override;
-	void LoadSound(const Sound& i_sound) override;
-	void Play(const core::SoundId i_soundId, const SoundSettings& i_settings) override;
+	void LoadSound(const core::Sound& i_sound) override;
+	void Play(const core::SoundId i_soundId, const core::SoundSettings& i_settings) override;
 	void Pause() override;
 	void Resume() override;
 	void Shutdown() override;
@@ -29,4 +29,4 @@ private:
 	std::unordered_map<core::SoundId, IXAudio2SourceVoice*> m_mapSourceVoices;
 };
 
-} // namespace audios
+} // namespace xaudio

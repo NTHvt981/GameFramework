@@ -36,7 +36,7 @@ public:
 
 private:
 	audios::IAudioAPI& m_audioAPI;
-	audios::SoundSettings m_settings;
+	core::SoundSettings m_settings;
 };
 
 } // namespace logic

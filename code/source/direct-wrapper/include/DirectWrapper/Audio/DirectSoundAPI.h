@@ -6,18 +6,18 @@
 #include <windows.h>
 #include <dsound.h>
 
-namespace audios
+namespace direct
 {
 
-class DirectSoundAPI final: public INativeAudioAPI
+class DirectSoundAPI final: public core::INativeAudioAPI
 {
 public:
 	DirectSoundAPI(const HWND i_hwnd);
 
 	// Inherited via INativeAudioAPI
 	void Initialize() override;
-	void LoadSound(const Sound& i_sound) override;
-	void Play(const core::SoundId i_soundId, const SoundSettings& i_settings) override;
+	void LoadSound(const core::Sound& i_sound) override;
+	void Play(const core::SoundId i_soundId, const core::SoundSettings& i_settings) override;
 	void Pause() override;
 	void Resume() override;
 	void Shutdown() override;
@@ -33,4 +33,4 @@ private:
 	std::unordered_map<core::SoundId, ComPtr<IDirectSoundBuffer>> m_mapSoundBuffers;
 };
 
-} // namespace audios
+} // namespace direct

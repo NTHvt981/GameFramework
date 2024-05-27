@@ -73,9 +73,9 @@ const core::AnimationDef Database::GetAnimation(const core::AnimationId i_animat
 
 ////////////////////////////////////////////////////////////////////////////////
 
-core::Ref<audios::Sound> Database::GetSoundRef(const core::SoundId i_soundId) const
+core::Ref<core::Sound> Database::GetSoundRef(const core::SoundId i_soundId) const
 {
-	return core::Ref<audios::Sound>(m_sounds.at(i_soundId).get());
+	return core::Ref<core::Sound>(m_sounds.at(i_soundId).get());
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -132,12 +132,12 @@ void Database::LoadSounds()
 {
 	const core::String path = m_fileSystem->GetSoundsXmlFilePath();
 	const std::string stringPath = path.ToStdStr();
-	std::vector<audios::Sound> sounds = xml::LoadSoundsFile(stringPath.c_str());
+	std::vector<core::Sound> sounds = xml::LoadSoundsFile(stringPath.c_str());
 
-	for (audios::Sound& sound : sounds)
+	for (core::Sound& sound : sounds)
 	{
 		sound.filePath = m_fileSystem->GetSoundsFolderPath() + sound.filePath;
-		m_sounds.try_emplace(sound.id, std::make_shared<audios::Sound>(sound));
+		m_sounds.try_emplace(sound.id, std::make_shared<core::Sound>(sound));
 	}
 }
 

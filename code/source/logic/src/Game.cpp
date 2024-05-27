@@ -26,7 +26,7 @@ namespace logic
 
 Game::Game(std::unique_ptr<core::INativeGraphicAPI> i_nativeGraphicAPI,
 	std::unique_ptr<core::INativeInputAPI> i_nativeInputAPI,
-	std::unique_ptr<audios::INativeAudioAPI> i_nativeAudioAPI,
+	std::unique_ptr<core::INativeAudioAPI> i_nativeAudioAPI,
 	std::shared_ptr<core::GameSetting> i_gameSetting)
 	: m_nativeGraphicAPI(std::move(i_nativeGraphicAPI))
 	, m_nativeInputAPI(std::move(i_nativeInputAPI))

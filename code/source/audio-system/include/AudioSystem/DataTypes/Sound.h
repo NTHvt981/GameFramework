@@ -2,7 +2,7 @@
 #include "Core/Identifiers/SoundId.h"
 #include "Core/DataTypes/String.h"
 
-namespace audios
+namespace core
 {
 
 struct Sound
@@ -12,4 +12,4 @@ struct Sound
 	bool loop;
 };
 
-} // namespace audios
+} // namespace core

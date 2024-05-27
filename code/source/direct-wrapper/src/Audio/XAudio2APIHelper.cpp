@@ -21,7 +21,7 @@
 #define fourccDPDS 'sdpd'
 #endif
 
-namespace audios
+namespace xaudio
 {
 
 HRESULT FindChunk(HANDLE hFile, DWORD fourcc, DWORD& dwChunkSize, DWORD& dwChunkDataPosition)
@@ -89,4 +89,4 @@ HRESULT ReadChunkData(HANDLE hFile, void* buffer, DWORD buffersize, DWORD buffer
     return hr;
 }
 
-} // namespace audios
+} // namespace xaudio

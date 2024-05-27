@@ -21,7 +21,7 @@ public:
 	virtual const core::AnimationDef GetAnimation(const core::AnimationId i_animationId) const override;
 
 	// IAudioDatabaseAPI impl
-	core::Ref<audios::Sound> GetSoundRef(const core::SoundId i_soundId) const override;
+	core::Ref<core::Sound> GetSoundRef(const core::SoundId i_soundId) const override;
 
 private:
 	void LoadTextures();
@@ -34,7 +34,7 @@ private:
 	std::map<core::SpriteId, std::shared_ptr<core::SpriteDef>> m_sprites;
 	std::map<core::AnimationId, std::shared_ptr<core::AnimationDef>> m_animations;
 
-	std::map<core::SoundId, std::shared_ptr<audios::Sound>> m_sounds;
+	std::map<core::SoundId, std::shared_ptr<core::Sound>> m_sounds;
 };
 
 } // namespace logic

@@ -1,7 +1,7 @@
 #pragma once
 #include <stdint.h>
 
-namespace audios
+namespace core
 {
 
 struct SoundSettings
@@ -12,4 +12,4 @@ struct SoundSettings
 	uint16_t pan = 0;
 };
 
-} // namespace audios
+} // namespace core

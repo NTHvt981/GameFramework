@@ -5,12 +5,11 @@
 namespace core
 {
 enum class SoundId : uint64_t;
+struct Sound;
 }
 
 namespace audios
 {
-
-struct Sound;
 
 namespace database
 {
@@ -18,7 +17,7 @@ namespace database
 class IAudioDatabaseAPI
 {
 public:
-	virtual core::Ref<Sound> GetSoundRef(const core::SoundId i_soundId) const = 0;
+	virtual core::Ref<core::Sound> GetSoundRef(const core::SoundId i_soundId) const = 0;
 };
 
 } // namespace database

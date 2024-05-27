@@ -10,11 +10,10 @@
 #include <memory>
 #include <queue>
 
-namespace inputs
+namespace logic
 {
-class INativeInputAPI;
 class IInputSystem;
-} // namespace inputs
+} // namespace logic
 
 namespace audios
 {
@@ -26,6 +25,7 @@ namespace core
 {
 class GameSetting;
 class INativeGraphicAPI;
+class INativeInputAPI;
 } // namespace core
 
 namespace logic
@@ -46,7 +46,7 @@ class Game
 public:
 	Game(
 		std::unique_ptr<core::INativeGraphicAPI> i_nativeGraphicAPI,
-		std::unique_ptr<inputs::INativeInputAPI> i_nativeInputAPI,
+		std::unique_ptr<core::INativeInputAPI> i_nativeInputAPI,
 		std::unique_ptr<audios::INativeAudioAPI> i_nativeAudioAPI,
 		std::shared_ptr<core::GameSetting> i_gameSetting
 	);
@@ -84,7 +84,7 @@ private:
 	std::shared_ptr<IFileSystem > m_fileSystem;
 	std::shared_ptr<IGraphicSystem> m_graphicSystem;
 	std::shared_ptr<PhysicSystem> m_physicSystem;
-	std::shared_ptr<inputs::IInputSystem> m_inputSystem;
+	std::shared_ptr<IInputSystem> m_inputSystem;
 	std::shared_ptr<audios::IAudioSystem> m_audioSystem;
 	std::shared_ptr<logic::camera::ICameraSystem> m_cameraSystem;
 	std::shared_ptr<core::GameSetting> m_gameSetting;
@@ -98,7 +98,7 @@ private:
 
 	// own, pass by param
 	std::unique_ptr<core::INativeGraphicAPI> m_nativeGraphicAPI;
-	std::unique_ptr<inputs::INativeInputAPI> m_nativeInputAPI;
+	std::unique_ptr<core::INativeInputAPI> m_nativeInputAPI;
 	std::unique_ptr<audios::INativeAudioAPI> m_nativeAudioAPI;
 
 	// game clock relate

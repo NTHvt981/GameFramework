@@ -1,598 +1,597 @@
 #include "KeyboardKeyHelper.h"
-#include "InputSystem/DataTypes/KeyboardKey.h"
 #include <dinput.h>
 
-namespace inputs
+namespace logic
 {
 
-uint64_t ToDirectKeyboardKey(const KeyboardKey i_keyboardKey)
+uint64_t ToDirectKeyboardKey(const core::KeyboardKey i_keyboardKey)
 {
 	switch (i_keyboardKey)
 	{
-	case KeyboardKey::Escape:
+	case core::KeyboardKey::Escape:
 		return DIK_ESCAPE;
-	case KeyboardKey::N1:
+	case core::KeyboardKey::N1:
 		return DIK_1;
-	case KeyboardKey::N2:
+	case core::KeyboardKey::N2:
 		return DIK_2;
-	case KeyboardKey::N3:
+	case core::KeyboardKey::N3:
 		return DIK_3;
-	case KeyboardKey::N4:
+	case core::KeyboardKey::N4:
 		return DIK_4;
-	case KeyboardKey::N5:
+	case core::KeyboardKey::N5:
 		return DIK_5;
-	case KeyboardKey::N6:
+	case core::KeyboardKey::N6:
 		return DIK_6;
-	case KeyboardKey::N7:
+	case core::KeyboardKey::N7:
 		return DIK_7;
-	case KeyboardKey::N8:
+	case core::KeyboardKey::N8:
 		return DIK_8;
-	case KeyboardKey::N9:
+	case core::KeyboardKey::N9:
 		return DIK_9;
-	case KeyboardKey::N0:
+	case core::KeyboardKey::N0:
 		return DIK_0;
-	case KeyboardKey::Minus:
+	case core::KeyboardKey::Minus:
 		return DIK_MINUS;
-	case KeyboardKey::Equals:
+	case core::KeyboardKey::Equals:
 		return DIK_EQUALS;
-	case KeyboardKey::Back:
+	case core::KeyboardKey::Back:
 		return DIK_BACK;
-	case KeyboardKey::Tab:
+	case core::KeyboardKey::Tab:
 		return DIK_TAB;
-	case KeyboardKey::Q:
+	case core::KeyboardKey::Q:
 		return DIK_Q;
-	case KeyboardKey::W:
+	case core::KeyboardKey::W:
 		return DIK_W;
-	case KeyboardKey::E:
+	case core::KeyboardKey::E:
 		return DIK_E;
-	case KeyboardKey::R:
+	case core::KeyboardKey::R:
 		return DIK_R;
-	case KeyboardKey::T:
+	case core::KeyboardKey::T:
 		return DIK_T;
-	case KeyboardKey::Y:
+	case core::KeyboardKey::Y:
 		return DIK_Y;
-	case KeyboardKey::U:
+	case core::KeyboardKey::U:
 		return DIK_U;
-	case KeyboardKey::I:
+	case core::KeyboardKey::I:
 		return DIK_I;
-	case KeyboardKey::O:
+	case core::KeyboardKey::O:
 		return DIK_O;
-	case KeyboardKey::P:
+	case core::KeyboardKey::P:
 		return DIK_P;
-	case KeyboardKey::LeftBracket:
+	case core::KeyboardKey::LeftBracket:
 		return DIK_LBRACKET;
-	case KeyboardKey::RightBracket:
+	case core::KeyboardKey::RightBracket:
 		return DIK_RBRACKET;
-	case KeyboardKey::Return:
+	case core::KeyboardKey::Return:
 		return DIK_RETURN;
-	case KeyboardKey::LeftControl:
+	case core::KeyboardKey::LeftControl:
 		return DIK_LCONTROL;
-	case KeyboardKey::A:
+	case core::KeyboardKey::A:
 		return DIK_A;
-	case KeyboardKey::S:
+	case core::KeyboardKey::S:
 		return DIK_S;
-	case KeyboardKey::D:
+	case core::KeyboardKey::D:
 		return DIK_D;
-	case KeyboardKey::F:
+	case core::KeyboardKey::F:
 		return DIK_F;
-	case KeyboardKey::G:
+	case core::KeyboardKey::G:
 		return DIK_G;
-	case KeyboardKey::H:
+	case core::KeyboardKey::H:
 		return DIK_H;
-	case KeyboardKey::J:
+	case core::KeyboardKey::J:
 		return DIK_J;
-	case KeyboardKey::K:
+	case core::KeyboardKey::K:
 		return DIK_K;
-	case KeyboardKey::L:
+	case core::KeyboardKey::L:
 		return DIK_L;
-	case KeyboardKey::Semicolon:
+	case core::KeyboardKey::Semicolon:
 		return DIK_SEMICOLON;
-	case KeyboardKey::Apostrophe:
+	case core::KeyboardKey::Apostrophe:
 		return DIK_APOSTROPHE;
-	case KeyboardKey::Grave:
+	case core::KeyboardKey::Grave:
 		return DIK_GRAVE;
-	case KeyboardKey::LeftShift:
+	case core::KeyboardKey::LeftShift:
 		return DIK_LSHIFT;
-	case KeyboardKey::Backlash:
+	case core::KeyboardKey::Backlash:
 		return DIK_BACKSLASH;
-	case KeyboardKey::Z:
+	case core::KeyboardKey::Z:
 		return DIK_Z;
-	case KeyboardKey::X:
+	case core::KeyboardKey::X:
 		return DIK_X;
-	case KeyboardKey::C:
+	case core::KeyboardKey::C:
 		return DIK_C;
-	case KeyboardKey::V:
+	case core::KeyboardKey::V:
 		return DIK_V;
-	case KeyboardKey::B:
+	case core::KeyboardKey::B:
 		return DIK_B;
-	case KeyboardKey::N:
+	case core::KeyboardKey::N:
 		return DIK_N;
-	case KeyboardKey::M:
+	case core::KeyboardKey::M:
 		return DIK_M;
-	case KeyboardKey::Coma:
+	case core::KeyboardKey::Coma:
 		return DIK_COMMA;
-	case KeyboardKey::Period:
+	case core::KeyboardKey::Period:
 		return DIK_PERIOD;
-	case KeyboardKey::Slash:
+	case core::KeyboardKey::Slash:
 		return DIK_SLASH;
-	case KeyboardKey::RightShift:
+	case core::KeyboardKey::RightShift:
 		return DIK_RSHIFT;
-	case KeyboardKey::Multiply:
+	case core::KeyboardKey::Multiply:
 		return DIK_MULTIPLY;
-	case KeyboardKey::LeftAlt:
+	case core::KeyboardKey::LeftAlt:
 		return DIK_LALT;
-	case KeyboardKey::Space:
+	case core::KeyboardKey::Space:
 		return DIK_SPACE;
-	case KeyboardKey::Capital:
+	case core::KeyboardKey::Capital:
 		return DIK_CAPITAL;
-	case KeyboardKey::F1:
+	case core::KeyboardKey::F1:
 		return DIK_F1;
-	case KeyboardKey::F2:
+	case core::KeyboardKey::F2:
 		return DIK_F2;
-	case KeyboardKey::F3:
+	case core::KeyboardKey::F3:
 		return DIK_F3;
-	case KeyboardKey::F4:
+	case core::KeyboardKey::F4:
 		return DIK_F4;
-	case KeyboardKey::F5:
+	case core::KeyboardKey::F5:
 		return DIK_F5;
-	case KeyboardKey::F6:
+	case core::KeyboardKey::F6:
 		return DIK_F6;
-	case KeyboardKey::F7:
+	case core::KeyboardKey::F7:
 		return DIK_F7;
-	case KeyboardKey::F8:
+	case core::KeyboardKey::F8:
 		return DIK_F8;
-	case KeyboardKey::F9:
+	case core::KeyboardKey::F9:
 		return DIK_F9;
-	case KeyboardKey::F10:
+	case core::KeyboardKey::F10:
 		return DIK_F10;
-	case KeyboardKey::Numlock:
+	case core::KeyboardKey::Numlock:
 		return DIK_NUMLOCK;
-	case KeyboardKey::Scroll:
+	case core::KeyboardKey::Scroll:
 		return DIK_SCROLL;
-	case KeyboardKey::Numpad7:
+	case core::KeyboardKey::Numpad7:
 		return DIK_NUMPAD7;
-	case KeyboardKey::Numpad8:
+	case core::KeyboardKey::Numpad8:
 		return DIK_NUMPAD8;
-	case KeyboardKey::Numpad9:
+	case core::KeyboardKey::Numpad9:
 		return DIK_NUMPAD9;
-	case KeyboardKey::Subtract:
+	case core::KeyboardKey::Subtract:
 		return DIK_SUBTRACT;
-	case KeyboardKey::Numpad4:
+	case core::KeyboardKey::Numpad4:
 		return DIK_NUMPAD4;
-	case KeyboardKey::Numpad5:
+	case core::KeyboardKey::Numpad5:
 		return DIK_NUMPAD5;
-	case KeyboardKey::Numpad6:
+	case core::KeyboardKey::Numpad6:
 		return DIK_NUMPAD6;
-	case KeyboardKey::Add:
+	case core::KeyboardKey::Add:
 		return DIK_ADD;
-	case KeyboardKey::Numpad1:
+	case core::KeyboardKey::Numpad1:
 		return DIK_NUMPAD1;
-	case KeyboardKey::Numpad2:
+	case core::KeyboardKey::Numpad2:
 		return DIK_NUMPAD2;
-	case KeyboardKey::Numpad3:
+	case core::KeyboardKey::Numpad3:
 		return DIK_NUMPAD3;
-	case KeyboardKey::Numpad0:
+	case core::KeyboardKey::Numpad0:
 		return DIK_NUMPAD0;
-	case KeyboardKey::Decimal:
+	case core::KeyboardKey::Decimal:
 		return DIK_DECIMAL;
-	case KeyboardKey::Oem102:
+	case core::KeyboardKey::Oem102:
 		return DIK_OEM_102;
-	case KeyboardKey::F11:
+	case core::KeyboardKey::F11:
 		return DIK_F11;
-	case KeyboardKey::F12:
+	case core::KeyboardKey::F12:
 		return DIK_F12;
-	case KeyboardKey::F13:
+	case core::KeyboardKey::F13:
 		return DIK_F13;
-	case KeyboardKey::F14:
+	case core::KeyboardKey::F14:
 		return DIK_F14;
-	case KeyboardKey::F15:
+	case core::KeyboardKey::F15:
 		return DIK_F15;
-	case KeyboardKey::Kana:
+	case core::KeyboardKey::Kana:
 		return DIK_KANA;
-	case KeyboardKey::AbntC1:
+	case core::KeyboardKey::AbntC1:
 		return DIK_ABNT_C1;
-	case KeyboardKey::Convert:
+	case core::KeyboardKey::Convert:
 		return DIK_CONVERT;
-	case KeyboardKey::NoConvert:
+	case core::KeyboardKey::NoConvert:
 		return DIK_NOCONVERT;
-	case KeyboardKey::Yen:
+	case core::KeyboardKey::Yen:
 		return DIK_YEN;
-	case KeyboardKey::AbntC2:
+	case core::KeyboardKey::AbntC2:
 		return DIK_ABNT_C2;
-	case KeyboardKey::NumpadEquals:
+	case core::KeyboardKey::NumpadEquals:
 		return DIK_NUMPADEQUALS;
-	case KeyboardKey::PrevTrack:
+	case core::KeyboardKey::PrevTrack:
 		return DIK_PREVTRACK;
-	case KeyboardKey::At:
+	case core::KeyboardKey::At:
 		return DIK_AT;
-	case KeyboardKey::Colon:
+	case core::KeyboardKey::Colon:
 		return DIK_COLON;
-	case KeyboardKey::Underline:
+	case core::KeyboardKey::Underline:
 		return DIK_UNDERLINE;
-	case KeyboardKey::Kanji:
+	case core::KeyboardKey::Kanji:
 		return DIK_KANJI;
-	case KeyboardKey::Stop:
+	case core::KeyboardKey::Stop:
 		return DIK_STOP;
-	case KeyboardKey::Ax:
+	case core::KeyboardKey::Ax:
 		return DIK_AX;
-	case KeyboardKey::Unlabeled:
+	case core::KeyboardKey::Unlabeled:
 		return DIK_UNLABELED;
-	case KeyboardKey::NextTrack:
+	case core::KeyboardKey::NextTrack:
 		return DIK_NEXTTRACK;
-	case KeyboardKey::NumpadEnter:
+	case core::KeyboardKey::NumpadEnter:
 		return DIK_NUMPADENTER;
-	case KeyboardKey::RightControl:
+	case core::KeyboardKey::RightControl:
 		return DIK_RCONTROL;
-	case KeyboardKey::Mute:
+	case core::KeyboardKey::Mute:
 		return DIK_MUTE;
-	case KeyboardKey::Calculator:
+	case core::KeyboardKey::Calculator:
 		return DIK_CALCULATOR;
-	case KeyboardKey::PlayPause:
+	case core::KeyboardKey::PlayPause:
 		return DIK_PLAYPAUSE;
-	case KeyboardKey::MediaStop:
+	case core::KeyboardKey::MediaStop:
 		return DIK_MEDIASTOP;
-	case KeyboardKey::VolumeDown:
+	case core::KeyboardKey::VolumeDown:
 		return DIK_VOLUMEDOWN;
-	case KeyboardKey::VolumeUp:
+	case core::KeyboardKey::VolumeUp:
 		return DIK_VOLUMEUP;
-	case KeyboardKey::WebHome:
+	case core::KeyboardKey::WebHome:
 		return DIK_WEBHOME;
-	case KeyboardKey::NumpadComma:
+	case core::KeyboardKey::NumpadComma:
 		return DIK_NUMPADCOMMA;
-	case KeyboardKey::Divide:
+	case core::KeyboardKey::Divide:
 		return DIK_DIVIDE;
-	case KeyboardKey::SysRQ:
+	case core::KeyboardKey::SysRQ:
 		return DIK_SYSRQ;
-	case KeyboardKey::RightAlt:
+	case core::KeyboardKey::RightAlt:
 		return DIK_RALT;
-	case KeyboardKey::Pause:
+	case core::KeyboardKey::Pause:
 		return DIK_PAUSE;
-	case KeyboardKey::Home:
+	case core::KeyboardKey::Home:
 		return DIK_HOME;
-	case KeyboardKey::Up:
+	case core::KeyboardKey::Up:
 		return DIK_UP;
-	case KeyboardKey::Prior:
+	case core::KeyboardKey::Prior:
 		return DIK_PRIOR;
-	case KeyboardKey::Left:
+	case core::KeyboardKey::Left:
 		return DIK_LEFT;
-	case KeyboardKey::Right:
+	case core::KeyboardKey::Right:
 		return DIK_RIGHT;
-	case KeyboardKey::End:
+	case core::KeyboardKey::End:
 		return DIK_END;
-	case KeyboardKey::Down:
+	case core::KeyboardKey::Down:
 		return DIK_DOWN;
-	case KeyboardKey::Next:
+	case core::KeyboardKey::Next:
 		return DIK_NEXT;
-	case KeyboardKey::Insert:
+	case core::KeyboardKey::Insert:
 		return DIK_INSERT;
-	case KeyboardKey::Delete:
+	case core::KeyboardKey::Delete:
 		return DIK_DELETE;
-	case KeyboardKey::LeftWin:
+	case core::KeyboardKey::LeftWin:
 		return DIK_LWIN;
-	case KeyboardKey::RightWin:
+	case core::KeyboardKey::RightWin:
 		return DIK_RWIN;
-	case KeyboardKey::Apps:
+	case core::KeyboardKey::Apps:
 		return DIK_APPS;
-	case KeyboardKey::Power:
+	case core::KeyboardKey::Power:
 		return DIK_POWER;
-	case KeyboardKey::Sleep:
+	case core::KeyboardKey::Sleep:
 		return DIK_SLEEP;
-	case KeyboardKey::Wake:
+	case core::KeyboardKey::Wake:
 		return DIK_WAKE;
-	case KeyboardKey::WebSearch:
+	case core::KeyboardKey::WebSearch:
 		return DIK_WEBSEARCH;
-	case KeyboardKey::WebFavorite:
+	case core::KeyboardKey::WebFavorite:
 		return DIK_WEBFAVORITES;
-	case KeyboardKey::WebRefresh:
+	case core::KeyboardKey::WebRefresh:
 		return DIK_WEBREFRESH;
-	case KeyboardKey::WebStop:
+	case core::KeyboardKey::WebStop:
 		return DIK_WEBSTOP;
-	case KeyboardKey::WebForward:
+	case core::KeyboardKey::WebForward:
 		return DIK_WEBFORWARD;
-	case KeyboardKey::WebBack:
+	case core::KeyboardKey::WebBack:
 		return DIK_WEBBACK;
-	case KeyboardKey::MyComputer:
+	case core::KeyboardKey::MyComputer:
 		return DIK_MYCOMPUTER;
-	case KeyboardKey::Mail:
+	case core::KeyboardKey::Mail:
 		return DIK_MAIL;
-	case KeyboardKey::MediaSelect:
+	case core::KeyboardKey::MediaSelect:
 		return DIK_MEDIASELECT;
 	}
 }
 
-KeyboardKey ToKeyboardKey(const uint64_t i_directKey)
+core::KeyboardKey ToKeyboardKey(const uint64_t i_directKey)
 {
 	switch (i_directKey)
 	{
 	case DIK_ESCAPE:
-		return KeyboardKey::Escape;
+		return core::KeyboardKey::Escape;
 	case DIK_1:
-		return KeyboardKey::N1;
+		return core::KeyboardKey::N1;
 	case DIK_2:
-		return KeyboardKey::N2;
+		return core::KeyboardKey::N2;
 	case DIK_3:
-		return KeyboardKey::N3;
+		return core::KeyboardKey::N3;
 	case DIK_4:
-		return KeyboardKey::N4;
+		return core::KeyboardKey::N4;
 	case DIK_5:
-		return KeyboardKey::N5;
+		return core::KeyboardKey::N5;
 	case DIK_6:
-		return KeyboardKey::N6;
+		return core::KeyboardKey::N6;
 	case DIK_7:
-		return KeyboardKey::N7;
+		return core::KeyboardKey::N7;
 	case DIK_8:
-		return KeyboardKey::N8;
+		return core::KeyboardKey::N8;
 	case DIK_9:
-		return KeyboardKey::N9;
+		return core::KeyboardKey::N9;
 	case DIK_0:
-		return KeyboardKey::N0;
+		return core::KeyboardKey::N0;
 	case DIK_MINUS:
-		return KeyboardKey::Minus;
+		return core::KeyboardKey::Minus;
 	case DIK_EQUALS:
-		return KeyboardKey::Equals;
+		return core::KeyboardKey::Equals;
 	case DIK_BACK:
-		return KeyboardKey::Back;
+		return core::KeyboardKey::Back;
 	case DIK_TAB:
-		return KeyboardKey::Tab;
+		return core::KeyboardKey::Tab;
 	case DIK_Q:
-		return KeyboardKey::Q;
+		return core::KeyboardKey::Q;
 	case DIK_W:
-		return KeyboardKey::W;
+		return core::KeyboardKey::W;
 	case DIK_E:
-		return KeyboardKey::E;
+		return core::KeyboardKey::E;
 	case DIK_R:
-		return KeyboardKey::R;
+		return core::KeyboardKey::R;
 	case DIK_T:
-		return KeyboardKey::T;
+		return core::KeyboardKey::T;
 	case DIK_Y:
-		return KeyboardKey::Y;
+		return core::KeyboardKey::Y;
 	case DIK_U:
-		return KeyboardKey::U;
+		return core::KeyboardKey::U;
 	case DIK_I:
-		return KeyboardKey::I;
+		return core::KeyboardKey::I;
 	case DIK_O:
-		return KeyboardKey::O;
+		return core::KeyboardKey::O;
 	case DIK_P:
-		return KeyboardKey::P;
+		return core::KeyboardKey::P;
 	case DIK_LBRACKET:
-		return KeyboardKey::LeftBracket;
+		return core::KeyboardKey::LeftBracket;
 	case DIK_RBRACKET:
-		return KeyboardKey::RightBracket;
+		return core::KeyboardKey::RightBracket;
 	case DIK_RETURN:
-		return KeyboardKey::Return;
+		return core::KeyboardKey::Return;
 	case DIK_LCONTROL:
-		return KeyboardKey::LeftControl;
+		return core::KeyboardKey::LeftControl;
 	case DIK_A:
-		return KeyboardKey::A;
+		return core::KeyboardKey::A;
 	case DIK_S:
-		return KeyboardKey::S;
+		return core::KeyboardKey::S;
 	case DIK_D:
-		return KeyboardKey::D;
+		return core::KeyboardKey::D;
 	case DIK_F:
-		return KeyboardKey::F;
+		return core::KeyboardKey::F;
 	case DIK_G:
-		return KeyboardKey::G;
+		return core::KeyboardKey::G;
 	case DIK_H:
-		return KeyboardKey::H;
+		return core::KeyboardKey::H;
 	case DIK_J:
-		return KeyboardKey::J;
+		return core::KeyboardKey::J;
 	case DIK_K:
-		return KeyboardKey::K;
+		return core::KeyboardKey::K;
 	case DIK_L:
-		return KeyboardKey::L;
+		return core::KeyboardKey::L;
 	case DIK_SEMICOLON:
-		return KeyboardKey::Semicolon;
+		return core::KeyboardKey::Semicolon;
 	case DIK_APOSTROPHE:
-		return KeyboardKey::Apostrophe;
+		return core::KeyboardKey::Apostrophe;
 	case DIK_GRAVE:
-		return KeyboardKey::Grave;
+		return core::KeyboardKey::Grave;
 	case DIK_LSHIFT:
-		return KeyboardKey::LeftShift;
+		return core::KeyboardKey::LeftShift;
 	case DIK_BACKSLASH:
-		return KeyboardKey::Backlash;
+		return core::KeyboardKey::Backlash;
 	case DIK_Z:
-		return KeyboardKey::Z;
+		return core::KeyboardKey::Z;
 	case DIK_X:
-		return KeyboardKey::X;
+		return core::KeyboardKey::X;
 	case DIK_C:
-		return KeyboardKey::C;
+		return core::KeyboardKey::C;
 	case DIK_V:
-		return KeyboardKey::V;
+		return core::KeyboardKey::V;
 	case DIK_B:
-		return KeyboardKey::B;
+		return core::KeyboardKey::B;
 	case DIK_N:
-		return KeyboardKey::N;
+		return core::KeyboardKey::N;
 	case DIK_M:
-		return KeyboardKey::M;
+		return core::KeyboardKey::M;
 	case DIK_COMMA:
-		return KeyboardKey::Coma;
+		return core::KeyboardKey::Coma;
 	case DIK_PERIOD:
-		return KeyboardKey::Period;
+		return core::KeyboardKey::Period;
 	case DIK_SLASH:
-		return KeyboardKey::Slash;
+		return core::KeyboardKey::Slash;
 	case DIK_RSHIFT:
-		return KeyboardKey::RightShift;
+		return core::KeyboardKey::RightShift;
 	case DIK_MULTIPLY:
-		return KeyboardKey::Multiply;
+		return core::KeyboardKey::Multiply;
 	case DIK_LALT:
-		return KeyboardKey::LeftAlt;
+		return core::KeyboardKey::LeftAlt;
 	case DIK_SPACE:
-		return KeyboardKey::Space;
+		return core::KeyboardKey::Space;
 	case DIK_CAPITAL:
-		return KeyboardKey::Capital;
+		return core::KeyboardKey::Capital;
 	case DIK_F1:
-		return KeyboardKey::F1;
+		return core::KeyboardKey::F1;
 	case DIK_F2:
-		return KeyboardKey::F2;
+		return core::KeyboardKey::F2;
 	case DIK_F3:
-		return KeyboardKey::F3;
+		return core::KeyboardKey::F3;
 	case DIK_F4:
-		return KeyboardKey::F4;
+		return core::KeyboardKey::F4;
 	case DIK_F5:
-		return KeyboardKey::F5;
+		return core::KeyboardKey::F5;
 	case DIK_F6:
-		return KeyboardKey::F6;
+		return core::KeyboardKey::F6;
 	case DIK_F7:
-		return KeyboardKey::F7;
+		return core::KeyboardKey::F7;
 	case DIK_F8:
-		return KeyboardKey::F8;
+		return core::KeyboardKey::F8;
 	case DIK_F9:
-		return KeyboardKey::F9;
+		return core::KeyboardKey::F9;
 	case DIK_F10:
-		return KeyboardKey::F10;
+		return core::KeyboardKey::F10;
 	case DIK_NUMLOCK:
-		return KeyboardKey::Numlock;
+		return core::KeyboardKey::Numlock;
 	case DIK_SCROLL:
-		return KeyboardKey::Scroll;
+		return core::KeyboardKey::Scroll;
 	case DIK_NUMPAD7:
-		return KeyboardKey::Numpad7;
+		return core::KeyboardKey::Numpad7;
 	case DIK_NUMPAD8:
-		return KeyboardKey::Numpad8;
+		return core::KeyboardKey::Numpad8;
 	case DIK_NUMPAD9:
-		return KeyboardKey::Numpad9;
+		return core::KeyboardKey::Numpad9;
 	case DIK_SUBTRACT:
-		return KeyboardKey::Subtract;
+		return core::KeyboardKey::Subtract;
 	case DIK_NUMPAD4:
-		return KeyboardKey::Numpad4;
+		return core::KeyboardKey::Numpad4;
 	case DIK_NUMPAD5:
-		return KeyboardKey::Numpad5;
+		return core::KeyboardKey::Numpad5;
 	case DIK_NUMPAD6:
-		return KeyboardKey::Numpad6;
+		return core::KeyboardKey::Numpad6;
 	case DIK_ADD:
-		return KeyboardKey::Add;
+		return core::KeyboardKey::Add;
 	case DIK_NUMPAD1:
-		return KeyboardKey::Numpad1;
+		return core::KeyboardKey::Numpad1;
 	case DIK_NUMPAD2:
-		return KeyboardKey::Numpad2;
+		return core::KeyboardKey::Numpad2;
 	case DIK_NUMPAD3:
-		return KeyboardKey::Numpad3;
+		return core::KeyboardKey::Numpad3;
 	case DIK_NUMPAD0:
-		return KeyboardKey::Numpad0;
+		return core::KeyboardKey::Numpad0;
 	case DIK_DECIMAL:
-		return KeyboardKey::Decimal;
+		return core::KeyboardKey::Decimal;
 	case DIK_OEM_102:
-		return KeyboardKey::Oem102;
+		return core::KeyboardKey::Oem102;
 	case DIK_F11:
-		return KeyboardKey::F11;
+		return core::KeyboardKey::F11;
 	case DIK_F12:
-		return KeyboardKey::F12;
+		return core::KeyboardKey::F12;
 	case DIK_F13:
-		return KeyboardKey::F13;
+		return core::KeyboardKey::F13;
 	case DIK_F14:
-		return KeyboardKey::F14;
+		return core::KeyboardKey::F14;
 	case DIK_F15:
-		return KeyboardKey::F15;
+		return core::KeyboardKey::F15;
 	case DIK_KANA:
-		return KeyboardKey::Kana;
+		return core::KeyboardKey::Kana;
 	case DIK_ABNT_C1:
-		return KeyboardKey::AbntC1;
+		return core::KeyboardKey::AbntC1;
 	case DIK_CONVERT:
-		return KeyboardKey::Convert;
+		return core::KeyboardKey::Convert;
 	case DIK_NOCONVERT:
-		return KeyboardKey::NoConvert;
+		return core::KeyboardKey::NoConvert;
 	case DIK_YEN:
-		return KeyboardKey::Yen;
+		return core::KeyboardKey::Yen;
 	case DIK_ABNT_C2:
-		return KeyboardKey::AbntC2;
+		return core::KeyboardKey::AbntC2;
 	case DIK_NUMPADEQUALS:
-		return KeyboardKey::NumpadEquals;
+		return core::KeyboardKey::NumpadEquals;
 	case DIK_PREVTRACK:
-		return KeyboardKey::PrevTrack;
+		return core::KeyboardKey::PrevTrack;
 	case DIK_AT:
-		return KeyboardKey::At;
+		return core::KeyboardKey::At;
 	case DIK_COLON:
-		return KeyboardKey::Colon;
+		return core::KeyboardKey::Colon;
 	case DIK_UNDERLINE:
-		return KeyboardKey::Underline;
+		return core::KeyboardKey::Underline;
 	case DIK_KANJI:
-		return KeyboardKey::Kanji;
+		return core::KeyboardKey::Kanji;
 	case DIK_STOP:
-		return KeyboardKey::Stop;
+		return core::KeyboardKey::Stop;
 	case DIK_AX:
-		return KeyboardKey::Ax;
+		return core::KeyboardKey::Ax;
 	case DIK_UNLABELED:
-		return KeyboardKey::Unlabeled;
+		return core::KeyboardKey::Unlabeled;
 	case DIK_NEXTTRACK:
-		return KeyboardKey::NextTrack;
+		return core::KeyboardKey::NextTrack;
 	case DIK_NUMPADENTER:
-		return KeyboardKey::NumpadEnter;
+		return core::KeyboardKey::NumpadEnter;
 	case DIK_RCONTROL:
-		return KeyboardKey::RightControl;
+		return core::KeyboardKey::RightControl;
 	case DIK_MUTE:
-		return KeyboardKey::Mute;
+		return core::KeyboardKey::Mute;
 	case DIK_CALCULATOR:
-		return KeyboardKey::Calculator;
+		return core::KeyboardKey::Calculator;
 	case DIK_PLAYPAUSE:
-		return KeyboardKey::PlayPause;
+		return core::KeyboardKey::PlayPause;
 	case DIK_MEDIASTOP:
-		return KeyboardKey::MediaStop;
+		return core::KeyboardKey::MediaStop;
 	case DIK_VOLUMEDOWN:
-		return KeyboardKey::VolumeDown;
+		return core::KeyboardKey::VolumeDown;
 	case DIK_VOLUMEUP:
-		return KeyboardKey::VolumeUp;
+		return core::KeyboardKey::VolumeUp;
 	case DIK_WEBHOME:
-		return KeyboardKey::WebHome;
+		return core::KeyboardKey::WebHome;
 	case DIK_NUMPADCOMMA:
-		return KeyboardKey::NumpadComma;
+		return core::KeyboardKey::NumpadComma;
 	case DIK_DIVIDE:
-		return KeyboardKey::Divide;
+		return core::KeyboardKey::Divide;
 	case DIK_SYSRQ:
-		return KeyboardKey::SysRQ;
+		return core::KeyboardKey::SysRQ;
 	case DIK_RALT:
-		return KeyboardKey::RightAlt;
+		return core::KeyboardKey::RightAlt;
 	case DIK_PAUSE:
-		return KeyboardKey::Pause;
+		return core::KeyboardKey::Pause;
 	case DIK_HOME:
-		return KeyboardKey::Home;
+		return core::KeyboardKey::Home;
 	case DIK_UP:
-		return KeyboardKey::Up;
+		return core::KeyboardKey::Up;
 	case DIK_PRIOR:
-		return KeyboardKey::Prior;
+		return core::KeyboardKey::Prior;
 	case DIK_LEFT:
-		return KeyboardKey::Left;
+		return core::KeyboardKey::Left;
 	case DIK_RIGHT:
-		return KeyboardKey::Right;
+		return core::KeyboardKey::Right;
 	case DIK_END:
-		return KeyboardKey::End;
+		return core::KeyboardKey::End;
 	case DIK_DOWN:
-		return KeyboardKey::Down;
+		return core::KeyboardKey::Down;
 	case DIK_NEXT:
-		return KeyboardKey::Next;
+		return core::KeyboardKey::Next;
 	case DIK_INSERT:
-		return KeyboardKey::Insert;
+		return core::KeyboardKey::Insert;
 	case DIK_DELETE:
-		return KeyboardKey::Delete;
+		return core::KeyboardKey::Delete;
 	case DIK_LWIN:
-		return KeyboardKey::LeftWin;
+		return core::KeyboardKey::LeftWin;
 	case DIK_RWIN:
-		return KeyboardKey::RightWin;
+		return core::KeyboardKey::RightWin;
 	case DIK_APPS:
-		return KeyboardKey::Apps;
+		return core::KeyboardKey::Apps;
 	case DIK_POWER:
-		return KeyboardKey::Power;
+		return core::KeyboardKey::Power;
 	case DIK_SLEEP:
-		return KeyboardKey::Sleep;
+		return core::KeyboardKey::Sleep;
 	case DIK_WAKE:
-		return KeyboardKey::Wake;
+		return core::KeyboardKey::Wake;
 	case DIK_WEBSEARCH:
-		return KeyboardKey::WebSearch;
+		return core::KeyboardKey::WebSearch;
 	case DIK_WEBFAVORITES:
-		return KeyboardKey::WebFavorite;
+		return core::KeyboardKey::WebFavorite;
 	case DIK_WEBREFRESH:
-		return KeyboardKey::WebRefresh;
+		return core::KeyboardKey::WebRefresh;
 	case DIK_WEBSTOP:
-		return KeyboardKey::WebStop;
+		return core::KeyboardKey::WebStop;
 	case DIK_WEBFORWARD:
-		return KeyboardKey::WebForward;
+		return core::KeyboardKey::WebForward;
 	case DIK_WEBBACK:
-		return KeyboardKey::WebBack;
+		return core::KeyboardKey::WebBack;
 	case DIK_MYCOMPUTER:
-		return KeyboardKey::MyComputer;
+		return core::KeyboardKey::MyComputer;
 	case DIK_MAIL:
-		return KeyboardKey::Mail;
+		return core::KeyboardKey::Mail;
 	case DIK_MEDIASELECT:
-		return KeyboardKey::MediaSelect;
+		return core::KeyboardKey::MediaSelect;
 	}
 }
 
-} // namespace inputs
+} // namespace logic

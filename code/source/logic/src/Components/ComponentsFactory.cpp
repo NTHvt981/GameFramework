@@ -1,7 +1,7 @@
 #include "Logic/Components/ComponentsFactory.h"
 #include "Logic/LogicSystems/CameraSystem/ICameraSystem.h"
 #include "Logic/LogicSystems/IGraphicSystem.h"
-#include "InputSystem/IInputSystem.h"
+#include "Logic/LogicSystems/IInputSystem.h"
 #include "AudioSystem/IAudioSystem.h"
 #include "Logic/Databases/IDatabase.h"
 #include "Logic/Components/AnimationComponent.h"
@@ -21,8 +21,8 @@ namespace logic
 {
 
 ComponentsFactory::ComponentsFactory(
-	std::shared_ptr<logic::IGraphicSystem> i_graphicSystem,
-	std::shared_ptr<inputs::IInputSystem> i_inputSystem,
+	std::shared_ptr<IGraphicSystem> i_graphicSystem,
+	std::shared_ptr<IInputSystem> i_inputSystem,
 	std::shared_ptr<audios::IAudioSystem> i_audioSystem,
 	std::shared_ptr<core::IPhysicAPI> i_physicAPI,
 	std::shared_ptr<camera::ICameraSystem> i_cameraSystem,

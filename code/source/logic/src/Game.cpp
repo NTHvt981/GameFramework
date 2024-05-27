@@ -3,8 +3,8 @@
 #include "Logic/LogicSystems/GraphicSystem.h"
 #include "Core/APIs/INativeGraphicAPI.h"
 #include "Logic/LogicSystems/PhysicSystem.h"
-#include "InputSystem/InputSystem.h"
-#include "InputSystem/API/INativeInputAPI.h"
+#include "Logic/LogicSystems/InputSystem.h"
+#include "Core/APIs/INativeInputAPI.h"
 #include "AudioSystem/AudioSystem.h"
 #include "AudioSystem/API/INativeAudioAPI.h"
 #include "Logic/LogicSystems/FileSystem.h"
@@ -25,7 +25,7 @@ namespace logic
 ////////////////////////////////////////////////////////////////////////////////
 
 Game::Game(std::unique_ptr<core::INativeGraphicAPI> i_nativeGraphicAPI,
-	std::unique_ptr<inputs::INativeInputAPI> i_nativeInputAPI,
+	std::unique_ptr<core::INativeInputAPI> i_nativeInputAPI,
 	std::unique_ptr<audios::INativeAudioAPI> i_nativeAudioAPI,
 	std::shared_ptr<core::GameSetting> i_gameSetting)
 	: m_nativeGraphicAPI(std::move(i_nativeGraphicAPI))
@@ -36,7 +36,7 @@ Game::Game(std::unique_ptr<core::INativeGraphicAPI> i_nativeGraphicAPI,
 	m_gameClock = std::make_shared<GameClock>();
 	m_fileSystem = std::make_shared<FileSystem>();
 	m_database = std::make_shared<Database>(m_fileSystem);
-	m_inputSystem = std::make_shared<inputs::InputSystem>(std::move(m_nativeInputAPI));
+	m_inputSystem = std::make_shared<logic::InputSystem>(std::move(m_nativeInputAPI));
 	m_audioSystem = std::make_shared<audios::AudioSystem>(
 		std::move(m_nativeAudioAPI),
 		m_database

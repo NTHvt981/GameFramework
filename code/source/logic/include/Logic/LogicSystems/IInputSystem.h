@@ -1,11 +1,11 @@
 #pragma once
-#include "API/IInputAPI.h"
+#include "Core/APIs/IInputAPI.h"
 #include "Core/DataTypes/Duration.h"
 
-namespace inputs
+namespace logic
 {
 
-class IInputSystem : public IInputAPI
+class IInputSystem : public core::IInputAPI
 {
 public:
 	virtual void Initialize() = 0;
@@ -15,4 +15,4 @@ public:
 	virtual void Shutdown() = 0;
 };
 
-} // namespace inputs
+} // namespace logic

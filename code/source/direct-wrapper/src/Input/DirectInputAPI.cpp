@@ -1,16 +1,12 @@
 #include "DirectWrapper/Input/DirectInputAPI.h"
-#include "InputSystem/DataTypes/KeyboardKey.h"
 #include "Core/DataTypes/Flag.h"
 #include "KeyboardKeyHelper.h"
 #include <assert.h>
 #include <iostream>
 #include "Core/Macros/Macros.h"
 
-namespace inputs
+namespace logic
 {
-
-core::Flag s_initFlag;
-core::Flag s_shutdownFlag;
 
 DirectInputAPI::DirectInputAPI(const HWND i_hwnd, const HINSTANCE i_hInstance)
 	: m_hwnd(i_hwnd)
@@ -75,33 +71,33 @@ void DirectInputAPI::Resume()
 	DEBUG(assert(SUCCEEDED(result)));
 }
 
-bool DirectInputAPI::IsKeyDown(const KeyboardKey i_key)
+bool DirectInputAPI::IsKeyDown(const core::KeyboardKey i_key)
 {
 	uint64_t index = ToDirectKeyboardKey(i_key);
 	return m_currentKeys[index];
 }
 
-bool DirectInputAPI::IsKeyUp(const KeyboardKey i_key)
+bool DirectInputAPI::IsKeyUp(const core::KeyboardKey i_key)
 {
 	return !IsKeyDown(i_key);
 }
 
-bool DirectInputAPI::IsKeyPressed(const KeyboardKey i_key)
+bool DirectInputAPI::IsKeyPressed(const core::KeyboardKey i_key)
 {
 	uint64_t index = ToDirectKeyboardKey(i_key);
 	return m_currentKeys[index] && (! m_previousKeys[index]);
 }
 
-bool DirectInputAPI::IsKeyRelease(const KeyboardKey i_key)
+bool DirectInputAPI::IsKeyRelease(const core::KeyboardKey i_key)
 {
 	uint64_t index = ToDirectKeyboardKey(i_key);
 	return (! m_currentKeys[index]) && m_previousKeys[index];
 }
 
-bool DirectInputAPI::IsKeyHold(const KeyboardKey i_key)
+bool DirectInputAPI::IsKeyHold(const core::KeyboardKey i_key)
 {
 	uint64_t index = ToDirectKeyboardKey(i_key);
 	return m_currentKeys[index] && m_previousKeys[index];
 }
 
-} // namespace inputs
+} // namespace logic

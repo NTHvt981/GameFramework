@@ -1,6 +1,5 @@
 require("common")
 require("core")
-require("input-system")
 require("audio-system")
 
 local logic_prj_name = "logic"
@@ -24,7 +23,6 @@ function addLogic()
       }
 
       includeCore()
-      includeInputSystem()
       includeAudioSystem()
 end
 

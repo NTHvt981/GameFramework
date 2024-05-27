@@ -1,12 +1,11 @@
-#include "InputSystem/InputSystem.h"
-#include "InputSystem/API/INativeInputAPI.h"
+#include "Logic/LogicSystems/InputSystem.h"
 
-namespace inputs
+namespace logic
 {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-InputSystem::InputSystem(std::unique_ptr<INativeInputAPI> i_nativeInputAPI)
+InputSystem::InputSystem(std::unique_ptr<core::INativeInputAPI> i_nativeInputAPI)
 	: m_nativeInputAPI(std::move(i_nativeInputAPI))
 {
 }
@@ -36,31 +35,31 @@ void InputSystem::Shutdown()
 	m_nativeInputAPI->Shutdown();
 }
 
-bool InputSystem::IsKeyDown(const KeyboardKey i_key) const
+bool InputSystem::IsKeyDown(const core::KeyboardKey i_key) const
 {
 	return m_nativeInputAPI->IsKeyDown(i_key);
 }
 
-bool InputSystem::IsKeyUp(const KeyboardKey i_key) const
+bool InputSystem::IsKeyUp(const core::KeyboardKey i_key) const
 {
 	return m_nativeInputAPI->IsKeyUp(i_key);
 }
 
-bool InputSystem::IsKeyPressed(const KeyboardKey i_key) const
+bool InputSystem::IsKeyPressed(const core::KeyboardKey i_key) const
 {
 	return m_nativeInputAPI->IsKeyPressed(i_key);
 }
 
-bool InputSystem::IsKeyRelease(const KeyboardKey i_key) const
+bool InputSystem::IsKeyRelease(const core::KeyboardKey i_key) const
 {
 	return m_nativeInputAPI->IsKeyRelease(i_key);
 }
 
-bool InputSystem::IsKeyHold(const KeyboardKey i_key) const
+bool InputSystem::IsKeyHold(const core::KeyboardKey i_key) const
 {
 	return m_nativeInputAPI->IsKeyHold(i_key);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-} // namespace inputs
+} // namespace logic
